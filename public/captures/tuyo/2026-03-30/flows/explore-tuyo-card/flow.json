@@ -1,0 +1,36 @@
+{
+  "slug": "explore-tuyo-card",
+  "name": "Explore Tuyo Card",
+  "summary": "Learn about the Tuyo Visa card — pay with USDC worldwide and use Apple Pay",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home screen",
+      "screenId": "home",
+      "action": "Entry point",
+      "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Tuyo Card — USDC payments",
+      "screenId": "card-promo",
+      "action": "Tap Card tab (3rd in bottom bar)",
+      "description": "Tuyo Visa card preview (ending 6321) with USDC logo. 'Pay with USDC, anywhere in the world' — use USDC in your Tuyo account to pay in 40 million merchants worldwide. Green 'Get Tuyo Card for free' CTA. Carousel page indicator (2 pages).",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": "Tab switched to Card. Card tab highlighted in bottom bar."
+    },
+    {
+      "number": 3,
+      "title": "Tuyo Card — Apple Pay",
+      "screenId": "card-promo",
+      "action": "Swipe left",
+      "description": "Second carousel page showing iPhone with Tuyo card in Apple Wallet at a payment terminal. 'Spend in-store with Apple Pay' — add Tuyo Card to Apple Wallet and tap phone to pay. Same 'Get Tuyo Card for free' CTA.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": "Carousel advanced to page 2."
+    }
+  ],
+  "notes": null
+}

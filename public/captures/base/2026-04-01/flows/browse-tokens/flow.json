@@ -1,0 +1,36 @@
+{
+  "slug": "browse-tokens",
+  "name": "Browse Tokens",
+  "summary": "User browses trending tokens, views token details, and initiates a buy.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Discover",
+      "screenId": "discover",
+      "action": "Entry point",
+      "description": "Discover screen with trending coins list.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Token Detail",
+      "screenId": "token-detail",
+      "action": "Tap a token from the list",
+      "description": "Virtual Protocol token detail with price chart, market cap, and about section.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    },
+    {
+      "number": 3,
+      "title": "Buy Modal",
+      "screenId": "token-buy-modal",
+      "action": "Tap Buy",
+      "description": "Buy modal for Virtual Protocol with USDC to VIRTUAL swap interface.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": null
+    }
+  ],
+  "notes": "Discover tab provides trending token exploration with inline buy functionality."
+}

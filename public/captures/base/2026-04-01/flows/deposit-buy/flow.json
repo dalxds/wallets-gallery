@@ -1,0 +1,45 @@
+{
+  "slug": "deposit-buy",
+  "name": "Deposit & Buy",
+  "summary": "User deposits or buys crypto via debit card or Coinbase connection.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home",
+      "screenId": "home",
+      "action": "Entry point",
+      "description": "Home screen with Deposit button visible.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Buy / Deposit",
+      "screenId": "buy-deposit",
+      "action": "Tap Deposit",
+      "description": "Buy screen with $0 amount, USDC selected, numpad, Debit Card payment method, and swipe to deposit.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    },
+    {
+      "number": 3,
+      "title": "Token Selector",
+      "screenId": "token-selector",
+      "action": "Tap token dropdown",
+      "description": "Token selector modal listing USDC, Ethereum, Edge, Compound, and other tokens.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": null
+    },
+    {
+      "number": 4,
+      "title": "Deposit With Coinbase",
+      "screenId": "deposit-with-coinbase",
+      "action": "Tap Deposit With option",
+      "description": "Deposit With modal showing Connect to Coinbase option.",
+      "screenshotPath": "screenshots/step-04.png",
+      "changes": null
+    }
+  ],
+  "notes": "Supports debit card purchases and Coinbase integration for deposits."
+}

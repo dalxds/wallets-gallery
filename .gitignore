@@ -31,6 +31,11 @@ pnpm-debug.log*
 # env files
 .env*.local
 
+# captures
+credentials.md
+**/credentials.md
+public/captures/**/_staging/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

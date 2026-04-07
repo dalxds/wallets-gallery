@@ -1,0 +1,45 @@
+{
+  "slug": "send-money",
+  "name": "Send Money",
+  "summary": "Send money via Tuyo username, wallet address, or bank account",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home screen (with balance)",
+      "screenId": "home-with-balance",
+      "action": "Entry point",
+      "description": "Home dashboard with $1.00 Total balance. EARN section ($0.00) and CASH section ($1.00 USDC). Recent transactions showing two Receive USDC entries. Bottom tab bar.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Add Recipient",
+      "screenId": "send",
+      "action": "Tap Send",
+      "description": "Send screen with 'Add Recipient' header. Three options: Find on Tuyo (BEST badge) — send instantly with @Tuyoname, Wallet Address — wallet address for crypto transfers, Bank Account — account details for bank transfers.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": "Navigation pushed Send screen with recipient type selection."
+    },
+    {
+      "number": 3,
+      "title": "Send to Wallet Address",
+      "screenId": "send-to-wallet",
+      "action": "Tap Wallet Address",
+      "description": "Enter Wallet Address screen with 'To:' input field pre-filled with '0x' placeholder. '0x' badge with prompt 'Send crypto to any 0x address'.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": "Bottom sheet showing wallet address input."
+    },
+    {
+      "number": 4,
+      "title": "Send to Bank Account",
+      "screenId": "send-to-bank",
+      "action": "Tap Bank Account (from step 2)",
+      "description": "Bank Account option triggers identity verification prompt: 'Takes 2 min'. Lists benefits: Get a USD bank account number, Request your Tuyo Card, Your data stays private & secure. Green 'Verify identity' button and 'Not now' option.",
+      "screenshotPath": "screenshots/step-04.png",
+      "changes": "Bottom sheet with identity verification prompt overlaying the Send screen."
+    }
+  ],
+  "notes": "Bank account transfers require identity verification. Wallet address and Tuyo username transfers do not."
+}

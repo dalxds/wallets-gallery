@@ -1,0 +1,27 @@
+{
+  "slug": "receive",
+  "name": "Receive",
+  "summary": "User views their QR code and wallet address to receive crypto.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home",
+      "screenId": "home",
+      "action": "Entry point",
+      "description": "Home screen with navigation options.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Receive",
+      "screenId": "receive",
+      "action": "Tap Receive",
+      "description": "Receive screen with QR code, wallet address, and network support info.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    }
+  ],
+  "notes": "Displays QR code and copyable wallet address with supported network information."
+}
