@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useRouter } from "next/navigation"
+import { useQueryState } from "nuqs"
 
 interface AppHeaderProps {
   app: AppCapture
@@ -18,7 +18,17 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ app, appIndex, currentDate }: AppHeaderProps) {
-  const router = useRouter()
+  const [, setDateParam] = useQueryState("date")
+  const [, setScreen] = useQueryState("screen")
+  const [, setFlow] = useQueryState("flow")
+  const [, setStep] = useQueryState("step")
+
+  function handleDateChange(date: string) {
+    setDateParam(date)
+    setScreen(null)
+    setFlow(null)
+    setStep(null)
+  }
 
   return (
     <div className="flex items-center gap-4">
@@ -32,9 +42,7 @@ export function AppHeader({ app, appIndex, currentDate }: AppHeaderProps) {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Select
             value={currentDate}
-            onValueChange={(date) =>
-              router.push(`/apps/${app.app.slug}?date=${date}`)
-            }
+            onValueChange={handleDateChange}
           >
             <SelectTrigger size="sm" className="h-7 text-xs">
               <SelectValue />

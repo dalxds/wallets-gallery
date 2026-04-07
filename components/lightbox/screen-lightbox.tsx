@@ -4,6 +4,7 @@ import type { ScreenEntry } from "@/lib/types"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog"
 import { captureUrl } from "@/lib/images"
@@ -11,7 +12,7 @@ import { cn, formatScreenId } from "@/lib/utils"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Copy, Check, Link2, Download, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
+import { useQueryState } from "nuqs"
 
 interface ScreenLightboxProps {
   screens: ScreenEntry[]
@@ -26,7 +27,7 @@ export function ScreenLightbox({
   appSlug,
   date,
 }: ScreenLightboxProps) {
-  const router = useRouter()
+  const [, setScreen] = useQueryState("screen")
   const [currentIndex, setCurrentIndex] = useState(() =>
     screens.findIndex((s) => s.id === activeScreenId)
   )
@@ -55,14 +56,10 @@ export function ScreenLightbox({
     (index: number) => {
       const clamped = Math.max(0, Math.min(screens.length - 1, index))
       setCurrentIndex(clamped)
-      window.history.replaceState(
-        null,
-        "",
-        `/apps/${appSlug}/screens/${screens[clamped].id}`
-      )
+      setScreen(screens[clamped].id)
       scrollThumbIntoView(clamped)
     },
-    [screens, appSlug, scrollThumbIntoView]
+    [screens, setScreen, scrollThumbIntoView]
   )
 
   useEffect(() => {
@@ -109,7 +106,7 @@ export function ScreenLightbox({
   }
 
   function close() {
-    router.push(`/apps/${appSlug}`)
+    setScreen(null)
   }
 
   return (
@@ -121,6 +118,9 @@ export function ScreenLightbox({
         <DialogTitle className="sr-only">
           {current?.description ?? "Screen"}
         </DialogTitle>
+        <DialogDescription className="sr-only">
+          Screen lightbox viewer
+        </DialogDescription>
 
         {/* Header with title + close */}
         <div className="flex items-center justify-between border-b px-4 py-2">

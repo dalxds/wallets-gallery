@@ -4,6 +4,7 @@ import type { FlowDetail, FlowStep } from "@/lib/types"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog"
 import { captureUrl } from "@/lib/images"
@@ -125,7 +126,7 @@ export function FlowLightbox({
   }
 
   async function copyFlowLink() {
-    const url = `${window.location.origin}/apps/${appSlug}/flows/${flow.slug}`
+    const url = `${window.location.origin}/apps/${appSlug}/flows/${flow.slug}?step=${initialIndex}`
     await navigator.clipboard.writeText(url)
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
@@ -138,6 +139,9 @@ export function FlowLightbox({
         showCloseButton={false}
       >
         <DialogTitle className="sr-only">{flow.name}</DialogTitle>
+        <DialogDescription className="sr-only">
+          Flow lightbox viewer
+        </DialogDescription>
 
         {/* Header */}
         <div className="flex items-center justify-between border-b px-4 py-2">

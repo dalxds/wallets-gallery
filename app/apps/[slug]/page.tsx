@@ -4,6 +4,7 @@ import { AppShell } from "@/components/layout/app-shell"
 import { AppHeader } from "@/components/app-detail/app-header"
 import { ScreensGrid } from "@/components/app-detail/screens-grid"
 import { FlowsView } from "@/components/app-detail/flows-view"
+import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 import { getAppsIndex, fetchAppCapture } from "@/lib/data"
 import type { AppCapture, AppIndex } from "@/lib/types"
 import { useParams } from "next/navigation"
@@ -24,7 +25,9 @@ export default function AppDetailPage() {
     parseAsStringLiteral(tabs).withDefault("screens")
   )
   const [activeFlowSlug, setActiveFlowSlug] = useQueryState("flow")
+  const [, setStepParam] = useQueryState("step")
   const [dateParam, setDateParam] = useQueryState("date")
+  const [activeScreenId, setActiveScreenId] = useQueryState("screen")
 
   const slug = params.slug
 
@@ -86,7 +89,11 @@ export default function AppDetailPage() {
         {/* Client-side tabs — no navigation, no flicker */}
         <div className="flex gap-4 border-b">
           <button
-            onClick={() => setTab("screens")}
+            onClick={() => {
+              setTab("screens")
+              setActiveFlowSlug(null)
+              setStepParam(null)
+            }}
             className={cn(
               "border-b-2 pb-2 text-sm font-medium transition-colors",
               tab === "screens"
@@ -97,7 +104,10 @@ export default function AppDetailPage() {
             Screens ({app.screens.length})
           </button>
           <button
-            onClick={() => setTab("flows")}
+            onClick={() => {
+              setTab("flows")
+              setActiveScreenId(null)
+            }}
             className={cn(
               "border-b-2 pb-2 text-sm font-medium transition-colors",
               tab === "flows"
@@ -124,6 +134,15 @@ export default function AppDetailPage() {
           />
         )}
       </div>
+
+      {activeScreenId && app.screens.some((s) => s.id === activeScreenId) && (
+        <ScreenLightbox
+          screens={app.screens}
+          activeScreenId={activeScreenId}
+          appSlug={slug}
+          date={date}
+        />
+      )}
     </AppShell>
   )
 }

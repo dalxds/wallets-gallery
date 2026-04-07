@@ -23,17 +23,28 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [linkCopied, setLinkCopied] = useState(false)
-  const [, setFlowParam] = useQueryState("flow")
+  const [flowParam, setFlowParam] = useQueryState("flow")
+  const [stepParam, setStepParam] = useQueryState("step")
 
   const openLightbox = useCallback((idx: number) => {
     setLightboxIndex(idx)
     setFlowParam(flow.slug)
-  }, [flow.slug, setFlowParam])
+    setStepParam(String(idx))
+  }, [flow.slug, setFlowParam, setStepParam])
 
   const closeLightbox = useCallback(() => {
     setLightboxIndex(null)
     setFlowParam(null)
-  }, [setFlowParam])
+    setStepParam(null)
+  }, [setFlowParam, setStepParam])
+
+  // Auto-open lightbox when URL flow param matches this flow (deep link)
+  useEffect(() => {
+    if (flowParam === flow.slug && lightboxIndex === null) {
+      const idx = stepParam ? parseInt(stepParam, 10) : 0
+      setLightboxIndex(isNaN(idx) ? 0 : idx)
+    }
+  }, [flowParam, flow.slug, stepParam, lightboxIndex])
 
   function updateScrollState() {
     const el = scrollRef.current
