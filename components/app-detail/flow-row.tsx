@@ -5,7 +5,8 @@ import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Check, Link2 } from "lucide-react"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
+import { useQueryState } from "nuqs"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 import { ImageActions } from "@/components/shared/image-actions"
 
@@ -22,6 +23,17 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [linkCopied, setLinkCopied] = useState(false)
+  const [, setFlowParam] = useQueryState("flow")
+
+  const openLightbox = useCallback((idx: number) => {
+    setLightboxIndex(idx)
+    setFlowParam(flow.slug)
+  }, [flow.slug, setFlowParam])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxIndex(null)
+    setFlowParam(null)
+  }, [setFlowParam])
 
   function updateScrollState() {
     const el = scrollRef.current
@@ -109,11 +121,11 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
               key={step.number}
               role="button"
               tabIndex={0}
-              onClick={() => setLightboxIndex(idx)}
+              onClick={() => openLightbox(idx)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault()
-                  setLightboxIndex(idx)
+                  openLightbox(idx)
                 }
               }}
               className="group/step w-32 shrink-0 cursor-pointer snap-start text-left sm:w-36"
@@ -165,7 +177,8 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
           appSlug={appSlug}
           date={date}
           flowDir={flowDir}
-          onClose={() => setLightboxIndex(null)}
+          initialIndex={lightboxIndex}
+          onClose={closeLightbox}
         />
       )}
     </div>

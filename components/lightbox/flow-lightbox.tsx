@@ -7,7 +7,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { captureUrl } from "@/lib/images"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { cn } from "@/lib/utils"
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react"
 import {
   Copy,
   Check,
@@ -24,6 +25,7 @@ interface FlowLightboxProps {
   appSlug: string
   date: string
   flowDir: string
+  initialIndex?: number
   onClose: () => void
 }
 
@@ -42,23 +44,56 @@ export function FlowLightbox({
   appSlug,
   date,
   flowDir,
+  initialIndex = 0,
   onClose,
 }: FlowLightboxProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const stepRefs = useRef<Map<number, HTMLDivElement>>(new Map())
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [flowLinkCopied, setFlowLinkCopied] = useState(false)
+  const [ready, setReady] = useState(false)
 
-  function updateScrollState() {
+  const updateScrollState = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    setCanScrollLeft(el.scrollLeft > 0)
+    setCanScrollLeft(el.scrollLeft > 1)
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
-  }
+  }, [])
 
-  useEffect(() => {
+  const scrollToIndex = useCallback(() => {
+    const container = scrollRef.current
+    const stepEl = stepRefs.current.get(initialIndex)
+    if (stepEl && container) {
+      container.scrollLeft =
+        stepEl.offsetLeft - (container.clientWidth - stepEl.offsetWidth) / 2
+    }
     updateScrollState()
-  }, [flow])
+  }, [initialIndex, updateScrollState])
+
+  // Position scroll then reveal — hide for 1 frame to avoid flicker
+  useEffect(() => {
+    // Frame 1: layout is computed, set scroll position
+    const raf1 = requestAnimationFrame(() => {
+      scrollToIndex()
+      // Frame 2: scroll position applied, now reveal
+      requestAnimationFrame(() => {
+        setReady(true)
+      })
+    })
+    return () => cancelAnimationFrame(raf1)
+  }, [scrollToIndex])
+
+  // Keep arrows updated when scroll container resizes
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+    const observer = new ResizeObserver(() => {
+      if (ready) updateScrollState()
+    })
+    observer.observe(container)
+    return () => observer.disconnect()
+  }, [updateScrollState, ready])
 
   function scroll(direction: "left" | "right") {
     const el = scrollRef.current
@@ -99,7 +134,7 @@ export function FlowLightbox({
   return (
     <Dialog open onOpenChange={() => onClose()}>
       <DialogContent
-        className="flex h-[96vh] max-w-[97vw] flex-col gap-0 overflow-hidden p-0"
+        className="flex h-[80vh] max-w-[80vw] sm:max-w-[80vw] flex-col gap-0 overflow-hidden p-0"
         showCloseButton={false}
       >
         <DialogTitle className="sr-only">{flow.name}</DialogTitle>
@@ -134,25 +169,31 @@ export function FlowLightbox({
 
         {/* Flow strip — all steps side-by-side equally */}
         <div className="relative flex flex-1 items-center overflow-hidden bg-muted/30">
-          {canScrollLeft && (
-            <Button
-              variant="secondary"
-              size="icon"
-              className="absolute left-2 z-10 h-9 w-9 rounded-full shadow-md"
-              onClick={() => scroll("left")}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-          )}
+          <button
+            className={cn(
+              "absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/90 text-neutral-900 shadow-lg backdrop-blur-sm transition-opacity hover:bg-white dark:bg-white/20 dark:text-white dark:hover:bg-white/30",
+              canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0"
+            )}
+            onClick={() => scroll("left")}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
 
           <div
             ref={scrollRef}
-            className="flex h-full items-center gap-4 overflow-x-auto px-14 py-4 scrollbar-hide"
+            className={cn(
+              "flex h-full items-center gap-4 overflow-x-auto px-14 py-4 scrollbar-hide transition-opacity duration-150",
+              ready ? "opacity-100" : "opacity-0"
+            )}
             onScroll={updateScrollState}
           >
-            {flow.steps.map((step) => (
+            {flow.steps.map((step, idx) => (
               <StepCard
                 key={step.number}
+                ref={(el) => {
+                  if (el) stepRefs.current.set(idx, el)
+                  else stepRefs.current.delete(idx)
+                }}
                 step={step}
                 src={stepSrc(step)}
                 appSlug={appSlug}
@@ -161,33 +202,30 @@ export function FlowLightbox({
             ))}
           </div>
 
-          {canScrollRight && (
-            <Button
-              variant="secondary"
-              size="icon"
-              className="absolute right-2 z-10 h-9 w-9 rounded-full shadow-md"
-              onClick={() => scroll("right")}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          )}
+          <button
+            className={cn(
+              "absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/90 text-neutral-900 shadow-lg backdrop-blur-sm transition-opacity hover:bg-white dark:bg-white/20 dark:text-white dark:hover:bg-white/30",
+              canScrollRight ? "opacity-100" : "pointer-events-none opacity-0"
+            )}
+            onClick={() => scroll("right")}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       </DialogContent>
     </Dialog>
   )
 }
 
-function StepCard({
-  step,
-  src,
-  appSlug,
-  flowSlug,
-}: {
-  step: FlowStep
-  src: string
-  appSlug: string
-  flowSlug: string
-}) {
+const StepCard = forwardRef<
+  HTMLDivElement,
+  {
+    step: FlowStep
+    src: string
+    appSlug: string
+    flowSlug: string
+  }
+>(function StepCard({ step, src, appSlug, flowSlug }, ref) {
   const [copiedImage, setCopiedImage] = useState(false)
   const [copiedLink, setCopiedLink] = useState(false)
 
@@ -228,12 +266,12 @@ function StepCard({
   }
 
   return (
-    <div className="group/card flex shrink-0 flex-col items-center gap-2">
+    <div ref={ref} className="group/card flex shrink-0 flex-col items-center gap-2">
       <div className="relative">
         <img
           src={src}
           alt={step.description}
-          className="max-h-[calc(96vh-9rem)] rounded-lg object-contain shadow-lg"
+          className="max-h-[calc(80vh-9rem)] rounded-lg object-contain shadow-lg"
         />
         {/* Hover action buttons */}
         <div className="absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
@@ -275,4 +313,4 @@ function StepCard({
       </div>
     </div>
   )
-}
+})

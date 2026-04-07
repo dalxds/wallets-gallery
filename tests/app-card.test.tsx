@@ -1,0 +1,112 @@
+import { describe, it, expect, vi } from "vitest"
+import { render, within } from "@testing-library/react"
+import { AppCard } from "@/components/browse/app-card"
+import type { AppIndex, AppCapture } from "@/lib/types"
+
+vi.mock("next/link", () => ({
+  default: ({
+    href,
+    children,
+    ...props
+  }: {
+    href: string
+    children: React.ReactNode
+  }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ),
+}))
+
+const mockApp: AppIndex = {
+  slug: "phantom",
+  name: "Phantom",
+  platform: "ios",
+  captures: ["2026-04-01"],
+  latest: "2026-04-01",
+}
+
+const mockCapture: AppCapture = {
+  app: { name: "Phantom", slug: "phantom", bundleId: "com.phantom", platform: "ios" },
+  captureDate: "2026-04-01",
+  mode: "full",
+  screens: [
+    { id: "home", description: "Home screen", screenshotPath: "home.png" },
+    { id: "send", description: "Send screen", screenshotPath: "send.png" },
+  ],
+  flows: [
+    {
+      slug: "send-crypto",
+      name: "Send Crypto",
+      summary: "Send crypto flow",
+      stepsCount: 3,
+      path: "flows/send-crypto/flow.json",
+    },
+  ],
+  decisionPoints: [],
+  sitemapPath: "sitemap.png",
+}
+
+describe("AppCard", () => {
+  describe("list view", () => {
+    it("renders app name and links to detail page", () => {
+      const { container } = render(
+        <AppCard app={mockApp} capture={mockCapture} view="list" />
+      )
+      const view = within(container)
+      expect(view.getByText("Phantom")).toBeInTheDocument()
+      expect(view.getByRole("link")).toHaveAttribute("href", "/apps/phantom")
+    })
+
+    it("shows screen and flow counts", () => {
+      const { container } = render(
+        <AppCard app={mockApp} capture={mockCapture} view="list" />
+      )
+      const view = within(container)
+      expect(view.getByText("2 screens")).toBeInTheDocument()
+      expect(view.getByText("1 flows")).toBeInTheDocument()
+    })
+
+    it("shows formatted date", () => {
+      const { container } = render(
+        <AppCard app={mockApp} capture={mockCapture} view="list" />
+      )
+      expect(within(container).getByText("Apr 1, 2026")).toBeInTheDocument()
+    })
+
+    it("shows 0 counts when no capture", () => {
+      const { container } = render(<AppCard app={mockApp} view="list" />)
+      const view = within(container)
+      expect(view.getByText("0 screens")).toBeInTheDocument()
+      expect(view.getByText("0 flows")).toBeInTheDocument()
+    })
+  })
+
+  describe("grid view", () => {
+    it("renders app name and links to detail page", () => {
+      const { container } = render(
+        <AppCard app={mockApp} capture={mockCapture} view="grid" />
+      )
+      const view = within(container)
+      expect(view.getByText("Phantom")).toBeInTheDocument()
+      expect(view.getByRole("link")).toHaveAttribute("href", "/apps/phantom")
+    })
+
+    it("shows screen and flow counts", () => {
+      const { container } = render(
+        <AppCard app={mockApp} capture={mockCapture} view="grid" />
+      )
+      const view = within(container)
+      expect(view.getByText("2 screens")).toBeInTheDocument()
+      expect(view.getByText("1 flows")).toBeInTheDocument()
+    })
+
+    it("renders avatar image", () => {
+      const { container } = render(
+        <AppCard app={mockApp} capture={mockCapture} view="grid" />
+      )
+      const img = within(container).getByAltText("Phantom")
+      expect(img).toHaveAttribute("src", "https://avatar.vercel.sh/phantom")
+    })
+  })
+})

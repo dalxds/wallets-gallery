@@ -33,26 +33,6 @@ Search and browse available tokens with prices, sparklines, and token detail vie
 2. **Token search** (`search`) — Tap search icon. Watchlist (USDC, Ethereum, EURC, Bitcoin) and Most Relevant token list with sparklines and prices.
 3. **Token detail** (`token-detail`) — Tap a token. MemeCore at $2.31, price chart with timeframe toggles, Buy/Sell/Receive/Send buttons, balance.
 
-### Explore Yield Strategies (3 steps)
-
-Browse yield strategies by currency and view available options with APY, risk, and AUM.
-
-1. **Home screen** (`home`) — Entry point.
-2. **Strategies Overview** (`strategies-overview`) — Tap Strategies tab. Four currency cards: USD (6.99%), ETH (3.50%), EUR (1.69%), BTC (1.09%).
-3. **USD Strategies** (`usd-strategies`) — Tap USD. Five strategies: yoUSD (4.89%, Best Performer), Morpho Moonwell (3.88%), Fluid USDC (3.19%), Morpho Seamless, Aave USDC.
-
-### Manage Account Settings (7 steps)
-
-Access and manage account settings including handle, verification, backup, privacy, and permissions.
-
-1. **Home screen** (`home`) — Entry point.
-2. **Settings** (`settings`) — Tap profile avatar. Wallet address (0x93d...Ce569), NOT VERIFIED status. General: Account Handle (AVAILABLE), Verification, Account Backup (BACKUP NEEDED), Privacy, Permissions. Security: Keys & Security.
-3. **Account Handle** (`account-handle`) — Choose @handle with text input.
-4. **Identity Verification** (`identity-verification`) — Verify identity prompt, takes 2 min, unlocks Card and banking.
-5. **Backup** (`backup`) — iCloud Drive backup — NOT CONNECTED. Private key stored via iCloud Keychain.
-6. **Privacy** (`privacy`) — Toggle: Hide Holdings & Earn Balances (off).
-7. **Permissions** (`permissions`) — Biometrics (off), Push Notifications (on).
-
 ### Add Money (2 steps)
 
 Add funds to Tuyo account via bank transfer, crypto wallet, or Coinbase.
@@ -101,6 +81,14 @@ View transaction history and individual transaction details.
 2. **Transaction history** (`transaction-history`) — Tap transactions. Full list: two Receive USDC entries grouped under TODAY.
 3. **Transaction details** (`transaction-details`) — Tap a transaction. Bottom sheet: Received status, March 31 2026 timestamp, from address, 1 USDC amount.
 
+### Explore Yield Strategies (3 steps)
+
+Browse yield strategies by currency and view available options with APY, risk, and AUM.
+
+1. **Home screen** (`home`) — Entry point.
+2. **Strategies Overview** (`strategies-overview`) — Tap Strategies tab. Four currency cards: USD (6.99%), ETH (3.50%), EUR (1.69%), BTC (1.09%).
+3. **USD Strategies** (`usd-strategies`) — Tap USD. Five strategies: yoUSD (4.89%, Best Performer), Morpho Moonwell (3.88%), Fluid USDC (3.19%), Morpho Seamless, Aave USDC.
+
 ### Explore Tuyo Card (3 steps)
 
 Learn about the Tuyo Visa card — pay with USDC worldwide and use Apple Pay.
@@ -118,6 +106,18 @@ Browse the TUYOs rewards program — earn points, invite friends, and view the l
 3. **Invite friends** (`invite-friends`) — Invite code 18FTN9. Direct referrals: 20%. Second level: 10%. Share button, Become an ambassador link.
 4. **Leaderboard** (`leaderboard`) — Five league tier badges. "You're not part of any league yet."
 
+### Manage Account Settings (7 steps)
+
+Access and manage account settings including handle, verification, backup, privacy, and permissions.
+
+1. **Home screen** (`home`) — Entry point.
+2. **Settings** (`settings`) — Tap profile avatar. Wallet address (0x93d...Ce569), NOT VERIFIED status. General: Account Handle (AVAILABLE), Verification, Account Backup (BACKUP NEEDED), Privacy, Permissions. Security: Keys & Security.
+3. **Account Handle** (`account-handle`) — Choose @handle with text input.
+4. **Identity Verification** (`identity-verification`) — Verify identity prompt, takes 2 min, unlocks Card and banking.
+5. **Backup** (`backup`) — iCloud Drive backup — NOT CONNECTED. Private key stored via iCloud Keychain.
+6. **Privacy** (`privacy`) — Toggle: Hide Holdings & Earn Balances (off).
+7. **Permissions** (`permissions`) — Biometrics (off), Push Notifications (on).
+
 ## Decision Points
 
 ### welcome — 3 options
@@ -127,13 +127,13 @@ Browse the TUYOs rewards program — earn points, invite friends, and view the l
 
 ### home — 8 options
 - [x] Search → `browse-tokens`
-- [x] Profile/Settings → `manage-settings`
 - [x] Add money → `add-money`
 - [x] Send → `send-money`
 - [x] Convert → `convert-tokens`
 - [x] Strategies tab → `explore-strategies`
 - [x] Card tab → `explore-tuyo-card`
 - [x] Rewards tab → `explore-tuyos-rewards`
+- [x] Profile/Settings → `manage-settings`
 
 ### send — 3 options
 - [x] Find on Tuyo → `send-to-tuyo`
@@ -171,12 +171,6 @@ Browse the TUYOs rewards program — earn points, invite friends, and view the l
 - `search` → tap token → `token-detail`
 - `token-detail` → swipe down → `search`
 - `search` → tap back → `home`
-- `home` → tap profile avatar → `settings`
-- `settings` → tap Account Handle → `account-handle`
-- `settings` → tap Verification → `identity-verification`
-- `settings` → tap Account Backup → `backup`
-- `settings` → tap Account Privacy → `privacy`
-- `settings` → tap Permissions → `permissions`
 - `home` → tap Add money → `add-money`
 - `add-money` → tap Wallet → `receive`
 - `home-with-balance` → tap Send → `send`
@@ -193,3 +187,9 @@ Browse the TUYOs rewards program — earn points, invite friends, and view the l
 - `tuyos-rewards` → tap Get TUYOs → `get-tuyos`
 - `tuyos-rewards` → tap Invite friends → `invite-friends`
 - `tuyos-rewards` → tap Leaderboard → `leaderboard`
+- `home` → tap profile avatar → `settings`
+- `settings` → tap Account Handle → `account-handle`
+- `settings` → tap Verification → `identity-verification`
+- `settings` → tap Account Backup → `backup`
+- `settings` → tap Account Privacy → `privacy`
+- `settings` → tap Permissions → `permissions`

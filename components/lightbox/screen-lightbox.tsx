@@ -115,7 +115,7 @@ export function ScreenLightbox({
   return (
     <Dialog open onOpenChange={close}>
       <DialogContent
-        className="flex h-[95vh] max-w-[95vw] flex-col gap-0 overflow-hidden p-0"
+        className="flex h-[95vh] max-w-[95vw] sm:max-w-[95vw] flex-col gap-0 overflow-hidden p-0"
         showCloseButton={false}
       >
         <DialogTitle className="sr-only">
