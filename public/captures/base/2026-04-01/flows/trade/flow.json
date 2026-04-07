@@ -1,0 +1,27 @@
+{
+  "slug": "trade",
+  "name": "Trade",
+  "summary": "User swaps tokens using the trade screen with trending token suggestions.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home",
+      "screenId": "home",
+      "action": "Entry point",
+      "description": "Home screen with navigation options.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Trade",
+      "screenId": "trade",
+      "action": "Tap Trade",
+      "description": "Trade/swap screen with USDC to ETH pair, percentage buttons, trending tokens, and numpad.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    }
+  ],
+  "notes": "Includes quick percentage buttons and trending token suggestions for easy swaps."
+}

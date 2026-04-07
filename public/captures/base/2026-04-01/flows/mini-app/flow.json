@@ -1,0 +1,72 @@
+{
+  "slug": "mini-app",
+  "name": "Mini App (Bankr example)",
+  "summary": "User installs and onboards into a mini app from the Mini Apps directory. Bankr is used as an example.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Mini Apps Directory",
+      "screenId": "mini-apps",
+      "action": "Entry point",
+      "description": "Mini Apps directory with featured apps and categories.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Set Display Name",
+      "screenId": "bankr-display-name",
+      "action": "Tap Bankr app",
+      "description": "Bankr onboarding step to set display name with d-mysten pre-filled.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    },
+    {
+      "number": 3,
+      "title": "Add Avatar",
+      "screenId": "bankr-avatar",
+      "action": "Tap Next",
+      "description": "Bankr onboarding step to add avatar with placeholder image.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": null
+    },
+    {
+      "number": 4,
+      "title": "Write Bio",
+      "screenId": "bankr-bio",
+      "action": "Tap Next",
+      "description": "Bankr onboarding step to write a short bio.",
+      "screenshotPath": "screenshots/step-04.png",
+      "changes": null
+    },
+    {
+      "number": 5,
+      "title": "Loading",
+      "screenId": "bankr-loading",
+      "action": "Tap Next",
+      "description": "Setting up profile screen with loading assets animation.",
+      "screenshotPath": "screenshots/step-05.png",
+      "changes": null
+    },
+    {
+      "number": 6,
+      "title": "Setup Complete",
+      "screenId": "bankr-complete",
+      "action": "Wait for loading to finish",
+      "description": "Setup complete screen showing \"You're all set up, d-mysten!\" confirmation.",
+      "screenshotPath": "screenshots/step-06.png",
+      "changes": null
+    },
+    {
+      "number": 7,
+      "title": "Bankr Browser",
+      "screenId": "bankr-browser",
+      "action": "Tap Continue",
+      "description": "Bankr web app loaded in Base in-app browser.",
+      "screenshotPath": "screenshots/step-07.png",
+      "changes": null
+    }
+  ],
+  "notes": "Bankr is used as an example mini app. The mini app flow (install → onboard → in-app browser) is representative of how mini apps work in Base."
+}

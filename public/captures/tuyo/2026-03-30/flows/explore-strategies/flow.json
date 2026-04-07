@@ -1,0 +1,36 @@
+{
+  "slug": "explore-strategies",
+  "name": "Explore Yield Strategies",
+  "summary": "Browse yield strategies by currency and view available strategy options with APY, risk, and AUM",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home screen",
+      "screenId": "home",
+      "action": "Entry point",
+      "description": "Main dashboard showing Total balance $0.00 with quick actions and bottom tab bar.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Strategies Overview",
+      "screenId": "strategies-overview",
+      "action": "Tap Strategies tab (2nd in bottom bar)",
+      "description": "Strategies Overview screen with info button (i) top-right. Four currency strategy cards stacked vertically: USD (Balance: 0, MAX APY: 6.99%, Assets: $54.49M), ETH (Balance: 0, MAX APY: 3.50%, Assets: $12.59M), EUR (Balance: 0, MAX APY: 1.69%, Assets: $6.28M), BTC (Balance: 0, MAX APY: 1.09%, Assets: $7.20M).",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": "Tab switched to Strategies. Strategies tab icon highlighted in bottom bar."
+    },
+    {
+      "number": 3,
+      "title": "USD Available Strategies",
+      "screenId": "usd-strategies",
+      "action": "Tap USD strategy card",
+      "description": "USD strategy detail showing 'Available strategies' header with back chevron. Strategies: yoUSD (+4.89% APY, Best Performer, Manager: YO, Assets: $28.45M, Risk: Moderate — 'Depositing $1,000 could make you $48.88/year'), Morpho Moonwell Flagship USDC (+3.88%, Manager: Block A..., Assets: $11.59M, Risk: Low), Fluid USDC (+3.19%, Manager: Fluid, Assets: $9.74M, Risk: Low), plus Morpho Seamless and Aave USDC.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": "Navigation pushed to USD strategies list. Back chevron top-left."
+    }
+  ],
+  "notes": null
+}

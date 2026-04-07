@@ -1,0 +1,45 @@
+{
+  "slug": "send-to-tuyo",
+  "name": "Send to Tuyo User",
+  "summary": "Send money instantly to another Tuyo user by searching their @Tuyoname",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home screen (with balance)",
+      "screenId": "home-with-balance",
+      "action": "Entry point",
+      "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Recent transactions visible.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Add Recipient",
+      "screenId": "send",
+      "action": "Tap Send",
+      "description": "Send screen with three recipient options: Find on Tuyo (BEST), Wallet Address, Bank Account.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": "Navigation pushed Send screen."
+    },
+    {
+      "number": 3,
+      "title": "Tuyo user found",
+      "screenId": "send-to-tuyo-found",
+      "action": "Tap Find on Tuyo, search 'joe'",
+      "description": "Search input showing 'joe'. Result: @joe with verified checkmark and avatar. User can tap to select as recipient.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": "Bottom sheet with search input and matching result."
+    },
+    {
+      "number": 4,
+      "title": "Tuyo user not found",
+      "screenId": "send-to-tuyo-not-found",
+      "action": "Search 'joep'",
+      "description": "Search input showing 'joep'. No results returned — empty state below the search field.",
+      "screenshotPath": "screenshots/step-04.png",
+      "changes": "Search results cleared, no match found."
+    }
+  ],
+  "notes": "Steps 3 and 4 show the found/not-found states of the same search screen."
+}

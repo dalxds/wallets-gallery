@@ -1,0 +1,27 @@
+{
+  "slug": "request-payment",
+  "name": "Request Payment",
+  "summary": "User requests a payment via profile search, QR code, or shareable link.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home",
+      "screenId": "home",
+      "action": "Entry point",
+      "description": "Home screen with navigation options.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Request",
+      "screenId": "request",
+      "action": "Tap Request",
+      "description": "Request screen with profile search, QR Code, and Request via Link options.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    }
+  ],
+  "notes": "Supports requesting payments via direct profile search, QR code scanning, or shareable link."
+}

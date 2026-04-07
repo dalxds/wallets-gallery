@@ -1,0 +1,45 @@
+{
+  "slug": "verify-identity",
+  "name": "Verify Identity",
+  "summary": "User verifies their identity by connecting social accounts through Base verification.",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Discover",
+      "screenId": "discover",
+      "action": "Entry point",
+      "description": "Discover screen with Pinned Apps including Verify.",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Get Verified",
+      "screenId": "verify",
+      "action": "Tap Verify pinned app",
+      "description": "Get Verified landing page with Earn Rewards, Build Credibility, Boost Visibility benefits.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": null
+    },
+    {
+      "number": 3,
+      "title": "Login Request",
+      "screenId": "verify-login-request",
+      "action": "Tap Continue",
+      "description": "Login request modal from verify.base.dev for wallet authentication.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": null
+    },
+    {
+      "number": 4,
+      "title": "Manage Verifications",
+      "screenId": "manage-verifications",
+      "action": "Tap Confirm",
+      "description": "Manage verifications screen with X, Coinbase, TikTok, and Instagram connection options.",
+      "screenshotPath": "screenshots/step-04.png",
+      "changes": null
+    }
+  ],
+  "notes": "Verification uses verify.base.dev and supports X, Coinbase, TikTok, and Instagram."
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "view-transactions",
+  "name": "View Transaction History",
+  "summary": "View transaction history and individual transaction details",
+  "mode": "guided",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Home screen (with balance)",
+      "screenId": "home-with-balance",
+      "action": "Entry point",
+      "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Transactions section showing two recent Receive USDC entries ($0.0,990 and $1.00).",
+      "screenshotPath": "screenshots/step-01.png",
+      "changes": null
+    },
+    {
+      "number": 2,
+      "title": "Transaction history",
+      "screenId": "transaction-history",
+      "action": "Tap Transactions section (view all)",
+      "description": "Full Transactions screen with 'TODAY' header. Two entries: Receive USDC from 0xC34l...2b6E ($0.0,990) and Receive USDC from 0xc348...7B6e ($1.00). Each row shows USDC icon, type, source address, and amount.",
+      "screenshotPath": "screenshots/step-02.png",
+      "changes": "Navigation pushed full transaction history screen."
+    },
+    {
+      "number": 3,
+      "title": "Transaction details",
+      "screenId": "transaction-details",
+      "action": "Tap a transaction",
+      "description": "Transaction list with detail bottom sheet. Shows: 'Received' status with green checkmark, timestamp (Tuesday, March 31, 2026 at 5:28 PM), FROM address (0xc348D942...44e27B6e) with avatar, RECEIVED (USDC) amount: 1. Copy and external link buttons in header.",
+      "screenshotPath": "screenshots/step-03.png",
+      "changes": "Bottom sheet slid up with transaction details over the transaction list."
+    }
+  ],
+  "notes": null
+}

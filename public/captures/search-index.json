@@ -1,0 +1,2328 @@
+[
+  {
+    "type": "app",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Base",
+    "description": "IOS app — 60 screens, 15 flows",
+    "href": "/apps/base"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "welcome",
+    "description": "Welcome screen with animated icons and Create Account / Sign In buttons",
+    "screenId": "welcome",
+    "href": "/apps/base/screens/welcome"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "enter-email",
+    "description": "Email input for account creation",
+    "screenId": "enter-email",
+    "href": "/apps/base/screens/enter-email"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "otp-verify",
+    "description": "6-digit OTP verification code entry",
+    "screenId": "otp-verify",
+    "href": "/apps/base/screens/otp-verify"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "choose-username",
+    "description": "Basename (username.base.eth) registration",
+    "screenId": "choose-username",
+    "href": "/apps/base/screens/choose-username"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "home",
+    "description": "Main dashboard with balance, quick actions, and token list",
+    "screenId": "home",
+    "href": "/apps/base/screens/home"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "home-empty",
+    "description": "Home screen with $0 balance and empty token list",
+    "screenId": "home-empty",
+    "href": "/apps/base/screens/home-empty"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "buy-deposit",
+    "description": "Buy/deposit screen with amount input, token selector, and payment method",
+    "screenId": "buy-deposit",
+    "href": "/apps/base/screens/buy-deposit"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "token-selector",
+    "description": "Token picker modal for deposit with search and token list",
+    "screenId": "token-selector",
+    "href": "/apps/base/screens/token-selector"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "deposit-with-coinbase",
+    "description": "Connect to Coinbase payment method modal",
+    "screenId": "deposit-with-coinbase",
+    "href": "/apps/base/screens/deposit-with-coinbase"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "send-deposit-prompt",
+    "description": "Deposit Funds modal triggered when sending with empty wallet",
+    "screenId": "send-deposit-prompt",
+    "href": "/apps/base/screens/send-deposit-prompt"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "trade",
+    "description": "Token swap interface with USDC to ETH, percentage buttons, and trending tokens",
+    "screenId": "trade",
+    "href": "/apps/base/screens/trade"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "request",
+    "description": "Request payment screen with QR code, link sharing, and profile search",
+    "screenId": "request",
+    "href": "/apps/base/screens/request"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "receive",
+    "description": "Receive screen with QR code, wallet address, and supported networks",
+    "screenId": "receive",
+    "href": "/apps/base/screens/receive"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "collectibles",
+    "description": "NFT collectibles tab with empty state",
+    "screenId": "collectibles",
+    "href": "/apps/base/screens/collectibles"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "activity-empty",
+    "description": "Activity tab showing only minted basename NFT",
+    "screenId": "activity-empty",
+    "href": "/apps/base/screens/activity-empty"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "activity",
+    "description": "Activity tab showing received USDC and minted basename",
+    "screenId": "activity",
+    "href": "/apps/base/screens/activity"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "home-filters",
+    "description": "Filters modal with categories and networks",
+    "screenId": "home-filters",
+    "href": "/apps/base/screens/home-filters"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "home-sort",
+    "description": "Sort modal with Balance, Market Cap, Volume, Price Change options",
+    "screenId": "home-sort",
+    "href": "/apps/base/screens/home-sort"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "discover",
+    "description": "Discover/Search screen with pinned apps, trending coins, and search bar",
+    "screenId": "discover",
+    "href": "/apps/base/screens/discover"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "mini-apps",
+    "description": "Mini Apps directory with featured apps carousel and app categories",
+    "screenId": "mini-apps",
+    "href": "/apps/base/screens/mini-apps"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "mini-apps-scrolled",
+    "description": "Mini Apps scrolled showing Connect with creators, Earn crypto sections",
+    "screenId": "mini-apps-scrolled",
+    "href": "/apps/base/screens/mini-apps-scrolled"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "bankr-display-name",
+    "description": "Bankr mini app onboarding - set display name",
+    "screenId": "bankr-display-name",
+    "href": "/apps/base/screens/bankr-display-name"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "bankr-avatar",
+    "description": "Bankr mini app onboarding - add avatar",
+    "screenId": "bankr-avatar",
+    "href": "/apps/base/screens/bankr-avatar"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "bankr-bio",
+    "description": "Bankr mini app onboarding - write short bio",
+    "screenId": "bankr-bio",
+    "href": "/apps/base/screens/bankr-bio"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "bankr-loading",
+    "description": "Bankr mini app - loading/setting up profile",
+    "screenId": "bankr-loading",
+    "href": "/apps/base/screens/bankr-loading"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "bankr-complete",
+    "description": "Bankr mini app - setup complete with Start Posting CTA",
+    "screenId": "bankr-complete",
+    "href": "/apps/base/screens/bankr-complete"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "bankr-browser",
+    "description": "Bankr web app in Base in-app browser",
+    "screenId": "bankr-browser",
+    "href": "/apps/base/screens/bankr-browser"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "verify",
+    "description": "Get Verified landing with benefits",
+    "screenId": "verify",
+    "href": "/apps/base/screens/verify"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "verify-login-request",
+    "description": "Wallet login request modal from verify.base.dev",
+    "screenId": "verify-login-request",
+    "href": "/apps/base/screens/verify-login-request"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "manage-verifications",
+    "description": "Social verification for X, Coinbase, TikTok, Instagram",
+    "screenId": "manage-verifications",
+    "href": "/apps/base/screens/manage-verifications"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "token-detail",
+    "description": "Token detail page with price chart, market data, and about section",
+    "screenId": "token-detail",
+    "href": "/apps/base/screens/token-detail"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "token-buy-modal",
+    "description": "Token buy/swap modal with USDC input and token output",
+    "screenId": "token-buy-modal",
+    "href": "/apps/base/screens/token-buy-modal"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "chat",
+    "description": "Chat home with AI agents and compose button",
+    "screenId": "chat",
+    "href": "/apps/base/screens/chat"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "chat-search",
+    "description": "New chat profile search with basename results",
+    "screenId": "chat-search",
+    "href": "/apps/base/screens/chat-search"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "chat-conversation",
+    "description": "1:1 chat conversation with message input",
+    "screenId": "chat-conversation",
+    "href": "/apps/base/screens/chat-conversation"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "live-feed",
+    "description": "Live social trading feed showing real-time trades with token cards",
+    "screenId": "live-feed",
+    "href": "/apps/base/screens/live-feed"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "create-post",
+    "description": "Create post with text input, earnings toggle, and media attachments",
+    "screenId": "create-post",
+    "href": "/apps/base/screens/create-post"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "about-earnings",
+    "description": "About Earnings info modal explaining tradable posts",
+    "screenId": "about-earnings",
+    "href": "/apps/base/screens/about-earnings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "edit-ticker",
+    "description": "Edit Ticker modal for post trading nickname",
+    "screenId": "edit-ticker",
+    "href": "/apps/base/screens/edit-ticker"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "notifications",
+    "description": "Notifications screen with empty state",
+    "screenId": "notifications",
+    "href": "/apps/base/screens/notifications"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "notification-settings",
+    "description": "Push notification settings with social and trading toggles",
+    "screenId": "notification-settings",
+    "href": "/apps/base/screens/notification-settings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "profile-drawer",
+    "description": "Profile side drawer with name, balance, and menu options",
+    "screenId": "profile-drawer",
+    "href": "/apps/base/screens/profile-drawer"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "view-profile",
+    "description": "User profile with posts, assets, casts, replies tabs",
+    "screenId": "view-profile",
+    "href": "/apps/base/screens/view-profile"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "earnings",
+    "description": "Earnings dashboard with post, creator coin, and creator rewards breakdown",
+    "screenId": "earnings",
+    "href": "/apps/base/screens/earnings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "earnings-modal",
+    "description": "Earnings onboarding modal",
+    "screenId": "earnings-modal",
+    "href": "/apps/base/screens/earnings-modal"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "edit-profile",
+    "description": "Edit profile modal with avatar, username, display name, and bio",
+    "screenId": "edit-profile",
+    "href": "/apps/base/screens/edit-profile"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "share-modal",
+    "description": "Share profile modal with Post, Copy link, Share to options",
+    "screenId": "share-modal",
+    "href": "/apps/base/screens/share-modal"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "settings",
+    "description": "Settings main menu with Display, Account, Privacy, Trading, and more",
+    "screenId": "settings",
+    "href": "/apps/base/screens/settings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "display-settings",
+    "description": "Display settings with theme, appearance mode, language, currency",
+    "screenId": "display-settings",
+    "href": "/apps/base/screens/display-settings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "account-management",
+    "description": "Account management with authenticator app and sign out",
+    "screenId": "account-management",
+    "href": "/apps/base/screens/account-management"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "sign-out-confirm",
+    "description": "Sign out confirmation with passkey reminder",
+    "screenId": "sign-out-confirm",
+    "href": "/apps/base/screens/sign-out-confirm"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "connect-coinbase",
+    "description": "Connect to Coinbase account for funding",
+    "screenId": "connect-coinbase",
+    "href": "/apps/base/screens/connect-coinbase"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "privacy-security",
+    "description": "Privacy settings with personalization, privacy mode, developer mode",
+    "screenId": "privacy-security",
+    "href": "/apps/base/screens/privacy-security"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "manage-permissions",
+    "description": "App permissions management screen",
+    "screenId": "manage-permissions",
+    "href": "/apps/base/screens/manage-permissions"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "social-creators",
+    "description": "Social settings with Farcaster ID, coin pairings, muted accounts",
+    "screenId": "social-creators",
+    "href": "/apps/base/screens/social-creators"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "trading-settings",
+    "description": "Trading settings with quick buy, stealth mode, dust coins",
+    "screenId": "trading-settings",
+    "href": "/apps/base/screens/trading-settings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "sign-in-options",
+    "description": "Sign in method selection: Email, Passkey, Recovery phrase",
+    "screenId": "sign-in-options",
+    "href": "/apps/base/screens/sign-in-options"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "import-wallet",
+    "description": "Import wallet landing with Create new wallet and I already have a wallet",
+    "screenId": "import-wallet",
+    "href": "/apps/base/screens/import-wallet"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "create-passcode",
+    "description": "6-digit passcode creation for wallet unlock",
+    "screenId": "create-passcode",
+    "href": "/apps/base/screens/create-passcode"
+  },
+  {
+    "type": "screen",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "import-wallet-options",
+    "description": "Wallet import options: Passkey or Recovery phrase",
+    "screenId": "import-wallet-options",
+    "href": "/apps/base/screens/import-wallet-options"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Create Account",
+    "description": "Create a new Base account with email, OTP verification, and basename registration",
+    "flowSlug": "create-account",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Welcome",
+    "description": "Welcome screen with Create Account and Sign In buttons.",
+    "flowSlug": "create-account",
+    "flowName": "Create Account",
+    "screenId": "welcome",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Enter Email",
+    "description": "Enter email screen with email input field.",
+    "flowSlug": "create-account",
+    "flowName": "Create Account",
+    "screenId": "enter-email",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "OTP Verification",
+    "description": "OTP verification screen with 6-digit code entry sent to email.",
+    "flowSlug": "create-account",
+    "flowName": "Create Account",
+    "screenId": "otp-verify",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Choose Username",
+    "description": "Choose username screen for basename registration (name.base.eth).",
+    "flowSlug": "create-account",
+    "flowName": "Create Account",
+    "screenId": "choose-username",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Username Entered",
+    "description": "Username entered (d-mysten) with Claim button enabled.",
+    "flowSlug": "create-account",
+    "flowName": "Create Account",
+    "screenId": "username-entered",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen after successful account creation with $0 balance and empty token list.",
+    "flowSlug": "create-account",
+    "flowName": "Create Account",
+    "screenId": "home-empty",
+    "href": "/apps/base/flows/create-account"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sign In",
+    "description": "Sign into Base via email, passkey, or recovery phrase with wallet creation option",
+    "flowSlug": "sign-in",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Welcome",
+    "description": "Welcome screen with Create Account and Sign In buttons.",
+    "flowSlug": "sign-in",
+    "flowName": "Sign In",
+    "screenId": "welcome",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sign In Options",
+    "description": "Sign in options screen with Email, Passkey, and Recovery phrase methods.",
+    "flowSlug": "sign-in",
+    "flowName": "Sign In",
+    "screenId": "sign-in-options",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Import Wallet",
+    "description": "Import wallet landing with Create new wallet and I already have a wallet options.",
+    "flowSlug": "sign-in",
+    "flowName": "Sign In",
+    "screenId": "import-wallet",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Import Wallet Options",
+    "description": "Import wallet options screen with Passkey or Recovery phrase choices.",
+    "flowSlug": "sign-in",
+    "flowName": "Sign In",
+    "screenId": "import-wallet-options",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Create Passcode",
+    "description": "Create 6-digit passcode screen for securing the wallet.",
+    "flowSlug": "sign-in",
+    "flowName": "Sign In",
+    "screenId": "create-passcode",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with wallet balance, token list, and quick actions.",
+    "flowSlug": "sign-in",
+    "flowName": "Sign In",
+    "screenId": "home",
+    "href": "/apps/base/flows/sign-in"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit / Buy",
+    "description": "Deposit funds via debit card or Coinbase with token selection",
+    "flowSlug": "deposit-buy",
+    "href": "/apps/base/flows/deposit-buy"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with Deposit button visible.",
+    "flowSlug": "deposit-buy",
+    "flowName": "Deposit / Buy",
+    "screenId": "home",
+    "href": "/apps/base/flows/deposit-buy"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Buy / Deposit",
+    "description": "Buy screen with $0 amount, USDC selected, numpad, Debit Card payment method, and swipe to deposit.",
+    "flowSlug": "deposit-buy",
+    "flowName": "Deposit / Buy",
+    "screenId": "buy-deposit",
+    "href": "/apps/base/flows/deposit-buy"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Token Selector",
+    "description": "Token selector modal listing USDC, Ethereum, Edge, Compound, and other tokens.",
+    "flowSlug": "deposit-buy",
+    "flowName": "Deposit / Buy",
+    "screenId": "token-selector",
+    "href": "/apps/base/flows/deposit-buy"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit With Coinbase",
+    "description": "Deposit With modal showing Connect to Coinbase option.",
+    "flowSlug": "deposit-buy",
+    "flowName": "Deposit / Buy",
+    "screenId": "deposit-with-coinbase",
+    "href": "/apps/base/flows/deposit-buy"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trade",
+    "description": "Swap tokens using the built-in DEX interface",
+    "flowSlug": "trade",
+    "href": "/apps/base/flows/trade"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with navigation options.",
+    "flowSlug": "trade",
+    "flowName": "Trade",
+    "screenId": "home",
+    "href": "/apps/base/flows/trade"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trade",
+    "description": "Trade/swap screen with USDC to ETH pair, percentage buttons, trending tokens, and numpad.",
+    "flowSlug": "trade",
+    "flowName": "Trade",
+    "screenId": "trade",
+    "href": "/apps/base/flows/trade"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Request Payment",
+    "description": "Request crypto via profile search, QR code, or shareable link",
+    "flowSlug": "request-payment",
+    "href": "/apps/base/flows/request-payment"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with navigation options.",
+    "flowSlug": "request-payment",
+    "flowName": "Request Payment",
+    "screenId": "home",
+    "href": "/apps/base/flows/request-payment"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Request",
+    "description": "Request screen with profile search, QR Code, and Request via Link options.",
+    "flowSlug": "request-payment",
+    "flowName": "Request Payment",
+    "screenId": "request",
+    "href": "/apps/base/flows/request-payment"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Receive",
+    "description": "Display wallet QR code and address for receiving funds across EVM networks",
+    "flowSlug": "receive",
+    "href": "/apps/base/flows/receive"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with navigation options.",
+    "flowSlug": "receive",
+    "flowName": "Receive",
+    "screenId": "home",
+    "href": "/apps/base/flows/receive"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Receive",
+    "description": "Receive screen with QR code, wallet address, and network support info.",
+    "flowSlug": "receive",
+    "flowName": "Receive",
+    "screenId": "receive",
+    "href": "/apps/base/flows/receive"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Browse Tokens",
+    "description": "Discover trending tokens, view details with price charts, and buy",
+    "flowSlug": "browse-tokens",
+    "href": "/apps/base/flows/browse-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover",
+    "description": "Discover screen with trending coins list.",
+    "flowSlug": "browse-tokens",
+    "flowName": "Browse Tokens",
+    "screenId": "discover",
+    "href": "/apps/base/flows/browse-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Token Detail",
+    "description": "Virtual Protocol token detail with price chart, market cap, and about section.",
+    "flowSlug": "browse-tokens",
+    "flowName": "Browse Tokens",
+    "screenId": "token-detail",
+    "href": "/apps/base/flows/browse-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Buy Modal",
+    "description": "Buy modal for Virtual Protocol with USDC to VIRTUAL swap interface.",
+    "flowSlug": "browse-tokens",
+    "flowName": "Browse Tokens",
+    "screenId": "token-buy-modal",
+    "href": "/apps/base/flows/browse-tokens"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Mini App (Bankr example)",
+    "description": "Install and onboard into a mini app within Base",
+    "flowSlug": "mini-app",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Mini Apps Directory",
+    "description": "Mini Apps directory with featured apps and categories.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "mini-apps",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Set Display Name",
+    "description": "Bankr onboarding step to set display name with d-mysten pre-filled.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "bankr-display-name",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Add Avatar",
+    "description": "Bankr onboarding step to add avatar with placeholder image.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "bankr-avatar",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Write Bio",
+    "description": "Bankr onboarding step to write a short bio.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "bankr-bio",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Loading",
+    "description": "Setting up profile screen with loading assets animation.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "bankr-loading",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Setup Complete",
+    "description": "Setup complete screen showing \"You're all set up, d-mysten!\" confirmation.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "bankr-complete",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Bankr Browser",
+    "description": "Bankr web app loaded in Base in-app browser.",
+    "flowSlug": "mini-app",
+    "flowName": "Mini App (Bankr example)",
+    "screenId": "bankr-browser",
+    "href": "/apps/base/flows/mini-app"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Verify Identity",
+    "description": "Verify social accounts (X, Coinbase, TikTok, Instagram) for profile credibility",
+    "flowSlug": "verify-identity",
+    "href": "/apps/base/flows/verify-identity"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover",
+    "description": "Discover screen with Pinned Apps including Verify.",
+    "flowSlug": "verify-identity",
+    "flowName": "Verify Identity",
+    "screenId": "discover",
+    "href": "/apps/base/flows/verify-identity"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Get Verified",
+    "description": "Get Verified landing page with Earn Rewards, Build Credibility, Boost Visibility benefits.",
+    "flowSlug": "verify-identity",
+    "flowName": "Verify Identity",
+    "screenId": "verify",
+    "href": "/apps/base/flows/verify-identity"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Login Request",
+    "description": "Login request modal from verify.base.dev for wallet authentication.",
+    "flowSlug": "verify-identity",
+    "flowName": "Verify Identity",
+    "screenId": "verify-login-request",
+    "href": "/apps/base/flows/verify-identity"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Manage Verifications",
+    "description": "Manage verifications screen with X, Coinbase, TikTok, and Instagram connection options.",
+    "flowSlug": "verify-identity",
+    "flowName": "Verify Identity",
+    "screenId": "manage-verifications",
+    "href": "/apps/base/flows/verify-identity"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Messaging",
+    "description": "Chat with AI agents or other users via basename search",
+    "flowSlug": "messaging",
+    "href": "/apps/base/flows/messaging"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with balance and chat icon in top right corner.",
+    "flowSlug": "messaging",
+    "flowName": "Messaging",
+    "screenId": "home",
+    "href": "/apps/base/flows/messaging"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Chat Home",
+    "description": "Chat home screen with AI agents (Bankr, Elsa) listed.",
+    "flowSlug": "messaging",
+    "flowName": "Messaging",
+    "screenId": "chat",
+    "href": "/apps/base/flows/messaging"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "New Chat Search",
+    "description": "New chat profile search with search results.",
+    "flowSlug": "messaging",
+    "flowName": "Messaging",
+    "screenId": "chat-search",
+    "href": "/apps/base/flows/messaging"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Conversation",
+    "description": "1:1 chat conversation with a sent message.",
+    "flowSlug": "messaging",
+    "flowName": "Messaging",
+    "screenId": "chat-conversation",
+    "href": "/apps/base/flows/messaging"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Live Feed & Posting",
+    "description": "Browse the social trading feed and create tradable posts with earnings",
+    "flowSlug": "live-feed-posting",
+    "href": "/apps/base/flows/live-feed-posting"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Live Feed",
+    "description": "Live social trading feed with real-time trade cards.",
+    "flowSlug": "live-feed-posting",
+    "flowName": "Live Feed & Posting",
+    "screenId": "live-feed",
+    "href": "/apps/base/flows/live-feed-posting"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Create Post",
+    "description": "Create post screen with earnings toggle and attachment options.",
+    "flowSlug": "live-feed-posting",
+    "flowName": "Live Feed & Posting",
+    "screenId": "create-post",
+    "href": "/apps/base/flows/live-feed-posting"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "About Earnings",
+    "description": "About Earnings info modal explaining how post earnings work.",
+    "flowSlug": "live-feed-posting",
+    "flowName": "Live Feed & Posting",
+    "screenId": "about-earnings",
+    "href": "/apps/base/flows/live-feed-posting"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Edit Ticker",
+    "description": "Edit Ticker modal for setting a trading nickname on the post.",
+    "flowSlug": "live-feed-posting",
+    "flowName": "Live Feed & Posting",
+    "screenId": "edit-ticker",
+    "href": "/apps/base/flows/live-feed-posting"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Profile & Earnings",
+    "description": "View and edit profile, track post and creator coin earnings",
+    "flowSlug": "profile-earnings",
+    "href": "/apps/base/flows/profile-earnings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Profile Drawer",
+    "description": "Profile drawer with menu options.",
+    "flowSlug": "profile-earnings",
+    "flowName": "Profile & Earnings",
+    "screenId": "profile-drawer",
+    "href": "/apps/base/flows/profile-earnings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "View Profile",
+    "description": "User profile with Posts, Assets, Casts, and Replies tabs.",
+    "flowSlug": "profile-earnings",
+    "flowName": "Profile & Earnings",
+    "screenId": "view-profile",
+    "href": "/apps/base/flows/profile-earnings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Earnings",
+    "description": "Earnings dashboard with detailed breakdown.",
+    "flowSlug": "profile-earnings",
+    "flowName": "Profile & Earnings",
+    "screenId": "earnings",
+    "href": "/apps/base/flows/profile-earnings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Edit Profile",
+    "description": "Edit profile modal for updating profile information.",
+    "flowSlug": "profile-earnings",
+    "flowName": "Profile & Earnings",
+    "screenId": "edit-profile",
+    "href": "/apps/base/flows/profile-earnings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Share Profile",
+    "description": "Share profile modal with sharing options.",
+    "flowSlug": "profile-earnings",
+    "flowName": "Profile & Earnings",
+    "screenId": "share-modal",
+    "href": "/apps/base/flows/profile-earnings"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Configure display, account, privacy, social, and trading preferences",
+    "flowSlug": "settings",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings main menu with all configuration categories.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "settings",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display Settings",
+    "description": "Display settings with theme, appearance, language, and currency options.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "display-settings",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Account Management",
+    "description": "Account management with authenticator and sign out options.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "account-management",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sign Out Confirmation",
+    "description": "Sign out confirmation dialog with passkey warning.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "sign-out-confirm",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Connect to Coinbase",
+    "description": "Connect to Coinbase screen for linking accounts.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "connect-coinbase",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Privacy & Security",
+    "description": "Privacy and security settings with personalization, privacy mode, and developer mode toggles.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "privacy-security",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Manage Permissions",
+    "description": "Manage permissions screen for controlling app access.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "manage-permissions",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Social & Creators",
+    "description": "Social and creators settings with Farcaster ID, coin pairings, and muted accounts.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "social-creators",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading Settings",
+    "description": "Trading settings with quick buy, stealth mode, and dust coins options.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "trading-settings",
+    "href": "/apps/base/flows/settings"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Notifications",
+    "description": "View notifications and configure push notification preferences",
+    "flowSlug": "notifications",
+    "href": "/apps/base/flows/notifications"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Notifications",
+    "description": "Notifications screen showing empty state.",
+    "flowSlug": "notifications",
+    "flowName": "Notifications",
+    "screenId": "notifications",
+    "href": "/apps/base/flows/notifications"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Notification Settings",
+    "description": "Notification settings with push notification toggles for various alert types.",
+    "flowSlug": "notifications",
+    "flowName": "Notifications",
+    "screenId": "notification-settings",
+    "href": "/apps/base/flows/notifications"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home Browsing",
+    "description": "Browse portfolio with filters, sorting, collectibles, and activity history",
+    "flowSlug": "home-browsing",
+    "href": "/apps/base/flows/home-browsing"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Coins Tab",
+    "description": "Home Coins tab with USDC balance, Filters button, and Sort button.",
+    "flowSlug": "home-browsing",
+    "flowName": "Home Browsing",
+    "screenId": "home",
+    "href": "/apps/base/flows/home-browsing"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Filters",
+    "description": "Filters modal with Categories and Networks filter options.",
+    "flowSlug": "home-browsing",
+    "flowName": "Home Browsing",
+    "screenId": "home-filters",
+    "href": "/apps/base/flows/home-browsing"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sort By",
+    "description": "Sort By modal with Balance, Market Cap, Volume, and Price Change options.",
+    "flowSlug": "home-browsing",
+    "flowName": "Home Browsing",
+    "screenId": "home-sort",
+    "href": "/apps/base/flows/home-browsing"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Collectibles",
+    "description": "Collectibles tab showing empty state.",
+    "flowSlug": "home-browsing",
+    "flowName": "Home Browsing",
+    "screenId": "collectibles",
+    "href": "/apps/base/flows/home-browsing"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Activity",
+    "description": "Activity tab showing Received and Minted transaction history.",
+    "flowSlug": "home-browsing",
+    "flowName": "Home Browsing",
+    "screenId": "activity",
+    "href": "/apps/base/flows/home-browsing"
+  },
+  {
+    "type": "app",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Tuyo",
+    "description": "IOS app — 33 screens, 13 flows",
+    "href": "/apps/tuyo"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "home",
+    "description": "Main dashboard with $0.00 balance, quick actions, yield promo, bottom tab bar",
+    "screenId": "home",
+    "href": "/apps/tuyo/screens/home"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "home-with-balance",
+    "description": "Home with $1.00 balance, EARN/CASH sections, recent transactions",
+    "screenId": "home-with-balance",
+    "href": "/apps/tuyo/screens/home-with-balance"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "search",
+    "description": "Token search with Watchlist and Most Relevant lists",
+    "screenId": "search",
+    "href": "/apps/tuyo/screens/search"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "token-detail",
+    "description": "Token detail sheet with price chart, Buy/Sell/Receive/Send actions",
+    "screenId": "token-detail",
+    "href": "/apps/tuyo/screens/token-detail"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "settings",
+    "description": "Account settings — handle, verification, backup, privacy, permissions, security",
+    "screenId": "settings",
+    "href": "/apps/tuyo/screens/settings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "account-handle",
+    "description": "Choose your @handle input",
+    "screenId": "account-handle",
+    "href": "/apps/tuyo/screens/account-handle"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "identity-verification",
+    "description": "Identity verification prompt — takes 2 min, unlocks Card and banking",
+    "screenId": "identity-verification",
+    "href": "/apps/tuyo/screens/identity-verification"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "backup",
+    "description": "iCloud Drive backup status and explanation",
+    "screenId": "backup",
+    "href": "/apps/tuyo/screens/backup"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "privacy",
+    "description": "Privacy toggle — hide holdings and earn balances",
+    "screenId": "privacy",
+    "href": "/apps/tuyo/screens/privacy"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "permissions",
+    "description": "Biometrics and Push Notifications toggles",
+    "screenId": "permissions",
+    "href": "/apps/tuyo/screens/permissions"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "add-money",
+    "description": "Choose funding source: Bank, Wallet, or Coinbase",
+    "screenId": "add-money",
+    "href": "/apps/tuyo/screens/add-money"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "receive",
+    "description": "QR code and wallet address for receiving crypto on multiple networks",
+    "screenId": "receive",
+    "href": "/apps/tuyo/screens/receive"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "send",
+    "description": "Add Recipient — Find on Tuyo, Wallet Address, or Bank Account",
+    "screenId": "send",
+    "href": "/apps/tuyo/screens/send"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "send-to-tuyo-found",
+    "description": "Tuyo user search — matching user found",
+    "screenId": "send-to-tuyo-found",
+    "href": "/apps/tuyo/screens/send-to-tuyo-found"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "send-to-tuyo-not-found",
+    "description": "Tuyo user search — no match found",
+    "screenId": "send-to-tuyo-not-found",
+    "href": "/apps/tuyo/screens/send-to-tuyo-not-found"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "send-to-wallet",
+    "description": "Enter wallet address input (0x)",
+    "screenId": "send-to-wallet",
+    "href": "/apps/tuyo/screens/send-to-wallet"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "send-to-bank",
+    "description": "Bank account — triggers identity verification",
+    "screenId": "send-to-bank",
+    "href": "/apps/tuyo/screens/send-to-bank"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "convert",
+    "description": "Token swap — USDC on Base, destination token picker",
+    "screenId": "convert",
+    "href": "/apps/tuyo/screens/convert"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "transaction-history",
+    "description": "Full transaction list grouped by date",
+    "screenId": "transaction-history",
+    "href": "/apps/tuyo/screens/transaction-history"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "transaction-details",
+    "description": "Transaction detail — status, timestamp, addresses, amount",
+    "screenId": "transaction-details",
+    "href": "/apps/tuyo/screens/transaction-details"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "strategies-overview",
+    "description": "Yield strategies by currency: USD, ETH, EUR, BTC",
+    "screenId": "strategies-overview",
+    "href": "/apps/tuyo/screens/strategies-overview"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "usd-strategies",
+    "description": "USD strategies: yoUSD, Morpho Moonwell, Fluid USDC, Morpho Seamless, Aave",
+    "screenId": "usd-strategies",
+    "href": "/apps/tuyo/screens/usd-strategies"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "card-promo",
+    "description": "Tuyo Visa card — USDC payments and Apple Pay",
+    "screenId": "card-promo",
+    "href": "/apps/tuyo/screens/card-promo"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "tuyos-rewards",
+    "description": "TUYOs rewards dashboard — balance, actions, invite code, breakdown",
+    "screenId": "tuyos-rewards",
+    "href": "/apps/tuyo/screens/tuyos-rewards"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "get-tuyos",
+    "description": "Get TUYOs carousel — earning methods explained",
+    "screenId": "get-tuyos",
+    "href": "/apps/tuyo/screens/get-tuyos"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "invite-friends",
+    "description": "Referral program — invite code, 20%/10% tiers",
+    "screenId": "invite-friends",
+    "href": "/apps/tuyo/screens/invite-friends"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "leaderboard",
+    "description": "League rankings",
+    "screenId": "leaderboard",
+    "href": "/apps/tuyo/screens/leaderboard"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "welcome",
+    "description": "Tuyo splash — Spend. Earn. Trade. Bank. Get started or recover account",
+    "screenId": "welcome",
+    "href": "/apps/tuyo/screens/welcome"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "create-key-interactive",
+    "description": "Key creation — hold to generate cryptographic key",
+    "screenId": "create-key-interactive",
+    "href": "/apps/tuyo/screens/create-key-interactive"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "create-key-ready",
+    "description": "Key created — tap inside when ready",
+    "screenId": "create-key-ready",
+    "href": "/apps/tuyo/screens/create-key-ready"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "onboarding-notifications",
+    "description": "Enable notifications opt-in during onboarding",
+    "screenId": "onboarding-notifications",
+    "href": "/apps/tuyo/screens/onboarding-notifications"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "onboarding-handle",
+    "description": "Choose your handle during onboarding",
+    "screenId": "onboarding-handle",
+    "href": "/apps/tuyo/screens/onboarding-handle"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "recover-account",
+    "description": "Recover account — import mnemonic or continue without",
+    "screenId": "recover-account",
+    "href": "/apps/tuyo/screens/recover-account"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "New Account Onboarding",
+    "description": "Create a new account — generate key, enable notifications, set handle",
+    "flowSlug": "new-account-onboarding",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "description": "Tuyo splash screen with Visa card hero image. Tagline: 'Spend. Earn. Trade. Bank.' Three options: green 'Get started' button, 'Already have a Tuyo account?' button, and 'I have a referral code' link. Terms of service link at bottom.",
+    "flowSlug": "new-account-onboarding",
+    "flowName": "New Account Onboarding",
+    "screenId": "welcome",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Create key — hold to generate",
+    "description": "'Let's create your key' with decorative geometric key illustration. Green hand icon at bottom with 'HOLD TO CREATE' instruction. User must press and hold to generate their cryptographic key.",
+    "flowSlug": "new-account-onboarding",
+    "flowName": "New Account Onboarding",
+    "screenId": "create-key-interactive",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Create key — ready",
+    "description": "'Let's create your key' — key shape has transformed into a lock/card outline with keyhole icon in center. 'TAP INSIDE WHEN YOU FEEL READY' instruction at bottom. Key generation complete.",
+    "flowSlug": "new-account-onboarding",
+    "flowName": "New Account Onboarding",
+    "screenId": "create-key-ready",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Enable notifications",
+    "description": "Bell icon with green dot. 'Enable notifications — Stay updated about transactions and important updates.' Two options: green 'Enable now' button, 'Skip for now' button.",
+    "flowSlug": "new-account-onboarding",
+    "flowName": "New Account Onboarding",
+    "screenId": "onboarding-notifications",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose handle",
+    "description": "Profile icon with green ring. 'Set up your profile — Choose your handle.' Two options: green 'Set handle' button, 'Skip for now' button.",
+    "flowSlug": "new-account-onboarding",
+    "flowName": "New Account Onboarding",
+    "screenId": "onboarding-handle",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00. Onboarding complete — user lands on home screen.",
+    "flowSlug": "new-account-onboarding",
+    "flowName": "New Account Onboarding",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/new-account-onboarding"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recover Account",
+    "description": "Recover existing account by importing mnemonic",
+    "flowSlug": "recover-account",
+    "href": "/apps/tuyo/flows/recover-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "description": "Tuyo splash screen with Visa card hero. 'Get started', 'Already have a Tuyo account?', and 'I have a referral code' options.",
+    "flowSlug": "recover-account",
+    "flowName": "Recover Account",
+    "screenId": "welcome",
+    "href": "/apps/tuyo/flows/recover-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recover account",
+    "description": "Recover account screen with animated lock/keyhole illustration. 'Import mnemonic manually' button. 'Continue without recovering your account' link at bottom. Back chevron top-left.",
+    "flowSlug": "recover-account",
+    "flowName": "Recover Account",
+    "screenId": "recover-account",
+    "href": "/apps/tuyo/flows/recover-account"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Browse Tokens",
+    "description": "Search and browse available tokens with prices and detail view",
+    "flowSlug": "browse-tokens",
+    "href": "/apps/tuyo/flows/browse-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00, three quick action buttons (Add money, Send, Convert), a yield promo card ('Earn $106.34 a year on every $1,000 you have'), green 'Make your first deposit' CTA, and bottom tab bar with 4 tabs.",
+    "flowSlug": "browse-tokens",
+    "flowName": "Browse Tokens",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/browse-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Token search",
+    "description": "Token search screen with search bar at top. Watchlist section showing USDC ($1.00), Ethereum ($2,062.82, +3.87%), EURC ($1.15), Bitcoin ($67,626.00, +1.59%). Below, 'Most Relevant' section with more tokens including BNB, Sky Dollar, Chain Link, Ethena USDe, USD1. Each row has icon, name, ticker, sparkline chart, price, and % change.",
+    "flowSlug": "browse-tokens",
+    "flowName": "Browse Tokens",
+    "screenId": "search",
+    "href": "/apps/tuyo/flows/browse-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Token detail (MemeCore)",
+    "description": "Bottom sheet showing MemeCore (M) at $2.31, +1.82% (+$0.04) Today. Four action buttons: Buy (green +), Sell (grey -), Receive (download arrow), Send (arrow). Price chart with timeframe toggles (24H, 7D, 30D, 1Y, ALL). 'Your balance' section showing VALUE $0.00, AMOUNT 0 M.",
+    "flowSlug": "browse-tokens",
+    "flowName": "Browse Tokens",
+    "screenId": "token-detail",
+    "href": "/apps/tuyo/flows/browse-tokens"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Explore Yield Strategies",
+    "description": "Browse yield strategies by currency with APY, risk, and AUM",
+    "flowSlug": "explore-strategies",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00 with quick actions and bottom tab bar.",
+    "flowSlug": "explore-strategies",
+    "flowName": "Explore Yield Strategies",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Strategies Overview",
+    "description": "Strategies Overview screen with info button (i) top-right. Four currency strategy cards stacked vertically: USD (Balance: 0, MAX APY: 6.99%, Assets: $54.49M), ETH (Balance: 0, MAX APY: 3.50%, Assets: $12.59M), EUR (Balance: 0, MAX APY: 1.69%, Assets: $6.28M), BTC (Balance: 0, MAX APY: 1.09%, Assets: $7.20M).",
+    "flowSlug": "explore-strategies",
+    "flowName": "Explore Yield Strategies",
+    "screenId": "strategies-overview",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "USD Available Strategies",
+    "description": "USD strategy detail showing 'Available strategies' header with back chevron. Strategies: yoUSD (+4.89% APY, Best Performer, Manager: YO, Assets: $28.45M, Risk: Moderate — 'Depositing $1,000 could make you $48.88/year'), Morpho Moonwell Flagship USDC (+3.88%, Manager: Block A..., Assets: $11.59M, Risk: Low), Fluid USDC (+3.19%, Manager: Fluid, Assets: $9.74M, Risk: Low), plus Morpho Seamless and Aave USDC.",
+    "flowSlug": "explore-strategies",
+    "flowName": "Explore Yield Strategies",
+    "screenId": "usd-strategies",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Manage Account Settings",
+    "description": "Access handle, verification, backup, privacy, and permissions",
+    "flowSlug": "manage-settings",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "description": "Settings screen showing truncated wallet address (0x93d...Ce569) with 'NOT VERIFIED' badge and Receive button. General section: Account Handle (AVAILABLE), Verification, Account Backup (BACKUP NEEDED), Account Privacy, Permissions. Security section: Keys & Security. About section: Get Help.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "settings",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Account Handle",
+    "description": "Choose your handle screen with text input showing '@Satoshi'. Green Continue button below. Keyboard visible.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "account-handle",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Identity Verification",
+    "description": "Verify your identity prompt — 'Takes 2 min' badge. Explains verification unlocks Tuyo Card and banking features.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "identity-verification",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Backup",
+    "description": "Backup screen showing iCloud Drive as NOT CONNECTED. Explains Tuyo stores private key via iCloud Keychain, with encrypted secondary backup on iCloud Drive.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "backup",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Privacy",
+    "description": "Privacy settings with single toggle: 'Hide Holdings & Earn Balances' (currently off).",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "privacy",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Permissions",
+    "description": "Permissions screen with two toggles: Biometrics (off) and Push Notifications (on, green).",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "permissions",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Money",
+    "description": "Add funds via bank, wallet, or Coinbase",
+    "flowSlug": "add-money",
+    "href": "/apps/tuyo/flows/add-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+    "flowSlug": "add-money",
+    "flowName": "Add Money",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/add-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose the source",
+    "description": "Bottom sheet presenting three funding sources: Bank — account details for bank transfers (INSTANT badge), Wallet — wallet address for crypto transfers (INSTANT badge), Coinbase — transfer from Coinbase (external link arrow).",
+    "flowSlug": "add-money",
+    "flowName": "Add Money",
+    "screenId": "add-money",
+    "href": "/apps/tuyo/flows/add-money"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Receive Crypto",
+    "description": "Get wallet address and QR code for multiple networks",
+    "flowSlug": "receive-crypto",
+    "href": "/apps/tuyo/flows/receive-crypto"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+    "flowSlug": "receive-crypto",
+    "flowName": "Receive Crypto",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/receive-crypto"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose the source",
+    "description": "Bottom sheet presenting three funding sources: Bank (INSTANT), Wallet (INSTANT), Coinbase.",
+    "flowSlug": "receive-crypto",
+    "flowName": "Receive Crypto",
+    "screenId": "add-money",
+    "href": "/apps/tuyo/flows/receive-crypto"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Receive address",
+    "description": "'One address for all your crypto.' QR code with avatar overlay. Supported networks listed: Base, Arbitrum, Polygon, BNB, Ethereum. Wallet address shown at bottom (0x93d5391c3...2aadf6ce569) with copy button.",
+    "flowSlug": "receive-crypto",
+    "flowName": "Receive Crypto",
+    "screenId": "receive",
+    "href": "/apps/tuyo/flows/receive-crypto"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send Money",
+    "description": "Send via Tuyo username, wallet address, or bank account",
+    "flowSlug": "send-money",
+    "href": "/apps/tuyo/flows/send-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen (with balance)",
+    "description": "Home dashboard with $1.00 Total balance. EARN section ($0.00) and CASH section ($1.00 USDC). Recent transactions showing two Receive USDC entries. Bottom tab bar.",
+    "flowSlug": "send-money",
+    "flowName": "Send Money",
+    "screenId": "home-with-balance",
+    "href": "/apps/tuyo/flows/send-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Recipient",
+    "description": "Send screen with 'Add Recipient' header. Three options: Find on Tuyo (BEST badge) — send instantly with @Tuyoname, Wallet Address — wallet address for crypto transfers, Bank Account — account details for bank transfers.",
+    "flowSlug": "send-money",
+    "flowName": "Send Money",
+    "screenId": "send",
+    "href": "/apps/tuyo/flows/send-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send to Wallet Address",
+    "description": "Enter Wallet Address screen with 'To:' input field pre-filled with '0x' placeholder. '0x' badge with prompt 'Send crypto to any 0x address'.",
+    "flowSlug": "send-money",
+    "flowName": "Send Money",
+    "screenId": "send-to-wallet",
+    "href": "/apps/tuyo/flows/send-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send to Bank Account",
+    "description": "Bank Account option triggers identity verification prompt: 'Takes 2 min'. Lists benefits: Get a USD bank account number, Request your Tuyo Card, Your data stays private & secure. Green 'Verify identity' button and 'Not now' option.",
+    "flowSlug": "send-money",
+    "flowName": "Send Money",
+    "screenId": "send-to-bank",
+    "href": "/apps/tuyo/flows/send-money"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send to Tuyo User",
+    "description": "Send instantly by searching @Tuyoname",
+    "flowSlug": "send-to-tuyo",
+    "href": "/apps/tuyo/flows/send-to-tuyo"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen (with balance)",
+    "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Recent transactions visible.",
+    "flowSlug": "send-to-tuyo",
+    "flowName": "Send to Tuyo User",
+    "screenId": "home-with-balance",
+    "href": "/apps/tuyo/flows/send-to-tuyo"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Recipient",
+    "description": "Send screen with three recipient options: Find on Tuyo (BEST), Wallet Address, Bank Account.",
+    "flowSlug": "send-to-tuyo",
+    "flowName": "Send to Tuyo User",
+    "screenId": "send",
+    "href": "/apps/tuyo/flows/send-to-tuyo"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Tuyo user found",
+    "description": "Search input showing 'joe'. Result: @joe with verified checkmark and avatar. User can tap to select as recipient.",
+    "flowSlug": "send-to-tuyo",
+    "flowName": "Send to Tuyo User",
+    "screenId": "send-to-tuyo-found",
+    "href": "/apps/tuyo/flows/send-to-tuyo"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Tuyo user not found",
+    "description": "Search input showing 'joep'. No results returned — empty state below the search field.",
+    "flowSlug": "send-to-tuyo",
+    "flowName": "Send to Tuyo User",
+    "screenId": "send-to-tuyo-not-found",
+    "href": "/apps/tuyo/flows/send-to-tuyo"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Convert Tokens",
+    "description": "Swap between tokens on Base network",
+    "flowSlug": "convert-tokens",
+    "href": "/apps/tuyo/flows/convert-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen (with balance)",
+    "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Recent transactions visible.",
+    "flowSlug": "convert-tokens",
+    "flowName": "Convert Tokens",
+    "screenId": "home-with-balance",
+    "href": "/apps/tuyo/flows/convert-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Convert",
+    "description": "Convert screen with amount input (0), source token selector showing USDC on Base network (with '1 on Base' indicator and dropdown). Swap arrow below. Search token field for destination. Watchlist: USDC ($1.00), Ethereum ($2,083.08), EURC ($1.15), Bitcoin ($67,543.00). Tokens section: Ethereum, BNB ($614.04), Sky Dollar.",
+    "flowSlug": "convert-tokens",
+    "flowName": "Convert Tokens",
+    "screenId": "convert",
+    "href": "/apps/tuyo/flows/convert-tokens"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "View Transaction History",
+    "description": "View transaction list and individual transaction details",
+    "flowSlug": "view-transactions",
+    "href": "/apps/tuyo/flows/view-transactions"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen (with balance)",
+    "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Transactions section showing two recent Receive USDC entries ($0.0,990 and $1.00).",
+    "flowSlug": "view-transactions",
+    "flowName": "View Transaction History",
+    "screenId": "home-with-balance",
+    "href": "/apps/tuyo/flows/view-transactions"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Transaction history",
+    "description": "Full Transactions screen with 'TODAY' header. Two entries: Receive USDC from 0xC34l...2b6E ($0.0,990) and Receive USDC from 0xc348...7B6e ($1.00). Each row shows USDC icon, type, source address, and amount.",
+    "flowSlug": "view-transactions",
+    "flowName": "View Transaction History",
+    "screenId": "transaction-history",
+    "href": "/apps/tuyo/flows/view-transactions"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Transaction details",
+    "description": "Transaction list with detail bottom sheet. Shows: 'Received' status with green checkmark, timestamp (Tuesday, March 31, 2026 at 5:28 PM), FROM address (0xc348D942...44e27B6e) with avatar, RECEIVED (USDC) amount: 1. Copy and external link buttons in header.",
+    "flowSlug": "view-transactions",
+    "flowName": "View Transaction History",
+    "screenId": "transaction-details",
+    "href": "/apps/tuyo/flows/view-transactions"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Explore Tuyo Card",
+    "description": "Learn about the Tuyo Visa card — USDC payments and Apple Pay",
+    "flowSlug": "explore-tuyo-card",
+    "href": "/apps/tuyo/flows/explore-tuyo-card"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+    "flowSlug": "explore-tuyo-card",
+    "flowName": "Explore Tuyo Card",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/explore-tuyo-card"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Tuyo Card — USDC payments",
+    "description": "Tuyo Visa card preview (ending 6321) with USDC logo. 'Pay with USDC, anywhere in the world' — use USDC in your Tuyo account to pay in 40 million merchants worldwide. Green 'Get Tuyo Card for free' CTA. Carousel page indicator (2 pages).",
+    "flowSlug": "explore-tuyo-card",
+    "flowName": "Explore Tuyo Card",
+    "screenId": "card-promo",
+    "href": "/apps/tuyo/flows/explore-tuyo-card"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Tuyo Card — Apple Pay",
+    "description": "Second carousel page showing iPhone with Tuyo card in Apple Wallet at a payment terminal. 'Spend in-store with Apple Pay' — add Tuyo Card to Apple Wallet and tap phone to pay. Same 'Get Tuyo Card for free' CTA.",
+    "flowSlug": "explore-tuyo-card",
+    "flowName": "Explore Tuyo Card",
+    "screenId": "card-promo",
+    "href": "/apps/tuyo/flows/explore-tuyo-card"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Explore TUYOs Rewards",
+    "description": "Earn points, invite friends, and view the leaderboard",
+    "flowSlug": "explore-tuyos-rewards",
+    "href": "/apps/tuyo/flows/explore-tuyos-rewards"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TUYOs dashboard",
+    "description": "TUYOs rewards dashboard. Balance: 0. Four action buttons: Get TUYOs, Invite friends, Leaderboard, Redeem (coming soon). Invite code: 18FTN9 with 'SINCE MARCH 2026' member badge. Rewards Breakdown grid: CARD (0), EARN (0), CONVERT (0), REFERRAL (0).",
+    "flowSlug": "explore-tuyos-rewards",
+    "flowName": "Explore TUYOs Rewards",
+    "screenId": "tuyos-rewards",
+    "href": "/apps/tuyo/flows/explore-tuyos-rewards"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Get TUYOs",
+    "description": "Bottom sheet carousel explaining how to earn TUYOs. Visible card: 'Pay with Tuyo Card — Get 0.50 TUYOs per dollar spent.' Example: Spend $100 → earn 50 TUYOs. Carousel pagination dots (4 pages). Left/right navigation arrows.",
+    "flowSlug": "explore-tuyos-rewards",
+    "flowName": "Explore TUYOs Rewards",
+    "screenId": "get-tuyos",
+    "href": "/apps/tuyo/flows/explore-tuyos-rewards"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Invite friends",
+    "description": "Referral screen. Personal invite code: 18FTN9 with copy button. Stats: Direct (0), Second Level (0). Two referral tiers: Direct referrals — get 20% of TUYOs rewarded to your referrals. Second level referrals — get 10% of all TUYOs rewarded to your referrals' referrals. Purple 'Share your invite' button. 'Become an ambassador' link at bottom.",
+    "flowSlug": "explore-tuyos-rewards",
+    "flowName": "Explore TUYOs Rewards",
+    "screenId": "invite-friends",
+    "href": "/apps/tuyo/flows/explore-tuyos-rewards"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Leaderboard",
+    "description": "League screen with five tier badges displayed horizontally. Message: 'You're not part of any league yet. Earn TUYOs and climb the leaderboard.' Info button top-right.",
+    "flowSlug": "explore-tuyos-rewards",
+    "flowName": "Explore TUYOs Rewards",
+    "screenId": "leaderboard",
+    "href": "/apps/tuyo/flows/explore-tuyos-rewards"
+  }
+]
