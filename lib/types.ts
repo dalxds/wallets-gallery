@@ -13,13 +13,24 @@ export interface ScreenEntry {
   snapshotPath?: string | null
 }
 
+export interface FlowStep {
+  number: number
+  title: string
+  screenId: string
+  action: string
+  description: string
+  screenshotPath: string
+  changes?: string | null
+}
+
 export interface FlowEntry {
   slug: string
   name: string
   parent?: string | null
   summary: string
-  stepsCount: number
-  path: string
+  mode?: string
+  steps: FlowStep[]
+  notes?: string
 }
 
 export interface DecisionPointOption {
@@ -41,44 +52,6 @@ export interface AppCapture {
   screens: ScreenEntry[]
   flows: FlowEntry[]
   decisionPoints: DecisionPoint[]
-  sitemapPath: string
-}
-
-// From flow.json
-export interface FlowStep {
-  number: number
-  title: string
-  screenId: string
-  action: string
-  description: string
-  screenshotPath: string
-  changes?: string | null
-}
-
-export interface FlowDetail {
-  slug: string
-  name: string
-  parent?: string | null
-  summary: string
-  steps: FlowStep[]
-  notes?: string
-}
-
-// From navigation.json
-export interface NavigationScreen {
-  id: string
-  description: string
-}
-
-export interface NavigationTransition {
-  from: string
-  to: string
-  action: string
-}
-
-export interface NavigationGraph {
-  screens: NavigationScreen[]
-  transitions: NavigationTransition[]
 }
 
 // App registry (index.json)

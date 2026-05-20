@@ -67,7 +67,7 @@ export function FlowSidebar({
               >
                 {flow.name}
                 <span className="ml-1 text-xs text-muted-foreground">
-                  ({flow.stepsCount})
+                  ({flow.steps.length})
                 </span>
               </button>
             )
@@ -85,7 +85,7 @@ export function FlowSidebar({
                   {flow.name}
                 </span>
                 <span className="ml-1 text-xs text-muted-foreground">
-                  ({flow.stepsCount})
+                  ({flow.steps.length})
                 </span>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -112,7 +112,7 @@ export function FlowSidebar({
                     >
                       {child.name}
                       <span className="ml-1 text-xs text-muted-foreground">
-                        ({child.stepsCount})
+                        ({child.steps.length})
                       </span>
                     </button>
                   ))}

@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowDetail } from "@/lib/types"
+import type { FlowEntry } from "@/lib/types"
 import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
 import { Button } from "@/components/ui/button"
@@ -11,13 +11,12 @@ import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 import { ImageActions } from "@/components/shared/image-actions"
 
 interface FlowRowProps {
-  flow: FlowDetail
+  flow: FlowEntry
   appSlug: string
   date: string
-  flowDir: string
 }
 
-export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
+export function FlowRow({ flow, appSlug, date }: FlowRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
@@ -146,7 +145,7 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
                   src={captureUrl(
                     appSlug,
                     date,
-                    `${flowDir}/${step.screenshotPath}`
+                    step.screenshotPath
                   )}
                   screenUrl={`${typeof window !== "undefined" ? window.location.origin : ""}/apps/${appSlug}/flows/${flow.slug}`}
                 />
@@ -154,7 +153,7 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
                   src={captureUrl(
                     appSlug,
                     date,
-                    `${flowDir}/${step.screenshotPath}`
+                    step.screenshotPath
                   )}
                   alt={step.title}
                 />
@@ -187,7 +186,6 @@ export function FlowRow({ flow, appSlug, date, flowDir }: FlowRowProps) {
           flow={flow}
           appSlug={appSlug}
           date={date}
-          flowDir={flowDir}
           initialIndex={lightboxIndex}
           onClose={closeLightbox}
         />

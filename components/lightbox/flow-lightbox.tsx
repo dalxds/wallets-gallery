@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowDetail, FlowStep } from "@/lib/types"
+import type { FlowEntry, FlowStep } from "@/lib/types"
 import {
   Dialog,
   DialogContent,
@@ -22,10 +22,9 @@ import {
 import { Button } from "@/components/ui/button"
 
 interface FlowLightboxProps {
-  flow: FlowDetail
+  flow: FlowEntry
   appSlug: string
   date: string
-  flowDir: string
   initialIndex?: number
   onClose: () => void
 }
@@ -44,7 +43,6 @@ export function FlowLightbox({
   flow,
   appSlug,
   date,
-  flowDir,
   initialIndex = 0,
   onClose,
 }: FlowLightboxProps) {
@@ -122,7 +120,7 @@ export function FlowLightbox({
   }, [])
 
   function stepSrc(step: FlowStep) {
-    return captureUrl(appSlug, date, `${flowDir}/${step.screenshotPath}`)
+    return captureUrl(appSlug, date, step.screenshotPath)
   }
 
   async function copyFlowLink() {

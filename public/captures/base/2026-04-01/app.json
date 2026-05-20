@@ -8,116 +8,1122 @@
   "captureDate": "2026-04-01",
   "mode": "guided",
   "screens": [
-    { "id": "welcome", "description": "Welcome screen with animated icons and Create Account / Sign In buttons", "screenshotPath": "screens/welcome/screenshot.png" },
-    { "id": "enter-email", "description": "Email input for account creation", "screenshotPath": "screens/enter-email/screenshot.png" },
-    { "id": "otp-verify", "description": "6-digit OTP verification code entry", "screenshotPath": "screens/otp-verify/screenshot.png" },
-    { "id": "choose-username", "description": "Basename (username.base.eth) registration", "screenshotPath": "screens/choose-username/screenshot.png" },
-    { "id": "home", "description": "Main dashboard with balance, quick actions, and token list", "screenshotPath": "screens/home/screenshot.png" },
-    { "id": "home-empty", "description": "Home screen with $0 balance and empty token list", "screenshotPath": "screens/home-empty/screenshot.png" },
-    { "id": "buy-deposit", "description": "Buy/deposit screen with amount input, token selector, and payment method", "screenshotPath": "screens/buy-deposit/screenshot.png" },
-    { "id": "token-selector", "description": "Token picker modal for deposit with search and token list", "screenshotPath": "screens/token-selector/screenshot.png" },
-    { "id": "deposit-with-coinbase", "description": "Connect to Coinbase payment method modal", "screenshotPath": "screens/deposit-with-coinbase/screenshot.png" },
-    { "id": "send-deposit-prompt", "description": "Deposit Funds modal triggered when sending with empty wallet", "screenshotPath": "screens/send-deposit-prompt/screenshot.png" },
-    { "id": "trade", "description": "Token swap interface with USDC to ETH, percentage buttons, and trending tokens", "screenshotPath": "screens/trade/screenshot.png" },
-    { "id": "request", "description": "Request payment screen with QR code, link sharing, and profile search", "screenshotPath": "screens/request/screenshot.png" },
-    { "id": "receive", "description": "Receive screen with QR code, wallet address, and supported networks", "screenshotPath": "screens/receive/screenshot.png" },
-    { "id": "collectibles", "description": "NFT collectibles tab with empty state", "screenshotPath": "screens/collectibles/screenshot.png" },
-    { "id": "activity-empty", "description": "Activity tab showing only minted basename NFT", "screenshotPath": "screens/activity-empty/screenshot.png" },
-    { "id": "activity", "description": "Activity tab showing received USDC and minted basename", "screenshotPath": "screens/activity/screenshot.png" },
-    { "id": "home-filters", "description": "Filters modal with categories and networks", "screenshotPath": "screens/home-filters/screenshot.png" },
-    { "id": "home-sort", "description": "Sort modal with Balance, Market Cap, Volume, Price Change options", "screenshotPath": "screens/home-sort/screenshot.png" },
-    { "id": "discover", "description": "Discover/Search screen with pinned apps, trending coins, and search bar", "screenshotPath": "screens/discover/screenshot.png" },
-    { "id": "mini-apps", "description": "Mini Apps directory with featured apps carousel and app categories", "screenshotPath": "screens/mini-apps/screenshot.png" },
-    { "id": "mini-apps-scrolled", "description": "Mini Apps scrolled showing Connect with creators, Earn crypto sections", "screenshotPath": "screens/mini-apps-scrolled/screenshot.png" },
-    { "id": "bankr-display-name", "description": "Bankr mini app onboarding - set display name", "screenshotPath": "screens/bankr-display-name/screenshot.png" },
-    { "id": "bankr-avatar", "description": "Bankr mini app onboarding - add avatar", "screenshotPath": "screens/bankr-avatar/screenshot.png" },
-    { "id": "bankr-bio", "description": "Bankr mini app onboarding - write short bio", "screenshotPath": "screens/bankr-bio/screenshot.png" },
-    { "id": "bankr-loading", "description": "Bankr mini app - loading/setting up profile", "screenshotPath": "screens/bankr-loading/screenshot.png" },
-    { "id": "bankr-complete", "description": "Bankr mini app - setup complete with Start Posting CTA", "screenshotPath": "screens/bankr-complete/screenshot.png" },
-    { "id": "bankr-browser", "description": "Bankr web app in Base in-app browser", "screenshotPath": "screens/bankr-browser/screenshot.png" },
-    { "id": "verify", "description": "Get Verified landing with benefits", "screenshotPath": "screens/verify/screenshot.png" },
-    { "id": "verify-login-request", "description": "Wallet login request modal from verify.base.dev", "screenshotPath": "screens/verify-login-request/screenshot.png" },
-    { "id": "manage-verifications", "description": "Social verification for X, Coinbase, TikTok, Instagram", "screenshotPath": "screens/manage-verifications/screenshot.png" },
-    { "id": "token-detail", "description": "Token detail page with price chart, market data, and about section", "screenshotPath": "screens/token-detail/screenshot.png" },
-    { "id": "token-buy-modal", "description": "Token buy/swap modal with USDC input and token output", "screenshotPath": "screens/token-buy-modal/screenshot.png" },
-    { "id": "chat", "description": "Chat home with AI agents and compose button", "screenshotPath": "screens/chat/screenshot.png" },
-    { "id": "chat-search", "description": "New chat profile search with basename results", "screenshotPath": "screens/chat-search/screenshot.png" },
-    { "id": "chat-conversation", "description": "1:1 chat conversation with message input", "screenshotPath": "screens/chat-conversation/screenshot.png" },
-    { "id": "live-feed", "description": "Live social trading feed showing real-time trades with token cards", "screenshotPath": "screens/live-feed/screenshot.png" },
-    { "id": "create-post", "description": "Create post with text input, earnings toggle, and media attachments", "screenshotPath": "screens/create-post/screenshot.png" },
-    { "id": "about-earnings", "description": "About Earnings info modal explaining tradable posts", "screenshotPath": "screens/about-earnings/screenshot.png" },
-    { "id": "edit-ticker", "description": "Edit Ticker modal for post trading nickname", "screenshotPath": "screens/edit-ticker/screenshot.png" },
-    { "id": "notifications", "description": "Notifications screen with empty state", "screenshotPath": "screens/notifications/screenshot.png" },
-    { "id": "notification-settings", "description": "Push notification settings with social and trading toggles", "screenshotPath": "screens/notification-settings/screenshot.png" },
-    { "id": "profile-drawer", "description": "Profile side drawer with name, balance, and menu options", "screenshotPath": "screens/profile-drawer/screenshot.png" },
-    { "id": "view-profile", "description": "User profile with posts, assets, casts, replies tabs", "screenshotPath": "screens/view-profile/screenshot.png" },
-    { "id": "earnings", "description": "Earnings dashboard with post, creator coin, and creator rewards breakdown", "screenshotPath": "screens/earnings/screenshot.png" },
-    { "id": "earnings-modal", "description": "Earnings onboarding modal", "screenshotPath": "screens/earnings-modal/screenshot.png" },
-    { "id": "edit-profile", "description": "Edit profile modal with avatar, username, display name, and bio", "screenshotPath": "screens/edit-profile/screenshot.png" },
-    { "id": "share-modal", "description": "Share profile modal with Post, Copy link, Share to options", "screenshotPath": "screens/share-modal/screenshot.png" },
-    { "id": "settings", "description": "Settings main menu with Display, Account, Privacy, Trading, and more", "screenshotPath": "screens/settings/screenshot.png" },
-    { "id": "display-settings", "description": "Display settings with theme, appearance mode, language, currency", "screenshotPath": "screens/display-settings/screenshot.png" },
-    { "id": "account-management", "description": "Account management with authenticator app and sign out", "screenshotPath": "screens/account-management/screenshot.png" },
-    { "id": "sign-out-confirm", "description": "Sign out confirmation with passkey reminder", "screenshotPath": "screens/sign-out-confirm/screenshot.png" },
-    { "id": "connect-coinbase", "description": "Connect to Coinbase account for funding", "screenshotPath": "screens/connect-coinbase/screenshot.png" },
-    { "id": "privacy-security", "description": "Privacy settings with personalization, privacy mode, developer mode", "screenshotPath": "screens/privacy-security/screenshot.png" },
-    { "id": "manage-permissions", "description": "App permissions management screen", "screenshotPath": "screens/manage-permissions/screenshot.png" },
-    { "id": "social-creators", "description": "Social settings with Farcaster ID, coin pairings, muted accounts", "screenshotPath": "screens/social-creators/screenshot.png" },
-    { "id": "trading-settings", "description": "Trading settings with quick buy, stealth mode, dust coins", "screenshotPath": "screens/trading-settings/screenshot.png" },
-    { "id": "sign-in-options", "description": "Sign in method selection: Email, Passkey, Recovery phrase", "screenshotPath": "screens/sign-in-options/screenshot.png" },
-    { "id": "import-wallet", "description": "Import wallet landing with Create new wallet and I already have a wallet", "screenshotPath": "screens/import-wallet/screenshot.png" },
-    { "id": "create-passcode", "description": "6-digit passcode creation for wallet unlock", "screenshotPath": "screens/create-passcode/screenshot.png" },
-    { "id": "import-wallet-options", "description": "Wallet import options: Passkey or Recovery phrase", "screenshotPath": "screens/import-wallet-options/screenshot.png" }
+    {
+      "id": "welcome",
+      "description": "Welcome screen with animated icons and Create Account / Sign In buttons",
+      "screenshotPath": "screens/welcome/screenshot.png"
+    },
+    {
+      "id": "enter-email",
+      "description": "Email input for account creation",
+      "screenshotPath": "screens/enter-email/screenshot.png"
+    },
+    {
+      "id": "otp-verify",
+      "description": "6-digit OTP verification code entry",
+      "screenshotPath": "screens/otp-verify/screenshot.png"
+    },
+    {
+      "id": "choose-username",
+      "description": "Basename (username.base.eth) registration",
+      "screenshotPath": "screens/choose-username/screenshot.png"
+    },
+    {
+      "id": "home",
+      "description": "Main dashboard with balance, quick actions, and token list",
+      "screenshotPath": "screens/home/screenshot.png"
+    },
+    {
+      "id": "home-empty",
+      "description": "Home screen with $0 balance and empty token list",
+      "screenshotPath": "screens/home-empty/screenshot.png"
+    },
+    {
+      "id": "buy-deposit",
+      "description": "Buy/deposit screen with amount input, token selector, and payment method",
+      "screenshotPath": "screens/buy-deposit/screenshot.png"
+    },
+    {
+      "id": "token-selector",
+      "description": "Token picker modal for deposit with search and token list",
+      "screenshotPath": "screens/token-selector/screenshot.png"
+    },
+    {
+      "id": "deposit-with-coinbase",
+      "description": "Connect to Coinbase payment method modal",
+      "screenshotPath": "screens/deposit-with-coinbase/screenshot.png"
+    },
+    {
+      "id": "send-deposit-prompt",
+      "description": "Deposit Funds modal triggered when sending with empty wallet",
+      "screenshotPath": "screens/send-deposit-prompt/screenshot.png"
+    },
+    {
+      "id": "trade",
+      "description": "Token swap interface with USDC to ETH, percentage buttons, and trending tokens",
+      "screenshotPath": "screens/trade/screenshot.png"
+    },
+    {
+      "id": "request",
+      "description": "Request payment screen with QR code, link sharing, and profile search",
+      "screenshotPath": "screens/request/screenshot.png"
+    },
+    {
+      "id": "receive",
+      "description": "Receive screen with QR code, wallet address, and supported networks",
+      "screenshotPath": "screens/receive/screenshot.png"
+    },
+    {
+      "id": "collectibles",
+      "description": "NFT collectibles tab with empty state",
+      "screenshotPath": "screens/collectibles/screenshot.png"
+    },
+    {
+      "id": "activity-empty",
+      "description": "Activity tab showing only minted basename NFT",
+      "screenshotPath": "screens/activity-empty/screenshot.png"
+    },
+    {
+      "id": "activity",
+      "description": "Activity tab showing received USDC and minted basename",
+      "screenshotPath": "screens/activity/screenshot.png"
+    },
+    {
+      "id": "home-filters",
+      "description": "Filters modal with categories and networks",
+      "screenshotPath": "screens/home-filters/screenshot.png"
+    },
+    {
+      "id": "home-sort",
+      "description": "Sort modal with Balance, Market Cap, Volume, Price Change options",
+      "screenshotPath": "screens/home-sort/screenshot.png"
+    },
+    {
+      "id": "discover",
+      "description": "Discover/Search screen with pinned apps, trending coins, and search bar",
+      "screenshotPath": "screens/discover/screenshot.png"
+    },
+    {
+      "id": "mini-apps",
+      "description": "Mini Apps directory with featured apps carousel and app categories",
+      "screenshotPath": "screens/mini-apps/screenshot.png"
+    },
+    {
+      "id": "mini-apps-scrolled",
+      "description": "Mini Apps scrolled showing Connect with creators, Earn crypto sections",
+      "screenshotPath": "screens/mini-apps-scrolled/screenshot.png"
+    },
+    {
+      "id": "bankr-display-name",
+      "description": "Bankr mini app onboarding - set display name",
+      "screenshotPath": "screens/bankr-display-name/screenshot.png"
+    },
+    {
+      "id": "bankr-avatar",
+      "description": "Bankr mini app onboarding - add avatar",
+      "screenshotPath": "screens/bankr-avatar/screenshot.png"
+    },
+    {
+      "id": "bankr-bio",
+      "description": "Bankr mini app onboarding - write short bio",
+      "screenshotPath": "screens/bankr-bio/screenshot.png"
+    },
+    {
+      "id": "bankr-loading",
+      "description": "Bankr mini app - loading/setting up profile",
+      "screenshotPath": "screens/bankr-loading/screenshot.png"
+    },
+    {
+      "id": "bankr-complete",
+      "description": "Bankr mini app - setup complete with Start Posting CTA",
+      "screenshotPath": "screens/bankr-complete/screenshot.png"
+    },
+    {
+      "id": "bankr-browser",
+      "description": "Bankr web app in Base in-app browser",
+      "screenshotPath": "screens/bankr-browser/screenshot.png"
+    },
+    {
+      "id": "verify",
+      "description": "Get Verified landing with benefits",
+      "screenshotPath": "screens/verify/screenshot.png"
+    },
+    {
+      "id": "verify-login-request",
+      "description": "Wallet login request modal from verify.base.dev",
+      "screenshotPath": "screens/verify-login-request/screenshot.png"
+    },
+    {
+      "id": "manage-verifications",
+      "description": "Social verification for X, Coinbase, TikTok, Instagram",
+      "screenshotPath": "screens/manage-verifications/screenshot.png"
+    },
+    {
+      "id": "token-detail",
+      "description": "Token detail page with price chart, market data, and about section",
+      "screenshotPath": "screens/token-detail/screenshot.png"
+    },
+    {
+      "id": "token-buy-modal",
+      "description": "Token buy/swap modal with USDC input and token output",
+      "screenshotPath": "screens/token-buy-modal/screenshot.png"
+    },
+    {
+      "id": "chat",
+      "description": "Chat home with AI agents and compose button",
+      "screenshotPath": "screens/chat/screenshot.png"
+    },
+    {
+      "id": "chat-search",
+      "description": "New chat profile search with basename results",
+      "screenshotPath": "screens/chat-search/screenshot.png"
+    },
+    {
+      "id": "chat-conversation",
+      "description": "1:1 chat conversation with message input",
+      "screenshotPath": "screens/chat-conversation/screenshot.png"
+    },
+    {
+      "id": "live-feed",
+      "description": "Live social trading feed showing real-time trades with token cards",
+      "screenshotPath": "screens/live-feed/screenshot.png"
+    },
+    {
+      "id": "create-post",
+      "description": "Create post with text input, earnings toggle, and media attachments",
+      "screenshotPath": "screens/create-post/screenshot.png"
+    },
+    {
+      "id": "about-earnings",
+      "description": "About Earnings info modal explaining tradable posts",
+      "screenshotPath": "screens/about-earnings/screenshot.png"
+    },
+    {
+      "id": "edit-ticker",
+      "description": "Edit Ticker modal for post trading nickname",
+      "screenshotPath": "screens/edit-ticker/screenshot.png"
+    },
+    {
+      "id": "notifications",
+      "description": "Notifications screen with empty state",
+      "screenshotPath": "screens/notifications/screenshot.png"
+    },
+    {
+      "id": "notification-settings",
+      "description": "Push notification settings with social and trading toggles",
+      "screenshotPath": "screens/notification-settings/screenshot.png"
+    },
+    {
+      "id": "profile-drawer",
+      "description": "Profile side drawer with name, balance, and menu options",
+      "screenshotPath": "screens/profile-drawer/screenshot.png"
+    },
+    {
+      "id": "view-profile",
+      "description": "User profile with posts, assets, casts, replies tabs",
+      "screenshotPath": "screens/view-profile/screenshot.png"
+    },
+    {
+      "id": "earnings",
+      "description": "Earnings dashboard with post, creator coin, and creator rewards breakdown",
+      "screenshotPath": "screens/earnings/screenshot.png"
+    },
+    {
+      "id": "earnings-modal",
+      "description": "Earnings onboarding modal",
+      "screenshotPath": "screens/earnings-modal/screenshot.png"
+    },
+    {
+      "id": "edit-profile",
+      "description": "Edit profile modal with avatar, username, display name, and bio",
+      "screenshotPath": "screens/edit-profile/screenshot.png"
+    },
+    {
+      "id": "share-modal",
+      "description": "Share profile modal with Post, Copy link, Share to options",
+      "screenshotPath": "screens/share-modal/screenshot.png"
+    },
+    {
+      "id": "settings",
+      "description": "Settings main menu with Display, Account, Privacy, Trading, and more",
+      "screenshotPath": "screens/settings/screenshot.png"
+    },
+    {
+      "id": "display-settings",
+      "description": "Display settings with theme, appearance mode, language, currency",
+      "screenshotPath": "screens/display-settings/screenshot.png"
+    },
+    {
+      "id": "account-management",
+      "description": "Account management with authenticator app and sign out",
+      "screenshotPath": "screens/account-management/screenshot.png"
+    },
+    {
+      "id": "sign-out-confirm",
+      "description": "Sign out confirmation with passkey reminder",
+      "screenshotPath": "screens/sign-out-confirm/screenshot.png"
+    },
+    {
+      "id": "connect-coinbase",
+      "description": "Connect to Coinbase account for funding",
+      "screenshotPath": "screens/connect-coinbase/screenshot.png"
+    },
+    {
+      "id": "privacy-security",
+      "description": "Privacy settings with personalization, privacy mode, developer mode",
+      "screenshotPath": "screens/privacy-security/screenshot.png"
+    },
+    {
+      "id": "manage-permissions",
+      "description": "App permissions management screen",
+      "screenshotPath": "screens/manage-permissions/screenshot.png"
+    },
+    {
+      "id": "social-creators",
+      "description": "Social settings with Farcaster ID, coin pairings, muted accounts",
+      "screenshotPath": "screens/social-creators/screenshot.png"
+    },
+    {
+      "id": "trading-settings",
+      "description": "Trading settings with quick buy, stealth mode, dust coins",
+      "screenshotPath": "screens/trading-settings/screenshot.png"
+    },
+    {
+      "id": "sign-in-options",
+      "description": "Sign in method selection: Email, Passkey, Recovery phrase",
+      "screenshotPath": "screens/sign-in-options/screenshot.png"
+    },
+    {
+      "id": "import-wallet",
+      "description": "Import wallet landing with Create new wallet and I already have a wallet",
+      "screenshotPath": "screens/import-wallet/screenshot.png"
+    },
+    {
+      "id": "create-passcode",
+      "description": "6-digit passcode creation for wallet unlock",
+      "screenshotPath": "screens/create-passcode/screenshot.png"
+    },
+    {
+      "id": "import-wallet-options",
+      "description": "Wallet import options: Passkey or Recovery phrase",
+      "screenshotPath": "screens/import-wallet-options/screenshot.png"
+    }
   ],
   "flows": [
-    { "slug": "create-account", "name": "Create Account", "summary": "Create a new Base account with email, OTP verification, and basename registration", "stepsCount": 6, "path": "flows/create-account/flow.json" },
-    { "slug": "sign-in", "name": "Sign In", "summary": "Sign into Base via email, passkey, or recovery phrase with wallet creation option", "stepsCount": 6, "path": "flows/sign-in/flow.json" },
-    { "slug": "deposit-buy", "name": "Deposit / Buy", "summary": "Deposit funds via debit card or Coinbase with token selection", "stepsCount": 4, "path": "flows/deposit-buy/flow.json" },
-    { "slug": "trade", "name": "Trade", "summary": "Swap tokens using the built-in DEX interface", "stepsCount": 2, "path": "flows/trade/flow.json" },
-    { "slug": "request-payment", "name": "Request Payment", "summary": "Request crypto via profile search, QR code, or shareable link", "stepsCount": 2, "path": "flows/request-payment/flow.json" },
-    { "slug": "receive", "name": "Receive", "summary": "Display wallet QR code and address for receiving funds across EVM networks", "stepsCount": 2, "path": "flows/receive/flow.json" },
-    { "slug": "browse-tokens", "name": "Browse Tokens", "summary": "Discover trending tokens, view details with price charts, and buy", "stepsCount": 3, "path": "flows/browse-tokens/flow.json" },
-    { "slug": "mini-app", "name": "Mini App (Bankr example)", "summary": "Install and onboard into a mini app within Base", "stepsCount": 7, "path": "flows/mini-app/flow.json" },
-    { "slug": "verify-identity", "name": "Verify Identity", "summary": "Verify social accounts (X, Coinbase, TikTok, Instagram) for profile credibility", "stepsCount": 4, "path": "flows/verify-identity/flow.json" },
-    { "slug": "messaging", "name": "Messaging", "summary": "Chat with AI agents or other users via basename search", "stepsCount": 4, "path": "flows/messaging/flow.json" },
-    { "slug": "live-feed-posting", "name": "Live Feed & Posting", "summary": "Browse the social trading feed and create tradable posts with earnings", "stepsCount": 4, "path": "flows/live-feed-posting/flow.json" },
-    { "slug": "profile-earnings", "name": "Profile & Earnings", "summary": "View and edit profile, track post and creator coin earnings", "stepsCount": 5, "path": "flows/profile-earnings/flow.json" },
-    { "slug": "settings", "name": "Settings", "summary": "Configure display, account, privacy, social, and trading preferences", "stepsCount": 9, "path": "flows/settings/flow.json" },
-    { "slug": "notifications", "name": "Notifications", "summary": "View notifications and configure push notification preferences", "stepsCount": 2, "path": "flows/notifications/flow.json" },
-    { "slug": "home-browsing", "name": "Home Browsing", "summary": "Browse portfolio with filters, sorting, collectibles, and activity history", "stepsCount": 5, "path": "flows/home-browsing/flow.json" }
+    {
+      "slug": "create-account",
+      "name": "Create Account",
+      "summary": "Create a new Base account with email, OTP verification, and basename registration",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "Entry point",
+          "description": "Welcome screen with Create Account and Sign In buttons.",
+          "screenshotPath": "flows/create-account/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Enter Email",
+          "screenId": "enter-email",
+          "action": "Tap Create Account",
+          "description": "Enter email screen with email input field.",
+          "screenshotPath": "flows/create-account/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "OTP Verification",
+          "screenId": "otp-verify",
+          "action": "Submit email",
+          "description": "OTP verification screen with 6-digit code entry sent to email.",
+          "screenshotPath": "flows/create-account/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Choose Username",
+          "screenId": "choose-username",
+          "action": "Enter valid OTP code",
+          "description": "Choose username screen for basename registration (name.base.eth).",
+          "screenshotPath": "flows/create-account/screenshots/step-04.png",
+          "changes": null
+        },
+        {
+          "number": 5,
+          "title": "Username Entered",
+          "screenId": "username-entered",
+          "action": "Type username d-mysten",
+          "description": "Username entered (d-mysten) with Claim button enabled.",
+          "screenshotPath": "flows/create-account/screenshots/step-05.png",
+          "changes": null
+        },
+        {
+          "number": 6,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Tap Claim",
+          "description": "Home screen after successful account creation with $0 balance and empty token list.",
+          "screenshotPath": "flows/create-account/screenshots/step-06.png",
+          "changes": null
+        }
+      ],
+      "notes": "Account creation grants a basename (name.base.eth). Wallet starts with zero balance."
+    },
+    {
+      "slug": "sign-in",
+      "name": "Sign In",
+      "summary": "Sign into Base via email, passkey, or recovery phrase with wallet creation option",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "Entry point",
+          "description": "Welcome screen with Create Account and Sign In buttons.",
+          "screenshotPath": "flows/sign-in/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Sign In Options",
+          "screenId": "sign-in-options",
+          "action": "Tap Sign In",
+          "description": "Sign in options screen with Email, Passkey, and Recovery phrase methods.",
+          "screenshotPath": "flows/sign-in/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Import Wallet",
+          "screenId": "import-wallet",
+          "action": "Select a sign-in method",
+          "description": "Import wallet landing with Create new wallet and I already have a wallet options.",
+          "screenshotPath": "flows/sign-in/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Import Wallet Options",
+          "screenId": "import-wallet-options",
+          "action": "Tap I already have a wallet",
+          "description": "Import wallet options screen with Passkey or Recovery phrase choices.",
+          "screenshotPath": "flows/sign-in/screenshots/step-04.png",
+          "changes": null
+        },
+        {
+          "number": 5,
+          "title": "Create Passcode",
+          "screenId": "create-passcode",
+          "action": "Complete wallet import",
+          "description": "Create 6-digit passcode screen for securing the wallet.",
+          "screenshotPath": "flows/sign-in/screenshots/step-05.png",
+          "changes": null
+        },
+        {
+          "number": 6,
+          "title": "Home",
+          "screenId": "home",
+          "action": "Enter passcode",
+          "description": "Home screen with wallet balance, token list, and quick actions.",
+          "screenshotPath": "flows/sign-in/screenshots/step-06.png",
+          "changes": null
+        }
+      ],
+      "notes": "Supports multiple sign-in methods including email, passkey, and recovery phrase. Lands on home with existing balance."
+    },
+    {
+      "slug": "deposit-buy",
+      "name": "Deposit / Buy",
+      "summary": "Deposit funds via debit card or Coinbase with token selection",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Home screen with Deposit button visible.",
+          "screenshotPath": "flows/deposit-buy/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Buy / Deposit",
+          "screenId": "buy-deposit",
+          "action": "Tap Deposit",
+          "description": "Buy screen with $0 amount, USDC selected, numpad, Debit Card payment method, and swipe to deposit.",
+          "screenshotPath": "flows/deposit-buy/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Token Selector",
+          "screenId": "token-selector",
+          "action": "Tap token dropdown",
+          "description": "Token selector modal listing USDC, Ethereum, Edge, Compound, and other tokens.",
+          "screenshotPath": "flows/deposit-buy/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Deposit With Coinbase",
+          "screenId": "deposit-with-coinbase",
+          "action": "Tap Deposit With option",
+          "description": "Deposit With modal showing Connect to Coinbase option.",
+          "screenshotPath": "flows/deposit-buy/screenshots/step-04.png",
+          "changes": null
+        }
+      ],
+      "notes": "Supports debit card purchases and Coinbase integration for deposits."
+    },
+    {
+      "slug": "trade",
+      "name": "Trade",
+      "summary": "Swap tokens using the built-in DEX interface",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Home screen with navigation options.",
+          "screenshotPath": "flows/trade/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Trade",
+          "screenId": "trade",
+          "action": "Tap Trade",
+          "description": "Trade/swap screen with USDC to ETH pair, percentage buttons, trending tokens, and numpad.",
+          "screenshotPath": "flows/trade/screenshots/step-02.png",
+          "changes": null
+        }
+      ],
+      "notes": "Includes quick percentage buttons and trending token suggestions for easy swaps."
+    },
+    {
+      "slug": "request-payment",
+      "name": "Request Payment",
+      "summary": "Request crypto via profile search, QR code, or shareable link",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Home screen with navigation options.",
+          "screenshotPath": "flows/request-payment/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Request",
+          "screenId": "request",
+          "action": "Tap Request",
+          "description": "Request screen with profile search, QR Code, and Request via Link options.",
+          "screenshotPath": "flows/request-payment/screenshots/step-02.png",
+          "changes": null
+        }
+      ],
+      "notes": "Supports requesting payments via direct profile search, QR code scanning, or shareable link."
+    },
+    {
+      "slug": "receive",
+      "name": "Receive",
+      "summary": "Display wallet QR code and address for receiving funds across EVM networks",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Home screen with navigation options.",
+          "screenshotPath": "flows/receive/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Receive",
+          "screenId": "receive",
+          "action": "Tap Receive",
+          "description": "Receive screen with QR code, wallet address, and network support info.",
+          "screenshotPath": "flows/receive/screenshots/step-02.png",
+          "changes": null
+        }
+      ],
+      "notes": "Displays QR code and copyable wallet address with supported network information."
+    },
+    {
+      "slug": "browse-tokens",
+      "name": "Browse Tokens",
+      "summary": "Discover trending tokens, view details with price charts, and buy",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Discover",
+          "screenId": "discover",
+          "action": "Entry point",
+          "description": "Discover screen with trending coins list.",
+          "screenshotPath": "flows/browse-tokens/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Token Detail",
+          "screenId": "token-detail",
+          "action": "Tap a token from the list",
+          "description": "Virtual Protocol token detail with price chart, market cap, and about section.",
+          "screenshotPath": "flows/browse-tokens/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Buy Modal",
+          "screenId": "token-buy-modal",
+          "action": "Tap Buy",
+          "description": "Buy modal for Virtual Protocol with USDC to VIRTUAL swap interface.",
+          "screenshotPath": "flows/browse-tokens/screenshots/step-03.png",
+          "changes": null
+        }
+      ],
+      "notes": "Discover tab provides trending token exploration with inline buy functionality."
+    },
+    {
+      "slug": "mini-app",
+      "name": "Mini App (Bankr example)",
+      "summary": "Install and onboard into a mini app within Base",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Mini Apps Directory",
+          "screenId": "mini-apps",
+          "action": "Entry point",
+          "description": "Mini Apps directory with featured apps and categories.",
+          "screenshotPath": "flows/mini-app/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Set Display Name",
+          "screenId": "bankr-display-name",
+          "action": "Tap Bankr app",
+          "description": "Bankr onboarding step to set display name with d-mysten pre-filled.",
+          "screenshotPath": "flows/mini-app/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Add Avatar",
+          "screenId": "bankr-avatar",
+          "action": "Tap Next",
+          "description": "Bankr onboarding step to add avatar with placeholder image.",
+          "screenshotPath": "flows/mini-app/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Write Bio",
+          "screenId": "bankr-bio",
+          "action": "Tap Next",
+          "description": "Bankr onboarding step to write a short bio.",
+          "screenshotPath": "flows/mini-app/screenshots/step-04.png",
+          "changes": null
+        },
+        {
+          "number": 5,
+          "title": "Loading",
+          "screenId": "bankr-loading",
+          "action": "Tap Next",
+          "description": "Setting up profile screen with loading assets animation.",
+          "screenshotPath": "flows/mini-app/screenshots/step-05.png",
+          "changes": null
+        },
+        {
+          "number": 6,
+          "title": "Setup Complete",
+          "screenId": "bankr-complete",
+          "action": "Wait for loading to finish",
+          "description": "Setup complete screen showing \"You're all set up, d-mysten!\" confirmation.",
+          "screenshotPath": "flows/mini-app/screenshots/step-06.png",
+          "changes": null
+        },
+        {
+          "number": 7,
+          "title": "Bankr Browser",
+          "screenId": "bankr-browser",
+          "action": "Tap Continue",
+          "description": "Bankr web app loaded in Base in-app browser.",
+          "screenshotPath": "flows/mini-app/screenshots/step-07.png",
+          "changes": null
+        }
+      ],
+      "notes": "Bankr is used as an example mini app. The mini app flow (install → onboard → in-app browser) is representative of how mini apps work in Base."
+    },
+    {
+      "slug": "verify-identity",
+      "name": "Verify Identity",
+      "summary": "Verify social accounts (X, Coinbase, TikTok, Instagram) for profile credibility",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Discover",
+          "screenId": "discover",
+          "action": "Entry point",
+          "description": "Discover screen with Pinned Apps including Verify.",
+          "screenshotPath": "flows/verify-identity/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Get Verified",
+          "screenId": "verify",
+          "action": "Tap Verify pinned app",
+          "description": "Get Verified landing page with Earn Rewards, Build Credibility, Boost Visibility benefits.",
+          "screenshotPath": "flows/verify-identity/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Login Request",
+          "screenId": "verify-login-request",
+          "action": "Tap Continue",
+          "description": "Login request modal from verify.base.dev for wallet authentication.",
+          "screenshotPath": "flows/verify-identity/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Manage Verifications",
+          "screenId": "manage-verifications",
+          "action": "Tap Confirm",
+          "description": "Manage verifications screen with X, Coinbase, TikTok, and Instagram connection options.",
+          "screenshotPath": "flows/verify-identity/screenshots/step-04.png",
+          "changes": null
+        }
+      ],
+      "notes": "Verification uses verify.base.dev and supports X, Coinbase, TikTok, and Instagram."
+    },
+    {
+      "slug": "messaging",
+      "name": "Messaging",
+      "summary": "Chat with AI agents or other users via basename search",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Home screen with balance and chat icon in top right corner.",
+          "screenshotPath": "flows/messaging/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Chat Home",
+          "screenId": "chat",
+          "action": "Tap chat icon",
+          "description": "Chat home screen with AI agents (Bankr, Elsa) listed.",
+          "screenshotPath": "flows/messaging/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "New Chat Search",
+          "screenId": "chat-search",
+          "action": "Tap new chat",
+          "description": "New chat profile search with search results.",
+          "screenshotPath": "flows/messaging/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Conversation",
+          "screenId": "chat-conversation",
+          "action": "Select a profile",
+          "description": "1:1 chat conversation with a sent message.",
+          "screenshotPath": "flows/messaging/screenshots/step-04.png",
+          "changes": null
+        }
+      ],
+      "notes": "Chat supports both AI agent conversations and peer-to-peer messaging."
+    },
+    {
+      "slug": "live-feed-posting",
+      "name": "Live Feed & Posting",
+      "summary": "Browse the social trading feed and create tradable posts with earnings",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Live Feed",
+          "screenId": "live-feed",
+          "action": "Entry point",
+          "description": "Live social trading feed with real-time trade cards.",
+          "screenshotPath": "flows/live-feed-posting/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Create Post",
+          "screenId": "create-post",
+          "action": "Tap create post",
+          "description": "Create post screen with earnings toggle and attachment options.",
+          "screenshotPath": "flows/live-feed-posting/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "About Earnings",
+          "screenId": "about-earnings",
+          "action": "Tap earnings info",
+          "description": "About Earnings info modal explaining how post earnings work.",
+          "screenshotPath": "flows/live-feed-posting/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Edit Ticker",
+          "screenId": "edit-ticker",
+          "action": "Tap ticker option",
+          "description": "Edit Ticker modal for setting a trading nickname on the post.",
+          "screenshotPath": "flows/live-feed-posting/screenshots/step-04.png",
+          "changes": null
+        }
+      ],
+      "notes": "Posts can include earnings toggles and custom trading tickers."
+    },
+    {
+      "slug": "profile-earnings",
+      "name": "Profile & Earnings",
+      "summary": "View and edit profile, track post and creator coin earnings",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Profile Drawer",
+          "screenId": "profile-drawer",
+          "action": "Entry point",
+          "description": "Profile drawer with menu options.",
+          "screenshotPath": "flows/profile-earnings/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "View Profile",
+          "screenId": "view-profile",
+          "action": "Tap profile",
+          "description": "User profile with Posts, Assets, Casts, and Replies tabs.",
+          "screenshotPath": "flows/profile-earnings/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Earnings",
+          "screenId": "earnings",
+          "action": "Tap Earnings",
+          "description": "Earnings dashboard with detailed breakdown.",
+          "screenshotPath": "flows/profile-earnings/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Edit Profile",
+          "screenId": "edit-profile",
+          "action": "Tap Edit Profile",
+          "description": "Edit profile modal for updating profile information.",
+          "screenshotPath": "flows/profile-earnings/screenshots/step-04.png",
+          "changes": null
+        },
+        {
+          "number": 5,
+          "title": "Share Profile",
+          "screenId": "share-modal",
+          "action": "Tap Share",
+          "description": "Share profile modal with sharing options.",
+          "screenshotPath": "flows/profile-earnings/screenshots/step-05.png",
+          "changes": null
+        }
+      ],
+      "notes": "Profile includes social features like posts and casts alongside wallet assets and earnings."
+    },
+    {
+      "slug": "settings",
+      "name": "Settings",
+      "summary": "Configure display, account, privacy, social, and trading preferences",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "description": "Settings main menu with all configuration categories.",
+          "screenshotPath": "flows/settings/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Display Settings",
+          "screenId": "display-settings",
+          "action": "Tap Display",
+          "description": "Display settings with theme, appearance, language, and currency options.",
+          "screenshotPath": "flows/settings/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Account Management",
+          "screenId": "account-management",
+          "action": "Tap Account",
+          "description": "Account management with authenticator and sign out options.",
+          "screenshotPath": "flows/settings/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Sign Out Confirmation",
+          "screenId": "sign-out-confirm",
+          "action": "Tap Sign Out",
+          "description": "Sign out confirmation dialog with passkey warning.",
+          "screenshotPath": "flows/settings/screenshots/step-04.png",
+          "changes": null
+        },
+        {
+          "number": 5,
+          "title": "Connect to Coinbase",
+          "screenId": "connect-coinbase",
+          "action": "Tap Connect to Coinbase",
+          "description": "Connect to Coinbase screen for linking accounts.",
+          "screenshotPath": "flows/settings/screenshots/step-05.png",
+          "changes": null
+        },
+        {
+          "number": 6,
+          "title": "Privacy & Security",
+          "screenId": "privacy-security",
+          "action": "Tap Privacy & Security",
+          "description": "Privacy and security settings with personalization, privacy mode, and developer mode toggles.",
+          "screenshotPath": "flows/settings/screenshots/step-06.png",
+          "changes": null
+        },
+        {
+          "number": 7,
+          "title": "Manage Permissions",
+          "screenId": "manage-permissions",
+          "action": "Tap Manage Permissions",
+          "description": "Manage permissions screen for controlling app access.",
+          "screenshotPath": "flows/settings/screenshots/step-07.png",
+          "changes": null
+        },
+        {
+          "number": 8,
+          "title": "Social & Creators",
+          "screenId": "social-creators",
+          "action": "Tap Social & Creators",
+          "description": "Social and creators settings with Farcaster ID, coin pairings, and muted accounts.",
+          "screenshotPath": "flows/settings/screenshots/step-08.png",
+          "changes": null
+        },
+        {
+          "number": 9,
+          "title": "Trading Settings",
+          "screenId": "trading-settings",
+          "action": "Tap Trading",
+          "description": "Trading settings with quick buy, stealth mode, and dust coins options.",
+          "screenshotPath": "flows/settings/screenshots/step-09.png",
+          "changes": null
+        }
+      ],
+      "notes": "Comprehensive settings covering display, account, privacy, social, and trading configurations."
+    },
+    {
+      "slug": "notifications",
+      "name": "Notifications",
+      "summary": "View notifications and configure push notification preferences",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Notifications",
+          "screenId": "notifications",
+          "action": "Entry point",
+          "description": "Notifications screen showing empty state.",
+          "screenshotPath": "flows/notifications/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Notification Settings",
+          "screenId": "notification-settings",
+          "action": "Tap settings icon",
+          "description": "Notification settings with push notification toggles for various alert types.",
+          "screenshotPath": "flows/notifications/screenshots/step-02.png",
+          "changes": null
+        }
+      ],
+      "notes": "New accounts start with an empty notification state."
+    },
+    {
+      "slug": "home-browsing",
+      "name": "Home Browsing",
+      "summary": "Browse portfolio with filters, sorting, collectibles, and activity history",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Coins Tab",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Home Coins tab with USDC balance, Filters button, and Sort button.",
+          "screenshotPath": "flows/home-browsing/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Filters",
+          "screenId": "home-filters",
+          "action": "Tap Filters",
+          "description": "Filters modal with Categories and Networks filter options.",
+          "screenshotPath": "flows/home-browsing/screenshots/step-02.png",
+          "changes": null
+        },
+        {
+          "number": 3,
+          "title": "Sort By",
+          "screenId": "home-sort",
+          "action": "Tap Sort",
+          "description": "Sort By modal with Balance, Market Cap, Volume, and Price Change options.",
+          "screenshotPath": "flows/home-browsing/screenshots/step-03.png",
+          "changes": null
+        },
+        {
+          "number": 4,
+          "title": "Collectibles",
+          "screenId": "collectibles",
+          "action": "Tap Collectibles tab",
+          "description": "Collectibles tab showing empty state.",
+          "screenshotPath": "flows/home-browsing/screenshots/step-04.png",
+          "changes": null
+        },
+        {
+          "number": 5,
+          "title": "Activity",
+          "screenId": "activity",
+          "action": "Tap Activity tab",
+          "description": "Activity tab showing Received and Minted transaction history.",
+          "screenshotPath": "flows/home-browsing/screenshots/step-05.png",
+          "changes": null
+        }
+      ],
+      "notes": "Home screen organizes assets across Coins, Collectibles, and Activity tabs with filtering and sorting."
+    }
   ],
   "decisionPoints": [
     {
       "screenId": "welcome",
       "options": [
-        { "label": "Create Account", "explored": true, "flowSlug": "create-account" },
-        { "label": "Sign In", "explored": true, "flowSlug": "sign-in" }
+        {
+          "label": "Create Account",
+          "explored": true,
+          "flowSlug": "create-account"
+        },
+        {
+          "label": "Sign In",
+          "explored": true,
+          "flowSlug": "sign-in"
+        }
       ]
     },
     {
       "screenId": "home",
       "options": [
-        { "label": "Deposit", "explored": true, "flowSlug": "deposit-buy" },
-        { "label": "Trade", "explored": true, "flowSlug": "trade" },
-        { "label": "Send", "explored": true },
-        { "label": "Request", "explored": true, "flowSlug": "request-payment" },
-        { "label": "Coins tab", "explored": true, "flowSlug": "home-browsing" },
-        { "label": "Collectibles tab", "explored": true, "flowSlug": "home-browsing" },
-        { "label": "Activity tab", "explored": true, "flowSlug": "home-browsing" },
-        { "label": "Profile avatar", "explored": true, "flowSlug": "profile-earnings" },
-        { "label": "QR / Receive", "explored": true, "flowSlug": "receive" },
-        { "label": "Chat icon", "explored": true, "flowSlug": "messaging" }
+        {
+          "label": "Deposit",
+          "explored": true,
+          "flowSlug": "deposit-buy"
+        },
+        {
+          "label": "Trade",
+          "explored": true,
+          "flowSlug": "trade"
+        },
+        {
+          "label": "Send",
+          "explored": true
+        },
+        {
+          "label": "Request",
+          "explored": true,
+          "flowSlug": "request-payment"
+        },
+        {
+          "label": "Coins tab",
+          "explored": true,
+          "flowSlug": "home-browsing"
+        },
+        {
+          "label": "Collectibles tab",
+          "explored": true,
+          "flowSlug": "home-browsing"
+        },
+        {
+          "label": "Activity tab",
+          "explored": true,
+          "flowSlug": "home-browsing"
+        },
+        {
+          "label": "Profile avatar",
+          "explored": true,
+          "flowSlug": "profile-earnings"
+        },
+        {
+          "label": "QR / Receive",
+          "explored": true,
+          "flowSlug": "receive"
+        },
+        {
+          "label": "Chat icon",
+          "explored": true,
+          "flowSlug": "messaging"
+        }
       ]
     },
     {
       "screenId": "discover",
       "options": [
-        { "label": "Apps", "explored": true, "flowSlug": "mini-app-bankr" },
-        { "label": "Verify", "explored": true, "flowSlug": "verify-identity" },
-        { "label": "Trending coin", "explored": true, "flowSlug": "browse-tokens" },
-        { "label": "Search", "explored": false }
+        {
+          "label": "Apps",
+          "explored": true,
+          "flowSlug": "mini-app-bankr"
+        },
+        {
+          "label": "Verify",
+          "explored": true,
+          "flowSlug": "verify-identity"
+        },
+        {
+          "label": "Trending coin",
+          "explored": true,
+          "flowSlug": "browse-tokens"
+        },
+        {
+          "label": "Search",
+          "explored": false
+        }
       ]
     }
-  ],
-  "sitemapPath": "navigation.json"
+  ]
 }

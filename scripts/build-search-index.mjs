@@ -51,25 +51,18 @@ for (const app of index.apps) {
     })
 
     // Flow step entries
-    try {
-      const flowJson = JSON.parse(
-        fs.readFileSync(path.join(appDir, flow.path), "utf-8")
-      )
-      for (const step of flowJson.steps) {
-        entries.push({
-          type: "step",
-          appSlug: app.slug,
-          appName: appJson.app.name,
-          label: step.title,
-          description: step.description,
-          flowSlug: flow.slug,
-          flowName: flow.name,
-          screenId: step.screenId,
-          href: `/apps/${app.slug}/flows/${flow.slug}`,
-        })
-      }
-    } catch {
-      // skip if flow.json can't be read
+    for (const step of flow.steps) {
+      entries.push({
+        type: "step",
+        appSlug: app.slug,
+        appName: appJson.app.name,
+        label: step.title,
+        description: step.description,
+        flowSlug: flow.slug,
+        flowName: flow.name,
+        screenId: step.screenId,
+        href: `/apps/${app.slug}/flows/${flow.slug}`,
+      })
     }
   }
 }

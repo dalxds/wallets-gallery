@@ -8,113 +8,882 @@
   "captureDate": "2026-03-30",
   "mode": "guided",
   "screens": [
-    { "id": "welcome", "description": "Tuyo splash — Spend. Earn. Trade. Bank. Get started or recover account", "screenshotPath": "screens/welcome/screenshot.png", "snapshotPath": null },
-    { "id": "create-key-interactive", "description": "Key creation — hold to generate cryptographic key", "screenshotPath": "screens/create-key-interactive/screenshot.png", "snapshotPath": null },
-    { "id": "create-key-ready", "description": "Key created — tap inside when ready", "screenshotPath": "screens/create-key-ready/screenshot.png", "snapshotPath": null },
-    { "id": "onboarding-notifications", "description": "Enable notifications opt-in during onboarding", "screenshotPath": "screens/onboarding-notifications/screenshot.png", "snapshotPath": null },
-    { "id": "onboarding-handle", "description": "Choose your handle during onboarding", "screenshotPath": "screens/onboarding-handle/screenshot.png", "snapshotPath": null },
-    { "id": "recover-account", "description": "Recover account — import mnemonic or continue without", "screenshotPath": "screens/recover-account/screenshot.png", "snapshotPath": null },
-    { "id": "home", "description": "Main dashboard with $0.00 balance, quick actions, yield promo, bottom tab bar", "screenshotPath": "screens/home/screenshot.png", "snapshotPath": null },
-    { "id": "home-with-balance", "description": "Home with $1.00 balance, EARN/CASH sections, recent transactions", "screenshotPath": "screens/home-with-balance/screenshot.png", "snapshotPath": null },
-    { "id": "search", "description": "Token search with Watchlist and Most Relevant lists", "screenshotPath": "screens/search/screenshot.png", "snapshotPath": null },
-    { "id": "token-detail", "description": "Token detail sheet with price chart, Buy/Sell/Receive/Send actions", "screenshotPath": "screens/token-detail/screenshot.png", "snapshotPath": null },
-    { "id": "add-money", "description": "Choose funding source: Bank, Wallet, or Coinbase", "screenshotPath": "screens/add-money/screenshot.png", "snapshotPath": null },
-    { "id": "receive", "description": "QR code and wallet address for receiving crypto on multiple networks", "screenshotPath": "screens/receive/screenshot.png", "snapshotPath": null },
-    { "id": "send", "description": "Add Recipient — Find on Tuyo, Wallet Address, or Bank Account", "screenshotPath": "screens/send/screenshot.png", "snapshotPath": null },
-    { "id": "send-to-tuyo-found", "description": "Tuyo user search — matching user found", "screenshotPath": "screens/send-to-tuyo-found/screenshot.png", "snapshotPath": null },
-    { "id": "send-to-tuyo-not-found", "description": "Tuyo user search — no match found", "screenshotPath": "screens/send-to-tuyo-not-found/screenshot.png", "snapshotPath": null },
-    { "id": "send-to-wallet", "description": "Enter wallet address input (0x)", "screenshotPath": "screens/send-to-wallet/screenshot.png", "snapshotPath": null },
-    { "id": "send-to-bank", "description": "Bank account — triggers identity verification", "screenshotPath": "screens/send-to-bank/screenshot.png", "snapshotPath": null },
-    { "id": "convert", "description": "Token swap — USDC on Base, destination token picker", "screenshotPath": "screens/convert/screenshot.png", "snapshotPath": null },
-    { "id": "transaction-history", "description": "Full transaction list grouped by date", "screenshotPath": "screens/transaction-history/screenshot.png", "snapshotPath": null },
-    { "id": "transaction-details", "description": "Transaction detail — status, timestamp, addresses, amount", "screenshotPath": "screens/transaction-details/screenshot.png", "snapshotPath": null },
-    { "id": "strategies-overview", "description": "Yield strategies by currency: USD, ETH, EUR, BTC", "screenshotPath": "screens/strategies-overview/screenshot.png", "snapshotPath": null },
-    { "id": "usd-strategies", "description": "USD strategies: yoUSD, Morpho Moonwell, Fluid USDC, Morpho Seamless, Aave", "screenshotPath": "screens/usd-strategies/screenshot.png", "snapshotPath": null },
-    { "id": "card-promo", "description": "Tuyo Visa card — USDC payments and Apple Pay", "screenshotPath": "screens/card-promo/screenshot.png", "snapshotPath": null },
-    { "id": "tuyos-rewards", "description": "TUYOs rewards dashboard — balance, actions, invite code, breakdown", "screenshotPath": "screens/tuyos-rewards/screenshot.png", "snapshotPath": null },
-    { "id": "get-tuyos", "description": "Get TUYOs carousel — earning methods explained", "screenshotPath": "screens/get-tuyos/screenshot.png", "snapshotPath": null },
-    { "id": "invite-friends", "description": "Referral program — invite code, 20%/10% tiers", "screenshotPath": "screens/invite-friends/screenshot.png", "snapshotPath": null },
-    { "id": "leaderboard", "description": "League rankings", "screenshotPath": "screens/leaderboard/screenshot.png", "snapshotPath": null },
-    { "id": "settings", "description": "Account settings — handle, verification, backup, privacy, permissions, security", "screenshotPath": "screens/settings/screenshot.png", "snapshotPath": null },
-    { "id": "account-handle", "description": "Choose your @handle input", "screenshotPath": "screens/account-handle/screenshot.png", "snapshotPath": null },
-    { "id": "identity-verification", "description": "Identity verification prompt — takes 2 min, unlocks Card and banking", "screenshotPath": "screens/identity-verification/screenshot.png", "snapshotPath": null },
-    { "id": "backup", "description": "iCloud Drive backup status and explanation", "screenshotPath": "screens/backup/screenshot.png", "snapshotPath": null },
-    { "id": "privacy", "description": "Privacy toggle — hide holdings and earn balances", "screenshotPath": "screens/privacy/screenshot.png", "snapshotPath": null },
-    { "id": "permissions", "description": "Biometrics and Push Notifications toggles", "screenshotPath": "screens/permissions/screenshot.png", "snapshotPath": null }
+    {
+      "id": "welcome",
+      "description": "Tuyo splash — Spend. Earn. Trade. Bank. Get started or recover account",
+      "screenshotPath": "screens/welcome/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "create-key-interactive",
+      "description": "Key creation — hold to generate cryptographic key",
+      "screenshotPath": "screens/create-key-interactive/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "create-key-ready",
+      "description": "Key created — tap inside when ready",
+      "screenshotPath": "screens/create-key-ready/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "onboarding-notifications",
+      "description": "Enable notifications opt-in during onboarding",
+      "screenshotPath": "screens/onboarding-notifications/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "onboarding-handle",
+      "description": "Choose your handle during onboarding",
+      "screenshotPath": "screens/onboarding-handle/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "recover-account",
+      "description": "Recover account — import mnemonic or continue without",
+      "screenshotPath": "screens/recover-account/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "home",
+      "description": "Main dashboard with $0.00 balance, quick actions, yield promo, bottom tab bar",
+      "screenshotPath": "screens/home/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "home-with-balance",
+      "description": "Home with $1.00 balance, EARN/CASH sections, recent transactions",
+      "screenshotPath": "screens/home-with-balance/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "search",
+      "description": "Token search with Watchlist and Most Relevant lists",
+      "screenshotPath": "screens/search/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "token-detail",
+      "description": "Token detail sheet with price chart, Buy/Sell/Receive/Send actions",
+      "screenshotPath": "screens/token-detail/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "add-money",
+      "description": "Choose funding source: Bank, Wallet, or Coinbase",
+      "screenshotPath": "screens/add-money/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "receive",
+      "description": "QR code and wallet address for receiving crypto on multiple networks",
+      "screenshotPath": "screens/receive/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "send",
+      "description": "Add Recipient — Find on Tuyo, Wallet Address, or Bank Account",
+      "screenshotPath": "screens/send/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "send-to-tuyo-found",
+      "description": "Tuyo user search — matching user found",
+      "screenshotPath": "screens/send-to-tuyo-found/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "send-to-tuyo-not-found",
+      "description": "Tuyo user search — no match found",
+      "screenshotPath": "screens/send-to-tuyo-not-found/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "send-to-wallet",
+      "description": "Enter wallet address input (0x)",
+      "screenshotPath": "screens/send-to-wallet/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "send-to-bank",
+      "description": "Bank account — triggers identity verification",
+      "screenshotPath": "screens/send-to-bank/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "convert",
+      "description": "Token swap — USDC on Base, destination token picker",
+      "screenshotPath": "screens/convert/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "transaction-history",
+      "description": "Full transaction list grouped by date",
+      "screenshotPath": "screens/transaction-history/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "transaction-details",
+      "description": "Transaction detail — status, timestamp, addresses, amount",
+      "screenshotPath": "screens/transaction-details/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "strategies-overview",
+      "description": "Yield strategies by currency: USD, ETH, EUR, BTC",
+      "screenshotPath": "screens/strategies-overview/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "usd-strategies",
+      "description": "USD strategies: yoUSD, Morpho Moonwell, Fluid USDC, Morpho Seamless, Aave",
+      "screenshotPath": "screens/usd-strategies/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "card-promo",
+      "description": "Tuyo Visa card — USDC payments and Apple Pay",
+      "screenshotPath": "screens/card-promo/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "tuyos-rewards",
+      "description": "TUYOs rewards dashboard — balance, actions, invite code, breakdown",
+      "screenshotPath": "screens/tuyos-rewards/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "get-tuyos",
+      "description": "Get TUYOs carousel — earning methods explained",
+      "screenshotPath": "screens/get-tuyos/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "invite-friends",
+      "description": "Referral program — invite code, 20%/10% tiers",
+      "screenshotPath": "screens/invite-friends/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "leaderboard",
+      "description": "League rankings",
+      "screenshotPath": "screens/leaderboard/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "settings",
+      "description": "Account settings — handle, verification, backup, privacy, permissions, security",
+      "screenshotPath": "screens/settings/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "account-handle",
+      "description": "Choose your @handle input",
+      "screenshotPath": "screens/account-handle/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "identity-verification",
+      "description": "Identity verification prompt — takes 2 min, unlocks Card and banking",
+      "screenshotPath": "screens/identity-verification/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "backup",
+      "description": "iCloud Drive backup status and explanation",
+      "screenshotPath": "screens/backup/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "privacy",
+      "description": "Privacy toggle — hide holdings and earn balances",
+      "screenshotPath": "screens/privacy/screenshot.png",
+      "snapshotPath": null
+    },
+    {
+      "id": "permissions",
+      "description": "Biometrics and Push Notifications toggles",
+      "screenshotPath": "screens/permissions/screenshot.png",
+      "snapshotPath": null
+    }
   ],
   "flows": [
-    { "slug": "new-account-onboarding", "name": "New Account Onboarding", "summary": "Create a new account — generate key, enable notifications, set handle", "stepsCount": 6, "path": "flows/new-account-onboarding/flow.json" },
-    { "slug": "recover-account", "name": "Recover Account", "summary": "Recover existing account by importing mnemonic", "stepsCount": 2, "path": "flows/recover-account/flow.json" },
-    { "slug": "browse-tokens", "name": "Browse Tokens", "summary": "Search and browse available tokens with prices and detail view", "stepsCount": 3, "path": "flows/browse-tokens/flow.json" },
-    { "slug": "add-money", "name": "Add Money", "summary": "Add funds via bank, wallet, or Coinbase", "stepsCount": 2, "path": "flows/add-money/flow.json" },
-    { "slug": "receive-crypto", "name": "Receive Crypto", "summary": "Get wallet address and QR code for multiple networks", "stepsCount": 3, "path": "flows/receive-crypto/flow.json" },
-    { "slug": "send-money", "name": "Send Money", "summary": "Send via Tuyo username, wallet address, or bank account", "stepsCount": 4, "path": "flows/send-money/flow.json" },
-    { "slug": "send-to-tuyo", "name": "Send to Tuyo User", "summary": "Send instantly by searching @Tuyoname", "stepsCount": 4, "path": "flows/send-to-tuyo/flow.json" },
-    { "slug": "convert-tokens", "name": "Convert Tokens", "summary": "Swap between tokens on Base network", "stepsCount": 2, "path": "flows/convert-tokens/flow.json" },
-    { "slug": "view-transactions", "name": "View Transaction History", "summary": "View transaction list and individual transaction details", "stepsCount": 3, "path": "flows/view-transactions/flow.json" },
-    { "slug": "explore-strategies", "name": "Explore Yield Strategies", "summary": "Browse yield strategies by currency with APY, risk, and AUM", "stepsCount": 3, "path": "flows/explore-strategies/flow.json" },
-    { "slug": "explore-tuyo-card", "name": "Explore Tuyo Card", "summary": "Learn about the Tuyo Visa card — USDC payments and Apple Pay", "stepsCount": 3, "path": "flows/explore-tuyo-card/flow.json" },
-    { "slug": "explore-tuyos-rewards", "name": "Explore TUYOs Rewards", "summary": "Earn points, invite friends, and view the leaderboard", "stepsCount": 4, "path": "flows/explore-tuyos-rewards/flow.json" },
-    { "slug": "manage-settings", "name": "Manage Account Settings", "summary": "Access handle, verification, backup, privacy, and permissions", "stepsCount": 7, "path": "flows/manage-settings/flow.json" }
+    {
+      "slug": "new-account-onboarding",
+      "name": "New Account Onboarding",
+      "summary": "Create a new account — generate key, enable notifications, set handle",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "App launch",
+          "description": "Tuyo splash screen with Visa card hero image. Tagline: 'Spend. Earn. Trade. Bank.' Three options: green 'Get started' button, 'Already have a Tuyo account?' button, and 'I have a referral code' link. Terms of service link at bottom.",
+          "screenshotPath": "flows/new-account-onboarding/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Create key — hold to generate",
+          "screenId": "create-key-interactive",
+          "action": "Tap Get started",
+          "description": "'Let's create your key' with decorative geometric key illustration. Green hand icon at bottom with 'HOLD TO CREATE' instruction. User must press and hold to generate their cryptographic key.",
+          "screenshotPath": "flows/new-account-onboarding/screenshots/step-02.png",
+          "changes": "Navigation pushed key creation screen."
+        },
+        {
+          "number": 3,
+          "title": "Create key — ready",
+          "screenId": "create-key-ready",
+          "action": "Hold to create",
+          "description": "'Let's create your key' — key shape has transformed into a lock/card outline with keyhole icon in center. 'TAP INSIDE WHEN YOU FEEL READY' instruction at bottom. Key generation complete.",
+          "screenshotPath": "flows/new-account-onboarding/screenshots/step-03.png",
+          "changes": "Key illustration animated into completed state. Instruction changed from hold to tap."
+        },
+        {
+          "number": 4,
+          "title": "Enable notifications",
+          "screenId": "onboarding-notifications",
+          "action": "Tap inside key",
+          "description": "Bell icon with green dot. 'Enable notifications — Stay updated about transactions and important updates.' Two options: green 'Enable now' button, 'Skip for now' button.",
+          "screenshotPath": "flows/new-account-onboarding/screenshots/step-04.png",
+          "changes": "Navigation pushed notifications opt-in screen."
+        },
+        {
+          "number": 5,
+          "title": "Choose handle",
+          "screenId": "onboarding-handle",
+          "action": "Tap Enable now / Skip for now",
+          "description": "Profile icon with green ring. 'Set up your profile — Choose your handle.' Two options: green 'Set handle' button, 'Skip for now' button.",
+          "screenshotPath": "flows/new-account-onboarding/screenshots/step-05.png",
+          "changes": "Navigation pushed handle setup screen."
+        },
+        {
+          "number": 6,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Tap Set handle / Skip for now",
+          "description": "Main dashboard showing Total balance $0.00. Onboarding complete — user lands on home screen.",
+          "screenshotPath": "flows/new-account-onboarding/screenshots/step-06.png",
+          "changes": "Onboarding flow dismissed. Home screen with full tab bar."
+        }
+      ]
+    },
+    {
+      "slug": "recover-account",
+      "name": "Recover Account",
+      "summary": "Recover existing account by importing mnemonic",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "App launch",
+          "description": "Tuyo splash screen with Visa card hero. 'Get started', 'Already have a Tuyo account?', and 'I have a referral code' options.",
+          "screenshotPath": "flows/recover-account/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Recover account",
+          "screenId": "recover-account",
+          "action": "Tap Already have a Tuyo account?",
+          "description": "Recover account screen with animated lock/keyhole illustration. 'Import mnemonic manually' button. 'Continue without recovering your account' link at bottom. Back chevron top-left.",
+          "screenshotPath": "flows/recover-account/screenshots/step-02.png",
+          "changes": "Navigation pushed recover account screen."
+        }
+      ]
+    },
+    {
+      "slug": "browse-tokens",
+      "name": "Browse Tokens",
+      "summary": "Search and browse available tokens with prices and detail view",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Main dashboard showing Total balance $0.00, three quick action buttons (Add money, Send, Convert), a yield promo card ('Earn $106.34 a year on every $1,000 you have'), green 'Make your first deposit' CTA, and bottom tab bar with 4 tabs.",
+          "screenshotPath": "flows/browse-tokens/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Token search",
+          "screenId": "search",
+          "action": "Tap search icon (top right)",
+          "description": "Token search screen with search bar at top. Watchlist section showing USDC ($1.00), Ethereum ($2,062.82, +3.87%), EURC ($1.15), Bitcoin ($67,626.00, +1.59%). Below, 'Most Relevant' section with more tokens including BNB, Sky Dollar, Chain Link, Ethena USDe, USD1. Each row has icon, name, ticker, sparkline chart, price, and % change.",
+          "screenshotPath": "flows/browse-tokens/screenshots/step-02.png",
+          "changes": "Navigation pushed search screen. Tab bar hidden. Back chevron appears top-left."
+        },
+        {
+          "number": 3,
+          "title": "Token detail (MemeCore)",
+          "screenId": "token-detail",
+          "action": "Tap a token",
+          "description": "Bottom sheet showing MemeCore (M) at $2.31, +1.82% (+$0.04) Today. Four action buttons: Buy (green +), Sell (grey -), Receive (download arrow), Send (arrow). Price chart with timeframe toggles (24H, 7D, 30D, 1Y, ALL). 'Your balance' section showing VALUE $0.00, AMOUNT 0 M.",
+          "screenshotPath": "flows/browse-tokens/screenshots/step-03.png",
+          "changes": "Bottom sheet slid up with token detail. Heart/favorite icon top-right."
+        }
+      ]
+    },
+    {
+      "slug": "add-money",
+      "name": "Add Money",
+      "summary": "Add funds via bank, wallet, or Coinbase",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+          "screenshotPath": "flows/add-money/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Choose the source",
+          "screenId": "add-money",
+          "action": "Tap Add money",
+          "description": "Bottom sheet presenting three funding sources: Bank — account details for bank transfers (INSTANT badge), Wallet — wallet address for crypto transfers (INSTANT badge), Coinbase — transfer from Coinbase (external link arrow).",
+          "screenshotPath": "flows/add-money/screenshots/step-02.png",
+          "changes": "Bottom sheet slid up over home screen with source options."
+        }
+      ]
+    },
+    {
+      "slug": "receive-crypto",
+      "name": "Receive Crypto",
+      "summary": "Get wallet address and QR code for multiple networks",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+          "screenshotPath": "flows/receive-crypto/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Choose the source",
+          "screenId": "add-money",
+          "action": "Tap Add money",
+          "description": "Bottom sheet presenting three funding sources: Bank (INSTANT), Wallet (INSTANT), Coinbase.",
+          "screenshotPath": "flows/receive-crypto/screenshots/step-02.png",
+          "changes": "Bottom sheet slid up over home screen."
+        },
+        {
+          "number": 3,
+          "title": "Receive address",
+          "screenId": "receive",
+          "action": "Tap Wallet",
+          "description": "'One address for all your crypto.' QR code with avatar overlay. Supported networks listed: Base, Arbitrum, Polygon, BNB, Ethereum. Wallet address shown at bottom (0x93d5391c3...2aadf6ce569) with copy button.",
+          "screenshotPath": "flows/receive-crypto/screenshots/step-03.png",
+          "changes": "Bottom sheet expanded to full-screen receive view with QR code."
+        }
+      ]
+    },
+    {
+      "slug": "send-money",
+      "name": "Send Money",
+      "summary": "Send via Tuyo username, wallet address, or bank account",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen (with balance)",
+          "screenId": "home-with-balance",
+          "action": "Entry point",
+          "description": "Home dashboard with $1.00 Total balance. EARN section ($0.00) and CASH section ($1.00 USDC). Recent transactions showing two Receive USDC entries. Bottom tab bar.",
+          "screenshotPath": "flows/send-money/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Add Recipient",
+          "screenId": "send",
+          "action": "Tap Send",
+          "description": "Send screen with 'Add Recipient' header. Three options: Find on Tuyo (BEST badge) — send instantly with @Tuyoname, Wallet Address — wallet address for crypto transfers, Bank Account — account details for bank transfers.",
+          "screenshotPath": "flows/send-money/screenshots/step-02.png",
+          "changes": "Navigation pushed Send screen with recipient type selection."
+        },
+        {
+          "number": 3,
+          "title": "Send to Wallet Address",
+          "screenId": "send-to-wallet",
+          "action": "Tap Wallet Address",
+          "description": "Enter Wallet Address screen with 'To:' input field pre-filled with '0x' placeholder. '0x' badge with prompt 'Send crypto to any 0x address'.",
+          "screenshotPath": "flows/send-money/screenshots/step-03.png",
+          "changes": "Bottom sheet showing wallet address input."
+        },
+        {
+          "number": 4,
+          "title": "Send to Bank Account",
+          "screenId": "send-to-bank",
+          "action": "Tap Bank Account (from step 2)",
+          "description": "Bank Account option triggers identity verification prompt: 'Takes 2 min'. Lists benefits: Get a USD bank account number, Request your Tuyo Card, Your data stays private & secure. Green 'Verify identity' button and 'Not now' option.",
+          "screenshotPath": "flows/send-money/screenshots/step-04.png",
+          "changes": "Bottom sheet with identity verification prompt overlaying the Send screen."
+        }
+      ],
+      "notes": "Bank account transfers require identity verification. Wallet address and Tuyo username transfers do not."
+    },
+    {
+      "slug": "send-to-tuyo",
+      "name": "Send to Tuyo User",
+      "summary": "Send instantly by searching @Tuyoname",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen (with balance)",
+          "screenId": "home-with-balance",
+          "action": "Entry point",
+          "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Recent transactions visible.",
+          "screenshotPath": "flows/send-to-tuyo/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Add Recipient",
+          "screenId": "send",
+          "action": "Tap Send",
+          "description": "Send screen with three recipient options: Find on Tuyo (BEST), Wallet Address, Bank Account.",
+          "screenshotPath": "flows/send-to-tuyo/screenshots/step-02.png",
+          "changes": "Navigation pushed Send screen."
+        },
+        {
+          "number": 3,
+          "title": "Tuyo user found",
+          "screenId": "send-to-tuyo-found",
+          "action": "Tap Find on Tuyo, search 'joe'",
+          "description": "Search input showing 'joe'. Result: @joe with verified checkmark and avatar. User can tap to select as recipient.",
+          "screenshotPath": "flows/send-to-tuyo/screenshots/step-03.png",
+          "changes": "Bottom sheet with search input and matching result."
+        },
+        {
+          "number": 4,
+          "title": "Tuyo user not found",
+          "screenId": "send-to-tuyo-not-found",
+          "action": "Search 'joep'",
+          "description": "Search input showing 'joep'. No results returned — empty state below the search field.",
+          "screenshotPath": "flows/send-to-tuyo/screenshots/step-04.png",
+          "changes": "Search results cleared, no match found."
+        }
+      ],
+      "notes": "Steps 3 and 4 show the found/not-found states of the same search screen."
+    },
+    {
+      "slug": "convert-tokens",
+      "name": "Convert Tokens",
+      "summary": "Swap between tokens on Base network",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen (with balance)",
+          "screenId": "home-with-balance",
+          "action": "Entry point",
+          "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Recent transactions visible.",
+          "screenshotPath": "flows/convert-tokens/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Convert",
+          "screenId": "convert",
+          "action": "Tap Convert",
+          "description": "Convert screen with amount input (0), source token selector showing USDC on Base network (with '1 on Base' indicator and dropdown). Swap arrow below. Search token field for destination. Watchlist: USDC ($1.00), Ethereum ($2,083.08), EURC ($1.15), Bitcoin ($67,543.00). Tokens section: Ethereum, BNB ($614.04), Sky Dollar.",
+          "screenshotPath": "flows/convert-tokens/screenshots/step-02.png",
+          "changes": "Navigation pushed Convert screen with token picker."
+        }
+      ]
+    },
+    {
+      "slug": "view-transactions",
+      "name": "View Transaction History",
+      "summary": "View transaction list and individual transaction details",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen (with balance)",
+          "screenId": "home-with-balance",
+          "action": "Entry point",
+          "description": "Home dashboard with $1.00 Total balance. EARN ($0.00) and CASH ($1.00) sections. Transactions section showing two recent Receive USDC entries ($0.0,990 and $1.00).",
+          "screenshotPath": "flows/view-transactions/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Transaction history",
+          "screenId": "transaction-history",
+          "action": "Tap Transactions section (view all)",
+          "description": "Full Transactions screen with 'TODAY' header. Two entries: Receive USDC from 0xC34l...2b6E ($0.0,990) and Receive USDC from 0xc348...7B6e ($1.00). Each row shows USDC icon, type, source address, and amount.",
+          "screenshotPath": "flows/view-transactions/screenshots/step-02.png",
+          "changes": "Navigation pushed full transaction history screen."
+        },
+        {
+          "number": 3,
+          "title": "Transaction details",
+          "screenId": "transaction-details",
+          "action": "Tap a transaction",
+          "description": "Transaction list with detail bottom sheet. Shows: 'Received' status with green checkmark, timestamp (Tuesday, March 31, 2026 at 5:28 PM), FROM address (0xc348D942...44e27B6e) with avatar, RECEIVED (USDC) amount: 1. Copy and external link buttons in header.",
+          "screenshotPath": "flows/view-transactions/screenshots/step-03.png",
+          "changes": "Bottom sheet slid up with transaction details over the transaction list."
+        }
+      ]
+    },
+    {
+      "slug": "explore-strategies",
+      "name": "Explore Yield Strategies",
+      "summary": "Browse yield strategies by currency with APY, risk, and AUM",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Main dashboard showing Total balance $0.00 with quick actions and bottom tab bar.",
+          "screenshotPath": "flows/explore-strategies/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Strategies Overview",
+          "screenId": "strategies-overview",
+          "action": "Tap Strategies tab (2nd in bottom bar)",
+          "description": "Strategies Overview screen with info button (i) top-right. Four currency strategy cards stacked vertically: USD (Balance: 0, MAX APY: 6.99%, Assets: $54.49M), ETH (Balance: 0, MAX APY: 3.50%, Assets: $12.59M), EUR (Balance: 0, MAX APY: 1.69%, Assets: $6.28M), BTC (Balance: 0, MAX APY: 1.09%, Assets: $7.20M).",
+          "screenshotPath": "flows/explore-strategies/screenshots/step-02.png",
+          "changes": "Tab switched to Strategies. Strategies tab icon highlighted in bottom bar."
+        },
+        {
+          "number": 3,
+          "title": "USD Available Strategies",
+          "screenId": "usd-strategies",
+          "action": "Tap USD strategy card",
+          "description": "USD strategy detail showing 'Available strategies' header with back chevron. Strategies: yoUSD (+4.89% APY, Best Performer, Manager: YO, Assets: $28.45M, Risk: Moderate — 'Depositing $1,000 could make you $48.88/year'), Morpho Moonwell Flagship USDC (+3.88%, Manager: Block A..., Assets: $11.59M, Risk: Low), Fluid USDC (+3.19%, Manager: Fluid, Assets: $9.74M, Risk: Low), plus Morpho Seamless and Aave USDC.",
+          "screenshotPath": "flows/explore-strategies/screenshots/step-03.png",
+          "changes": "Navigation pushed to USD strategies list. Back chevron top-left."
+        }
+      ]
+    },
+    {
+      "slug": "explore-tuyo-card",
+      "name": "Explore Tuyo Card",
+      "summary": "Learn about the Tuyo Visa card — USDC payments and Apple Pay",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+          "screenshotPath": "flows/explore-tuyo-card/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Tuyo Card — USDC payments",
+          "screenId": "card-promo",
+          "action": "Tap Card tab (3rd in bottom bar)",
+          "description": "Tuyo Visa card preview (ending 6321) with USDC logo. 'Pay with USDC, anywhere in the world' — use USDC in your Tuyo account to pay in 40 million merchants worldwide. Green 'Get Tuyo Card for free' CTA. Carousel page indicator (2 pages).",
+          "screenshotPath": "flows/explore-tuyo-card/screenshots/step-02.png",
+          "changes": "Tab switched to Card. Card tab highlighted in bottom bar."
+        },
+        {
+          "number": 3,
+          "title": "Tuyo Card — Apple Pay",
+          "screenId": "card-promo",
+          "action": "Swipe left",
+          "description": "Second carousel page showing iPhone with Tuyo card in Apple Wallet at a payment terminal. 'Spend in-store with Apple Pay' — add Tuyo Card to Apple Wallet and tap phone to pay. Same 'Get Tuyo Card for free' CTA.",
+          "screenshotPath": "flows/explore-tuyo-card/screenshots/step-03.png",
+          "changes": "Carousel advanced to page 2."
+        }
+      ]
+    },
+    {
+      "slug": "explore-tuyos-rewards",
+      "name": "Explore TUYOs Rewards",
+      "summary": "Earn points, invite friends, and view the leaderboard",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "TUYOs dashboard",
+          "screenId": "tuyos-rewards",
+          "action": "Tap Rewards tab (4th in bottom bar)",
+          "description": "TUYOs rewards dashboard. Balance: 0. Four action buttons: Get TUYOs, Invite friends, Leaderboard, Redeem (coming soon). Invite code: 18FTN9 with 'SINCE MARCH 2026' member badge. Rewards Breakdown grid: CARD (0), EARN (0), CONVERT (0), REFERRAL (0).",
+          "screenshotPath": "flows/explore-tuyos-rewards/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Get TUYOs",
+          "screenId": "get-tuyos",
+          "action": "Tap Get TUYOs",
+          "description": "Bottom sheet carousel explaining how to earn TUYOs. Visible card: 'Pay with Tuyo Card — Get 0.50 TUYOs per dollar spent.' Example: Spend $100 → earn 50 TUYOs. Carousel pagination dots (4 pages). Left/right navigation arrows.",
+          "screenshotPath": "flows/explore-tuyos-rewards/screenshots/step-02.png",
+          "changes": "Bottom sheet slid up with Get TUYOs carousel over rewards dashboard."
+        },
+        {
+          "number": 3,
+          "title": "Invite friends",
+          "screenId": "invite-friends",
+          "action": "Tap Invite friends",
+          "description": "Referral screen. Personal invite code: 18FTN9 with copy button. Stats: Direct (0), Second Level (0). Two referral tiers: Direct referrals — get 20% of TUYOs rewarded to your referrals. Second level referrals — get 10% of all TUYOs rewarded to your referrals' referrals. Purple 'Share your invite' button. 'Become an ambassador' link at bottom.",
+          "screenshotPath": "flows/explore-tuyos-rewards/screenshots/step-03.png",
+          "changes": "Full-screen referral view replaced the bottom sheet."
+        },
+        {
+          "number": 4,
+          "title": "Leaderboard",
+          "screenId": "leaderboard",
+          "action": "Tap Leaderboard",
+          "description": "League screen with five tier badges displayed horizontally. Message: 'You're not part of any league yet. Earn TUYOs and climb the leaderboard.' Info button top-right.",
+          "screenshotPath": "flows/explore-tuyos-rewards/screenshots/step-04.png",
+          "changes": "Navigation pushed leaderboard screen. Back chevron top-left."
+        }
+      ],
+      "notes": "Steps 2-4 are each accessed from the TUYOs dashboard (step 1). They are branches, not sequential."
+    },
+    {
+      "slug": "manage-settings",
+      "name": "Manage Account Settings",
+      "summary": "Access handle, verification, backup, privacy, and permissions",
+      "mode": "guided",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home screen",
+          "screenId": "home",
+          "action": "Entry point",
+          "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+          "screenshotPath": "flows/manage-settings/screenshots/step-01.png",
+          "changes": null
+        },
+        {
+          "number": 2,
+          "title": "Settings",
+          "screenId": "settings",
+          "action": "Tap profile avatar (top right)",
+          "description": "Settings screen showing truncated wallet address (0x93d...Ce569) with 'NOT VERIFIED' badge and Receive button. General section: Account Handle (AVAILABLE), Verification, Account Backup (BACKUP NEEDED), Account Privacy, Permissions. Security section: Keys & Security. About section: Get Help.",
+          "screenshotPath": "flows/manage-settings/screenshots/step-02.png",
+          "changes": "Navigation pushed settings screen. Tab bar hidden. Back chevron top-left."
+        },
+        {
+          "number": 3,
+          "title": "Account Handle",
+          "screenId": "account-handle",
+          "action": "Tap Account Handle",
+          "description": "Choose your handle screen with text input showing '@Satoshi'. Green Continue button below. Keyboard visible.",
+          "screenshotPath": "flows/manage-settings/screenshots/step-03.png",
+          "changes": "Navigation pushed handle picker. Input focused with keyboard."
+        },
+        {
+          "number": 4,
+          "title": "Identity Verification",
+          "screenId": "identity-verification",
+          "action": "Tap Verification (from Settings)",
+          "description": "Verify your identity prompt — 'Takes 2 min' badge. Explains verification unlocks Tuyo Card and banking features.",
+          "screenshotPath": "flows/manage-settings/screenshots/step-04.png",
+          "changes": "Navigation pushed verification screen."
+        },
+        {
+          "number": 5,
+          "title": "Backup",
+          "screenId": "backup",
+          "action": "Tap Account Backup (from Settings)",
+          "description": "Backup screen showing iCloud Drive as NOT CONNECTED. Explains Tuyo stores private key via iCloud Keychain, with encrypted secondary backup on iCloud Drive.",
+          "screenshotPath": "flows/manage-settings/screenshots/step-05.png",
+          "changes": "Navigation pushed backup screen."
+        },
+        {
+          "number": 6,
+          "title": "Privacy",
+          "screenId": "privacy",
+          "action": "Tap Account Privacy (from Settings)",
+          "description": "Privacy settings with single toggle: 'Hide Holdings & Earn Balances' (currently off).",
+          "screenshotPath": "flows/manage-settings/screenshots/step-06.png",
+          "changes": "Navigation pushed privacy screen."
+        },
+        {
+          "number": 7,
+          "title": "Permissions",
+          "screenId": "permissions",
+          "action": "Tap Permissions (from Settings)",
+          "description": "Permissions screen with two toggles: Biometrics (off) and Push Notifications (on, green).",
+          "screenshotPath": "flows/manage-settings/screenshots/step-07.png",
+          "changes": "Navigation pushed permissions screen."
+        }
+      ],
+      "notes": "Steps 3-7 are each accessed from the Settings screen (step 2). They are branches, not a sequential flow."
+    }
   ],
   "decisionPoints": [
     {
       "screenId": "welcome",
       "options": [
-        { "label": "Get started", "explored": true, "flowSlug": "new-account-onboarding" },
-        { "label": "Already have a Tuyo account?", "explored": true, "flowSlug": "recover-account" },
-        { "label": "I have a referral code", "explored": false }
+        {
+          "label": "Get started",
+          "explored": true,
+          "flowSlug": "new-account-onboarding"
+        },
+        {
+          "label": "Already have a Tuyo account?",
+          "explored": true,
+          "flowSlug": "recover-account"
+        },
+        {
+          "label": "I have a referral code",
+          "explored": false
+        }
       ]
     },
     {
       "screenId": "home",
       "options": [
-        { "label": "Search", "explored": true, "flowSlug": "browse-tokens" },
-        { "label": "Add money", "explored": true, "flowSlug": "add-money" },
-        { "label": "Send", "explored": true, "flowSlug": "send-money" },
-        { "label": "Convert", "explored": true, "flowSlug": "convert-tokens" },
-        { "label": "Strategies tab", "explored": true, "flowSlug": "explore-strategies" },
-        { "label": "Card tab", "explored": true, "flowSlug": "explore-tuyo-card" },
-        { "label": "Rewards tab", "explored": true, "flowSlug": "explore-tuyos-rewards" },
-        { "label": "Profile/Settings", "explored": true, "flowSlug": "manage-settings" }
+        {
+          "label": "Search",
+          "explored": true,
+          "flowSlug": "browse-tokens"
+        },
+        {
+          "label": "Add money",
+          "explored": true,
+          "flowSlug": "add-money"
+        },
+        {
+          "label": "Send",
+          "explored": true,
+          "flowSlug": "send-money"
+        },
+        {
+          "label": "Convert",
+          "explored": true,
+          "flowSlug": "convert-tokens"
+        },
+        {
+          "label": "Strategies tab",
+          "explored": true,
+          "flowSlug": "explore-strategies"
+        },
+        {
+          "label": "Card tab",
+          "explored": true,
+          "flowSlug": "explore-tuyo-card"
+        },
+        {
+          "label": "Rewards tab",
+          "explored": true,
+          "flowSlug": "explore-tuyos-rewards"
+        },
+        {
+          "label": "Profile/Settings",
+          "explored": true,
+          "flowSlug": "manage-settings"
+        }
       ]
     },
     {
       "screenId": "send",
       "options": [
-        { "label": "Find on Tuyo", "explored": true, "flowSlug": "send-to-tuyo" },
-        { "label": "Wallet Address", "explored": true, "flowSlug": "send-money" },
-        { "label": "Bank Account", "explored": true, "flowSlug": "send-money" }
+        {
+          "label": "Find on Tuyo",
+          "explored": true,
+          "flowSlug": "send-to-tuyo"
+        },
+        {
+          "label": "Wallet Address",
+          "explored": true,
+          "flowSlug": "send-money"
+        },
+        {
+          "label": "Bank Account",
+          "explored": true,
+          "flowSlug": "send-money"
+        }
       ]
     },
     {
       "screenId": "add-money",
       "options": [
-        { "label": "Bank", "explored": false },
-        { "label": "Wallet", "explored": true, "flowSlug": "receive-crypto" },
-        { "label": "Coinbase", "explored": false }
+        {
+          "label": "Bank",
+          "explored": false
+        },
+        {
+          "label": "Wallet",
+          "explored": true,
+          "flowSlug": "receive-crypto"
+        },
+        {
+          "label": "Coinbase",
+          "explored": false
+        }
       ]
     },
     {
       "screenId": "settings",
       "options": [
-        { "label": "Account Handle", "explored": true },
-        { "label": "Verification", "explored": true },
-        { "label": "Account Backup", "explored": true },
-        { "label": "Account Privacy", "explored": true },
-        { "label": "Permissions", "explored": true },
-        { "label": "Keys & Security", "explored": false }
+        {
+          "label": "Account Handle",
+          "explored": true
+        },
+        {
+          "label": "Verification",
+          "explored": true
+        },
+        {
+          "label": "Account Backup",
+          "explored": true
+        },
+        {
+          "label": "Account Privacy",
+          "explored": true
+        },
+        {
+          "label": "Permissions",
+          "explored": true
+        },
+        {
+          "label": "Keys & Security",
+          "explored": false
+        }
       ]
     },
     {
       "screenId": "tuyos-rewards",
       "options": [
-        { "label": "Get TUYOs", "explored": true },
-        { "label": "Invite friends", "explored": true },
-        { "label": "Leaderboard", "explored": true },
-        { "label": "Redeem", "explored": false, "note": "Coming soon" }
+        {
+          "label": "Get TUYOs",
+          "explored": true
+        },
+        {
+          "label": "Invite friends",
+          "explored": true
+        },
+        {
+          "label": "Leaderboard",
+          "explored": true
+        },
+        {
+          "label": "Redeem",
+          "explored": false,
+          "note": "Coming soon"
+        }
       ]
     }
-  ],
-  "sitemapPath": "navigation.json"
+  ]
 }

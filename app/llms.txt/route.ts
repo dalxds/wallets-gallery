@@ -1,6 +1,8 @@
 import fs from "fs"
 import path from "path"
 
+export const dynamic = "force-static"
+
 export async function GET() {
   const indexPath = path.join(
     process.cwd(),
@@ -10,8 +12,8 @@ export async function GET() {
 
   const appLines = index.apps
     .map(
-      (app: { name: string; slug: string; platform: string }) =>
-        `- ${app.name} (${app.platform.toUpperCase()}) — /api/apps/${app.slug}/app.md`
+      (app: { name: string; slug: string; platform: string; latest: string }) =>
+        `- ${app.name} (${app.platform.toUpperCase()}) — /captures/${app.slug}/${app.latest}/app.json`
     )
     .join("\n")
 
@@ -22,11 +24,13 @@ export async function GET() {
 
 ${appLines}
 
-## API
+## Data
 
-- GET /api/apps/{slug}/app.md — Human/LLM-readable capture summary
-- GET /api/apps/{slug}/app.md?date=YYYY-MM-DD — Specific capture date
-- GET /captures/index.json — Machine-readable app registry
+Each app.json contains the full capture: app metadata, screens, flows with inline steps, and decision points.
+All screenshot paths are relative to the capture directory.
+
+- GET /captures/index.json — App registry with slugs and capture dates
+- GET /captures/{slug}/{date}/app.json — Full app capture data
 `
 
   return new Response(body, {

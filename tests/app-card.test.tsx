@@ -39,12 +39,10 @@ const mockCapture: AppCapture = {
       slug: "send-crypto",
       name: "Send Crypto",
       summary: "Send crypto flow",
-      stepsCount: 3,
-      path: "flows/send-crypto/flow.json",
+      steps: [],
     },
   ],
   decisionPoints: [],
-  sitemapPath: "sitemap.png",
 }
 
 describe("AppCard", () => {

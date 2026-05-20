@@ -1409,6 +1409,60 @@
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
+    "label": "welcome",
+    "description": "Tuyo splash — Spend. Earn. Trade. Bank. Get started or recover account",
+    "screenId": "welcome",
+    "href": "/apps/tuyo/screens/welcome"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "create-key-interactive",
+    "description": "Key creation — hold to generate cryptographic key",
+    "screenId": "create-key-interactive",
+    "href": "/apps/tuyo/screens/create-key-interactive"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "create-key-ready",
+    "description": "Key created — tap inside when ready",
+    "screenId": "create-key-ready",
+    "href": "/apps/tuyo/screens/create-key-ready"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "onboarding-notifications",
+    "description": "Enable notifications opt-in during onboarding",
+    "screenId": "onboarding-notifications",
+    "href": "/apps/tuyo/screens/onboarding-notifications"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "onboarding-handle",
+    "description": "Choose your handle during onboarding",
+    "screenId": "onboarding-handle",
+    "href": "/apps/tuyo/screens/onboarding-handle"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "recover-account",
+    "description": "Recover account — import mnemonic or continue without",
+    "screenId": "recover-account",
+    "href": "/apps/tuyo/screens/recover-account"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
     "label": "home",
     "description": "Main dashboard with $0.00 balance, quick actions, yield promo, bottom tab bar",
     "screenId": "home",
@@ -1440,60 +1494,6 @@
     "description": "Token detail sheet with price chart, Buy/Sell/Receive/Send actions",
     "screenId": "token-detail",
     "href": "/apps/tuyo/screens/token-detail"
-  },
-  {
-    "type": "screen",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "settings",
-    "description": "Account settings — handle, verification, backup, privacy, permissions, security",
-    "screenId": "settings",
-    "href": "/apps/tuyo/screens/settings"
-  },
-  {
-    "type": "screen",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "account-handle",
-    "description": "Choose your @handle input",
-    "screenId": "account-handle",
-    "href": "/apps/tuyo/screens/account-handle"
-  },
-  {
-    "type": "screen",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "identity-verification",
-    "description": "Identity verification prompt — takes 2 min, unlocks Card and banking",
-    "screenId": "identity-verification",
-    "href": "/apps/tuyo/screens/identity-verification"
-  },
-  {
-    "type": "screen",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "backup",
-    "description": "iCloud Drive backup status and explanation",
-    "screenId": "backup",
-    "href": "/apps/tuyo/screens/backup"
-  },
-  {
-    "type": "screen",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "privacy",
-    "description": "Privacy toggle — hide holdings and earn balances",
-    "screenId": "privacy",
-    "href": "/apps/tuyo/screens/privacy"
-  },
-  {
-    "type": "screen",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "permissions",
-    "description": "Biometrics and Push Notifications toggles",
-    "screenId": "permissions",
-    "href": "/apps/tuyo/screens/permissions"
   },
   {
     "type": "screen",
@@ -1652,55 +1652,55 @@
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
-    "label": "welcome",
-    "description": "Tuyo splash — Spend. Earn. Trade. Bank. Get started or recover account",
-    "screenId": "welcome",
-    "href": "/apps/tuyo/screens/welcome"
+    "label": "settings",
+    "description": "Account settings — handle, verification, backup, privacy, permissions, security",
+    "screenId": "settings",
+    "href": "/apps/tuyo/screens/settings"
   },
   {
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
-    "label": "create-key-interactive",
-    "description": "Key creation — hold to generate cryptographic key",
-    "screenId": "create-key-interactive",
-    "href": "/apps/tuyo/screens/create-key-interactive"
+    "label": "account-handle",
+    "description": "Choose your @handle input",
+    "screenId": "account-handle",
+    "href": "/apps/tuyo/screens/account-handle"
   },
   {
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
-    "label": "create-key-ready",
-    "description": "Key created — tap inside when ready",
-    "screenId": "create-key-ready",
-    "href": "/apps/tuyo/screens/create-key-ready"
+    "label": "identity-verification",
+    "description": "Identity verification prompt — takes 2 min, unlocks Card and banking",
+    "screenId": "identity-verification",
+    "href": "/apps/tuyo/screens/identity-verification"
   },
   {
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
-    "label": "onboarding-notifications",
-    "description": "Enable notifications opt-in during onboarding",
-    "screenId": "onboarding-notifications",
-    "href": "/apps/tuyo/screens/onboarding-notifications"
+    "label": "backup",
+    "description": "iCloud Drive backup status and explanation",
+    "screenId": "backup",
+    "href": "/apps/tuyo/screens/backup"
   },
   {
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
-    "label": "onboarding-handle",
-    "description": "Choose your handle during onboarding",
-    "screenId": "onboarding-handle",
-    "href": "/apps/tuyo/screens/onboarding-handle"
+    "label": "privacy",
+    "description": "Privacy toggle — hide holdings and earn balances",
+    "screenId": "privacy",
+    "href": "/apps/tuyo/screens/privacy"
   },
   {
     "type": "screen",
     "appSlug": "tuyo",
     "appName": "Tuyo",
-    "label": "recover-account",
-    "description": "Recover account — import mnemonic or continue without",
-    "screenId": "recover-account",
-    "href": "/apps/tuyo/screens/recover-account"
+    "label": "permissions",
+    "description": "Biometrics and Push Notifications toggles",
+    "screenId": "permissions",
+    "href": "/apps/tuyo/screens/permissions"
   },
   {
     "type": "flow",
@@ -1849,134 +1849,6 @@
     "flowName": "Browse Tokens",
     "screenId": "token-detail",
     "href": "/apps/tuyo/flows/browse-tokens"
-  },
-  {
-    "type": "flow",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Explore Yield Strategies",
-    "description": "Browse yield strategies by currency with APY, risk, and AUM",
-    "flowSlug": "explore-strategies",
-    "href": "/apps/tuyo/flows/explore-strategies"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Home screen",
-    "description": "Main dashboard showing Total balance $0.00 with quick actions and bottom tab bar.",
-    "flowSlug": "explore-strategies",
-    "flowName": "Explore Yield Strategies",
-    "screenId": "home",
-    "href": "/apps/tuyo/flows/explore-strategies"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Strategies Overview",
-    "description": "Strategies Overview screen with info button (i) top-right. Four currency strategy cards stacked vertically: USD (Balance: 0, MAX APY: 6.99%, Assets: $54.49M), ETH (Balance: 0, MAX APY: 3.50%, Assets: $12.59M), EUR (Balance: 0, MAX APY: 1.69%, Assets: $6.28M), BTC (Balance: 0, MAX APY: 1.09%, Assets: $7.20M).",
-    "flowSlug": "explore-strategies",
-    "flowName": "Explore Yield Strategies",
-    "screenId": "strategies-overview",
-    "href": "/apps/tuyo/flows/explore-strategies"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "USD Available Strategies",
-    "description": "USD strategy detail showing 'Available strategies' header with back chevron. Strategies: yoUSD (+4.89% APY, Best Performer, Manager: YO, Assets: $28.45M, Risk: Moderate — 'Depositing $1,000 could make you $48.88/year'), Morpho Moonwell Flagship USDC (+3.88%, Manager: Block A..., Assets: $11.59M, Risk: Low), Fluid USDC (+3.19%, Manager: Fluid, Assets: $9.74M, Risk: Low), plus Morpho Seamless and Aave USDC.",
-    "flowSlug": "explore-strategies",
-    "flowName": "Explore Yield Strategies",
-    "screenId": "usd-strategies",
-    "href": "/apps/tuyo/flows/explore-strategies"
-  },
-  {
-    "type": "flow",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Manage Account Settings",
-    "description": "Access handle, verification, backup, privacy, and permissions",
-    "flowSlug": "manage-settings",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Home screen",
-    "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "home",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Settings",
-    "description": "Settings screen showing truncated wallet address (0x93d...Ce569) with 'NOT VERIFIED' badge and Receive button. General section: Account Handle (AVAILABLE), Verification, Account Backup (BACKUP NEEDED), Account Privacy, Permissions. Security section: Keys & Security. About section: Get Help.",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "settings",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Account Handle",
-    "description": "Choose your handle screen with text input showing '@Satoshi'. Green Continue button below. Keyboard visible.",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "account-handle",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Identity Verification",
-    "description": "Verify your identity prompt — 'Takes 2 min' badge. Explains verification unlocks Tuyo Card and banking features.",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "identity-verification",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Backup",
-    "description": "Backup screen showing iCloud Drive as NOT CONNECTED. Explains Tuyo stores private key via iCloud Keychain, with encrypted secondary backup on iCloud Drive.",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "backup",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Privacy",
-    "description": "Privacy settings with single toggle: 'Hide Holdings & Earn Balances' (currently off).",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "privacy",
-    "href": "/apps/tuyo/flows/manage-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "tuyo",
-    "appName": "Tuyo",
-    "label": "Permissions",
-    "description": "Permissions screen with two toggles: Biometrics (off) and Push Notifications (on, green).",
-    "flowSlug": "manage-settings",
-    "flowName": "Manage Account Settings",
-    "screenId": "permissions",
-    "href": "/apps/tuyo/flows/manage-settings"
   },
   {
     "type": "flow",
@@ -2234,6 +2106,48 @@
     "type": "flow",
     "appSlug": "tuyo",
     "appName": "Tuyo",
+    "label": "Explore Yield Strategies",
+    "description": "Browse yield strategies by currency with APY, risk, and AUM",
+    "flowSlug": "explore-strategies",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00 with quick actions and bottom tab bar.",
+    "flowSlug": "explore-strategies",
+    "flowName": "Explore Yield Strategies",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Strategies Overview",
+    "description": "Strategies Overview screen with info button (i) top-right. Four currency strategy cards stacked vertically: USD (Balance: 0, MAX APY: 6.99%, Assets: $54.49M), ETH (Balance: 0, MAX APY: 3.50%, Assets: $12.59M), EUR (Balance: 0, MAX APY: 1.69%, Assets: $6.28M), BTC (Balance: 0, MAX APY: 1.09%, Assets: $7.20M).",
+    "flowSlug": "explore-strategies",
+    "flowName": "Explore Yield Strategies",
+    "screenId": "strategies-overview",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "USD Available Strategies",
+    "description": "USD strategy detail showing 'Available strategies' header with back chevron. Strategies: yoUSD (+4.89% APY, Best Performer, Manager: YO, Assets: $28.45M, Risk: Moderate — 'Depositing $1,000 could make you $48.88/year'), Morpho Moonwell Flagship USDC (+3.88%, Manager: Block A..., Assets: $11.59M, Risk: Low), Fluid USDC (+3.19%, Manager: Fluid, Assets: $9.74M, Risk: Low), plus Morpho Seamless and Aave USDC.",
+    "flowSlug": "explore-strategies",
+    "flowName": "Explore Yield Strategies",
+    "screenId": "usd-strategies",
+    "href": "/apps/tuyo/flows/explore-strategies"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
     "label": "Explore Tuyo Card",
     "description": "Learn about the Tuyo Visa card — USDC payments and Apple Pay",
     "flowSlug": "explore-tuyo-card",
@@ -2324,5 +2238,91 @@
     "flowName": "Explore TUYOs Rewards",
     "screenId": "leaderboard",
     "href": "/apps/tuyo/flows/explore-tuyos-rewards"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Manage Account Settings",
+    "description": "Access handle, verification, backup, privacy, and permissions",
+    "flowSlug": "manage-settings",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home screen",
+    "description": "Main dashboard showing Total balance $0.00, quick action buttons (Add money, Send, Convert), yield promo card, and bottom tab bar.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "home",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "description": "Settings screen showing truncated wallet address (0x93d...Ce569) with 'NOT VERIFIED' badge and Receive button. General section: Account Handle (AVAILABLE), Verification, Account Backup (BACKUP NEEDED), Account Privacy, Permissions. Security section: Keys & Security. About section: Get Help.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "settings",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Account Handle",
+    "description": "Choose your handle screen with text input showing '@Satoshi'. Green Continue button below. Keyboard visible.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "account-handle",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Identity Verification",
+    "description": "Verify your identity prompt — 'Takes 2 min' badge. Explains verification unlocks Tuyo Card and banking features.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "identity-verification",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Backup",
+    "description": "Backup screen showing iCloud Drive as NOT CONNECTED. Explains Tuyo stores private key via iCloud Keychain, with encrypted secondary backup on iCloud Drive.",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "backup",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Privacy",
+    "description": "Privacy settings with single toggle: 'Hide Holdings & Earn Balances' (currently off).",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "privacy",
+    "href": "/apps/tuyo/flows/manage-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Permissions",
+    "description": "Permissions screen with two toggles: Biometrics (off) and Push Notifications (on, green).",
+    "flowSlug": "manage-settings",
+    "flowName": "Manage Account Settings",
+    "screenId": "permissions",
+    "href": "/apps/tuyo/flows/manage-settings"
   }
 ]

@@ -2,8 +2,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest"
 import {
   getAppsIndex,
   fetchAppCapture,
-  fetchFlow,
-  fetchNavigation,
   fetchSearchIndex,
 } from "@/lib/data"
 
@@ -41,38 +39,6 @@ describe("fetchAppCapture", () => {
       "/captures/phantom/2026-04-01/app.json"
     )
     expect(result).toEqual(capture)
-  })
-})
-
-describe("fetchFlow", () => {
-  it("fetches flow detail from the correct path", async () => {
-    const flow = { slug: "send-crypto", steps: [] }
-    mockFetch.mockResolvedValue(mockJsonResponse(flow))
-
-    const result = await fetchFlow(
-      "phantom",
-      "2026-04-01",
-      "flows/send-crypto/flow.json"
-    )
-
-    expect(mockFetch).toHaveBeenCalledWith(
-      "/captures/phantom/2026-04-01/flows/send-crypto/flow.json"
-    )
-    expect(result).toEqual(flow)
-  })
-})
-
-describe("fetchNavigation", () => {
-  it("fetches navigation.json for the given app and date", async () => {
-    const nav = { screens: [], transitions: [] }
-    mockFetch.mockResolvedValue(mockJsonResponse(nav))
-
-    const result = await fetchNavigation("phantom", "2026-04-01")
-
-    expect(mockFetch).toHaveBeenCalledWith(
-      "/captures/phantom/2026-04-01/navigation.json"
-    )
-    expect(result).toEqual(nav)
   })
 })
 
