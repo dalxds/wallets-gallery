@@ -1,0 +1,5 @@
+context platform=android device="pixel test" kind=emulator theme=unknown
+open "org.toshi" --relaunch
+click "id=\"messaging-navigation-icon\" || role=\"button\" label=\"Open messages\" || label=\"Open messages\""
+back
+close

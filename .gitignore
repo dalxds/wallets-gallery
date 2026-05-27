@@ -35,6 +35,7 @@ pnpm-debug.log*
 credentials.md
 **/credentials.md
 public/captures/**/_staging/
+*.bak
 
 # typescript
 *.tsbuildinfo

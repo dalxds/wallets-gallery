@@ -8,14 +8,12 @@ import { useCallback, useEffect, useRef, useState } from "react"
 interface FlowsViewProps {
   app: AppCapture
   appSlug: string
-  date: string
   activeFlowSlug?: string
 }
 
 export function FlowsView({
   app,
   appSlug,
-  date,
   activeFlowSlug,
 }: FlowsViewProps) {
   const [currentSlug, setCurrentSlug] = useState(activeFlowSlug)
@@ -81,7 +79,6 @@ export function FlowsView({
                   <FlowRow
                     flow={flow}
                     appSlug={appSlug}
-                    date={date}
                   />
                 </div>
                 {children.map((child) => (
@@ -96,7 +93,6 @@ export function FlowsView({
                     <FlowRow
                       flow={child}
                       appSlug={appSlug}
-                      date={date}
                     />
                   </div>
                 ))}

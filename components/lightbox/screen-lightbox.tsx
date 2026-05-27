@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { captureUrl } from "@/lib/images"
-import { cn, formatScreenId } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Copy, Check, Link2, Download, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -18,14 +18,12 @@ interface ScreenLightboxProps {
   screens: ScreenEntry[]
   activeScreenId: string
   appSlug: string
-  date: string
 }
 
 export function ScreenLightbox({
   screens,
   activeScreenId,
   appSlug,
-  date,
 }: ScreenLightboxProps) {
   const [, setScreen] = useQueryState("screen")
   const [currentIndex, setCurrentIndex] = useState(() =>
@@ -37,7 +35,7 @@ export function ScreenLightbox({
 
   const current = screens[currentIndex]
   const currentSrc = current
-    ? captureUrl(appSlug, date, current.screenshotPath)
+    ? captureUrl(appSlug, current.screenshotPath)
     : ""
 
   const scrollThumbIntoView = useCallback((index: number) => {
@@ -116,7 +114,7 @@ export function ScreenLightbox({
         showCloseButton={false}
       >
         <DialogTitle className="sr-only">
-          {current?.description ?? "Screen"}
+          {current?.title ?? "Screen"}
         </DialogTitle>
         <DialogDescription className="sr-only">
           Screen lightbox viewer
@@ -126,7 +124,7 @@ export function ScreenLightbox({
         <div className="flex items-center justify-between border-b px-4 py-2">
           <div className="min-w-0 flex-1">
             <p className="font-medium">
-              {current ? formatScreenId(current.id) : ""}
+              {current?.title ?? ""}
             </p>
             <p className="text-sm text-muted-foreground">
               {current?.description}
@@ -192,7 +190,7 @@ export function ScreenLightbox({
                 )}
               >
                 <img
-                  src={captureUrl(appSlug, date, screen.screenshotPath)}
+                  src={captureUrl(appSlug, screen.screenshotPath)}
                   alt={screen.id}
                   className="h-auto w-full"
                   loading="lazy"

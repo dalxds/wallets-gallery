@@ -1,0 +1,7 @@
+context platform=android device="pixel test" kind=emulator theme=unknown
+open "org.toshi" --relaunch
+open "org.toshi" --relaunch
+back
+close
+click "id=\"trade-button\" || role=\"button\" label=\"Trade\" || label=\"Trade\""
+close

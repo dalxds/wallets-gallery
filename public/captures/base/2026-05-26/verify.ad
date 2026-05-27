@@ -1,0 +1,6 @@
+context platform=android device="pixel test" kind=emulator theme=unknown
+open "org.toshi" --relaunch
+click "id=\"SearchTabButton\" || role=\"button\" label=\"Search\" || label=\"Search\""
+click "id=\"custom-tile-verify-tile\" || role=\"button\" label=\"Verify\" || label=\"Verify\""
+click "id=\"bottom-browser-bar-close\" || role=\"button\" label=\"Close tab\" || label=\"Close tab\""
+close

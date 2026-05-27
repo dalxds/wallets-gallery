@@ -46,8 +46,6 @@ export default function AppDetailPage() {
     load()
   }, [slug, dateParam])
 
-  const date = dateParam ?? appIndex?.latest ?? ""
-
   if (loading) {
     return (
       <AppShell>
@@ -84,9 +82,8 @@ export default function AppDetailPage() {
   return (
     <AppShell>
       <div className="space-y-6">
-        <AppHeader app={app} appIndex={appIndex} currentDate={date} />
+        <AppHeader app={app} appIndex={appIndex} currentDate={dateParam ?? appIndex.latest} />
 
-        {/* Client-side tabs — no navigation, no flicker */}
         <div className="flex gap-4 border-b">
           <button
             onClick={() => {
@@ -123,13 +120,11 @@ export default function AppDetailPage() {
           <ScreensGrid
             screens={app.screens}
             appSlug={slug}
-            date={date}
           />
         ) : (
           <FlowsView
             app={app}
             appSlug={slug}
-            date={date}
             activeFlowSlug={activeFlowSlug ?? undefined}
           />
         )}
@@ -140,7 +135,6 @@ export default function AppDetailPage() {
           screens={app.screens}
           activeScreenId={activeScreenId}
           appSlug={slug}
-          date={date}
         />
       )}
     </AppShell>

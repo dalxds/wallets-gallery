@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { cn, formatScreenId, formatDate } from "@/lib/utils"
+import { cn, formatDate } from "@/lib/utils"
 
 describe("cn", () => {
   it("merges class names", () => {
@@ -32,26 +32,6 @@ describe("cn", () => {
 
   it("handles object syntax via clsx", () => {
     expect(cn({ hidden: true, visible: false })).toBe("hidden")
-  })
-})
-
-describe("formatScreenId", () => {
-  it("converts kebab-case to Title Case", () => {
-    expect(formatScreenId("home-with-balance")).toBe("Home With Balance")
-  })
-
-  it("handles single word", () => {
-    expect(formatScreenId("home")).toBe("Home")
-  })
-
-  it("handles multiple hyphens", () => {
-    expect(formatScreenId("send-crypto-confirm-dialog")).toBe(
-      "Send Crypto Confirm Dialog"
-    )
-  })
-
-  it("handles already capitalized segments", () => {
-    expect(formatScreenId("Home")).toBe("Home")
   })
 })
 

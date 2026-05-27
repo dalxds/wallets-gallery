@@ -2,66 +2,68 @@ import fs from "fs"
 import path from "path"
 
 const capturesDir = path.join(process.cwd(), "public/captures")
-const indexPath = path.join(capturesDir, "index.json")
 const outputPath = path.join(capturesDir, "search-index.json")
 
-const index = JSON.parse(fs.readFileSync(indexPath, "utf-8"))
 const entries = []
 
-for (const app of index.apps) {
-  const date = app.latest
-  const appDir = path.join(capturesDir, app.slug, date)
-  const appJson = JSON.parse(
-    fs.readFileSync(path.join(appDir, "app.json"), "utf-8")
-  )
+const dirs = fs.readdirSync(capturesDir, { withFileTypes: true })
+for (const dir of dirs) {
+  if (!dir.isDirectory()) continue
+  const manifestPath = path.join(capturesDir, dir.name, "app.json")
+  if (!fs.existsSync(manifestPath)) continue
 
-  // App entry
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"))
+  const date = manifest.latestCapture
+  const capturePath = path.join(capturesDir, dir.name, date, "capture.json")
+  if (!fs.existsSync(capturePath)) continue
+
+  const capture = JSON.parse(fs.readFileSync(capturePath, "utf-8"))
+  const appSlug = manifest.app.slug
+  const appName = manifest.app.name
+
   entries.push({
     type: "app",
-    appSlug: app.slug,
-    appName: appJson.app.name,
-    label: appJson.app.name,
-    description: `${appJson.app.platform.toUpperCase()} app — ${appJson.screens.length} screens, ${appJson.flows.length} flows`,
-    href: `/apps/${app.slug}`,
+    appSlug,
+    appName,
+    label: appName,
+    description: `${manifest.app.platform.toUpperCase()} app — ${capture.screens.length} screens, ${capture.flows.length} flows`,
+    href: `/apps/${appSlug}`,
   })
 
-  // Screen entries
-  for (const screen of appJson.screens) {
+  for (const screen of capture.screens) {
     entries.push({
       type: "screen",
-      appSlug: app.slug,
-      appName: appJson.app.name,
-      label: screen.id,
+      appSlug,
+      appName,
+      label: screen.title || screen.id,
       description: screen.description,
       screenId: screen.id,
-      href: `/apps/${app.slug}/screens/${screen.id}`,
+      href: `/apps/${appSlug}/screens/${screen.id}`,
     })
   }
 
-  // Flow entries
-  for (const flow of appJson.flows) {
+  for (const flow of capture.flows) {
     entries.push({
       type: "flow",
-      appSlug: app.slug,
-      appName: appJson.app.name,
+      appSlug,
+      appName,
       label: flow.name,
       description: flow.summary,
       flowSlug: flow.slug,
-      href: `/apps/${app.slug}/flows/${flow.slug}`,
+      href: `/apps/${appSlug}/flows/${flow.slug}`,
     })
 
-    // Flow step entries
     for (const step of flow.steps) {
       entries.push({
         type: "step",
-        appSlug: app.slug,
-        appName: appJson.app.name,
+        appSlug,
+        appName,
         label: step.title,
         description: step.description,
         flowSlug: flow.slug,
         flowName: flow.name,
         screenId: step.screenId,
-        href: `/apps/${app.slug}/flows/${flow.slug}`,
+        href: `/apps/${appSlug}/flows/${flow.slug}`,
       })
     }
   }

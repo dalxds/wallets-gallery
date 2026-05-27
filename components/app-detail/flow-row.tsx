@@ -13,10 +13,9 @@ import { ImageActions } from "@/components/shared/image-actions"
 interface FlowRowProps {
   flow: FlowEntry
   appSlug: string
-  date: string
 }
 
-export function FlowRow({ flow, appSlug, date }: FlowRowProps) {
+export function FlowRow({ flow, appSlug }: FlowRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
@@ -74,7 +73,6 @@ export function FlowRow({ flow, appSlug, date }: FlowRowProps) {
     setTimeout(() => setLinkCopied(false), 1500)
   }
 
-  /** For step 1 "Entry point", use the step description instead */
   function getStepLabel(step: (typeof flow.steps)[0]): string {
     if (
       step.action.toLowerCase() === "entry point" ||
@@ -142,19 +140,11 @@ export function FlowRow({ flow, appSlug, date }: FlowRowProps) {
             >
               <div className="group/card relative overflow-hidden rounded-lg border transition-shadow group-hover/step:shadow-md">
                 <ImageActions
-                  src={captureUrl(
-                    appSlug,
-                    date,
-                    step.screenshotPath
-                  )}
+                  src={captureUrl(appSlug, step.screenshotPath)}
                   screenUrl={`${typeof window !== "undefined" ? window.location.origin : ""}/apps/${appSlug}/flows/${flow.slug}`}
                 />
                 <LazyImage
-                  src={captureUrl(
-                    appSlug,
-                    date,
-                    step.screenshotPath
-                  )}
+                  src={captureUrl(appSlug, step.screenshotPath)}
                   alt={step.title}
                 />
               </div>
@@ -185,7 +175,6 @@ export function FlowRow({ flow, appSlug, date }: FlowRowProps) {
         <FlowLightbox
           flow={flow}
           appSlug={appSlug}
-          date={date}
           initialIndex={lightboxIndex}
           onClose={closeLightbox}
         />
@@ -193,4 +182,3 @@ export function FlowRow({ flow, appSlug, date }: FlowRowProps) {
     </div>
   )
 }
-

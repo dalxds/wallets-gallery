@@ -1,5 +1,6 @@
 import type {
   AppCapture,
+  AppManifest,
   AppsRegistry,
   SearchEntry,
 } from "./types"
@@ -15,8 +16,13 @@ export async function fetchAppCapture(
   slug: string,
   date: string
 ): Promise<AppCapture> {
-  const res = await fetch(`${BASE}/${slug}/${date}/app.json`)
-  return res.json()
+  const [manifestRes, captureRes] = await Promise.all([
+    fetch(`${BASE}/${slug}/app.json`),
+    fetch(`${BASE}/${slug}/${date}/capture.json`),
+  ])
+  const manifest: AppManifest = await manifestRes.json()
+  const capture = await captureRes.json()
+  return { ...capture, app: manifest.app }
 }
 
 export async function fetchSearchIndex(): Promise<SearchEntry[]> {

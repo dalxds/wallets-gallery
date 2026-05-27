@@ -11,7 +11,8 @@
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "build-index": "node scripts/build-search-index.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

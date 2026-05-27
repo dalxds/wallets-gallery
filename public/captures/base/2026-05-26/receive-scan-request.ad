@@ -1,0 +1,8 @@
+context platform=android device="pixel test" kind=emulator theme=unknown
+open "org.toshi" --relaunch
+click "id=\"receive-button\" || role=\"button\" label=\"Receive\" || label=\"Receive\""
+click "id=\"swipeable-tab-item-scan\" || role=\"view\" label=\"Scan\" || label=\"Scan\""
+click "id=\"swipeable-tab-item-request\" || role=\"view\" label=\"Request\" || label=\"Request\""
+click "id=\"receive-v2-entry-recipient-header-fallback\" || role=\"button\" label=\"From, Add Recipient\" || label=\"From, Add Recipient\""
+click "id=\"tray-nav-bar-close-button\" || role=\"button\" label=\"Close\" || label=\"Close\""
+close

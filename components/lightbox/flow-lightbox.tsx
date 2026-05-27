@@ -24,7 +24,6 @@ import { Button } from "@/components/ui/button"
 interface FlowLightboxProps {
   flow: FlowEntry
   appSlug: string
-  date: string
   initialIndex?: number
   onClose: () => void
 }
@@ -42,7 +41,6 @@ function getStepLabel(step: FlowStep): string {
 export function FlowLightbox({
   flow,
   appSlug,
-  date,
   initialIndex = 0,
   onClose,
 }: FlowLightboxProps) {
@@ -70,12 +68,9 @@ export function FlowLightbox({
     updateScrollState()
   }, [initialIndex, updateScrollState])
 
-  // Position scroll then reveal — hide for 1 frame to avoid flicker
   useEffect(() => {
-    // Frame 1: layout is computed, set scroll position
     const raf1 = requestAnimationFrame(() => {
       scrollToIndex()
-      // Frame 2: scroll position applied, now reveal
       requestAnimationFrame(() => {
         setReady(true)
       })
@@ -83,7 +78,6 @@ export function FlowLightbox({
     return () => cancelAnimationFrame(raf1)
   }, [scrollToIndex])
 
-  // Keep arrows updated when scroll container resizes
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
@@ -120,7 +114,7 @@ export function FlowLightbox({
   }, [])
 
   function stepSrc(step: FlowStep) {
-    return captureUrl(appSlug, date, step.screenshotPath)
+    return captureUrl(appSlug, step.screenshotPath)
   }
 
   async function copyFlowLink() {
@@ -169,7 +163,7 @@ export function FlowLightbox({
           </div>
         </div>
 
-        {/* Flow strip — all steps side-by-side equally */}
+        {/* Flow strip */}
         <div className="relative flex flex-1 items-center overflow-hidden bg-muted/30">
           <button
             className={cn(

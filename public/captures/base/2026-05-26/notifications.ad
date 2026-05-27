@@ -1,0 +1,4 @@
+context platform=android device="pixel test" kind=emulator theme=unknown
+open "org.toshi" --relaunch
+back
+close

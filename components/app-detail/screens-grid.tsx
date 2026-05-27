@@ -3,23 +3,21 @@
 import type { ScreenEntry } from "@/lib/types"
 import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
-import { formatScreenId } from "@/lib/utils"
 import { ImageActions } from "@/components/shared/image-actions"
 import { useQueryState } from "nuqs"
 
 interface ScreensGridProps {
   screens: ScreenEntry[]
   appSlug: string
-  date: string
 }
 
-export function ScreensGrid({ screens, appSlug, date }: ScreensGridProps) {
+export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
   const [, setScreen] = useQueryState("screen")
 
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {screens.map((screen) => {
-        const src = captureUrl(appSlug, date, screen.screenshotPath)
+        const src = captureUrl(appSlug, screen.screenshotPath)
         const screenUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/apps/${appSlug}/screens/${screen.id}`
         return (
           <div
@@ -40,7 +38,7 @@ export function ScreensGrid({ screens, appSlug, date }: ScreensGridProps) {
               <LazyImage src={src} alt={screen.description} />
             </div>
             <p className="truncate text-xs font-medium">
-              {formatScreenId(screen.id)}
+              {screen.title}
             </p>
           </div>
         )

@@ -2,21 +2,19 @@ import { describe, it, expect } from "vitest"
 import { captureUrl } from "@/lib/images"
 
 describe("captureUrl", () => {
-  it("builds correct URL from slug, date, and path", () => {
-    expect(captureUrl("phantom", "2026-04-01", "screenshots/home.png")).toBe(
-      "/captures/phantom/2026-04-01/screenshots/home.png"
+  it("builds correct URL from slug and relative path", () => {
+    expect(captureUrl("phantom", "assets/abc123.png")).toBe(
+      "/captures/phantom/assets/abc123.png"
     )
   })
 
   it("handles nested relative paths", () => {
-    expect(
-      captureUrl("coinbase", "2025-12-15", "flows/send/step-1.png")
-    ).toBe("/captures/coinbase/2025-12-15/flows/send/step-1.png")
+    expect(captureUrl("coinbase", "assets/f8533c79ce1b.png")).toBe(
+      "/captures/coinbase/assets/f8533c79ce1b.png"
+    )
   })
 
   it("handles simple filename", () => {
-    expect(captureUrl("myapp", "2026-01-01", "app.json")).toBe(
-      "/captures/myapp/2026-01-01/app.json"
-    )
+    expect(captureUrl("myapp", "app.json")).toBe("/captures/myapp/app.json")
   })
 })
