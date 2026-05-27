@@ -4,7 +4,7 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Base",
-    "description": "ANDROID app — 68 screens, 19 flows",
+    "description": "ANDROID app — 68 screens, 28 flows",
     "href": "/apps/base"
   },
   {
@@ -1482,48 +1482,25 @@
     "href": "/apps/base/flows/settings"
   },
   {
-    "type": "step",
+    "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Display",
-    "description": "Theme, app icon, language, currency.",
-    "flowSlug": "settings",
-    "flowName": "Browsing settings",
-    "screenId": "display-settings",
-    "href": "/apps/base/flows/settings"
+    "label": "Connecting to Coinbase",
+    "description": "Link Coinbase account for funding",
+    "flowSlug": "connecting-to-coinbase",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/connecting-to-coinbase"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Account Management",
-    "description": "2FA and sign out.",
-    "flowSlug": "settings",
-    "flowName": "Browsing settings",
-    "screenId": "account-management",
-    "href": "/apps/base/flows/settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Privacy & Security",
-    "description": "Privacy toggles, token approvals, permissions.",
-    "flowSlug": "settings",
-    "flowName": "Browsing settings",
-    "screenId": "privacy-security",
-    "href": "/apps/base/flows/settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Trading",
-    "description": "Stealth mode, dust coins, hidden coins.",
-    "flowSlug": "settings",
-    "flowName": "Browsing settings",
-    "screenId": "trading-settings",
-    "href": "/apps/base/flows/settings"
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "connecting-to-coinbase",
+    "flowName": "Connecting to Coinbase",
+    "screenId": "settings",
+    "href": "/apps/base/flows/connecting-to-coinbase"
   },
   {
     "type": "step",
@@ -1531,31 +1508,42 @@
     "appName": "Base",
     "label": "Connect to Coinbase",
     "description": "Link Coinbase account for funding.",
-    "flowSlug": "settings",
-    "flowName": "Browsing settings",
+    "flowSlug": "connecting-to-coinbase",
+    "flowName": "Connecting to Coinbase",
     "screenId": "connect-coinbase",
-    "href": "/apps/base/flows/settings"
+    "href": "/apps/base/flows/connecting-to-coinbase"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings deep dive",
-    "description": "All settings sub-screens explored to their deepest level: Display pickers, Account 2FA setup, sign-out confirmation, Privacy token approvals and permissions, Trading hidden coins, Help (external), Legal links",
-    "flowSlug": "settings-deep",
+    "label": "Switching to dark mode",
+    "description": "Change appearance mode between light, dark, and system",
+    "flowSlug": "switching-to-dark-mode",
     "flowSection": "settings",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/switching-to-dark-mode"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Settings Main",
-    "description": "Settings menu.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "switching-to-dark-mode",
+    "flowName": "Switching to dark mode",
     "screenId": "settings",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/switching-to-dark-mode"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display",
+    "description": "Theme, app icon, language, currency.",
+    "flowSlug": "switching-to-dark-mode",
+    "flowName": "Switching to dark mode",
+    "screenId": "display-settings",
+    "href": "/apps/base/flows/switching-to-dark-mode"
   },
   {
     "type": "step",
@@ -1563,10 +1551,42 @@
     "appName": "Base",
     "label": "Appearance Mode",
     "description": "Light / Dark / System options.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "switching-to-dark-mode",
+    "flowName": "Switching to dark mode",
     "screenId": "settings-appearance-mode",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/switching-to-dark-mode"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Changing app icon",
+    "description": "Choose from 20 app icon variants",
+    "flowSlug": "changing-app-icon",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/changing-app-icon"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "changing-app-icon",
+    "flowName": "Changing app icon",
+    "screenId": "settings",
+    "href": "/apps/base/flows/changing-app-icon"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display",
+    "description": "Theme, app icon, language, currency.",
+    "flowSlug": "changing-app-icon",
+    "flowName": "Changing app icon",
+    "screenId": "display-settings",
+    "href": "/apps/base/flows/changing-app-icon"
   },
   {
     "type": "step",
@@ -1574,10 +1594,42 @@
     "appName": "Base",
     "label": "App Icon",
     "description": "20 icon variants in grid.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "changing-app-icon",
+    "flowName": "Changing app icon",
     "screenId": "settings-app-icon",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/changing-app-icon"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Changing language",
+    "description": "Select from 15 supported languages",
+    "flowSlug": "changing-language",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/changing-language"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "changing-language",
+    "flowName": "Changing language",
+    "screenId": "settings",
+    "href": "/apps/base/flows/changing-language"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display",
+    "description": "Theme, app icon, language, currency.",
+    "flowSlug": "changing-language",
+    "flowName": "Changing language",
+    "screenId": "display-settings",
+    "href": "/apps/base/flows/changing-language"
   },
   {
     "type": "step",
@@ -1585,10 +1637,42 @@
     "appName": "Base",
     "label": "Language",
     "description": "15 languages supported.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "changing-language",
+    "flowName": "Changing language",
     "screenId": "settings-language",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/changing-language"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Changing local currency",
+    "description": "Search and select local currency for balance display",
+    "flowSlug": "changing-local-currency",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/changing-local-currency"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "changing-local-currency",
+    "flowName": "Changing local currency",
+    "screenId": "settings",
+    "href": "/apps/base/flows/changing-local-currency"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display",
+    "description": "Theme, app icon, language, currency.",
+    "flowSlug": "changing-local-currency",
+    "flowName": "Changing local currency",
+    "screenId": "display-settings",
+    "href": "/apps/base/flows/changing-local-currency"
   },
   {
     "type": "step",
@@ -1596,10 +1680,42 @@
     "appName": "Base",
     "label": "Currency",
     "description": "Searchable currency list, USD selected.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "changing-local-currency",
+    "flowName": "Changing local currency",
     "screenId": "settings-currency",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/changing-local-currency"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Setting up authenticator",
+    "description": "2FA setup via authenticator app",
+    "flowSlug": "setting-up-authenticator",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/setting-up-authenticator"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "setting-up-authenticator",
+    "flowName": "Setting up authenticator",
+    "screenId": "settings",
+    "href": "/apps/base/flows/setting-up-authenticator"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Account Management",
+    "description": "2FA and sign out.",
+    "flowSlug": "setting-up-authenticator",
+    "flowName": "Setting up authenticator",
+    "screenId": "account-management",
+    "href": "/apps/base/flows/setting-up-authenticator"
   },
   {
     "type": "step",
@@ -1607,10 +1723,42 @@
     "appName": "Base",
     "label": "Authenticator Setup",
     "description": "2FA setup key and Continue.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "setting-up-authenticator",
+    "flowName": "Setting up authenticator",
     "screenId": "settings-authenticator-setup",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/setting-up-authenticator"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Logging out",
+    "description": "Sign out with recovery warning confirmation",
+    "flowSlug": "logging-out",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/logging-out"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "logging-out",
+    "flowName": "Logging out",
+    "screenId": "settings",
+    "href": "/apps/base/flows/logging-out"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Account Management",
+    "description": "2FA and sign out.",
+    "flowSlug": "logging-out",
+    "flowName": "Logging out",
+    "screenId": "account-management",
+    "href": "/apps/base/flows/logging-out"
   },
   {
     "type": "step",
@@ -1618,10 +1766,42 @@
     "appName": "Base",
     "label": "Sign Out Confirm",
     "description": "Warning: can't recover without wallet access. Sign Out / Nevermind.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "logging-out",
+    "flowName": "Logging out",
     "screenId": "settings-sign-out-confirm",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/logging-out"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Managing token approvals",
+    "description": "View and revoke token approvals",
+    "flowSlug": "managing-token-approvals",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/managing-token-approvals"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "managing-token-approvals",
+    "flowName": "Managing token approvals",
+    "screenId": "settings",
+    "href": "/apps/base/flows/managing-token-approvals"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Privacy & Security",
+    "description": "Privacy toggles, token approvals, permissions.",
+    "flowSlug": "managing-token-approvals",
+    "flowName": "Managing token approvals",
+    "screenId": "privacy-security",
+    "href": "/apps/base/flows/managing-token-approvals"
   },
   {
     "type": "step",
@@ -1629,10 +1809,42 @@
     "appName": "Base",
     "label": "Token Approvals",
     "description": "No active approvals. Revoke guidance.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "managing-token-approvals",
+    "flowName": "Managing token approvals",
     "screenId": "settings-token-approvals",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/managing-token-approvals"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Managing permissions",
+    "description": "View apps granted permissions",
+    "flowSlug": "managing-permissions",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/managing-permissions"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "managing-permissions",
+    "flowName": "Managing permissions",
+    "screenId": "settings",
+    "href": "/apps/base/flows/managing-permissions"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Privacy & Security",
+    "description": "Privacy toggles, token approvals, permissions.",
+    "flowSlug": "managing-permissions",
+    "flowName": "Managing permissions",
+    "screenId": "privacy-security",
+    "href": "/apps/base/flows/managing-permissions"
   },
   {
     "type": "step",
@@ -1640,10 +1852,42 @@
     "appName": "Base",
     "label": "Manage Permissions",
     "description": "Empty — no apps granted permissions.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "managing-permissions",
+    "flowName": "Managing permissions",
     "screenId": "settings-manage-permissions",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/managing-permissions"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Viewing hidden coins",
+    "description": "Manage hidden, spam, and dust coins",
+    "flowSlug": "viewing-hidden-coins",
+    "flowSection": "settings",
+    "href": "/apps/base/flows/viewing-hidden-coins"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings Main",
+    "description": "Settings menu with all categories.",
+    "flowSlug": "viewing-hidden-coins",
+    "flowName": "Viewing hidden coins",
+    "screenId": "settings",
+    "href": "/apps/base/flows/viewing-hidden-coins"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading",
+    "description": "Stealth mode, dust coins, hidden coins.",
+    "flowSlug": "viewing-hidden-coins",
+    "flowName": "Viewing hidden coins",
+    "screenId": "trading-settings",
+    "href": "/apps/base/flows/viewing-hidden-coins"
   },
   {
     "type": "step",
@@ -1651,31 +1895,9 @@
     "appName": "Base",
     "label": "Hidden Coins",
     "description": "Hidden/Spam/Dust tabs, all empty.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
+    "flowSlug": "viewing-hidden-coins",
+    "flowName": "Viewing hidden coins",
     "screenId": "settings-hidden-coins",
-    "href": "/apps/base/flows/settings-deep"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Help",
-    "description": "Opens help.coinbase.com in Chrome.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
-    "screenId": "settings-help",
-    "href": "/apps/base/flows/settings-deep"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Legal",
-    "description": "Privacy Policy and Terms of Service links.",
-    "flowSlug": "settings-deep",
-    "flowName": "Settings deep dive",
-    "screenId": "settings-legal",
-    "href": "/apps/base/flows/settings-deep"
+    "href": "/apps/base/flows/viewing-hidden-coins"
   }
 ]

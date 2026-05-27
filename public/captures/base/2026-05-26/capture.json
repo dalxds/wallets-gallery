@@ -135,6 +135,10 @@
       ],
       "appearsIn": [
         {
+          "flow": "onboarding-create-account",
+          "step": 8
+        },
+        {
           "flow": "deposit",
           "step": 1
         },
@@ -1667,6 +1671,46 @@
         {
           "flow": "settings",
           "step": 1
+        },
+        {
+          "flow": "connecting-to-coinbase",
+          "step": 1
+        },
+        {
+          "flow": "switching-to-dark-mode",
+          "step": 1
+        },
+        {
+          "flow": "changing-app-icon",
+          "step": 1
+        },
+        {
+          "flow": "changing-language",
+          "step": 1
+        },
+        {
+          "flow": "changing-local-currency",
+          "step": 1
+        },
+        {
+          "flow": "setting-up-authenticator",
+          "step": 1
+        },
+        {
+          "flow": "logging-out",
+          "step": 1
+        },
+        {
+          "flow": "managing-token-approvals",
+          "step": 1
+        },
+        {
+          "flow": "managing-permissions",
+          "step": 1
+        },
+        {
+          "flow": "viewing-hidden-coins",
+          "step": 1
         }
       ],
       "_humanEdited": []
@@ -1728,7 +1772,19 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings",
+          "flow": "switching-to-dark-mode",
+          "step": 2
+        },
+        {
+          "flow": "changing-app-icon",
+          "step": 2
+        },
+        {
+          "flow": "changing-language",
+          "step": 2
+        },
+        {
+          "flow": "changing-local-currency",
           "step": 2
         }
       ],
@@ -1774,8 +1830,12 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings",
-          "step": 3
+          "flow": "setting-up-authenticator",
+          "step": 2
+        },
+        {
+          "flow": "logging-out",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -1843,8 +1903,12 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings",
-          "step": 4
+          "flow": "managing-token-approvals",
+          "step": 2
+        },
+        {
+          "flow": "managing-permissions",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -1893,8 +1957,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings",
-          "step": 5
+          "flow": "viewing-hidden-coins",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -1933,8 +1997,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings",
-          "step": 6
+          "flow": "connecting-to-coinbase",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -2275,6 +2339,10 @@
         }
       ],
       "appearsIn": [
+        {
+          "flow": "onboarding-sign-in",
+          "step": 4
+        },
         {
           "flow": "home-funded",
           "step": 1
@@ -3272,8 +3340,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 2
+          "flow": "switching-to-dark-mode",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3300,7 +3368,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
+          "flow": "changing-app-icon",
           "step": 3
         }
       ],
@@ -3342,8 +3410,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 4
+          "flow": "changing-language",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3380,8 +3448,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 5
+          "flow": "changing-local-currency",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3429,8 +3497,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 6
+          "flow": "setting-up-authenticator",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3471,8 +3539,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 7
+          "flow": "logging-out",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3501,8 +3569,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 8
+          "flow": "managing-token-approvals",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3533,8 +3601,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 9
+          "flow": "managing-permissions",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3581,8 +3649,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "settings-deep",
-          "step": 10
+          "flow": "viewing-hidden-coins",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3608,12 +3676,7 @@
           "action": "Tap Help"
         }
       ],
-      "appearsIn": [
-        {
-          "flow": "settings-deep",
-          "step": 11
-        }
-      ],
+      "appearsIn": [],
       "_humanEdited": []
     },
     {
@@ -3648,12 +3711,7 @@
           "action": "Tap Legal"
         }
       ],
-      "appearsIn": [
-        {
-          "flow": "settings-deep",
-          "step": 12
-        }
-      ],
+      "appearsIn": [],
       "_humanEdited": []
     }
   ],
@@ -4687,6 +4745,72 @@
           "screenshotPath": "assets/6d02e1c775d8.png",
           "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
           "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
+        }
+      ],
+      "notes": "Settings main menu with all categories.",
+      "_humanEdited": [],
+      "section": "settings"
+    },
+    {
+      "slug": "connecting-to-coinbase",
+      "name": "Connecting to Coinbase",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "Link Coinbase account for funding",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
+        },
+        {
+          "number": 2,
+          "title": "Connect to Coinbase",
+          "screenId": "connect-coinbase",
+          "action": "Tap Connect to Coinbase",
+          "selector": "id=\"coinbaseConnect-setting\"",
+          "description": "Link Coinbase account for funding.",
+          "screenshotPath": "assets/01da1ee66a1a.png",
+          "fingerprintBefore": "sha256:9f8147a823b5f59da4efa66c924923e7",
+          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "switching-to-dark-mode",
+      "name": "Switching to dark mode",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "Change appearance mode between light, dark, and system",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
           "number": 2,
@@ -4701,58 +4825,25 @@
         },
         {
           "number": 3,
-          "title": "Account Management",
-          "screenId": "account-management",
-          "action": "Tap Account management",
-          "selector": "id=\"accountManagement-setting\"",
-          "description": "2FA and sign out.",
-          "screenshotPath": "assets/8ff0e39011c7.png",
-          "fingerprintBefore": "sha256:15ff6f9699c680bd88dc2cc036649639",
-          "fingerprintAfter": "sha256:c2a9f5f22fc13cebfc55d8edc995130f"
-        },
-        {
-          "number": 4,
-          "title": "Privacy & Security",
-          "screenId": "privacy-security",
-          "action": "Tap Privacy & Security",
-          "selector": "id=\"privacySecurity-setting\"",
-          "description": "Privacy toggles, token approvals, permissions.",
-          "screenshotPath": "assets/b7b52eab082b.png",
-          "fingerprintBefore": "sha256:c2a9f5f22fc13cebfc55d8edc995130f",
-          "fingerprintAfter": "sha256:80d685f1e3282246913e2da67842af03"
-        },
-        {
-          "number": 5,
-          "title": "Trading",
-          "screenId": "trading-settings",
-          "action": "Tap Trading",
-          "selector": "id=\"trade-setting\"",
-          "description": "Stealth mode, dust coins, hidden coins.",
-          "screenshotPath": "assets/c2a22f535c9b.png",
-          "fingerprintBefore": "sha256:80d685f1e3282246913e2da67842af03",
-          "fingerprintAfter": "sha256:9f8147a823b5f59da4efa66c924923e7"
-        },
-        {
-          "number": 6,
-          "title": "Connect to Coinbase",
-          "screenId": "connect-coinbase",
-          "action": "Tap Connect to Coinbase",
-          "selector": "id=\"coinbaseConnect-setting\"",
-          "description": "Link Coinbase account for funding.",
-          "screenshotPath": "assets/01da1ee66a1a.png",
-          "fingerprintBefore": "sha256:9f8147a823b5f59da4efa66c924923e7",
-          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+          "title": "Appearance Mode",
+          "screenId": "settings-appearance-mode",
+          "action": "Display > Appearance Mode",
+          "selector": "id=\"color-scheme-setting\"",
+          "description": "Light / Dark / System options.",
+          "screenshotPath": "assets/00b69e0a800f.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54"
         }
       ],
-      "notes": "Version 29.95.120, User ID 107426270.",
-      "_humanEdited": [],
-      "section": "settings"
+      "notes": "",
+      "_humanEdited": []
     },
     {
-      "slug": "settings-deep",
-      "name": "Settings deep dive",
+      "slug": "changing-app-icon",
+      "name": "Changing app icon",
+      "section": "settings",
       "parent": "settings",
-      "summary": "All settings sub-screens explored to their deepest level: Display pickers, Account 2FA setup, sign-out confirmation, Privacy token approvals and permissions, Trading hidden coins, Help (external), Legal links",
+      "summary": "Choose from 20 app icon variants",
       "mode": "free-roam",
       "entryPoints": [
         "settings"
@@ -4765,21 +4856,21 @@
           "screenId": "settings",
           "action": "Entry point",
           "selector": null,
-          "description": "Settings menu.",
+          "description": "Settings menu with all categories.",
           "screenshotPath": "assets/6d02e1c775d8.png",
           "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
           "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
           "number": 2,
-          "title": "Appearance Mode",
-          "screenId": "settings-appearance-mode",
-          "action": "Display > Appearance Mode",
-          "selector": "id=\"color-scheme-setting\"",
-          "description": "Light / Dark / System options.",
-          "screenshotPath": "assets/00b69e0a800f.png",
+          "title": "Display",
+          "screenId": "display-settings",
+          "action": "Tap Display",
+          "selector": "id=\"display-setting\"",
+          "description": "Theme, app icon, language, currency.",
+          "screenshotPath": "assets/dc08a5922783.png",
           "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
-          "fingerprintAfter": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54"
+          "fingerprintAfter": "sha256:15ff6f9699c680bd88dc2cc036649639"
         },
         {
           "number": 3,
@@ -4791,9 +4882,47 @@
           "screenshotPath": "assets/c72065ae642d.png",
           "fingerprintBefore": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54",
           "fingerprintAfter": "sha256-text:26bd82a2fd260f89e499d7f13524501d"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "changing-language",
+      "name": "Changing language",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "Select from 15 supported languages",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 4,
+          "number": 2,
+          "title": "Display",
+          "screenId": "display-settings",
+          "action": "Tap Display",
+          "selector": "id=\"display-setting\"",
+          "description": "Theme, app icon, language, currency.",
+          "screenshotPath": "assets/dc08a5922783.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:15ff6f9699c680bd88dc2cc036649639"
+        },
+        {
+          "number": 3,
           "title": "Language",
           "screenId": "settings-language",
           "action": "Display > Language",
@@ -4802,9 +4931,47 @@
           "screenshotPath": "assets/0090f6afd1fc.png",
           "fingerprintBefore": "sha256-text:26bd82a2fd260f89e499d7f13524501d",
           "fingerprintAfter": "sha256-text:638dd7dff77e5a61e34c3ea88daead2e"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "changing-local-currency",
+      "name": "Changing local currency",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "Search and select local currency for balance display",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 5,
+          "number": 2,
+          "title": "Display",
+          "screenId": "display-settings",
+          "action": "Tap Display",
+          "selector": "id=\"display-setting\"",
+          "description": "Theme, app icon, language, currency.",
+          "screenshotPath": "assets/dc08a5922783.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:15ff6f9699c680bd88dc2cc036649639"
+        },
+        {
+          "number": 3,
           "title": "Currency",
           "screenId": "settings-currency",
           "action": "Display > Local currency",
@@ -4813,9 +4980,47 @@
           "screenshotPath": "assets/9da5bc12a7d2.png",
           "fingerprintBefore": "sha256-text:638dd7dff77e5a61e34c3ea88daead2e",
           "fingerprintAfter": "sha256:64e8d61ce5470467c8f6f5e7afb4070d"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "setting-up-authenticator",
+      "name": "Setting up authenticator",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "2FA setup via authenticator app",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 6,
+          "number": 2,
+          "title": "Account Management",
+          "screenId": "account-management",
+          "action": "Tap Account management",
+          "selector": "id=\"accountManagement-setting\"",
+          "description": "2FA and sign out.",
+          "screenshotPath": "assets/8ff0e39011c7.png",
+          "fingerprintBefore": "sha256:15ff6f9699c680bd88dc2cc036649639",
+          "fingerprintAfter": "sha256:c2a9f5f22fc13cebfc55d8edc995130f"
+        },
+        {
+          "number": 3,
           "title": "Authenticator Setup",
           "screenId": "settings-authenticator-setup",
           "action": "Account > Authenticator App",
@@ -4824,9 +5029,47 @@
           "screenshotPath": "assets/f5ae0bc9eddc.png",
           "fingerprintBefore": "sha256:64e8d61ce5470467c8f6f5e7afb4070d",
           "fingerprintAfter": "sha256:12cb0671bf18aed8cfc8e267a7c95355"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "logging-out",
+      "name": "Logging out",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "Sign out with recovery warning confirmation",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 7,
+          "number": 2,
+          "title": "Account Management",
+          "screenId": "account-management",
+          "action": "Tap Account management",
+          "selector": "id=\"accountManagement-setting\"",
+          "description": "2FA and sign out.",
+          "screenshotPath": "assets/8ff0e39011c7.png",
+          "fingerprintBefore": "sha256:15ff6f9699c680bd88dc2cc036649639",
+          "fingerprintAfter": "sha256:c2a9f5f22fc13cebfc55d8edc995130f"
+        },
+        {
+          "number": 3,
           "title": "Sign Out Confirm",
           "screenId": "settings-sign-out-confirm",
           "action": "Account > Sign out",
@@ -4835,9 +5078,47 @@
           "screenshotPath": "assets/257eedcf904c.png",
           "fingerprintBefore": "sha256:12cb0671bf18aed8cfc8e267a7c95355",
           "fingerprintAfter": "sha256-text:613c3295c7303c84dfc16b6f3d59899d"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "managing-token-approvals",
+      "name": "Managing token approvals",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "View and revoke token approvals",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 8,
+          "number": 2,
+          "title": "Privacy & Security",
+          "screenId": "privacy-security",
+          "action": "Tap Privacy & Security",
+          "selector": "id=\"privacySecurity-setting\"",
+          "description": "Privacy toggles, token approvals, permissions.",
+          "screenshotPath": "assets/b7b52eab082b.png",
+          "fingerprintBefore": "sha256:c2a9f5f22fc13cebfc55d8edc995130f",
+          "fingerprintAfter": "sha256:80d685f1e3282246913e2da67842af03"
+        },
+        {
+          "number": 3,
           "title": "Token Approvals",
           "screenId": "settings-token-approvals",
           "action": "Privacy > Token Approvals",
@@ -4846,9 +5127,47 @@
           "screenshotPath": "assets/f5c117a30f71.png",
           "fingerprintBefore": "sha256-text:613c3295c7303c84dfc16b6f3d59899d",
           "fingerprintAfter": "sha256-text:7e0bba9456f178aa9360ea5f2eeadf07"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "managing-permissions",
+      "name": "Managing permissions",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "View apps granted permissions",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 9,
+          "number": 2,
+          "title": "Privacy & Security",
+          "screenId": "privacy-security",
+          "action": "Tap Privacy & Security",
+          "selector": "id=\"privacySecurity-setting\"",
+          "description": "Privacy toggles, token approvals, permissions.",
+          "screenshotPath": "assets/b7b52eab082b.png",
+          "fingerprintBefore": "sha256:c2a9f5f22fc13cebfc55d8edc995130f",
+          "fingerprintAfter": "sha256:80d685f1e3282246913e2da67842af03"
+        },
+        {
+          "number": 3,
           "title": "Manage Permissions",
           "screenId": "settings-manage-permissions",
           "action": "Privacy > Manage Permissions",
@@ -4857,9 +5176,47 @@
           "screenshotPath": "assets/70e28761a03c.png",
           "fingerprintBefore": "sha256-text:7e0bba9456f178aa9360ea5f2eeadf07",
           "fingerprintAfter": "sha256:61632a6eef4152a48d31841f9e40ec99"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "viewing-hidden-coins",
+      "name": "Viewing hidden coins",
+      "section": "settings",
+      "parent": "settings",
+      "summary": "Manage hidden, spam, and dust coins",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
         },
         {
-          "number": 10,
+          "number": 2,
+          "title": "Trading",
+          "screenId": "trading-settings",
+          "action": "Tap Trading",
+          "selector": "id=\"trade-setting\"",
+          "description": "Stealth mode, dust coins, hidden coins.",
+          "screenshotPath": "assets/c2a22f535c9b.png",
+          "fingerprintBefore": "sha256:80d685f1e3282246913e2da67842af03",
+          "fingerprintAfter": "sha256:9f8147a823b5f59da4efa66c924923e7"
+        },
+        {
+          "number": 3,
           "title": "Hidden Coins",
           "screenId": "settings-hidden-coins",
           "action": "Trading > Hidden Coins",
@@ -4868,33 +5225,10 @@
           "screenshotPath": "assets/ec89ca53b808.png",
           "fingerprintBefore": "sha256:61632a6eef4152a48d31841f9e40ec99",
           "fingerprintAfter": "sha256:d647b76d6fbff1cf676c6bf35ca3b4af"
-        },
-        {
-          "number": 11,
-          "title": "Help",
-          "screenId": "settings-help",
-          "action": "Tap Help",
-          "selector": "id=\"help-setting\"",
-          "description": "Opens help.coinbase.com in Chrome.",
-          "screenshotPath": "assets/670e94a1c0d8.png",
-          "fingerprintBefore": "sha256:d647b76d6fbff1cf676c6bf35ca3b4af",
-          "fingerprintAfter": "sha256-text:d6cede6a0f88c09aaf8c73ef92c13ab8"
-        },
-        {
-          "number": 12,
-          "title": "Legal",
-          "screenId": "settings-legal",
-          "action": "Tap Legal",
-          "selector": "id=\"legal-setting\"",
-          "description": "Privacy Policy and Terms of Service links.",
-          "screenshotPath": "assets/4e2f483fc6a6.png",
-          "fingerprintBefore": "sha256-text:d6cede6a0f88c09aaf8c73ef92c13ab8",
-          "fingerprintAfter": "sha256:0b4ce297fb54fbf2f05cf48a831143b0"
         }
       ],
-      "notes": "All settings explored to deepest available level. No changes were made — view only.",
-      "_humanEdited": [],
-      "section": "settings"
+      "notes": "",
+      "_humanEdited": []
     }
   ],
   "decisionPoints": [
@@ -5071,6 +5405,6 @@
     "screensAdded": 72,
     "screensModified": 0,
     "screensRemoved": 0,
-    "flowsTouched": 19
+    "flowsTouched": 28
   }
 }
