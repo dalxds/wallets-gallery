@@ -160,6 +160,7 @@ The canonical snapshot of an app at a date. Every capture writes one of these. A
   "slug": "password-reset",
   "name": "Password Reset",
   "parent": null,
+  "section": "auth",
   "summary": "Reset password via email OTP. Starts on login, ends at OTP verification.",
   "mode": "guided",
   "entryPoints": ["login"],
@@ -214,6 +215,7 @@ The canonical snapshot of an app at a date. Every capture writes one of these. A
 | `slug` | string | human-editable | Stable. Rename cascades to `appearsIn[].flow`, `decisionPoints[].options[].flowSlug`, `.ad` filename, `replay.path`. |
 | `name` | string | human-editable | Human label. |
 | `parent` | string \| null | human-editable | Slug of parent flow if this is a subflow. |
+| `section` | string | human-editable | App navigation section this flow belongs to. Derived from the app's primary navigation (tab bar, bottom nav, drawer). Examples: "wallet", "search", "trade", "settings", "onboarding". |
 | `summary` | string | human-editable | One-paragraph description. |
 | `entryPoints` | string[] | mixed | Screen IDs. Agent infers; human can add/remove. |
 | `replay` | object \| null | agent (locked) | The replay block as a whole may be `null` when the flow cannot be deterministically replayed (e.g. requires SMS OTP, one-time onboarding step, sensitive auth). When null, future re-captures fall back to LLM-walk. Validator emits a warning, not an error. |

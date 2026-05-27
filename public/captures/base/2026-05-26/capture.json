@@ -1,0 +1,5076 @@
+{
+  "schemaVersion": 1,
+  "captureDate": "2026-05-26",
+  "scope": "initial",
+  "flowsRecaptured": null,
+  "previousCapture": null,
+  "mode": "free-roam",
+  "durationSeconds": 420,
+  "screens": [
+    {
+      "id": "home-empty",
+      "title": "Home (Empty Wallet)",
+      "role": "home",
+      "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA.",
+      "screenshotPath": "assets/f8533c79ce1b.png",
+      "fingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+      "texts": [
+        "$0",
+        "Add funds. Withdraw anytime.",
+        "Deposit",
+        "Receive",
+        "Earn",
+        "Trading is better together",
+        "Invite Friends",
+        "Coins",
+        "Collectibles",
+        "Activity",
+        "Looking a Little Empty in Here...",
+        "See what's trending"
+      ],
+      "primaryCta": {
+        "label": "Deposit",
+        "role": "button",
+        "selector": "id=\"buy-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        },
+        {
+          "label": "Earn",
+          "role": "button",
+          "selector": "id=\"home-earn-chip\""
+        },
+        {
+          "label": "See what's trending",
+          "role": "button",
+          "selector": "id=\"coins-tab-empty-state-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Avatar",
+          "role": "button",
+          "selector": "id=\"account-settings-pressable-avatar\""
+        },
+        {
+          "label": "Search",
+          "role": "button",
+          "selector": "id=\"global-search-icon\""
+        },
+        {
+          "label": "Scan QR Code",
+          "role": "button",
+          "selector": "id=\"assets-action-btn-scan\""
+        },
+        {
+          "label": "Open messages",
+          "role": "button",
+          "selector": "id=\"messaging-navigation-icon\""
+        },
+        {
+          "label": "Total balance: $0",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Earn",
+          "role": "button",
+          "selector": "id=\"home-earn-chip\""
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "id=\"buy-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        },
+        {
+          "label": "Invite Friends",
+          "role": "button",
+          "selector": "id=\"announcement-card-v2-cta-label\""
+        },
+        {
+          "label": "Close announcement",
+          "role": "button",
+          "selector": "id=\"announcement-card-v2-close-button\""
+        },
+        {
+          "label": "Coins",
+          "role": "tab",
+          "selector": "id=\"tab-coins-active\""
+        },
+        {
+          "label": "Collectibles",
+          "role": "tab",
+          "selector": "id=\"tab-collectibles\""
+        },
+        {
+          "label": "Activity",
+          "role": "tab",
+          "selector": "id=\"tab-activity\""
+        },
+        {
+          "label": "See what's trending",
+          "role": "button",
+          "selector": "id=\"coins-tab-empty-state-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "App launch with active session",
+          "via": "open org.toshi --relaunch"
+        },
+        {
+          "description": "Tap Wallet in bottom nav",
+          "fromScreen": "any",
+          "action": "Tap Wallet tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "deposit",
+          "step": 1
+        },
+        {
+          "flow": "receive-scan-request",
+          "step": 1
+        },
+        {
+          "flow": "earn-referral",
+          "step": 1
+        },
+        {
+          "flow": "home-browsing",
+          "step": 1
+        },
+        {
+          "flow": "messaging",
+          "step": 1
+        },
+        {
+          "flow": "profile-settings",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "deposit",
+      "title": "Deposit",
+      "role": "form",
+      "description": "Buy/deposit screen with $0 amount display, USDC selected, Debit Card payment method, numpad, $2/Max presets, and Connect to Coinbase CTA at bottom.",
+      "screenshotPath": "assets/462e785b6b13.png",
+      "fingerprint": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf",
+      "texts": [
+        "Deposit",
+        "Deposit With",
+        "Debit Card",
+        "$0",
+        "0 USDC",
+        "USDC",
+        "$2",
+        "Max",
+        "Total",
+        "$0.00",
+        "Connect to Coinbase"
+      ],
+      "primaryCta": {
+        "label": "Connect to Coinbase",
+        "role": "button",
+        "selector": "id=\"coinbase-connect-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "USDC token selector",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-selector\""
+        },
+        {
+          "label": "Deposit With payment method",
+          "role": "button",
+          "selector": "id=\"buy-v2-payment-method-header\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Deposit With",
+          "role": "button",
+          "selector": "id=\"buy-v2-payment-method-header\""
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-selector\""
+        },
+        {
+          "label": "$2",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-fiat-amount-preset-min\""
+        },
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-fiat-amount-preset-max\""
+        },
+        {
+          "label": "Connect to Coinbase",
+          "role": "button",
+          "selector": "id=\"coinbase-connect-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Deposit on home",
+          "fromScreen": "home-empty",
+          "action": "Tap Deposit"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "deposit",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "deposit-token-selector",
+      "title": "Token Selector (Deposit)",
+      "role": "picker",
+      "description": "Modal listing tokens available for deposit with search bar and network filter. Shows USDC, Ethereum, cbBTC, Venice Token, EURC, Aerodrome, cbETH, RaveDAO, KAITO with prices and percentage changes.",
+      "screenshotPath": "assets/9c36ab3a00ab.png",
+      "fingerprint": "sha256-text:94014ee65d3fb66d7bcc41baf4ce1640",
+      "texts": [
+        "Deposit",
+        "Search",
+        "USDC",
+        "Ethereum",
+        "Coinbase Wrapped BTC",
+        "Venice Token",
+        "EURC Coin",
+        "Aerodrome",
+        "Coinbase Wrapped Staked ETH",
+        "RaveDAO",
+        "KAITO"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap token selector on Deposit",
+          "fromScreen": "deposit",
+          "action": "Tap USDC selector"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "deposit",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "deposit-with-modal",
+      "title": "Deposit With Modal",
+      "role": "modal",
+      "description": "Bottom sheet showing payment method option: Connect to Coinbase with description 'Use payment methods on your Coinbase.com account' and Connect arrow.",
+      "screenshotPath": "assets/9a09b229cd11.png",
+      "fingerprint": "sha256-text:914560f6b2b3bebd1a90f0c9aa3882ff",
+      "texts": [
+        "Deposit With",
+        "Connect to Coinbase",
+        "Use payment methods on your Coinbase.com account",
+        "Connect"
+      ],
+      "primaryCta": {
+        "label": "Connect",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Deposit With on Deposit",
+          "fromScreen": "deposit",
+          "action": "Tap Deposit With header"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "deposit",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "receive",
+      "title": "Receive",
+      "role": "other",
+      "description": "Receive tab showing wallet address (0x1c7...b282), Ethereum QR code, supported network badges (Base, Optimism, Polygon, Arbitrum, Avalanche, Zora), and Copy Wallet Address button.",
+      "screenshotPath": "assets/7e96e0c4223e.png",
+      "fingerprint": "sha256-text:ee9be5c30a22a83e6855c708063d24d4",
+      "texts": [
+        "Receive",
+        "Scan",
+        "Request",
+        "0x1c7...b282",
+        "Ethereum",
+        "This address supports all assets on Ethereum, Base, Polygon, and other EVM networks.",
+        "Copy Wallet Address"
+      ],
+      "primaryCta": {
+        "label": "Copy Wallet Address",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Receive on home or QR scanner",
+          "fromScreen": "home-empty",
+          "action": "Tap Receive"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "receive-scan-request",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "scan-qr",
+      "title": "Scan QR Code",
+      "role": "other",
+      "description": "Camera viewfinder with QR code scanning frame and text 'Scan a QR code to send crypto'. Part of the Receive/Scan/Request tab group.",
+      "screenshotPath": "assets/ef5d4726948b.png",
+      "fingerprint": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
+      "texts": [
+        "Receive",
+        "Scan",
+        "Request",
+        "Scan a QR code to send crypto"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Scan tab from Receive/Scan/Request",
+          "fromScreen": "receive",
+          "action": "Tap Scan tab"
+        },
+        {
+          "description": "Tap QR scanner icon from top bar",
+          "fromScreen": "home-empty",
+          "action": "Tap Scan QR Code"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "receive-scan-request",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "request",
+      "title": "Request Payment",
+      "role": "form",
+      "description": "Request tab with Add Recipient field, $0 amount, USDC token selector, preset amounts ($5/$10/$25), numpad, and 'Enter an amount' swipe CTA.",
+      "screenshotPath": "assets/85c33a577c47.png",
+      "fingerprint": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf",
+      "texts": [
+        "Receive",
+        "Scan",
+        "Request",
+        "From",
+        "Add Recipient",
+        "$0",
+        "0 USDC",
+        "USDC",
+        "$5",
+        "$10",
+        "$25",
+        "Total",
+        "$0.00",
+        "Enter an amount"
+      ],
+      "primaryCta": {
+        "label": "Enter an amount",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Request tab from Receive/Scan/Request",
+          "fromScreen": "receive",
+          "action": "Tap Request tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "receive-scan-request",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "request-add-recipient",
+      "title": "Request From (Add Recipient)",
+      "role": "picker",
+      "description": "Bottom sheet for selecting who to request payment from. Search input with Paste button, QR Code option ('Show your QR code to receive funds'), Tap to Request (proximity), Request via Link (shareable link). Shows 'No recent recipients' empty state.",
+      "screenshotPath": "assets/19b968fc6cd4.png",
+      "fingerprint": "sha256:3eb56e230703bcd15a25d860159cc020",
+      "texts": [
+        "Request From",
+        "From",
+        "Paste",
+        "QR Code",
+        "Show your QR code to receive funds",
+        "Tap to Request",
+        "Request via Link",
+        "No recent recipients",
+        "Search to find someone to send to"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"receive-v2-recipient-tray-search-bar\""
+        },
+        {
+          "label": "QR Code",
+          "role": "button",
+          "selector": "id=\"payment-v2-scan-qr-code-button\""
+        },
+        {
+          "label": "Tap to Request",
+          "role": "button",
+          "selector": "id=\"payment-v2-tap-to-payment-button\""
+        },
+        {
+          "label": "Request via Link",
+          "role": "button",
+          "selector": "id=\"payment-v2-payment-via-link-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Add Recipient on Request tab",
+          "fromScreen": "request",
+          "action": "Tap Add Recipient"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "receive-scan-request",
+          "step": 5
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "request-fee-info",
+      "title": "Network Fee Info (Request)",
+      "role": "modal",
+      "description": "Bottom sheet showing transaction fee details: 'Applies to all transactions and varies based on network usage.' Network: Base. Network fee: Free.",
+      "screenshotPath": "assets/12c9c0110000.png",
+      "fingerprint": "sha256-text:bb9ddecdd65ecfe14a06e13db9b6e5a8",
+      "texts": [
+        "Applies to all transactions and varies based on network usage.",
+        "Network",
+        "Network fee",
+        "Free"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Total/fee info on Request tab",
+          "fromScreen": "request",
+          "action": "Tap Total fees"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "receive-scan-request",
+          "step": 6
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "earn-enrollment",
+      "title": "Base Rewards Enrollment",
+      "role": "form",
+      "description": "Earn enrollment screen asking 'Where do you live?' with US and non-US options. 'I don't live in the US' pre-selected with Continue button.",
+      "screenshotPath": "assets/5ce67e7b969e.png",
+      "fingerprint": "sha256:4beb65e5b33acd10011ce6e88ff406b2",
+      "texts": [
+        "Enroll in Base Rewards to Begin",
+        "Where do you live?",
+        "I live in the US",
+        "I don't live in the US",
+        "Continue"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"earn-enrollment-continue-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "id=\"earn-enrollment-continue-button\""
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Earn chip on home",
+          "fromScreen": "home-empty",
+          "action": "Tap Earn"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "earn-referral",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "invite-friends",
+      "title": "Invite Friends to Earn",
+      "role": "other",
+      "description": "Referral screen showing referral code HDNXPRX6, 'Have your friends use your referral link to earn 25% of their fees', Copy Referral Code and Share Referral Link buttons.",
+      "screenshotPath": "assets/39f3134e2e48.png",
+      "fingerprint": "sha256-text:6837a7f717ec606957c242274925a7d3",
+      "texts": [
+        "Invite Friends to Earn",
+        "Have your friends use your referral link to earn 25% of their fees. Restrictions apply.",
+        "Referral Code",
+        "HDNXPRX6",
+        "Copy Referral Code",
+        "Share Referral Link"
+      ],
+      "primaryCta": {
+        "label": "Share Referral Link",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [
+        {
+          "label": "Copy Referral Code",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Continue on earn enrollment",
+          "fromScreen": "earn-enrollment",
+          "action": "Tap Continue"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "earn-referral",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "home-collectibles",
+      "title": "Collectibles Tab",
+      "role": "list",
+      "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles.",
+      "screenshotPath": "assets/3743761f1051.png",
+      "fingerprint": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c",
+      "texts": [
+        "Collectibles",
+        "Your Collection Awaits",
+        "This is where you can show off all the cool collectibles you find onchain."
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Collectibles tab on home",
+          "fromScreen": "home-empty",
+          "action": "Tap Collectibles tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-browsing",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "home-activity",
+      "title": "Activity Tab",
+      "role": "list",
+      "description": "Activity tab on home showing 'No transactions found' empty state.",
+      "screenshotPath": "assets/d633acb54146.png",
+      "fingerprint": "sha256-text:1faab5cfa4343737d0d245c93dab418c",
+      "texts": [
+        "Activity",
+        "No transactions found"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Activity tab on home",
+          "fromScreen": "home-empty",
+          "action": "Tap Activity tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-browsing",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "discover",
+      "title": "Discover / Search",
+      "role": "list",
+      "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+      "screenshotPath": "assets/4d1473c5b051.png",
+      "fingerprint": "sha256:7d6e323322357c812a8cf39f27c57412",
+      "texts": [
+        "Discover",
+        "Pinned Apps",
+        "Verify",
+        "Apps",
+        "Trending",
+        "New",
+        "Majors",
+        "Search Base or URL"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Verify",
+          "role": "button",
+          "selector": "id=\"custom-tile-verify-tile\""
+        },
+        {
+          "label": "Apps",
+          "role": "button",
+          "selector": "id=\"custom-tile-discover-tile\""
+        },
+        {
+          "label": "Toggle watchlist",
+          "role": "button",
+          "selector": "id=\"discovery-watchlist-chip\""
+        },
+        {
+          "label": "Trending",
+          "role": "button",
+          "selector": "id=\"discovery-trending-chip-all\""
+        },
+        {
+          "label": "New",
+          "role": "button",
+          "selector": "id=\"discovery-trending-chip-new_launches\""
+        },
+        {
+          "label": "Majors",
+          "role": "button",
+          "selector": "id=\"discovery-trending-chip-majors\""
+        },
+        {
+          "label": "Open filters",
+          "role": "button",
+          "selector": "id=\"discovery-trending-filter-chip\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"discovery-search-input\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Search in bottom nav",
+          "fromScreen": "any",
+          "action": "Tap Search tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "browse-tokens",
+          "step": 1
+        },
+        {
+          "flow": "verify",
+          "step": 1
+        },
+        {
+          "flow": "apps-directory",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "verify",
+      "title": "Get Verified",
+      "role": "other",
+      "description": "WebView at verify.base.dev showing Get Verified landing page with benefits: Earn Rewards, Build Credibility, Boost Visibility. Continue CTA and Terms of Service link.",
+      "screenshotPath": "assets/82a42139fc8f.png",
+      "fingerprint": "sha256:d5c1c58ab39654daf407c424fd875e03",
+      "texts": [
+        "Get Verified",
+        "Earn Rewards",
+        "Build Credibility",
+        "Boost Visibility",
+        "Continue",
+        "verify.base.dev"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close tab",
+          "role": "button",
+          "selector": "id=\"bottom-browser-bar-close\""
+        },
+        {
+          "label": "verify.base.dev",
+          "role": "button",
+          "selector": "id=\"bottom-browser-bar-url\""
+        },
+        {
+          "label": "More actions",
+          "role": "button",
+          "selector": "id=\"bottom-browser-bar-more\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Verify tile on Discover",
+          "fromScreen": "discover",
+          "action": "Tap Verify"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "verify",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "apps-directory",
+      "title": "Apps Directory",
+      "role": "list",
+      "description": "Mini apps directory with featured carousel (RIP.FUN, Beezie, Clash of Coins) and categorized sections: Trading must-haves (Perps by Avantis, Wasabi, Bankr, Aerodrome), Play games (Cat Town), Earn crypto (Morpho, Mamo, Rips), Make predictions (Limitless, Bookie).",
+      "screenshotPath": "assets/656d9d5b6d09.png",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+      "texts": [
+        "RIP.FUN",
+        "Beezie",
+        "Clash of Coins",
+        "Trading must-haves",
+        "Perps by Avantis",
+        "Wasabi",
+        "Bankr",
+        "Aerodrome",
+        "Play games",
+        "Cat Town",
+        "Earn crypto",
+        "Make predictions"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Apps tile on Discover",
+          "fromScreen": "discover",
+          "action": "Tap Apps"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "apps-directory",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "token-detail",
+      "title": "Token Detail",
+      "role": "other",
+      "description": "Token detail page (shown for VIRTUAL Protocol) with price ($0.7785), percentage change, market cap ($510M), 24h volume, interactive price chart with 1H/1D/1W/1M/1Y/All periods, candlestick toggle, top holders, external links (Whitepaper, Official website, GeckoTerminal, Dexscreener), contract address, and Buy CTA.",
+      "screenshotPath": "assets/d2512b29be5b.png",
+      "fingerprint": "sha256:ac69712ee93ddfce891513adfe9deb5f",
+      "texts": [
+        "VIRTUAL",
+        "Virtual Protocol",
+        "$0.7785",
+        "Mkt Cap",
+        "24h Vol",
+        "1H",
+        "1D",
+        "1W",
+        "1M",
+        "1Y",
+        "All",
+        "Whitepaper",
+        "Official website",
+        "Buy"
+      ],
+      "primaryCta": {
+        "label": "Buy",
+        "role": "button",
+        "selector": "id=\"infer-action-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Add to watchlist",
+          "role": "button",
+          "selector": "id=\"watchlist-star-button\""
+        },
+        {
+          "label": "View asset options",
+          "role": "button",
+          "selector": "id=\"asset-options-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"tba-animated-nav-bar-back-arrow\""
+        },
+        {
+          "label": "Add to watchlist",
+          "role": "button",
+          "selector": "id=\"watchlist-star-button\""
+        },
+        {
+          "label": "Select 1H period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-hour\""
+        },
+        {
+          "label": "Select 1D period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-day\""
+        },
+        {
+          "label": "Select 1W period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-week\""
+        },
+        {
+          "label": "Select 1M period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-month\""
+        },
+        {
+          "label": "Select 1Y period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-year\""
+        },
+        {
+          "label": "Select All period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-all\""
+        },
+        {
+          "label": "Toggle candlestick chart",
+          "role": "button",
+          "selector": "id=\"asset-details-chart-type-toggle\""
+        },
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "id=\"infer-action-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap a token from trending list",
+          "fromScreen": "discover",
+          "action": "Tap token row"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "browse-tokens",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trading-requires-usdc",
+      "title": "Trading Requires USDC",
+      "role": "modal",
+      "description": "Interstitial overlay on token detail: 'Trading this coin requires USDC. Add USDC to your wallet to continue with your purchase.' with Continue button.",
+      "screenshotPath": "assets/ed866d343585.png",
+      "fingerprint": "sha256-text:0869f5aa81b456b564055fb3cbab11a6",
+      "texts": [
+        "Trading this coin requires USDC",
+        "Add USDC to your wallet to continue with your purchase of VIRTUAL.",
+        "Continue"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"top-up-interstitial-continue-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Buy on token detail with $0 balance",
+          "fromScreen": "token-detail",
+          "action": "Tap Buy"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "browse-tokens",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade",
+      "title": "Trade / Swap (No Funds)",
+      "role": "form",
+      "description": "Token swap screen showing USDC → Ethereum. USDC selected with $0.00 balance, 50%/75%/Max preset buttons, $1 entered with '1 Not enough' warning in orange. Flip tokens button, Ethereum output showing 0.00046 ($0.99), exchange rate (1 USDC ≈ 0.00047028 ETH), and 'Add funds' blue CTA.",
+      "screenshotPath": "assets/3dd68f026d33.png",
+      "fingerprint": "sha256:72aeee6499929606c3e39e1bcfa0bae8",
+      "texts": [
+        "Trade",
+        "USDC",
+        "$0.00",
+        "$1",
+        "1 Not enough",
+        "Ethereum",
+        "0.00046",
+        "$0.99",
+        "1 USDC ≈ 0.00047028 ETH",
+        "Add funds"
+      ],
+      "primaryCta": {
+        "label": "Add funds",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "USDC (from token)",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-asset-selector\""
+        },
+        {
+          "label": "50%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-half-button\""
+        },
+        {
+          "label": "75%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-three-quarter-button\""
+        },
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-max-button\""
+        },
+        {
+          "label": "Toggle fiat/crypto",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-fiat-display-toggle\""
+        },
+        {
+          "label": "Flip tokens",
+          "role": "button",
+          "selector": "id=\"flip-tokens-arrow\""
+        },
+        {
+          "label": "Add funds",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Transact in bottom nav",
+          "fromScreen": "any",
+          "action": "Tap Transact tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-no-funds",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade-requires-usdc",
+      "title": "Trading Requires USDC (Trade)",
+      "role": "modal",
+      "description": "Interstitial overlay on Trade screen: 'Trading this coin requires USDC. Add USDC to your wallet to continue with your purchase of ETH.' with Continue button.",
+      "screenshotPath": "assets/c824b3218f9f.png",
+      "fingerprint": "sha256-text:c686643cfe6591f91344678de0abee5c",
+      "texts": [
+        "Trading this coin requires USDC",
+        "Add USDC to your wallet to continue with your purchase of ETH.",
+        "Continue"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"top-up-interstitial-continue-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Add funds on Trade with $0 balance",
+          "fromScreen": "trade",
+          "action": "Tap Add funds"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-no-funds",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade-deposit-funds",
+      "title": "Deposit Funds (from Trade)",
+      "role": "form",
+      "description": "Bottom sheet for depositing funds inline from the Trade flow. Shows 'Add funds to your wallet to continue with your purchase.' $2 default amount with USDC, presets ($5/$10/$50), Deposit With Debit Card, Total $2.00, and Connect to Coinbase CTA.",
+      "screenshotPath": "assets/4723de2c694f.png",
+      "fingerprint": "sha256:62105507a453c3d9540b80309f190764",
+      "texts": [
+        "Deposit Funds",
+        "Add funds to your wallet to continue with your purchase.",
+        "$2",
+        "USDC",
+        "$5",
+        "$10",
+        "$50",
+        "Deposit With",
+        "Debit Card",
+        "Total",
+        "$2.00",
+        "Connect to Coinbase"
+      ],
+      "primaryCta": {
+        "label": "Connect to Coinbase",
+        "role": "button",
+        "selector": "id=\"coinbase-connect-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-back-button\""
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Asset selector",
+          "role": "button",
+          "selector": "id=\"top-up-amount-selector-pressable\""
+        },
+        {
+          "label": "$5",
+          "role": "button",
+          "selector": "id=\"top-up-preset-fiat-amount-preset-5\""
+        },
+        {
+          "label": "$10",
+          "role": "button",
+          "selector": "id=\"top-up-preset-fiat-amount-preset-10\""
+        },
+        {
+          "label": "$50",
+          "role": "button",
+          "selector": "id=\"top-up-preset-fiat-amount-preset-50\""
+        },
+        {
+          "label": "Select payment method",
+          "role": "button",
+          "selector": "id=\"payments-v2-left-pressable\""
+        },
+        {
+          "label": "Connect to Coinbase",
+          "role": "button",
+          "selector": "id=\"coinbase-connect-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Continue on USDC interstitial from Trade",
+          "fromScreen": "trade-requires-usdc",
+          "action": "Tap Continue"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-no-funds",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade-from-token-selector",
+      "title": "From-Token Selector (Trade)",
+      "role": "picker",
+      "description": "Bottom tray for selecting which token to sell/swap from. Search bar, network filter, token list (USDC, Virtual Protocol, gitlawb, Venice Token, Boon, Aerodrome) all showing $0.00 balance with percentage changes and info icons.",
+      "screenshotPath": "assets/419ad140ef01.png",
+      "fingerprint": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07",
+      "texts": [
+        "Search",
+        "Filter networks",
+        "USDC",
+        "Virtual Protocol",
+        "gitlawb",
+        "Venice Token",
+        "Boon",
+        "Aerodrome"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"searchable-tray-asset-list-search-bar\""
+        },
+        {
+          "label": "Filter networks",
+          "role": "button",
+          "selector": "id=\"network-filter-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap from-token selector on Trade",
+          "fromScreen": "trade",
+          "action": "Tap USDC selector"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-no-funds",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade-to-token-selector",
+      "title": "To-Token Selector (Trade)",
+      "role": "picker",
+      "description": "Bottom tray for selecting which token to buy/swap into. Search bar, network filter, token list with prices: Ethereum ($2,125), Virtual Protocol ($0.83), gitlawb, Venice Token ($17.80), Boon, Wrapped PROS ($0.61). Each with contract addresses and info icons.",
+      "screenshotPath": "assets/e9fa6b920ccc.png",
+      "fingerprint": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07",
+      "texts": [
+        "Search",
+        "Filter networks",
+        "Ethereum",
+        "Virtual Protocol",
+        "gitlawb",
+        "Venice Token",
+        "Boon",
+        "Wrapped PROS"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"searchable-tray-asset-list-search-bar\""
+        },
+        {
+          "label": "Filter networks",
+          "role": "button",
+          "selector": "id=\"network-filter-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap to-token (Ethereum) on Trade",
+          "fromScreen": "trade",
+          "action": "Tap Ethereum row"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-no-funds",
+          "step": 5
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "social-feed",
+      "title": "Social Feed",
+      "role": "list",
+      "description": "Live trading feed showing real-time trade broadcast cards. Each card shows avatar, token name, market cap, trade amount, PnL percentage, with Share and Trade action buttons.",
+      "screenshotPath": "assets/9a33f7d3c1e4.png",
+      "fingerprint": "sha256-text:9da71d657ce81668f59b987bec8c76c9",
+      "texts": [
+        "HuntToken",
+        "Buy $1K",
+        "The Next 100x Memecoin on Base",
+        "FreeCode",
+        "Ribbita by Virtuals"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Social Feed in bottom nav",
+          "fromScreen": "any",
+          "action": "Tap Social Feed tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "social-feed",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "notifications",
+      "title": "Notifications",
+      "role": "list",
+      "description": "Notifications screen with push notification toggle and ETH price alert notifications (up +5.37%, down 4.42%).",
+      "screenshotPath": "assets/94539a6fd3ed.png",
+      "fingerprint": "sha256:de6604cb2625c762e9cbfee28f88e61f",
+      "texts": [
+        "Enable push notifications",
+        "Ethereum (ETH) is up +5.37%",
+        "Ethereum (ETH) is down 4.42%"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Open notification settings",
+          "role": "button",
+          "selector": "id=\"notification-settings-icon\""
+        },
+        {
+          "label": "Enable push notifications",
+          "role": "button",
+          "selector": "id=\"push-upsell-toggle\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Notifications in bottom nav",
+          "fromScreen": "any",
+          "action": "Tap Notifications tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "notifications",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "notification-settings",
+      "title": "Notification Settings",
+      "role": "settings",
+      "description": "Notification preferences with push toggle and category rows: Trading, Social, Rewards, Subscriptions, Wallet Activity, Chat, Product Announcements.",
+      "screenshotPath": "assets/8b112a412c41.png",
+      "fingerprint": "sha256:7ee271b132e1b95890516440cf455654",
+      "texts": [
+        "Search Notification Settings",
+        "Trading",
+        "Social",
+        "Rewards",
+        "Subscriptions",
+        "Wallet Activity",
+        "Chat",
+        "Product Announcements"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Enable push notifications",
+          "role": "button",
+          "selector": "id=\"push-upsell-toggle\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap settings icon on Notifications",
+          "fromScreen": "notifications",
+          "action": "Tap notification settings"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "notifications",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "profile-drawer",
+      "title": "Profile Drawer",
+      "role": "modal",
+      "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $0 balance, and menu: Invite Friends, View Profile, Settings.",
+      "screenshotPath": "assets/a497e6f119ad.png",
+      "fingerprint": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9",
+      "texts": [
+        "0x1c734aC214...716A50b282",
+        "$0",
+        "Invite Friends",
+        "View Profile",
+        "Settings"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap avatar on home",
+          "fromScreen": "home-empty",
+          "action": "Tap avatar"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "profile-settings",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "view-profile",
+      "title": "View Profile",
+      "role": "other",
+      "description": "User profile page with Edit Profile and Share Profile buttons, network/category/sort filter chips, Deposit CTA, and Coins/Collectibles/Activity tabs.",
+      "screenshotPath": "assets/a843502c0927.png",
+      "fingerprint": "sha256:642e0b2257c39e36b6221ff30f8ba2d9",
+      "texts": [
+        "Edit profile",
+        "Share Profile",
+        "Edit Profile",
+        "Deposit",
+        "Coins",
+        "Collectibles",
+        "Activity"
+      ],
+      "primaryCta": {
+        "label": "Edit Profile",
+        "role": "button",
+        "selector": "id=\"trading-profile-header-edit-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Share Profile",
+          "role": "button",
+          "selector": "id=\"trading-profile-share-button\""
+        },
+        {
+          "label": "Settings",
+          "role": "button",
+          "selector": "id=\"trading-profile-settings-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Profile menu",
+          "role": "button",
+          "selector": "id=\"trading-profile-options-button\""
+        },
+        {
+          "label": "Settings",
+          "role": "button",
+          "selector": "id=\"trading-profile-settings-button\""
+        },
+        {
+          "label": "Filter by network",
+          "role": "button",
+          "selector": "id=\"wallet-network-chip\""
+        },
+        {
+          "label": "Filter by category",
+          "role": "button",
+          "selector": "id=\"wallet-category-chip\""
+        },
+        {
+          "label": "Sort assets",
+          "role": "button",
+          "selector": "id=\"wallet-sort-chip\""
+        },
+        {
+          "label": "Edit Profile",
+          "role": "button",
+          "selector": "id=\"trading-profile-header-edit-button\""
+        },
+        {
+          "label": "Share Profile",
+          "role": "button",
+          "selector": "id=\"trading-profile-share-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap View Profile in drawer",
+          "fromScreen": "profile-drawer",
+          "action": "Tap View Profile"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "profile-settings",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "edit-profile",
+      "title": "Edit Profile",
+      "role": "form",
+      "description": "Edit profile screen with follow button, 'Claim Your Unique Basename Today' card, Display name input, and Bio input.",
+      "screenshotPath": "assets/7b29eb088708.png",
+      "fingerprint": "sha256:072f2f45f7a5f6374754867021a0b4fc",
+      "texts": [
+        "Claim Your Unique Basename Today",
+        "Display name",
+        "Tell a little us about yourself..."
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"edit-profile-close-button\""
+        },
+        {
+          "label": "Display name",
+          "role": "edit-text",
+          "selector": "id=\"display-name-input\""
+        },
+        {
+          "label": "Bio",
+          "role": "edit-text",
+          "selector": "id=\"bio-input\""
+        },
+        {
+          "label": "Claim Basename",
+          "role": "button",
+          "selector": "id=\"basename-claim-card\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Edit Profile on View Profile",
+          "fromScreen": "view-profile",
+          "action": "Tap Edit profile"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "profile-settings",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings",
+      "title": "Settings",
+      "role": "settings",
+      "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+      "screenshotPath": "assets/6d02e1c775d8.png",
+      "fingerprint": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+      "texts": [
+        "Settings",
+        "Display",
+        "Account management",
+        "Connect to Coinbase",
+        "Privacy & Security",
+        "Trading",
+        "Help",
+        "Legal",
+        "Version",
+        "29.95.78",
+        "User ID",
+        "107426270"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Display",
+          "role": "button",
+          "selector": "id=\"display-setting\""
+        },
+        {
+          "label": "Account management",
+          "role": "button",
+          "selector": "id=\"accountManagement-setting\""
+        },
+        {
+          "label": "Connect to Coinbase",
+          "role": "button",
+          "selector": "id=\"coinbaseConnect-setting\""
+        },
+        {
+          "label": "Privacy & Security",
+          "role": "button",
+          "selector": "id=\"privacySecurity-setting\""
+        },
+        {
+          "label": "Trading",
+          "role": "button",
+          "selector": "id=\"trade-setting\""
+        },
+        {
+          "label": "Help",
+          "role": "button",
+          "selector": "id=\"help-setting\""
+        },
+        {
+          "label": "Legal",
+          "role": "button",
+          "selector": "id=\"legal-setting\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Settings in profile drawer or from View Profile",
+          "fromScreen": "profile-drawer",
+          "action": "Tap Settings"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "display-settings",
+      "title": "Display Settings",
+      "role": "settings",
+      "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD).",
+      "screenshotPath": "assets/dc08a5922783.png",
+      "fingerprint": "sha256:15ff6f9699c680bd88dc2cc036649639",
+      "texts": [
+        "Display",
+        "Appearance",
+        "Appearance Mode",
+        "Auto",
+        "App Icon",
+        "Language",
+        "English - US",
+        "Balances",
+        "Local currency",
+        "USD"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Appearance Mode",
+          "role": "button",
+          "selector": "id=\"color-scheme-setting\""
+        },
+        {
+          "label": "App Icon",
+          "role": "button",
+          "selector": "id=\"app-icon-setting\""
+        },
+        {
+          "label": "Language",
+          "role": "button",
+          "selector": "id=\"language-setting\""
+        },
+        {
+          "label": "Local currency",
+          "role": "button",
+          "selector": "id=\"local-currency-setting\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Display in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Display"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "account-management",
+      "title": "Account Management",
+      "role": "settings",
+      "description": "Account management with Authenticator App (2FA) option and Sign out button.",
+      "screenshotPath": "assets/8ff0e39011c7.png",
+      "fingerprint": "sha256:c2a9f5f22fc13cebfc55d8edc995130f",
+      "texts": [
+        "Authenticator App",
+        "Use a separate app to generate verification codes.",
+        "Sign out"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Authenticator App",
+          "role": "button",
+          "selector": "id=\"authenticator-app-setting\""
+        },
+        {
+          "label": "Sign out",
+          "role": "button",
+          "selector": "id=\"sign-out-setting\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Account management in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Account management"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "privacy-security",
+      "title": "Privacy & Security",
+      "role": "settings",
+      "description": "Privacy settings with Personalized offers toggle, Privacy mode toggle, Payment requests toggle, Decline all requests button, Token Approvals, and Manage Permissions.",
+      "screenshotPath": "assets/b7b52eab082b.png",
+      "fingerprint": "sha256:80d685f1e3282246913e2da67842af03",
+      "texts": [
+        "Personalized offers",
+        "Privacy mode",
+        "Payment requests",
+        "Decline all requests",
+        "Token Approvals",
+        "Manage Permissions"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Personalized offers toggle",
+          "role": "switch",
+          "selector": "id=\"personalized-offers-switch\""
+        },
+        {
+          "label": "Privacy mode toggle",
+          "role": "switch",
+          "selector": "id=\"privacy-mode-switch\""
+        },
+        {
+          "label": "Payment requests toggle",
+          "role": "switch",
+          "selector": "id=\"enable-payment-requests-switch-checked\""
+        },
+        {
+          "label": "Decline all requests",
+          "role": "button",
+          "selector": "id=\"decline-all-payment-requests-button\""
+        },
+        {
+          "label": "Token Approvals",
+          "role": "button",
+          "selector": "id=\"token-approvals-setting\""
+        },
+        {
+          "label": "Manage Permissions",
+          "role": "button",
+          "selector": "id=\"manage-permissions-setting\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Privacy & Security in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Privacy & Security"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trading-settings",
+      "title": "Trading Settings",
+      "role": "settings",
+      "description": "Trading preferences: Turn on stealth mode toggle (hide trades from social feed), Dust Coins toggle (auto-hide coins under $0.10), Hidden Coins list.",
+      "screenshotPath": "assets/c2a22f535c9b.png",
+      "fingerprint": "sha256:9f8147a823b5f59da4efa66c924923e7",
+      "texts": [
+        "Trade",
+        "Turn on stealth mode",
+        "Hide your trades from the social feed.",
+        "Dust Coins",
+        "Automatically hide dust coins under $0.10",
+        "Hidden Coins",
+        "View coins you've hidden or marked as spam"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Dust Coins toggle",
+          "role": "switch",
+          "selector": "id=\"dust-coins-switch\""
+        },
+        {
+          "label": "Hidden Coins",
+          "role": "button",
+          "selector": "id=\"hidden-coins-setting\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Trading in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Trading"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings",
+          "step": 5
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "connect-coinbase",
+      "title": "Connect to Coinbase",
+      "role": "other",
+      "description": "Connect to Coinbase screen with wallet illustration and 'Buy or transfer with Coinbase' CTA. Links to Coinbase User Agreement and Privacy Policy.",
+      "screenshotPath": "assets/01da1ee66a1a.png",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+      "texts": [
+        "Connect to Coinbase",
+        "You can use your Coinbase account to fund your wallet.",
+        "Buy or transfer with Coinbase"
+      ],
+      "primaryCta": {
+        "label": "Buy or transfer with Coinbase",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Connect to Coinbase in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Connect to Coinbase"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings",
+          "step": 6
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "chat",
+      "title": "Chat",
+      "role": "list",
+      "description": "Chat home showing 'Chat with AI Agents' section with Bankr ('Your friendly crypto companion') and Elsa ('Turn words into onchain action'). New conversation FAB at bottom right.",
+      "screenshotPath": "assets/8547f4f48ffb.png",
+      "fingerprint": "sha256:b341bb857347879a826d652f85f33ff3",
+      "texts": [
+        "Chat",
+        "Chat with AI Agents",
+        "Bankr",
+        "Your friendly crypto companion",
+        "Elsa",
+        "Turn words into onchain action"
+      ],
+      "primaryCta": {
+        "label": "Start a new chat",
+        "role": "button",
+        "selector": "id=\"new-conversation-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "More options",
+          "role": "button",
+          "selector": "id=\"inbox-more-menu-button-container\""
+        },
+        {
+          "label": "Start a new chat",
+          "role": "button",
+          "selector": "id=\"new-conversation-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap messages icon from top bar",
+          "fromScreen": "home-empty",
+          "action": "Tap Open messages"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "messaging",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "global-search",
+      "title": "Global Search",
+      "role": "other",
+      "description": "Full-screen search overlay with filter chips: All, Coins, Apps, Profiles, Sites. Search input for 'Search Base or URL'.",
+      "screenshotPath": "assets/a0547061d334.png",
+      "fingerprint": "sha256:cc7a9e31fa677e2d1f99812d5d0aee1c",
+      "texts": [
+        "All",
+        "Coins",
+        "Apps",
+        "Profiles",
+        "Sites",
+        "Search Base or URL"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close search",
+          "role": "button",
+          "selector": "id=\"search-header-close\""
+        },
+        {
+          "label": "All",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_UNSPECIFIED\""
+        },
+        {
+          "label": "Coins",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_ASSET\""
+        },
+        {
+          "label": "Apps",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_DAPP\""
+        },
+        {
+          "label": "Profiles",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_SOCIAL_PROFILE\""
+        },
+        {
+          "label": "Sites",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_SITE\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"global-search-input\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap search icon from top bar",
+          "fromScreen": "home-empty",
+          "action": "Tap Search icon"
+        }
+      ],
+      "appearsIn": [],
+      "_humanEdited": []
+    },
+    {
+      "id": "watchlist-empty",
+      "title": "Watchlist (Empty)",
+      "role": "list",
+      "description": "Watchlist view on Discover tab showing empty state: 'Start your watchlist — Add assets to your watchlist to monitor price moves' with 'View Trending Coins' CTA.",
+      "screenshotPath": "assets/35099b9247cb.png",
+      "fingerprint": "sha256-text:072a9b5e82d0905929f491377ae68489",
+      "texts": [
+        "Watchlist",
+        "Start your watchlist",
+        "Add assets to your watchlist to monitor price moves",
+        "View Trending Coins"
+      ],
+      "primaryCta": {
+        "label": "View Trending Coins",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap watchlist toggle on Discover",
+          "fromScreen": "discover",
+          "action": "Tap Toggle watchlist"
+        }
+      ],
+      "appearsIn": [],
+      "_humanEdited": []
+    },
+    {
+      "id": "trending-filters",
+      "title": "Trending Filters",
+      "role": "picker",
+      "description": "Filter tray for trending tokens: Timeframe (5m/1h/4h/12h/24h), Sort by (Trending/Market Cap/Volume/Price Change/Liquidity/Holders/Transactions), Networks (Base/Ethereum/Polygon/Arbitrum/Optimism/Avalanche/BNB Chain), Apply and Reset buttons.",
+      "screenshotPath": "assets/b0843d2bf42a.png",
+      "fingerprint": "sha256:b9d9388da94f7689fccfb4848fe83dac",
+      "texts": [
+        "5m",
+        "1h",
+        "4h",
+        "12h",
+        "24h",
+        "Trending",
+        "Market Cap",
+        "Volume",
+        "Price Change",
+        "Liquidity",
+        "Holders",
+        "Transactions",
+        "Base",
+        "Ethereum",
+        "Polygon",
+        "Arbitrum",
+        "Optimism",
+        "Avalanche",
+        "BNB Chain",
+        "Apply filters",
+        "Reset all filters"
+      ],
+      "primaryCta": {
+        "label": "Apply filters",
+        "role": "button",
+        "selector": "id=\"discovery-filter-apply-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Reset all filters",
+          "role": "button",
+          "selector": "id=\"discovery-filter-reset-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Apply filters",
+          "role": "button",
+          "selector": "id=\"discovery-filter-apply-button\""
+        },
+        {
+          "label": "Reset all filters",
+          "role": "button",
+          "selector": "id=\"discovery-filter-reset-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap filter icon on Discover trending",
+          "fromScreen": "discover",
+          "action": "Tap Open filters"
+        }
+      ],
+      "appearsIn": [],
+      "_humanEdited": []
+    },
+    {
+      "id": "home-funded",
+      "title": "Home (Funded)",
+      "role": "home",
+      "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+      "screenshotPath": "assets/c292538c7202.png",
+      "fingerprint": "sha256:4adabafd57dd1481316392f6b34e8439",
+      "texts": [
+        "$1",
+        "Deposit",
+        "Receive",
+        "Send",
+        "Trade",
+        "Earn",
+        "Coins",
+        "Collectibles",
+        "Activity",
+        "Network",
+        "Category",
+        "Sort By",
+        "USDC",
+        "1 USDC",
+        "$1.00"
+      ],
+      "primaryCta": {
+        "label": "Send",
+        "role": "button",
+        "selector": "id=\"send-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Trade",
+          "role": "button",
+          "selector": "id=\"trade-button\""
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "id=\"buy-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Avatar",
+          "role": "button",
+          "selector": "id=\"account-settings-pressable-avatar\""
+        },
+        {
+          "label": "Search",
+          "role": "button",
+          "selector": "id=\"global-search-icon\""
+        },
+        {
+          "label": "Scan QR Code",
+          "role": "button",
+          "selector": "id=\"assets-action-btn-scan\""
+        },
+        {
+          "label": "Open messages",
+          "role": "button",
+          "selector": "id=\"messaging-navigation-icon\""
+        },
+        {
+          "label": "Earn",
+          "role": "button",
+          "selector": "id=\"home-earn-chip\""
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "id=\"buy-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "id=\"send-button\""
+        },
+        {
+          "label": "Trade",
+          "role": "button",
+          "selector": "id=\"trade-button\""
+        },
+        {
+          "label": "Filter by network",
+          "role": "button",
+          "selector": "id=\"wallet-network-chip\""
+        },
+        {
+          "label": "Filter by category",
+          "role": "button",
+          "selector": "id=\"wallet-category-chip\""
+        },
+        {
+          "label": "Sort assets",
+          "role": "button",
+          "selector": "id=\"wallet-sort-chip\""
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": "id=\"wallet-asset-list-item-base-mainnet-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913-USDC\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "App launch with active session and balance",
+          "via": "open org.toshi --relaunch"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 1
+        },
+        {
+          "flow": "send",
+          "step": 1
+        },
+        {
+          "flow": "trade-funded",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "home-sort-by",
+      "title": "Sort By",
+      "role": "picker",
+      "description": "Sort By bottom sheet with direction toggle (High to Low / Low to High) and sort criteria: Balance, Market Cap, Volume, Price Change. Reset and Apply buttons.",
+      "screenshotPath": "assets/98fb4db482ad.png",
+      "fingerprint": "sha256:f531d1401a297935d9f06db5330130bc",
+      "texts": [
+        "Sort By",
+        "High to Low",
+        "Low to High",
+        "Balance",
+        "Market Cap",
+        "Volume",
+        "Price Change",
+        "Reset",
+        "Apply"
+      ],
+      "primaryCta": {
+        "label": "Apply",
+        "role": "button",
+        "selector": "id=\"sort-by-filter-apply\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Reset",
+          "role": "button",
+          "selector": "id=\"sort-filter-reset\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "High to Low",
+          "role": "button",
+          "selector": "id=\"sort-direction-desc\""
+        },
+        {
+          "label": "Low to High",
+          "role": "button",
+          "selector": "id=\"sort-direction-asc\""
+        },
+        {
+          "label": "Balance",
+          "role": "button",
+          "selector": "id=\"sort-filter-fiat_balance\""
+        },
+        {
+          "label": "Market Cap",
+          "role": "button",
+          "selector": "id=\"sort-filter-market_cap\""
+        },
+        {
+          "label": "Volume",
+          "role": "button",
+          "selector": "id=\"sort-filter-volume\""
+        },
+        {
+          "label": "Price Change",
+          "role": "button",
+          "selector": "id=\"sort-filter-price_change\""
+        },
+        {
+          "label": "Reset",
+          "role": "button",
+          "selector": "id=\"sort-filter-reset\""
+        },
+        {
+          "label": "Apply",
+          "role": "button",
+          "selector": "id=\"sort-by-filter-apply\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Sort By on Coins tab",
+          "fromScreen": "home-funded",
+          "action": "Tap Sort assets"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "home-network-filter",
+      "title": "Network Filter",
+      "role": "picker",
+      "description": "Network filter bottom sheet: All Networks, Base, Arbitrum, Optimism, Zora, Polygon, BNB Chain, Avalanche, Ethereum. Clear and Apply buttons.",
+      "screenshotPath": "assets/4b85bdb288cf.png",
+      "fingerprint": "sha256-text:09165b58596b3db29305341555e803a4",
+      "texts": [
+        "All Networks",
+        "Base",
+        "Arbitrum",
+        "Optimism",
+        "Zora",
+        "Polygon",
+        "BNB Chain",
+        "Avalanche",
+        "Ethereum",
+        "Clear",
+        "Apply"
+      ],
+      "primaryCta": {
+        "label": "Apply",
+        "role": "button",
+        "selector": "id=\"network-filter-apply\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Network on Coins tab",
+          "fromScreen": "home-funded",
+          "action": "Tap Filter by network"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "home-category-filter",
+      "title": "Category Filter",
+      "role": "picker",
+      "description": "Category filter bottom sheet: Cash, Apps, Memes, Social. Clear and Apply buttons.",
+      "screenshotPath": "assets/18c6cd8fce92.png",
+      "fingerprint": "sha256-text:4f447309404df381082a1d44af0ba8e6",
+      "texts": [
+        "Cash",
+        "Apps",
+        "Memes",
+        "Social",
+        "Clear",
+        "Apply"
+      ],
+      "primaryCta": {
+        "label": "Apply",
+        "role": "button",
+        "selector": "id=\"category-filter-apply\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Category on Coins tab",
+          "fromScreen": "home-funded",
+          "action": "Tap Filter by category"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "activity-funded",
+      "title": "Activity (Funded)",
+      "role": "list",
+      "description": "Activity tab showing transaction history. TODAY section with 'Received — From dalxds.base.eth — +$1.00 — 1 USDC' in green.",
+      "screenshotPath": "assets/1d1c8e74a824.png",
+      "fingerprint": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850",
+      "texts": [
+        "Activity",
+        "TODAY",
+        "Received",
+        "From dalxds.base.eth",
+        "+$1.00",
+        "1 USDC"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Activity tab on home",
+          "fromScreen": "home-funded",
+          "action": "Tap Activity tab"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 5
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "transaction-detail",
+      "title": "Transaction Detail",
+      "role": "other",
+      "description": "Received USDC transaction detail: May 26, 2026 1:30 PM. Status: Complete (green checkmark). From: dalxds.base.eth. Amount: 1 USDC. Price: $1.00. Transaction Hash: 0xbc28...6130. Block Explorer link at bottom.",
+      "screenshotPath": "assets/e2238c97d252.png",
+      "fingerprint": "sha256:da473a96ea69889e4e27d959d95b2626",
+      "texts": [
+        "Received USDC",
+        "May 26, 2026 1:30 PM",
+        "Status",
+        "Complete",
+        "From",
+        "dalxds.base.eth",
+        "Amount",
+        "1 USDC",
+        "Price",
+        "$1.00",
+        "Transaction Hash",
+        "0xbc28...6130",
+        "Block Explorer"
+      ],
+      "primaryCta": {
+        "label": "Block Explorer",
+        "role": "button",
+        "selector": "id=\"block-explorer-action-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Block Explorer",
+          "role": "button",
+          "selector": "id=\"block-explorer-action-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap transaction row in Activity",
+          "fromScreen": "activity-funded",
+          "action": "Tap transaction"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 6
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "send",
+      "title": "Send",
+      "role": "form",
+      "description": "Send screen with To search input, Paste button, Scan QR code ('Tap to scan an address'), Tap to Send (proximity), Send via Link (shareable), and Recents section ('No recent recipients').",
+      "screenshotPath": "assets/1c171685a2e5.png",
+      "fingerprint": "sha256:2e327f12abfb48b77a00f83146615716",
+      "texts": [
+        "Send",
+        "To",
+        "Paste",
+        "Scan QR code",
+        "Tap to scan an address",
+        "Tap to Send",
+        "Send via Link",
+        "Recents",
+        "No recent recipients",
+        "Search to find someone to send to"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"send-v2-recipient-search-bar\""
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "id=\"send-v2-recipient-search-bar-paste-button\""
+        },
+        {
+          "label": "Scan QR code",
+          "role": "button",
+          "selector": "id=\"payment-v2-scan-qr-code-button\""
+        },
+        {
+          "label": "Tap to Send",
+          "role": "button",
+          "selector": "id=\"payment-v2-tap-to-payment-button\""
+        },
+        {
+          "label": "Send via Link",
+          "role": "button",
+          "selector": "id=\"payment-v2-payment-via-link-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Send on home (funded)",
+          "fromScreen": "home-funded",
+          "action": "Tap Send"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "send",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade-funded",
+      "title": "Trade / Swap (Funded)",
+      "role": "form",
+      "description": "Swap screen with USDC ($1.00 balance) → Ethereum. 50%/75%/Max preset buttons, flip tokens, exchange rate (1 USDC ≈ 0.0004725 ETH), Continue CTA (enabled). When Max is tapped: $1 entered, 'Not enough' (needs gas ETH), shows 'Receive ETH' CTA instead.",
+      "screenshotPath": "assets/91087510a2d3.png",
+      "fingerprint": "sha256:920980b743b4df84fcc6a300f3157773",
+      "texts": [
+        "Trade",
+        "USDC",
+        "$1.00",
+        "50%",
+        "75%",
+        "Max",
+        "Ethereum",
+        "1 USDC ≈ 0.0004725 ETH",
+        "Continue"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"trade-v2-continue-button\""
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "USDC (from token)",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-asset-selector\""
+        },
+        {
+          "label": "50%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-half-button\""
+        },
+        {
+          "label": "75%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-three-quarter-button\""
+        },
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-max-button\""
+        },
+        {
+          "label": "Toggle fiat/crypto",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-fiat-display-toggle\""
+        },
+        {
+          "label": "Flip tokens",
+          "role": "button",
+          "selector": "id=\"flip-tokens-arrow\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "id=\"trade-v2-continue-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Trade on home (funded)",
+          "fromScreen": "home-funded",
+          "action": "Tap Trade"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-funded",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "trade-funded-max",
+      "title": "Trade Max (Needs Gas)",
+      "role": "form",
+      "description": "Swap with Max tapped: $1 USDC amount, '1 Not enough' warning (needs ETH for gas), Ethereum output 0.00047 ($0.99), exchange rate row, 'Receive ETH' CTA instead of Continue.",
+      "screenshotPath": "assets/32f721894b44.png",
+      "fingerprint": "sha256-text:f3bedb6df2a99e1a2d28188f0bcd9810",
+      "texts": [
+        "Trade",
+        "USDC",
+        "$1.00",
+        "$1",
+        "1 Not enough",
+        "Ethereum",
+        "0.00047",
+        "$0.99",
+        "1 USDC ≈ 0.0004722 ETH",
+        "Receive ETH"
+      ],
+      "primaryCta": {
+        "label": "Receive ETH",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Max on Trade screen",
+          "fromScreen": "trade-funded",
+          "action": "Tap Max"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "trade-funded",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "usdc-token-detail-owned",
+      "title": "USDC Token Detail (Owned)",
+      "role": "other",
+      "description": "USDC token detail showing owned balance: $1.00 (1 USDC) with Send/Receive buttons. About section (Stablecoin badge), description. Stats: Token age 2y, Market cap $76.26B, Total supply 76.28B. Links: Whitepaper, Official website, GeckoTerminal, Dexscreener, contract address 0x8335...2913. Buy and Sell CTAs.",
+      "screenshotPath": "assets/c7064f130a47.png",
+      "fingerprint": "sha256:0e7e791507067575ffad442abcdf2701",
+      "texts": [
+        "USDC",
+        "$1.00",
+        "1 USDC",
+        "Send",
+        "Receive",
+        "About",
+        "Stablecoin",
+        "Stats",
+        "Token age",
+        "2y",
+        "Market cap",
+        "$76.26B",
+        "Total supply",
+        "76.28B",
+        "Buy",
+        "Sell"
+      ],
+      "primaryCta": {
+        "label": "Buy",
+        "role": "button",
+        "selector": "id=\"infer-action-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Sell",
+          "role": "button",
+          "selector": "id=\"sell-action-button\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "id=\"my-balance-send-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"my-balance-receive-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"tba-animated-nav-bar-back-arrow\""
+        },
+        {
+          "label": "Add to watchlist",
+          "role": "button",
+          "selector": "id=\"watchlist-star-button\""
+        },
+        {
+          "label": "View asset options",
+          "role": "button",
+          "selector": "id=\"asset-options-button\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "id=\"my-balance-send-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"my-balance-receive-button\""
+        },
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "id=\"infer-action-button\""
+        },
+        {
+          "label": "Sell",
+          "role": "button",
+          "selector": "id=\"sell-action-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap USDC row on Coins tab",
+          "fromScreen": "home-funded",
+          "action": "Tap USDC token"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "home-funded",
+          "step": 7
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "profile-drawer-funded",
+      "title": "Profile Drawer (Funded)",
+      "role": "modal",
+      "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $1 balance, and menu: Invite Friends, View Profile, Settings.",
+      "screenshotPath": "assets/6681fd7a83f4.png",
+      "fingerprint": "sha256-text:1651a4ea5d2797b7e3475be3951d5760",
+      "texts": [
+        "0x1c734aC214...716A50b282",
+        "$1",
+        "Invite Friends",
+        "View Profile",
+        "Settings"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap avatar on home (funded)",
+          "fromScreen": "home-funded",
+          "action": "Tap avatar"
+        }
+      ],
+      "appearsIn": [],
+      "_humanEdited": []
+    },
+    {
+      "id": "welcome",
+      "title": "Welcome to Base",
+      "role": "auth",
+      "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer.",
+      "screenshotPath": "assets/3300f04956d6.png",
+      "fingerprint": "sha256:1586f1477f40c1f7235d597005d5f072",
+      "texts": [
+        "Welcome to Base",
+        "Trade, send, discover crypto, all in one place",
+        "Continue with Email",
+        "More Options",
+        "Terms",
+        "Privacy Policy"
+      ],
+      "primaryCta": {
+        "label": "Continue with Email",
+        "role": "button",
+        "selector": "id=\"continue-with-email-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Sign in with Apple",
+          "role": "button",
+          "selector": "id=\"social-login-apple-button\""
+        },
+        {
+          "label": "Sign in with Google",
+          "role": "button",
+          "selector": "id=\"social-login-google-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue with Email",
+          "role": "button",
+          "selector": "id=\"continue-with-email-button\""
+        },
+        {
+          "label": "Sign in with Apple",
+          "role": "button",
+          "selector": "id=\"social-login-apple-button\""
+        },
+        {
+          "label": "Sign in with Google",
+          "role": "button",
+          "selector": "id=\"social-login-google-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "App launch with no active session",
+          "via": "open org.toshi --relaunch"
+        },
+        {
+          "description": "Sign out from Settings",
+          "fromScreen": "settings-sign-out-confirm",
+          "action": "Tap Sign Out"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-sign-in",
+          "step": 1
+        },
+        {
+          "flow": "onboarding-create-account",
+          "step": 1
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "more-options",
+      "title": "More Options",
+      "role": "picker",
+      "description": "Bottom sheet with three options: Create Account, Import Recovery Phrase, Import Passkey.",
+      "screenshotPath": "assets/742aaa11579d.png",
+      "fingerprint": "sha256:52f84e9975eff2f17ee2052db4b68c7c",
+      "texts": [
+        "More Options",
+        "Create Account",
+        "Import Recovery Phrase",
+        "Import Passkey"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Create Account",
+          "role": "button",
+          "selector": "id=\"create-account-action\""
+        },
+        {
+          "label": "Import Recovery Phrase",
+          "role": "button",
+          "selector": "id=\"import-recovery-phrase-action\""
+        },
+        {
+          "label": "Import Passkey",
+          "role": "button",
+          "selector": "id=\"import-passkey-action\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap More Options on Welcome",
+          "fromScreen": "welcome",
+          "action": "Tap More Options"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-create-account",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "onboarding-email",
+      "title": "Email Entry (Onboarding)",
+      "role": "form",
+      "description": "\"What's Your Email? You'll use this to sign in and to recover your account.\" Email input with placeholder name@email.com, Next button. Shared by both sign-in and create account flows.",
+      "screenshotPath": "assets/108df466e12e.png",
+      "fingerprint": "sha256:b25e87b217b29db66356e72818512871",
+      "texts": [
+        "What's Your Email?",
+        "You'll use this to sign in and to recover your account.",
+        "name@email.com",
+        "Next"
+      ],
+      "primaryCta": {
+        "label": "Next",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Email input",
+          "role": "edit-text",
+          "selector": "id=\"email-text-input\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Continue with Email on Welcome",
+          "fromScreen": "welcome",
+          "action": "Tap Continue with Email"
+        },
+        {
+          "description": "Tap Create Account in More Options",
+          "fromScreen": "more-options",
+          "action": "Tap Create Account"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-sign-in",
+          "step": 2
+        },
+        {
+          "flow": "onboarding-create-account",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "onboarding-otp",
+      "title": "OTP Verification",
+      "role": "form",
+      "description": "\"Let's confirm it's you — Enter the 6-digit code sent to your email.\" Six digit input boxes, 'Didn't get a code? Resend' with countdown timer, security warning: 'Base will never ask you to set up a new account or transfer funds. Never enter a code given to you by someone else.' Numeric keypad.",
+      "screenshotPath": "assets/e2dfed635174.png",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+      "texts": [
+        "Let's confirm it's you",
+        "Enter the 6-digit code sent to your email",
+        "Didn't get a code?",
+        "Resend",
+        "Base will never ask you to set up a new account or transfer funds."
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Next after entering email",
+          "fromScreen": "onboarding-email",
+          "action": "Tap Next"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-sign-in",
+          "step": 3
+        },
+        {
+          "flow": "onboarding-create-account",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "onboarding-referral-code",
+      "title": "Referral Code (New Account Only)",
+      "role": "form",
+      "description": "\"Enter a referral code, if you have one.\" Referral Code input with Paste button. Incentive: '10% discount on all swap fees — Enter a referral code from a friend and you'll receive a 10% discount on all swap fees.' Skip and Continue buttons. Only shown during new account creation.",
+      "screenshotPath": "assets/ba301728d97f.png",
+      "fingerprint": "sha256:e5af72ba136ad6464f9fa28e0e978a61",
+      "texts": [
+        "Referral Code",
+        "Enter a referral code, if you have one.",
+        "10% discount on all swap fees",
+        "Skip",
+        "Continue"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"referral-code-continue-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Skip",
+          "role": "button",
+          "selector": "id=\"referral-code-skip-button\""
+        }
+      ],
+      "interactiveElements": [
+        {
+          "label": "Referral Code input",
+          "role": "edit-text",
+          "selector": "id=\"referral-code-input\""
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "id=\"referral-code-paste-button\""
+        },
+        {
+          "label": "Skip",
+          "role": "button",
+          "selector": "id=\"referral-code-skip-button\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "id=\"referral-code-continue-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "After OTP verification for new account",
+          "fromScreen": "onboarding-otp",
+          "action": "Enter valid OTP"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-create-account",
+          "step": 5
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "onboarding-choose-username",
+      "title": "Choose Username (Basename)",
+      "role": "form",
+      "description": "\"Choose username — Choose your unique onchain handle to trade, create, and socialize.\" Input with name.base.eth placeholder, Personalized Advertising checkbox with info button, Claim CTA.",
+      "screenshotPath": "assets/49463999a480.png",
+      "fingerprint": "sha256:76abc8a0ff4a8c1d5131e8ad67a05b1a",
+      "texts": [
+        "Choose username",
+        "Choose your unique onchain handle to trade, create, and socialize",
+        "name.base.eth",
+        "Personalized Advertising",
+        "Claim"
+      ],
+      "primaryCta": {
+        "label": "Claim",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Go back",
+          "role": "button",
+          "selector": "id=\"onboarding-back-button\""
+        },
+        {
+          "label": "Username input",
+          "role": "edit-text",
+          "selector": "id=\"basename-search-input\""
+        },
+        {
+          "label": "About Personalized Advertising",
+          "role": "button",
+          "selector": "id=\"personalized-offers-info-button\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Skip or Continue from Referral Code",
+          "fromScreen": "onboarding-referral-code",
+          "action": "Tap Skip or Continue"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-create-account",
+          "step": 6
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "onboarding-captcha",
+      "title": "CAPTCHA Puzzle",
+      "role": "modal",
+      "description": "\"Protecting your account — Please solve this puzzle so we know you are a real person.\" Shield icon, Start Puzzle CTA, session ID, Audio alternative. Overlaid on Choose Username screen.",
+      "screenshotPath": "assets/134f0135c639.png",
+      "fingerprint": "sha256-text:d9159bc8ddcd14e96baaa03737749d92",
+      "texts": [
+        "Protecting your account",
+        "Please solve this puzzle so we know you are a real person",
+        "Start Puzzle",
+        "Audio"
+      ],
+      "primaryCta": {
+        "label": "Start Puzzle",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [
+        {
+          "label": "Audio",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Claim after entering username",
+          "fromScreen": "onboarding-choose-username",
+          "action": "Tap Claim"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "onboarding-create-account",
+          "step": 7
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-appearance-mode",
+      "title": "Appearance Mode Picker",
+      "role": "picker",
+      "description": "Bottom sheet with three appearance options: Light, Dark, System. Auto is the default.",
+      "screenshotPath": "assets/00b69e0a800f.png",
+      "fingerprint": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54",
+      "texts": [
+        "Light",
+        "Dark",
+        "System"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Light",
+          "role": "button",
+          "selector": "id=\"light-mode-option\""
+        },
+        {
+          "label": "Dark",
+          "role": "button",
+          "selector": "id=\"dark-mode-option\""
+        },
+        {
+          "label": "System",
+          "role": "button",
+          "selector": "id=\"system-mode-option\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Appearance Mode in Display settings",
+          "fromScreen": "display-settings",
+          "action": "Tap Appearance Mode"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 2
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-app-icon",
+      "title": "App Icon Picker",
+      "role": "picker",
+      "description": "Bottom sheet grid of 20 app icon variants: Glass series (Shiny Blue, Blue Gradient, Dark Green, Green, Pink, Pink Blue Gradient — each with flat variant) and Theme series (Blue, Black, Chartreuse, Orange, Indigo, Pink, Purple, Yellow).",
+      "screenshotPath": "assets/c72065ae642d.png",
+      "fingerprint": "sha256-text:26bd82a2fd260f89e499d7f13524501d",
+      "texts": [
+        "App Icon"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap App Icon in Display settings",
+          "fromScreen": "display-settings",
+          "action": "Tap App Icon"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 3
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-language",
+      "title": "Language Picker",
+      "role": "picker",
+      "description": "Full-screen language list: English-US (selected), Deutsch, Español (Argentina/España/Latam), Français, हिंदी, 日本語, Italiano, Português (Brazil/Portugal), Pусский, ไทย, Türkçe, 繁體中文.",
+      "screenshotPath": "assets/0090f6afd1fc.png",
+      "fingerprint": "sha256-text:638dd7dff77e5a61e34c3ea88daead2e",
+      "texts": [
+        "English - US",
+        "Deutsch",
+        "Español - Argentina",
+        "Español - España",
+        "Español - Latam",
+        "Français",
+        "हिंदी",
+        "日本語",
+        "Italiano",
+        "Português - Brazil",
+        "Português - Portugal",
+        "Pусский",
+        "ไทย",
+        "Türkçe",
+        "繁體中文"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Language in Display settings",
+          "fromScreen": "display-settings",
+          "action": "Tap Language"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 4
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-currency",
+      "title": "Currency Picker",
+      "role": "picker",
+      "description": "Full-screen currency list with search bar. USD selected. Extensive list: AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, and many more.",
+      "screenshotPath": "assets/9da5bc12a7d2.png",
+      "fingerprint": "sha256:64e8d61ce5470467c8f6f5e7afb4070d",
+      "texts": [
+        "Search",
+        "United States Dollar (USD)",
+        "United Arab Emirates Dirham (AED)",
+        "Afghan Afghani (AFN)",
+        "Albanian Lek (ALL)"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"currency-search-bar\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Local currency in Display settings",
+          "fromScreen": "display-settings",
+          "action": "Tap Local currency"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 5
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-authenticator-setup",
+      "title": "Set Up Authenticator",
+      "role": "form",
+      "description": "Authenticator app 2FA setup: 'Choose an Authenticator App — Use a separate app like Google Authenticator or Authy.' Setup key (ZSQW...YFJL) with copy button. Continue CTA.",
+      "screenshotPath": "assets/f5ae0bc9eddc.png",
+      "fingerprint": "sha256:12cb0671bf18aed8cfc8e267a7c95355",
+      "texts": [
+        "Set Up Authenticator",
+        "Choose an Authenticator App",
+        "Use a separate app like Google Authenticator or Authy.",
+        "Enter This Setup Key",
+        "Copy and enter this setup key into your authenticator app.",
+        "ZSQW...YFJL",
+        "Continue"
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Setup key",
+          "role": "edit-text",
+          "selector": "id=\"mfa-setup-key-input\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Authenticator App in Account Management",
+          "fromScreen": "account-management",
+          "action": "Tap Authenticator App"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 6
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-sign-out-confirm",
+      "title": "Sign Out Confirmation",
+      "role": "confirmation",
+      "description": "Warning screen with red triangle illustration: 'Are you sure you want to sign out? Without access to your wallets, you won't be able to recover the accounts.' Red Sign Out button and Nevermind button.",
+      "screenshotPath": "assets/257eedcf904c.png",
+      "fingerprint": "sha256-text:613c3295c7303c84dfc16b6f3d59899d",
+      "texts": [
+        "Sign Out",
+        "Are you sure you want to sign out?",
+        "Without access to your wallets, you won't be able to recover the accounts.",
+        "Sign Out",
+        "Nevermind"
+      ],
+      "primaryCta": {
+        "label": "Sign Out",
+        "role": "button",
+        "selector": "id=\"sign-out-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Nevermind",
+          "role": "button",
+          "selector": "id=\"go-back-button\""
+        }
+      ],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Sign out in Account Management",
+          "fromScreen": "account-management",
+          "action": "Tap Sign out"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 7
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-token-approvals",
+      "title": "Token Approvals",
+      "role": "list",
+      "description": "Token approvals management: 'To keep your assets safe, it's a good practice to regularly revoke approvals.' Empty state: 'No active token approvals.'",
+      "screenshotPath": "assets/f5c117a30f71.png",
+      "fingerprint": "sha256-text:7e0bba9456f178aa9360ea5f2eeadf07",
+      "texts": [
+        "Token Approvals",
+        "To keep your assets safe, it's a good practice to regularly revoke approvals",
+        "No active token approvals"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Token Approvals in Privacy & Security",
+          "fromScreen": "privacy-security",
+          "action": "Tap Token Approvals"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 8
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-manage-permissions",
+      "title": "Manage Permissions",
+      "role": "list",
+      "description": "App permissions management. Empty state — no apps have been granted permissions. Shows avatar and close button only.",
+      "screenshotPath": "assets/70e28761a03c.png",
+      "fingerprint": "sha256:61632a6eef4152a48d31841f9e40ec99",
+      "texts": [],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"nav-close-x\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Manage Permissions in Privacy & Security",
+          "fromScreen": "privacy-security",
+          "action": "Tap Manage Permissions"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 9
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-hidden-coins",
+      "title": "Hidden Coins",
+      "role": "list",
+      "description": "Hidden coins management with three tabs: Hidden, Spam, Dust. Hidden tab empty: 'Coins you hide will appear here. You can unhide them at any time.'",
+      "screenshotPath": "assets/ec89ca53b808.png",
+      "fingerprint": "sha256:d647b76d6fbff1cf676c6bf35ca3b4af",
+      "texts": [
+        "Hidden Coins",
+        "Hidden",
+        "Spam",
+        "Dust",
+        "Coins you hide will appear here. You can unhide them at any time."
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Hidden",
+          "role": "tab",
+          "selector": "id=\"hidden-assets-tabs-tab--hidden\""
+        },
+        {
+          "label": "Spam",
+          "role": "tab",
+          "selector": "id=\"hidden-assets-tabs-tab--spam\""
+        },
+        {
+          "label": "Dust",
+          "role": "tab",
+          "selector": "id=\"hidden-assets-tabs-tab--dust\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Hidden Coins in Trading settings",
+          "fromScreen": "trading-settings",
+          "action": "Tap Hidden Coins"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 10
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-help",
+      "title": "Help (External)",
+      "role": "other",
+      "description": "Opens Chrome browser to help.coinbase.com — 'Coinbase Wallet | Coinbase Help'. External website, not in-app.",
+      "screenshotPath": "assets/670e94a1c0d8.png",
+      "fingerprint": "sha256-text:d6cede6a0f88c09aaf8c73ef92c13ab8",
+      "texts": [
+        "Coinbase Wallet | Coinbase Help",
+        "help.coinbase.com"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [],
+      "entryPaths": [
+        {
+          "description": "Tap Help in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Help"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 11
+        }
+      ],
+      "_humanEdited": []
+    },
+    {
+      "id": "settings-legal",
+      "title": "Legal",
+      "role": "picker",
+      "description": "Bottom sheet with two options: Privacy Policy and Terms of Service. Both open external links.",
+      "screenshotPath": "assets/4e2f483fc6a6.png",
+      "fingerprint": "sha256:0b4ce297fb54fbf2f05cf48a831143b0",
+      "texts": [
+        "Privacy Policy",
+        "Terms of Service"
+      ],
+      "primaryCta": null,
+      "secondaryCtas": [],
+      "interactiveElements": [
+        {
+          "label": "Privacy Policy",
+          "role": "button",
+          "selector": "id=\"privacy-policy-cell\""
+        },
+        {
+          "label": "Terms of Service",
+          "role": "button",
+          "selector": "id=\"tos-cell\""
+        }
+      ],
+      "entryPaths": [
+        {
+          "description": "Tap Legal in Settings",
+          "fromScreen": "settings",
+          "action": "Tap Legal"
+        }
+      ],
+      "appearsIn": [
+        {
+          "flow": "settings-deep",
+          "step": 12
+        }
+      ],
+      "_humanEdited": []
+    }
+  ],
+  "flows": [
+    {
+      "slug": "onboarding-sign-in",
+      "name": "Signing in",
+      "parent": null,
+      "summary": "Sign into an existing Base account via email OTP. Welcome → Email → OTP → Home.",
+      "mode": "free-roam",
+      "entryPoints": [
+        "welcome"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Welcome to Base with sign-in options.",
+          "screenshotPath": "assets/3300f04956d6.png",
+          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
+          "fingerprintAfter": "sha256:1586f1477f40c1f7235d597005d5f072"
+        },
+        {
+          "number": 2,
+          "title": "Email Entry",
+          "screenId": "onboarding-email",
+          "action": "Tap Continue with Email",
+          "selector": "id=\"continue-with-email-button\"",
+          "description": "Enter email address.",
+          "screenshotPath": "assets/108df466e12e.png",
+          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
+          "fingerprintAfter": "sha256:b25e87b217b29db66356e72818512871"
+        },
+        {
+          "number": 3,
+          "title": "OTP Verification",
+          "screenId": "onboarding-otp",
+          "action": "Tap Next",
+          "selector": null,
+          "description": "6-digit code sent to email.",
+          "screenshotPath": "assets/e2dfed635174.png",
+          "fingerprintBefore": "sha256:b25e87b217b29db66356e72818512871",
+          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+        },
+        {
+          "number": 4,
+          "title": "Home",
+          "screenId": "home-funded",
+          "action": "Enter valid OTP",
+          "selector": null,
+          "description": "Lands on home with existing balance.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        }
+      ],
+      "notes": "Existing accounts skip referral code, username, and captcha. Goes straight from OTP to Home. Also supports Apple and Google sign-in from Welcome.",
+      "_humanEdited": [],
+      "section": "onboarding"
+    },
+    {
+      "slug": "onboarding-create-account",
+      "name": "Creating an account",
+      "parent": null,
+      "summary": "Create a new Base account: Welcome → More Options → Email → OTP → Referral Code → Choose Username (basename) → CAPTCHA → Home",
+      "mode": "free-roam",
+      "entryPoints": [
+        "welcome"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Welcome to Base.",
+          "screenshotPath": "assets/3300f04956d6.png",
+          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
+          "fingerprintAfter": "sha256:1586f1477f40c1f7235d597005d5f072"
+        },
+        {
+          "number": 2,
+          "title": "More Options",
+          "screenId": "more-options",
+          "action": "Tap More Options",
+          "selector": null,
+          "description": "Create Account, Import Recovery Phrase, Import Passkey.",
+          "screenshotPath": "assets/742aaa11579d.png",
+          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
+          "fingerprintAfter": "sha256:52f84e9975eff2f17ee2052db4b68c7c"
+        },
+        {
+          "number": 3,
+          "title": "Email Entry",
+          "screenId": "onboarding-email",
+          "action": "Tap Create Account",
+          "selector": "id=\"create-account-action\"",
+          "description": "Enter fresh email address.",
+          "screenshotPath": "assets/108df466e12e.png",
+          "fingerprintBefore": "sha256:52f84e9975eff2f17ee2052db4b68c7c",
+          "fingerprintAfter": "sha256:b25e87b217b29db66356e72818512871"
+        },
+        {
+          "number": 4,
+          "title": "OTP Verification",
+          "screenId": "onboarding-otp",
+          "action": "Tap Next",
+          "selector": null,
+          "description": "6-digit code sent to email.",
+          "screenshotPath": "assets/e2dfed635174.png",
+          "fingerprintBefore": "sha256:b25e87b217b29db66356e72818512871",
+          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+        },
+        {
+          "number": 5,
+          "title": "Referral Code",
+          "screenId": "onboarding-referral-code",
+          "action": "Enter valid OTP",
+          "selector": null,
+          "description": "Optional referral code for 10% swap fee discount.",
+          "screenshotPath": "assets/ba301728d97f.png",
+          "fingerprintBefore": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+          "fingerprintAfter": "sha256:e5af72ba136ad6464f9fa28e0e978a61"
+        },
+        {
+          "number": 6,
+          "title": "Choose Username",
+          "screenId": "onboarding-choose-username",
+          "action": "Skip or enter referral",
+          "selector": null,
+          "description": "Pick basename (name.base.eth) onchain handle.",
+          "screenshotPath": "assets/49463999a480.png",
+          "fingerprintBefore": "sha256:e5af72ba136ad6464f9fa28e0e978a61",
+          "fingerprintAfter": "sha256:76abc8a0ff4a8c1d5131e8ad67a05b1a"
+        },
+        {
+          "number": 7,
+          "title": "CAPTCHA",
+          "screenId": "onboarding-captcha",
+          "action": "Tap Claim",
+          "selector": null,
+          "description": "Solve puzzle to verify human.",
+          "screenshotPath": "assets/134f0135c639.png",
+          "fingerprintBefore": "sha256:76abc8a0ff4a8c1d5131e8ad67a05b1a",
+          "fingerprintAfter": "sha256-text:d9159bc8ddcd14e96baaa03737749d92"
+        },
+        {
+          "number": 8,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Solve CAPTCHA",
+          "selector": null,
+          "description": "Lands on home with $0 balance.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256-text:d9159bc8ddcd14e96baaa03737749d92",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        }
+      ],
+      "notes": "New accounts go through referral code (optional), basename registration, and CAPTCHA before reaching home. Also available via Continue with Email for new emails (same flow minus the More Options step).",
+      "_humanEdited": [],
+      "section": "onboarding"
+    },
+    {
+      "slug": "home-funded",
+      "name": "Browsing portfolio (funded)",
+      "parent": null,
+      "summary": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity with transaction history, and USDC token detail",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": {
+        "path": "home-funded.ad",
+        "entryFingerprint": "sha256:4adabafd57dd1481316392f6b34e8439",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home (Coins)",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with $1 balance, USDC in Coins tab.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "Sort By",
+          "screenId": "home-sort-by",
+          "action": "Tap Sort assets",
+          "selector": "id=\"wallet-sort-chip\"",
+          "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
+          "screenshotPath": "assets/98fb4db482ad.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:f531d1401a297935d9f06db5330130bc"
+        },
+        {
+          "number": 3,
+          "title": "Network Filter",
+          "screenId": "home-network-filter",
+          "action": "Tap Filter by network",
+          "selector": "id=\"wallet-network-chip\"",
+          "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
+          "screenshotPath": "assets/4b85bdb288cf.png",
+          "fingerprintBefore": "sha256:f531d1401a297935d9f06db5330130bc",
+          "fingerprintAfter": "sha256-text:09165b58596b3db29305341555e803a4"
+        },
+        {
+          "number": 4,
+          "title": "Category Filter",
+          "screenId": "home-category-filter",
+          "action": "Tap Filter by category",
+          "selector": "id=\"wallet-category-chip\"",
+          "description": "Filter by category: Cash, Apps, Memes, Social.",
+          "screenshotPath": "assets/18c6cd8fce92.png",
+          "fingerprintBefore": "sha256-text:09165b58596b3db29305341555e803a4",
+          "fingerprintAfter": "sha256-text:4f447309404df381082a1d44af0ba8e6"
+        },
+        {
+          "number": 5,
+          "title": "Activity",
+          "screenId": "activity-funded",
+          "action": "Tap Activity tab",
+          "selector": "id=\"tab-activity\"",
+          "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
+          "screenshotPath": "assets/1d1c8e74a824.png",
+          "fingerprintBefore": "sha256-text:4f447309404df381082a1d44af0ba8e6",
+          "fingerprintAfter": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850"
+        },
+        {
+          "number": 6,
+          "title": "Transaction Detail",
+          "screenId": "transaction-detail",
+          "action": "Tap transaction",
+          "selector": null,
+          "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
+          "screenshotPath": "assets/e2238c97d252.png",
+          "fingerprintBefore": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850",
+          "fingerprintAfter": "sha256:da473a96ea69889e4e27d959d95b2626"
+        },
+        {
+          "number": 7,
+          "title": "USDC Token Detail",
+          "screenId": "usdc-token-detail-owned",
+          "action": "Tap USDC row on Coins",
+          "selector": null,
+          "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
+          "screenshotPath": "assets/c7064f130a47.png",
+          "fingerprintBefore": "sha256:da473a96ea69889e4e27d959d95b2626",
+          "fingerprintAfter": "sha256:0e7e791507067575ffad442abcdf2701"
+        }
+      ],
+      "notes": "Funded with 1 USDC via transfer from dalxds.base.eth. Home now shows Send and Trade buttons alongside Deposit and Receive.",
+      "_humanEdited": [],
+      "section": "wallet"
+    },
+    {
+      "slug": "send",
+      "name": "Sending a token",
+      "parent": null,
+      "summary": "Send crypto via address search, QR scan, proximity, or shareable link",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": {
+        "path": "send.ad",
+        "entryFingerprint": "sha256:4adabafd57dd1481316392f6b34e8439",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with Send button visible (funded wallet).",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "Send",
+          "screenId": "send",
+          "action": "Tap Send",
+          "selector": "id=\"send-button\"",
+          "description": "Recipient picker: search, paste, QR, NFC, link.",
+          "screenshotPath": "assets/1c171685a2e5.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:2e327f12abfb48b77a00f83146615716"
+        }
+      ],
+      "notes": "Send button only appears on home when wallet has a balance. Supports search, QR scan, tap-to-send (NFC), and send via link.",
+      "_humanEdited": [],
+      "section": "wallet"
+    },
+    {
+      "slug": "deposit",
+      "name": "Buying a token",
+      "parent": null,
+      "summary": "Fund wallet via debit card or Coinbase with token selection",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-empty"
+      ],
+      "replay": {
+        "path": "deposit.ad",
+        "entryFingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home screen with Deposit button.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Deposit",
+          "screenId": "deposit",
+          "action": "Tap Deposit",
+          "selector": "id=\"buy-button\"",
+          "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
+          "screenshotPath": "assets/462e785b6b13.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf"
+        },
+        {
+          "number": 3,
+          "title": "Token Selector",
+          "screenId": "deposit-token-selector",
+          "action": "Tap USDC selector",
+          "selector": "id=\"buy-v2-asset-with-presets-selector\"",
+          "description": "Token picker modal with USDC, ETH, cbBTC, and more.",
+          "screenshotPath": "assets/9c36ab3a00ab.png",
+          "fingerprintBefore": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf",
+          "fingerprintAfter": "sha256-text:94014ee65d3fb66d7bcc41baf4ce1640"
+        },
+        {
+          "number": 4,
+          "title": "Payment Method",
+          "screenId": "deposit-with-modal",
+          "action": "Tap Deposit With header",
+          "selector": "id=\"buy-v2-payment-method-header\"",
+          "description": "Connect to Coinbase payment method option.",
+          "screenshotPath": "assets/9a09b229cd11.png",
+          "fingerprintBefore": "sha256-text:94014ee65d3fb66d7bcc41baf4ce1640",
+          "fingerprintAfter": "sha256-text:914560f6b2b3bebd1a90f0c9aa3882ff"
+        }
+      ],
+      "notes": "Debit card is default. Coinbase Connect available as alternative payment method.",
+      "_humanEdited": [],
+      "section": "wallet"
+    },
+    {
+      "slug": "receive-scan-request",
+      "name": "Receiving a token",
+      "parent": null,
+      "summary": "Receive funds via QR code, scan to send, or request payment from others",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-empty"
+      ],
+      "replay": {
+        "path": "receive-scan-request.ad",
+        "entryFingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home screen with Receive button.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Receive",
+          "screenId": "receive",
+          "action": "Tap Receive",
+          "selector": "id=\"receive-button\"",
+          "description": "QR code and wallet address for receiving funds.",
+          "screenshotPath": "assets/7e96e0c4223e.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256-text:ee9be5c30a22a83e6855c708063d24d4"
+        },
+        {
+          "number": 3,
+          "title": "Scan QR",
+          "screenId": "scan-qr",
+          "action": "Tap Scan tab",
+          "selector": "id=\"swipeable-tab-item-scan\"",
+          "description": "Camera viewfinder for scanning QR codes.",
+          "screenshotPath": "assets/ef5d4726948b.png",
+          "fingerprintBefore": "sha256-text:ee9be5c30a22a83e6855c708063d24d4",
+          "fingerprintAfter": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af"
+        },
+        {
+          "number": 4,
+          "title": "Request",
+          "screenId": "request",
+          "action": "Tap Request tab",
+          "selector": "id=\"swipeable-tab-item-request\"",
+          "description": "Request payment with recipient, amount, and USDC.",
+          "screenshotPath": "assets/85c33a577c47.png",
+          "fingerprintBefore": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
+          "fingerprintAfter": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf"
+        },
+        {
+          "number": 5,
+          "title": "Add Recipient",
+          "screenId": "request-add-recipient",
+          "action": "Tap Add Recipient",
+          "selector": "id=\"receive-v2-entry-recipient-header-fallback\"",
+          "description": "Recipient picker with search, QR, tap-to-request, and link options.",
+          "screenshotPath": "assets/19b968fc6cd4.png",
+          "fingerprintBefore": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf",
+          "fingerprintAfter": "sha256:3eb56e230703bcd15a25d860159cc020"
+        },
+        {
+          "number": 6,
+          "title": "Fee Info",
+          "screenId": "request-fee-info",
+          "action": "Tap Total fees",
+          "selector": "id=\"payments-v2-total-row-pressable\"",
+          "description": "Network fee breakdown showing Base network, fee: Free.",
+          "screenshotPath": "assets/12c9c0110000.png",
+          "fingerprintBefore": "sha256:3eb56e230703bcd15a25d860159cc020",
+          "fingerprintAfter": "sha256-text:bb9ddecdd65ecfe14a06e13db9b6e5a8"
+        }
+      ],
+      "notes": "Three tabs in one screen group: Receive (QR), Scan (camera), Request (payment). Request includes recipient search, QR, NFC, and link-based request methods. Network fees are free on Base.",
+      "_humanEdited": [],
+      "section": "wallet"
+    },
+    {
+      "slug": "earn-referral",
+      "name": "Enrolling in Base Rewards",
+      "parent": null,
+      "summary": "Enroll in Base Rewards and share referral code for 25% fee earnings",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-empty"
+      ],
+      "replay": {
+        "path": "earn-referral.ad",
+        "entryFingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home screen with Earn chip.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Enroll",
+          "screenId": "earn-enrollment",
+          "action": "Tap Earn",
+          "selector": "id=\"home-earn-chip\"",
+          "description": "Base Rewards enrollment with residency question.",
+          "screenshotPath": "assets/5ce67e7b969e.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:4beb65e5b33acd10011ce6e88ff406b2"
+        },
+        {
+          "number": 3,
+          "title": "Invite Friends",
+          "screenId": "invite-friends",
+          "action": "Tap Continue",
+          "selector": "id=\"earn-enrollment-continue-button\"",
+          "description": "Referral code and sharing options.",
+          "screenshotPath": "assets/39f3134e2e48.png",
+          "fingerprintBefore": "sha256:4beb65e5b33acd10011ce6e88ff406b2",
+          "fingerprintAfter": "sha256-text:6837a7f717ec606957c242274925a7d3"
+        }
+      ],
+      "notes": "Non-US residency auto-selected. Referral code HDNXPRX6 shown.",
+      "_humanEdited": [],
+      "section": "wallet"
+    },
+    {
+      "slug": "home-browsing",
+      "name": "Browsing portfolio (empty)",
+      "parent": null,
+      "summary": "Browse portfolio tabs: Coins (empty), Collectibles (empty), Activity (no transactions)",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-empty"
+      ],
+      "replay": {
+        "path": "home-browsing.ad",
+        "entryFingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Coins (Empty)",
+          "screenId": "home-empty",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home Coins tab with empty token list.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Collectibles",
+          "screenId": "home-collectibles",
+          "action": "Tap Collectibles tab",
+          "selector": "id=\"tab-collectibles\"",
+          "description": "Empty collectibles state.",
+          "screenshotPath": "assets/3743761f1051.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c"
+        },
+        {
+          "number": 3,
+          "title": "Activity",
+          "screenId": "home-activity",
+          "action": "Tap Activity tab",
+          "selector": "id=\"tab-activity\"",
+          "description": "No transactions found.",
+          "screenshotPath": "assets/d633acb54146.png",
+          "fingerprintBefore": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c",
+          "fingerprintAfter": "sha256-text:1faab5cfa4343737d0d245c93dab418c"
+        }
+      ],
+      "notes": "All tabs show empty states for a fresh wallet.",
+      "_humanEdited": [],
+      "section": "wallet"
+    },
+    {
+      "slug": "browse-tokens",
+      "name": "Browsing tokens",
+      "parent": null,
+      "summary": "Discover trending tokens, view price charts and market data, attempt to buy",
+      "mode": "free-roam",
+      "entryPoints": [
+        "discover"
+      ],
+      "replay": {
+        "path": "browse-tokens.ad",
+        "entryFingerprint": "sha256:7d6e323322357c812a8cf39f27c57412",
+        "confidence": "medium",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Discover",
+          "screenId": "discover",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Trending tokens list with filter chips.",
+          "screenshotPath": "assets/4d1473c5b051.png",
+          "fingerprintBefore": "sha256:7d6e323322357c812a8cf39f27c57412",
+          "fingerprintAfter": "sha256:7d6e323322357c812a8cf39f27c57412"
+        },
+        {
+          "number": 2,
+          "title": "Token Detail",
+          "screenId": "token-detail",
+          "action": "Tap VIRTUAL token",
+          "selector": null,
+          "description": "Price chart, market data, and Buy CTA.",
+          "screenshotPath": "assets/d2512b29be5b.png",
+          "fingerprintBefore": "sha256:7d6e323322357c812a8cf39f27c57412",
+          "fingerprintAfter": "sha256:ac69712ee93ddfce891513adfe9deb5f"
+        },
+        {
+          "number": 3,
+          "title": "Requires USDC",
+          "screenId": "trading-requires-usdc",
+          "action": "Tap Buy",
+          "selector": "id=\"infer-action-button\"",
+          "description": "Interstitial: wallet needs USDC to trade.",
+          "screenshotPath": "assets/ed866d343585.png",
+          "fingerprintBefore": "sha256:ac69712ee93ddfce891513adfe9deb5f",
+          "fingerprintAfter": "sha256-text:0869f5aa81b456b564055fb3cbab11a6"
+        }
+      ],
+      "notes": "Empty wallet triggers USDC top-up interstitial when attempting to buy.",
+      "_humanEdited": [],
+      "section": "search"
+    },
+    {
+      "slug": "verify",
+      "name": "Getting verified",
+      "parent": null,
+      "summary": "Get verified via verify.base.dev for rewards, credibility, and visibility",
+      "mode": "free-roam",
+      "entryPoints": [
+        "discover"
+      ],
+      "replay": {
+        "path": "verify.ad",
+        "entryFingerprint": "sha256:7d6e323322357c812a8cf39f27c57412",
+        "confidence": "low",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Discover",
+          "screenId": "discover",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Search tab with Verify pinned app.",
+          "screenshotPath": "assets/4d1473c5b051.png",
+          "fingerprintBefore": "sha256:7d6e323322357c812a8cf39f27c57412",
+          "fingerprintAfter": "sha256:7d6e323322357c812a8cf39f27c57412"
+        },
+        {
+          "number": 2,
+          "title": "Get Verified",
+          "screenId": "verify",
+          "action": "Tap Verify tile",
+          "selector": "id=\"custom-tile-verify-tile\"",
+          "description": "WebView with verification benefits and Continue.",
+          "screenshotPath": "assets/82a42139fc8f.png",
+          "fingerprintBefore": "sha256:7d6e323322357c812a8cf39f27c57412",
+          "fingerprintAfter": "sha256:d5c1c58ab39654daf407c424fd875e03"
+        }
+      ],
+      "notes": "Opens verify.base.dev in in-app browser. WebView content not fully accessible via snapshots.",
+      "_humanEdited": [],
+      "section": "search"
+    },
+    {
+      "slug": "apps-directory",
+      "name": "Browsing apps",
+      "parent": null,
+      "summary": "Browse and install mini apps across categories: trading, games, earning, predictions",
+      "mode": "free-roam",
+      "entryPoints": [
+        "discover"
+      ],
+      "replay": {
+        "path": "apps-directory.ad",
+        "entryFingerprint": "sha256:7d6e323322357c812a8cf39f27c57412",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Discover",
+          "screenId": "discover",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Search tab with Apps pinned tile.",
+          "screenshotPath": "assets/4d1473c5b051.png",
+          "fingerprintBefore": "sha256:7d6e323322357c812a8cf39f27c57412",
+          "fingerprintAfter": "sha256:7d6e323322357c812a8cf39f27c57412"
+        },
+        {
+          "number": 2,
+          "title": "Apps Directory",
+          "screenId": "apps-directory",
+          "action": "Tap Apps tile",
+          "selector": "id=\"custom-tile-discover-tile\"",
+          "description": "Featured apps carousel and categorized app list.",
+          "screenshotPath": "assets/656d9d5b6d09.png",
+          "fingerprintBefore": "sha256:7d6e323322357c812a8cf39f27c57412",
+          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+        }
+      ],
+      "notes": "Categories include Trading must-haves, Play games, Earn crypto, Make predictions.",
+      "_humanEdited": [],
+      "section": "search"
+    },
+    {
+      "slug": "trade-funded",
+      "name": "Trading a token (funded)",
+      "parent": null,
+      "summary": "Swap USDC → ETH with $1 balance, showing Continue CTA and Max/gas warning",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": {
+        "path": "trade-funded.ad",
+        "entryFingerprint": "sha256:4adabafd57dd1481316392f6b34e8439",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with Trade button (funded wallet).",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "Trade",
+          "screenId": "trade-funded",
+          "action": "Tap Trade",
+          "selector": "id=\"trade-button\"",
+          "description": "Swap USDC → ETH with $1 balance, Continue enabled.",
+          "screenshotPath": "assets/91087510a2d3.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:920980b743b4df84fcc6a300f3157773"
+        },
+        {
+          "number": 3,
+          "title": "Trade Max (Needs Gas)",
+          "screenId": "trade-funded-max",
+          "action": "Tap Max",
+          "selector": "id=\"trade-v2-swap-from-card-max-button\"",
+          "description": "$1 entered, 'Not enough' — needs ETH for gas, Receive ETH CTA.",
+          "screenshotPath": "assets/32f721894b44.png",
+          "fingerprintBefore": "sha256:920980b743b4df84fcc6a300f3157773",
+          "fingerprintAfter": "sha256-text:f3bedb6df2a99e1a2d28188f0bcd9810"
+        }
+      ],
+      "notes": "With 1 USDC: Continue is available for sub-max amounts. At Max, gas (ETH) is required and 'Receive ETH' replaces Continue.",
+      "_humanEdited": [],
+      "section": "trade"
+    },
+    {
+      "slug": "trade-no-funds",
+      "name": "Trading a token (no funds)",
+      "parent": null,
+      "summary": "Attempt to swap USDC → ETH with empty wallet, triggering Add Funds deposit flow",
+      "mode": "free-roam",
+      "entryPoints": [
+        "trade"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Trade",
+          "screenId": "trade",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Swap screen with USDC → ETH, $1 entered, 'Not enough' warning.",
+          "screenshotPath": "assets/3dd68f026d33.png",
+          "fingerprintBefore": "sha256:72aeee6499929606c3e39e1bcfa0bae8",
+          "fingerprintAfter": "sha256:72aeee6499929606c3e39e1bcfa0bae8"
+        },
+        {
+          "number": 2,
+          "title": "Requires USDC",
+          "screenId": "trade-requires-usdc",
+          "action": "Tap Add funds",
+          "selector": null,
+          "description": "Interstitial: trading requires USDC.",
+          "screenshotPath": "assets/c824b3218f9f.png",
+          "fingerprintBefore": "sha256:72aeee6499929606c3e39e1bcfa0bae8",
+          "fingerprintAfter": "sha256-text:c686643cfe6591f91344678de0abee5c"
+        },
+        {
+          "number": 3,
+          "title": "Deposit Funds",
+          "screenId": "trade-deposit-funds",
+          "action": "Tap Continue",
+          "selector": "id=\"top-up-interstitial-continue-button\"",
+          "description": "Inline deposit sheet with $2 USDC, Debit Card, Connect to Coinbase.",
+          "screenshotPath": "assets/4723de2c694f.png",
+          "fingerprintBefore": "sha256-text:c686643cfe6591f91344678de0abee5c",
+          "fingerprintAfter": "sha256:62105507a453c3d9540b80309f190764"
+        },
+        {
+          "number": 4,
+          "title": "From-Token Selector",
+          "screenId": "trade-from-token-selector",
+          "action": "Tap USDC selector",
+          "selector": "id=\"trade-v2-swap-from-card-asset-selector\"",
+          "description": "Pick which token to sell. All balances $0.00.",
+          "screenshotPath": "assets/419ad140ef01.png",
+          "fingerprintBefore": "sha256:62105507a453c3d9540b80309f190764",
+          "fingerprintAfter": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07"
+        },
+        {
+          "number": 5,
+          "title": "To-Token Selector",
+          "screenId": "trade-to-token-selector",
+          "action": "Tap Ethereum row",
+          "selector": null,
+          "description": "Pick which token to buy. Shows prices and contract addresses.",
+          "screenshotPath": "assets/e9fa6b920ccc.png",
+          "fingerprintBefore": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07",
+          "fingerprintAfter": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07"
+        }
+      ],
+      "notes": "Empty wallet triggers USDC interstitial → deposit flow. From-selector shows balances, to-selector shows market prices.",
+      "_humanEdited": [],
+      "section": "trade"
+    },
+    {
+      "slug": "social-feed",
+      "name": "Trades feed",
+      "parent": null,
+      "summary": "Browse live trading activity feed showing real-time buy/sell broadcasts",
+      "mode": "free-roam",
+      "entryPoints": [
+        "social-feed"
+      ],
+      "replay": {
+        "path": "social-feed.ad",
+        "entryFingerprint": "sha256-text:9da71d657ce81668f59b987bec8c76c9",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Social Feed",
+          "screenId": "social-feed",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Live trading feed with trade broadcast cards.",
+          "screenshotPath": "assets/9a33f7d3c1e4.png",
+          "fingerprintBefore": "sha256-text:9da71d657ce81668f59b987bec8c76c9",
+          "fingerprintAfter": "sha256-text:9da71d657ce81668f59b987bec8c76c9"
+        }
+      ],
+      "notes": "Read-only feed of other users' trades. No create/compose button visible.",
+      "_humanEdited": [],
+      "section": "trade"
+    },
+    {
+      "slug": "notifications",
+      "name": "Viewing notifications",
+      "parent": null,
+      "summary": "View price alerts and configure notification preferences",
+      "mode": "free-roam",
+      "entryPoints": [
+        "notifications"
+      ],
+      "replay": {
+        "path": "notifications.ad",
+        "entryFingerprint": "sha256:de6604cb2625c762e9cbfee28f88e61f",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Notifications",
+          "screenId": "notifications",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Notifications with push toggle and price alerts.",
+          "screenshotPath": "assets/94539a6fd3ed.png",
+          "fingerprintBefore": "sha256:de6604cb2625c762e9cbfee28f88e61f",
+          "fingerprintAfter": "sha256:de6604cb2625c762e9cbfee28f88e61f"
+        },
+        {
+          "number": 2,
+          "title": "Settings",
+          "screenId": "notification-settings",
+          "action": "Tap notification settings",
+          "selector": "id=\"notification-settings-icon\"",
+          "description": "Category-based notification preferences.",
+          "screenshotPath": "assets/8b112a412c41.png",
+          "fingerprintBefore": "sha256:de6604cb2625c762e9cbfee28f88e61f",
+          "fingerprintAfter": "sha256:7ee271b132e1b95890516440cf455654"
+        }
+      ],
+      "notes": "Categories: Trading, Social, Rewards, Subscriptions, Wallet Activity, Chat, Product Announcements.",
+      "_humanEdited": [],
+      "section": "notifications"
+    },
+    {
+      "slug": "messaging",
+      "name": "Chatting with AI agents",
+      "parent": null,
+      "summary": "Chat with AI agents (Bankr, Elsa) or start peer-to-peer conversations",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-empty"
+      ],
+      "replay": {
+        "path": "messaging.ad",
+        "entryFingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+        "confidence": "high",
+        "credentialsTemplate": []
+      },
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with messages icon in top bar.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Chat",
+          "screenId": "chat",
+          "action": "Tap Open messages",
+          "selector": "id=\"messaging-navigation-icon\"",
+          "description": "AI agents and new conversation button.",
+          "screenshotPath": "assets/8547f4f48ffb.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:b341bb857347879a826d652f85f33ff3"
+        }
+      ],
+      "notes": "AI agents: Bankr (crypto companion) and Elsa (onchain actions).",
+      "_humanEdited": [],
+      "section": "chat"
+    },
+    {
+      "slug": "profile-settings",
+      "name": "Viewing profile",
+      "parent": null,
+      "summary": "View/edit profile and access all app settings from the profile drawer",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-empty"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home",
+          "screenId": "home-empty",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home screen with avatar in top left.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Profile Drawer",
+          "screenId": "profile-drawer",
+          "action": "Tap avatar",
+          "selector": "id=\"account-settings-pressable-avatar\"",
+          "description": "Side drawer with wallet info and menu.",
+          "screenshotPath": "assets/a497e6f119ad.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9"
+        },
+        {
+          "number": 3,
+          "title": "View Profile",
+          "screenId": "view-profile",
+          "action": "Tap View Profile",
+          "selector": null,
+          "description": "Profile page with edit and share options.",
+          "screenshotPath": "assets/a843502c0927.png",
+          "fingerprintBefore": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9",
+          "fingerprintAfter": "sha256:642e0b2257c39e36b6221ff30f8ba2d9"
+        },
+        {
+          "number": 4,
+          "title": "Edit Profile",
+          "screenId": "edit-profile",
+          "action": "Tap Edit profile",
+          "selector": "id=\"trading-profile-header-edit-button\"",
+          "description": "Edit display name, bio, and claim basename.",
+          "screenshotPath": "assets/7b29eb088708.png",
+          "fingerprintBefore": "sha256:642e0b2257c39e36b6221ff30f8ba2d9",
+          "fingerprintAfter": "sha256:072f2f45f7a5f6374754867021a0b4fc"
+        }
+      ],
+      "notes": "Profile drawer is the entry to View Profile, Edit Profile, and Settings.",
+      "_humanEdited": [],
+      "section": "profile"
+    },
+    {
+      "slug": "settings",
+      "name": "Browsing settings",
+      "parent": null,
+      "summary": "Configure display, account, privacy, trading, and Coinbase connection",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu with all categories.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
+        },
+        {
+          "number": 2,
+          "title": "Display",
+          "screenId": "display-settings",
+          "action": "Tap Display",
+          "selector": "id=\"display-setting\"",
+          "description": "Theme, app icon, language, currency.",
+          "screenshotPath": "assets/dc08a5922783.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:15ff6f9699c680bd88dc2cc036649639"
+        },
+        {
+          "number": 3,
+          "title": "Account Management",
+          "screenId": "account-management",
+          "action": "Tap Account management",
+          "selector": "id=\"accountManagement-setting\"",
+          "description": "2FA and sign out.",
+          "screenshotPath": "assets/8ff0e39011c7.png",
+          "fingerprintBefore": "sha256:15ff6f9699c680bd88dc2cc036649639",
+          "fingerprintAfter": "sha256:c2a9f5f22fc13cebfc55d8edc995130f"
+        },
+        {
+          "number": 4,
+          "title": "Privacy & Security",
+          "screenId": "privacy-security",
+          "action": "Tap Privacy & Security",
+          "selector": "id=\"privacySecurity-setting\"",
+          "description": "Privacy toggles, token approvals, permissions.",
+          "screenshotPath": "assets/b7b52eab082b.png",
+          "fingerprintBefore": "sha256:c2a9f5f22fc13cebfc55d8edc995130f",
+          "fingerprintAfter": "sha256:80d685f1e3282246913e2da67842af03"
+        },
+        {
+          "number": 5,
+          "title": "Trading",
+          "screenId": "trading-settings",
+          "action": "Tap Trading",
+          "selector": "id=\"trade-setting\"",
+          "description": "Stealth mode, dust coins, hidden coins.",
+          "screenshotPath": "assets/c2a22f535c9b.png",
+          "fingerprintBefore": "sha256:80d685f1e3282246913e2da67842af03",
+          "fingerprintAfter": "sha256:9f8147a823b5f59da4efa66c924923e7"
+        },
+        {
+          "number": 6,
+          "title": "Connect to Coinbase",
+          "screenId": "connect-coinbase",
+          "action": "Tap Connect to Coinbase",
+          "selector": "id=\"coinbaseConnect-setting\"",
+          "description": "Link Coinbase account for funding.",
+          "screenshotPath": "assets/01da1ee66a1a.png",
+          "fingerprintBefore": "sha256:9f8147a823b5f59da4efa66c924923e7",
+          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+        }
+      ],
+      "notes": "Version 29.95.120, User ID 107426270.",
+      "_humanEdited": [],
+      "section": "settings"
+    },
+    {
+      "slug": "settings-deep",
+      "name": "Settings deep dive",
+      "parent": "settings",
+      "summary": "All settings sub-screens explored to their deepest level: Display pickers, Account 2FA setup, sign-out confirmation, Privacy token approvals and permissions, Trading hidden coins, Help (external), Legal links",
+      "mode": "free-roam",
+      "entryPoints": [
+        "settings"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Settings Main",
+          "screenId": "settings",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Settings menu.",
+          "screenshotPath": "assets/6d02e1c775d8.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109"
+        },
+        {
+          "number": 2,
+          "title": "Appearance Mode",
+          "screenId": "settings-appearance-mode",
+          "action": "Display > Appearance Mode",
+          "selector": "id=\"color-scheme-setting\"",
+          "description": "Light / Dark / System options.",
+          "screenshotPath": "assets/00b69e0a800f.png",
+          "fingerprintBefore": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+          "fingerprintAfter": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54"
+        },
+        {
+          "number": 3,
+          "title": "App Icon",
+          "screenId": "settings-app-icon",
+          "action": "Display > App Icon",
+          "selector": "id=\"app-icon-setting\"",
+          "description": "20 icon variants in grid.",
+          "screenshotPath": "assets/c72065ae642d.png",
+          "fingerprintBefore": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54",
+          "fingerprintAfter": "sha256-text:26bd82a2fd260f89e499d7f13524501d"
+        },
+        {
+          "number": 4,
+          "title": "Language",
+          "screenId": "settings-language",
+          "action": "Display > Language",
+          "selector": "id=\"language-setting\"",
+          "description": "15 languages supported.",
+          "screenshotPath": "assets/0090f6afd1fc.png",
+          "fingerprintBefore": "sha256-text:26bd82a2fd260f89e499d7f13524501d",
+          "fingerprintAfter": "sha256-text:638dd7dff77e5a61e34c3ea88daead2e"
+        },
+        {
+          "number": 5,
+          "title": "Currency",
+          "screenId": "settings-currency",
+          "action": "Display > Local currency",
+          "selector": "id=\"local-currency-setting\"",
+          "description": "Searchable currency list, USD selected.",
+          "screenshotPath": "assets/9da5bc12a7d2.png",
+          "fingerprintBefore": "sha256-text:638dd7dff77e5a61e34c3ea88daead2e",
+          "fingerprintAfter": "sha256:64e8d61ce5470467c8f6f5e7afb4070d"
+        },
+        {
+          "number": 6,
+          "title": "Authenticator Setup",
+          "screenId": "settings-authenticator-setup",
+          "action": "Account > Authenticator App",
+          "selector": "id=\"authenticator-app-setting\"",
+          "description": "2FA setup key and Continue.",
+          "screenshotPath": "assets/f5ae0bc9eddc.png",
+          "fingerprintBefore": "sha256:64e8d61ce5470467c8f6f5e7afb4070d",
+          "fingerprintAfter": "sha256:12cb0671bf18aed8cfc8e267a7c95355"
+        },
+        {
+          "number": 7,
+          "title": "Sign Out Confirm",
+          "screenId": "settings-sign-out-confirm",
+          "action": "Account > Sign out",
+          "selector": "id=\"sign-out-setting\"",
+          "description": "Warning: can't recover without wallet access. Sign Out / Nevermind.",
+          "screenshotPath": "assets/257eedcf904c.png",
+          "fingerprintBefore": "sha256:12cb0671bf18aed8cfc8e267a7c95355",
+          "fingerprintAfter": "sha256-text:613c3295c7303c84dfc16b6f3d59899d"
+        },
+        {
+          "number": 8,
+          "title": "Token Approvals",
+          "screenId": "settings-token-approvals",
+          "action": "Privacy > Token Approvals",
+          "selector": "id=\"token-approvals-setting\"",
+          "description": "No active approvals. Revoke guidance.",
+          "screenshotPath": "assets/f5c117a30f71.png",
+          "fingerprintBefore": "sha256-text:613c3295c7303c84dfc16b6f3d59899d",
+          "fingerprintAfter": "sha256-text:7e0bba9456f178aa9360ea5f2eeadf07"
+        },
+        {
+          "number": 9,
+          "title": "Manage Permissions",
+          "screenId": "settings-manage-permissions",
+          "action": "Privacy > Manage Permissions",
+          "selector": "id=\"manage-permissions-setting\"",
+          "description": "Empty — no apps granted permissions.",
+          "screenshotPath": "assets/70e28761a03c.png",
+          "fingerprintBefore": "sha256-text:7e0bba9456f178aa9360ea5f2eeadf07",
+          "fingerprintAfter": "sha256:61632a6eef4152a48d31841f9e40ec99"
+        },
+        {
+          "number": 10,
+          "title": "Hidden Coins",
+          "screenId": "settings-hidden-coins",
+          "action": "Trading > Hidden Coins",
+          "selector": "id=\"hidden-coins-setting\"",
+          "description": "Hidden/Spam/Dust tabs, all empty.",
+          "screenshotPath": "assets/ec89ca53b808.png",
+          "fingerprintBefore": "sha256:61632a6eef4152a48d31841f9e40ec99",
+          "fingerprintAfter": "sha256:d647b76d6fbff1cf676c6bf35ca3b4af"
+        },
+        {
+          "number": 11,
+          "title": "Help",
+          "screenId": "settings-help",
+          "action": "Tap Help",
+          "selector": "id=\"help-setting\"",
+          "description": "Opens help.coinbase.com in Chrome.",
+          "screenshotPath": "assets/670e94a1c0d8.png",
+          "fingerprintBefore": "sha256:d647b76d6fbff1cf676c6bf35ca3b4af",
+          "fingerprintAfter": "sha256-text:d6cede6a0f88c09aaf8c73ef92c13ab8"
+        },
+        {
+          "number": 12,
+          "title": "Legal",
+          "screenId": "settings-legal",
+          "action": "Tap Legal",
+          "selector": "id=\"legal-setting\"",
+          "description": "Privacy Policy and Terms of Service links.",
+          "screenshotPath": "assets/4e2f483fc6a6.png",
+          "fingerprintBefore": "sha256-text:d6cede6a0f88c09aaf8c73ef92c13ab8",
+          "fingerprintAfter": "sha256:0b4ce297fb54fbf2f05cf48a831143b0"
+        }
+      ],
+      "notes": "All settings explored to deepest available level. No changes were made — view only.",
+      "_humanEdited": [],
+      "section": "settings"
+    }
+  ],
+  "decisionPoints": [
+    {
+      "screenId": "home-empty",
+      "options": [
+        {
+          "label": "Deposit",
+          "explored": true,
+          "flowSlug": "deposit"
+        },
+        {
+          "label": "Receive",
+          "explored": true,
+          "flowSlug": "receive-scan-request"
+        },
+        {
+          "label": "Earn",
+          "explored": true,
+          "flowSlug": "earn-referral"
+        },
+        {
+          "label": "Invite Friends (announcement)",
+          "explored": true,
+          "flowSlug": "earn-referral"
+        },
+        {
+          "label": "Coins tab",
+          "explored": true,
+          "flowSlug": "home-browsing"
+        },
+        {
+          "label": "Collectibles tab",
+          "explored": true,
+          "flowSlug": "home-browsing"
+        },
+        {
+          "label": "Activity tab",
+          "explored": true,
+          "flowSlug": "home-browsing"
+        },
+        {
+          "label": "See what's trending",
+          "explored": true,
+          "flowSlug": "browse-tokens"
+        },
+        {
+          "label": "Avatar / Profile",
+          "explored": true,
+          "flowSlug": "profile-settings"
+        },
+        {
+          "label": "Search icon",
+          "explored": true
+        },
+        {
+          "label": "Scan QR Code",
+          "explored": true,
+          "flowSlug": "receive-scan-request"
+        },
+        {
+          "label": "Open messages",
+          "explored": true,
+          "flowSlug": "messaging"
+        }
+      ]
+    },
+    {
+      "screenId": "discover",
+      "options": [
+        {
+          "label": "Verify",
+          "explored": true,
+          "flowSlug": "verify"
+        },
+        {
+          "label": "Apps",
+          "explored": true,
+          "flowSlug": "apps-directory"
+        },
+        {
+          "label": "Trending token",
+          "explored": true,
+          "flowSlug": "browse-tokens"
+        },
+        {
+          "label": "Watchlist toggle",
+          "explored": true
+        },
+        {
+          "label": "New filter",
+          "explored": true
+        },
+        {
+          "label": "Majors filter",
+          "explored": false
+        },
+        {
+          "label": "Open filters",
+          "explored": true
+        },
+        {
+          "label": "More options",
+          "explored": true
+        },
+        {
+          "label": "Search input",
+          "explored": true
+        }
+      ]
+    },
+    {
+      "screenId": "deposit",
+      "options": [
+        {
+          "label": "Token selector (USDC)",
+          "explored": true,
+          "flowSlug": "deposit"
+        },
+        {
+          "label": "Deposit With (payment method)",
+          "explored": true,
+          "flowSlug": "deposit"
+        },
+        {
+          "label": "Connect to Coinbase",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "screenId": "settings",
+      "options": [
+        {
+          "label": "Display",
+          "explored": true,
+          "flowSlug": "settings"
+        },
+        {
+          "label": "Account management",
+          "explored": true,
+          "flowSlug": "settings"
+        },
+        {
+          "label": "Connect to Coinbase",
+          "explored": true,
+          "flowSlug": "settings"
+        },
+        {
+          "label": "Privacy & Security",
+          "explored": true,
+          "flowSlug": "settings"
+        },
+        {
+          "label": "Trading",
+          "explored": true,
+          "flowSlug": "settings"
+        },
+        {
+          "label": "Help",
+          "explored": false
+        },
+        {
+          "label": "Legal",
+          "explored": false
+        }
+      ]
+    }
+  ],
+  "changes": [],
+  "stats": {
+    "screensInThisCapture": 68,
+    "screensVisited": 72,
+    "screensAdded": 72,
+    "screensModified": 0,
+    "screensRemoved": 0,
+    "flowsTouched": 19
+  }
+}

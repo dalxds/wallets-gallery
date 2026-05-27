@@ -50,6 +50,7 @@ for (const dir of dirs) {
       label: flow.name,
       description: flow.summary,
       flowSlug: flow.slug,
+      flowSection: flow.section,
       href: `/apps/${appSlug}/flows/${flow.slug}`,
     })
 

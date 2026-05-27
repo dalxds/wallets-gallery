@@ -268,27 +268,29 @@ Decide the screen-id from the snapshot content (page identifier, dominant text, 
 
 ### Build flows
 
-**Every captured screen must belong to at least one flow.** Flows describe user intent (e.g. "Browse tokens", "Explore yield strategies", "Get a debit card"). There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap (the home screen is the entry point for many flows).
+**Every captured screen must belong to at least one flow.** Flows describe user tasks (e.g. "Buying a token", "Sending money", "Getting verified"). There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap (the home screen is the entry point for many flows).
+
+**Flow naming: gerund + object.** Name every flow as a user action in gerund form: "Buying a token", "Sending a token", "Switching to dark mode" — NOT "Deposit", "Send", "Display Settings". Each name should answer "what is the user doing?" in natural language.
+
+**Sections: group by navigation.** Every flow MUST have a `section` field derived from the app's primary navigation structure (tab bar, bottom nav, drawer menu). The section name matches the navigation item: "wallet", "search", "trade", "settings", "onboarding", etc. Flows that happen outside primary navigation (onboarding, login) use descriptive sections.
+
+To determine sections during packaging:
+1. Identify the app's primary navigation items (tab bar, bottom nav, drawer).
+2. Map each flow's entry screen to the navigation item that leads to it.
+3. Assign that navigation item's label (lowercased, slugified) as the flow's section.
+4. Flows reachable only before authentication (welcome, sign-up, login) use section "onboarding".
+5. Flows reachable from a profile/account drawer use section "profile" or "settings" as appropriate.
 
 **Determining flow hierarchy:**
 
-- If a flow is only reachable from within another flow (never independently), set `parent` to that flow's slug.
-- Otherwise leave `parent: null`.
-- When in doubt, default to top-level. Only set a parent when the relationship is clear.
+- **Parent for sub-actions:** If a flow represents an action reachable from within another flow's screens (e.g., "Selecting a coin" is reachable from "Buying a token"), set `parent` to that flow's slug.
+- **Parent for variants:** If two flows represent the same user intent in different app states (e.g., trading with funds vs. without), they should be siblings in the same section — do NOT set one as parent of the other.
+- **Default to nesting under the section.** Only leave `parent: null` for top-level flows within a section.
+- **Three levels max:** Section → Flow → Sub-flow. Avoid deeper nesting.
 
-For each identified flow:
+**No state-variant flows.** Do not create separate flows for the same action in different app states (empty wallet vs. funded wallet, free vs. premium). Capture the primary variant as the main flow. If the state difference produces materially different screens (different CTAs, different steps), capture both as sibling flows in the same section with descriptive names: "Trading a token (funded)" and "Trading a token (no funds)".
 
-1. Choose a descriptive slug (e.g. `send-sol`, `swap-eth-usdc`, `onboarding`).
-2. Build the flow's step data from the staging log + saved snapshots:
-   - `screenId` references the assigned screen ID.
-   - `description` describes what the user is doing/seeing at this step.
-   - `action` describes the transition into this step from the previous (e.g. `Tap "Send"`).
-   - `selector` is the stable selector used to perform the action.
-   - `fingerprintBefore/After` for change detection on re-capture.
-   - `screenshotPath` references the content-addressed asset.
-3. **Every flow's step-01 must be a screen reachable from primary navigation.** Show how the user gets there. Don't start mid-journey.
-4. **Do not include scroll states** for homogeneous lists as separate steps. One representative view is enough.
-5. Compute `entryPoints` — screen IDs from which this flow can be launched.
+**Flow granularity:** Each distinct sub-action the user can take from within a flow should ideally be its own child flow. "Selecting a coin" is a separate flow from "Buying a token", nested as a child. This makes flows individually linkable and reusable. However, do not create child flows for trivial interactions (dismissing a modal, scrolling) — only for actions that navigate to a meaningfully different screen.
 
 ### Harden `.ad` files
 
