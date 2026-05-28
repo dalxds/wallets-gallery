@@ -58,7 +58,6 @@ export interface FlowReplay {
 export interface FlowEntry {
   slug: string
   name: string
-  section: string
   parent: string | null
   summary: string
   mode: string

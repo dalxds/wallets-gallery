@@ -268,29 +268,38 @@ Decide the screen-id from the snapshot content (page identifier, dominant text, 
 
 ### Build flows
 
-**Every captured screen must belong to at least one flow.** Flows describe user tasks (e.g. "Buying a token", "Sending money", "Getting verified"). There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap (the home screen is the entry point for many flows).
+**Every captured screen must belong to at least one flow.** Flows describe user tasks (e.g. "Buying a token", "Sending money", "Getting verified"). There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap.
 
 **Flow naming: gerund + object.** Name every flow as a user action in gerund form: "Buying a token", "Sending a token", "Switching to dark mode" — NOT "Deposit", "Send", "Display Settings". Each name should answer "what is the user doing?" in natural language.
 
-**Sections: group by navigation.** Every flow MUST have a `section` field derived from the app's primary navigation structure (tab bar, bottom nav, drawer menu). The section name matches the navigation item: "wallet", "search", "trade", "settings", "onboarding", etc. Flows that happen outside primary navigation (onboarding, login) use descriptive sections.
+Exception: top-level navigation flows are named after the navigation label itself: "Wallet", "Discover", "Settings". These represent "being in" that section of the app.
 
-To determine sections during packaging:
-1. Identify the app's primary navigation items (tab bar, bottom nav, drawer).
-2. Map each flow's entry screen to the navigation item that leads to it.
-3. Assign that navigation item's label (lowercased, slugified) as the flow's section.
-4. Flows reachable only before authentication (welcome, sign-up, login) use section "onboarding".
-5. Flows reachable from a profile/account drawer use section "profile" or "settings" as appropriate.
+**Flow hierarchy is recursive and entry-point driven.** A flow's `parent` field describes where its entry screen comes from:
 
-**Determining flow hierarchy:**
+- **Top-level flows** (`parent: null`): one per primary navigation item (tab bar, drawer, bottom nav). The entry screen is the navigation tap landing screen. Plus "Onboarding" for pre-auth flows.
+- **Child flows**: their entry screen is a screen that already appears within the parent flow. The child represents one specific action reachable from that screen.
+- **Grandchild flows**: their entry screen appears within a child flow. Nesting can go 3+ levels deep.
 
-- **Parent for sub-actions:** If a flow represents an action reachable from within another flow's screens (e.g., "Selecting a coin" is reachable from "Buying a token"), set `parent` to that flow's slug.
-- **Parent for variants:** If two flows represent the same user intent in different app states (e.g., trading with funds vs. without), they should be siblings in the same section — do NOT set one as parent of the other.
-- **Default to nesting under the section.** Only leave `parent: null` for top-level flows within a section.
-- **Three levels max:** Section → Flow → Sub-flow. Avoid deeper nesting.
+Each level's entry point IS a screen in the level above. This makes the tree mirror the app's actual navigation depth.
 
-**No state-variant flows.** Do not create separate flows for the same action in different app states (empty wallet vs. funded wallet, free vs. premium). Capture the primary variant as the main flow. If the state difference produces materially different screens (different CTAs, different steps), capture both as sibling flows in the same section with descriptive names: "Trading a token (funded)" and "Trading a token (no funds)".
+**Split at decision points.** When a screen offers multiple branches (`decisionPoints` data records this), do NOT bundle all branches into one linear flow. Instead:
 
-**Flow granularity:** Each distinct sub-action the user can take from within a flow should ideally be its own child flow. "Selecting a coin" is a separate flow from "Buying a token", nested as a child. This makes flows individually linkable and reusable. However, do not create child flows for trivial interactions (dismissing a modal, scrolling) — only for actions that navigate to a meaningfully different screen.
+1. The parent flow ends at the decision-point screen.
+2. Each explored branch becomes a separate child flow.
+3. Each child flow's steps repeat the path to the decision-point screen, then add the branch-specific steps.
+
+Example — a "Deposit" screen has options for token-selector and payment-method:
+- ❌ One flow with steps: Home → Deposit → Token Selector → Payment Method (bundled, linear)
+- ✓ Three flows:
+  - "Buying a token" (parent): Home → Deposit
+  - "Selecting a coin" (child): Home → Deposit → Token Selector
+  - "Selecting a payment method" (child): Home → Deposit → Payment Method
+
+This produces a tree that matches the app's branching IA, and each leaf flow is individually linkable as a focused user task.
+
+**No state-variant flows.** Do not create separate flows for the same action in different app states (empty wallet vs. funded wallet, free vs. premium). Capture the primary variant as the main flow. If the state difference produces materially different screens (different CTAs, different steps), capture both as sibling flows with descriptive names: "Trading a token (funded)" and "Trading a token (no funds)".
+
+**Flow granularity:** every distinct sub-action the user can take from within a flow should ideally be its own child flow. "Selecting a coin" is a separate flow from "Buying a token", nested as a child. Do not create child flows for trivial interactions (dismissing a modal, scrolling).
 
 ### Harden `.ad` files
 

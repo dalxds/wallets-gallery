@@ -1,9 +1,9 @@
 "use client"
 
-import type { AppCapture } from "@/lib/types"
+import type { AppCapture, FlowEntry } from "@/lib/types"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 interface FlowsViewProps {
   app: AppCapture
@@ -11,8 +11,47 @@ interface FlowsViewProps {
   activeFlowSlug?: string
 }
 
-function formatSectionName(section: string) {
-  return section.charAt(0).toUpperCase() + section.slice(1)
+function FlowTree({
+  flow,
+  allFlows,
+  depth,
+  appSlug,
+  flowRefs,
+}: {
+  flow: FlowEntry
+  allFlows: FlowEntry[]
+  depth: number
+  appSlug: string
+  flowRefs: React.MutableRefObject<Map<string, HTMLDivElement>>
+}) {
+  const children = allFlows.filter((f) => f.parent === flow.slug)
+
+  return (
+    <div>
+      <div
+        ref={(el) => {
+          if (el) flowRefs.current.set(flow.slug, el)
+        }}
+        className="scroll-mt-20"
+      >
+        <FlowRow flow={flow} appSlug={appSlug} />
+      </div>
+      {children.length > 0 && (
+        <div className="ml-6 mt-4 space-y-6 border-l pl-6">
+          {children.map((child) => (
+            <FlowTree
+              key={child.slug}
+              flow={child}
+              allFlows={allFlows}
+              depth={depth + 1}
+              appSlug={appSlug}
+              flowRefs={flowRefs}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export function FlowsView({
@@ -43,17 +82,7 @@ export function FlowsView({
     })
   }, [activeFlowSlug])
 
-  const sections = useMemo(() => {
-    const seen = new Set<string>()
-    const result: string[] = []
-    for (const f of app.flows) {
-      if (!seen.has(f.section)) {
-        seen.add(f.section)
-        result.push(f.section)
-      }
-    }
-    return result
-  }, [app.flows])
+  const topLevel = app.flows.filter((f) => f.parent === null)
 
   return (
     <div className="flex gap-6">
@@ -74,66 +103,17 @@ export function FlowsView({
             onFlowClick={scrollToFlow}
           />
         </div>
-        <div className="space-y-10">
-          {sections.map((section) => {
-            const topLevel = app.flows.filter(
-              (f) => f.section === section && !f.parent
-            )
-            if (topLevel.length === 0) return null
-
-            return (
-              <div key={section}>
-                <h2 className="mb-4 text-lg font-semibold">
-                  {formatSectionName(section)}
-                </h2>
-                <div className="space-y-8">
-                  {topLevel.map((flow) => {
-                    const children = app.flows.filter(
-                      (f) => f.parent === flow.slug
-                    )
-
-                    return (
-                      <div key={flow.slug}>
-                        <div
-                          ref={(el) => {
-                            if (el)
-                              flowRefs.current.set(
-                                flow.slug,
-                                el
-                              )
-                          }}
-                          className="scroll-mt-20"
-                        >
-                          <FlowRow
-                            flow={flow}
-                            appSlug={appSlug}
-                          />
-                        </div>
-                        {children.map((child) => (
-                          <div
-                            key={child.slug}
-                            ref={(el) => {
-                              if (el)
-                                flowRefs.current.set(
-                                  child.slug,
-                                  el
-                                )
-                            }}
-                            className="ml-6 mt-4 scroll-mt-20 border-l pl-6"
-                          >
-                            <FlowRow
-                              flow={child}
-                              appSlug={appSlug}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })}
+        <div className="space-y-8">
+          {topLevel.map((flow) => (
+            <FlowTree
+              key={flow.slug}
+              flow={flow}
+              allFlows={app.flows}
+              depth={0}
+              appSlug={appSlug}
+              flowRefs={flowRefs}
+            />
+          ))}
         </div>
       </div>
     </div>

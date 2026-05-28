@@ -9,7 +9,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { ChevronRight } from "lucide-react"
-import { useState, useMemo } from "react"
+import { useMemo, useState } from "react"
 
 interface FlowSidebarProps {
   flows: FlowEntry[]
@@ -17,20 +17,95 @@ interface FlowSidebarProps {
   onFlowClick: (slug: string) => void
 }
 
-function getSections(flows: FlowEntry[]) {
-  const seen = new Set<string>()
-  const sections: string[] = []
-  for (const f of flows) {
-    if (!seen.has(f.section)) {
-      seen.add(f.section)
-      sections.push(f.section)
-    }
-  }
-  return sections
+function matchesFilter(flow: FlowEntry, q: string): boolean {
+  if (!q) return true
+  return (
+    flow.name.toLowerCase().includes(q) ||
+    flow.summary.toLowerCase().includes(q)
+  )
 }
 
-function formatSectionName(section: string) {
-  return section.charAt(0).toUpperCase() + section.slice(1)
+function FlowNode({
+  flow,
+  allFlows,
+  depth,
+  filter,
+  activeFlowSlug,
+  onFlowClick,
+}: {
+  flow: FlowEntry
+  allFlows: FlowEntry[]
+  depth: number
+  filter: string
+  activeFlowSlug?: string
+  onFlowClick: (slug: string) => void
+}) {
+  const children = allFlows.filter((f) => f.parent === flow.slug)
+
+  const q = filter.toLowerCase()
+  const selfMatches = matchesFilter(flow, q)
+  const visibleChildren = children.filter((child) =>
+    childOrDescendantMatches(child, allFlows, q)
+  )
+
+  if (q && !selfMatches && visibleChildren.length === 0) {
+    return null
+  }
+
+  const button = (
+    <button
+      onClick={() => onFlowClick(flow.slug)}
+      className={cn(
+        "flex-1 truncate rounded-md px-2 py-1.5 text-left text-sm transition-colors hover:bg-accent",
+        activeFlowSlug === flow.slug && "bg-accent font-medium"
+      )}
+    >
+      {flow.name}
+      <span className="ml-1 text-xs text-muted-foreground">
+        ({flow.steps.length})
+      </span>
+    </button>
+  )
+
+  if (children.length === 0) {
+    return <div className="flex items-center">{button}</div>
+  }
+
+  return (
+    <Collapsible defaultOpen>
+      <div className="flex items-center">
+        <CollapsibleTrigger className="flex h-7 w-5 shrink-0 items-center justify-center text-muted-foreground hover:text-foreground [&[data-state=open]>svg]:rotate-90">
+          <ChevronRight className="h-3 w-3 transition-transform" />
+        </CollapsibleTrigger>
+        {button}
+      </div>
+      <CollapsibleContent>
+        <div className={cn("ml-3 flex flex-col gap-0.5 border-l pl-2")}>
+          {visibleChildren.map((child) => (
+            <FlowNode
+              key={child.slug}
+              flow={child}
+              allFlows={allFlows}
+              depth={depth + 1}
+              filter={filter}
+              activeFlowSlug={activeFlowSlug}
+              onFlowClick={onFlowClick}
+            />
+          ))}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  )
+}
+
+function childOrDescendantMatches(
+  flow: FlowEntry,
+  allFlows: FlowEntry[],
+  q: string
+): boolean {
+  if (matchesFilter(flow, q)) return true
+  const children = allFlows.filter((f) => f.parent === flow.slug)
+  return children.some((c) => childOrDescendantMatches(c, allFlows, q))
 }
 
 export function FlowSidebar({
@@ -40,39 +115,15 @@ export function FlowSidebar({
 }: FlowSidebarProps) {
   const [filter, setFilter] = useState("")
 
-  const getChildren = (parentSlug: string) =>
-    flows.filter((f) => f.parent === parentSlug)
+  const topLevel = useMemo(
+    () => flows.filter((f) => f.parent === null),
+    [flows]
+  )
 
-  const sections = useMemo(() => getSections(flows), [flows])
-
-  const filteredFlowsBySection = useMemo(() => {
-    const q = filter.toLowerCase()
-    const result: Record<string, FlowEntry[]> = {}
-
-    for (const section of sections) {
-      const sectionFlows = flows.filter(
-        (f) => f.section === section && !f.parent
-      )
-      const filtered = sectionFlows.filter((f) => {
-        if (!q) return true
-        const children = getChildren(f.slug)
-        return (
-          f.name.toLowerCase().includes(q) ||
-          f.summary.toLowerCase().includes(q) ||
-          section.toLowerCase().includes(q) ||
-          children.some(
-            (c) =>
-              c.name.toLowerCase().includes(q) ||
-              c.summary.toLowerCase().includes(q)
-          )
-        )
-      })
-      if (filtered.length > 0) {
-        result[section] = filtered
-      }
-    }
-    return result
-  }, [flows, filter, sections])
+  const q = filter.toLowerCase()
+  const visibleTopLevel = topLevel.filter((f) =>
+    childOrDescendantMatches(f, flows, q)
+  )
 
   return (
     <div className="flex flex-col gap-2">
@@ -82,97 +133,18 @@ export function FlowSidebar({
         onChange={(e) => setFilter(e.target.value)}
         className="h-8 text-sm"
       />
-      <nav className="flex flex-col gap-1">
-        {Object.entries(filteredFlowsBySection).map(
-          ([section, sectionFlows]) => (
-            <Collapsible key={section} defaultOpen>
-              <CollapsibleTrigger className="flex w-full items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground [&[data-state=open]>svg]:rotate-90">
-                <ChevronRight className="h-3 w-3 transition-transform" />
-                {formatSectionName(section)}
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <div className="flex flex-col gap-0.5">
-                  {sectionFlows.map((flow) => {
-                    const children = getChildren(flow.slug)
-                    if (children.length === 0) {
-                      return (
-                        <button
-                          key={flow.slug}
-                          onClick={() => onFlowClick(flow.slug)}
-                          className={cn(
-                            "rounded-md px-2 py-1.5 text-left text-sm transition-colors hover:bg-accent",
-                            activeFlowSlug === flow.slug &&
-                              "bg-accent font-medium"
-                          )}
-                        >
-                          {flow.name}
-                          <span className="ml-1 text-xs text-muted-foreground">
-                            ({flow.steps.length})
-                          </span>
-                        </button>
-                      )
-                    }
-
-                    return (
-                      <Collapsible key={flow.slug} defaultOpen>
-                        <CollapsibleTrigger className="flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-accent [&[data-state=open]>svg]:rotate-90">
-                          <ChevronRight className="h-3 w-3 transition-transform" />
-                          <span
-                            className={cn(
-                              activeFlowSlug === flow.slug &&
-                                "font-medium"
-                            )}
-                          >
-                            {flow.name}
-                          </span>
-                          <span className="ml-1 text-xs text-muted-foreground">
-                            ({flow.steps.length})
-                          </span>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <div className="ml-4 flex flex-col gap-0.5 border-l pl-2">
-                            <button
-                              onClick={() =>
-                                onFlowClick(flow.slug)
-                              }
-                              className={cn(
-                                "rounded-md px-2 py-1 text-left text-sm transition-colors hover:bg-accent",
-                                activeFlowSlug ===
-                                  flow.slug &&
-                                  "bg-accent font-medium"
-                              )}
-                            >
-                              {flow.name}
-                            </button>
-                            {children.map((child) => (
-                              <button
-                                key={child.slug}
-                                onClick={() =>
-                                  onFlowClick(child.slug)
-                                }
-                                className={cn(
-                                  "rounded-md px-2 py-1 text-left text-sm transition-colors hover:bg-accent",
-                                  activeFlowSlug ===
-                                    child.slug &&
-                                    "bg-accent font-medium"
-                                )}
-                              >
-                                {child.name}
-                                <span className="ml-1 text-xs text-muted-foreground">
-                                  ({child.steps.length})
-                                </span>
-                              </button>
-                            ))}
-                          </div>
-                        </CollapsibleContent>
-                      </Collapsible>
-                    )
-                  })}
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-          )
-        )}
+      <nav className="flex flex-col gap-0.5">
+        {visibleTopLevel.map((flow) => (
+          <FlowNode
+            key={flow.slug}
+            flow={flow}
+            allFlows={flows}
+            depth={0}
+            filter={filter}
+            activeFlowSlug={activeFlowSlug}
+            onFlowClick={onFlowClick}
+          />
+        ))}
       </nav>
     </div>
   )
