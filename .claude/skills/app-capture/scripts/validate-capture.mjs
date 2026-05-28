@@ -312,6 +312,18 @@ function validate(capture, captureDir) {
     }
   }
 
+  // Cross-reference flow.parent -> flows[].slug
+  for (let i = 0; i < capture.flows.length; i++) {
+    const f = capture.flows[i];
+    if (f.parent === null || f.parent === undefined) continue;
+    if (!flowSlugs.has(f.parent)) {
+      err(`flows[${i}] (slug="${f.slug}"): parent "${f.parent}" not in flows[].slug`);
+    }
+    if (f.parent === f.slug) {
+      err(`flows[${i}] (slug="${f.slug}"): parent cannot be self`);
+    }
+  }
+
   // Cross-reference appearsIn -> flows
   for (let i = 0; i < capture.screens.length; i++) {
     const s = capture.screens[i];
