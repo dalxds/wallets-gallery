@@ -813,8 +813,8 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Browsing portfolio (funded)",
-    "description": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity with transaction history, and USDC token detail",
+    "label": "Home (funded)",
+    "description": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity, USDC detail",
     "flowSlug": "home-funded",
     "href": "/apps/base/flows/home-funded"
   },
@@ -825,7 +825,7 @@
     "label": "Home (Coins)",
     "description": "Home with $1 balance, USDC in Coins tab.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "home-funded",
     "href": "/apps/base/flows/home-funded"
   },
@@ -836,7 +836,7 @@
     "label": "Sort By",
     "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "home-sort-by",
     "href": "/apps/base/flows/home-funded"
   },
@@ -847,7 +847,7 @@
     "label": "Network Filter",
     "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "home-network-filter",
     "href": "/apps/base/flows/home-funded"
   },
@@ -858,7 +858,7 @@
     "label": "Category Filter",
     "description": "Filter by category: Cash, Apps, Memes, Social.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "home-category-filter",
     "href": "/apps/base/flows/home-funded"
   },
@@ -869,7 +869,7 @@
     "label": "Activity",
     "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "activity-funded",
     "href": "/apps/base/flows/home-funded"
   },
@@ -880,7 +880,7 @@
     "label": "Transaction Detail",
     "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "transaction-detail",
     "href": "/apps/base/flows/home-funded"
   },
@@ -891,7 +891,7 @@
     "label": "USDC Token Detail",
     "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
     "flowSlug": "home-funded",
-    "flowName": "Browsing portfolio (funded)",
+    "flowName": "Home (funded)",
     "screenId": "usdc-token-detail-owned",
     "href": "/apps/base/flows/home-funded"
   },
@@ -1100,8 +1100,8 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Browsing portfolio (empty)",
-    "description": "Browse portfolio tabs: Coins (empty), Collectibles (empty), Activity (no transactions)",
+    "label": "Home (empty)",
+    "description": "Browse portfolio tabs in empty-wallet state: Coins, Collectibles, Activity",
     "flowSlug": "home-browsing",
     "href": "/apps/base/flows/home-browsing"
   },
@@ -1112,7 +1112,7 @@
     "label": "Coins (Empty)",
     "description": "Home Coins tab with empty token list.",
     "flowSlug": "home-browsing",
-    "flowName": "Browsing portfolio (empty)",
+    "flowName": "Home (empty)",
     "screenId": "home-empty",
     "href": "/apps/base/flows/home-browsing"
   },
@@ -1123,7 +1123,7 @@
     "label": "Collectibles",
     "description": "Empty collectibles state.",
     "flowSlug": "home-browsing",
-    "flowName": "Browsing portfolio (empty)",
+    "flowName": "Home (empty)",
     "screenId": "home-collectibles",
     "href": "/apps/base/flows/home-browsing"
   },
@@ -1134,7 +1134,7 @@
     "label": "Activity",
     "description": "No transactions found.",
     "flowSlug": "home-browsing",
-    "flowName": "Browsing portfolio (empty)",
+    "flowName": "Home (empty)",
     "screenId": "home-activity",
     "href": "/apps/base/flows/home-browsing"
   },
@@ -1162,7 +1162,7 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Browsing tokens",
+    "label": "Token detail",
     "description": "Discover trending tokens, view price charts and market data, attempt to buy",
     "flowSlug": "browse-tokens",
     "href": "/apps/base/flows/browse-tokens"
@@ -1174,7 +1174,7 @@
     "label": "Discover",
     "description": "Trending tokens list with filter chips.",
     "flowSlug": "browse-tokens",
-    "flowName": "Browsing tokens",
+    "flowName": "Token detail",
     "screenId": "discover",
     "href": "/apps/base/flows/browse-tokens"
   },
@@ -1185,7 +1185,7 @@
     "label": "Token Detail",
     "description": "Price chart, market data, and Buy CTA.",
     "flowSlug": "browse-tokens",
-    "flowName": "Browsing tokens",
+    "flowName": "Token detail",
     "screenId": "token-detail",
     "href": "/apps/base/flows/browse-tokens"
   },
@@ -1196,7 +1196,7 @@
     "label": "Requires USDC",
     "description": "Interstitial: wallet needs USDC to trade.",
     "flowSlug": "browse-tokens",
-    "flowName": "Browsing tokens",
+    "flowName": "Token detail",
     "screenId": "trading-requires-usdc",
     "href": "/apps/base/flows/browse-tokens"
   },
@@ -1235,8 +1235,8 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Browsing apps",
-    "description": "Browse and install mini apps across categories: trading, games, earning, predictions",
+    "label": "Apps directory",
+    "description": "Browse and install mini apps across categories",
     "flowSlug": "apps-directory",
     "href": "/apps/base/flows/apps-directory"
   },
@@ -1247,7 +1247,7 @@
     "label": "Discover",
     "description": "Search tab with Apps pinned tile.",
     "flowSlug": "apps-directory",
-    "flowName": "Browsing apps",
+    "flowName": "Apps directory",
     "screenId": "discover",
     "href": "/apps/base/flows/apps-directory"
   },
@@ -1258,7 +1258,7 @@
     "label": "Apps Directory",
     "description": "Featured apps carousel and categorized app list.",
     "flowSlug": "apps-directory",
-    "flowName": "Browsing apps",
+    "flowName": "Apps directory",
     "screenId": "apps-directory",
     "href": "/apps/base/flows/apps-directory"
   },
@@ -1392,8 +1392,8 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Browsing trades feed",
-    "description": "Browse live trading activity feed showing real-time buy/sell broadcasts",
+    "label": "Trades feed",
+    "description": "Live trading feed showing real-time buy/sell broadcasts",
     "flowSlug": "social-feed",
     "href": "/apps/base/flows/social-feed"
   },
@@ -1404,7 +1404,7 @@
     "label": "Social Feed",
     "description": "Live trading feed with trade broadcast cards.",
     "flowSlug": "social-feed",
-    "flowName": "Browsing trades feed",
+    "flowName": "Trades feed",
     "screenId": "social-feed",
     "href": "/apps/base/flows/social-feed"
   },
@@ -1463,7 +1463,7 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Viewing notifications",
+    "label": "Notifications",
     "description": "View price alerts and configure notification preferences",
     "flowSlug": "notifications",
     "href": "/apps/base/flows/notifications"
@@ -1475,7 +1475,7 @@
     "label": "Notifications",
     "description": "Notifications with push toggle and price alerts.",
     "flowSlug": "notifications",
-    "flowName": "Viewing notifications",
+    "flowName": "Notifications",
     "screenId": "notifications",
     "href": "/apps/base/flows/notifications"
   },
@@ -1486,7 +1486,7 @@
     "label": "Settings",
     "description": "Category-based notification preferences.",
     "flowSlug": "notifications",
-    "flowName": "Viewing notifications",
+    "flowName": "Notifications",
     "screenId": "notification-settings",
     "href": "/apps/base/flows/notifications"
   },
@@ -1514,8 +1514,8 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Viewing and editing profile",
-    "description": "View/edit profile and access all app settings from the profile drawer",
+    "label": "Editing profile",
+    "description": "View profile drawer, navigate to View Profile and Edit Profile",
     "flowSlug": "profile-settings",
     "href": "/apps/base/flows/profile-settings"
   },
@@ -1526,7 +1526,7 @@
     "label": "Home",
     "description": "Home screen with avatar in top left.",
     "flowSlug": "profile-settings",
-    "flowName": "Viewing and editing profile",
+    "flowName": "Editing profile",
     "screenId": "home-empty",
     "href": "/apps/base/flows/profile-settings"
   },
@@ -1537,7 +1537,7 @@
     "label": "Profile Drawer",
     "description": "Side drawer with wallet info and menu.",
     "flowSlug": "profile-settings",
-    "flowName": "Viewing and editing profile",
+    "flowName": "Editing profile",
     "screenId": "profile-drawer",
     "href": "/apps/base/flows/profile-settings"
   },
@@ -1548,7 +1548,7 @@
     "label": "View Profile",
     "description": "Profile page with edit and share options.",
     "flowSlug": "profile-settings",
-    "flowName": "Viewing and editing profile",
+    "flowName": "Editing profile",
     "screenId": "view-profile",
     "href": "/apps/base/flows/profile-settings"
   },
@@ -1559,7 +1559,7 @@
     "label": "Edit Profile",
     "description": "Edit display name, bio, and claim basename.",
     "flowSlug": "profile-settings",
-    "flowName": "Viewing and editing profile",
+    "flowName": "Editing profile",
     "screenId": "edit-profile",
     "href": "/apps/base/flows/profile-settings"
   },
@@ -1567,8 +1567,8 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Browsing settings",
-    "description": "Configure display, account, privacy, trading, and Coinbase connection",
+    "label": "Settings",
+    "description": "Settings main menu with all categories",
     "flowSlug": "settings",
     "href": "/apps/base/flows/settings"
   },
@@ -1579,7 +1579,7 @@
     "label": "Settings Main",
     "description": "Settings menu with all categories.",
     "flowSlug": "settings",
-    "flowName": "Browsing settings",
+    "flowName": "Settings",
     "screenId": "settings",
     "href": "/apps/base/flows/settings"
   },

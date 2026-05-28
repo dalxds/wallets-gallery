@@ -268,40 +268,54 @@ Decide the screen-id from the snapshot content (page identifier, dominant text, 
 
 ### Build flows
 
-**Every captured screen must belong to at least one flow.** Flows describe user tasks (e.g. "Buying a token", "Sending money", "Getting verified"). There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap.
-
-**Flow naming: gerund + object.** Name every flow as a user action in gerund form: "Buying a token", "Sending a token", "Switching to dark mode" — NOT "Deposit", "Send", "Display Settings". Each name should answer "what is the user doing?" in natural language.
-
-Exception: top-level navigation flows are named after the navigation label itself: "Wallet", "Discover", "Settings". These represent "being in" that section of the app.
-
-**Flow hierarchy is recursive and entry-point driven.** A flow's `parent` field describes where its entry screen comes from:
-
-- **Top-level flows** (`parent: null`): one per primary navigation item (tab bar, drawer, bottom nav). The entry screen is the navigation tap landing screen. Plus "Onboarding" for pre-auth flows.
-- **Child flows**: their entry screen is a screen that already appears within the parent flow. The child represents one specific action reachable from that screen.
-- **Grandchild flows**: their entry screen appears within a child flow. Nesting can go 3+ levels deep.
-
-Each level's entry point IS a screen in the level above. This makes the tree mirror the app's actual navigation depth.
+**Every captured screen must belong to at least one flow.** There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap.
 
 **Intent-centric flows.** A flow demonstrates *one user intent end-to-end*. Decisions a user makes while pursuing that intent (picking a coin, choosing a payment method, selecting an amount) are inline steps within the same flow — NOT separate child flows. The user thinks "I'm buying a token" — coin and payment-method picks are part of that single task.
 
-Example — buying a token on a wallet app:
-- ✓ One flow "Buying a token" (4 steps): Home → Deposit → Token Selector → Payment Method
-- ❌ Three flows splitting at every decision point
+The test: if two flows would be described with the same sentence ("the user is buying a token"), they're ONE flow. If they'd be described differently ("buying a token" vs. "changing language"), they can be separate.
 
-**When to split into child flows.** Create a child flow only when the branch represents a *separate user intent* — one that the user would describe as a distinct task and that produces meaningfully different screens. Heuristics:
+#### Flow naming rules
 
-- The branch leads to a different feature area or modal that the user could pursue independently (e.g., "Editing profile" from "Viewing profile").
-- The branch represents an alternative path that diverges substantially from the happy path (e.g., "Trading a token (no funds)" triggers an entire deposit interstitial flow on top of the trade flow).
-- Sub-areas under a section that each have their own settings/state (e.g., each individual setting screen — "Switching to dark mode", "Changing language" — is its own intent because the user thinks of changing language separately from changing dark mode).
+Naming follows a small set of rules based on the flow's role in the tree:
 
-Do NOT split into children when:
-- The branch is just a picker/selector that the user opens and dismisses as part of the parent intent (token selector during a buy flow).
+| Flow role | Name style | Examples |
+|---|---|---|
+| Top-level section flow (matches a primary nav item) | Plain navigation label, as a noun | `Wallet`, `Discover`, `Trade`, `Settings`, `Profile`, `Notifications`, `Chat` |
+| Child flow representing a user intent | Gerund + object | `Buying a token`, `Sending a token`, `Switching to dark mode`, `Editing profile` |
+| Child flow representing a view or state variant | Noun phrase, often with a qualifier | `Home (funded)`, `Home (empty)`, `Token detail`, `Trades feed`, `Apps directory` |
+| Top-level flow that IS the user intent (standalone, not a nav section) | Gerund + object OR noun | `Logging in`, `Onboarding`, `Receiving a token` |
+
+**Avoid filler gerunds.** Do not say `Browsing settings`, `Viewing notifications`, `Browsing apps` — the parent/section already implies the user is in that area. Use the plain noun (`Settings`, `Notifications`, `Apps directory`). Reserve gerunds for actions that change state or commit to a task.
+
+#### Flow hierarchy is recursive and entry-point driven
+
+A flow's `parent` field describes where its entry screen comes from:
+
+- **Top-level flows** (`parent: null`): one per primary navigation item (tab bar, drawer, bottom nav). The entry screen is the navigation tap landing screen. Plus standalone important actions like "Onboarding" or "Logging in".
+- **Child flows**: their entry screen is a screen that already appears within the parent flow. The child represents one specific action reachable from that screen.
+- **Deeper nesting**: a child's child flow's entry screen appears within the child flow. Trees can go 3+ levels deep when the IA warrants it.
+
+Each level's entry point IS a screen in the level above. This makes the tree mirror the app's actual navigation depth.
+
+#### When to split into child flows
+
+Create a child flow only when the branch represents a **separate user intent** — one the user would describe as a distinct task and that produces meaningfully different screens.
+
+✓ Split when:
+- The branch leads to a different feature/area the user could pursue independently (`Editing profile` from `Profile`).
+- The branch represents an alternative path that diverges substantially (`Trading a token (no funds)` triggers a deposit interstitial; `Trading a token (funded)` doesn't).
+- Sub-areas with their own settings/state (each setting screen — `Switching to dark mode`, `Changing language` — is a separate intent).
+
+✗ Do NOT split when:
+- The branch is just a picker/selector opened and dismissed as part of the parent intent (token selector during a buy flow).
 - The branch is a modal showing extra info (network fee breakdown during a request).
 - The branch is a tab the user swipes through as part of exploring a section.
 
-**No state-variant flows in general.** Do not create separate flows for the same action in different app states (empty wallet vs. funded wallet, free vs. premium). Capture the primary variant as the main flow. Exception: when the state difference materially changes the journey (different CTAs, different downstream screens, requires a separate prerequisite like "needs funds first"), capture sibling flows with descriptive names: "Trading a token (funded)" and "Trading a token (no funds)".
+#### State variants
 
-**The test:** if you'd describe two flows with the same sentence (e.g., "the user is buying a token"), they should be ONE flow, not multiple. If you'd describe them differently ("the user is buying a token" vs. "the user is selecting a payment method on its own"), they can be separate.
+Default: capture the primary state only. Do NOT duplicate flows for empty vs. funded, free vs. premium, etc.
+
+Exception: when the state difference materially changes the journey — different CTAs, different downstream screens, requires a separate prerequisite — capture them as sibling flows with descriptive qualifiers in parentheses: `Trading a token (funded)` and `Trading a token (no funds)`, or `Home (empty)` and `Home (funded)`.
 
 ### Harden `.ad` files
 

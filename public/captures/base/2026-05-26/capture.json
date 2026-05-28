@@ -3956,9 +3956,9 @@
     },
     {
       "slug": "home-funded",
-      "name": "Browsing portfolio (funded)",
+      "name": "Home (funded)",
       "parent": "wallet",
-      "summary": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity with transaction history, and USDC token detail",
+      "summary": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity, USDC detail",
       "mode": "free-roam",
       "entryPoints": [
         "home-funded"
@@ -4298,9 +4298,9 @@
     },
     {
       "slug": "home-browsing",
-      "name": "Browsing portfolio (empty)",
+      "name": "Home (empty)",
       "parent": "wallet",
-      "summary": "Browse portfolio tabs: Coins (empty), Collectibles (empty), Activity (no transactions)",
+      "summary": "Browse portfolio tabs in empty-wallet state: Coins, Collectibles, Activity",
       "mode": "free-roam",
       "entryPoints": [
         "home-empty"
@@ -4377,7 +4377,7 @@
     },
     {
       "slug": "browse-tokens",
-      "name": "Browsing tokens",
+      "name": "Token detail",
       "parent": "discover",
       "summary": "Discover trending tokens, view price charts and market data, attempt to buy",
       "mode": "free-roam",
@@ -4472,9 +4472,9 @@
     },
     {
       "slug": "apps-directory",
-      "name": "Browsing apps",
+      "name": "Apps directory",
       "parent": "discover",
-      "summary": "Browse and install mini apps across categories: trading, games, earning, predictions",
+      "summary": "Browse and install mini apps across categories",
       "mode": "free-roam",
       "entryPoints": [
         "discover"
@@ -4663,9 +4663,9 @@
     },
     {
       "slug": "social-feed",
-      "name": "Browsing trades feed",
+      "name": "Trades feed",
       "parent": "trade",
-      "summary": "Browse live trading activity feed showing real-time buy/sell broadcasts",
+      "summary": "Live trading feed showing real-time buy/sell broadcasts",
       "mode": "free-roam",
       "entryPoints": [
         "social-feed"
@@ -4762,7 +4762,7 @@
     },
     {
       "slug": "notifications",
-      "name": "Viewing notifications",
+      "name": "Notifications",
       "parent": null,
       "summary": "View price alerts and configure notification preferences",
       "mode": "free-roam",
@@ -4830,9 +4830,9 @@
     },
     {
       "slug": "profile-settings",
-      "name": "Viewing and editing profile",
+      "name": "Editing profile",
       "parent": "profile",
-      "summary": "View/edit profile and access all app settings from the profile drawer",
+      "summary": "View profile drawer, navigate to View Profile and Edit Profile",
       "mode": "free-roam",
       "entryPoints": [
         "home-empty"
@@ -4889,9 +4889,9 @@
     },
     {
       "slug": "settings",
-      "name": "Browsing settings",
+      "name": "Settings",
       "parent": null,
-      "summary": "Configure display, account, privacy, trading, and Coinbase connection",
+      "summary": "Settings main menu with all categories",
       "mode": "free-roam",
       "entryPoints": [
         "settings"
