@@ -147,31 +147,7 @@
           "step": 1
         },
         {
-          "flow": "selecting-a-coin",
-          "step": 1
-        },
-        {
-          "flow": "selecting-a-payment-method",
-          "step": 1
-        },
-        {
           "flow": "receive-scan-request",
-          "step": 1
-        },
-        {
-          "flow": "scanning-a-qr-code",
-          "step": 1
-        },
-        {
-          "flow": "requesting-payment",
-          "step": 1
-        },
-        {
-          "flow": "adding-a-recipient",
-          "step": 1
-        },
-        {
-          "flow": "viewing-network-fee",
           "step": 1
         },
         {
@@ -273,14 +249,6 @@
         {
           "flow": "deposit",
           "step": 2
-        },
-        {
-          "flow": "selecting-a-coin",
-          "step": 2
-        },
-        {
-          "flow": "selecting-a-payment-method",
-          "step": 2
         }
       ],
       "_humanEdited": []
@@ -317,7 +285,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "selecting-a-coin",
+          "flow": "deposit",
           "step": 3
         }
       ],
@@ -352,8 +320,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "selecting-a-payment-method",
-          "step": 3
+          "flow": "deposit",
+          "step": 4
         }
       ],
       "_humanEdited": []
@@ -392,22 +360,6 @@
         {
           "flow": "receive-scan-request",
           "step": 2
-        },
-        {
-          "flow": "scanning-a-qr-code",
-          "step": 2
-        },
-        {
-          "flow": "requesting-payment",
-          "step": 2
-        },
-        {
-          "flow": "adding-a-recipient",
-          "step": 2
-        },
-        {
-          "flow": "viewing-network-fee",
-          "step": 2
         }
       ],
       "_humanEdited": []
@@ -442,7 +394,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "scanning-a-qr-code",
+          "flow": "receive-scan-request",
           "step": 3
         }
       ],
@@ -487,16 +439,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "requesting-payment",
-          "step": 3
-        },
-        {
-          "flow": "adding-a-recipient",
-          "step": 3
-        },
-        {
-          "flow": "viewing-network-fee",
-          "step": 3
+          "flow": "receive-scan-request",
+          "step": 4
         }
       ],
       "_humanEdited": []
@@ -557,8 +501,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "adding-a-recipient",
-          "step": 4
+          "flow": "receive-scan-request",
+          "step": 5
         }
       ],
       "_humanEdited": []
@@ -588,8 +532,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "viewing-network-fee",
-          "step": 4
+          "flow": "receive-scan-request",
+          "step": 6
         }
       ],
       "_humanEdited": []
@@ -4153,7 +4097,7 @@
       "slug": "deposit",
       "name": "Buying a token",
       "parent": "wallet",
-      "summary": "Tap Deposit to enter the buy/deposit screen",
+      "summary": "Fund wallet via debit card or Coinbase with token and payment-method selection",
       "mode": "free-roam",
       "entryPoints": [
         "home-empty"
@@ -4164,43 +4108,6 @@
         "confidence": "high",
         "credentialsTemplate": []
       },
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home",
-          "screenId": "home-empty",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home screen with Deposit button.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
-        },
-        {
-          "number": 2,
-          "title": "Deposit",
-          "screenId": "deposit",
-          "action": "Tap Deposit",
-          "selector": "id=\"buy-button\"",
-          "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
-          "screenshotPath": "assets/462e785b6b13.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf"
-        }
-      ],
-      "notes": "Debit card is default. Coinbase Connect available as alternative payment method.",
-      "_humanEdited": []
-    },
-    {
-      "slug": "selecting-a-coin",
-      "name": "Selecting a coin",
-      "parent": "deposit",
-      "summary": "Pick which token to deposit from the searchable token list",
-      "mode": "free-roam",
-      "entryPoints": [
-        "deposit"
-      ],
-      "replay": null,
       "steps": [
         {
           "number": 1,
@@ -4234,46 +4141,9 @@
           "screenshotPath": "assets/9c36ab3a00ab.png",
           "fingerprintBefore": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf",
           "fingerprintAfter": "sha256-text:94014ee65d3fb66d7bcc41baf4ce1640"
-        }
-      ],
-      "notes": "",
-      "_humanEdited": []
-    },
-    {
-      "slug": "selecting-a-payment-method",
-      "name": "Selecting a payment method",
-      "parent": "deposit",
-      "summary": "Choose between Debit Card or Coinbase Connect as payment method",
-      "mode": "free-roam",
-      "entryPoints": [
-        "deposit"
-      ],
-      "replay": null,
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home",
-          "screenId": "home-empty",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home screen with Deposit button.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
         },
         {
-          "number": 2,
-          "title": "Deposit",
-          "screenId": "deposit",
-          "action": "Tap Deposit",
-          "selector": "id=\"buy-button\"",
-          "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
-          "screenshotPath": "assets/462e785b6b13.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf"
-        },
-        {
-          "number": 3,
+          "number": 4,
           "title": "Payment Method",
           "screenId": "deposit-with-modal",
           "action": "Tap Deposit With header",
@@ -4284,14 +4154,14 @@
           "fingerprintAfter": "sha256-text:914560f6b2b3bebd1a90f0c9aa3882ff"
         }
       ],
-      "notes": "",
+      "notes": "Debit card is default. Coinbase Connect available as alternative payment method.",
       "_humanEdited": []
     },
     {
       "slug": "receive-scan-request",
       "name": "Receiving a token",
       "parent": "wallet",
-      "summary": "Tap Receive to view wallet address and QR code",
+      "summary": "Receive funds via QR code, scan to send, or request payment from others",
       "mode": "free-roam",
       "entryPoints": [
         "home-empty"
@@ -4302,43 +4172,6 @@
         "confidence": "high",
         "credentialsTemplate": []
       },
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home",
-          "screenId": "home-empty",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home screen with Receive button.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
-        },
-        {
-          "number": 2,
-          "title": "Receive",
-          "screenId": "receive",
-          "action": "Tap Receive",
-          "selector": "id=\"receive-button\"",
-          "description": "QR code and wallet address for receiving funds.",
-          "screenshotPath": "assets/7e96e0c4223e.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256-text:ee9be5c30a22a83e6855c708063d24d4"
-        }
-      ],
-      "notes": "Three tabs in one screen group: Receive (QR), Scan (camera), Request (payment). Request includes recipient search, QR, NFC, and link-based request methods. Network fees are free on Base.",
-      "_humanEdited": []
-    },
-    {
-      "slug": "scanning-a-qr-code",
-      "name": "Scanning a QR code",
-      "parent": "receive-scan-request",
-      "summary": "Switch to the Scan tab to scan a QR code and send crypto",
-      "mode": "free-roam",
-      "entryPoints": [
-        "receive"
-      ],
-      "replay": null,
       "steps": [
         {
           "number": 1,
@@ -4372,105 +4205,20 @@
           "screenshotPath": "assets/ef5d4726948b.png",
           "fingerprintBefore": "sha256-text:ee9be5c30a22a83e6855c708063d24d4",
           "fingerprintAfter": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af"
-        }
-      ],
-      "notes": "",
-      "_humanEdited": []
-    },
-    {
-      "slug": "requesting-payment",
-      "name": "Requesting payment",
-      "parent": "receive-scan-request",
-      "summary": "Request payment from someone via address, QR, NFC, or shareable link",
-      "mode": "free-roam",
-      "entryPoints": [
-        "receive"
-      ],
-      "replay": null,
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home",
-          "screenId": "home-empty",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home screen with Receive button.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
-        },
-        {
-          "number": 2,
-          "title": "Receive",
-          "screenId": "receive",
-          "action": "Tap Receive",
-          "selector": "id=\"receive-button\"",
-          "description": "QR code and wallet address for receiving funds.",
-          "screenshotPath": "assets/7e96e0c4223e.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256-text:ee9be5c30a22a83e6855c708063d24d4"
-        },
-        {
-          "number": 3,
-          "title": "Request",
-          "screenId": "request",
-          "action": "Tap Request tab",
-          "selector": "id=\"swipeable-tab-item-request\"",
-          "description": "Request payment with recipient, amount, and USDC.",
-          "screenshotPath": "assets/85c33a577c47.png",
-          "fingerprintBefore": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
-          "fingerprintAfter": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf"
-        }
-      ],
-      "notes": "",
-      "_humanEdited": []
-    },
-    {
-      "slug": "adding-a-recipient",
-      "name": "Adding a recipient",
-      "parent": "requesting-payment",
-      "summary": "Pick a recipient via search, paste, QR, NFC, or link",
-      "mode": "free-roam",
-      "entryPoints": [
-        "request"
-      ],
-      "replay": null,
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home",
-          "screenId": "home-empty",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home screen with Receive button.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
-        },
-        {
-          "number": 2,
-          "title": "Receive",
-          "screenId": "receive",
-          "action": "Tap Receive",
-          "selector": "id=\"receive-button\"",
-          "description": "QR code and wallet address for receiving funds.",
-          "screenshotPath": "assets/7e96e0c4223e.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256-text:ee9be5c30a22a83e6855c708063d24d4"
-        },
-        {
-          "number": 3,
-          "title": "Request",
-          "screenId": "request",
-          "action": "Tap Request tab",
-          "selector": "id=\"swipeable-tab-item-request\"",
-          "description": "Request payment with recipient, amount, and USDC.",
-          "screenshotPath": "assets/85c33a577c47.png",
-          "fingerprintBefore": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
-          "fingerprintAfter": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf"
         },
         {
           "number": 4,
+          "title": "Request",
+          "screenId": "request",
+          "action": "Tap Request tab",
+          "selector": "id=\"swipeable-tab-item-request\"",
+          "description": "Request payment with recipient, amount, and USDC.",
+          "screenshotPath": "assets/85c33a577c47.png",
+          "fingerprintBefore": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
+          "fingerprintAfter": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf"
+        },
+        {
+          "number": 5,
           "title": "Add Recipient",
           "screenId": "request-add-recipient",
           "action": "Tap Add Recipient",
@@ -4479,57 +4227,9 @@
           "screenshotPath": "assets/19b968fc6cd4.png",
           "fingerprintBefore": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf",
           "fingerprintAfter": "sha256:3eb56e230703bcd15a25d860159cc020"
-        }
-      ],
-      "notes": "",
-      "_humanEdited": []
-    },
-    {
-      "slug": "viewing-network-fee",
-      "name": "Viewing network fee",
-      "parent": "requesting-payment",
-      "summary": "Inspect the network fee breakdown for a request on Base",
-      "mode": "free-roam",
-      "entryPoints": [
-        "request"
-      ],
-      "replay": null,
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home",
-          "screenId": "home-empty",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home screen with Receive button.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
         },
         {
-          "number": 2,
-          "title": "Receive",
-          "screenId": "receive",
-          "action": "Tap Receive",
-          "selector": "id=\"receive-button\"",
-          "description": "QR code and wallet address for receiving funds.",
-          "screenshotPath": "assets/7e96e0c4223e.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256-text:ee9be5c30a22a83e6855c708063d24d4"
-        },
-        {
-          "number": 3,
-          "title": "Request",
-          "screenId": "request",
-          "action": "Tap Request tab",
-          "selector": "id=\"swipeable-tab-item-request\"",
-          "description": "Request payment with recipient, amount, and USDC.",
-          "screenshotPath": "assets/85c33a577c47.png",
-          "fingerprintBefore": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
-          "fingerprintAfter": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf"
-        },
-        {
-          "number": 4,
+          "number": 6,
           "title": "Fee Info",
           "screenId": "request-fee-info",
           "action": "Tap Total fees",
@@ -4540,7 +4240,7 @@
           "fingerprintAfter": "sha256-text:bb9ddecdd65ecfe14a06e13db9b6e5a8"
         }
       ],
-      "notes": "",
+      "notes": "Three tabs in one screen group: Receive (QR), Scan (camera), Request (payment). Request includes recipient search, QR, NFC, and link-based request methods. Network fees are free on Base.",
       "_humanEdited": []
     },
     {
@@ -5857,6 +5557,6 @@
     "screensAdded": 72,
     "screensModified": 0,
     "screensRemoved": 0,
-    "flowsTouched": 40
+    "flowsTouched": 34
   }
 }

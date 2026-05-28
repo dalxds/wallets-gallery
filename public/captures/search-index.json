@@ -4,7 +4,7 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Base",
-    "description": "ANDROID app — 68 screens, 40 flows",
+    "description": "ANDROID app — 68 screens, 34 flows",
     "href": "/apps/base"
   },
   {
@@ -931,7 +931,7 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Buying a token",
-    "description": "Tap Deposit to enter the buy/deposit screen",
+    "description": "Fund wallet via debit card or Coinbase with token and payment-method selection",
     "flowSlug": "deposit",
     "href": "/apps/base/flows/deposit"
   },
@@ -956,37 +956,6 @@
     "flowName": "Buying a token",
     "screenId": "deposit",
     "href": "/apps/base/flows/deposit"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Selecting a coin",
-    "description": "Pick which token to deposit from the searchable token list",
-    "flowSlug": "selecting-a-coin",
-    "href": "/apps/base/flows/selecting-a-coin"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Deposit button.",
-    "flowSlug": "selecting-a-coin",
-    "flowName": "Selecting a coin",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/selecting-a-coin"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Deposit",
-    "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
-    "flowSlug": "selecting-a-coin",
-    "flowName": "Selecting a coin",
-    "screenId": "deposit",
-    "href": "/apps/base/flows/selecting-a-coin"
   },
   {
     "type": "step",
@@ -994,41 +963,10 @@
     "appName": "Base",
     "label": "Token Selector",
     "description": "Token picker modal with USDC, ETH, cbBTC, and more.",
-    "flowSlug": "selecting-a-coin",
-    "flowName": "Selecting a coin",
+    "flowSlug": "deposit",
+    "flowName": "Buying a token",
     "screenId": "deposit-token-selector",
-    "href": "/apps/base/flows/selecting-a-coin"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Selecting a payment method",
-    "description": "Choose between Debit Card or Coinbase Connect as payment method",
-    "flowSlug": "selecting-a-payment-method",
-    "href": "/apps/base/flows/selecting-a-payment-method"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Deposit button.",
-    "flowSlug": "selecting-a-payment-method",
-    "flowName": "Selecting a payment method",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/selecting-a-payment-method"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Deposit",
-    "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
-    "flowSlug": "selecting-a-payment-method",
-    "flowName": "Selecting a payment method",
-    "screenId": "deposit",
-    "href": "/apps/base/flows/selecting-a-payment-method"
+    "href": "/apps/base/flows/deposit"
   },
   {
     "type": "step",
@@ -1036,17 +974,17 @@
     "appName": "Base",
     "label": "Payment Method",
     "description": "Connect to Coinbase payment method option.",
-    "flowSlug": "selecting-a-payment-method",
-    "flowName": "Selecting a payment method",
+    "flowSlug": "deposit",
+    "flowName": "Buying a token",
     "screenId": "deposit-with-modal",
-    "href": "/apps/base/flows/selecting-a-payment-method"
+    "href": "/apps/base/flows/deposit"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Receiving a token",
-    "description": "Tap Receive to view wallet address and QR code",
+    "description": "Receive funds via QR code, scan to send, or request payment from others",
     "flowSlug": "receive-scan-request",
     "href": "/apps/base/flows/receive-scan-request"
   },
@@ -1071,37 +1009,6 @@
     "flowName": "Receiving a token",
     "screenId": "receive",
     "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Scanning a QR code",
-    "description": "Switch to the Scan tab to scan a QR code and send crypto",
-    "flowSlug": "scanning-a-qr-code",
-    "href": "/apps/base/flows/scanning-a-qr-code"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Receive button.",
-    "flowSlug": "scanning-a-qr-code",
-    "flowName": "Scanning a QR code",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/scanning-a-qr-code"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Receive",
-    "description": "QR code and wallet address for receiving funds.",
-    "flowSlug": "scanning-a-qr-code",
-    "flowName": "Scanning a QR code",
-    "screenId": "receive",
-    "href": "/apps/base/flows/scanning-a-qr-code"
   },
   {
     "type": "step",
@@ -1109,41 +1016,10 @@
     "appName": "Base",
     "label": "Scan QR",
     "description": "Camera viewfinder for scanning QR codes.",
-    "flowSlug": "scanning-a-qr-code",
-    "flowName": "Scanning a QR code",
+    "flowSlug": "receive-scan-request",
+    "flowName": "Receiving a token",
     "screenId": "scan-qr",
-    "href": "/apps/base/flows/scanning-a-qr-code"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Requesting payment",
-    "description": "Request payment from someone via address, QR, NFC, or shareable link",
-    "flowSlug": "requesting-payment",
-    "href": "/apps/base/flows/requesting-payment"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Receive button.",
-    "flowSlug": "requesting-payment",
-    "flowName": "Requesting payment",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/requesting-payment"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Receive",
-    "description": "QR code and wallet address for receiving funds.",
-    "flowSlug": "requesting-payment",
-    "flowName": "Requesting payment",
-    "screenId": "receive",
-    "href": "/apps/base/flows/requesting-payment"
+    "href": "/apps/base/flows/receive-scan-request"
   },
   {
     "type": "step",
@@ -1151,52 +1027,10 @@
     "appName": "Base",
     "label": "Request",
     "description": "Request payment with recipient, amount, and USDC.",
-    "flowSlug": "requesting-payment",
-    "flowName": "Requesting payment",
+    "flowSlug": "receive-scan-request",
+    "flowName": "Receiving a token",
     "screenId": "request",
-    "href": "/apps/base/flows/requesting-payment"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Adding a recipient",
-    "description": "Pick a recipient via search, paste, QR, NFC, or link",
-    "flowSlug": "adding-a-recipient",
-    "href": "/apps/base/flows/adding-a-recipient"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Receive button.",
-    "flowSlug": "adding-a-recipient",
-    "flowName": "Adding a recipient",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/adding-a-recipient"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Receive",
-    "description": "QR code and wallet address for receiving funds.",
-    "flowSlug": "adding-a-recipient",
-    "flowName": "Adding a recipient",
-    "screenId": "receive",
-    "href": "/apps/base/flows/adding-a-recipient"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Request",
-    "description": "Request payment with recipient, amount, and USDC.",
-    "flowSlug": "adding-a-recipient",
-    "flowName": "Adding a recipient",
-    "screenId": "request",
-    "href": "/apps/base/flows/adding-a-recipient"
+    "href": "/apps/base/flows/receive-scan-request"
   },
   {
     "type": "step",
@@ -1204,52 +1038,10 @@
     "appName": "Base",
     "label": "Add Recipient",
     "description": "Recipient picker with search, QR, tap-to-request, and link options.",
-    "flowSlug": "adding-a-recipient",
-    "flowName": "Adding a recipient",
+    "flowSlug": "receive-scan-request",
+    "flowName": "Receiving a token",
     "screenId": "request-add-recipient",
-    "href": "/apps/base/flows/adding-a-recipient"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Viewing network fee",
-    "description": "Inspect the network fee breakdown for a request on Base",
-    "flowSlug": "viewing-network-fee",
-    "href": "/apps/base/flows/viewing-network-fee"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Receive button.",
-    "flowSlug": "viewing-network-fee",
-    "flowName": "Viewing network fee",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/viewing-network-fee"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Receive",
-    "description": "QR code and wallet address for receiving funds.",
-    "flowSlug": "viewing-network-fee",
-    "flowName": "Viewing network fee",
-    "screenId": "receive",
-    "href": "/apps/base/flows/viewing-network-fee"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Request",
-    "description": "Request payment with recipient, amount, and USDC.",
-    "flowSlug": "viewing-network-fee",
-    "flowName": "Viewing network fee",
-    "screenId": "request",
-    "href": "/apps/base/flows/viewing-network-fee"
+    "href": "/apps/base/flows/receive-scan-request"
   },
   {
     "type": "step",
@@ -1257,10 +1049,10 @@
     "appName": "Base",
     "label": "Fee Info",
     "description": "Network fee breakdown showing Base network, fee: Free.",
-    "flowSlug": "viewing-network-fee",
-    "flowName": "Viewing network fee",
+    "flowSlug": "receive-scan-request",
+    "flowName": "Receiving a token",
     "screenId": "request-fee-info",
-    "href": "/apps/base/flows/viewing-network-fee"
+    "href": "/apps/base/flows/receive-scan-request"
   },
   {
     "type": "flow",

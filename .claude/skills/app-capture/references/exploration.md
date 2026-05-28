@@ -282,24 +282,26 @@ Exception: top-level navigation flows are named after the navigation label itsel
 
 Each level's entry point IS a screen in the level above. This makes the tree mirror the app's actual navigation depth.
 
-**Split at decision points.** When a screen offers multiple branches (`decisionPoints` data records this), do NOT bundle all branches into one linear flow. Instead:
+**Intent-centric flows.** A flow demonstrates *one user intent end-to-end*. Decisions a user makes while pursuing that intent (picking a coin, choosing a payment method, selecting an amount) are inline steps within the same flow — NOT separate child flows. The user thinks "I'm buying a token" — coin and payment-method picks are part of that single task.
 
-1. The parent flow ends at the decision-point screen.
-2. Each explored branch becomes a separate child flow.
-3. Each child flow's steps repeat the path to the decision-point screen, then add the branch-specific steps.
+Example — buying a token on a wallet app:
+- ✓ One flow "Buying a token" (4 steps): Home → Deposit → Token Selector → Payment Method
+- ❌ Three flows splitting at every decision point
 
-Example — a "Deposit" screen has options for token-selector and payment-method:
-- ❌ One flow with steps: Home → Deposit → Token Selector → Payment Method (bundled, linear)
-- ✓ Three flows:
-  - "Buying a token" (parent): Home → Deposit
-  - "Selecting a coin" (child): Home → Deposit → Token Selector
-  - "Selecting a payment method" (child): Home → Deposit → Payment Method
+**When to split into child flows.** Create a child flow only when the branch represents a *separate user intent* — one that the user would describe as a distinct task and that produces meaningfully different screens. Heuristics:
 
-This produces a tree that matches the app's branching IA, and each leaf flow is individually linkable as a focused user task.
+- The branch leads to a different feature area or modal that the user could pursue independently (e.g., "Editing profile" from "Viewing profile").
+- The branch represents an alternative path that diverges substantially from the happy path (e.g., "Trading a token (no funds)" triggers an entire deposit interstitial flow on top of the trade flow).
+- Sub-areas under a section that each have their own settings/state (e.g., each individual setting screen — "Switching to dark mode", "Changing language" — is its own intent because the user thinks of changing language separately from changing dark mode).
 
-**No state-variant flows.** Do not create separate flows for the same action in different app states (empty wallet vs. funded wallet, free vs. premium). Capture the primary variant as the main flow. If the state difference produces materially different screens (different CTAs, different steps), capture both as sibling flows with descriptive names: "Trading a token (funded)" and "Trading a token (no funds)".
+Do NOT split into children when:
+- The branch is just a picker/selector that the user opens and dismisses as part of the parent intent (token selector during a buy flow).
+- The branch is a modal showing extra info (network fee breakdown during a request).
+- The branch is a tab the user swipes through as part of exploring a section.
 
-**Flow granularity:** every distinct sub-action the user can take from within a flow should ideally be its own child flow. "Selecting a coin" is a separate flow from "Buying a token", nested as a child. Do not create child flows for trivial interactions (dismissing a modal, scrolling).
+**No state-variant flows in general.** Do not create separate flows for the same action in different app states (empty wallet vs. funded wallet, free vs. premium). Capture the primary variant as the main flow. Exception: when the state difference materially changes the journey (different CTAs, different downstream screens, requires a separate prerequisite like "needs funds first"), capture sibling flows with descriptive names: "Trading a token (funded)" and "Trading a token (no funds)".
+
+**The test:** if you'd describe two flows with the same sentence (e.g., "the user is buying a token"), they should be ONE flow, not multiple. If you'd describe them differently ("the user is buying a token" vs. "the user is selecting a payment method on its own"), they can be separate.
 
 ### Harden `.ad` files
 
