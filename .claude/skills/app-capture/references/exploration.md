@@ -268,9 +268,40 @@ Decide the screen-id from the snapshot content (page identifier, dominant text, 
 
 ### Build flows
 
-**Every captured screen must belong to at least one flow.** There should be no orphan screens. A screen can naturally appear in multiple flows when journeys overlap.
+The packaging step turns the BFS exploration log into a tree of flows. The shape of that tree is what readers will navigate, so it matters as much as the screen data itself. Follow these rules in order.
 
-**Intent-centric flows.** A flow demonstrates *one user intent end-to-end*. Decisions a user makes while pursuing that intent (picking a coin, choosing a payment method, selecting an amount) are inline steps within the same flow — NOT separate child flows. The user thinks "I'm buying a token" — coin and payment-method picks are part of that single task.
+**Every captured screen must belong to at least one flow.** No orphan screens. A screen can naturally appear in multiple flows when journeys overlap.
+
+#### Tree shape: section walkthroughs over a fan of intents
+
+The output tree mirrors the app's primary navigation. Top-level flows correspond to navigation items (tab bar, drawer, bottom nav). Children flowing out from each section are the user intents reachable from within that section.
+
+```
+Section walkthrough         (top-level flow — multi-step, shows main views)
+├── User intent A           (child — gerund+object)
+├── User intent B
+└── User intent C
+    └── Sub-intent C'       (grandchild — reachable from inside C)
+```
+
+#### Section flows are walkthroughs, not placeholders
+
+A top-level section flow is a real walkthrough of that section's main experience. Aim for 3–8 steps showing:
+
+- The entry screen
+- Any meaningful state variants of that screen (empty vs. funded, signed-in vs. signed-out) — as steps within the same flow
+- Each primary tab within the section as a step
+- Any single-screen views that round out the section's main experience
+
+State variants belong as STEPS in the section flow, not as separate sibling flows. "Home (empty)" and "Home (funded)" are step 1 and step 2 of the `Wallet` flow — not two flows.
+
+Tabs within a section belong as STEPS in the section flow. "Coins", "Collectibles", "Activity" are three steps of the `Wallet` flow — not three flows.
+
+**Exception — 1-step section flow is OK when:** the section has only one screen, no tabs, no meaningful state variants, and the screen is already content-rich (a long-scrolling feed, a menu, a settings list). Example: `Settings` (1 step — just the settings menu, since each row spawns a child action flow).
+
+#### Intent-centric child flows
+
+A child flow demonstrates *one user intent end-to-end*. Decisions the user makes while pursuing that intent (picking a coin, choosing a payment method, selecting an amount, opening info modals) are inline steps within the same flow — NOT separate child flows. The user thinks "I'm buying a token"; coin and payment-method picks are part of that single task.
 
 The test: if two flows would be described with the same sentence ("the user is buying a token"), they're ONE flow. If they'd be described differently ("buying a token" vs. "changing language"), they can be separate.
 
@@ -282,18 +313,18 @@ Naming follows a small set of rules based on the flow's role in the tree:
 |---|---|---|
 | Top-level section flow (matches a primary nav item) | Plain navigation label, as a noun | `Wallet`, `Discover`, `Trade`, `Settings`, `Profile`, `Notifications`, `Chat` |
 | Child flow representing a user intent | Gerund + object | `Buying a token`, `Sending a token`, `Switching to dark mode`, `Editing profile` |
-| Child flow representing a view or state variant | Noun phrase, often with a qualifier | `Home (funded)`, `Home (empty)`, `Token detail`, `Trades feed`, `Apps directory` |
+| Child flow representing a view or state variant | Noun phrase, often with a qualifier | `Token detail`, `Trades feed`, `Apps directory`, `Activity detail (received)` |
 | Top-level flow that IS the user intent (standalone, not a nav section) | Gerund + object OR noun | `Logging in`, `Onboarding`, `Receiving a token` |
 
-**Avoid filler gerunds.** Do not say `Browsing settings`, `Viewing notifications`, `Browsing apps` — the parent/section already implies the user is in that area. Use the plain noun (`Settings`, `Notifications`, `Apps directory`). Reserve gerunds for actions that change state or commit to a task.
+**Avoid filler gerunds.** Do not say `Browsing settings`, `Viewing notifications`, `Browsing apps` — the parent section already implies the user is in that area. Use the plain noun (`Settings`, `Notifications`, `Apps directory`). Reserve gerunds for actions that change state or commit to a task.
 
 #### Flow hierarchy is recursive and entry-point driven
 
 A flow's `parent` field describes where its entry screen comes from:
 
-- **Top-level flows** (`parent: null`): one per primary navigation item (tab bar, drawer, bottom nav). The entry screen is the navigation tap landing screen. Plus standalone important actions like "Onboarding" or "Logging in".
-- **Child flows**: their entry screen is a screen that already appears within the parent flow. The child represents one specific action reachable from that screen.
-- **Deeper nesting**: a child's child flow's entry screen appears within the child flow. Trees can go 3+ levels deep when the IA warrants it.
+- **Top-level flows** (`parent: null`): one per primary navigation item, plus standalone important intents (`Onboarding`, `Logging in`).
+- **Child flows**: their entry screen is a screen that already appears within the parent flow. The child represents one specific intent reachable from that screen.
+- **Deeper nesting**: a grandchild's entry screen appears within a child flow. Trees can go 3+ levels deep when the IA warrants.
 
 Each level's entry point IS a screen in the level above. This makes the tree mirror the app's actual navigation depth.
 
@@ -304,18 +335,33 @@ Create a child flow only when the branch represents a **separate user intent** �
 ✓ Split when:
 - The branch leads to a different feature/area the user could pursue independently (`Editing profile` from `Profile`).
 - The branch represents an alternative path that diverges substantially (`Trading a token (no funds)` triggers a deposit interstitial; `Trading a token (funded)` doesn't).
-- Sub-areas with their own settings/state (each setting screen — `Switching to dark mode`, `Changing language` — is a separate intent).
+- Sub-areas with their own settings/state — each setting screen (`Switching to dark mode`, `Changing language`) is a separate intent.
+- The action has meaningful steps of its own (`Sorting coins`, `Filtering by network` — each opens a real picker the user navigates).
 
 ✗ Do NOT split when:
-- The branch is just a picker/selector opened and dismissed as part of the parent intent (token selector during a buy flow).
+- The branch is a picker/selector opened and dismissed as part of the parent intent (token selector during a buy flow).
 - The branch is a modal showing extra info (network fee breakdown during a request).
-- The branch is a tab the user swipes through as part of exploring a section.
+- The branch is a tab the user swipes through as part of exploring a section — that goes INTO the section flow as a step.
 
-#### State variants
+#### State variants — two patterns
 
-Default: capture the primary state only. Do NOT duplicate flows for empty vs. funded, free vs. premium, etc.
+**Pattern A — within a section walkthrough (default).** Section flows show their main screen in different states as separate steps. `Wallet` step 1 = empty Coins tab; step 2 = funded Coins tab. The transition action is "App relaunched in funded state" or "Received 1 USDC" — describing how the state changed.
 
-Exception: when the state difference materially changes the journey — different CTAs, different downstream screens, requires a separate prerequisite — capture them as sibling flows with descriptive qualifiers in parentheses: `Trading a token (funded)` and `Trading a token (no funds)`, or `Home (empty)` and `Home (funded)`.
+**Pattern B — as sibling intent flows (when the journey diverges).** When the state difference materially changes the journey itself — different CTAs, different downstream screens, requires a prerequisite — capture sibling intent flows with parenthetical qualifiers: `Trading a token (funded)` and `Trading a token (no funds)`. The no-funds variant triggers an entire deposit sheet that's absent in the funded variant — that's a different journey, not the same intent in different states.
+
+Default to Pattern A. Promote to Pattern B only when the journey changes, not just the screen content.
+
+#### Packaging checklist
+
+Before writing `capture.json`, walk the flow tree once more and verify:
+
+- [ ] Every top-level flow is either a primary navigation section OR a standalone critical intent (`Onboarding`, `Logging in`).
+- [ ] Every section flow is a real walkthrough — multiple steps showing state variants and tabs — or has a justification for being 1 step (single-screen, content-rich, no states/tabs).
+- [ ] No state-variant flows duplicate intent. Empty/funded → steps in the section flow, not sibling flows.
+- [ ] No 1-step "navigation tap" placeholder flows that exist only to anchor children.
+- [ ] Every child flow's entry screen appears in its parent's steps.
+- [ ] Every flow name fits its role in the table above. No filler gerunds on sections.
+- [ ] Every flow's name can complete the sentence "the user is ___" naturally (and unambiguously vs. its siblings).
 
 ### Harden `.ad` files
 

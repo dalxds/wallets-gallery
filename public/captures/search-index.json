@@ -4,7 +4,7 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Base",
-    "description": "ANDROID app — 68 screens, 34 flows",
+    "description": "ANDROID app — 68 screens, 36 flows",
     "href": "/apps/base"
   },
   {
@@ -624,82 +624,9 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Onboarding",
-    "description": "Welcome screen and authentication entry point",
+    "description": "Create a new Base account end-to-end: Welcome → More Options → Email → OTP → Referral → Username → CAPTCHA → Home",
     "flowSlug": "onboarding",
     "href": "/apps/base/flows/onboarding"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Welcome to Base",
-    "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer.",
-    "flowSlug": "onboarding",
-    "flowName": "Onboarding",
-    "screenId": "welcome",
-    "href": "/apps/base/flows/onboarding"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Signing in",
-    "description": "Sign into an existing Base account via email OTP. Welcome → Email → OTP → Home.",
-    "flowSlug": "onboarding-sign-in",
-    "href": "/apps/base/flows/onboarding-sign-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Welcome",
-    "description": "Welcome to Base with sign-in options.",
-    "flowSlug": "onboarding-sign-in",
-    "flowName": "Signing in",
-    "screenId": "welcome",
-    "href": "/apps/base/flows/onboarding-sign-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Email Entry",
-    "description": "Enter email address.",
-    "flowSlug": "onboarding-sign-in",
-    "flowName": "Signing in",
-    "screenId": "onboarding-email",
-    "href": "/apps/base/flows/onboarding-sign-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "OTP Verification",
-    "description": "6-digit code sent to email.",
-    "flowSlug": "onboarding-sign-in",
-    "flowName": "Signing in",
-    "screenId": "onboarding-otp",
-    "href": "/apps/base/flows/onboarding-sign-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Lands on home with existing balance.",
-    "flowSlug": "onboarding-sign-in",
-    "flowName": "Signing in",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/onboarding-sign-in"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Creating an account",
-    "description": "Create a new Base account: Welcome → More Options → Email → OTP → Referral Code → Choose Username (basename) → CAPTCHA → Home",
-    "flowSlug": "onboarding-create-account",
-    "href": "/apps/base/flows/onboarding-create-account"
   },
   {
     "type": "step",
@@ -707,10 +634,10 @@
     "appName": "Base",
     "label": "Welcome",
     "description": "Welcome to Base.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "welcome",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -718,10 +645,10 @@
     "appName": "Base",
     "label": "More Options",
     "description": "Create Account, Import Recovery Phrase, Import Passkey.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "more-options",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -729,10 +656,10 @@
     "appName": "Base",
     "label": "Email Entry",
     "description": "Enter fresh email address.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "onboarding-email",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -740,10 +667,10 @@
     "appName": "Base",
     "label": "OTP Verification",
     "description": "6-digit code sent to email.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "onboarding-otp",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -751,10 +678,10 @@
     "appName": "Base",
     "label": "Referral Code",
     "description": "Optional referral code for 10% swap fee discount.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "onboarding-referral-code",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -762,10 +689,10 @@
     "appName": "Base",
     "label": "Choose Username",
     "description": "Pick basename (name.base.eth) onchain handle.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "onboarding-choose-username",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -773,10 +700,10 @@
     "appName": "Base",
     "label": "CAPTCHA",
     "description": "Solve puzzle to verify human.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "onboarding-captcha",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
   },
   {
     "type": "step",
@@ -784,17 +711,70 @@
     "appName": "Base",
     "label": "Home",
     "description": "Lands on home with $0 balance.",
-    "flowSlug": "onboarding-create-account",
-    "flowName": "Creating an account",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "home-empty",
-    "href": "/apps/base/flows/onboarding-create-account"
+    "href": "/apps/base/flows/onboarding"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Logging in",
+    "description": "Sign into an existing Base account via email OTP",
+    "flowSlug": "logging-in",
+    "href": "/apps/base/flows/logging-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Welcome",
+    "description": "Welcome to Base with sign-in options.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "welcome",
+    "href": "/apps/base/flows/logging-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Email Entry",
+    "description": "Enter email address.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "onboarding-email",
+    "href": "/apps/base/flows/logging-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "OTP Verification",
+    "description": "6-digit code sent to email.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "onboarding-otp",
+    "href": "/apps/base/flows/logging-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Lands on home with existing balance.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "home-funded",
+    "href": "/apps/base/flows/logging-in"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Wallet",
-    "description": "Wallet home — primary tab with portfolio, balance, and asset actions",
+    "description": "Wallet tab walkthrough: empty and funded portfolio, Collectibles, and Activity",
     "flowSlug": "wallet",
     "href": "/apps/base/flows/wallet"
   },
@@ -802,7 +782,7 @@
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Wallet (Home)",
+    "label": "Home (Empty Wallet)",
     "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA.",
     "flowSlug": "wallet",
     "flowName": "Wallet",
@@ -810,90 +790,37 @@
     "href": "/apps/base/flows/wallet"
   },
   {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (funded)",
-    "description": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity, USDC detail",
-    "flowSlug": "home-funded",
-    "href": "/apps/base/flows/home-funded"
-  },
-  {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Home (Coins)",
-    "description": "Home with $1 balance, USDC in Coins tab.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "wallet",
+    "flowName": "Wallet",
     "screenId": "home-funded",
-    "href": "/apps/base/flows/home-funded"
+    "href": "/apps/base/flows/wallet"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Sort By",
-    "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
-    "screenId": "home-sort-by",
-    "href": "/apps/base/flows/home-funded"
+    "label": "Collectibles Tab",
+    "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles.",
+    "flowSlug": "wallet",
+    "flowName": "Wallet",
+    "screenId": "home-collectibles",
+    "href": "/apps/base/flows/wallet"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Network Filter",
-    "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
-    "screenId": "home-network-filter",
-    "href": "/apps/base/flows/home-funded"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Category Filter",
-    "description": "Filter by category: Cash, Apps, Memes, Social.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
-    "screenId": "home-category-filter",
-    "href": "/apps/base/flows/home-funded"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Activity",
-    "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
-    "screenId": "activity-funded",
-    "href": "/apps/base/flows/home-funded"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Transaction Detail",
-    "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
-    "screenId": "transaction-detail",
-    "href": "/apps/base/flows/home-funded"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "USDC Token Detail",
-    "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
-    "flowSlug": "home-funded",
-    "flowName": "Home (funded)",
-    "screenId": "usdc-token-detail-owned",
-    "href": "/apps/base/flows/home-funded"
+    "label": "Activity Tab",
+    "description": "Activity tab on home showing 'No transactions found' empty state.",
+    "flowSlug": "wallet",
+    "flowName": "Wallet",
+    "screenId": "home-activity",
+    "href": "/apps/base/flows/wallet"
   },
   {
     "type": "flow",
@@ -1100,43 +1027,167 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Home (empty)",
-    "description": "Browse portfolio tabs in empty-wallet state: Coins, Collectibles, Activity",
-    "flowSlug": "home-browsing",
-    "href": "/apps/base/flows/home-browsing"
+    "label": "Sorting coins",
+    "description": "Open sort options: Balance, Market Cap, Volume, Price Change",
+    "flowSlug": "sorting-coins",
+    "href": "/apps/base/flows/sorting-coins"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Coins (Empty)",
-    "description": "Home Coins tab with empty token list.",
-    "flowSlug": "home-browsing",
-    "flowName": "Home (empty)",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/home-browsing"
+    "label": "Home (Coins)",
+    "description": "Home with $1 balance, USDC in Coins tab.",
+    "flowSlug": "sorting-coins",
+    "flowName": "Sorting coins",
+    "screenId": "home-funded",
+    "href": "/apps/base/flows/sorting-coins"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Collectibles",
-    "description": "Empty collectibles state.",
-    "flowSlug": "home-browsing",
-    "flowName": "Home (empty)",
-    "screenId": "home-collectibles",
-    "href": "/apps/base/flows/home-browsing"
+    "label": "Sort By",
+    "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
+    "flowSlug": "sorting-coins",
+    "flowName": "Sorting coins",
+    "screenId": "home-sort-by",
+    "href": "/apps/base/flows/sorting-coins"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Filtering by network",
+    "description": "Filter portfolio by network (Base, Arbitrum, Optimism, etc.)",
+    "flowSlug": "filtering-by-network",
+    "href": "/apps/base/flows/filtering-by-network"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Coins)",
+    "description": "Home with $1 balance, USDC in Coins tab.",
+    "flowSlug": "filtering-by-network",
+    "flowName": "Filtering by network",
+    "screenId": "home-funded",
+    "href": "/apps/base/flows/filtering-by-network"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Network Filter",
+    "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
+    "flowSlug": "filtering-by-network",
+    "flowName": "Filtering by network",
+    "screenId": "home-network-filter",
+    "href": "/apps/base/flows/filtering-by-network"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Filtering by category",
+    "description": "Filter portfolio by category (Cash, Apps, Memes, Social)",
+    "flowSlug": "filtering-by-category",
+    "href": "/apps/base/flows/filtering-by-category"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Coins)",
+    "description": "Home with $1 balance, USDC in Coins tab.",
+    "flowSlug": "filtering-by-category",
+    "flowName": "Filtering by category",
+    "screenId": "home-funded",
+    "href": "/apps/base/flows/filtering-by-category"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Category Filter",
+    "description": "Filter by category: Cash, Apps, Memes, Social.",
+    "flowSlug": "filtering-by-category",
+    "flowName": "Filtering by category",
+    "screenId": "home-category-filter",
+    "href": "/apps/base/flows/filtering-by-category"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Activity detail (received)",
+    "description": "Open a received-USDC transaction to view full details (status, sender, tx hash, Block Explorer)",
+    "flowSlug": "transaction-detail",
+    "href": "/apps/base/flows/transaction-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Coins)",
+    "description": "Home with $1 balance, USDC in Coins tab.",
+    "flowSlug": "transaction-detail",
+    "flowName": "Activity detail (received)",
+    "screenId": "home-funded",
+    "href": "/apps/base/flows/transaction-detail"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Activity",
-    "description": "No transactions found.",
-    "flowSlug": "home-browsing",
-    "flowName": "Home (empty)",
-    "screenId": "home-activity",
-    "href": "/apps/base/flows/home-browsing"
+    "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
+    "flowSlug": "transaction-detail",
+    "flowName": "Activity detail (received)",
+    "screenId": "activity-funded",
+    "href": "/apps/base/flows/transaction-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Transaction Detail",
+    "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
+    "flowSlug": "transaction-detail",
+    "flowName": "Activity detail (received)",
+    "screenId": "transaction-detail",
+    "href": "/apps/base/flows/transaction-detail"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "USDC token detail",
+    "description": "Open USDC from the Coins list to view balance, Send/Receive, About, and Buy/Sell actions",
+    "flowSlug": "usdc-token-detail",
+    "href": "/apps/base/flows/usdc-token-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Coins)",
+    "description": "Home with $1 balance, USDC in Coins tab.",
+    "flowSlug": "usdc-token-detail",
+    "flowName": "USDC token detail",
+    "screenId": "home-funded",
+    "href": "/apps/base/flows/usdc-token-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "USDC Token Detail",
+    "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
+    "flowSlug": "usdc-token-detail",
+    "flowName": "USDC token detail",
+    "screenId": "usdc-token-detail-owned",
+    "href": "/apps/base/flows/usdc-token-detail"
   },
   {
     "type": "flow",
@@ -1495,29 +1546,9 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Profile",
-    "description": "Profile drawer — account, profile, and settings access",
+    "description": "Open the profile drawer from home and view the trading profile page",
     "flowSlug": "profile",
     "href": "/apps/base/flows/profile"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Profile Drawer",
-    "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $0 balance, and menu: Invite Friends, View Profile, Settings.",
-    "flowSlug": "profile",
-    "flowName": "Profile",
-    "screenId": "profile-drawer",
-    "href": "/apps/base/flows/profile"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Editing profile",
-    "description": "View profile drawer, navigate to View Profile and Edit Profile",
-    "flowSlug": "profile-settings",
-    "href": "/apps/base/flows/profile-settings"
   },
   {
     "type": "step",
@@ -1525,10 +1556,10 @@
     "appName": "Base",
     "label": "Home",
     "description": "Home screen with avatar in top left.",
-    "flowSlug": "profile-settings",
-    "flowName": "Editing profile",
+    "flowSlug": "profile",
+    "flowName": "Profile",
     "screenId": "home-empty",
-    "href": "/apps/base/flows/profile-settings"
+    "href": "/apps/base/flows/profile"
   },
   {
     "type": "step",
@@ -1536,10 +1567,10 @@
     "appName": "Base",
     "label": "Profile Drawer",
     "description": "Side drawer with wallet info and menu.",
-    "flowSlug": "profile-settings",
-    "flowName": "Editing profile",
+    "flowSlug": "profile",
+    "flowName": "Profile",
     "screenId": "profile-drawer",
-    "href": "/apps/base/flows/profile-settings"
+    "href": "/apps/base/flows/profile"
   },
   {
     "type": "step",
@@ -1547,10 +1578,52 @@
     "appName": "Base",
     "label": "View Profile",
     "description": "Profile page with edit and share options.",
-    "flowSlug": "profile-settings",
+    "flowSlug": "profile",
+    "flowName": "Profile",
+    "screenId": "view-profile",
+    "href": "/apps/base/flows/profile"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Editing profile",
+    "description": "Edit display name, bio, and claim a basename",
+    "flowSlug": "editing-profile",
+    "href": "/apps/base/flows/editing-profile"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home",
+    "description": "Home screen with avatar in top left.",
+    "flowSlug": "editing-profile",
+    "flowName": "Editing profile",
+    "screenId": "home-empty",
+    "href": "/apps/base/flows/editing-profile"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Profile Drawer",
+    "description": "Side drawer with wallet info and menu.",
+    "flowSlug": "editing-profile",
+    "flowName": "Editing profile",
+    "screenId": "profile-drawer",
+    "href": "/apps/base/flows/editing-profile"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "View Profile",
+    "description": "Profile page with edit and share options.",
+    "flowSlug": "editing-profile",
     "flowName": "Editing profile",
     "screenId": "view-profile",
-    "href": "/apps/base/flows/profile-settings"
+    "href": "/apps/base/flows/editing-profile"
   },
   {
     "type": "step",
@@ -1558,10 +1631,10 @@
     "appName": "Base",
     "label": "Edit Profile",
     "description": "Edit display name, bio, and claim basename.",
-    "flowSlug": "profile-settings",
+    "flowSlug": "editing-profile",
     "flowName": "Editing profile",
     "screenId": "edit-profile",
-    "href": "/apps/base/flows/profile-settings"
+    "href": "/apps/base/flows/editing-profile"
   },
   {
     "type": "flow",

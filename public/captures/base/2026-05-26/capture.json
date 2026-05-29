@@ -135,7 +135,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-create-account",
+          "flow": "onboarding",
           "step": 8
         },
         {
@@ -155,15 +155,15 @@
           "step": 1
         },
         {
-          "flow": "home-browsing",
-          "step": 1
-        },
-        {
           "flow": "messaging",
           "step": 1
         },
         {
-          "flow": "profile-settings",
+          "flow": "profile",
+          "step": 1
+        },
+        {
+          "flow": "editing-profile",
           "step": 1
         }
       ],
@@ -652,8 +652,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-browsing",
-          "step": 2
+          "flow": "wallet",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -681,8 +681,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-browsing",
-          "step": 3
+          "flow": "wallet",
+          "step": 4
         }
       ],
       "_humanEdited": []
@@ -1461,10 +1461,10 @@
       "appearsIn": [
         {
           "flow": "profile",
-          "step": 1
+          "step": 2
         },
         {
-          "flow": "profile-settings",
+          "flow": "editing-profile",
           "step": 2
         }
       ],
@@ -1554,7 +1554,11 @@
       ],
       "appearsIn": [
         {
-          "flow": "profile-settings",
+          "flow": "profile",
+          "step": 3
+        },
+        {
+          "flow": "editing-profile",
           "step": 3
         }
       ],
@@ -1605,7 +1609,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "profile-settings",
+          "flow": "editing-profile",
           "step": 4
         }
       ],
@@ -2360,15 +2364,35 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-sign-in",
+          "flow": "logging-in",
           "step": 4
         },
         {
-          "flow": "home-funded",
-          "step": 1
+          "flow": "wallet",
+          "step": 2
         },
         {
           "flow": "send",
+          "step": 1
+        },
+        {
+          "flow": "sorting-coins",
+          "step": 1
+        },
+        {
+          "flow": "filtering-by-network",
+          "step": 1
+        },
+        {
+          "flow": "filtering-by-category",
+          "step": 1
+        },
+        {
+          "flow": "transaction-detail",
+          "step": 1
+        },
+        {
+          "flow": "usdc-token-detail",
           "step": 1
         },
         {
@@ -2459,7 +2483,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-funded",
+          "flow": "sorting-coins",
           "step": 2
         }
       ],
@@ -2501,8 +2525,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-funded",
-          "step": 3
+          "flow": "filtering-by-network",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -2538,8 +2562,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-funded",
-          "step": 4
+          "flow": "filtering-by-category",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -2571,8 +2595,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-funded",
-          "step": 5
+          "flow": "transaction-detail",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -2626,8 +2650,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-funded",
-          "step": 6
+          "flow": "transaction-detail",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -2910,8 +2934,8 @@
       ],
       "appearsIn": [
         {
-          "flow": "home-funded",
-          "step": 7
+          "flow": "usdc-token-detail",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -3009,11 +3033,7 @@
           "step": 1
         },
         {
-          "flow": "onboarding-sign-in",
-          "step": 1
-        },
-        {
-          "flow": "onboarding-create-account",
+          "flow": "logging-in",
           "step": 1
         }
       ],
@@ -3065,7 +3085,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-create-account",
+          "flow": "onboarding",
           "step": 2
         }
       ],
@@ -3116,12 +3136,12 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-sign-in",
-          "step": 2
+          "flow": "onboarding",
+          "step": 3
         },
         {
-          "flow": "onboarding-create-account",
-          "step": 3
+          "flow": "logging-in",
+          "step": 2
         }
       ],
       "_humanEdited": []
@@ -3158,12 +3178,12 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-sign-in",
-          "step": 3
+          "flow": "onboarding",
+          "step": 4
         },
         {
-          "flow": "onboarding-create-account",
-          "step": 4
+          "flow": "logging-in",
+          "step": 3
         }
       ],
       "_humanEdited": []
@@ -3225,7 +3245,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-create-account",
+          "flow": "onboarding",
           "step": 5
         }
       ],
@@ -3277,7 +3297,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-create-account",
+          "flow": "onboarding",
           "step": 6
         }
       ],
@@ -3318,7 +3338,7 @@
       ],
       "appearsIn": [
         {
-          "flow": "onboarding-create-account",
+          "flow": "onboarding",
           "step": 7
         }
       ],
@@ -3744,92 +3764,7 @@
       "slug": "onboarding",
       "name": "Onboarding",
       "parent": null,
-      "summary": "Welcome screen and authentication entry point",
-      "mode": "free-roam",
-      "entryPoints": [
-        "welcome"
-      ],
-      "replay": null,
-      "steps": [
-        {
-          "number": 1,
-          "title": "Welcome to Base",
-          "screenId": "welcome",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer.",
-          "screenshotPath": "assets/3300f04956d6.png",
-          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
-          "fingerprintAfter": "sha256:1586f1477f40c1f7235d597005d5f072"
-        }
-      ],
-      "notes": "",
-      "_humanEdited": []
-    },
-    {
-      "slug": "onboarding-sign-in",
-      "name": "Signing in",
-      "parent": "onboarding",
-      "summary": "Sign into an existing Base account via email OTP. Welcome → Email → OTP → Home.",
-      "mode": "free-roam",
-      "entryPoints": [
-        "welcome"
-      ],
-      "replay": null,
-      "steps": [
-        {
-          "number": 1,
-          "title": "Welcome",
-          "screenId": "welcome",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Welcome to Base with sign-in options.",
-          "screenshotPath": "assets/3300f04956d6.png",
-          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
-          "fingerprintAfter": "sha256:1586f1477f40c1f7235d597005d5f072"
-        },
-        {
-          "number": 2,
-          "title": "Email Entry",
-          "screenId": "onboarding-email",
-          "action": "Tap Continue with Email",
-          "selector": "id=\"continue-with-email-button\"",
-          "description": "Enter email address.",
-          "screenshotPath": "assets/108df466e12e.png",
-          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
-          "fingerprintAfter": "sha256:b25e87b217b29db66356e72818512871"
-        },
-        {
-          "number": 3,
-          "title": "OTP Verification",
-          "screenId": "onboarding-otp",
-          "action": "Tap Next",
-          "selector": null,
-          "description": "6-digit code sent to email.",
-          "screenshotPath": "assets/e2dfed635174.png",
-          "fingerprintBefore": "sha256:b25e87b217b29db66356e72818512871",
-          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
-        },
-        {
-          "number": 4,
-          "title": "Home",
-          "screenId": "home-funded",
-          "action": "Enter valid OTP",
-          "selector": null,
-          "description": "Lands on home with existing balance.",
-          "screenshotPath": "assets/c292538c7202.png",
-          "fingerprintBefore": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
-          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
-        }
-      ],
-      "notes": "Existing accounts skip referral code, username, and captcha. Goes straight from OTP to Home. Also supports Apple and Google sign-in from Welcome.",
-      "_humanEdited": []
-    },
-    {
-      "slug": "onboarding-create-account",
-      "name": "Creating an account",
-      "parent": "onboarding",
-      "summary": "Create a new Base account: Welcome → More Options → Email → OTP → Referral Code → Choose Username (basename) → CAPTCHA → Home",
+      "summary": "Create a new Base account end-to-end: Welcome → More Options → Email → OTP → Referral → Username → CAPTCHA → Home",
       "mode": "free-roam",
       "entryPoints": [
         "welcome"
@@ -3929,10 +3864,69 @@
       "_humanEdited": []
     },
     {
+      "slug": "logging-in",
+      "name": "Logging in",
+      "parent": null,
+      "summary": "Sign into an existing Base account via email OTP",
+      "mode": "free-roam",
+      "entryPoints": [
+        "welcome"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Welcome",
+          "screenId": "welcome",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Welcome to Base with sign-in options.",
+          "screenshotPath": "assets/3300f04956d6.png",
+          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
+          "fingerprintAfter": "sha256:1586f1477f40c1f7235d597005d5f072"
+        },
+        {
+          "number": 2,
+          "title": "Email Entry",
+          "screenId": "onboarding-email",
+          "action": "Tap Continue with Email",
+          "selector": "id=\"continue-with-email-button\"",
+          "description": "Enter email address.",
+          "screenshotPath": "assets/108df466e12e.png",
+          "fingerprintBefore": "sha256:1586f1477f40c1f7235d597005d5f072",
+          "fingerprintAfter": "sha256:b25e87b217b29db66356e72818512871"
+        },
+        {
+          "number": 3,
+          "title": "OTP Verification",
+          "screenId": "onboarding-otp",
+          "action": "Tap Next",
+          "selector": null,
+          "description": "6-digit code sent to email.",
+          "screenshotPath": "assets/e2dfed635174.png",
+          "fingerprintBefore": "sha256:b25e87b217b29db66356e72818512871",
+          "fingerprintAfter": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c"
+        },
+        {
+          "number": 4,
+          "title": "Home",
+          "screenId": "home-funded",
+          "action": "Enter valid OTP",
+          "selector": null,
+          "description": "Lands on home with existing balance.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        }
+      ],
+      "notes": "Existing accounts skip referral code, username, and captcha. Goes straight from OTP to Home. Also supports Apple and Google sign-in from Welcome.",
+      "_humanEdited": []
+    },
+    {
       "slug": "wallet",
       "name": "Wallet",
       "parent": null,
-      "summary": "Wallet home — primary tab with portfolio, balance, and asset actions",
+      "summary": "Wallet tab walkthrough: empty and funded portfolio, Collectibles, and Activity",
       "mode": "free-roam",
       "entryPoints": [
         "home-empty"
@@ -3941,7 +3935,7 @@
       "steps": [
         {
           "number": 1,
-          "title": "Wallet (Home)",
+          "title": "Home (Empty Wallet)",
           "screenId": "home-empty",
           "action": "Entry point",
           "selector": null,
@@ -3949,106 +3943,42 @@
           "screenshotPath": "assets/f8533c79ce1b.png",
           "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
           "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
-        }
-      ],
-      "notes": "",
-      "_humanEdited": []
-    },
-    {
-      "slug": "home-funded",
-      "name": "Home (funded)",
-      "parent": "wallet",
-      "summary": "Browse the funded wallet: Coins with USDC balance, sorting/filtering, Activity, USDC detail",
-      "mode": "free-roam",
-      "entryPoints": [
-        "home-funded"
-      ],
-      "replay": {
-        "path": "home-funded.ad",
-        "entryFingerprint": "sha256:4adabafd57dd1481316392f6b34e8439",
-        "confidence": "high",
-        "credentialsTemplate": []
-      },
-      "steps": [
-        {
-          "number": 1,
-          "title": "Home (Coins)",
-          "screenId": "home-funded",
-          "action": "Entry point",
-          "selector": null,
-          "description": "Home with $1 balance, USDC in Coins tab.",
-          "screenshotPath": "assets/c292538c7202.png",
-          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
-          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
         },
         {
           "number": 2,
-          "title": "Sort By",
-          "screenId": "home-sort-by",
-          "action": "Tap Sort assets",
-          "selector": "id=\"wallet-sort-chip\"",
-          "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
-          "screenshotPath": "assets/98fb4db482ad.png",
-          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
-          "fingerprintAfter": "sha256:f531d1401a297935d9f06db5330130bc"
+          "title": "Home (Funded)",
+          "screenId": "home-funded",
+          "action": "Wallet funded (1 USDC received)",
+          "selector": null,
+          "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
         },
         {
           "number": 3,
-          "title": "Network Filter",
-          "screenId": "home-network-filter",
-          "action": "Tap Filter by network",
-          "selector": "id=\"wallet-network-chip\"",
-          "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
-          "screenshotPath": "assets/4b85bdb288cf.png",
-          "fingerprintBefore": "sha256:f531d1401a297935d9f06db5330130bc",
-          "fingerprintAfter": "sha256-text:09165b58596b3db29305341555e803a4"
+          "title": "Collectibles Tab",
+          "screenId": "home-collectibles",
+          "action": "Tap Collectibles tab",
+          "selector": null,
+          "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles.",
+          "screenshotPath": "assets/3743761f1051.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c"
         },
         {
           "number": 4,
-          "title": "Category Filter",
-          "screenId": "home-category-filter",
-          "action": "Tap Filter by category",
-          "selector": "id=\"wallet-category-chip\"",
-          "description": "Filter by category: Cash, Apps, Memes, Social.",
-          "screenshotPath": "assets/18c6cd8fce92.png",
-          "fingerprintBefore": "sha256-text:09165b58596b3db29305341555e803a4",
-          "fingerprintAfter": "sha256-text:4f447309404df381082a1d44af0ba8e6"
-        },
-        {
-          "number": 5,
-          "title": "Activity",
-          "screenId": "activity-funded",
+          "title": "Activity Tab",
+          "screenId": "home-activity",
           "action": "Tap Activity tab",
-          "selector": "id=\"tab-activity\"",
-          "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
-          "screenshotPath": "assets/1d1c8e74a824.png",
-          "fingerprintBefore": "sha256-text:4f447309404df381082a1d44af0ba8e6",
-          "fingerprintAfter": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850"
-        },
-        {
-          "number": 6,
-          "title": "Transaction Detail",
-          "screenId": "transaction-detail",
-          "action": "Tap transaction",
           "selector": null,
-          "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
-          "screenshotPath": "assets/e2238c97d252.png",
-          "fingerprintBefore": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850",
-          "fingerprintAfter": "sha256:da473a96ea69889e4e27d959d95b2626"
-        },
-        {
-          "number": 7,
-          "title": "USDC Token Detail",
-          "screenId": "usdc-token-detail-owned",
-          "action": "Tap USDC row on Coins",
-          "selector": null,
-          "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
-          "screenshotPath": "assets/c7064f130a47.png",
-          "fingerprintBefore": "sha256:da473a96ea69889e4e27d959d95b2626",
-          "fingerprintAfter": "sha256:0e7e791507067575ffad442abcdf2701"
+          "description": "Activity tab on home showing 'No transactions found' empty state.",
+          "screenshotPath": "assets/d633acb54146.png",
+          "fingerprintBefore": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c",
+          "fingerprintAfter": "sha256-text:1faab5cfa4343737d0d245c93dab418c"
         }
       ],
-      "notes": "Funded with 1 USDC via transfer from dalxds.base.eth. Home now shows Send and Trade buttons alongside Deposit and Receive.",
+      "notes": "Section walkthrough — shows the wallet tab in empty and funded states across its three tabs.",
       "_humanEdited": []
     },
     {
@@ -4297,56 +4227,199 @@
       "_humanEdited": []
     },
     {
-      "slug": "home-browsing",
-      "name": "Home (empty)",
+      "slug": "sorting-coins",
+      "name": "Sorting coins",
       "parent": "wallet",
-      "summary": "Browse portfolio tabs in empty-wallet state: Coins, Collectibles, Activity",
+      "summary": "Open sort options: Balance, Market Cap, Volume, Price Change",
       "mode": "free-roam",
       "entryPoints": [
-        "home-empty"
+        "home-funded"
       ],
-      "replay": {
-        "path": "home-browsing.ad",
-        "entryFingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-        "confidence": "high",
-        "credentialsTemplate": []
-      },
+      "replay": null,
       "steps": [
         {
           "number": 1,
-          "title": "Coins (Empty)",
-          "screenId": "home-empty",
+          "title": "Home (Coins)",
+          "screenId": "home-funded",
           "action": "Entry point",
           "selector": null,
-          "description": "Home Coins tab with empty token list.",
-          "screenshotPath": "assets/f8533c79ce1b.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+          "description": "Home with $1 balance, USDC in Coins tab.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
         },
         {
           "number": 2,
-          "title": "Collectibles",
-          "screenId": "home-collectibles",
-          "action": "Tap Collectibles tab",
-          "selector": "id=\"tab-collectibles\"",
-          "description": "Empty collectibles state.",
-          "screenshotPath": "assets/3743761f1051.png",
-          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
-          "fingerprintAfter": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c"
+          "title": "Sort By",
+          "screenId": "home-sort-by",
+          "action": "Tap Sort assets",
+          "selector": "id=\"wallet-sort-chip\"",
+          "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
+          "screenshotPath": "assets/98fb4db482ad.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:f531d1401a297935d9f06db5330130bc"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "filtering-by-network",
+      "name": "Filtering by network",
+      "parent": "wallet",
+      "summary": "Filter portfolio by network (Base, Arbitrum, Optimism, etc.)",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home (Coins)",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with $1 balance, USDC in Coins tab.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "Network Filter",
+          "screenId": "home-network-filter",
+          "action": "Tap Filter by network",
+          "selector": "id=\"wallet-network-chip\"",
+          "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
+          "screenshotPath": "assets/4b85bdb288cf.png",
+          "fingerprintBefore": "sha256:f531d1401a297935d9f06db5330130bc",
+          "fingerprintAfter": "sha256-text:09165b58596b3db29305341555e803a4"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "filtering-by-category",
+      "name": "Filtering by category",
+      "parent": "wallet",
+      "summary": "Filter portfolio by category (Cash, Apps, Memes, Social)",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home (Coins)",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with $1 balance, USDC in Coins tab.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "Category Filter",
+          "screenId": "home-category-filter",
+          "action": "Tap Filter by category",
+          "selector": "id=\"wallet-category-chip\"",
+          "description": "Filter by category: Cash, Apps, Memes, Social.",
+          "screenshotPath": "assets/18c6cd8fce92.png",
+          "fingerprintBefore": "sha256-text:09165b58596b3db29305341555e803a4",
+          "fingerprintAfter": "sha256-text:4f447309404df381082a1d44af0ba8e6"
+        }
+      ],
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "transaction-detail",
+      "name": "Activity detail (received)",
+      "parent": "wallet",
+      "summary": "Open a received-USDC transaction to view full details (status, sender, tx hash, Block Explorer)",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home (Coins)",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with $1 balance, USDC in Coins tab.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "Activity",
+          "screenId": "activity-funded",
+          "action": "Tap Activity tab",
+          "selector": "id=\"tab-activity\"",
+          "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
+          "screenshotPath": "assets/1d1c8e74a824.png",
+          "fingerprintBefore": "sha256-text:4f447309404df381082a1d44af0ba8e6",
+          "fingerprintAfter": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850"
         },
         {
           "number": 3,
-          "title": "Activity",
-          "screenId": "home-activity",
-          "action": "Tap Activity tab",
-          "selector": "id=\"tab-activity\"",
-          "description": "No transactions found.",
-          "screenshotPath": "assets/d633acb54146.png",
-          "fingerprintBefore": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c",
-          "fingerprintAfter": "sha256-text:1faab5cfa4343737d0d245c93dab418c"
+          "title": "Transaction Detail",
+          "screenId": "transaction-detail",
+          "action": "Tap transaction",
+          "selector": null,
+          "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
+          "screenshotPath": "assets/e2238c97d252.png",
+          "fingerprintBefore": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850",
+          "fingerprintAfter": "sha256:da473a96ea69889e4e27d959d95b2626"
         }
       ],
-      "notes": "All tabs show empty states for a fresh wallet.",
+      "notes": "",
+      "_humanEdited": []
+    },
+    {
+      "slug": "usdc-token-detail",
+      "name": "USDC token detail",
+      "parent": "wallet",
+      "summary": "Open USDC from the Coins list to view balance, Send/Receive, About, and Buy/Sell actions",
+      "mode": "free-roam",
+      "entryPoints": [
+        "home-funded"
+      ],
+      "replay": null,
+      "steps": [
+        {
+          "number": 1,
+          "title": "Home (Coins)",
+          "screenId": "home-funded",
+          "action": "Entry point",
+          "selector": null,
+          "description": "Home with $1 balance, USDC in Coins tab.",
+          "screenshotPath": "assets/c292538c7202.png",
+          "fingerprintBefore": "sha256:4adabafd57dd1481316392f6b34e8439",
+          "fingerprintAfter": "sha256:4adabafd57dd1481316392f6b34e8439"
+        },
+        {
+          "number": 2,
+          "title": "USDC Token Detail",
+          "screenId": "usdc-token-detail-owned",
+          "action": "Tap USDC row on Coins",
+          "selector": null,
+          "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
+          "screenshotPath": "assets/c7064f130a47.png",
+          "fingerprintBefore": "sha256:da473a96ea69889e4e27d959d95b2626",
+          "fingerprintAfter": "sha256:0e7e791507067575ffad442abcdf2701"
+        }
+      ],
+      "notes": "",
       "_humanEdited": []
     },
     {
@@ -4806,36 +4879,58 @@
       "slug": "profile",
       "name": "Profile",
       "parent": null,
-      "summary": "Profile drawer — account, profile, and settings access",
+      "summary": "Open the profile drawer from home and view the trading profile page",
       "mode": "free-roam",
       "entryPoints": [
-        "profile-drawer"
+        "home-empty"
       ],
       "replay": null,
       "steps": [
         {
           "number": 1,
-          "title": "Profile Drawer",
-          "screenId": "profile-drawer",
+          "title": "Home",
+          "screenId": "home-empty",
           "action": "Entry point",
           "selector": null,
-          "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $0 balance, and menu: Invite Friends, View Profile, Settings.",
+          "description": "Home screen with avatar in top left.",
+          "screenshotPath": "assets/f8533c79ce1b.png",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+          "fingerprintAfter": "sha256:23d975d8b3fb324f68aa3cc7935faa9a"
+        },
+        {
+          "number": 2,
+          "title": "Profile Drawer",
+          "screenId": "profile-drawer",
+          "action": "Tap avatar",
+          "selector": "id=\"account-settings-pressable-avatar\"",
+          "description": "Side drawer with wallet info and menu.",
           "screenshotPath": "assets/a497e6f119ad.png",
-          "fingerprintBefore": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9",
+          "fingerprintBefore": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
           "fingerprintAfter": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9"
+        },
+        {
+          "number": 3,
+          "title": "View Profile",
+          "screenId": "view-profile",
+          "action": "Tap View Profile",
+          "selector": null,
+          "description": "Profile page with edit and share options.",
+          "screenshotPath": "assets/a843502c0927.png",
+          "fingerprintBefore": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9",
+          "fingerprintAfter": "sha256:642e0b2257c39e36b6221ff30f8ba2d9"
         }
       ],
       "notes": "",
       "_humanEdited": []
     },
     {
-      "slug": "profile-settings",
+      "slug": "editing-profile",
       "name": "Editing profile",
       "parent": "profile",
-      "summary": "View profile drawer, navigate to View Profile and Edit Profile",
+      "summary": "Edit display name, bio, and claim a basename",
       "mode": "free-roam",
       "entryPoints": [
-        "home-empty"
+        "view-profile"
       ],
       "replay": null,
       "steps": [
@@ -4884,7 +4979,7 @@
           "fingerprintAfter": "sha256:072f2f45f7a5f6374754867021a0b4fc"
         }
       ],
-      "notes": "Profile drawer is the entry to View Profile, Edit Profile, and Settings.",
+      "notes": "",
       "_humanEdited": []
     },
     {
@@ -5410,17 +5505,17 @@
         {
           "label": "Coins tab",
           "explored": true,
-          "flowSlug": "home-browsing"
+          "flowSlug": "wallet"
         },
         {
           "label": "Collectibles tab",
           "explored": true,
-          "flowSlug": "home-browsing"
+          "flowSlug": "wallet"
         },
         {
           "label": "Activity tab",
           "explored": true,
-          "flowSlug": "home-browsing"
+          "flowSlug": "wallet"
         },
         {
           "label": "See what's trending",
@@ -5430,7 +5525,7 @@
         {
           "label": "Avatar / Profile",
           "explored": true,
-          "flowSlug": "profile-settings"
+          "flowSlug": "profile"
         },
         {
           "label": "Search icon",
@@ -5557,6 +5652,6 @@
     "screensAdded": 72,
     "screensModified": 0,
     "screensRemoved": 0,
-    "flowsTouched": 34
+    "flowsTouched": 36
   }
 }
