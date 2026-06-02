@@ -20,30 +20,30 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [linkCopied, setLinkCopied] = useState(false)
   const [flowParam, setFlowParam] = useQueryState("flow")
   const [stepParam, setStepParam] = useQueryState("step")
 
-  const openLightbox = useCallback((idx: number) => {
-    setLightboxIndex(idx)
-    setFlowParam(flow.slug)
-    setStepParam(String(idx))
-  }, [flow.slug, setFlowParam, setStepParam])
+  // The lightbox is derived from the URL (single source of truth): this flow's
+  // lightbox is open whenever ?flow matches its slug, at the ?step index. This
+  // also covers deep links that arrive after mount (e.g. via search) without
+  // mirroring URL state into an effect.
+  const isLightboxOpen = flowParam === flow.slug
+  const parsedStep = stepParam ? parseInt(stepParam, 10) : 0
+  const initialStep = Number.isNaN(parsedStep) ? 0 : parsedStep
+
+  const openLightbox = useCallback(
+    (idx: number) => {
+      setFlowParam(flow.slug)
+      setStepParam(String(idx))
+    },
+    [flow.slug, setFlowParam, setStepParam]
+  )
 
   const closeLightbox = useCallback(() => {
-    setLightboxIndex(null)
     setFlowParam(null)
     setStepParam(null)
   }, [setFlowParam, setStepParam])
-
-  // Auto-open lightbox when URL flow param matches this flow (deep link)
-  useEffect(() => {
-    if (flowParam === flow.slug && lightboxIndex === null) {
-      const idx = stepParam ? parseInt(stepParam, 10) : 0
-      setLightboxIndex(isNaN(idx) ? 0 : idx)
-    }
-  }, [flowParam, flow.slug, stepParam, lightboxIndex])
 
   function updateScrollState() {
     const el = scrollRef.current
@@ -172,11 +172,11 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
         )}
       </div>
 
-      {lightboxIndex !== null && (
+      {isLightboxOpen && (
         <FlowLightbox
           flow={flow}
           appSlug={appSlug}
-          initialIndex={lightboxIndex}
+          initialIndex={initialStep}
           onClose={closeLightbox}
         />
       )}
