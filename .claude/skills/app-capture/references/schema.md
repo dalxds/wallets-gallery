@@ -428,6 +428,8 @@ When the same logical screen exists in multiple app states (empty wallet vs fund
 }
 ```
 
+**How variants relate to flows.** A variant screen is surfaced by the flow that reaches it — never by sitting next to another variant as adjacent steps. The state-changing journey IS a flow: `deposit` enters on `home-empty` and ends on `home-funded` (the empty→funded bridge); `sign-in` enters on `home-signed-out`. Pick one primary state (usually the populated one) as the spine for section walkthroughs; alternative-state screens hang off the flow that produces them, or off a parenthetical variant sibling (`Trading a token (no funds)`). Full rules: [exploration.md](exploration.md) → State: model state changes as flows.
+
 ### Why this works
 
 - Renderers see all variants in one place — they can show all "home" variants side by side.

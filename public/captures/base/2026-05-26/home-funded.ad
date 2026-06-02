@@ -1,7 +1,0 @@
-context platform=android device="pixel test" kind=emulator theme=unknown
-open "org.toshi" --relaunch
-click "id=\"wallet-sort-chip\" || role=\"button\" label=\"Sort assets\" || label=\"Sort assets\""
-back
-back
-back
-close

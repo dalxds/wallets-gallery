@@ -1,5 +1,0 @@
-context platform=android device="pixel test" kind=emulator theme=unknown
-open "org.toshi" --relaunch
-click "id=\"tab-collectibles\" || role=\"view\" label=\"Collectibles\" || label=\"Collectibles\""
-click "id=\"tab-activity\" || role=\"view\" label=\"Activity\" || label=\"Activity\""
-close

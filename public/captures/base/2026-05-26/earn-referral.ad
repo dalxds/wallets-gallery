@@ -1,5 +1,0 @@
-context platform=android device="pixel test" kind=emulator theme=unknown
-open "org.toshi" --relaunch
-click "id=\"home-earn-chip\" || role=\"button\" label=\"Earn\" || label=\"Earn\""
-find "Close" "click"
-close

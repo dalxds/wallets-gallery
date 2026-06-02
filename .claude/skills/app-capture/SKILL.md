@@ -113,8 +113,13 @@ Same as above — restart with `--save-script` or plan a deliberate replay pass 
                 Then run pre-flight checks: session list, appstate, snapshot.
 3. Explore      Fingerprint-keyed BFS. Snapshot + screenshot every screen. Decision points at branches.
 4. Package      a. Verify {staging}/master.ad exists and has content.
-                b. Group screens into flows. State variants get distinct screen IDs
-                   (home-empty, home-funded). One screens[] array. No new top-level keys.
+                b. Group screens into a flow TREE (references/exploration.md → Build flows).
+                   Promote any distinct screen/functionality (pickers, detail/info screens) to
+                   its own flow — do not bury it as a step. Pick one primary app state as the
+                   spine; surface other states only as the entry of the flow that reaches them
+                   or as parenthetical variant siblings — never as hand-waved adjacent steps.
+                   State variants get distinct screen IDs (home-empty, home-funded) in ONE
+                   screens[] array. No new top-level keys.
                 c. Harden each flow's .ad (resolve @eN → stable selectors). Forbid empty
                    selectors — use a real selector or null.
                 d. Compute fingerprint for every screen. Compute fingerprintBefore/After
@@ -185,6 +190,7 @@ Every chat-edit stamps `_humanEdited` on the affected fields. Re-captures preser
 - **Fingerprints are mandatory.** Every `screens[].fingerprint`, every `steps[].fingerprintBefore`, every `steps[].fingerprintAfter` must be non-null at write time. Computed from `(role, label)` pairs of interactive elements. A capture without fingerprints is unfinished. See [references/temporal.md](references/temporal.md) → Fingerprints.
 - **No empty-string selectors.** Selectors are either a valid expression (`id="..."`, `label="..."`, etc.) or `null`/omitted. Empty strings will fail at replay. See [references/temporal.md](references/temporal.md) → Hardening.
 - **State variants get distinct screen IDs in ONE `screens[]` array.** When a screen exists in multiple app states (empty wallet vs funded wallet, signed-in vs signed-out), give each variant its own ID with a clear state suffix (`home-empty`, `home-funded`, `home-signed-out`). Do NOT split into multiple arrays. Do NOT add fields outside the schema. See [references/schema.md](references/schema.md) → State-variant convention.
+- **Flows are fine-grained; state changes are flows, not steps.** Give every distinct screen/functionality (a picker, a detail or info screen, a fee breakdown) its own flow rather than burying it as a step — a 1–3 screen flow is fine. Model a major state change (empty→funded, signed-out→in) as the flow that carries it: the alternative-state screen is that flow's entry, or a parenthetical variant sibling. Never show two state-variants of one screen as adjacent steps with a fabricated transition. See [references/exploration.md](references/exploration.md) → Build flows.
 - **One device, one session.** Never spawn background agents or subagents that drive the device in parallel. Hung subagents hold the device — kill them.
 - **Snapshot first, always.** Every screen begins with `agent-device snapshot -i --json`. Screenshots are evidence, never understanding. Only fall back to screenshot when snapshot is insufficient (see Navigation hierarchy above). Re-test snapshot on every new screen — don't commit to screenshot mode.
 - **Fingerprints are the source of screen identity, not slugs.** Slugs are agent-assigned labels; fingerprints are the deterministic hash. When comparing across captures, use fingerprints.
