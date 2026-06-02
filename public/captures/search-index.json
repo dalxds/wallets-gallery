@@ -4,7 +4,7 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Base",
-    "description": "ANDROID app — 68 screens, 36 flows",
+    "description": "ANDROID app — 68 screens, 54 flows",
     "href": "/apps/base"
   },
   {
@@ -14,7 +14,7 @@
     "label": "Home (Empty Wallet)",
     "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA.",
     "screenId": "home-empty",
-    "href": "/apps/base/screens/home-empty"
+    "href": "/apps/base?tab=screens&screen=home-empty"
   },
   {
     "type": "screen",
@@ -23,7 +23,7 @@
     "label": "Deposit",
     "description": "Buy/deposit screen with $0 amount display, USDC selected, Debit Card payment method, numpad, $2/Max presets, and Connect to Coinbase CTA at bottom.",
     "screenId": "deposit",
-    "href": "/apps/base/screens/deposit"
+    "href": "/apps/base?tab=screens&screen=deposit"
   },
   {
     "type": "screen",
@@ -32,7 +32,7 @@
     "label": "Token Selector (Deposit)",
     "description": "Modal listing tokens available for deposit with search bar and network filter. Shows USDC, Ethereum, cbBTC, Venice Token, EURC, Aerodrome, cbETH, RaveDAO, KAITO with prices and percentage changes.",
     "screenId": "deposit-token-selector",
-    "href": "/apps/base/screens/deposit-token-selector"
+    "href": "/apps/base?tab=screens&screen=deposit-token-selector"
   },
   {
     "type": "screen",
@@ -41,7 +41,7 @@
     "label": "Deposit With Modal",
     "description": "Bottom sheet showing payment method option: Connect to Coinbase with description 'Use payment methods on your Coinbase.com account' and Connect arrow.",
     "screenId": "deposit-with-modal",
-    "href": "/apps/base/screens/deposit-with-modal"
+    "href": "/apps/base?tab=screens&screen=deposit-with-modal"
   },
   {
     "type": "screen",
@@ -50,7 +50,7 @@
     "label": "Receive",
     "description": "Receive tab showing wallet address (0x1c7...b282), Ethereum QR code, supported network badges (Base, Optimism, Polygon, Arbitrum, Avalanche, Zora), and Copy Wallet Address button.",
     "screenId": "receive",
-    "href": "/apps/base/screens/receive"
+    "href": "/apps/base?tab=screens&screen=receive"
   },
   {
     "type": "screen",
@@ -59,7 +59,7 @@
     "label": "Scan QR Code",
     "description": "Camera viewfinder with QR code scanning frame and text 'Scan a QR code to send crypto'. Part of the Receive/Scan/Request tab group.",
     "screenId": "scan-qr",
-    "href": "/apps/base/screens/scan-qr"
+    "href": "/apps/base?tab=screens&screen=scan-qr"
   },
   {
     "type": "screen",
@@ -68,7 +68,7 @@
     "label": "Request Payment",
     "description": "Request tab with Add Recipient field, $0 amount, USDC token selector, preset amounts ($5/$10/$25), numpad, and 'Enter an amount' swipe CTA.",
     "screenId": "request",
-    "href": "/apps/base/screens/request"
+    "href": "/apps/base?tab=screens&screen=request"
   },
   {
     "type": "screen",
@@ -77,7 +77,7 @@
     "label": "Request From (Add Recipient)",
     "description": "Bottom sheet for selecting who to request payment from. Search input with Paste button, QR Code option ('Show your QR code to receive funds'), Tap to Request (proximity), Request via Link (shareable link). Shows 'No recent recipients' empty state.",
     "screenId": "request-add-recipient",
-    "href": "/apps/base/screens/request-add-recipient"
+    "href": "/apps/base?tab=screens&screen=request-add-recipient"
   },
   {
     "type": "screen",
@@ -86,7 +86,7 @@
     "label": "Network Fee Info (Request)",
     "description": "Bottom sheet showing transaction fee details: 'Applies to all transactions and varies based on network usage.' Network: Base. Network fee: Free.",
     "screenId": "request-fee-info",
-    "href": "/apps/base/screens/request-fee-info"
+    "href": "/apps/base?tab=screens&screen=request-fee-info"
   },
   {
     "type": "screen",
@@ -95,7 +95,7 @@
     "label": "Base Rewards Enrollment",
     "description": "Earn enrollment screen asking 'Where do you live?' with US and non-US options. 'I don't live in the US' pre-selected with Continue button.",
     "screenId": "earn-enrollment",
-    "href": "/apps/base/screens/earn-enrollment"
+    "href": "/apps/base?tab=screens&screen=earn-enrollment"
   },
   {
     "type": "screen",
@@ -104,7 +104,7 @@
     "label": "Invite Friends to Earn",
     "description": "Referral screen showing referral code HDNXPRX6, 'Have your friends use your referral link to earn 25% of their fees', Copy Referral Code and Share Referral Link buttons.",
     "screenId": "invite-friends",
-    "href": "/apps/base/screens/invite-friends"
+    "href": "/apps/base?tab=screens&screen=invite-friends"
   },
   {
     "type": "screen",
@@ -113,7 +113,7 @@
     "label": "Collectibles Tab",
     "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles.",
     "screenId": "home-collectibles",
-    "href": "/apps/base/screens/home-collectibles"
+    "href": "/apps/base?tab=screens&screen=home-collectibles"
   },
   {
     "type": "screen",
@@ -122,7 +122,7 @@
     "label": "Activity Tab",
     "description": "Activity tab on home showing 'No transactions found' empty state.",
     "screenId": "home-activity",
-    "href": "/apps/base/screens/home-activity"
+    "href": "/apps/base?tab=screens&screen=home-activity"
   },
   {
     "type": "screen",
@@ -131,7 +131,7 @@
     "label": "Discover / Search",
     "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
     "screenId": "discover",
-    "href": "/apps/base/screens/discover"
+    "href": "/apps/base?tab=screens&screen=discover"
   },
   {
     "type": "screen",
@@ -140,7 +140,7 @@
     "label": "Get Verified",
     "description": "WebView at verify.base.dev showing Get Verified landing page with benefits: Earn Rewards, Build Credibility, Boost Visibility. Continue CTA and Terms of Service link.",
     "screenId": "verify",
-    "href": "/apps/base/screens/verify"
+    "href": "/apps/base?tab=screens&screen=verify"
   },
   {
     "type": "screen",
@@ -149,7 +149,7 @@
     "label": "Apps Directory",
     "description": "Mini apps directory with featured carousel (RIP.FUN, Beezie, Clash of Coins) and categorized sections: Trading must-haves (Perps by Avantis, Wasabi, Bankr, Aerodrome), Play games (Cat Town), Earn crypto (Morpho, Mamo, Rips), Make predictions (Limitless, Bookie).",
     "screenId": "apps-directory",
-    "href": "/apps/base/screens/apps-directory"
+    "href": "/apps/base?tab=screens&screen=apps-directory"
   },
   {
     "type": "screen",
@@ -158,7 +158,7 @@
     "label": "Token Detail",
     "description": "Token detail page (shown for VIRTUAL Protocol) with price ($0.7785), percentage change, market cap ($510M), 24h volume, interactive price chart with 1H/1D/1W/1M/1Y/All periods, candlestick toggle, top holders, external links (Whitepaper, Official website, GeckoTerminal, Dexscreener), contract address, and Buy CTA.",
     "screenId": "token-detail",
-    "href": "/apps/base/screens/token-detail"
+    "href": "/apps/base?tab=screens&screen=token-detail"
   },
   {
     "type": "screen",
@@ -167,7 +167,7 @@
     "label": "Trading Requires USDC",
     "description": "Interstitial overlay on token detail: 'Trading this coin requires USDC. Add USDC to your wallet to continue with your purchase.' with Continue button.",
     "screenId": "trading-requires-usdc",
-    "href": "/apps/base/screens/trading-requires-usdc"
+    "href": "/apps/base?tab=screens&screen=trading-requires-usdc"
   },
   {
     "type": "screen",
@@ -176,7 +176,7 @@
     "label": "Trade / Swap (No Funds)",
     "description": "Token swap screen showing USDC → Ethereum. USDC selected with $0.00 balance, 50%/75%/Max preset buttons, $1 entered with '1 Not enough' warning in orange. Flip tokens button, Ethereum output showing 0.00046 ($0.99), exchange rate (1 USDC ≈ 0.00047028 ETH), and 'Add funds' blue CTA.",
     "screenId": "trade",
-    "href": "/apps/base/screens/trade"
+    "href": "/apps/base?tab=screens&screen=trade"
   },
   {
     "type": "screen",
@@ -185,7 +185,7 @@
     "label": "Trading Requires USDC (Trade)",
     "description": "Interstitial overlay on Trade screen: 'Trading this coin requires USDC. Add USDC to your wallet to continue with your purchase of ETH.' with Continue button.",
     "screenId": "trade-requires-usdc",
-    "href": "/apps/base/screens/trade-requires-usdc"
+    "href": "/apps/base?tab=screens&screen=trade-requires-usdc"
   },
   {
     "type": "screen",
@@ -194,7 +194,7 @@
     "label": "Deposit Funds (from Trade)",
     "description": "Bottom sheet for depositing funds inline from the Trade flow. Shows 'Add funds to your wallet to continue with your purchase.' $2 default amount with USDC, presets ($5/$10/$50), Deposit With Debit Card, Total $2.00, and Connect to Coinbase CTA.",
     "screenId": "trade-deposit-funds",
-    "href": "/apps/base/screens/trade-deposit-funds"
+    "href": "/apps/base?tab=screens&screen=trade-deposit-funds"
   },
   {
     "type": "screen",
@@ -203,7 +203,7 @@
     "label": "From-Token Selector (Trade)",
     "description": "Bottom tray for selecting which token to sell/swap from. Search bar, network filter, token list (USDC, Virtual Protocol, gitlawb, Venice Token, Boon, Aerodrome) all showing $0.00 balance with percentage changes and info icons.",
     "screenId": "trade-from-token-selector",
-    "href": "/apps/base/screens/trade-from-token-selector"
+    "href": "/apps/base?tab=screens&screen=trade-from-token-selector"
   },
   {
     "type": "screen",
@@ -212,7 +212,7 @@
     "label": "To-Token Selector (Trade)",
     "description": "Bottom tray for selecting which token to buy/swap into. Search bar, network filter, token list with prices: Ethereum ($2,125), Virtual Protocol ($0.83), gitlawb, Venice Token ($17.80), Boon, Wrapped PROS ($0.61). Each with contract addresses and info icons.",
     "screenId": "trade-to-token-selector",
-    "href": "/apps/base/screens/trade-to-token-selector"
+    "href": "/apps/base?tab=screens&screen=trade-to-token-selector"
   },
   {
     "type": "screen",
@@ -221,7 +221,7 @@
     "label": "Social Feed",
     "description": "Live trading feed showing real-time trade broadcast cards. Each card shows avatar, token name, market cap, trade amount, PnL percentage, with Share and Trade action buttons.",
     "screenId": "social-feed",
-    "href": "/apps/base/screens/social-feed"
+    "href": "/apps/base?tab=screens&screen=social-feed"
   },
   {
     "type": "screen",
@@ -230,7 +230,7 @@
     "label": "Notifications",
     "description": "Notifications screen with push notification toggle and ETH price alert notifications (up +5.37%, down 4.42%).",
     "screenId": "notifications",
-    "href": "/apps/base/screens/notifications"
+    "href": "/apps/base?tab=screens&screen=notifications"
   },
   {
     "type": "screen",
@@ -239,7 +239,7 @@
     "label": "Notification Settings",
     "description": "Notification preferences with push toggle and category rows: Trading, Social, Rewards, Subscriptions, Wallet Activity, Chat, Product Announcements.",
     "screenId": "notification-settings",
-    "href": "/apps/base/screens/notification-settings"
+    "href": "/apps/base?tab=screens&screen=notification-settings"
   },
   {
     "type": "screen",
@@ -248,7 +248,7 @@
     "label": "Profile Drawer",
     "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $0 balance, and menu: Invite Friends, View Profile, Settings.",
     "screenId": "profile-drawer",
-    "href": "/apps/base/screens/profile-drawer"
+    "href": "/apps/base?tab=screens&screen=profile-drawer"
   },
   {
     "type": "screen",
@@ -257,7 +257,7 @@
     "label": "View Profile",
     "description": "User profile page with Edit Profile and Share Profile buttons, network/category/sort filter chips, Deposit CTA, and Coins/Collectibles/Activity tabs.",
     "screenId": "view-profile",
-    "href": "/apps/base/screens/view-profile"
+    "href": "/apps/base?tab=screens&screen=view-profile"
   },
   {
     "type": "screen",
@@ -266,7 +266,7 @@
     "label": "Edit Profile",
     "description": "Edit profile screen with follow button, 'Claim Your Unique Basename Today' card, Display name input, and Bio input.",
     "screenId": "edit-profile",
-    "href": "/apps/base/screens/edit-profile"
+    "href": "/apps/base?tab=screens&screen=edit-profile"
   },
   {
     "type": "screen",
@@ -275,7 +275,7 @@
     "label": "Settings",
     "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
     "screenId": "settings",
-    "href": "/apps/base/screens/settings"
+    "href": "/apps/base?tab=screens&screen=settings"
   },
   {
     "type": "screen",
@@ -284,7 +284,7 @@
     "label": "Display Settings",
     "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD).",
     "screenId": "display-settings",
-    "href": "/apps/base/screens/display-settings"
+    "href": "/apps/base?tab=screens&screen=display-settings"
   },
   {
     "type": "screen",
@@ -293,7 +293,7 @@
     "label": "Account Management",
     "description": "Account management with Authenticator App (2FA) option and Sign out button.",
     "screenId": "account-management",
-    "href": "/apps/base/screens/account-management"
+    "href": "/apps/base?tab=screens&screen=account-management"
   },
   {
     "type": "screen",
@@ -302,7 +302,7 @@
     "label": "Privacy & Security",
     "description": "Privacy settings with Personalized offers toggle, Privacy mode toggle, Payment requests toggle, Decline all requests button, Token Approvals, and Manage Permissions.",
     "screenId": "privacy-security",
-    "href": "/apps/base/screens/privacy-security"
+    "href": "/apps/base?tab=screens&screen=privacy-security"
   },
   {
     "type": "screen",
@@ -311,7 +311,7 @@
     "label": "Trading Settings",
     "description": "Trading preferences: Turn on stealth mode toggle (hide trades from social feed), Dust Coins toggle (auto-hide coins under $0.10), Hidden Coins list.",
     "screenId": "trading-settings",
-    "href": "/apps/base/screens/trading-settings"
+    "href": "/apps/base?tab=screens&screen=trading-settings"
   },
   {
     "type": "screen",
@@ -320,7 +320,7 @@
     "label": "Connect to Coinbase",
     "description": "Connect to Coinbase screen with wallet illustration and 'Buy or transfer with Coinbase' CTA. Links to Coinbase User Agreement and Privacy Policy.",
     "screenId": "connect-coinbase",
-    "href": "/apps/base/screens/connect-coinbase"
+    "href": "/apps/base?tab=screens&screen=connect-coinbase"
   },
   {
     "type": "screen",
@@ -329,7 +329,7 @@
     "label": "Chat",
     "description": "Chat home showing 'Chat with AI Agents' section with Bankr ('Your friendly crypto companion') and Elsa ('Turn words into onchain action'). New conversation FAB at bottom right.",
     "screenId": "chat",
-    "href": "/apps/base/screens/chat"
+    "href": "/apps/base?tab=screens&screen=chat"
   },
   {
     "type": "screen",
@@ -338,7 +338,7 @@
     "label": "Global Search",
     "description": "Full-screen search overlay with filter chips: All, Coins, Apps, Profiles, Sites. Search input for 'Search Base or URL'.",
     "screenId": "global-search",
-    "href": "/apps/base/screens/global-search"
+    "href": "/apps/base?tab=screens&screen=global-search"
   },
   {
     "type": "screen",
@@ -347,7 +347,7 @@
     "label": "Watchlist (Empty)",
     "description": "Watchlist view on Discover tab showing empty state: 'Start your watchlist — Add assets to your watchlist to monitor price moves' with 'View Trending Coins' CTA.",
     "screenId": "watchlist-empty",
-    "href": "/apps/base/screens/watchlist-empty"
+    "href": "/apps/base?tab=screens&screen=watchlist-empty"
   },
   {
     "type": "screen",
@@ -356,7 +356,7 @@
     "label": "Trending Filters",
     "description": "Filter tray for trending tokens: Timeframe (5m/1h/4h/12h/24h), Sort by (Trending/Market Cap/Volume/Price Change/Liquidity/Holders/Transactions), Networks (Base/Ethereum/Polygon/Arbitrum/Optimism/Avalanche/BNB Chain), Apply and Reset buttons.",
     "screenId": "trending-filters",
-    "href": "/apps/base/screens/trending-filters"
+    "href": "/apps/base?tab=screens&screen=trending-filters"
   },
   {
     "type": "screen",
@@ -365,7 +365,7 @@
     "label": "Home (Funded)",
     "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
     "screenId": "home-funded",
-    "href": "/apps/base/screens/home-funded"
+    "href": "/apps/base?tab=screens&screen=home-funded"
   },
   {
     "type": "screen",
@@ -374,7 +374,7 @@
     "label": "Sort By",
     "description": "Sort By bottom sheet with direction toggle (High to Low / Low to High) and sort criteria: Balance, Market Cap, Volume, Price Change. Reset and Apply buttons.",
     "screenId": "home-sort-by",
-    "href": "/apps/base/screens/home-sort-by"
+    "href": "/apps/base?tab=screens&screen=home-sort-by"
   },
   {
     "type": "screen",
@@ -383,7 +383,7 @@
     "label": "Network Filter",
     "description": "Network filter bottom sheet: All Networks, Base, Arbitrum, Optimism, Zora, Polygon, BNB Chain, Avalanche, Ethereum. Clear and Apply buttons.",
     "screenId": "home-network-filter",
-    "href": "/apps/base/screens/home-network-filter"
+    "href": "/apps/base?tab=screens&screen=home-network-filter"
   },
   {
     "type": "screen",
@@ -392,7 +392,7 @@
     "label": "Category Filter",
     "description": "Category filter bottom sheet: Cash, Apps, Memes, Social. Clear and Apply buttons.",
     "screenId": "home-category-filter",
-    "href": "/apps/base/screens/home-category-filter"
+    "href": "/apps/base?tab=screens&screen=home-category-filter"
   },
   {
     "type": "screen",
@@ -401,7 +401,7 @@
     "label": "Activity (Funded)",
     "description": "Activity tab showing transaction history. TODAY section with 'Received — From dalxds.base.eth — +$1.00 — 1 USDC' in green.",
     "screenId": "activity-funded",
-    "href": "/apps/base/screens/activity-funded"
+    "href": "/apps/base?tab=screens&screen=activity-funded"
   },
   {
     "type": "screen",
@@ -410,7 +410,7 @@
     "label": "Transaction Detail",
     "description": "Received USDC transaction detail: May 26, 2026 1:30 PM. Status: Complete (green checkmark). From: dalxds.base.eth. Amount: 1 USDC. Price: $1.00. Transaction Hash: 0xbc28...6130. Block Explorer link at bottom.",
     "screenId": "transaction-detail",
-    "href": "/apps/base/screens/transaction-detail"
+    "href": "/apps/base?tab=screens&screen=transaction-detail"
   },
   {
     "type": "screen",
@@ -419,7 +419,7 @@
     "label": "Send",
     "description": "Send screen with To search input, Paste button, Scan QR code ('Tap to scan an address'), Tap to Send (proximity), Send via Link (shareable), and Recents section ('No recent recipients').",
     "screenId": "send",
-    "href": "/apps/base/screens/send"
+    "href": "/apps/base?tab=screens&screen=send"
   },
   {
     "type": "screen",
@@ -428,7 +428,7 @@
     "label": "Trade / Swap (Funded)",
     "description": "Swap screen with USDC ($1.00 balance) → Ethereum. 50%/75%/Max preset buttons, flip tokens, exchange rate (1 USDC ≈ 0.0004725 ETH), Continue CTA (enabled). When Max is tapped: $1 entered, 'Not enough' (needs gas ETH), shows 'Receive ETH' CTA instead.",
     "screenId": "trade-funded",
-    "href": "/apps/base/screens/trade-funded"
+    "href": "/apps/base?tab=screens&screen=trade-funded"
   },
   {
     "type": "screen",
@@ -437,7 +437,7 @@
     "label": "Trade Max (Needs Gas)",
     "description": "Swap with Max tapped: $1 USDC amount, '1 Not enough' warning (needs ETH for gas), Ethereum output 0.00047 ($0.99), exchange rate row, 'Receive ETH' CTA instead of Continue.",
     "screenId": "trade-funded-max",
-    "href": "/apps/base/screens/trade-funded-max"
+    "href": "/apps/base?tab=screens&screen=trade-funded-max"
   },
   {
     "type": "screen",
@@ -446,7 +446,7 @@
     "label": "USDC Token Detail (Owned)",
     "description": "USDC token detail showing owned balance: $1.00 (1 USDC) with Send/Receive buttons. About section (Stablecoin badge), description. Stats: Token age 2y, Market cap $76.26B, Total supply 76.28B. Links: Whitepaper, Official website, GeckoTerminal, Dexscreener, contract address 0x8335...2913. Buy and Sell CTAs.",
     "screenId": "usdc-token-detail-owned",
-    "href": "/apps/base/screens/usdc-token-detail-owned"
+    "href": "/apps/base?tab=screens&screen=usdc-token-detail-owned"
   },
   {
     "type": "screen",
@@ -455,7 +455,7 @@
     "label": "Profile Drawer (Funded)",
     "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $1 balance, and menu: Invite Friends, View Profile, Settings.",
     "screenId": "profile-drawer-funded",
-    "href": "/apps/base/screens/profile-drawer-funded"
+    "href": "/apps/base?tab=screens&screen=profile-drawer-funded"
   },
   {
     "type": "screen",
@@ -464,7 +464,7 @@
     "label": "Welcome to Base",
     "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer.",
     "screenId": "welcome",
-    "href": "/apps/base/screens/welcome"
+    "href": "/apps/base?tab=screens&screen=welcome"
   },
   {
     "type": "screen",
@@ -473,7 +473,7 @@
     "label": "More Options",
     "description": "Bottom sheet with three options: Create Account, Import Recovery Phrase, Import Passkey.",
     "screenId": "more-options",
-    "href": "/apps/base/screens/more-options"
+    "href": "/apps/base?tab=screens&screen=more-options"
   },
   {
     "type": "screen",
@@ -482,7 +482,7 @@
     "label": "Email Entry (Onboarding)",
     "description": "\"What's Your Email? You'll use this to sign in and to recover your account.\" Email input with placeholder name@email.com, Next button. Shared by both sign-in and create account flows.",
     "screenId": "onboarding-email",
-    "href": "/apps/base/screens/onboarding-email"
+    "href": "/apps/base?tab=screens&screen=onboarding-email"
   },
   {
     "type": "screen",
@@ -491,7 +491,7 @@
     "label": "OTP Verification",
     "description": "\"Let's confirm it's you — Enter the 6-digit code sent to your email.\" Six digit input boxes, 'Didn't get a code? Resend' with countdown timer, security warning: 'Base will never ask you to set up a new account or transfer funds. Never enter a code given to you by someone else.' Numeric keypad.",
     "screenId": "onboarding-otp",
-    "href": "/apps/base/screens/onboarding-otp"
+    "href": "/apps/base?tab=screens&screen=onboarding-otp"
   },
   {
     "type": "screen",
@@ -500,7 +500,7 @@
     "label": "Referral Code (New Account Only)",
     "description": "\"Enter a referral code, if you have one.\" Referral Code input with Paste button. Incentive: '10% discount on all swap fees — Enter a referral code from a friend and you'll receive a 10% discount on all swap fees.' Skip and Continue buttons. Only shown during new account creation.",
     "screenId": "onboarding-referral-code",
-    "href": "/apps/base/screens/onboarding-referral-code"
+    "href": "/apps/base?tab=screens&screen=onboarding-referral-code"
   },
   {
     "type": "screen",
@@ -509,7 +509,7 @@
     "label": "Choose Username (Basename)",
     "description": "\"Choose username — Choose your unique onchain handle to trade, create, and socialize.\" Input with name.base.eth placeholder, Personalized Advertising checkbox with info button, Claim CTA.",
     "screenId": "onboarding-choose-username",
-    "href": "/apps/base/screens/onboarding-choose-username"
+    "href": "/apps/base?tab=screens&screen=onboarding-choose-username"
   },
   {
     "type": "screen",
@@ -518,7 +518,7 @@
     "label": "CAPTCHA Puzzle",
     "description": "\"Protecting your account — Please solve this puzzle so we know you are a real person.\" Shield icon, Start Puzzle CTA, session ID, Audio alternative. Overlaid on Choose Username screen.",
     "screenId": "onboarding-captcha",
-    "href": "/apps/base/screens/onboarding-captcha"
+    "href": "/apps/base?tab=screens&screen=onboarding-captcha"
   },
   {
     "type": "screen",
@@ -527,7 +527,7 @@
     "label": "Appearance Mode Picker",
     "description": "Bottom sheet with three appearance options: Light, Dark, System. Auto is the default.",
     "screenId": "settings-appearance-mode",
-    "href": "/apps/base/screens/settings-appearance-mode"
+    "href": "/apps/base?tab=screens&screen=settings-appearance-mode"
   },
   {
     "type": "screen",
@@ -536,7 +536,7 @@
     "label": "App Icon Picker",
     "description": "Bottom sheet grid of 20 app icon variants: Glass series (Shiny Blue, Blue Gradient, Dark Green, Green, Pink, Pink Blue Gradient — each with flat variant) and Theme series (Blue, Black, Chartreuse, Orange, Indigo, Pink, Purple, Yellow).",
     "screenId": "settings-app-icon",
-    "href": "/apps/base/screens/settings-app-icon"
+    "href": "/apps/base?tab=screens&screen=settings-app-icon"
   },
   {
     "type": "screen",
@@ -545,7 +545,7 @@
     "label": "Language Picker",
     "description": "Full-screen language list: English-US (selected), Deutsch, Español (Argentina/España/Latam), Français, हिंदी, 日本語, Italiano, Português (Brazil/Portugal), Pусский, ไทย, Türkçe, 繁體中文.",
     "screenId": "settings-language",
-    "href": "/apps/base/screens/settings-language"
+    "href": "/apps/base?tab=screens&screen=settings-language"
   },
   {
     "type": "screen",
@@ -554,7 +554,7 @@
     "label": "Currency Picker",
     "description": "Full-screen currency list with search bar. USD selected. Extensive list: AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, and many more.",
     "screenId": "settings-currency",
-    "href": "/apps/base/screens/settings-currency"
+    "href": "/apps/base?tab=screens&screen=settings-currency"
   },
   {
     "type": "screen",
@@ -563,7 +563,7 @@
     "label": "Set Up Authenticator",
     "description": "Authenticator app 2FA setup: 'Choose an Authenticator App — Use a separate app like Google Authenticator or Authy.' Setup key (ZSQW...YFJL) with copy button. Continue CTA.",
     "screenId": "settings-authenticator-setup",
-    "href": "/apps/base/screens/settings-authenticator-setup"
+    "href": "/apps/base?tab=screens&screen=settings-authenticator-setup"
   },
   {
     "type": "screen",
@@ -572,7 +572,7 @@
     "label": "Sign Out Confirmation",
     "description": "Warning screen with red triangle illustration: 'Are you sure you want to sign out? Without access to your wallets, you won't be able to recover the accounts.' Red Sign Out button and Nevermind button.",
     "screenId": "settings-sign-out-confirm",
-    "href": "/apps/base/screens/settings-sign-out-confirm"
+    "href": "/apps/base?tab=screens&screen=settings-sign-out-confirm"
   },
   {
     "type": "screen",
@@ -581,7 +581,7 @@
     "label": "Token Approvals",
     "description": "Token approvals management: 'To keep your assets safe, it's a good practice to regularly revoke approvals.' Empty state: 'No active token approvals.'",
     "screenId": "settings-token-approvals",
-    "href": "/apps/base/screens/settings-token-approvals"
+    "href": "/apps/base?tab=screens&screen=settings-token-approvals"
   },
   {
     "type": "screen",
@@ -590,7 +590,7 @@
     "label": "Manage Permissions",
     "description": "App permissions management. Empty state — no apps have been granted permissions. Shows avatar and close button only.",
     "screenId": "settings-manage-permissions",
-    "href": "/apps/base/screens/settings-manage-permissions"
+    "href": "/apps/base?tab=screens&screen=settings-manage-permissions"
   },
   {
     "type": "screen",
@@ -599,7 +599,7 @@
     "label": "Hidden Coins",
     "description": "Hidden coins management with three tabs: Hidden, Spam, Dust. Hidden tab empty: 'Coins you hide will appear here. You can unhide them at any time.'",
     "screenId": "settings-hidden-coins",
-    "href": "/apps/base/screens/settings-hidden-coins"
+    "href": "/apps/base?tab=screens&screen=settings-hidden-coins"
   },
   {
     "type": "screen",
@@ -608,7 +608,7 @@
     "label": "Help (External)",
     "description": "Opens Chrome browser to help.coinbase.com — 'Coinbase Wallet | Coinbase Help'. External website, not in-app.",
     "screenId": "settings-help",
-    "href": "/apps/base/screens/settings-help"
+    "href": "/apps/base?tab=screens&screen=settings-help"
   },
   {
     "type": "screen",
@@ -617,27 +617,27 @@
     "label": "Legal",
     "description": "Bottom sheet with two options: Privacy Policy and Terms of Service. Both open external links.",
     "screenId": "settings-legal",
-    "href": "/apps/base/screens/settings-legal"
+    "href": "/apps/base?tab=screens&screen=settings-legal"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Onboarding",
-    "description": "Create a new Base account end-to-end: Welcome → More Options → Email → OTP → Referral → Username → CAPTCHA → Home",
+    "description": "Create a new Base account end-to-end: Welcome → sign-up options → email → OTP → referral → username → CAPTCHA → home.",
     "flowSlug": "onboarding",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Welcome",
-    "description": "Welcome to Base.",
+    "label": "Welcome to Base",
+    "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer.",
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "welcome",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=0"
   },
   {
     "type": "step",
@@ -648,18 +648,18 @@
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "more-options",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=1"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Email Entry",
+    "label": "Email Entry (Onboarding)",
     "description": "Enter fresh email address.",
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "onboarding-email",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=2"
   },
   {
     "type": "step",
@@ -670,124 +670,113 @@
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "onboarding-otp",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=3"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Referral Code",
+    "label": "Referral Code (New Account Only)",
     "description": "Optional referral code for 10% swap fee discount.",
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "onboarding-referral-code",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=4"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Choose Username",
+    "label": "Choose Username (Basename)",
     "description": "Pick basename (name.base.eth) onchain handle.",
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "onboarding-choose-username",
-    "href": "/apps/base/flows/onboarding"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=5"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "CAPTCHA",
+    "label": "CAPTCHA Puzzle",
     "description": "Solve puzzle to verify human.",
     "flowSlug": "onboarding",
     "flowName": "Onboarding",
     "screenId": "onboarding-captcha",
-    "href": "/apps/base/flows/onboarding"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Lands on home with $0 balance.",
-    "flowSlug": "onboarding",
-    "flowName": "Onboarding",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/onboarding"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Logging in",
-    "description": "Sign into an existing Base account via email OTP",
-    "flowSlug": "logging-in",
-    "href": "/apps/base/flows/logging-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Welcome",
-    "description": "Welcome to Base with sign-in options.",
-    "flowSlug": "logging-in",
-    "flowName": "Logging in",
-    "screenId": "welcome",
-    "href": "/apps/base/flows/logging-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Email Entry",
-    "description": "Enter email address.",
-    "flowSlug": "logging-in",
-    "flowName": "Logging in",
-    "screenId": "onboarding-email",
-    "href": "/apps/base/flows/logging-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "OTP Verification",
-    "description": "6-digit code sent to email.",
-    "flowSlug": "logging-in",
-    "flowName": "Logging in",
-    "screenId": "onboarding-otp",
-    "href": "/apps/base/flows/logging-in"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Lands on home with existing balance.",
-    "flowSlug": "logging-in",
-    "flowName": "Logging in",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/logging-in"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Wallet",
-    "description": "Wallet tab walkthrough: empty and funded portfolio, Collectibles, and Activity",
-    "flowSlug": "wallet",
-    "href": "/apps/base/flows/wallet"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=6"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Home (Empty Wallet)",
-    "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA.",
-    "flowSlug": "wallet",
-    "flowName": "Wallet",
+    "description": "Lands on home with $0 balance.",
+    "flowSlug": "onboarding",
+    "flowName": "Onboarding",
     "screenId": "home-empty",
-    "href": "/apps/base/flows/wallet"
+    "href": "/apps/base?tab=flows&flow=onboarding&step=7"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Logging in",
+    "description": "Sign into an existing Base account via email OTP.",
+    "flowSlug": "logging-in",
+    "href": "/apps/base?tab=flows&flow=logging-in"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Welcome to Base",
+    "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "welcome",
+    "href": "/apps/base?tab=flows&flow=logging-in&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Email Entry (Onboarding)",
+    "description": "Enter email address.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "onboarding-email",
+    "href": "/apps/base?tab=flows&flow=logging-in&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "OTP Verification",
+    "description": "6-digit code sent to email.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "onboarding-otp",
+    "href": "/apps/base?tab=flows&flow=logging-in&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Lands on home with existing balance.",
+    "flowSlug": "logging-in",
+    "flowName": "Logging in",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=logging-in&step=3"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Wallet",
+    "description": "The Wallet home in its funded state — $1 balance, Deposit/Receive/Send/Trade actions, and the Coins list. The spine the rest of the wallet branches from.",
+    "flowSlug": "wallet",
+    "href": "/apps/base?tab=flows&flow=wallet"
   },
   {
     "type": "step",
@@ -798,571 +787,58 @@
     "flowSlug": "wallet",
     "flowName": "Wallet",
     "screenId": "home-funded",
-    "href": "/apps/base/flows/wallet"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Collectibles Tab",
-    "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles.",
-    "flowSlug": "wallet",
-    "flowName": "Wallet",
-    "screenId": "home-collectibles",
-    "href": "/apps/base/flows/wallet"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Activity Tab",
-    "description": "Activity tab on home showing 'No transactions found' empty state.",
-    "flowSlug": "wallet",
-    "flowName": "Wallet",
-    "screenId": "home-activity",
-    "href": "/apps/base/flows/wallet"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Sending a token",
-    "description": "Send crypto via address search, QR scan, proximity, or shareable link",
-    "flowSlug": "send",
-    "href": "/apps/base/flows/send"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home with Send button visible (funded wallet).",
-    "flowSlug": "send",
-    "flowName": "Sending a token",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/send"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Send",
-    "description": "Recipient picker: search, paste, QR, NFC, link.",
-    "flowSlug": "send",
-    "flowName": "Sending a token",
-    "screenId": "send",
-    "href": "/apps/base/flows/send"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Buying a token",
-    "description": "Fund wallet via debit card or Coinbase with token and payment-method selection",
-    "flowSlug": "deposit",
-    "href": "/apps/base/flows/deposit"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Deposit button.",
-    "flowSlug": "deposit",
-    "flowName": "Buying a token",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/deposit"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Deposit",
-    "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
-    "flowSlug": "deposit",
-    "flowName": "Buying a token",
-    "screenId": "deposit",
-    "href": "/apps/base/flows/deposit"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Token Selector",
-    "description": "Token picker modal with USDC, ETH, cbBTC, and more.",
-    "flowSlug": "deposit",
-    "flowName": "Buying a token",
-    "screenId": "deposit-token-selector",
-    "href": "/apps/base/flows/deposit"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Payment Method",
-    "description": "Connect to Coinbase payment method option.",
-    "flowSlug": "deposit",
-    "flowName": "Buying a token",
-    "screenId": "deposit-with-modal",
-    "href": "/apps/base/flows/deposit"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Receiving a token",
-    "description": "Receive funds via QR code, scan to send, or request payment from others",
-    "flowSlug": "receive-scan-request",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Receive button.",
-    "flowSlug": "receive-scan-request",
-    "flowName": "Receiving a token",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Receive",
-    "description": "QR code and wallet address for receiving funds.",
-    "flowSlug": "receive-scan-request",
-    "flowName": "Receiving a token",
-    "screenId": "receive",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Scan QR",
-    "description": "Camera viewfinder for scanning QR codes.",
-    "flowSlug": "receive-scan-request",
-    "flowName": "Receiving a token",
-    "screenId": "scan-qr",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Request",
-    "description": "Request payment with recipient, amount, and USDC.",
-    "flowSlug": "receive-scan-request",
-    "flowName": "Receiving a token",
-    "screenId": "request",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Add Recipient",
-    "description": "Recipient picker with search, QR, tap-to-request, and link options.",
-    "flowSlug": "receive-scan-request",
-    "flowName": "Receiving a token",
-    "screenId": "request-add-recipient",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Fee Info",
-    "description": "Network fee breakdown showing Base network, fee: Free.",
-    "flowSlug": "receive-scan-request",
-    "flowName": "Receiving a token",
-    "screenId": "request-fee-info",
-    "href": "/apps/base/flows/receive-scan-request"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Enrolling in Base Rewards",
-    "description": "Enroll in Base Rewards and share referral code for 25% fee earnings",
-    "flowSlug": "earn-referral",
-    "href": "/apps/base/flows/earn-referral"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with Earn chip.",
-    "flowSlug": "earn-referral",
-    "flowName": "Enrolling in Base Rewards",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/earn-referral"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Enroll",
-    "description": "Base Rewards enrollment with residency question.",
-    "flowSlug": "earn-referral",
-    "flowName": "Enrolling in Base Rewards",
-    "screenId": "earn-enrollment",
-    "href": "/apps/base/flows/earn-referral"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Invite Friends",
-    "description": "Referral code and sharing options.",
-    "flowSlug": "earn-referral",
-    "flowName": "Enrolling in Base Rewards",
-    "screenId": "invite-friends",
-    "href": "/apps/base/flows/earn-referral"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Sorting coins",
-    "description": "Open sort options: Balance, Market Cap, Volume, Price Change",
-    "flowSlug": "sorting-coins",
-    "href": "/apps/base/flows/sorting-coins"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Coins)",
-    "description": "Home with $1 balance, USDC in Coins tab.",
-    "flowSlug": "sorting-coins",
-    "flowName": "Sorting coins",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/sorting-coins"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Sort By",
-    "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
-    "flowSlug": "sorting-coins",
-    "flowName": "Sorting coins",
-    "screenId": "home-sort-by",
-    "href": "/apps/base/flows/sorting-coins"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Filtering by network",
-    "description": "Filter portfolio by network (Base, Arbitrum, Optimism, etc.)",
-    "flowSlug": "filtering-by-network",
-    "href": "/apps/base/flows/filtering-by-network"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Coins)",
-    "description": "Home with $1 balance, USDC in Coins tab.",
-    "flowSlug": "filtering-by-network",
-    "flowName": "Filtering by network",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/filtering-by-network"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Network Filter",
-    "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
-    "flowSlug": "filtering-by-network",
-    "flowName": "Filtering by network",
-    "screenId": "home-network-filter",
-    "href": "/apps/base/flows/filtering-by-network"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Filtering by category",
-    "description": "Filter portfolio by category (Cash, Apps, Memes, Social)",
-    "flowSlug": "filtering-by-category",
-    "href": "/apps/base/flows/filtering-by-category"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Coins)",
-    "description": "Home with $1 balance, USDC in Coins tab.",
-    "flowSlug": "filtering-by-category",
-    "flowName": "Filtering by category",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/filtering-by-category"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Category Filter",
-    "description": "Filter by category: Cash, Apps, Memes, Social.",
-    "flowSlug": "filtering-by-category",
-    "flowName": "Filtering by category",
-    "screenId": "home-category-filter",
-    "href": "/apps/base/flows/filtering-by-category"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Activity detail (received)",
-    "description": "Open a received-USDC transaction to view full details (status, sender, tx hash, Block Explorer)",
-    "flowSlug": "transaction-detail",
-    "href": "/apps/base/flows/transaction-detail"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Coins)",
-    "description": "Home with $1 balance, USDC in Coins tab.",
-    "flowSlug": "transaction-detail",
-    "flowName": "Activity detail (received)",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/transaction-detail"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Activity",
-    "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
-    "flowSlug": "transaction-detail",
-    "flowName": "Activity detail (received)",
-    "screenId": "activity-funded",
-    "href": "/apps/base/flows/transaction-detail"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Transaction Detail",
-    "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
-    "flowSlug": "transaction-detail",
-    "flowName": "Activity detail (received)",
-    "screenId": "transaction-detail",
-    "href": "/apps/base/flows/transaction-detail"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "USDC token detail",
-    "description": "Open USDC from the Coins list to view balance, Send/Receive, About, and Buy/Sell actions",
-    "flowSlug": "usdc-token-detail",
-    "href": "/apps/base/flows/usdc-token-detail"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Coins)",
-    "description": "Home with $1 balance, USDC in Coins tab.",
-    "flowSlug": "usdc-token-detail",
-    "flowName": "USDC token detail",
-    "screenId": "home-funded",
-    "href": "/apps/base/flows/usdc-token-detail"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "USDC Token Detail",
-    "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
-    "flowSlug": "usdc-token-detail",
-    "flowName": "USDC token detail",
-    "screenId": "usdc-token-detail-owned",
-    "href": "/apps/base/flows/usdc-token-detail"
+    "href": "/apps/base?tab=flows&flow=wallet&step=0"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Discover",
-    "description": "Discover tab — browse trending tokens, mini apps, and verification",
+    "description": "The Discover/Search tab — trending tokens, pinned apps, Verify, and search.",
     "flowSlug": "discover",
-    "href": "/apps/base/flows/discover"
+    "href": "/apps/base?tab=flows&flow=discover"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Discover",
+    "label": "Discover / Search",
     "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
     "flowSlug": "discover",
     "flowName": "Discover",
     "screenId": "discover",
-    "href": "/apps/base/flows/discover"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Token detail",
-    "description": "Discover trending tokens, view price charts and market data, attempt to buy",
-    "flowSlug": "browse-tokens",
-    "href": "/apps/base/flows/browse-tokens"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Discover",
-    "description": "Trending tokens list with filter chips.",
-    "flowSlug": "browse-tokens",
-    "flowName": "Token detail",
-    "screenId": "discover",
-    "href": "/apps/base/flows/browse-tokens"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Token Detail",
-    "description": "Price chart, market data, and Buy CTA.",
-    "flowSlug": "browse-tokens",
-    "flowName": "Token detail",
-    "screenId": "token-detail",
-    "href": "/apps/base/flows/browse-tokens"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Requires USDC",
-    "description": "Interstitial: wallet needs USDC to trade.",
-    "flowSlug": "browse-tokens",
-    "flowName": "Token detail",
-    "screenId": "trading-requires-usdc",
-    "href": "/apps/base/flows/browse-tokens"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Getting verified",
-    "description": "Get verified via verify.base.dev for rewards, credibility, and visibility",
-    "flowSlug": "verify",
-    "href": "/apps/base/flows/verify"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Discover",
-    "description": "Search tab with Verify pinned app.",
-    "flowSlug": "verify",
-    "flowName": "Getting verified",
-    "screenId": "discover",
-    "href": "/apps/base/flows/verify"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Get Verified",
-    "description": "WebView with verification benefits and Continue.",
-    "flowSlug": "verify",
-    "flowName": "Getting verified",
-    "screenId": "verify",
-    "href": "/apps/base/flows/verify"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Apps directory",
-    "description": "Browse and install mini apps across categories",
-    "flowSlug": "apps-directory",
-    "href": "/apps/base/flows/apps-directory"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Discover",
-    "description": "Search tab with Apps pinned tile.",
-    "flowSlug": "apps-directory",
-    "flowName": "Apps directory",
-    "screenId": "discover",
-    "href": "/apps/base/flows/apps-directory"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Apps Directory",
-    "description": "Featured apps carousel and categorized app list.",
-    "flowSlug": "apps-directory",
-    "flowName": "Apps directory",
-    "screenId": "apps-directory",
-    "href": "/apps/base/flows/apps-directory"
+    "href": "/apps/base?tab=flows&flow=discover&step=0"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Trade",
-    "description": "Transact tab — swap and trading interface",
+    "description": "Swap USDC → ETH from a funded wallet, including the Max / gas-warning state.",
     "flowSlug": "trade",
-    "href": "/apps/base/flows/trade"
+    "href": "/apps/base?tab=flows&flow=trade"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Trade",
-    "description": "Token swap screen showing USDC → Ethereum. USDC selected with $0.00 balance, 50%/75%/Max preset buttons, $1 entered with '1 Not enough' warning in orange. Flip tokens button, Ethereum output showing 0.00046 ($0.99), exchange rate (1 USDC ≈ 0.00047028 ETH), and 'Add funds' blue CTA.",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
     "flowSlug": "trade",
     "flowName": "Trade",
-    "screenId": "trade",
-    "href": "/apps/base/flows/trade"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Trading a token (funded)",
-    "description": "Swap USDC → ETH with $1 balance, showing Continue CTA and Max/gas warning",
-    "flowSlug": "trade-funded",
-    "href": "/apps/base/flows/trade-funded"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home with Trade button (funded wallet).",
-    "flowSlug": "trade-funded",
-    "flowName": "Trading a token (funded)",
     "screenId": "home-funded",
-    "href": "/apps/base/flows/trade-funded"
+    "href": "/apps/base?tab=flows&flow=trade&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Trade",
+    "label": "Trade / Swap (Funded)",
     "description": "Swap USDC → ETH with $1 balance, Continue enabled.",
-    "flowSlug": "trade-funded",
-    "flowName": "Trading a token (funded)",
+    "flowSlug": "trade",
+    "flowName": "Trade",
     "screenId": "trade-funded",
-    "href": "/apps/base/flows/trade-funded"
+    "href": "/apps/base?tab=flows&flow=trade&step=1"
   },
   {
     "type": "step",
@@ -1370,103 +846,50 @@
     "appName": "Base",
     "label": "Trade Max (Needs Gas)",
     "description": "$1 entered, 'Not enough' — needs ETH for gas, Receive ETH CTA.",
-    "flowSlug": "trade-funded",
-    "flowName": "Trading a token (funded)",
+    "flowSlug": "trade",
+    "flowName": "Trade",
     "screenId": "trade-funded-max",
-    "href": "/apps/base/flows/trade-funded"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Trading a token (no funds)",
-    "description": "Attempt to swap USDC → ETH with empty wallet, triggering Add Funds deposit flow",
-    "flowSlug": "trade-no-funds",
-    "href": "/apps/base/flows/trade-no-funds"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Trade",
-    "description": "Swap screen with USDC → ETH, $1 entered, 'Not enough' warning.",
-    "flowSlug": "trade-no-funds",
-    "flowName": "Trading a token (no funds)",
-    "screenId": "trade",
-    "href": "/apps/base/flows/trade-no-funds"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Requires USDC",
-    "description": "Interstitial: trading requires USDC.",
-    "flowSlug": "trade-no-funds",
-    "flowName": "Trading a token (no funds)",
-    "screenId": "trade-requires-usdc",
-    "href": "/apps/base/flows/trade-no-funds"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Deposit Funds",
-    "description": "Inline deposit sheet with $2 USDC, Debit Card, Connect to Coinbase.",
-    "flowSlug": "trade-no-funds",
-    "flowName": "Trading a token (no funds)",
-    "screenId": "trade-deposit-funds",
-    "href": "/apps/base/flows/trade-no-funds"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "From-Token Selector",
-    "description": "Pick which token to sell. All balances $0.00.",
-    "flowSlug": "trade-no-funds",
-    "flowName": "Trading a token (no funds)",
-    "screenId": "trade-from-token-selector",
-    "href": "/apps/base/flows/trade-no-funds"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "To-Token Selector",
-    "description": "Pick which token to buy. Shows prices and contract addresses.",
-    "flowSlug": "trade-no-funds",
-    "flowName": "Trading a token (no funds)",
-    "screenId": "trade-to-token-selector",
-    "href": "/apps/base/flows/trade-no-funds"
+    "href": "/apps/base?tab=flows&flow=trade&step=2"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Trades feed",
-    "description": "Live trading feed showing real-time buy/sell broadcasts",
-    "flowSlug": "social-feed",
-    "href": "/apps/base/flows/social-feed"
+    "description": "Live trading feed of real-time buy/sell broadcasts.",
+    "flowSlug": "trades-feed",
+    "href": "/apps/base?tab=flows&flow=trades-feed"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Social Feed",
-    "description": "Live trading feed with trade broadcast cards.",
-    "flowSlug": "social-feed",
+    "description": "Live trading feed showing real-time trade broadcast cards. Each card shows avatar, token name, market cap, trade amount, PnL percentage, with Share and Trade action buttons.",
+    "flowSlug": "trades-feed",
     "flowName": "Trades feed",
     "screenId": "social-feed",
-    "href": "/apps/base/flows/social-feed"
+    "href": "/apps/base?tab=flows&flow=trades-feed&step=0"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Chat",
-    "description": "Messaging tab — chat with AI agents and other users",
+    "description": "Open messages and chat with AI agents (Bankr, Elsa) or other users.",
     "flowSlug": "chat",
-    "href": "/apps/base/flows/chat"
+    "href": "/apps/base?tab=flows&flow=chat"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "chat",
+    "flowName": "Chat",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=chat&step=0"
   },
   {
     "type": "step",
@@ -1477,153 +900,970 @@
     "flowSlug": "chat",
     "flowName": "Chat",
     "screenId": "chat",
-    "href": "/apps/base/flows/chat"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Chatting with AI agents",
-    "description": "Chat with AI agents (Bankr, Elsa) or start peer-to-peer conversations",
-    "flowSlug": "messaging",
-    "href": "/apps/base/flows/messaging"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home with messages icon in top bar.",
-    "flowSlug": "messaging",
-    "flowName": "Chatting with AI agents",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/messaging"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Chat",
-    "description": "AI agents and new conversation button.",
-    "flowSlug": "messaging",
-    "flowName": "Chatting with AI agents",
-    "screenId": "chat",
-    "href": "/apps/base/flows/messaging"
+    "href": "/apps/base?tab=flows&flow=chat&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Notifications",
-    "description": "View price alerts and configure notification preferences",
+    "description": "Notifications inbox — price alerts and activity.",
     "flowSlug": "notifications",
-    "href": "/apps/base/flows/notifications"
+    "href": "/apps/base?tab=flows&flow=notifications"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Notifications",
-    "description": "Notifications with push toggle and price alerts.",
+    "description": "Notifications screen with push notification toggle and ETH price alert notifications (up +5.37%, down 4.42%).",
     "flowSlug": "notifications",
     "flowName": "Notifications",
     "screenId": "notifications",
-    "href": "/apps/base/flows/notifications"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Settings",
-    "description": "Category-based notification preferences.",
-    "flowSlug": "notifications",
-    "flowName": "Notifications",
-    "screenId": "notification-settings",
-    "href": "/apps/base/flows/notifications"
+    "href": "/apps/base?tab=flows&flow=notifications&step=0"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Profile",
-    "description": "Open the profile drawer from home and view the trading profile page",
+    "description": "Open the profile drawer from home and view the public trading profile.",
     "flowSlug": "profile",
-    "href": "/apps/base/flows/profile"
+    "href": "/apps/base?tab=flows&flow=profile"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with avatar in top left.",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
     "flowSlug": "profile",
     "flowName": "Profile",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/profile"
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=profile&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Profile Drawer",
-    "description": "Side drawer with wallet info and menu.",
+    "label": "Profile Drawer (Funded)",
+    "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $1 balance, and menu: Invite Friends, View Profile, Settings.",
     "flowSlug": "profile",
     "flowName": "Profile",
-    "screenId": "profile-drawer",
-    "href": "/apps/base/flows/profile"
+    "screenId": "profile-drawer-funded",
+    "href": "/apps/base?tab=flows&flow=profile&step=1"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "View Profile",
-    "description": "Profile page with edit and share options.",
+    "description": "User profile page with Edit Profile and Share Profile buttons, network/category/sort filter chips, Deposit CTA, and Coins/Collectibles/Activity tabs.",
     "flowSlug": "profile",
     "flowName": "Profile",
     "screenId": "view-profile",
-    "href": "/apps/base/flows/profile"
+    "href": "/apps/base?tab=flows&flow=profile&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Settings menu — appearance, account, privacy, trading, and connections.",
+    "flowSlug": "settings",
+    "href": "/apps/base?tab=flows&flow=settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "settings",
+    "href": "/apps/base?tab=flows&flow=settings&step=0"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Empty wallet",
+    "description": "The brand-new, unfunded wallet across its Coins, Collectibles, and Activity tabs and the account menu — the empty states before any funds arrive.",
+    "flowSlug": "empty-wallet",
+    "href": "/apps/base?tab=flows&flow=empty-wallet"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Empty Wallet)",
+    "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA.",
+    "flowSlug": "empty-wallet",
+    "flowName": "Empty wallet",
+    "screenId": "home-empty",
+    "href": "/apps/base?tab=flows&flow=empty-wallet&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Collectibles Tab",
+    "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles.",
+    "flowSlug": "empty-wallet",
+    "flowName": "Empty wallet",
+    "screenId": "home-collectibles",
+    "href": "/apps/base?tab=flows&flow=empty-wallet&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Activity Tab",
+    "description": "Activity tab on home showing 'No transactions found' empty state.",
+    "flowSlug": "empty-wallet",
+    "flowName": "Empty wallet",
+    "screenId": "home-activity",
+    "href": "/apps/base?tab=flows&flow=empty-wallet&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Profile Drawer",
+    "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $0 balance, and menu: Invite Friends, View Profile, Settings.",
+    "flowSlug": "empty-wallet",
+    "flowName": "Empty wallet",
+    "screenId": "profile-drawer",
+    "href": "/apps/base?tab=flows&flow=empty-wallet&step=3"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Buying a token",
+    "description": "Fund the wallet by buying/depositing a token — the empty→funded bridge. Starts on the empty wallet's Deposit action.",
+    "flowSlug": "buying-a-token",
+    "href": "/apps/base?tab=flows&flow=buying-a-token"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Empty Wallet)",
+    "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA.",
+    "flowSlug": "buying-a-token",
+    "flowName": "Buying a token",
+    "screenId": "home-empty",
+    "href": "/apps/base?tab=flows&flow=buying-a-token&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit",
+    "description": "Deposit screen with USDC, numpad, Debit Card payment method.",
+    "flowSlug": "buying-a-token",
+    "flowName": "Buying a token",
+    "screenId": "deposit",
+    "href": "/apps/base?tab=flows&flow=buying-a-token&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Selecting a token",
+    "description": "Pick which token to buy from the deposit screen's token selector.",
+    "flowSlug": "selecting-a-token",
+    "href": "/apps/base?tab=flows&flow=selecting-a-token"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit",
+    "description": "Buy/deposit screen with $0 amount display, USDC selected, Debit Card payment method, numpad, $2/Max presets, and Connect to Coinbase CTA at bottom.",
+    "flowSlug": "selecting-a-token",
+    "flowName": "Selecting a token",
+    "screenId": "deposit",
+    "href": "/apps/base?tab=flows&flow=selecting-a-token&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Token Selector (Deposit)",
+    "description": "Token picker modal with USDC, ETH, cbBTC, and more.",
+    "flowSlug": "selecting-a-token",
+    "flowName": "Selecting a token",
+    "screenId": "deposit-token-selector",
+    "href": "/apps/base?tab=flows&flow=selecting-a-token&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Selecting a payment method",
+    "description": "Choose a payment method (e.g. Connect to Coinbase) for the deposit.",
+    "flowSlug": "selecting-a-payment-method",
+    "href": "/apps/base?tab=flows&flow=selecting-a-payment-method"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit",
+    "description": "Buy/deposit screen with $0 amount display, USDC selected, Debit Card payment method, numpad, $2/Max presets, and Connect to Coinbase CTA at bottom.",
+    "flowSlug": "selecting-a-payment-method",
+    "flowName": "Selecting a payment method",
+    "screenId": "deposit",
+    "href": "/apps/base?tab=flows&flow=selecting-a-payment-method&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit With Modal",
+    "description": "Bottom sheet showing payment method option: Connect to Coinbase with description 'Use payment methods on your Coinbase.com account' and Connect arrow.",
+    "flowSlug": "selecting-a-payment-method",
+    "flowName": "Selecting a payment method",
+    "screenId": "deposit-with-modal",
+    "href": "/apps/base?tab=flows&flow=selecting-a-payment-method&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sending a token",
+    "description": "Send crypto via address search, QR scan, proximity, or a shareable link.",
+    "flowSlug": "sending-a-token",
+    "href": "/apps/base?tab=flows&flow=sending-a-token"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "sending-a-token",
+    "flowName": "Sending a token",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=sending-a-token&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Send",
+    "description": "Recipient picker: search, paste, QR, NFC, link.",
+    "flowSlug": "sending-a-token",
+    "flowName": "Sending a token",
+    "screenId": "send",
+    "href": "/apps/base?tab=flows&flow=sending-a-token&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Receiving a token",
+    "description": "Receive funds — wallet address and QR across supported networks.",
+    "flowSlug": "receiving-a-token",
+    "href": "/apps/base?tab=flows&flow=receiving-a-token"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "receiving-a-token",
+    "flowName": "Receiving a token",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=receiving-a-token&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Receive",
+    "description": "Receive tab showing wallet address (0x1c7...b282), Ethereum QR code, supported network badges (Base, Optimism, Polygon, Arbitrum, Avalanche, Zora), and Copy Wallet Address button.",
+    "flowSlug": "receiving-a-token",
+    "flowName": "Receiving a token",
+    "screenId": "receive",
+    "href": "/apps/base?tab=flows&flow=receiving-a-token&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Scanning a QR code",
+    "description": "Scan a QR code to send crypto, from the Receive sheet's Scan tab.",
+    "flowSlug": "scanning-a-qr-code",
+    "href": "/apps/base?tab=flows&flow=scanning-a-qr-code"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Receive",
+    "description": "Receive tab showing wallet address (0x1c7...b282), Ethereum QR code, supported network badges (Base, Optimism, Polygon, Arbitrum, Avalanche, Zora), and Copy Wallet Address button.",
+    "flowSlug": "scanning-a-qr-code",
+    "flowName": "Scanning a QR code",
+    "screenId": "receive",
+    "href": "/apps/base?tab=flows&flow=scanning-a-qr-code&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Scan QR Code",
+    "description": "Camera viewfinder for scanning QR codes.",
+    "flowSlug": "scanning-a-qr-code",
+    "flowName": "Scanning a QR code",
+    "screenId": "scan-qr",
+    "href": "/apps/base?tab=flows&flow=scanning-a-qr-code&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Requesting a payment",
+    "description": "Request a payment from someone, from the Receive sheet's Request tab.",
+    "flowSlug": "requesting-a-payment",
+    "href": "/apps/base?tab=flows&flow=requesting-a-payment"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Receive",
+    "description": "Receive tab showing wallet address (0x1c7...b282), Ethereum QR code, supported network badges (Base, Optimism, Polygon, Arbitrum, Avalanche, Zora), and Copy Wallet Address button.",
+    "flowSlug": "requesting-a-payment",
+    "flowName": "Requesting a payment",
+    "screenId": "receive",
+    "href": "/apps/base?tab=flows&flow=requesting-a-payment&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Request Payment",
+    "description": "Request tab with Add Recipient field, $0 amount, USDC token selector, preset amounts ($5/$10/$25), numpad, and 'Enter an amount' swipe CTA.",
+    "flowSlug": "requesting-a-payment",
+    "flowName": "Requesting a payment",
+    "screenId": "request",
+    "href": "/apps/base?tab=flows&flow=requesting-a-payment&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Adding a recipient",
+    "description": "Pick who to request a payment from.",
+    "flowSlug": "adding-a-recipient",
+    "href": "/apps/base?tab=flows&flow=adding-a-recipient"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Request Payment",
+    "description": "Request tab with Add Recipient field, $0 amount, USDC token selector, preset amounts ($5/$10/$25), numpad, and 'Enter an amount' swipe CTA.",
+    "flowSlug": "adding-a-recipient",
+    "flowName": "Adding a recipient",
+    "screenId": "request",
+    "href": "/apps/base?tab=flows&flow=adding-a-recipient&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Request From (Add Recipient)",
+    "description": "Recipient picker with search, QR, tap-to-request, and link options.",
+    "flowSlug": "adding-a-recipient",
+    "flowName": "Adding a recipient",
+    "screenId": "request-add-recipient",
+    "href": "/apps/base?tab=flows&flow=adding-a-recipient&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Network fee details",
+    "description": "View the network fee breakdown for a request.",
+    "flowSlug": "network-fee-details",
+    "href": "/apps/base?tab=flows&flow=network-fee-details"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Request Payment",
+    "description": "Request tab with Add Recipient field, $0 amount, USDC token selector, preset amounts ($5/$10/$25), numpad, and 'Enter an amount' swipe CTA.",
+    "flowSlug": "network-fee-details",
+    "flowName": "Network fee details",
+    "screenId": "request",
+    "href": "/apps/base?tab=flows&flow=network-fee-details&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Network Fee Info (Request)",
+    "description": "Bottom sheet showing transaction fee details: 'Applies to all transactions and varies based on network usage.' Network: Base. Network fee: Free.",
+    "flowSlug": "network-fee-details",
+    "flowName": "Network fee details",
+    "screenId": "request-fee-info",
+    "href": "/apps/base?tab=flows&flow=network-fee-details&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sorting coins",
+    "description": "Sort the Coins list by Balance, Market Cap, Volume, or Price Change.",
+    "flowSlug": "sorting-coins",
+    "href": "/apps/base?tab=flows&flow=sorting-coins"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "sorting-coins",
+    "flowName": "Sorting coins",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=sorting-coins&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Sort By",
+    "description": "Sort options: Balance, Market Cap, Volume, Price Change.",
+    "flowSlug": "sorting-coins",
+    "flowName": "Sorting coins",
+    "screenId": "home-sort-by",
+    "href": "/apps/base?tab=flows&flow=sorting-coins&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Filtering by network",
+    "description": "Filter the portfolio by network (Base, Arbitrum, Optimism, …).",
+    "flowSlug": "filtering-by-network",
+    "href": "/apps/base?tab=flows&flow=filtering-by-network"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "filtering-by-network",
+    "flowName": "Filtering by network",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=filtering-by-network&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Network Filter",
+    "description": "Filter by network: Base, Arbitrum, Optimism, etc.",
+    "flowSlug": "filtering-by-network",
+    "flowName": "Filtering by network",
+    "screenId": "home-network-filter",
+    "href": "/apps/base?tab=flows&flow=filtering-by-network&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Filtering by category",
+    "description": "Filter the portfolio by category (Cash, Apps, Memes, Social).",
+    "flowSlug": "filtering-by-category",
+    "href": "/apps/base?tab=flows&flow=filtering-by-category"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "filtering-by-category",
+    "flowName": "Filtering by category",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=filtering-by-category&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Category Filter",
+    "description": "Filter by category: Cash, Apps, Memes, Social.",
+    "flowSlug": "filtering-by-category",
+    "flowName": "Filtering by category",
+    "screenId": "home-category-filter",
+    "href": "/apps/base?tab=flows&flow=filtering-by-category&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Coin detail (USDC)",
+    "description": "Open USDC from the Coins list — balance, Send/Receive, About, and stats.",
+    "flowSlug": "coin-detail-usdc",
+    "href": "/apps/base?tab=flows&flow=coin-detail-usdc"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "coin-detail-usdc",
+    "flowName": "Coin detail (USDC)",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=coin-detail-usdc&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "USDC Token Detail (Owned)",
+    "description": "USDC detail: $1.00 balance, Send/Receive, About, Stats, Buy/Sell.",
+    "flowSlug": "coin-detail-usdc",
+    "flowName": "Coin detail (USDC)",
+    "screenId": "usdc-token-detail-owned",
+    "href": "/apps/base?tab=flows&flow=coin-detail-usdc&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Activity",
+    "description": "The Activity tab with transaction history after funds arrive.",
+    "flowSlug": "activity",
+    "href": "/apps/base?tab=flows&flow=activity"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "activity",
+    "flowName": "Activity",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=activity&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Activity (Funded)",
+    "description": "Transaction history: Received 1 USDC from dalxds.base.eth.",
+    "flowSlug": "activity",
+    "flowName": "Activity",
+    "screenId": "activity-funded",
+    "href": "/apps/base?tab=flows&flow=activity&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Transaction detail",
+    "description": "Open a received-USDC transaction to view status, sender, amount, and tx hash.",
+    "flowSlug": "transaction-detail",
+    "href": "/apps/base?tab=flows&flow=transaction-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Activity (Funded)",
+    "description": "Activity tab showing transaction history. TODAY section with 'Received — From dalxds.base.eth — +$1.00 — 1 USDC' in green.",
+    "flowSlug": "transaction-detail",
+    "flowName": "Transaction detail",
+    "screenId": "activity-funded",
+    "href": "/apps/base?tab=flows&flow=transaction-detail&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Transaction Detail",
+    "description": "Full detail: status Complete, from dalxds.base.eth, 1 USDC, tx hash, Block Explorer.",
+    "flowSlug": "transaction-detail",
+    "flowName": "Transaction detail",
+    "screenId": "transaction-detail",
+    "href": "/apps/base?tab=flows&flow=transaction-detail&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Enrolling in Base Rewards",
+    "description": "Enroll in Base Rewards to earn referral fees.",
+    "flowSlug": "enrolling-in-base-rewards",
+    "href": "/apps/base?tab=flows&flow=enrolling-in-base-rewards"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00.",
+    "flowSlug": "enrolling-in-base-rewards",
+    "flowName": "Enrolling in Base Rewards",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=enrolling-in-base-rewards&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Base Rewards Enrollment",
+    "description": "Earn enrollment screen asking 'Where do you live?' with US and non-US options. 'I don't live in the US' pre-selected with Continue button.",
+    "flowSlug": "enrolling-in-base-rewards",
+    "flowName": "Enrolling in Base Rewards",
+    "screenId": "earn-enrollment",
+    "href": "/apps/base?tab=flows&flow=enrolling-in-base-rewards&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Inviting friends",
+    "description": "Share your referral code/link to earn 25% of friends' fees.",
+    "flowSlug": "inviting-friends",
+    "href": "/apps/base?tab=flows&flow=inviting-friends"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Base Rewards Enrollment",
+    "description": "Earn enrollment screen asking 'Where do you live?' with US and non-US options. 'I don't live in the US' pre-selected with Continue button.",
+    "flowSlug": "inviting-friends",
+    "flowName": "Inviting friends",
+    "screenId": "earn-enrollment",
+    "href": "/apps/base?tab=flows&flow=inviting-friends&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Invite Friends to Earn",
+    "description": "Referral code and sharing options.",
+    "flowSlug": "inviting-friends",
+    "flowName": "Inviting friends",
+    "screenId": "invite-friends",
+    "href": "/apps/base?tab=flows&flow=inviting-friends&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Searching Base",
+    "description": "Full-screen search across coins, apps, profiles, and sites.",
+    "flowSlug": "searching-base",
+    "href": "/apps/base?tab=flows&flow=searching-base"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover / Search",
+    "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+    "flowSlug": "searching-base",
+    "flowName": "Searching Base",
+    "screenId": "discover",
+    "href": "/apps/base?tab=flows&flow=searching-base&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Global Search",
+    "description": "Full-screen search overlay with filter chips: All, Coins, Apps, Profiles, Sites. Search input for 'Search Base or URL'.",
+    "flowSlug": "searching-base",
+    "flowName": "Searching Base",
+    "screenId": "global-search",
+    "href": "/apps/base?tab=flows&flow=searching-base&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Watchlist",
+    "description": "The watchlist view (empty state) for monitoring price moves.",
+    "flowSlug": "watchlist",
+    "href": "/apps/base?tab=flows&flow=watchlist"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover / Search",
+    "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+    "flowSlug": "watchlist",
+    "flowName": "Watchlist",
+    "screenId": "discover",
+    "href": "/apps/base?tab=flows&flow=watchlist&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Watchlist (Empty)",
+    "description": "Watchlist view on Discover tab showing empty state: 'Start your watchlist — Add assets to your watchlist to monitor price moves' with 'View Trending Coins' CTA.",
+    "flowSlug": "watchlist",
+    "flowName": "Watchlist",
+    "screenId": "watchlist-empty",
+    "href": "/apps/base?tab=flows&flow=watchlist&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Filtering trending tokens",
+    "description": "Filter trending tokens by timeframe, sort, and network.",
+    "flowSlug": "filtering-trending-tokens",
+    "href": "/apps/base?tab=flows&flow=filtering-trending-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover / Search",
+    "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+    "flowSlug": "filtering-trending-tokens",
+    "flowName": "Filtering trending tokens",
+    "screenId": "discover",
+    "href": "/apps/base?tab=flows&flow=filtering-trending-tokens&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trending Filters",
+    "description": "Filter tray for trending tokens: Timeframe (5m/1h/4h/12h/24h), Sort by (Trending/Market Cap/Volume/Price Change/Liquidity/Holders/Transactions), Networks (Base/Ethereum/Polygon/Arbitrum/Optimism/Avalanche/BNB Chain), Apply and Reset buttons.",
+    "flowSlug": "filtering-trending-tokens",
+    "flowName": "Filtering trending tokens",
+    "screenId": "trending-filters",
+    "href": "/apps/base?tab=flows&flow=filtering-trending-tokens&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Token detail",
+    "description": "Open a trending token's detail and attempt to buy (requires-USDC interstitial).",
+    "flowSlug": "token-detail",
+    "href": "/apps/base?tab=flows&flow=token-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover / Search",
+    "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+    "flowSlug": "token-detail",
+    "flowName": "Token detail",
+    "screenId": "discover",
+    "href": "/apps/base?tab=flows&flow=token-detail&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Token Detail",
+    "description": "Price chart, market data, and Buy CTA.",
+    "flowSlug": "token-detail",
+    "flowName": "Token detail",
+    "screenId": "token-detail",
+    "href": "/apps/base?tab=flows&flow=token-detail&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading Requires USDC",
+    "description": "Interstitial: wallet needs USDC to trade.",
+    "flowSlug": "token-detail",
+    "flowName": "Token detail",
+    "screenId": "trading-requires-usdc",
+    "href": "/apps/base?tab=flows&flow=token-detail&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Getting verified",
+    "description": "Get verified via verify.base.dev for rewards, credibility, and visibility.",
+    "flowSlug": "getting-verified",
+    "href": "/apps/base?tab=flows&flow=getting-verified"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover / Search",
+    "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+    "flowSlug": "getting-verified",
+    "flowName": "Getting verified",
+    "screenId": "discover",
+    "href": "/apps/base?tab=flows&flow=getting-verified&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Get Verified",
+    "description": "WebView with verification benefits and Continue.",
+    "flowSlug": "getting-verified",
+    "flowName": "Getting verified",
+    "screenId": "verify",
+    "href": "/apps/base?tab=flows&flow=getting-verified&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Apps directory",
+    "description": "Browse mini apps across categories.",
+    "flowSlug": "apps-directory",
+    "href": "/apps/base?tab=flows&flow=apps-directory"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Discover / Search",
+    "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom.",
+    "flowSlug": "apps-directory",
+    "flowName": "Apps directory",
+    "screenId": "discover",
+    "href": "/apps/base?tab=flows&flow=apps-directory&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Apps Directory",
+    "description": "Featured apps carousel and categorized app list.",
+    "flowSlug": "apps-directory",
+    "flowName": "Apps directory",
+    "screenId": "apps-directory",
+    "href": "/apps/base?tab=flows&flow=apps-directory&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading a token (no funds)",
+    "description": "Attempt a swap with an empty wallet — triggers the requires-USDC interstitial and an inline deposit.",
+    "flowSlug": "trading-a-token-no-funds",
+    "href": "/apps/base?tab=flows&flow=trading-a-token-no-funds"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trade / Swap (No Funds)",
+    "description": "Token swap screen showing USDC → Ethereum. USDC selected with $0.00 balance, 50%/75%/Max preset buttons, $1 entered with '1 Not enough' warning in orange. Flip tokens button, Ethereum output showing 0.00046 ($0.99), exchange rate (1 USDC ≈ 0.00047028 ETH), and 'Add funds' blue CTA.",
+    "flowSlug": "trading-a-token-no-funds",
+    "flowName": "Trading a token (no funds)",
+    "screenId": "trade",
+    "href": "/apps/base?tab=flows&flow=trading-a-token-no-funds&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading Requires USDC (Trade)",
+    "description": "Interstitial: trading requires USDC.",
+    "flowSlug": "trading-a-token-no-funds",
+    "flowName": "Trading a token (no funds)",
+    "screenId": "trade-requires-usdc",
+    "href": "/apps/base?tab=flows&flow=trading-a-token-no-funds&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit Funds (from Trade)",
+    "description": "Inline deposit sheet with $2 USDC, Debit Card, Connect to Coinbase.",
+    "flowSlug": "trading-a-token-no-funds",
+    "flowName": "Trading a token (no funds)",
+    "screenId": "trade-deposit-funds",
+    "href": "/apps/base?tab=flows&flow=trading-a-token-no-funds&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Selecting tokens to swap",
+    "description": "Pick the from- and to-tokens for the swap.",
+    "flowSlug": "selecting-tokens-to-swap",
+    "href": "/apps/base?tab=flows&flow=selecting-tokens-to-swap"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit Funds (from Trade)",
+    "description": "Bottom sheet for depositing funds inline from the Trade flow. Shows 'Add funds to your wallet to continue with your purchase.' $2 default amount with USDC, presets ($5/$10/$50), Deposit With Debit Card, Total $2.00, and Connect to Coinbase CTA.",
+    "flowSlug": "selecting-tokens-to-swap",
+    "flowName": "Selecting tokens to swap",
+    "screenId": "trade-deposit-funds",
+    "href": "/apps/base?tab=flows&flow=selecting-tokens-to-swap&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "From-Token Selector (Trade)",
+    "description": "Pick which token to sell. All balances $0.00.",
+    "flowSlug": "selecting-tokens-to-swap",
+    "flowName": "Selecting tokens to swap",
+    "screenId": "trade-from-token-selector",
+    "href": "/apps/base?tab=flows&flow=selecting-tokens-to-swap&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "To-Token Selector (Trade)",
+    "description": "Pick which token to buy. Shows prices and contract addresses.",
+    "flowSlug": "selecting-tokens-to-swap",
+    "flowName": "Selecting tokens to swap",
+    "screenId": "trade-to-token-selector",
+    "href": "/apps/base?tab=flows&flow=selecting-tokens-to-swap&step=2"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Editing profile",
-    "description": "Edit display name, bio, and claim a basename",
+    "description": "Edit display name and bio, and claim a basename.",
     "flowSlug": "editing-profile",
-    "href": "/apps/base/flows/editing-profile"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "Home screen with avatar in top left.",
-    "flowSlug": "editing-profile",
-    "flowName": "Editing profile",
-    "screenId": "home-empty",
-    "href": "/apps/base/flows/editing-profile"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Profile Drawer",
-    "description": "Side drawer with wallet info and menu.",
-    "flowSlug": "editing-profile",
-    "flowName": "Editing profile",
-    "screenId": "profile-drawer",
-    "href": "/apps/base/flows/editing-profile"
+    "href": "/apps/base?tab=flows&flow=editing-profile"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "View Profile",
-    "description": "Profile page with edit and share options.",
+    "description": "User profile page with Edit Profile and Share Profile buttons, network/category/sort filter chips, Deposit CTA, and Coins/Collectibles/Activity tabs.",
     "flowSlug": "editing-profile",
     "flowName": "Editing profile",
     "screenId": "view-profile",
-    "href": "/apps/base/flows/editing-profile"
+    "href": "/apps/base?tab=flows&flow=editing-profile&step=0"
   },
   {
     "type": "step",
@@ -1634,47 +1874,58 @@
     "flowSlug": "editing-profile",
     "flowName": "Editing profile",
     "screenId": "edit-profile",
-    "href": "/apps/base/flows/editing-profile"
+    "href": "/apps/base?tab=flows&flow=editing-profile&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings",
-    "description": "Settings main menu with all categories",
-    "flowSlug": "settings",
-    "href": "/apps/base/flows/settings"
+    "label": "Notification settings",
+    "description": "Configure notification categories (Trading, Social, Rewards, …).",
+    "flowSlug": "notification-settings",
+    "href": "/apps/base?tab=flows&flow=notification-settings"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "settings",
-    "flowName": "Settings",
-    "screenId": "settings",
-    "href": "/apps/base/flows/settings"
+    "label": "Notifications",
+    "description": "Notifications screen with push notification toggle and ETH price alert notifications (up +5.37%, down 4.42%).",
+    "flowSlug": "notification-settings",
+    "flowName": "Notification settings",
+    "screenId": "notifications",
+    "href": "/apps/base?tab=flows&flow=notification-settings&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Notification Settings",
+    "description": "Category-based notification preferences.",
+    "flowSlug": "notification-settings",
+    "flowName": "Notification settings",
+    "screenId": "notification-settings",
+    "href": "/apps/base?tab=flows&flow=notification-settings&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Connecting to Coinbase",
-    "description": "Link Coinbase account for funding",
+    "description": "Link a Coinbase account for funding.",
     "flowSlug": "connecting-to-coinbase",
-    "href": "/apps/base/flows/connecting-to-coinbase"
+    "href": "/apps/base?tab=flows&flow=connecting-to-coinbase"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
     "flowSlug": "connecting-to-coinbase",
     "flowName": "Connecting to Coinbase",
     "screenId": "settings",
-    "href": "/apps/base/flows/connecting-to-coinbase"
+    "href": "/apps/base?tab=flows&flow=connecting-to-coinbase&step=0"
   },
   {
     "type": "step",
@@ -1685,279 +1936,275 @@
     "flowSlug": "connecting-to-coinbase",
     "flowName": "Connecting to Coinbase",
     "screenId": "connect-coinbase",
-    "href": "/apps/base/flows/connecting-to-coinbase"
+    "href": "/apps/base?tab=flows&flow=connecting-to-coinbase&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display settings",
+    "description": "Display preferences hub — appearance, app icon, language, currency.",
+    "flowSlug": "display-settings",
+    "href": "/apps/base?tab=flows&flow=display-settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "display-settings",
+    "flowName": "Display settings",
+    "screenId": "settings",
+    "href": "/apps/base?tab=flows&flow=display-settings&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Display Settings",
+    "description": "Theme, app icon, language, currency.",
+    "flowSlug": "display-settings",
+    "flowName": "Display settings",
+    "screenId": "display-settings",
+    "href": "/apps/base?tab=flows&flow=display-settings&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Switching to dark mode",
-    "description": "Change appearance mode between light, dark, and system",
+    "description": "Change appearance mode between Light, Dark, and System.",
     "flowSlug": "switching-to-dark-mode",
-    "href": "/apps/base/flows/switching-to-dark-mode"
+    "href": "/apps/base?tab=flows&flow=switching-to-dark-mode"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "switching-to-dark-mode",
-    "flowName": "Switching to dark mode",
-    "screenId": "settings",
-    "href": "/apps/base/flows/switching-to-dark-mode"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Display",
-    "description": "Theme, app icon, language, currency.",
+    "label": "Display Settings",
+    "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD).",
     "flowSlug": "switching-to-dark-mode",
     "flowName": "Switching to dark mode",
     "screenId": "display-settings",
-    "href": "/apps/base/flows/switching-to-dark-mode"
+    "href": "/apps/base?tab=flows&flow=switching-to-dark-mode&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Appearance Mode",
+    "label": "Appearance Mode Picker",
     "description": "Light / Dark / System options.",
     "flowSlug": "switching-to-dark-mode",
     "flowName": "Switching to dark mode",
     "screenId": "settings-appearance-mode",
-    "href": "/apps/base/flows/switching-to-dark-mode"
+    "href": "/apps/base?tab=flows&flow=switching-to-dark-mode&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Changing app icon",
-    "description": "Choose from 20 app icon variants",
+    "description": "Choose from 20 app-icon variants.",
     "flowSlug": "changing-app-icon",
-    "href": "/apps/base/flows/changing-app-icon"
+    "href": "/apps/base?tab=flows&flow=changing-app-icon"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "changing-app-icon",
-    "flowName": "Changing app icon",
-    "screenId": "settings",
-    "href": "/apps/base/flows/changing-app-icon"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Display",
-    "description": "Theme, app icon, language, currency.",
+    "label": "Display Settings",
+    "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD).",
     "flowSlug": "changing-app-icon",
     "flowName": "Changing app icon",
     "screenId": "display-settings",
-    "href": "/apps/base/flows/changing-app-icon"
+    "href": "/apps/base?tab=flows&flow=changing-app-icon&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "App Icon",
+    "label": "App Icon Picker",
     "description": "20 icon variants in grid.",
     "flowSlug": "changing-app-icon",
     "flowName": "Changing app icon",
     "screenId": "settings-app-icon",
-    "href": "/apps/base/flows/changing-app-icon"
+    "href": "/apps/base?tab=flows&flow=changing-app-icon&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Changing language",
-    "description": "Select from 15 supported languages",
+    "description": "Select from supported languages.",
     "flowSlug": "changing-language",
-    "href": "/apps/base/flows/changing-language"
+    "href": "/apps/base?tab=flows&flow=changing-language"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "changing-language",
-    "flowName": "Changing language",
-    "screenId": "settings",
-    "href": "/apps/base/flows/changing-language"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Display",
-    "description": "Theme, app icon, language, currency.",
+    "label": "Display Settings",
+    "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD).",
     "flowSlug": "changing-language",
     "flowName": "Changing language",
     "screenId": "display-settings",
-    "href": "/apps/base/flows/changing-language"
+    "href": "/apps/base?tab=flows&flow=changing-language&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Language",
+    "label": "Language Picker",
     "description": "15 languages supported.",
     "flowSlug": "changing-language",
     "flowName": "Changing language",
     "screenId": "settings-language",
-    "href": "/apps/base/flows/changing-language"
+    "href": "/apps/base?tab=flows&flow=changing-language&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Changing local currency",
-    "description": "Search and select local currency for balance display",
+    "description": "Search and select the local currency for balance display.",
     "flowSlug": "changing-local-currency",
-    "href": "/apps/base/flows/changing-local-currency"
+    "href": "/apps/base?tab=flows&flow=changing-local-currency"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "changing-local-currency",
-    "flowName": "Changing local currency",
-    "screenId": "settings",
-    "href": "/apps/base/flows/changing-local-currency"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Display",
-    "description": "Theme, app icon, language, currency.",
+    "label": "Display Settings",
+    "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD).",
     "flowSlug": "changing-local-currency",
     "flowName": "Changing local currency",
     "screenId": "display-settings",
-    "href": "/apps/base/flows/changing-local-currency"
+    "href": "/apps/base?tab=flows&flow=changing-local-currency&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Currency",
+    "label": "Currency Picker",
     "description": "Searchable currency list, USD selected.",
     "flowSlug": "changing-local-currency",
     "flowName": "Changing local currency",
     "screenId": "settings-currency",
-    "href": "/apps/base/flows/changing-local-currency"
+    "href": "/apps/base?tab=flows&flow=changing-local-currency&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Account management",
+    "description": "Account hub — authenticator 2FA and sign out.",
+    "flowSlug": "account-management",
+    "href": "/apps/base?tab=flows&flow=account-management"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "account-management",
+    "flowName": "Account management",
+    "screenId": "settings",
+    "href": "/apps/base?tab=flows&flow=account-management&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Account Management",
+    "description": "2FA and sign out.",
+    "flowSlug": "account-management",
+    "flowName": "Account management",
+    "screenId": "account-management",
+    "href": "/apps/base?tab=flows&flow=account-management&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Setting up authenticator",
-    "description": "2FA setup via authenticator app",
+    "description": "Set up 2FA via an authenticator app.",
     "flowSlug": "setting-up-authenticator",
-    "href": "/apps/base/flows/setting-up-authenticator"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "setting-up-authenticator",
-    "flowName": "Setting up authenticator",
-    "screenId": "settings",
-    "href": "/apps/base/flows/setting-up-authenticator"
+    "href": "/apps/base?tab=flows&flow=setting-up-authenticator"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Account Management",
-    "description": "2FA and sign out.",
+    "description": "Account management with Authenticator App (2FA) option and Sign out button.",
     "flowSlug": "setting-up-authenticator",
     "flowName": "Setting up authenticator",
     "screenId": "account-management",
-    "href": "/apps/base/flows/setting-up-authenticator"
+    "href": "/apps/base?tab=flows&flow=setting-up-authenticator&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Authenticator Setup",
+    "label": "Set Up Authenticator",
     "description": "2FA setup key and Continue.",
     "flowSlug": "setting-up-authenticator",
     "flowName": "Setting up authenticator",
     "screenId": "settings-authenticator-setup",
-    "href": "/apps/base/flows/setting-up-authenticator"
+    "href": "/apps/base?tab=flows&flow=setting-up-authenticator&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Logging out",
-    "description": "Sign out with recovery warning confirmation",
+    "description": "Sign out, with the recovery-access warning.",
     "flowSlug": "logging-out",
-    "href": "/apps/base/flows/logging-out"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "logging-out",
-    "flowName": "Logging out",
-    "screenId": "settings",
-    "href": "/apps/base/flows/logging-out"
+    "href": "/apps/base?tab=flows&flow=logging-out"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Account Management",
-    "description": "2FA and sign out.",
+    "description": "Account management with Authenticator App (2FA) option and Sign out button.",
     "flowSlug": "logging-out",
     "flowName": "Logging out",
     "screenId": "account-management",
-    "href": "/apps/base/flows/logging-out"
+    "href": "/apps/base?tab=flows&flow=logging-out&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Sign Out Confirm",
+    "label": "Sign Out Confirmation",
     "description": "Warning: can't recover without wallet access. Sign Out / Nevermind.",
     "flowSlug": "logging-out",
     "flowName": "Logging out",
     "screenId": "settings-sign-out-confirm",
-    "href": "/apps/base/flows/logging-out"
+    "href": "/apps/base?tab=flows&flow=logging-out&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Managing token approvals",
-    "description": "View and revoke token approvals",
-    "flowSlug": "managing-token-approvals",
-    "href": "/apps/base/flows/managing-token-approvals"
+    "label": "Privacy & Security",
+    "description": "Privacy & security hub — offers, privacy mode, approvals, permissions.",
+    "flowSlug": "privacy-security",
+    "href": "/apps/base?tab=flows&flow=privacy-security"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "managing-token-approvals",
-    "flowName": "Managing token approvals",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "privacy-security",
+    "flowName": "Privacy & Security",
     "screenId": "settings",
-    "href": "/apps/base/flows/managing-token-approvals"
+    "href": "/apps/base?tab=flows&flow=privacy-security&step=0"
   },
   {
     "type": "step",
@@ -1965,10 +2212,30 @@
     "appName": "Base",
     "label": "Privacy & Security",
     "description": "Privacy toggles, token approvals, permissions.",
+    "flowSlug": "privacy-security",
+    "flowName": "Privacy & Security",
+    "screenId": "privacy-security",
+    "href": "/apps/base?tab=flows&flow=privacy-security&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Managing token approvals",
+    "description": "View and revoke token approvals.",
+    "flowSlug": "managing-token-approvals",
+    "href": "/apps/base?tab=flows&flow=managing-token-approvals"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Privacy & Security",
+    "description": "Privacy settings with Personalized offers toggle, Privacy mode toggle, Payment requests toggle, Decline all requests button, Token Approvals, and Manage Permissions.",
     "flowSlug": "managing-token-approvals",
     "flowName": "Managing token approvals",
     "screenId": "privacy-security",
-    "href": "/apps/base/flows/managing-token-approvals"
+    "href": "/apps/base?tab=flows&flow=managing-token-approvals&step=0"
   },
   {
     "type": "step",
@@ -1979,38 +2246,27 @@
     "flowSlug": "managing-token-approvals",
     "flowName": "Managing token approvals",
     "screenId": "settings-token-approvals",
-    "href": "/apps/base/flows/managing-token-approvals"
+    "href": "/apps/base?tab=flows&flow=managing-token-approvals&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
     "label": "Managing permissions",
-    "description": "View apps granted permissions",
+    "description": "View apps granted permissions.",
     "flowSlug": "managing-permissions",
-    "href": "/apps/base/flows/managing-permissions"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "managing-permissions",
-    "flowName": "Managing permissions",
-    "screenId": "settings",
-    "href": "/apps/base/flows/managing-permissions"
+    "href": "/apps/base?tab=flows&flow=managing-permissions"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Privacy & Security",
-    "description": "Privacy toggles, token approvals, permissions.",
+    "description": "Privacy settings with Personalized offers toggle, Privacy mode toggle, Payment requests toggle, Decline all requests button, Token Approvals, and Manage Permissions.",
     "flowSlug": "managing-permissions",
     "flowName": "Managing permissions",
     "screenId": "privacy-security",
-    "href": "/apps/base/flows/managing-permissions"
+    "href": "/apps/base?tab=flows&flow=managing-permissions&step=0"
   },
   {
     "type": "step",
@@ -2021,38 +2277,58 @@
     "flowSlug": "managing-permissions",
     "flowName": "Managing permissions",
     "screenId": "settings-manage-permissions",
-    "href": "/apps/base/flows/managing-permissions"
+    "href": "/apps/base?tab=flows&flow=managing-permissions&step=1"
   },
   {
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Viewing hidden coins",
-    "description": "Manage hidden, spam, and dust coins",
-    "flowSlug": "viewing-hidden-coins",
-    "href": "/apps/base/flows/viewing-hidden-coins"
+    "label": "Trading settings",
+    "description": "Trading preferences hub — stealth mode, dust coins, hidden coins.",
+    "flowSlug": "trading-settings",
+    "href": "/apps/base?tab=flows&flow=trading-settings"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Settings Main",
-    "description": "Settings menu with all categories.",
-    "flowSlug": "viewing-hidden-coins",
-    "flowName": "Viewing hidden coins",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "trading-settings",
+    "flowName": "Trading settings",
     "screenId": "settings",
-    "href": "/apps/base/flows/viewing-hidden-coins"
+    "href": "/apps/base?tab=flows&flow=trading-settings&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Trading",
+    "label": "Trading Settings",
     "description": "Stealth mode, dust coins, hidden coins.",
-    "flowSlug": "viewing-hidden-coins",
-    "flowName": "Viewing hidden coins",
+    "flowSlug": "trading-settings",
+    "flowName": "Trading settings",
     "screenId": "trading-settings",
-    "href": "/apps/base/flows/viewing-hidden-coins"
+    "href": "/apps/base?tab=flows&flow=trading-settings&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Hidden coins",
+    "description": "Manage hidden, spam, and dust coins.",
+    "flowSlug": "hidden-coins",
+    "href": "/apps/base?tab=flows&flow=hidden-coins"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading Settings",
+    "description": "Trading preferences: Turn on stealth mode toggle (hide trades from social feed), Dust Coins toggle (auto-hide coins under $0.10), Hidden Coins list.",
+    "flowSlug": "hidden-coins",
+    "flowName": "Hidden coins",
+    "screenId": "trading-settings",
+    "href": "/apps/base?tab=flows&flow=hidden-coins&step=0"
   },
   {
     "type": "step",
@@ -2060,9 +2336,71 @@
     "appName": "Base",
     "label": "Hidden Coins",
     "description": "Hidden/Spam/Dust tabs, all empty.",
-    "flowSlug": "viewing-hidden-coins",
-    "flowName": "Viewing hidden coins",
+    "flowSlug": "hidden-coins",
+    "flowName": "Hidden coins",
     "screenId": "settings-hidden-coins",
-    "href": "/apps/base/flows/viewing-hidden-coins"
+    "href": "/apps/base?tab=flows&flow=hidden-coins&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Legal",
+    "description": "Privacy Policy and Terms of Service links.",
+    "flowSlug": "legal",
+    "href": "/apps/base?tab=flows&flow=legal"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "legal",
+    "flowName": "Legal",
+    "screenId": "settings",
+    "href": "/apps/base?tab=flows&flow=legal&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Legal",
+    "description": "Bottom sheet with two options: Privacy Policy and Terms of Service. Both open external links.",
+    "flowSlug": "legal",
+    "flowName": "Legal",
+    "screenId": "settings-legal",
+    "href": "/apps/base?tab=flows&flow=legal&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Help",
+    "description": "Open the Coinbase help center (external).",
+    "flowSlug": "help",
+    "href": "/apps/base?tab=flows&flow=help"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Settings",
+    "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270.",
+    "flowSlug": "help",
+    "flowName": "Help",
+    "screenId": "settings",
+    "href": "/apps/base?tab=flows&flow=help&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Help (External)",
+    "description": "Opens Chrome browser to help.coinbase.com — 'Coinbase Wallet | Coinbase Help'. External website, not in-app.",
+    "flowSlug": "help",
+    "flowName": "Help",
+    "screenId": "settings-help",
+    "href": "/apps/base?tab=flows&flow=help&step=1"
   }
 ]

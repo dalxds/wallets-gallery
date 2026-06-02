@@ -3,18 +3,21 @@
 import type { FlowEntry } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, PanelLeftClose } from "lucide-react"
 import { useMemo, useState } from "react"
 
 interface FlowSidebarProps {
   flows: FlowEntry[]
   activeFlowSlug?: string
   onFlowClick: (slug: string) => void
+  onCollapse?: () => void
+  className?: string
 }
 
 function matchesFilter(flow: FlowEntry, q: string): boolean {
@@ -61,9 +64,6 @@ function FlowNode({
       )}
     >
       {flow.name}
-      <span className="ml-1 text-xs text-muted-foreground">
-        ({flow.steps.length})
-      </span>
     </button>
   )
 
@@ -112,6 +112,8 @@ export function FlowSidebar({
   flows,
   activeFlowSlug,
   onFlowClick,
+  onCollapse,
+  className,
 }: FlowSidebarProps) {
   const [filter, setFilter] = useState("")
 
@@ -126,14 +128,29 @@ export function FlowSidebar({
   )
 
   return (
-    <div className="flex flex-col gap-2">
-      <Input
-        placeholder="Filter flows..."
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        className="h-8 text-sm"
-      />
-      <nav className="flex flex-col gap-0.5">
+    <div className={cn("flex min-h-0 flex-col gap-2", className)}>
+      <div className="flex items-center gap-1">
+        <Input
+          placeholder="Filter flows..."
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="h-8 text-sm"
+        />
+        {onCollapse && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-sm"
+            onClick={onCollapse}
+            aria-label="Collapse sidebar"
+            title="Collapse sidebar"
+            className="shrink-0 text-muted-foreground"
+          >
+            <PanelLeftClose className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+      <nav className="scrollbar-hide flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto overscroll-contain">
         {visibleTopLevel.map((flow) => (
           <FlowNode
             key={flow.slug}

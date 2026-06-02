@@ -3,6 +3,7 @@
 import type { AppCapture, FlowEntry } from "@/lib/types"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
+import { PanelLeftOpen } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 interface FlowsViewProps {
@@ -32,7 +33,7 @@ function FlowTree({
         ref={(el) => {
           if (el) flowRefs.current.set(flow.slug, el)
         }}
-        className="scroll-mt-20"
+        className="scroll-mt-16 lg:scroll-mt-[var(--content-top)]"
       >
         <FlowRow flow={flow} appSlug={appSlug} />
       </div>
@@ -60,6 +61,7 @@ export function FlowsView({
   activeFlowSlug,
 }: FlowsViewProps) {
   const [currentSlug, setCurrentSlug] = useState(activeFlowSlug)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const flowRefs = useRef<Map<string, HTMLDivElement>>(new Map())
 
   const scrollToFlow = useCallback((slug: string) => {
@@ -84,18 +86,51 @@ export function FlowsView({
 
   const topLevel = app.flows.filter((f) => f.parent === null)
 
+  // Sidebar/rail are pinned just below the chrome (--content-top, set by the
+  // page) and span the rest of the viewport, scrolling internally. The page
+  // itself scrolls the window. Sizing is inline so the CSS var resolves
+  // cleanly; lg:sticky only engages the positioning on desktop (it's hidden
+  // below lg, where the inline mobile sidebar is shown instead).
+  const railStyle: React.CSSProperties = {
+    top: "var(--content-top)",
+    height: "calc(100dvh - var(--content-top) - 1.5rem)",
+  }
+
   return (
     <div className="flex gap-6">
-      <div className="hidden w-64 shrink-0 lg:block">
-        <div className="sticky top-20">
+      {/* Desktop: fixed full-height sidebar, or a slim rail when collapsed */}
+      {sidebarCollapsed ? (
+        <button
+          type="button"
+          onClick={() => setSidebarCollapsed(false)}
+          aria-label="Expand flow list"
+          title="Expand flow list"
+          style={railStyle}
+          className="hidden w-9 shrink-0 flex-col items-center gap-3 rounded-lg border bg-muted/30 py-3 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground lg:sticky lg:flex"
+        >
+          <PanelLeftOpen className="h-4 w-4" />
+          <span className="text-xs font-medium tracking-wide [writing-mode:vertical-rl]">
+            Flows
+          </span>
+        </button>
+      ) : (
+        <div
+          style={railStyle}
+          className="hidden w-64 shrink-0 lg:sticky lg:block"
+        >
           <FlowSidebar
             flows={app.flows}
             activeFlowSlug={currentSlug}
             onFlowClick={scrollToFlow}
+            onCollapse={() => setSidebarCollapsed(true)}
+            className="h-full"
           />
         </div>
-      </div>
+      )}
+
+      {/* Content column — scrolls with the page */}
       <div className="min-w-0 flex-1">
+        {/* Mobile sidebar (shown inline above the flows) */}
         <div className="mb-4 lg:hidden">
           <FlowSidebar
             flows={app.flows}

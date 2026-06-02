@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { captureUrl } from "@/lib/images"
+import { screenHref } from "@/lib/links"
 import { cn } from "@/lib/utils"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Copy, Check, Link2, Download, X } from "lucide-react"
@@ -85,7 +86,8 @@ export function ScreenLightbox({
   }
 
   async function copyLink() {
-    const url = `${window.location.origin}/apps/${appSlug}/screens/${current?.id}`
+    if (!current) return
+    const url = `${window.location.origin}${screenHref(appSlug, current.id)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)

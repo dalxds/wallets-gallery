@@ -8,7 +8,7 @@ import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 import { getAppsIndex, fetchAppCapture } from "@/lib/data"
 import type { AppCapture, AppIndex } from "@/lib/types"
 import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { useQueryState, parseAsStringLiteral } from "nuqs"
 
@@ -30,6 +30,22 @@ export default function AppDetailPage() {
   const [activeScreenId, setActiveScreenId] = useQueryState("screen")
 
   const slug = params.slug
+
+  // The chrome (app header + tabs) is pinned on the Flows tab; measure its
+  // height so the fixed sidebar can sit exactly below it. This is a stable
+  // measurement (only fires on resize/content change, never on scroll).
+  const chromeRef = useRef<HTMLDivElement>(null)
+  const [contentTop, setContentTop] = useState(0)
+  useEffect(() => {
+    const el = chromeRef.current
+    if (!el) return
+    const NAVBAR_PX = 56 // h-14
+    const update = () => setContentTop(NAVBAR_PX + el.offsetHeight)
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    update()
+    return () => ro.disconnect()
+  }, [app, tab])
 
   useEffect(() => {
     async function load() {
@@ -79,55 +95,74 @@ export default function AppDetailPage() {
     )
   }
 
-  return (
-    <AppShell>
-      <div className="space-y-6">
-        <AppHeader app={app} appIndex={appIndex} currentDate={dateParam ?? appIndex.latest} />
+  const isFlows = tab === "flows"
 
-        <div className="flex gap-4 border-b">
-          <button
-            onClick={() => {
-              setTab("screens")
-              setActiveFlowSlug(null)
-              setStepParam(null)
-            }}
-            className={cn(
-              "border-b-2 pb-2 text-sm font-medium transition-colors",
-              tab === "screens"
-                ? "border-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            )}
-          >
-            Screens ({app.screens.length})
-          </button>
-          <button
-            onClick={() => {
-              setTab("flows")
-              setActiveScreenId(null)
-            }}
-            className={cn(
-              "border-b-2 pb-2 text-sm font-medium transition-colors",
-              tab === "flows"
-                ? "border-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            )}
-          >
-            Flows ({app.flows.length})
-          </button>
+  return (
+    // The whole page scrolls the window. On Flows the chrome (app header +
+    // tabs) is pinned and the sidebar is a fixed rail sitting just below it;
+    // Screens scrolls normally with the chrome.
+    <AppShell>
+      <div
+        style={
+          { "--content-top": contentTop ? `${contentTop}px` : "13rem" } as React.CSSProperties
+        }
+      >
+        <div
+          ref={chromeRef}
+          className={cn(
+            "space-y-6",
+            isFlows &&
+              "lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background lg:px-4 lg:pt-6 lg:pb-6"
+          )}
+        >
+          <AppHeader app={app} appIndex={appIndex} currentDate={dateParam ?? appIndex.latest} />
+
+          <div className="flex gap-4 border-b">
+            <button
+              onClick={() => {
+                setTab("screens")
+                setActiveFlowSlug(null)
+                setStepParam(null)
+              }}
+              className={cn(
+                "border-b-2 pb-2 text-sm font-medium transition-colors",
+                tab === "screens"
+                  ? "border-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Screens ({app.screens.length})
+            </button>
+            <button
+              onClick={() => {
+                setTab("flows")
+                setActiveScreenId(null)
+              }}
+              className={cn(
+                "border-b-2 pb-2 text-sm font-medium transition-colors",
+                tab === "flows"
+                  ? "border-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Flows ({app.flows.length})
+            </button>
+          </div>
         </div>
 
-        {tab === "screens" ? (
-          <ScreensGrid
-            screens={app.screens}
-            appSlug={slug}
-          />
-        ) : (
-          <FlowsView
-            app={app}
-            appSlug={slug}
-            activeFlowSlug={activeFlowSlug ?? undefined}
-          />
-        )}
+        {/* Content scrolls with the page. The gap below the chrome is part of
+            the pinned chrome on flows (lg:pb-6), so no top margin there. */}
+        <div className={cn("mt-6", isFlows && "lg:mt-0")}>
+          {tab === "screens" ? (
+            <ScreensGrid screens={app.screens} appSlug={slug} />
+          ) : (
+            <FlowsView
+              app={app}
+              appSlug={slug}
+              activeFlowSlug={activeFlowSlug ?? undefined}
+            />
+          )}
+        </div>
       </div>
 
       {activeScreenId && app.screens.some((s) => s.id === activeScreenId) && (

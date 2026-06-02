@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { captureUrl } from "@/lib/images"
+import { flowHref } from "@/lib/links"
 import { cn } from "@/lib/utils"
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react"
 import {
@@ -118,7 +119,7 @@ export function FlowLightbox({
   }
 
   async function copyFlowLink() {
-    const url = `${window.location.origin}/apps/${appSlug}/flows/${flow.slug}?step=${initialIndex}`
+    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, initialIndex)}`
     await navigator.clipboard.writeText(url)
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
@@ -243,7 +244,7 @@ const StepCard = forwardRef<
   async function copyLink(e: React.MouseEvent) {
     e.stopPropagation()
     await navigator.clipboard.writeText(
-      `${window.location.origin}/apps/${appSlug}/flows/${flowSlug}`
+      `${window.location.origin}${flowHref(appSlug, flowSlug)}`
     )
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
@@ -263,11 +264,11 @@ const StepCard = forwardRef<
 
   return (
     <div ref={ref} className="group/card flex shrink-0 flex-col items-center gap-2">
-      <div className="relative">
+      <div className="relative aspect-[1080/2400] h-[calc(80vh-9rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
         <img
           src={src}
           alt={step.description}
-          className="max-h-[calc(80vh-9rem)] rounded-lg object-contain shadow-lg"
+          className="h-full w-full object-contain"
         />
         {/* Hover action buttons */}
         <div className="absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">

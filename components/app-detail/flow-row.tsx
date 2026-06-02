@@ -9,6 +9,7 @@ import { useRef, useState, useEffect, useCallback } from "react"
 import { useQueryState } from "nuqs"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 import { ImageActions } from "@/components/shared/image-actions"
+import { flowHref } from "@/lib/links"
 
 interface FlowRowProps {
   flow: FlowEntry
@@ -67,7 +68,7 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
 
   async function copyFlowLink(e: React.MouseEvent) {
     e.stopPropagation()
-    const url = `${window.location.origin}/apps/${appSlug}/flows/${flow.slug}`
+    const url = `${window.location.origin}${flowHref(appSlug, flow.slug)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
@@ -104,7 +105,7 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
             )}
           </Button>
           <span className="shrink-0 text-xs text-muted-foreground">
-            {flow.steps.length} steps
+            {flow.steps.length} {flow.steps.length === 1 ? "step" : "steps"}
           </span>
         </div>
       </div>
@@ -141,7 +142,7 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
               <div className="group/card relative overflow-hidden rounded-lg border transition-shadow group-hover/step:shadow-md">
                 <ImageActions
                   src={captureUrl(appSlug, step.screenshotPath)}
-                  screenUrl={`${typeof window !== "undefined" ? window.location.origin : ""}/apps/${appSlug}/flows/${flow.slug}`}
+                  screenUrl={`${typeof window !== "undefined" ? window.location.origin : ""}${flowHref(appSlug, flow.slug, idx)}`}
                 />
                 <LazyImage
                   src={captureUrl(appSlug, step.screenshotPath)}

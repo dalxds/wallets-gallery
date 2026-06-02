@@ -38,7 +38,7 @@ for (const dir of dirs) {
       label: screen.title || screen.id,
       description: screen.description,
       screenId: screen.id,
-      href: `/apps/${appSlug}/screens/${screen.id}`,
+      href: `/apps/${appSlug}?tab=screens&screen=${encodeURIComponent(screen.id)}`,
     })
   }
 
@@ -50,10 +50,10 @@ for (const dir of dirs) {
       label: flow.name,
       description: flow.summary,
       flowSlug: flow.slug,
-      href: `/apps/${appSlug}/flows/${flow.slug}`,
+      href: `/apps/${appSlug}?tab=flows&flow=${encodeURIComponent(flow.slug)}`,
     })
 
-    for (const step of flow.steps) {
+    flow.steps.forEach((step, stepIndex) => {
       entries.push({
         type: "step",
         appSlug,
@@ -63,9 +63,9 @@ for (const dir of dirs) {
         flowSlug: flow.slug,
         flowName: flow.name,
         screenId: step.screenId,
-        href: `/apps/${appSlug}/flows/${flow.slug}`,
+        href: `/apps/${appSlug}?tab=flows&flow=${encodeURIComponent(flow.slug)}&step=${stepIndex}`,
       })
-    }
+    })
   }
 }
 

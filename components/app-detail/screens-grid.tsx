@@ -3,6 +3,7 @@
 import type { ScreenEntry } from "@/lib/types"
 import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
+import { screenHref } from "@/lib/links"
 import { ImageActions } from "@/components/shared/image-actions"
 import { useQueryState } from "nuqs"
 
@@ -18,7 +19,7 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
-        const screenUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/apps/${appSlug}/screens/${screen.id}`
+        const screenUrl = `${typeof window !== "undefined" ? window.location.origin : ""}${screenHref(appSlug, screen.id)}`
         return (
           <div
             key={screen.id}
