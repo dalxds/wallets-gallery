@@ -7,8 +7,10 @@
 // Usage: node scripts/reconstruct.ts [captureDir] [captureDate]
 
 import { readFileSync, writeFileSync } from "node:fs"
+import { join } from "node:path"
 import { skeletonFromElements, skeletonFromTexts } from "../lib/packager/identity.ts"
 import { packageGraph } from "../lib/packager/index.ts"
+import { pHashFromPng } from "./phash.ts"
 import type { Graph, GraphEdge, GraphNode, ScreenRole } from "../lib/packager/types.ts"
 
 const dir = process.argv[2] ?? "public/captures/base"
@@ -28,7 +30,7 @@ const nodes: GraphNode[] = cap.screens.map((s: any): GraphNode => {
     id: s.id,
     fingerprint: s.fingerprint,
     skeletonHash,
-    pHash: null, // no decoder yet; legacy captures have no usable signal anyway
+    pHash: s.screenshotPath ? pHashFromPng(join(dir, s.screenshotPath)) : null,
     routeKey: null,
     role: s.role as ScreenRole,
     screenshotPath: s.screenshotPath,

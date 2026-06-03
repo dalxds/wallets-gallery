@@ -4,7 +4,7 @@
     "appSlug": "base",
     "appName": "Base",
     "label": "Base",
-    "description": "ANDROID app — 66 screens, 43 flows",
+    "description": "ANDROID app — 65 screens, 42 flows",
     "href": "/apps/base"
   },
   {
@@ -411,15 +411,6 @@
     "description": "Send screen with To search input, Paste button, Scan QR code ('Tap to scan an address'), Tap to Send (proximity), Send via Link (shareable), and Recents section ('No recent recipients').",
     "screenId": "send",
     "href": "/apps/base?tab=screens&screen=send"
-  },
-  {
-    "type": "screen",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Trade / Swap (Funded)",
-    "description": "Swap screen with USDC ($1.00 balance) → Ethereum. 50%/75%/Max preset buttons, flip tokens, exchange rate (1 USDC ≈ 0.0004725 ETH), Continue CTA (enabled). When Max is tapped: $1 entered, 'Not enough' (needs gas ETH), shows 'Receive ETH' CTA instead.",
-    "screenId": "trade-funded",
-    "href": "/apps/base?tab=screens&screen=trade-funded"
   },
   {
     "type": "screen",
@@ -993,6 +984,35 @@
     "type": "flow",
     "appSlug": "base",
     "appName": "Base",
+    "label": "Trade / Swap",
+    "description": "",
+    "flowSlug": "trade-swap",
+    "href": "/apps/base?tab=flows&flow=trade-swap"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Home (Funded)",
+    "flowSlug": "trade-swap",
+    "flowName": "Trade / Swap",
+    "screenId": "home-funded",
+    "href": "/apps/base?tab=flows&flow=trade-swap&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trade / Swap (No Funds)",
+    "flowSlug": "trade-swap",
+    "flowName": "Trade / Swap",
+    "screenId": "trade",
+    "href": "/apps/base?tab=flows&flow=trade-swap&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
     "label": "Trade",
     "description": "",
     "flowSlug": "trade",
@@ -1002,21 +1022,11 @@
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
-    "label": "Home (Funded)",
+    "label": "Trade / Swap (No Funds)",
     "flowSlug": "trade",
     "flowName": "Trade",
-    "screenId": "home-funded",
+    "screenId": "trade",
     "href": "/apps/base?tab=flows&flow=trade&step=0"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Trade / Swap (Funded)",
-    "flowSlug": "trade",
-    "flowName": "Trade",
-    "screenId": "trade-funded",
-    "href": "/apps/base?tab=flows&flow=trade&step=1"
   },
   {
     "type": "step",
@@ -1026,7 +1036,56 @@
     "flowSlug": "trade",
     "flowName": "Trade",
     "screenId": "trade-funded-max",
-    "href": "/apps/base?tab=flows&flow=trade&step=2"
+    "href": "/apps/base?tab=flows&flow=trade&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "From-Token Selector",
+    "description": "",
+    "flowSlug": "from-token-selector",
+    "href": "/apps/base?tab=flows&flow=from-token-selector"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trade / Swap (No Funds)",
+    "flowSlug": "from-token-selector",
+    "flowName": "From-Token Selector",
+    "screenId": "trade",
+    "href": "/apps/base?tab=flows&flow=from-token-selector&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Trading Requires USDC (Trade)",
+    "flowSlug": "from-token-selector",
+    "flowName": "From-Token Selector",
+    "screenId": "trade-requires-usdc",
+    "href": "/apps/base?tab=flows&flow=from-token-selector&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "Deposit Funds (from Trade)",
+    "flowSlug": "from-token-selector",
+    "flowName": "From-Token Selector",
+    "screenId": "trade-deposit-funds",
+    "href": "/apps/base?tab=flows&flow=from-token-selector&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "base",
+    "appName": "Base",
+    "label": "From-Token Selector (Trade)",
+    "flowSlug": "from-token-selector",
+    "flowName": "From-Token Selector",
+    "screenId": "trade-from-token-selector",
+    "href": "/apps/base?tab=flows&flow=from-token-selector&step=3"
   },
   {
     "type": "flow",
@@ -1056,35 +1115,6 @@
     "flowName": "Token Detail",
     "screenId": "usdc-token-detail-owned",
     "href": "/apps/base?tab=flows&flow=token-detail&step=1"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Notification Settings",
-    "description": "",
-    "flowSlug": "notification-settings",
-    "href": "/apps/base?tab=flows&flow=notification-settings"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Notifications",
-    "flowSlug": "notification-settings",
-    "flowName": "Notification Settings",
-    "screenId": "notifications",
-    "href": "/apps/base?tab=flows&flow=notification-settings&step=0"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Notification Settings",
-    "flowSlug": "notification-settings",
-    "flowName": "Notification Settings",
-    "screenId": "notification-settings",
-    "href": "/apps/base?tab=flows&flow=notification-settings&step=1"
   },
   {
     "type": "flow",
@@ -1701,58 +1731,58 @@
     "appName": "Base",
     "label": "From-Token Selector",
     "description": "",
-    "flowSlug": "from-token-selector",
-    "href": "/apps/base?tab=flows&flow=from-token-selector"
+    "flowSlug": "from-token-selector-2",
+    "href": "/apps/base?tab=flows&flow=from-token-selector-2"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Discover / Search",
-    "flowSlug": "from-token-selector",
+    "flowSlug": "from-token-selector-2",
     "flowName": "From-Token Selector",
     "screenId": "discover",
-    "href": "/apps/base?tab=flows&flow=from-token-selector&step=0"
+    "href": "/apps/base?tab=flows&flow=from-token-selector-2&step=0"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Token Detail",
-    "flowSlug": "from-token-selector",
+    "flowSlug": "from-token-selector-2",
     "flowName": "From-Token Selector",
     "screenId": "token-detail",
-    "href": "/apps/base?tab=flows&flow=from-token-selector&step=1"
+    "href": "/apps/base?tab=flows&flow=from-token-selector-2&step=1"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Trading Requires USDC (Trade)",
-    "flowSlug": "from-token-selector",
+    "flowSlug": "from-token-selector-2",
     "flowName": "From-Token Selector",
     "screenId": "trade-requires-usdc",
-    "href": "/apps/base?tab=flows&flow=from-token-selector&step=2"
+    "href": "/apps/base?tab=flows&flow=from-token-selector-2&step=2"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "Deposit Funds (from Trade)",
-    "flowSlug": "from-token-selector",
+    "flowSlug": "from-token-selector-2",
     "flowName": "From-Token Selector",
     "screenId": "trade-deposit-funds",
-    "href": "/apps/base?tab=flows&flow=from-token-selector&step=3"
+    "href": "/apps/base?tab=flows&flow=from-token-selector-2&step=3"
   },
   {
     "type": "step",
     "appSlug": "base",
     "appName": "Base",
     "label": "From-Token Selector (Trade)",
-    "flowSlug": "from-token-selector",
+    "flowSlug": "from-token-selector-2",
     "flowName": "From-Token Selector",
     "screenId": "trade-from-token-selector",
-    "href": "/apps/base?tab=flows&flow=from-token-selector&step=4"
+    "href": "/apps/base?tab=flows&flow=from-token-selector-2&step=4"
   },
   {
     "type": "flow",
@@ -1909,133 +1939,5 @@
     "flowName": "Edit Profile",
     "screenId": "edit-profile",
     "href": "/apps/base?tab=flows&flow=edit-profile-2&step=5"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "",
-    "flowSlug": "home-3",
-    "href": "/apps/base?tab=flows&flow=home-3"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Welcome to Base",
-    "flowSlug": "home-3",
-    "flowName": "Home",
-    "screenId": "welcome",
-    "href": "/apps/base?tab=flows&flow=home-3&step=0"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Email Entry (Onboarding)",
-    "flowSlug": "home-3",
-    "flowName": "Home",
-    "screenId": "onboarding-email",
-    "href": "/apps/base?tab=flows&flow=home-3&step=1"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "OTP Verification",
-    "flowSlug": "home-3",
-    "flowName": "Home",
-    "screenId": "onboarding-otp",
-    "href": "/apps/base?tab=flows&flow=home-3&step=2"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Funded)",
-    "flowSlug": "home-3",
-    "flowName": "Home",
-    "screenId": "home-funded",
-    "href": "/apps/base?tab=flows&flow=home-3&step=3"
-  },
-  {
-    "type": "flow",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home",
-    "description": "",
-    "flowSlug": "home-4",
-    "href": "/apps/base?tab=flows&flow=home-4"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Welcome to Base",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "welcome",
-    "href": "/apps/base?tab=flows&flow=home-4&step=0"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Email Entry (Onboarding)",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "onboarding-email",
-    "href": "/apps/base?tab=flows&flow=home-4&step=1"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "OTP Verification",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "onboarding-otp",
-    "href": "/apps/base?tab=flows&flow=home-4&step=2"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Referral Code (New Account Only)",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "onboarding-referral-code",
-    "href": "/apps/base?tab=flows&flow=home-4&step=3"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Choose Username (Basename)",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "onboarding-choose-username",
-    "href": "/apps/base?tab=flows&flow=home-4&step=4"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "CAPTCHA Puzzle",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "onboarding-captcha",
-    "href": "/apps/base?tab=flows&flow=home-4&step=5"
-  },
-  {
-    "type": "step",
-    "appSlug": "base",
-    "appName": "Base",
-    "label": "Home (Empty Wallet)",
-    "flowSlug": "home-4",
-    "flowName": "Home",
-    "screenId": "home-empty",
-    "href": "/apps/base?tab=flows&flow=home-4&step=6"
   }
 ]

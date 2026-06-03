@@ -48,6 +48,8 @@ A hash of the snapshot tree with labels and text stripped (roles + nesting). It 
 
 A perceptual hash of the screenshot (`p:`-prefixed), `null` when there's no usable shot. It's the **backstop** identity signal: the packager merges two nodes when their `skeletonHash` matches and `pHash` is near-identical, and clusters them as one logical screen when `pHash` is within a looser band. Distance is Hamming over the hex digits (`identity.ts` → `pHashDistance`).
 
+Compute it at capture time from the screenshot: `node scripts/phash.ts <screenshot.png>` prints the `p:…` hash to write into the node (dependency-free PNG → 32×32 → DCT → 64-bit hash; `scripts/phash.ts` also exports `pHashFromPng` for batch use). Rough bands: same logical screen → distance ≲ 14; same screen with identical data → ≲ 4; unrelated screens → ~30+.
+
 ### 4. `routeKey` — platform screen key
 
 Android resource-id of the root / iOS view-controller class when recoverable, else `null`. A strong same-logical-screen signal when present.
