@@ -1,342 +1,170 @@
 # Temporal / Re-capture Reference
 
-How the skill handles re-capturing an app over time: fingerprinting, `.ad` hardening, the re-capture decision ladder, copy-forward semantics, and diff computation.
+How the skill handles re-capturing an app over time: the four per-node identity signals, `.ad` hardening + credential templating, the re-capture decision ladder, graph-based diffing, and `overrides` copy-forward.
 
 ## Mental model
 
-**Each `capture.json` is a complete, self-contained snapshot of the app at a date.** Re-captures never write partial diffs. Instead, a re-capture:
+**Each `graph.json` is a complete, self-contained graph of the app at a date** (`nodes` + `edges` + `decisionPoints` + `overrides`). Re-captures never write partial diffs. A re-capture:
 
-1. Loads the prior `capture.json`.
-2. Walks the device (full or flow-scoped).
-3. Diffs new state against the prior.
-4. Carries forward unchanged data.
-5. Writes a new complete `capture.json` to a new date directory.
+1. Reads the prior `graph.json`.
+2. Replays known edges, then walks for new state (full or flow-scoped).
+3. Writes a new complete `graph.json` to a new date directory, carrying `overrides` forward verbatim.
+4. Diffs are computed *from the graphs* (compare node fingerprints + edges across dates) — see [Graph-based diffing](#graph-based-diffing).
 
-This means readers always get a full app snapshot from any single capture file. History is a directory walk — never a chain of pointers to reconstruct.
+History is a directory walk over dated `graph.json` files, not a chain of pointers to reconstruct.
 
-## Fingerprints — the identity primitive
+## Identity signals — four per node
 
-**Fingerprint computation is MANDATORY on every capture.** No `screen.fingerprint`, no `step.fingerprintBefore`, no `step.fingerprintAfter` may be null at write time. The pre-write validator will reject the capture if any are missing.
+Every node carries four signals, all computed at capture time and **never deferred**. Together they let the packager (and re-capture) decide whether two observations are the same screen state, variants of one logical screen, or genuinely different. The fingerprint is also what re-capture matches on to tell "modified" from "replaced".
 
-Every screen has a fingerprint computed deterministically from its snapshot:
+### 1. `fingerprint` — identity hash
+
+Computed deterministically from the snapshot's interactive elements:
 
 ```
 fingerprint = "sha256:" + sha256_hex(JSON.stringify(
-  interactive_elements
-    .map(e => [normalize(e.role), normalize(e.label)])
-    .sort()
-))
+  interactiveElements.map(e => [fpRole(e.role), normalize(e.label)]).sort()
+)).slice(0, 24)
 ```
 
-Where:
-- `interactive_elements` = nodes with role `button`, `link`, `tab`, `edit-text`, `checkbox`, `radio`, `switch`, `slider`, `image-button`, etc.
-- `normalize(s)` = lowercase, trim, collapse internal whitespace, strip leading/trailing punctuation.
+- `fpRole(role)` = last dotted segment, lowercased, trimmed (`android.widget.Button` → `button`).
+- `normalize(s)` = lowercase, trim, collapse internal whitespace.
 
-Properties:
-- **Deterministic.** Same screen state → same fingerprint.
-- **Order-independent.** Sorted pairs mean DOM-order shuffles don't change identity.
-- **Stable to dynamic text outside interactive elements.** Static labels and prose don't contribute.
-- **Sensitive to UI structure.** Adding a button changes the fingerprint. So does relabeling one.
+Properties: **deterministic** (same state → same hash), **order-independent** (sorted pairs), **stable to dynamic prose** (only interactive `(role,label)` pairs contribute), **sensitive to structure** (adding or relabeling a control changes it). Reference implementation: `lib/packager/identity.ts` → `computeFingerprint`.
 
-Computed once per snapshot, stored on `screen.fingerprint`, `step.fingerprintBefore`, `step.fingerprintAfter`, `flow.replay.entryFingerprint`.
-
-### Falling back when snapshot is unavailable (Tier 2/3)
-
-If a screen was captured in Tier 2 (screenshot + find) or Tier 3 (user-tapped) and has no usable snapshot, compute a fallback fingerprint from the screenshot-derived `texts[]` array:
+**Tier 2/3 fallback.** When a screen has no usable snapshot (screenshot-only), derive the fingerprint from the screenshot-extracted `texts[]` and prefix `sha256-text:`:
 
 ```
-fingerprint = "sha256-text:" + sha256_hex(JSON.stringify(
-  texts.map(normalize).sort()
-))
+fingerprint = "sha256-text:" + sha256_hex(JSON.stringify(texts.map(normalize).sort())).slice(0, 24)
 ```
 
-Note the `sha256-text:` prefix — distinguishes lower-confidence fingerprints from snapshot-derived ones. Re-capture identity matching can still work, but expect more false positives/negatives. Annotate the screen with `notes: "Tier 2/3 capture — fingerprint derived from screenshot text"` for traceability.
+The prefix marks the lower-confidence form; identity matching still works but expect more false positives/negatives. **Never store `fingerprint: null`** — the validator rejects it (it must match `sha256:` or `sha256-text:`).
 
-**Never store `fingerprint: null` at write time.** Always compute one — snapshot-derived or text-derived — before writing.
+### 2. `skeletonHash` — structure-only identity
 
-### Step fingerprints
+A hash of the snapshot tree with labels and text stripped (roles + nesting). It survives data changes, so it **clusters variants of one logical screen** (home empty vs funded) during merging, and it is the signal behind edge `kind`: when the post-tap `skeletonHash` equals the pre-tap one, the tap is an `in-place` state toggle, not a navigation. Fallbacks for element-less / Tier 2/3 screens: `identity.ts` → `skeletonFromElements` / `skeletonFromTexts` (`sk:` / `skt:` prefixed).
 
-Every step in every flow needs both `fingerprintBefore` and `fingerprintAfter`:
+### 3. `pHash` — perceptual hash (visual backstop)
 
-- `fingerprintBefore`: the fingerprint of the screen before the step's action was taken. For step 1 (entry-point), this equals the entry screen's fingerprint.
-- `fingerprintAfter`: the fingerprint of the screen after the action. For step 1, this also equals the entry screen's fingerprint (no transition yet).
+A perceptual hash of the screenshot (`p:`-prefixed), `null` when there's no usable shot. It's the **backstop** identity signal: the packager merges two nodes when their `skeletonHash` matches and `pHash` is near-identical, and clusters them as one logical screen when `pHash` is within a looser band. Distance is Hamming over the hex digits (`identity.ts` → `pHashDistance`).
 
-If you re-derive a capture from saved data after the fact (e.g., the agent forgot to compute fingerprints during capture), use the `screen.fingerprint` of the step's `screenId` as both `fingerprintBefore` and `fingerprintAfter` — best-effort but consistent.
+### 4. `routeKey` — platform screen key
 
-## `.ad` file mechanics
+Android resource-id of the root / iOS view-controller class when recoverable, else `null`. A strong same-logical-screen signal when present.
+
+How to record all four per screen: [exploration.md](exploration.md) → Per-screen capture routine.
+
+## `.ad` mechanics
+
+The `.ad` script is agent-device's native replay format. Selectors are hardened from the recorded `master.ad`; the per-flow replay is **emitted inline by the packager** into `view.json` (`ViewReplay.commands`) — there is no separate per-flow `.ad` file to author, and it's materialized to a temp file only when you actually replay.
 
 ### Recording
 
-Every capture session uses `--save-script` from session start:
+Every capture session uses `--save-script` from session start (see SKILL.md → Mandatory at session start):
 
 ```bash
 agent-device open {pkg} --platform android --relaunch --save-script {staging}/master.ad
 # ... entire exploration ...
-agent-device close   # the master.ad is written here
+agent-device close   # master.ad is written here
 ```
 
-The master script accumulates every command issued during the session. Refs are `@eN`.
-
-### Per-flow extraction
-
-After packaging assigns screens to flows, extract per-flow `.ad` scripts from the master:
-
-1. Identify the contiguous range of master commands that walk the flow.
-2. Extract them into a per-flow command list.
-3. Prepend a clean `open {pkg} --relaunch` if the flow's entry is the cold-launch screen.
-4. Otherwise prepend the navigation chain from cold-launch → flow entry.
+The master script accumulates every command issued during the session, with `@eN` refs.
 
 ### Hardening (selector resolution)
 
-Raw `@eN` refs are text-resolved on replay and unstable. Replace each `@eN` with a stable selector during packaging:
+Raw `@eN` refs are text-resolved on replay and unstable. They are hardened against the snapshot context recorded alongside each command — this is the same hardening the agent applies when populating an edge's `selector`, and it's what the packager's inline replay reuses:
 
-For each `@eN` in the flow's command list:
-1. Find the snapshot captured immediately before the action.
-2. Look up node `@eN` in that snapshot.
-3. Pick the most stable selector available:
-   - `id="..."` if the node has a unique resource-id / accessibilityIdentifier.
-   - `label="..." role="..."` if label is unique on the screen.
-   - `text="..."` as a last resort.
-   - Avoid coordinate-based unless nothing else is available.
-4. Replace `@eN` with the chosen selector in the command's positionals.
-5. Record confidence: `high` if `id=`, `medium` if `label=`, `low` if `text=` or coordinates.
+1. Find the snapshot captured immediately before the action and look up node `@eN`.
+2. Pick the most stable selector: `id="..."` (unique resource-id / accessibilityIdentifier) → `label="..." role="..."` (unique label) → `text="..."` (last resort). Avoid coordinate-based.
+3. Use the chosen selector as the edge `selector`. **If none is stable, use `null`, never `""`** — the validator rejects empty-string selectors.
 
-### Empty selectors are forbidden
+Replay confidence (`ViewReplay.confidence`, computed by `lib/packager/replay.ts`): `high` when every step uses `id=`; `medium` when some use `label=`/`role=`; `low` when any step is `text=`-only or a selector is missing. Warn the user before re-capturing a `low`-confidence flow — drift recovery is likely.
 
-If hardening cannot produce a valid selector for an element (no stable id, ambiguous label, no text), the resulting field must be **`null`**, never an empty string `""`.
+### Credential templating
 
-```json
-// ❌ Wrong — will fail at replay
-{ "label": "Total balance", "role": "button", "selector": "" }
-
-// ✅ Right — explicit null signals "no usable selector"
-{ "label": "Total balance", "role": "button", "selector": null }
-```
-
-Apply the same rule everywhere selectors appear: `flows[].steps[].selector`, `screens[].interactiveElements[].selector`, `screens[].primaryCta.selector`, `screens[].secondaryCtas[].selector`.
-
-The pre-write validator rejects empty-string selectors. Set them to `null` or pick a real selector.
-
-### Credential templatization
-
-After hardening, scan `fill` and `type` commands for credential values:
+Scan `fill`/`type` commands for credential values and replace literals with placeholders before storing/replaying:
 
 | Pattern | Placeholder |
 |---|---|
-| Anything in `credentials.md` under `Email` | `{{EMAIL}}` |
-| Anything in `credentials.md` under `Password / PIN` | `{{PASSWORD}}` or `{{PIN}}` |
-| Numeric strings of length 4-8 entered into fields labeled "OTP" / "code" / "verification" | `{{OTP}}` |
-| Anything in `credentials.md` under `Seed phrase` | `{{SEED_PHRASE}}` |
-| Anything in `credentials.md` under `Phone` matched as SMS code field | `{{SMS_CODE}}` |
+| Value under `Email` in `credentials.md` | `{{EMAIL}}` |
+| Value under `Password / PIN` | `{{PASSWORD}}` / `{{PIN}}` |
+| 4–8 digit code in an "OTP" / "code" / "verification" field | `{{OTP}}` |
+| Value under `Seed phrase` | `{{SEED_PHRASE}}` |
+| SMS code matched against `Phone` | `{{SMS_CODE}}` |
 
-Replace literal values with placeholders. Record present placeholders in `flow.replay.credentialsTemplate`.
-
-At replay time, the agent reads `credentials.md`, substitutes placeholders, and pipes the resolved script through `agent-device replay`. **Never** commit resolved scripts to disk — placeholders are the canonical form.
-
-### Confidence
-
-`flow.replay.confidence` summarizes selector quality:
-
-- `high`: every step uses `id=` or unique `label=`. Replay should be deterministic.
-- `medium`: at least one step uses `label=` with a label that appears multiple times on its screen. Possible drift.
-- `low`: any step uses `text=` only or coordinate-based selectors. Likely to drift on minor UI changes.
-
-The agent should warn the user when re-capturing flows with `confidence: low` — drift recovery is likely needed.
+At replay time the agent reads `credentials.md`, substitutes placeholders, and pipes the resolved script through `agent-device replay`. **Never** commit resolved scripts — placeholders are the canonical form.
 
 ## Re-capture decision ladder
 
-When re-walking a known flow:
+When re-walking a known flow (replay → replay -u → LLM-walk → ask):
 
 ```
 1. Verify entry
-   agent-device snapshot -i --json → compute fingerprint
-   If fingerprint != flow.replay.entryFingerprint:
-     - Fingerprints close (Jaccard ≥ 0.7 on interactive elements)? Continue with a warning logged.
-     - Fingerprints far? Abort, ask user (probably wrong screen).
+   agent-device snapshot -i --json → compute fingerprint.
+   Compare to the flow's entry fingerprint (ViewReplay.entryFingerprint, from the packager).
+   Close (Jaccard ≥ 0.7 on interactive elements)? Continue with a warning. Far? Abort, ask.
 
 2. Deterministic replay
    Resolve credential placeholders from credentials.md.
-   agent-device replay {flow}.ad
-   On success: walk done, capture each step's post-fingerprint, compare to fingerprintAfter.
-              Detect step modifications via fingerprint mismatch.
+   Materialize the inline replay commands to a temp .ad and: agent-device replay {tmp}.ad
+   On success: walk done; re-snapshot each landed screen and record fresh nodes/edges.
 
-3. Drift repair (if a step fails or post-fingerprint diverges)
-   agent-device replay -u {flow}.ad
-   The CLI auto-repairs drifted selectors in place. Re-run.
-   On success: hardening updated → record selector-drift change entries.
+3. Drift repair (a step fails or a landed fingerprint diverges)
+   agent-device replay -u {tmp}.ad   # auto-repairs drifted selectors in place; re-run.
 
 4. LLM-driven walk (if -u can't repair)
-   For each remaining step:
-     a. agent-device snapshot -i --json
-     b. Find the best interactive element matching step.description + prior step.selector.
-        Use semantic matching: same role, similar label, reasonable position.
-     c. Tap. Re-snapshot. Compare fingerprint to expected.
-     d. If matched: continue. Update step.selector with the new stable selector.
-     e. If no match: try scrolling once, retry. If still no match: ask user.
+   Per remaining step: snapshot → find the best element matching the prior action +
+   selector (same role, similar label, reasonable position) → tap → re-snapshot →
+   compare fingerprint. Matched: continue with the new selector. No match: scroll once,
+   retry; still none → ask the user.
 
 5. Ask the user (last resort)
-   Show current screen screenshot + the step we were trying to perform.
-   Ask: "I expected to see {expected}. The screen shows {actual}. How do I proceed?"
+   Show the current screenshot + the step being attempted:
+   "I expected {expected}; the screen shows {actual}. How do I proceed?"
 ```
 
-After successful re-walk, also attempt to **extend** the flow: snapshot the terminal screen, check if any new interactive elements that weren't there at last capture suggest the flow has grown.
+After a successful re-walk, also try to **extend** the flow: snapshot the terminal screen and check for new interactive elements that weren't present last time.
 
-## Diff computation
+## Graph-based diffing
 
-After re-walking, build the `changes` array by comparing new state to `previousCapture`.
+Diffs are computed by comparing the two `graph.json` files — there is no stored `changes` array; the view's stats and any change summary are derived on demand.
 
-### Screen diffs
+### Node diffs (match by fingerprint)
 
-For each screen in the new capture:
-- **screen-added**: fingerprint not in prior capture. Emit `{kind: "screen-added", screen: <id>}`.
-- **screen-modified**: fingerprint changed BUT identity is the same (matched via slug carryover from flow steps). Compare interactive elements, texts, role. Emit detailed sub-changes.
-- **screen-unchanged**: fingerprint exactly matches a screen in prior capture. Copy forward verbatim (preserving `_humanEdited`).
+- **added** — a node fingerprint in the new graph not in the prior.
+- **modified** — same node id (carried via reused slugs / matched skeleton+route) but a changed fingerprint. Compare `interactiveElements`, `texts`, `role` for sub-changes (element added/removed/relabeled, role change).
+- **unchanged** — fingerprint matches a prior node.
+- **removed** — a prior node fingerprint absent from the new graph.
 
-For each screen in the prior capture not seen in new:
-- **screen-removed**: emit `{kind: "screen-removed", screen: <id>}`.
+### Edge / flow diffs
 
-### Flow diffs
+Compare `edges[]` keyed by `(from, to, action)`: added / removed transitions. Because the flow tree is *derived*, flow-level changes fall out of the node/edge diff once both graphs are packaged — compare the two derived views' flows/steps if a flow-level summary is wanted. For a `scope: "flow"` re-capture, only the named flow's nodes/edges are re-walked; everything else is carried forward unchanged.
 
-For each flow in the new capture:
-- **flow-added**: slug not in prior capture.
-- **flow-modified**: same slug, but step count or step fingerprints differ. Emit per-step diffs (`step-added`, `step-removed`, `step-modified`).
-- **flow-unchanged**: same slug, same steps (each step's fingerprintBefore/After matches prior).
+## `overrides` copy-forward (replaces `_humanEdited`)
 
-For each flow in the prior capture not seen in new:
-- **flow-removed**: only emit on `scope: "full"`. For `scope: "flow"` re-captures, untouched flows are NOT removed — they're carried forward.
+The new dated `graph.json` carries the **entire `overrides` block forward verbatim** from the prior capture. This is the single edit-preservation mechanism — there is no per-field `_humanEdited` stamping any more, and no field-by-field provenance to reconcile. Because `overrides` is keyed by stable node ids and flow ids (a flow id is its anchor node id), human corrections survive re-capture automatically:
 
-### Entry-point and decision-point diffs
+1. Re-walk the device and build fresh `nodes[]` / `edges[]` / `decisionPoints[]`.
+2. Copy the prior `overrides` object into the new graph unchanged.
+3. Re-run the packager; the overrides re-apply on top of the fresh observation.
 
-- **entry-point-changed**: a flow's `entryPoints[]` changed.
-- **decision-point-added/removed**: new or vanished branch screens.
+If a re-capture removed a node/flow that an override still references, the validator emits a warning (`overrides.* "<id>" is not a node id`) — prune the stale key or re-point it. Edits themselves are made only through `overrides`; see [editing.md](editing.md).
 
-### Step-level granularity
+## Listing flows / read queries
 
-For `flow-modified.details[]`:
-
-```json
-{ "kind": "step-added", "atIndex": 3, "screen": "captcha",
-  "afterStep": 2, "beforeStep": 3 }
-
-{ "kind": "step-removed", "atIndex": 5, "screen": "old-screen" }
-
-{ "kind": "step-modified", "atIndex": 2,
-  "before": { "screenId": "old", "action": "Tap Continue" },
-  "after":  { "screenId": "new", "action": "Tap Submit" } }
-```
-
-For `screen-modified.details[]`:
-
-```json
-{ "kind": "element-added", "label": "Sign in with Face ID", "role": "button" }
-{ "kind": "element-removed", "label": "Sign in with Touch ID", "role": "button" }
-{ "kind": "element-modified", "before": {...}, "after": {...} }
-{ "kind": "role-changed", "from": "list", "to": "picker" }
-{ "kind": "title-changed", "from": "Login", "to": "Sign In" }
-```
-
-## Copy-forward semantics
-
-When re-capturing, the new `capture.json` is assembled from:
-
-1. **For full re-capture (`scope: "full"`):**
-   - Re-walk every prior flow with the ladder above.
-   - Optionally BFS-explore for new entry points after known flows finish.
-   - Build new `screens[]`, `flows[]`, `decisionPoints[]` from re-walked state.
-   - Unchanged screens carry forward verbatim, preserving `_humanEdited`.
-   - Unchanged flows carry forward verbatim, preserving `_humanEdited`.
-   - Removed screens/flows drop from new capture; recorded in `changes`.
-
-2. **For flow re-capture (`scope: "flow"`):**
-   - Load prior `capture.json` fully.
-   - Re-walk only the named flow(s).
-   - Replace the named flow's data with new state.
-   - For each screen visited during re-walk: if same fingerprint as in prior, carry forward; if changed, update; if new, add.
-   - All untouched flows AND their screens carry forward verbatim.
-   - `changes` only reflects diffs for the named flow + screens whose fingerprints changed.
-
-### Preserving `_humanEdited`
-
-For every screen and flow being carried forward (or updated):
-
-1. Identify fields listed in prior `_humanEdited`.
-2. Keep those field values from the prior capture.
-3. Re-derive all other fields from new device state.
-4. Re-populate `_humanEdited` with the same field names.
-5. If a `_humanEdited` field's underlying entity has changed so radically the value is obviously misleading (e.g. role-locked to `auth` but the screen is now clearly `confirmation`), surface this to the user before overwriting. Never silently overwrite a locked field.
-
-## Listing flows
+Listing flows or answering "what changed" is a packager run, not a device session:
 
 ```bash
-# pseudo-code
-read app.json → find latestCapture
-read {latestCapture}/capture.json
-for each flow in flows[]:
-  print flow.slug, flow.name, flow.entryPoints, flow.replay.confidence
+node scripts/package.ts {latestCapture}/graph.json        # flow tree + stats + namingTODO
+node scripts/package.ts {latestCapture}/graph.json --json  # full derived View
 ```
 
-Output format:
-
-```
-acme-bank flows (latest: 2026-05-25)
-
-  sign-in           — Sign In             entry: [login]        confidence: high
-  password-reset    — Password Reset       entry: [login]        confidence: high   modified 2026-05-25
-  transfer          — Transfer             entry: [home]         confidence: medium
-  ...
-```
-
-Pure metadata read. No device interaction.
-
-## Common patterns
-
-### "What changed since last capture?"
-
-```
-read {latestCapture}/capture.json
-print capture.changes
-```
-
-The `changes` array is pre-computed at capture time. No diffing needed at read time.
-
-### "How has the login screen evolved?"
-
-```
-for each capture in app.json.captures:
-  read {date}/capture.json
-  find screen with id="login"
-  print date + screen.fingerprint + screen.title + screen.description
-```
-
-Walks N capture files (where N = number of captures). Cheap.
-
-### "Which flow last changed?"
-
-```
-for each capture in app.json.captures (newest → oldest):
-  if any change in capture.changes has kind="flow-modified" or kind="flow-added" or kind="flow-removed":
-    return capture.date + flow
-```
+"How has the login screen evolved?" → walk the dated `graph.json` files, find the node with `id="login"`, print `captureDate` + `fingerprint` + `texts`. "What changed since last capture?" → package the two adjacent graphs and diff their nodes/edges as above. All pure reads — no device.
 
 ## Failure modes and edge cases
 
-- **Replay drifts catastrophically.** Fingerprint divergence > 50% on entry → abort, ask user. App may have changed too much for replay to be meaningful.
-- **Multiple flows share the same first screen.** Entry-point screens may serve many flows. Replay verification compares against the specific flow's `entryFingerprint`, not just any screen at the entry path.
-- **Credentials placeholder missing in credentials.md.** Abort replay. Surface which placeholder is missing.
-- **Snapshot helper APK upgrade mid-session (Android).** Recompute fingerprints — provider-side normalization may change. If pre/post-upgrade fingerprints diverge for unchanged screens, document the helper version in `capture.json` for traceability.
-- **Schema version mismatch on read.** Refuse to operate on captures with `schemaVersion` newer than the skill knows. Migrate older versions explicitly.
-
-## Re-capture invariants to enforce
-
-After writing the new `capture.json`, the skill should self-check:
-
-- Every `flows[].steps[].screenId` exists in `screens[]`.
-- Every `screens[].appearsIn[].flow` exists in `flows[]`.
-- Every `flows[].entryPoints[]` member exists in `screens[]`.
-- Every `decisionPoints[].screenId` exists in `screens[]`.
-- Every `decisionPoints[].options[].flowSlug` (if set) exists in `flows[]`.
-- Every `flows[].replay.path` file exists on disk in this capture's directory.
-- Every `_humanEdited` field name actually appears on the entity it's stamped on.
-- `stats.screensInThisCapture` == `screens.length`.
-
-Validation failure → roll back the write, log diagnostics, ask user.
+- **Replay drifts catastrophically.** Entry fingerprint divergence > 50% → abort, ask the user; the app may have changed too much for replay to be meaningful.
+- **Multiple flows share an entry screen.** Verify against the specific flow's `entryFingerprint`, not just any screen at the entry path.
+- **Missing credential placeholder.** Abort replay; surface which placeholder is absent from `credentials.md`.
+- **Snapshot helper upgrade mid-session (Android).** Recompute signals — provider-side normalization may shift hashes. If fingerprints diverge for unchanged screens, note the helper version for traceability.
+- **Schema version mismatch.** Refuse to operate on a `graph.json` whose `meta.schemaVersion` is newer than the skill knows; migrate older ones explicitly.

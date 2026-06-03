@@ -29,24 +29,23 @@ describe("getAppsIndex", () => {
 })
 
 describe("fetchAppCapture", () => {
-  it("fetches manifest and capture then merges app metadata", async () => {
-    const manifest = {
+  it("fetches the derived view for the capture", async () => {
+    const view = {
       app: { name: "Phantom", slug: "phantom", bundleId: "app.phantom", platform: "ios" },
-      latestCapture: "2026-04-01",
-      captures: [],
+      captureDate: "2026-04-01",
+      screens: [],
+      flows: [],
+      decisionPoints: [],
     }
-    const capture = { screens: [], flows: [], decisionPoints: [] }
     mockFetch.mockImplementation((url: string) => {
-      if (url.endsWith("app.json")) return Promise.resolve(mockJsonResponse(manifest))
-      if (url.endsWith("capture.json")) return Promise.resolve(mockJsonResponse(capture))
+      if (url.endsWith("/2026-04-01/view.json")) return Promise.resolve(mockJsonResponse(view))
       return Promise.reject(new Error(`unexpected fetch: ${url}`))
     })
 
     const result = await fetchAppCapture("phantom", "2026-04-01")
 
-    expect(mockFetch).toHaveBeenCalledWith("/captures/phantom/app.json")
-    expect(mockFetch).toHaveBeenCalledWith("/captures/phantom/2026-04-01/capture.json")
-    expect(result.app).toEqual(manifest.app)
+    expect(mockFetch).toHaveBeenCalledWith("/captures/phantom/2026-04-01/view.json")
+    expect(result.app).toEqual(view.app)
     expect(result.screens).toEqual([])
   })
 })

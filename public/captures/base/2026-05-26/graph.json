@@ -1,0 +1,3789 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "app": {
+      "name": "Base",
+      "slug": "base",
+      "bundleId": "org.toshi",
+      "platform": "android"
+    },
+    "captureDate": "2026-05-26",
+    "scope": "initial",
+    "mode": "free-roam",
+    "previousCapture": null
+  },
+  "root": "home-funded",
+  "nodes": [
+    {
+      "id": "home-empty",
+      "fingerprint": "sha256:23d975d8b3fb324f68aa3cc7935faa9a",
+      "skeletonHash": "sk:fd43be45d9886a01de8a0bfd",
+      "pHash": null,
+      "routeKey": null,
+      "role": "home",
+      "screenshotPath": "assets/f8533c79ce1b.png",
+      "snapshotPath": null,
+      "texts": [
+        "$0",
+        "Add funds. Withdraw anytime.",
+        "Deposit",
+        "Receive",
+        "Earn",
+        "Trading is better together",
+        "Invite Friends",
+        "Coins",
+        "Collectibles",
+        "Activity",
+        "Looking a Little Empty in Here...",
+        "See what's trending"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Avatar",
+          "role": "button",
+          "selector": "id=\"account-settings-pressable-avatar\""
+        },
+        {
+          "label": "Search",
+          "role": "button",
+          "selector": "id=\"global-search-icon\""
+        },
+        {
+          "label": "Scan QR Code",
+          "role": "button",
+          "selector": "id=\"assets-action-btn-scan\""
+        },
+        {
+          "label": "Open messages",
+          "role": "button",
+          "selector": "id=\"messaging-navigation-icon\""
+        },
+        {
+          "label": "Total balance: $0",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Earn",
+          "role": "button",
+          "selector": "id=\"home-earn-chip\""
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "id=\"buy-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        },
+        {
+          "label": "Invite Friends",
+          "role": "button",
+          "selector": "id=\"announcement-card-v2-cta-label\""
+        },
+        {
+          "label": "Close announcement",
+          "role": "button",
+          "selector": "id=\"announcement-card-v2-close-button\""
+        },
+        {
+          "label": "Coins",
+          "role": "tab",
+          "selector": "id=\"tab-coins-active\""
+        },
+        {
+          "label": "Collectibles",
+          "role": "tab",
+          "selector": "id=\"tab-collectibles\""
+        },
+        {
+          "label": "Activity",
+          "role": "tab",
+          "selector": "id=\"tab-activity\""
+        },
+        {
+          "label": "See what's trending",
+          "role": "button",
+          "selector": "id=\"coins-tab-empty-state-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Deposit",
+        "role": "button",
+        "selector": "id=\"buy-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        },
+        {
+          "label": "Earn",
+          "role": "button",
+          "selector": "id=\"home-earn-chip\""
+        },
+        {
+          "label": "See what's trending",
+          "role": "button",
+          "selector": "id=\"coins-tab-empty-state-button\""
+        }
+      ]
+    },
+    {
+      "id": "deposit",
+      "fingerprint": "sha256:1c4544e28e67c5e09d58e0d7ef4f01bf",
+      "skeletonHash": "sk:4c24ae8a5cf77d67591dd0de",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/462e785b6b13.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit",
+        "Deposit With",
+        "Debit Card",
+        "$0",
+        "0 USDC",
+        "USDC",
+        "$2",
+        "Max",
+        "Total",
+        "$0.00",
+        "Connect to Coinbase"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Deposit With",
+          "role": "button",
+          "selector": "id=\"buy-v2-payment-method-header\""
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-selector\""
+        },
+        {
+          "label": "$2",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-fiat-amount-preset-min\""
+        },
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-fiat-amount-preset-max\""
+        },
+        {
+          "label": "Connect to Coinbase",
+          "role": "button",
+          "selector": "id=\"coinbase-connect-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Connect to Coinbase",
+        "role": "button",
+        "selector": "id=\"coinbase-connect-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "USDC token selector",
+          "role": "button",
+          "selector": "id=\"buy-v2-asset-with-presets-selector\""
+        },
+        {
+          "label": "Deposit With payment method",
+          "role": "button",
+          "selector": "id=\"buy-v2-payment-method-header\""
+        }
+      ]
+    },
+    {
+      "id": "deposit-token-selector",
+      "fingerprint": "sha256-text:94014ee65d3fb66d7bcc41baf4ce1640",
+      "skeletonHash": "skt:c40bda75e72be3b851549565",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/9c36ab3a00ab.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit",
+        "Search",
+        "USDC",
+        "Ethereum",
+        "Coinbase Wrapped BTC",
+        "Venice Token",
+        "EURC Coin",
+        "Aerodrome",
+        "Coinbase Wrapped Staked ETH",
+        "RaveDAO",
+        "KAITO"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "deposit-with-modal",
+      "fingerprint": "sha256-text:914560f6b2b3bebd1a90f0c9aa3882ff",
+      "skeletonHash": "skt:4051ae113f41ef174a4b7104",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/9a09b229cd11.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit With",
+        "Connect to Coinbase",
+        "Use payment methods on your Coinbase.com account",
+        "Connect"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Connect",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "receive",
+      "fingerprint": "sha256-text:ee9be5c30a22a83e6855c708063d24d4",
+      "skeletonHash": "skt:f8c3f09c5811c4a69999cacd",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/7e96e0c4223e.png",
+      "snapshotPath": null,
+      "texts": [
+        "Receive",
+        "Scan",
+        "Request",
+        "0x1c7...b282",
+        "Ethereum",
+        "This address supports all assets on Ethereum, Base, Polygon, and other EVM networks.",
+        "Copy Wallet Address"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Copy Wallet Address",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "scan-qr",
+      "fingerprint": "sha256-text:7619fe922a55ea80df8ed1a1f0f9e3af",
+      "skeletonHash": "skt:9d92ee0bc9259437ba6d9030",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/ef5d4726948b.png",
+      "snapshotPath": null,
+      "texts": [
+        "Receive",
+        "Scan",
+        "Request",
+        "Scan a QR code to send crypto"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "request",
+      "fingerprint": "sha256-text:4ada7fdae054b23d6a8fcaafc42e3cdf",
+      "skeletonHash": "skt:6fbf468b6521a4d5a65668f5",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/85c33a577c47.png",
+      "snapshotPath": null,
+      "texts": [
+        "Receive",
+        "Scan",
+        "Request",
+        "From",
+        "Add Recipient",
+        "$0",
+        "0 USDC",
+        "USDC",
+        "$5",
+        "$10",
+        "$25",
+        "Total",
+        "$0.00",
+        "Enter an amount"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Enter an amount",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "request-add-recipient",
+      "fingerprint": "sha256:3eb56e230703bcd15a25d860159cc020",
+      "skeletonHash": "sk:619f59cc51da36871856d956",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/19b968fc6cd4.png",
+      "snapshotPath": null,
+      "texts": [
+        "Request From",
+        "From",
+        "Paste",
+        "QR Code",
+        "Show your QR code to receive funds",
+        "Tap to Request",
+        "Request via Link",
+        "No recent recipients",
+        "Search to find someone to send to"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"receive-v2-recipient-tray-search-bar\""
+        },
+        {
+          "label": "QR Code",
+          "role": "button",
+          "selector": "id=\"payment-v2-scan-qr-code-button\""
+        },
+        {
+          "label": "Tap to Request",
+          "role": "button",
+          "selector": "id=\"payment-v2-tap-to-payment-button\""
+        },
+        {
+          "label": "Request via Link",
+          "role": "button",
+          "selector": "id=\"payment-v2-payment-via-link-button\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "request-fee-info",
+      "fingerprint": "sha256-text:bb9ddecdd65ecfe14a06e13db9b6e5a8",
+      "skeletonHash": "skt:658db95e5c29eea5f5378045",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/12c9c0110000.png",
+      "snapshotPath": null,
+      "texts": [
+        "Applies to all transactions and varies based on network usage.",
+        "Network",
+        "Network fee",
+        "Free"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "earn-enrollment",
+      "fingerprint": "sha256:4beb65e5b33acd10011ce6e88ff406b2",
+      "skeletonHash": "sk:f64a31c9b5b8d1e1ba4ddebd",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/5ce67e7b969e.png",
+      "snapshotPath": null,
+      "texts": [
+        "Enroll in Base Rewards to Begin",
+        "Where do you live?",
+        "I live in the US",
+        "I don't live in the US",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "id=\"earn-enrollment-continue-button\""
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"earn-enrollment-continue-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "invite-friends",
+      "fingerprint": "sha256-text:6837a7f717ec606957c242274925a7d3",
+      "skeletonHash": "skt:6ce9bbf9586f6c8c87e6be1a",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/39f3134e2e48.png",
+      "snapshotPath": null,
+      "texts": [
+        "Invite Friends to Earn",
+        "Have your friends use your referral link to earn 25% of their fees. Restrictions apply.",
+        "Referral Code",
+        "HDNXPRX6",
+        "Copy Referral Code",
+        "Share Referral Link"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Share Referral Link",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [
+        {
+          "label": "Copy Referral Code",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "home-collectibles",
+      "fingerprint": "sha256-text:e454a7fef1c1d0c2f432188f442ecf9c",
+      "skeletonHash": "skt:edd0a3def56281a693f700b4",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/3743761f1051.png",
+      "snapshotPath": null,
+      "texts": [
+        "Collectibles",
+        "Your Collection Awaits",
+        "This is where you can show off all the cool collectibles you find onchain."
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "home-activity",
+      "fingerprint": "sha256-text:1faab5cfa4343737d0d245c93dab418c",
+      "skeletonHash": "skt:e7d74916fed24a4d5fa42062",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/d633acb54146.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "No transactions found"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "discover",
+      "fingerprint": "sha256:7d6e323322357c812a8cf39f27c57412",
+      "skeletonHash": "sk:5c5339f513719facac890977",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/4d1473c5b051.png",
+      "snapshotPath": null,
+      "texts": [
+        "Discover",
+        "Pinned Apps",
+        "Verify",
+        "Apps",
+        "Trending",
+        "New",
+        "Majors",
+        "Search Base or URL"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verify",
+          "role": "button",
+          "selector": "id=\"custom-tile-verify-tile\""
+        },
+        {
+          "label": "Apps",
+          "role": "button",
+          "selector": "id=\"custom-tile-discover-tile\""
+        },
+        {
+          "label": "Toggle watchlist",
+          "role": "button",
+          "selector": "id=\"discovery-watchlist-chip\""
+        },
+        {
+          "label": "Trending",
+          "role": "button",
+          "selector": "id=\"discovery-trending-chip-all\""
+        },
+        {
+          "label": "New",
+          "role": "button",
+          "selector": "id=\"discovery-trending-chip-new_launches\""
+        },
+        {
+          "label": "Majors",
+          "role": "button",
+          "selector": "id=\"discovery-trending-chip-majors\""
+        },
+        {
+          "label": "Open filters",
+          "role": "button",
+          "selector": "id=\"discovery-trending-filter-chip\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"discovery-search-input\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "verify",
+      "fingerprint": "sha256:d5c1c58ab39654daf407c424fd875e03",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/82a42139fc8f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Get Verified",
+        "Earn Rewards",
+        "Build Credibility",
+        "Boost Visibility",
+        "Continue",
+        "verify.base.dev"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close tab",
+          "role": "button",
+          "selector": "id=\"bottom-browser-bar-close\""
+        },
+        {
+          "label": "verify.base.dev",
+          "role": "button",
+          "selector": "id=\"bottom-browser-bar-url\""
+        },
+        {
+          "label": "More actions",
+          "role": "button",
+          "selector": "id=\"bottom-browser-bar-more\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "apps-directory",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+      "skeletonHash": "sk:0b4ea0876e117c48bbefd46c",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/656d9d5b6d09.png",
+      "snapshotPath": null,
+      "texts": [
+        "RIP.FUN",
+        "Beezie",
+        "Clash of Coins",
+        "Trading must-haves",
+        "Perps by Avantis",
+        "Wasabi",
+        "Bankr",
+        "Aerodrome",
+        "Play games",
+        "Cat Town",
+        "Earn crypto",
+        "Make predictions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "token-detail",
+      "fingerprint": "sha256:ac69712ee93ddfce891513adfe9deb5f",
+      "skeletonHash": "sk:ed7371be47dda76194ccebd2",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/d2512b29be5b.png",
+      "snapshotPath": null,
+      "texts": [
+        "VIRTUAL",
+        "Virtual Protocol",
+        "$0.7785",
+        "Mkt Cap",
+        "24h Vol",
+        "1H",
+        "1D",
+        "1W",
+        "1M",
+        "1Y",
+        "All",
+        "Whitepaper",
+        "Official website",
+        "Buy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"tba-animated-nav-bar-back-arrow\""
+        },
+        {
+          "label": "Add to watchlist",
+          "role": "button",
+          "selector": "id=\"watchlist-star-button\""
+        },
+        {
+          "label": "Select 1H period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-hour\""
+        },
+        {
+          "label": "Select 1D period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-day\""
+        },
+        {
+          "label": "Select 1W period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-week\""
+        },
+        {
+          "label": "Select 1M period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-month\""
+        },
+        {
+          "label": "Select 1Y period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-year\""
+        },
+        {
+          "label": "Select All period",
+          "role": "button",
+          "selector": "id=\"asset-details-date-marker-pressable-all\""
+        },
+        {
+          "label": "Toggle candlestick chart",
+          "role": "button",
+          "selector": "id=\"asset-details-chart-type-toggle\""
+        },
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "id=\"infer-action-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Buy",
+        "role": "button",
+        "selector": "id=\"infer-action-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Add to watchlist",
+          "role": "button",
+          "selector": "id=\"watchlist-star-button\""
+        },
+        {
+          "label": "View asset options",
+          "role": "button",
+          "selector": "id=\"asset-options-button\""
+        }
+      ]
+    },
+    {
+      "id": "trading-requires-usdc",
+      "fingerprint": "sha256-text:0869f5aa81b456b564055fb3cbab11a6",
+      "skeletonHash": "skt:e01f1e5799f80ee3891e59c2",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/ed866d343585.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trading this coin requires USDC",
+        "Add USDC to your wallet to continue with your purchase of VIRTUAL.",
+        "Continue"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"top-up-interstitial-continue-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade",
+      "fingerprint": "sha256:72aeee6499929606c3e39e1bcfa0bae8",
+      "skeletonHash": "sk:90825bf514270071c81e4166",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/3dd68f026d33.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trade",
+        "USDC",
+        "$0.00",
+        "$1",
+        "1 Not enough",
+        "Ethereum",
+        "0.00046",
+        "$0.99",
+        "1 USDC ≈ 0.00047028 ETH",
+        "Add funds"
+      ],
+      "interactiveElements": [
+        {
+          "label": "USDC (from token)",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-asset-selector\""
+        },
+        {
+          "label": "50%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-half-button\""
+        },
+        {
+          "label": "75%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-three-quarter-button\""
+        },
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-max-button\""
+        },
+        {
+          "label": "Toggle fiat/crypto",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-fiat-display-toggle\""
+        },
+        {
+          "label": "Flip tokens",
+          "role": "button",
+          "selector": "id=\"flip-tokens-arrow\""
+        },
+        {
+          "label": "Add funds",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": {
+        "label": "Add funds",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade-requires-usdc",
+      "fingerprint": "sha256-text:c686643cfe6591f91344678de0abee5c",
+      "skeletonHash": "skt:e01f1e5799f80ee3891e59c2",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/c824b3218f9f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trading this coin requires USDC",
+        "Add USDC to your wallet to continue with your purchase of ETH.",
+        "Continue"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"top-up-interstitial-continue-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade-deposit-funds",
+      "fingerprint": "sha256:62105507a453c3d9540b80309f190764",
+      "skeletonHash": "sk:2e395c0b52b90ef94d49afa6",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/4723de2c694f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit Funds",
+        "Add funds to your wallet to continue with your purchase.",
+        "$2",
+        "USDC",
+        "$5",
+        "$10",
+        "$50",
+        "Deposit With",
+        "Debit Card",
+        "Total",
+        "$2.00",
+        "Connect to Coinbase"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-back-button\""
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Asset selector",
+          "role": "button",
+          "selector": "id=\"top-up-amount-selector-pressable\""
+        },
+        {
+          "label": "$5",
+          "role": "button",
+          "selector": "id=\"top-up-preset-fiat-amount-preset-5\""
+        },
+        {
+          "label": "$10",
+          "role": "button",
+          "selector": "id=\"top-up-preset-fiat-amount-preset-10\""
+        },
+        {
+          "label": "$50",
+          "role": "button",
+          "selector": "id=\"top-up-preset-fiat-amount-preset-50\""
+        },
+        {
+          "label": "Select payment method",
+          "role": "button",
+          "selector": "id=\"payments-v2-left-pressable\""
+        },
+        {
+          "label": "Connect to Coinbase",
+          "role": "button",
+          "selector": "id=\"coinbase-connect-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Connect to Coinbase",
+        "role": "button",
+        "selector": "id=\"coinbase-connect-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade-from-token-selector",
+      "fingerprint": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07",
+      "skeletonHash": "sk:bab4bfa555898ff203e7fb55",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/419ad140ef01.png",
+      "snapshotPath": null,
+      "texts": [
+        "Search",
+        "Filter networks",
+        "USDC",
+        "Virtual Protocol",
+        "gitlawb",
+        "Venice Token",
+        "Boon",
+        "Aerodrome"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"searchable-tray-asset-list-search-bar\""
+        },
+        {
+          "label": "Filter networks",
+          "role": "button",
+          "selector": "id=\"network-filter-button\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade-to-token-selector",
+      "fingerprint": "sha256:1fe0bb01a9f51aed325340fd2fb6bc07",
+      "skeletonHash": "sk:bab4bfa555898ff203e7fb55",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/e9fa6b920ccc.png",
+      "snapshotPath": null,
+      "texts": [
+        "Search",
+        "Filter networks",
+        "Ethereum",
+        "Virtual Protocol",
+        "gitlawb",
+        "Venice Token",
+        "Boon",
+        "Wrapped PROS"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"searchable-tray-asset-list-search-bar\""
+        },
+        {
+          "label": "Filter networks",
+          "role": "button",
+          "selector": "id=\"network-filter-button\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "social-feed",
+      "fingerprint": "sha256-text:9da71d657ce81668f59b987bec8c76c9",
+      "skeletonHash": "skt:95ba02c12fb05ffe8f837f15",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/9a33f7d3c1e4.png",
+      "snapshotPath": null,
+      "texts": [
+        "HuntToken",
+        "Buy $1K",
+        "The Next 100x Memecoin on Base",
+        "FreeCode",
+        "Ribbita by Virtuals"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "notifications",
+      "fingerprint": "sha256:de6604cb2625c762e9cbfee28f88e61f",
+      "skeletonHash": "sk:32fc74c00959f521100e2879",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/94539a6fd3ed.png",
+      "snapshotPath": null,
+      "texts": [
+        "Enable push notifications",
+        "Ethereum (ETH) is up +5.37%",
+        "Ethereum (ETH) is down 4.42%"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Open notification settings",
+          "role": "button",
+          "selector": "id=\"notification-settings-icon\""
+        },
+        {
+          "label": "Enable push notifications",
+          "role": "button",
+          "selector": "id=\"push-upsell-toggle\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "notification-settings",
+      "fingerprint": "sha256:7ee271b132e1b95890516440cf455654",
+      "skeletonHash": "sk:6659cb48aadd5d8d28f90c29",
+      "pHash": null,
+      "routeKey": null,
+      "role": "settings",
+      "screenshotPath": "assets/8b112a412c41.png",
+      "snapshotPath": null,
+      "texts": [
+        "Search Notification Settings",
+        "Trading",
+        "Social",
+        "Rewards",
+        "Subscriptions",
+        "Wallet Activity",
+        "Chat",
+        "Product Announcements"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Enable push notifications",
+          "role": "button",
+          "selector": "id=\"push-upsell-toggle\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "profile-drawer",
+      "fingerprint": "sha256-text:932c74b6c6f54bb7ca71b947a3aa49e9",
+      "skeletonHash": "skt:d8f7c400db61f9b3261f01e9",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/a497e6f119ad.png",
+      "snapshotPath": null,
+      "texts": [
+        "0x1c734aC214...716A50b282",
+        "$0",
+        "Invite Friends",
+        "View Profile",
+        "Settings"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "view-profile",
+      "fingerprint": "sha256:642e0b2257c39e36b6221ff30f8ba2d9",
+      "skeletonHash": "sk:c4783741d04186a5a3ed0628",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/a843502c0927.png",
+      "snapshotPath": null,
+      "texts": [
+        "Edit profile",
+        "Share Profile",
+        "Edit Profile",
+        "Deposit",
+        "Coins",
+        "Collectibles",
+        "Activity"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Profile menu",
+          "role": "button",
+          "selector": "id=\"trading-profile-options-button\""
+        },
+        {
+          "label": "Settings",
+          "role": "button",
+          "selector": "id=\"trading-profile-settings-button\""
+        },
+        {
+          "label": "Filter by network",
+          "role": "button",
+          "selector": "id=\"wallet-network-chip\""
+        },
+        {
+          "label": "Filter by category",
+          "role": "button",
+          "selector": "id=\"wallet-category-chip\""
+        },
+        {
+          "label": "Sort assets",
+          "role": "button",
+          "selector": "id=\"wallet-sort-chip\""
+        },
+        {
+          "label": "Edit Profile",
+          "role": "button",
+          "selector": "id=\"trading-profile-header-edit-button\""
+        },
+        {
+          "label": "Share Profile",
+          "role": "button",
+          "selector": "id=\"trading-profile-share-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Edit Profile",
+        "role": "button",
+        "selector": "id=\"trading-profile-header-edit-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Share Profile",
+          "role": "button",
+          "selector": "id=\"trading-profile-share-button\""
+        },
+        {
+          "label": "Settings",
+          "role": "button",
+          "selector": "id=\"trading-profile-settings-button\""
+        }
+      ]
+    },
+    {
+      "id": "edit-profile",
+      "fingerprint": "sha256:072f2f45f7a5f6374754867021a0b4fc",
+      "skeletonHash": "sk:5d6843317f6012be96aa32a4",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/7b29eb088708.png",
+      "snapshotPath": null,
+      "texts": [
+        "Claim Your Unique Basename Today",
+        "Display name",
+        "Tell a little us about yourself..."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"edit-profile-close-button\""
+        },
+        {
+          "label": "Display name",
+          "role": "edit-text",
+          "selector": "id=\"display-name-input\""
+        },
+        {
+          "label": "Bio",
+          "role": "edit-text",
+          "selector": "id=\"bio-input\""
+        },
+        {
+          "label": "Claim Basename",
+          "role": "button",
+          "selector": "id=\"basename-claim-card\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings",
+      "fingerprint": "sha256:b48c8b271b6b1ac8d5b6545f6b28c109",
+      "skeletonHash": "sk:f6811d383dcfe53bd9837151",
+      "pHash": null,
+      "routeKey": null,
+      "role": "settings",
+      "screenshotPath": "assets/6d02e1c775d8.png",
+      "snapshotPath": null,
+      "texts": [
+        "Settings",
+        "Display",
+        "Account management",
+        "Connect to Coinbase",
+        "Privacy & Security",
+        "Trading",
+        "Help",
+        "Legal",
+        "Version",
+        "29.95.78",
+        "User ID",
+        "107426270"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Display",
+          "role": "button",
+          "selector": "id=\"display-setting\""
+        },
+        {
+          "label": "Account management",
+          "role": "button",
+          "selector": "id=\"accountManagement-setting\""
+        },
+        {
+          "label": "Connect to Coinbase",
+          "role": "button",
+          "selector": "id=\"coinbaseConnect-setting\""
+        },
+        {
+          "label": "Privacy & Security",
+          "role": "button",
+          "selector": "id=\"privacySecurity-setting\""
+        },
+        {
+          "label": "Trading",
+          "role": "button",
+          "selector": "id=\"trade-setting\""
+        },
+        {
+          "label": "Help",
+          "role": "button",
+          "selector": "id=\"help-setting\""
+        },
+        {
+          "label": "Legal",
+          "role": "button",
+          "selector": "id=\"legal-setting\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "display-settings",
+      "fingerprint": "sha256:15ff6f9699c680bd88dc2cc036649639",
+      "skeletonHash": "sk:d699d09404a201f125103238",
+      "pHash": null,
+      "routeKey": null,
+      "role": "settings",
+      "screenshotPath": "assets/dc08a5922783.png",
+      "snapshotPath": null,
+      "texts": [
+        "Display",
+        "Appearance",
+        "Appearance Mode",
+        "Auto",
+        "App Icon",
+        "Language",
+        "English - US",
+        "Balances",
+        "Local currency",
+        "USD"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Appearance Mode",
+          "role": "button",
+          "selector": "id=\"color-scheme-setting\""
+        },
+        {
+          "label": "App Icon",
+          "role": "button",
+          "selector": "id=\"app-icon-setting\""
+        },
+        {
+          "label": "Language",
+          "role": "button",
+          "selector": "id=\"language-setting\""
+        },
+        {
+          "label": "Local currency",
+          "role": "button",
+          "selector": "id=\"local-currency-setting\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "account-management",
+      "fingerprint": "sha256:c2a9f5f22fc13cebfc55d8edc995130f",
+      "skeletonHash": "sk:4f866088f215a6033a9ce073",
+      "pHash": null,
+      "routeKey": null,
+      "role": "settings",
+      "screenshotPath": "assets/8ff0e39011c7.png",
+      "snapshotPath": null,
+      "texts": [
+        "Authenticator App",
+        "Use a separate app to generate verification codes.",
+        "Sign out"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Authenticator App",
+          "role": "button",
+          "selector": "id=\"authenticator-app-setting\""
+        },
+        {
+          "label": "Sign out",
+          "role": "button",
+          "selector": "id=\"sign-out-setting\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "privacy-security",
+      "fingerprint": "sha256:80d685f1e3282246913e2da67842af03",
+      "skeletonHash": "sk:64c60cec8bcbbc79a1d597d2",
+      "pHash": null,
+      "routeKey": null,
+      "role": "settings",
+      "screenshotPath": "assets/b7b52eab082b.png",
+      "snapshotPath": null,
+      "texts": [
+        "Personalized offers",
+        "Privacy mode",
+        "Payment requests",
+        "Decline all requests",
+        "Token Approvals",
+        "Manage Permissions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Personalized offers toggle",
+          "role": "switch",
+          "selector": "id=\"personalized-offers-switch\""
+        },
+        {
+          "label": "Privacy mode toggle",
+          "role": "switch",
+          "selector": "id=\"privacy-mode-switch\""
+        },
+        {
+          "label": "Payment requests toggle",
+          "role": "switch",
+          "selector": "id=\"enable-payment-requests-switch-checked\""
+        },
+        {
+          "label": "Decline all requests",
+          "role": "button",
+          "selector": "id=\"decline-all-payment-requests-button\""
+        },
+        {
+          "label": "Token Approvals",
+          "role": "button",
+          "selector": "id=\"token-approvals-setting\""
+        },
+        {
+          "label": "Manage Permissions",
+          "role": "button",
+          "selector": "id=\"manage-permissions-setting\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "trading-settings",
+      "fingerprint": "sha256:9f8147a823b5f59da4efa66c924923e7",
+      "skeletonHash": "sk:69ad96e4b435cd64577e8496",
+      "pHash": null,
+      "routeKey": null,
+      "role": "settings",
+      "screenshotPath": "assets/c2a22f535c9b.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trade",
+        "Turn on stealth mode",
+        "Hide your trades from the social feed.",
+        "Dust Coins",
+        "Automatically hide dust coins under $0.10",
+        "Hidden Coins",
+        "View coins you've hidden or marked as spam"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Dust Coins toggle",
+          "role": "switch",
+          "selector": "id=\"dust-coins-switch\""
+        },
+        {
+          "label": "Hidden Coins",
+          "role": "button",
+          "selector": "id=\"hidden-coins-setting\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "connect-coinbase",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+      "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/01da1ee66a1a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Connect to Coinbase",
+        "You can use your Coinbase account to fund your wallet.",
+        "Buy or transfer with Coinbase"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Buy or transfer with Coinbase",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "chat",
+      "fingerprint": "sha256:b341bb857347879a826d652f85f33ff3",
+      "skeletonHash": "sk:12d67dd372c60ca5ae0ae5ec",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/8547f4f48ffb.png",
+      "snapshotPath": null,
+      "texts": [
+        "Chat",
+        "Chat with AI Agents",
+        "Bankr",
+        "Your friendly crypto companion",
+        "Elsa",
+        "Turn words into onchain action"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "More options",
+          "role": "button",
+          "selector": "id=\"inbox-more-menu-button-container\""
+        },
+        {
+          "label": "Start a new chat",
+          "role": "button",
+          "selector": "id=\"new-conversation-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Start a new chat",
+        "role": "button",
+        "selector": "id=\"new-conversation-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "global-search",
+      "fingerprint": "sha256:cc7a9e31fa677e2d1f99812d5d0aee1c",
+      "skeletonHash": "sk:feee49f46dcaa6f274d5de3a",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/a0547061d334.png",
+      "snapshotPath": null,
+      "texts": [
+        "All",
+        "Coins",
+        "Apps",
+        "Profiles",
+        "Sites",
+        "Search Base or URL"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close search",
+          "role": "button",
+          "selector": "id=\"search-header-close\""
+        },
+        {
+          "label": "All",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_UNSPECIFIED\""
+        },
+        {
+          "label": "Coins",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_ASSET\""
+        },
+        {
+          "label": "Apps",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_DAPP\""
+        },
+        {
+          "label": "Profiles",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_SOCIAL_PROFILE\""
+        },
+        {
+          "label": "Sites",
+          "role": "button",
+          "selector": "id=\"global-search-filter-chip-SEARCH_ENTITY_SITE\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"global-search-input\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "watchlist-empty",
+      "fingerprint": "sha256-text:072a9b5e82d0905929f491377ae68489",
+      "skeletonHash": "skt:f9eab5ce8aa94bf28ed093c5",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/35099b9247cb.png",
+      "snapshotPath": null,
+      "texts": [
+        "Watchlist",
+        "Start your watchlist",
+        "Add assets to your watchlist to monitor price moves",
+        "View Trending Coins"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "View Trending Coins",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "trending-filters",
+      "fingerprint": "sha256:b9d9388da94f7689fccfb4848fe83dac",
+      "skeletonHash": "sk:56521897d3fd22e96039f6bc",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/b0843d2bf42a.png",
+      "snapshotPath": null,
+      "texts": [
+        "5m",
+        "1h",
+        "4h",
+        "12h",
+        "24h",
+        "Trending",
+        "Market Cap",
+        "Volume",
+        "Price Change",
+        "Liquidity",
+        "Holders",
+        "Transactions",
+        "Base",
+        "Ethereum",
+        "Polygon",
+        "Arbitrum",
+        "Optimism",
+        "Avalanche",
+        "BNB Chain",
+        "Apply filters",
+        "Reset all filters"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Apply filters",
+          "role": "button",
+          "selector": "id=\"discovery-filter-apply-button\""
+        },
+        {
+          "label": "Reset all filters",
+          "role": "button",
+          "selector": "id=\"discovery-filter-reset-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Apply filters",
+        "role": "button",
+        "selector": "id=\"discovery-filter-apply-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Reset all filters",
+          "role": "button",
+          "selector": "id=\"discovery-filter-reset-button\""
+        }
+      ]
+    },
+    {
+      "id": "home-funded",
+      "fingerprint": "sha256:4adabafd57dd1481316392f6b34e8439",
+      "skeletonHash": "sk:4c36621685e359675837f0d2",
+      "pHash": null,
+      "routeKey": null,
+      "role": "home",
+      "screenshotPath": "assets/c292538c7202.png",
+      "snapshotPath": null,
+      "texts": [
+        "$1",
+        "Deposit",
+        "Receive",
+        "Send",
+        "Trade",
+        "Earn",
+        "Coins",
+        "Collectibles",
+        "Activity",
+        "Network",
+        "Category",
+        "Sort By",
+        "USDC",
+        "1 USDC",
+        "$1.00"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Avatar",
+          "role": "button",
+          "selector": "id=\"account-settings-pressable-avatar\""
+        },
+        {
+          "label": "Search",
+          "role": "button",
+          "selector": "id=\"global-search-icon\""
+        },
+        {
+          "label": "Scan QR Code",
+          "role": "button",
+          "selector": "id=\"assets-action-btn-scan\""
+        },
+        {
+          "label": "Open messages",
+          "role": "button",
+          "selector": "id=\"messaging-navigation-icon\""
+        },
+        {
+          "label": "Earn",
+          "role": "button",
+          "selector": "id=\"home-earn-chip\""
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "id=\"buy-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "id=\"send-button\""
+        },
+        {
+          "label": "Trade",
+          "role": "button",
+          "selector": "id=\"trade-button\""
+        },
+        {
+          "label": "Filter by network",
+          "role": "button",
+          "selector": "id=\"wallet-network-chip\""
+        },
+        {
+          "label": "Filter by category",
+          "role": "button",
+          "selector": "id=\"wallet-category-chip\""
+        },
+        {
+          "label": "Sort assets",
+          "role": "button",
+          "selector": "id=\"wallet-sort-chip\""
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": "id=\"wallet-asset-list-item-base-mainnet-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913-USDC\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Send",
+        "role": "button",
+        "selector": "id=\"send-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Trade",
+          "role": "button",
+          "selector": "id=\"trade-button\""
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "id=\"buy-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"receive-button\""
+        }
+      ]
+    },
+    {
+      "id": "home-sort-by",
+      "fingerprint": "sha256:f531d1401a297935d9f06db5330130bc",
+      "skeletonHash": "sk:6892c7093b30ce75fb213f80",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/98fb4db482ad.png",
+      "snapshotPath": null,
+      "texts": [
+        "Sort By",
+        "High to Low",
+        "Low to High",
+        "Balance",
+        "Market Cap",
+        "Volume",
+        "Price Change",
+        "Reset",
+        "Apply"
+      ],
+      "interactiveElements": [
+        {
+          "label": "High to Low",
+          "role": "button",
+          "selector": "id=\"sort-direction-desc\""
+        },
+        {
+          "label": "Low to High",
+          "role": "button",
+          "selector": "id=\"sort-direction-asc\""
+        },
+        {
+          "label": "Balance",
+          "role": "button",
+          "selector": "id=\"sort-filter-fiat_balance\""
+        },
+        {
+          "label": "Market Cap",
+          "role": "button",
+          "selector": "id=\"sort-filter-market_cap\""
+        },
+        {
+          "label": "Volume",
+          "role": "button",
+          "selector": "id=\"sort-filter-volume\""
+        },
+        {
+          "label": "Price Change",
+          "role": "button",
+          "selector": "id=\"sort-filter-price_change\""
+        },
+        {
+          "label": "Reset",
+          "role": "button",
+          "selector": "id=\"sort-filter-reset\""
+        },
+        {
+          "label": "Apply",
+          "role": "button",
+          "selector": "id=\"sort-by-filter-apply\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Apply",
+        "role": "button",
+        "selector": "id=\"sort-by-filter-apply\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Reset",
+          "role": "button",
+          "selector": "id=\"sort-filter-reset\""
+        }
+      ]
+    },
+    {
+      "id": "home-network-filter",
+      "fingerprint": "sha256-text:09165b58596b3db29305341555e803a4",
+      "skeletonHash": "skt:122545eb0bc7c42dce9cbf71",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/4b85bdb288cf.png",
+      "snapshotPath": null,
+      "texts": [
+        "All Networks",
+        "Base",
+        "Arbitrum",
+        "Optimism",
+        "Zora",
+        "Polygon",
+        "BNB Chain",
+        "Avalanche",
+        "Ethereum",
+        "Clear",
+        "Apply"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Apply",
+        "role": "button",
+        "selector": "id=\"network-filter-apply\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "home-category-filter",
+      "fingerprint": "sha256-text:4f447309404df381082a1d44af0ba8e6",
+      "skeletonHash": "skt:5f00bfac0f0e38b505d28ee0",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/18c6cd8fce92.png",
+      "snapshotPath": null,
+      "texts": [
+        "Cash",
+        "Apps",
+        "Memes",
+        "Social",
+        "Clear",
+        "Apply"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Apply",
+        "role": "button",
+        "selector": "id=\"category-filter-apply\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "activity-funded",
+      "fingerprint": "sha256-text:6c83935bf7eeac7dc981a6e25cdb6850",
+      "skeletonHash": "skt:6b9a0d0b009255d169bcb9b3",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/1d1c8e74a824.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "TODAY",
+        "Received",
+        "From dalxds.base.eth",
+        "+$1.00",
+        "1 USDC"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "transaction-detail",
+      "fingerprint": "sha256:da473a96ea69889e4e27d959d95b2626",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/e2238c97d252.png",
+      "snapshotPath": null,
+      "texts": [
+        "Received USDC",
+        "May 26, 2026 1:30 PM",
+        "Status",
+        "Complete",
+        "From",
+        "dalxds.base.eth",
+        "Amount",
+        "1 USDC",
+        "Price",
+        "$1.00",
+        "Transaction Hash",
+        "0xbc28...6130",
+        "Block Explorer"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Block Explorer",
+          "role": "button",
+          "selector": "id=\"block-explorer-action-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Block Explorer",
+        "role": "button",
+        "selector": "id=\"block-explorer-action-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "send",
+      "fingerprint": "sha256:2e327f12abfb48b77a00f83146615716",
+      "skeletonHash": "sk:0e9a8d7ef4e609c1aa6a5168",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/1c171685a2e5.png",
+      "snapshotPath": null,
+      "texts": [
+        "Send",
+        "To",
+        "Paste",
+        "Scan QR code",
+        "Tap to scan an address",
+        "Tap to Send",
+        "Send via Link",
+        "Recents",
+        "No recent recipients",
+        "Search to find someone to send to"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"send-v2-recipient-search-bar\""
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "id=\"send-v2-recipient-search-bar-paste-button\""
+        },
+        {
+          "label": "Scan QR code",
+          "role": "button",
+          "selector": "id=\"payment-v2-scan-qr-code-button\""
+        },
+        {
+          "label": "Tap to Send",
+          "role": "button",
+          "selector": "id=\"payment-v2-tap-to-payment-button\""
+        },
+        {
+          "label": "Send via Link",
+          "role": "button",
+          "selector": "id=\"payment-v2-payment-via-link-button\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade-funded",
+      "fingerprint": "sha256:920980b743b4df84fcc6a300f3157773",
+      "skeletonHash": "sk:90825bf514270071c81e4166",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/91087510a2d3.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trade",
+        "USDC",
+        "$1.00",
+        "50%",
+        "75%",
+        "Max",
+        "Ethereum",
+        "1 USDC ≈ 0.0004725 ETH",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "USDC (from token)",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-asset-selector\""
+        },
+        {
+          "label": "50%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-half-button\""
+        },
+        {
+          "label": "75%",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-three-quarter-button\""
+        },
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-max-button\""
+        },
+        {
+          "label": "Toggle fiat/crypto",
+          "role": "button",
+          "selector": "id=\"trade-v2-swap-from-card-fiat-display-toggle\""
+        },
+        {
+          "label": "Flip tokens",
+          "role": "button",
+          "selector": "id=\"flip-tokens-arrow\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "id=\"trade-v2-continue-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"trade-v2-continue-button\""
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "trade-funded-max",
+      "fingerprint": "sha256-text:f3bedb6df2a99e1a2d28188f0bcd9810",
+      "skeletonHash": "skt:af576b5ca7e7c4918a4f1204",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/32f721894b44.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trade",
+        "USDC",
+        "$1.00",
+        "$1",
+        "1 Not enough",
+        "Ethereum",
+        "0.00047",
+        "$0.99",
+        "1 USDC ≈ 0.0004722 ETH",
+        "Receive ETH"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Receive ETH",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "usdc-token-detail-owned",
+      "fingerprint": "sha256:0e7e791507067575ffad442abcdf2701",
+      "skeletonHash": "sk:a812017f44fdcfb3a34abc85",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/c7064f130a47.png",
+      "snapshotPath": null,
+      "texts": [
+        "USDC",
+        "$1.00",
+        "1 USDC",
+        "Send",
+        "Receive",
+        "About",
+        "Stablecoin",
+        "Stats",
+        "Token age",
+        "2y",
+        "Market cap",
+        "$76.26B",
+        "Total supply",
+        "76.28B",
+        "Buy",
+        "Sell"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"tba-animated-nav-bar-back-arrow\""
+        },
+        {
+          "label": "Add to watchlist",
+          "role": "button",
+          "selector": "id=\"watchlist-star-button\""
+        },
+        {
+          "label": "View asset options",
+          "role": "button",
+          "selector": "id=\"asset-options-button\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "id=\"my-balance-send-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"my-balance-receive-button\""
+        },
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "id=\"infer-action-button\""
+        },
+        {
+          "label": "Sell",
+          "role": "button",
+          "selector": "id=\"sell-action-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Buy",
+        "role": "button",
+        "selector": "id=\"infer-action-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Sell",
+          "role": "button",
+          "selector": "id=\"sell-action-button\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "id=\"my-balance-send-button\""
+        },
+        {
+          "label": "Receive",
+          "role": "button",
+          "selector": "id=\"my-balance-receive-button\""
+        }
+      ]
+    },
+    {
+      "id": "profile-drawer-funded",
+      "fingerprint": "sha256-text:1651a4ea5d2797b7e3475be3951d5760",
+      "skeletonHash": "skt:d8f7c400db61f9b3261f01e9",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/6681fd7a83f4.png",
+      "snapshotPath": null,
+      "texts": [
+        "0x1c734aC214...716A50b282",
+        "$1",
+        "Invite Friends",
+        "View Profile",
+        "Settings"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "welcome",
+      "fingerprint": "sha256:1586f1477f40c1f7235d597005d5f072",
+      "skeletonHash": "sk:1430333b75241d849a691873",
+      "pHash": null,
+      "routeKey": null,
+      "role": "auth",
+      "screenshotPath": "assets/3300f04956d6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Welcome to Base",
+        "Trade, send, discover crypto, all in one place",
+        "Continue with Email",
+        "More Options",
+        "Terms",
+        "Privacy Policy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue with Email",
+          "role": "button",
+          "selector": "id=\"continue-with-email-button\""
+        },
+        {
+          "label": "Sign in with Apple",
+          "role": "button",
+          "selector": "id=\"social-login-apple-button\""
+        },
+        {
+          "label": "Sign in with Google",
+          "role": "button",
+          "selector": "id=\"social-login-google-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Continue with Email",
+        "role": "button",
+        "selector": "id=\"continue-with-email-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Sign in with Apple",
+          "role": "button",
+          "selector": "id=\"social-login-apple-button\""
+        },
+        {
+          "label": "Sign in with Google",
+          "role": "button",
+          "selector": "id=\"social-login-google-button\""
+        }
+      ]
+    },
+    {
+      "id": "more-options",
+      "fingerprint": "sha256:52f84e9975eff2f17ee2052db4b68c7c",
+      "skeletonHash": "sk:a177d2d8c4149da70d5c7498",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/742aaa11579d.png",
+      "snapshotPath": null,
+      "texts": [
+        "More Options",
+        "Create Account",
+        "Import Recovery Phrase",
+        "Import Passkey"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"tray-nav-bar-close-button\""
+        },
+        {
+          "label": "Create Account",
+          "role": "button",
+          "selector": "id=\"create-account-action\""
+        },
+        {
+          "label": "Import Recovery Phrase",
+          "role": "button",
+          "selector": "id=\"import-recovery-phrase-action\""
+        },
+        {
+          "label": "Import Passkey",
+          "role": "button",
+          "selector": "id=\"import-passkey-action\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "onboarding-email",
+      "fingerprint": "sha256:b25e87b217b29db66356e72818512871",
+      "skeletonHash": "sk:d1499d787ac098a867380d38",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/108df466e12e.png",
+      "snapshotPath": null,
+      "texts": [
+        "What's Your Email?",
+        "You'll use this to sign in and to recover your account.",
+        "name@email.com",
+        "Next"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Email input",
+          "role": "edit-text",
+          "selector": "id=\"email-text-input\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Next",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "onboarding-otp",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad1b08dd3c",
+      "skeletonHash": "sk:86d3fe55278c7bae16c00abd",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/e2dfed635174.png",
+      "snapshotPath": null,
+      "texts": [
+        "Let's confirm it's you",
+        "Enter the 6-digit code sent to your email",
+        "Didn't get a code?",
+        "Resend",
+        "Base will never ask you to set up a new account or transfer funds."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "onboarding-referral-code",
+      "fingerprint": "sha256:e5af72ba136ad6464f9fa28e0e978a61",
+      "skeletonHash": "sk:a11b42af7fb8a1a6f2d7f772",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/ba301728d97f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Referral Code",
+        "Enter a referral code, if you have one.",
+        "10% discount on all swap fees",
+        "Skip",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Referral Code input",
+          "role": "edit-text",
+          "selector": "id=\"referral-code-input\""
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "id=\"referral-code-paste-button\""
+        },
+        {
+          "label": "Skip",
+          "role": "button",
+          "selector": "id=\"referral-code-skip-button\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "id=\"referral-code-continue-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": "id=\"referral-code-continue-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Skip",
+          "role": "button",
+          "selector": "id=\"referral-code-skip-button\""
+        }
+      ]
+    },
+    {
+      "id": "onboarding-choose-username",
+      "fingerprint": "sha256:76abc8a0ff4a8c1d5131e8ad67a05b1a",
+      "skeletonHash": "sk:2ba9bb32270678d3807c9808",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/49463999a480.png",
+      "snapshotPath": null,
+      "texts": [
+        "Choose username",
+        "Choose your unique onchain handle to trade, create, and socialize",
+        "name.base.eth",
+        "Personalized Advertising",
+        "Claim"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Go back",
+          "role": "button",
+          "selector": "id=\"onboarding-back-button\""
+        },
+        {
+          "label": "Username input",
+          "role": "edit-text",
+          "selector": "id=\"basename-search-input\""
+        },
+        {
+          "label": "About Personalized Advertising",
+          "role": "button",
+          "selector": "id=\"personalized-offers-info-button\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Claim",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "onboarding-captcha",
+      "fingerprint": "sha256-text:d9159bc8ddcd14e96baaa03737749d92",
+      "skeletonHash": "skt:167321c8aae08b1ec387f5ea",
+      "pHash": null,
+      "routeKey": null,
+      "role": "modal",
+      "screenshotPath": "assets/134f0135c639.png",
+      "snapshotPath": null,
+      "texts": [
+        "Protecting your account",
+        "Please solve this puzzle so we know you are a real person",
+        "Start Puzzle",
+        "Audio"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Start Puzzle",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": [
+        {
+          "label": "Audio",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "settings-appearance-mode",
+      "fingerprint": "sha256:b3bf4c6a24b2a90c704cb2f4b3d19a54",
+      "skeletonHash": "sk:56521897d3fd22e96039f6bc",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/00b69e0a800f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Light",
+        "Dark",
+        "System"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Light",
+          "role": "button",
+          "selector": "id=\"light-mode-option\""
+        },
+        {
+          "label": "Dark",
+          "role": "button",
+          "selector": "id=\"dark-mode-option\""
+        },
+        {
+          "label": "System",
+          "role": "button",
+          "selector": "id=\"system-mode-option\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-app-icon",
+      "fingerprint": "sha256-text:26bd82a2fd260f89e499d7f13524501d",
+      "skeletonHash": "skt:28d5b827f9d5a123331f5c9b",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/c72065ae642d.png",
+      "snapshotPath": null,
+      "texts": [
+        "App Icon"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-language",
+      "fingerprint": "sha256-text:638dd7dff77e5a61e34c3ea88daead2e",
+      "skeletonHash": "skt:eb8aefe932d7d0cd50bc949a",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/0090f6afd1fc.png",
+      "snapshotPath": null,
+      "texts": [
+        "English - US",
+        "Deutsch",
+        "Español - Argentina",
+        "Español - España",
+        "Español - Latam",
+        "Français",
+        "हिंदी",
+        "日本語",
+        "Italiano",
+        "Português - Brazil",
+        "Português - Portugal",
+        "Pусский",
+        "ไทย",
+        "Türkçe",
+        "繁體中文"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-currency",
+      "fingerprint": "sha256:64e8d61ce5470467c8f6f5e7afb4070d",
+      "skeletonHash": "sk:e5e8d2c5ee1f543bbbb0b87d",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/9da5bc12a7d2.png",
+      "snapshotPath": null,
+      "texts": [
+        "Search",
+        "United States Dollar (USD)",
+        "United Arab Emirates Dirham (AED)",
+        "Afghan Afghani (AFN)",
+        "Albanian Lek (ALL)"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Search",
+          "role": "edit-text",
+          "selector": "id=\"currency-search-bar\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-authenticator-setup",
+      "fingerprint": "sha256:12cb0671bf18aed8cfc8e267a7c95355",
+      "skeletonHash": "sk:d1499d787ac098a867380d38",
+      "pHash": null,
+      "routeKey": null,
+      "role": "form",
+      "screenshotPath": "assets/f5ae0bc9eddc.png",
+      "snapshotPath": null,
+      "texts": [
+        "Set Up Authenticator",
+        "Choose an Authenticator App",
+        "Use a separate app like Google Authenticator or Authy.",
+        "Enter This Setup Key",
+        "Copy and enter this setup key into your authenticator app.",
+        "ZSQW...YFJL",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "id=\"nav-back-arrow\""
+        },
+        {
+          "label": "Setup key",
+          "role": "edit-text",
+          "selector": "id=\"mfa-setup-key-input\""
+        }
+      ],
+      "primaryCta": {
+        "label": "Continue",
+        "role": "button",
+        "selector": null
+      },
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-sign-out-confirm",
+      "fingerprint": "sha256-text:613c3295c7303c84dfc16b6f3d59899d",
+      "skeletonHash": "skt:ec87a252cf384e301a4a22e0",
+      "pHash": null,
+      "routeKey": null,
+      "role": "confirmation",
+      "screenshotPath": "assets/257eedcf904c.png",
+      "snapshotPath": null,
+      "texts": [
+        "Sign Out",
+        "Are you sure you want to sign out?",
+        "Without access to your wallets, you won't be able to recover the accounts.",
+        "Sign Out",
+        "Nevermind"
+      ],
+      "interactiveElements": [],
+      "primaryCta": {
+        "label": "Sign Out",
+        "role": "button",
+        "selector": "id=\"sign-out-button\""
+      },
+      "secondaryCtas": [
+        {
+          "label": "Nevermind",
+          "role": "button",
+          "selector": "id=\"go-back-button\""
+        }
+      ]
+    },
+    {
+      "id": "settings-token-approvals",
+      "fingerprint": "sha256-text:7e0bba9456f178aa9360ea5f2eeadf07",
+      "skeletonHash": "skt:e20e4adff5533552668ec50c",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/f5c117a30f71.png",
+      "snapshotPath": null,
+      "texts": [
+        "Token Approvals",
+        "To keep your assets safe, it's a good practice to regularly revoke approvals",
+        "No active token approvals"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-manage-permissions",
+      "fingerprint": "sha256:61632a6eef4152a48d31841f9e40ec99",
+      "skeletonHash": "sk:0b4ea0876e117c48bbefd46c",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/70e28761a03c.png",
+      "snapshotPath": null,
+      "texts": [],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "id=\"nav-close-x\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-hidden-coins",
+      "fingerprint": "sha256:d647b76d6fbff1cf676c6bf35ca3b4af",
+      "skeletonHash": "sk:93024b2c3251ec95a2135c84",
+      "pHash": null,
+      "routeKey": null,
+      "role": "list",
+      "screenshotPath": "assets/ec89ca53b808.png",
+      "snapshotPath": null,
+      "texts": [
+        "Hidden Coins",
+        "Hidden",
+        "Spam",
+        "Dust",
+        "Coins you hide will appear here. You can unhide them at any time."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Hidden",
+          "role": "tab",
+          "selector": "id=\"hidden-assets-tabs-tab--hidden\""
+        },
+        {
+          "label": "Spam",
+          "role": "tab",
+          "selector": "id=\"hidden-assets-tabs-tab--spam\""
+        },
+        {
+          "label": "Dust",
+          "role": "tab",
+          "selector": "id=\"hidden-assets-tabs-tab--dust\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-help",
+      "fingerprint": "sha256-text:d6cede6a0f88c09aaf8c73ef92c13ab8",
+      "skeletonHash": "skt:89282edc2d4efa79018d85f8",
+      "pHash": null,
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/670e94a1c0d8.png",
+      "snapshotPath": null,
+      "texts": [
+        "Coinbase Wallet | Coinbase Help",
+        "help.coinbase.com"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "settings-legal",
+      "fingerprint": "sha256:0b4ce297fb54fbf2f05cf48a831143b0",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": null,
+      "routeKey": null,
+      "role": "picker",
+      "screenshotPath": "assets/4e2f483fc6a6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Privacy Policy",
+        "Terms of Service"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Privacy Policy",
+          "role": "button",
+          "selector": "id=\"privacy-policy-cell\""
+        },
+        {
+          "label": "Terms of Service",
+          "role": "button",
+          "selector": "id=\"tos-cell\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    }
+  ],
+  "edges": [
+    {
+      "from": "welcome",
+      "to": "more-options",
+      "action": "Tap More Options",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 1
+    },
+    {
+      "from": "more-options",
+      "to": "onboarding-email",
+      "action": "Tap Create Account",
+      "selector": "id=\"create-account-action\"",
+      "kind": "nav",
+      "observedAtStep": 2
+    },
+    {
+      "from": "onboarding-email",
+      "to": "onboarding-otp",
+      "action": "Tap Next",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 3
+    },
+    {
+      "from": "onboarding-otp",
+      "to": "onboarding-referral-code",
+      "action": "Enter valid OTP",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 4
+    },
+    {
+      "from": "onboarding-referral-code",
+      "to": "onboarding-choose-username",
+      "action": "Skip or enter referral",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 5
+    },
+    {
+      "from": "onboarding-choose-username",
+      "to": "onboarding-captcha",
+      "action": "Tap Claim",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 6
+    },
+    {
+      "from": "onboarding-captcha",
+      "to": "home-empty",
+      "action": "Solve CAPTCHA",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 7
+    },
+    {
+      "from": "welcome",
+      "to": "onboarding-email",
+      "action": "Tap Continue with Email",
+      "selector": "id=\"continue-with-email-button\"",
+      "kind": "nav",
+      "observedAtStep": 8
+    },
+    {
+      "from": "onboarding-otp",
+      "to": "home-funded",
+      "action": "Enter valid OTP",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 9
+    },
+    {
+      "from": "home-funded",
+      "to": "trade-funded",
+      "action": "Tap Trade",
+      "selector": "id=\"trade-button\"",
+      "kind": "nav",
+      "observedAtStep": 10
+    },
+    {
+      "from": "trade-funded",
+      "to": "trade-funded-max",
+      "action": "Tap Max",
+      "selector": "id=\"trade-v2-swap-from-card-max-button\"",
+      "kind": "nav",
+      "observedAtStep": 11
+    },
+    {
+      "from": "home-funded",
+      "to": "chat",
+      "action": "Tap Open messages",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 12
+    },
+    {
+      "from": "home-funded",
+      "to": "profile-drawer-funded",
+      "action": "Tap avatar",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 13
+    },
+    {
+      "from": "profile-drawer-funded",
+      "to": "view-profile",
+      "action": "Tap View Profile",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 14
+    },
+    {
+      "from": "home-empty",
+      "to": "home-collectibles",
+      "action": "Tap Collectibles tab",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 15
+    },
+    {
+      "from": "home-collectibles",
+      "to": "home-activity",
+      "action": "Tap Activity tab",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 16
+    },
+    {
+      "from": "home-activity",
+      "to": "profile-drawer",
+      "action": "Tap avatar",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 17
+    },
+    {
+      "from": "home-empty",
+      "to": "deposit",
+      "action": "Tap Deposit",
+      "selector": "id=\"buy-button\"",
+      "kind": "nav",
+      "observedAtStep": 18
+    },
+    {
+      "from": "deposit",
+      "to": "deposit-token-selector",
+      "action": "Tap USDC selector",
+      "selector": "id=\"buy-v2-asset-with-presets-selector\"",
+      "kind": "nav",
+      "observedAtStep": 19
+    },
+    {
+      "from": "deposit",
+      "to": "deposit-with-modal",
+      "action": "Open Deposit With Modal",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 20
+    },
+    {
+      "from": "home-funded",
+      "to": "send",
+      "action": "Tap Send",
+      "selector": "id=\"send-button\"",
+      "kind": "nav",
+      "observedAtStep": 21
+    },
+    {
+      "from": "home-funded",
+      "to": "receive",
+      "action": "Tap Receive",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 22
+    },
+    {
+      "from": "receive",
+      "to": "scan-qr",
+      "action": "Tap Scan tab",
+      "selector": "id=\"swipeable-tab-item-scan\"",
+      "kind": "nav",
+      "observedAtStep": 23
+    },
+    {
+      "from": "receive",
+      "to": "request",
+      "action": "Tap Request tab",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 24
+    },
+    {
+      "from": "request",
+      "to": "request-add-recipient",
+      "action": "Tap Add Recipient",
+      "selector": "id=\"receive-v2-entry-recipient-header-fallback\"",
+      "kind": "nav",
+      "observedAtStep": 25
+    },
+    {
+      "from": "request",
+      "to": "request-fee-info",
+      "action": "Tap Total fees",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 26
+    },
+    {
+      "from": "home-funded",
+      "to": "home-sort-by",
+      "action": "Tap Sort assets",
+      "selector": "id=\"wallet-sort-chip\"",
+      "kind": "nav",
+      "observedAtStep": 27
+    },
+    {
+      "from": "home-funded",
+      "to": "home-network-filter",
+      "action": "Tap Filter by network",
+      "selector": "id=\"wallet-network-chip\"",
+      "kind": "nav",
+      "observedAtStep": 28
+    },
+    {
+      "from": "home-funded",
+      "to": "home-category-filter",
+      "action": "Tap Filter by category",
+      "selector": "id=\"wallet-category-chip\"",
+      "kind": "nav",
+      "observedAtStep": 29
+    },
+    {
+      "from": "home-funded",
+      "to": "usdc-token-detail-owned",
+      "action": "Tap USDC row on Coins",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 30
+    },
+    {
+      "from": "home-funded",
+      "to": "activity-funded",
+      "action": "Tap Activity tab",
+      "selector": "id=\"tab-activity\"",
+      "kind": "nav",
+      "observedAtStep": 31
+    },
+    {
+      "from": "activity-funded",
+      "to": "transaction-detail",
+      "action": "Tap transaction",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 32
+    },
+    {
+      "from": "home-funded",
+      "to": "earn-enrollment",
+      "action": "Tap Earn",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 33
+    },
+    {
+      "from": "earn-enrollment",
+      "to": "invite-friends",
+      "action": "Tap Continue",
+      "selector": "id=\"earn-enrollment-continue-button\"",
+      "kind": "nav",
+      "observedAtStep": 34
+    },
+    {
+      "from": "discover",
+      "to": "global-search",
+      "action": "Tap search bar",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 35
+    },
+    {
+      "from": "discover",
+      "to": "watchlist-empty",
+      "action": "Tap Watchlist",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 36
+    },
+    {
+      "from": "discover",
+      "to": "trending-filters",
+      "action": "Open filters",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 37
+    },
+    {
+      "from": "discover",
+      "to": "token-detail",
+      "action": "Tap VIRTUAL token",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 38
+    },
+    {
+      "from": "token-detail",
+      "to": "trading-requires-usdc",
+      "action": "Tap Buy",
+      "selector": "id=\"infer-action-button\"",
+      "kind": "overlay",
+      "observedAtStep": 39
+    },
+    {
+      "from": "discover",
+      "to": "verify",
+      "action": "Tap Verify tile",
+      "selector": "id=\"custom-tile-verify-tile\"",
+      "kind": "nav",
+      "observedAtStep": 40
+    },
+    {
+      "from": "discover",
+      "to": "apps-directory",
+      "action": "Tap Apps tile",
+      "selector": "id=\"custom-tile-discover-tile\"",
+      "kind": "nav",
+      "observedAtStep": 41
+    },
+    {
+      "from": "trade",
+      "to": "trade-requires-usdc",
+      "action": "Tap Add funds",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 42
+    },
+    {
+      "from": "trade-requires-usdc",
+      "to": "trade-deposit-funds",
+      "action": "Tap Continue",
+      "selector": "id=\"top-up-interstitial-continue-button\"",
+      "kind": "nav",
+      "observedAtStep": 43
+    },
+    {
+      "from": "trade-deposit-funds",
+      "to": "trade-from-token-selector",
+      "action": "Tap USDC selector",
+      "selector": "id=\"trade-v2-swap-from-card-asset-selector\"",
+      "kind": "nav",
+      "observedAtStep": 44
+    },
+    {
+      "from": "trade-from-token-selector",
+      "to": "trade-to-token-selector",
+      "action": "Tap Ethereum row",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 45
+    },
+    {
+      "from": "view-profile",
+      "to": "edit-profile",
+      "action": "Tap Edit profile",
+      "selector": "id=\"trading-profile-header-edit-button\"",
+      "kind": "nav",
+      "observedAtStep": 46
+    },
+    {
+      "from": "notifications",
+      "to": "notification-settings",
+      "action": "Tap notification settings",
+      "selector": "id=\"notification-settings-icon\"",
+      "kind": "nav",
+      "observedAtStep": 47
+    },
+    {
+      "from": "settings",
+      "to": "connect-coinbase",
+      "action": "Tap Connect to Coinbase",
+      "selector": "id=\"coinbaseConnect-setting\"",
+      "kind": "nav",
+      "observedAtStep": 48
+    },
+    {
+      "from": "settings",
+      "to": "display-settings",
+      "action": "Tap Display",
+      "selector": "id=\"display-setting\"",
+      "kind": "nav",
+      "observedAtStep": 49
+    },
+    {
+      "from": "display-settings",
+      "to": "settings-appearance-mode",
+      "action": "Display > Appearance Mode",
+      "selector": "id=\"color-scheme-setting\"",
+      "kind": "nav",
+      "observedAtStep": 50
+    },
+    {
+      "from": "display-settings",
+      "to": "settings-app-icon",
+      "action": "Display > App Icon",
+      "selector": "id=\"app-icon-setting\"",
+      "kind": "nav",
+      "observedAtStep": 51
+    },
+    {
+      "from": "display-settings",
+      "to": "settings-language",
+      "action": "Display > Language",
+      "selector": "id=\"language-setting\"",
+      "kind": "nav",
+      "observedAtStep": 52
+    },
+    {
+      "from": "display-settings",
+      "to": "settings-currency",
+      "action": "Display > Local currency",
+      "selector": "id=\"local-currency-setting\"",
+      "kind": "nav",
+      "observedAtStep": 53
+    },
+    {
+      "from": "settings",
+      "to": "account-management",
+      "action": "Tap Account management",
+      "selector": "id=\"accountManagement-setting\"",
+      "kind": "nav",
+      "observedAtStep": 54
+    },
+    {
+      "from": "account-management",
+      "to": "settings-authenticator-setup",
+      "action": "Account > Authenticator App",
+      "selector": "id=\"authenticator-app-setting\"",
+      "kind": "nav",
+      "observedAtStep": 55
+    },
+    {
+      "from": "account-management",
+      "to": "settings-sign-out-confirm",
+      "action": "Account > Sign out",
+      "selector": "id=\"sign-out-setting\"",
+      "kind": "nav",
+      "observedAtStep": 56
+    },
+    {
+      "from": "settings",
+      "to": "privacy-security",
+      "action": "Tap Privacy & Security",
+      "selector": "id=\"privacySecurity-setting\"",
+      "kind": "nav",
+      "observedAtStep": 57
+    },
+    {
+      "from": "privacy-security",
+      "to": "settings-token-approvals",
+      "action": "Privacy > Token Approvals",
+      "selector": "id=\"token-approvals-setting\"",
+      "kind": "nav",
+      "observedAtStep": 58
+    },
+    {
+      "from": "privacy-security",
+      "to": "settings-manage-permissions",
+      "action": "Privacy > Manage Permissions",
+      "selector": "id=\"manage-permissions-setting\"",
+      "kind": "nav",
+      "observedAtStep": 59
+    },
+    {
+      "from": "settings",
+      "to": "trading-settings",
+      "action": "Tap Trading",
+      "selector": "id=\"trade-setting\"",
+      "kind": "nav",
+      "observedAtStep": 60
+    },
+    {
+      "from": "trading-settings",
+      "to": "settings-hidden-coins",
+      "action": "Trading > Hidden Coins",
+      "selector": "id=\"hidden-coins-setting\"",
+      "kind": "nav",
+      "observedAtStep": 61
+    },
+    {
+      "from": "settings",
+      "to": "settings-legal",
+      "action": "Tap Legal",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 62
+    },
+    {
+      "from": "settings",
+      "to": "settings-help",
+      "action": "Tap Help",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 63
+    },
+    {
+      "from": "home-empty",
+      "to": "home-funded",
+      "action": "Tap Receive",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 64
+    },
+    {
+      "from": "home-empty",
+      "to": "discover",
+      "action": "Tap See what's trending",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 65
+    },
+    {
+      "from": "home-empty",
+      "to": "receive",
+      "action": "Tap Scan QR Code",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 66
+    }
+  ],
+  "decisionPoints": [
+    {
+      "nodeId": "home-empty",
+      "options": [
+        {
+          "label": "Deposit",
+          "explored": true,
+          "toNode": "home-empty"
+        },
+        {
+          "label": "Receive",
+          "explored": true,
+          "toNode": "home-funded"
+        },
+        {
+          "label": "Earn",
+          "explored": true,
+          "toNode": "home-funded"
+        },
+        {
+          "label": "Invite Friends (announcement)",
+          "explored": true,
+          "toNode": "home-funded"
+        },
+        {
+          "label": "Coins tab",
+          "explored": true,
+          "toNode": "home-funded"
+        },
+        {
+          "label": "Collectibles tab",
+          "explored": true,
+          "toNode": "home-empty"
+        },
+        {
+          "label": "Activity tab",
+          "explored": true,
+          "toNode": "home-empty"
+        },
+        {
+          "label": "See what's trending",
+          "explored": true,
+          "toNode": "discover"
+        },
+        {
+          "label": "Avatar / Profile",
+          "explored": true,
+          "toNode": "home-funded"
+        },
+        {
+          "label": "Search icon",
+          "explored": true,
+          "toNode": null
+        },
+        {
+          "label": "Scan QR Code",
+          "explored": true,
+          "toNode": "receive"
+        },
+        {
+          "label": "Open messages",
+          "explored": true,
+          "toNode": "home-funded"
+        }
+      ]
+    },
+    {
+      "nodeId": "discover",
+      "options": [
+        {
+          "label": "Verify",
+          "explored": true,
+          "toNode": "discover"
+        },
+        {
+          "label": "Apps",
+          "explored": true,
+          "toNode": "discover"
+        },
+        {
+          "label": "Trending token",
+          "explored": true,
+          "toNode": "discover"
+        },
+        {
+          "label": "Watchlist toggle",
+          "explored": true,
+          "toNode": null
+        },
+        {
+          "label": "New filter",
+          "explored": true,
+          "toNode": null
+        },
+        {
+          "label": "Majors filter",
+          "explored": false,
+          "toNode": null
+        },
+        {
+          "label": "Open filters",
+          "explored": true,
+          "toNode": null
+        },
+        {
+          "label": "More options",
+          "explored": true,
+          "toNode": null
+        },
+        {
+          "label": "Search input",
+          "explored": true,
+          "toNode": null
+        }
+      ]
+    },
+    {
+      "nodeId": "deposit",
+      "options": [
+        {
+          "label": "Token selector (USDC)",
+          "explored": true,
+          "toNode": "deposit"
+        },
+        {
+          "label": "Deposit With (payment method)",
+          "explored": true,
+          "toNode": "deposit"
+        },
+        {
+          "label": "Connect to Coinbase",
+          "explored": false,
+          "toNode": null
+        }
+      ]
+    },
+    {
+      "nodeId": "settings",
+      "options": [
+        {
+          "label": "Display",
+          "explored": true,
+          "toNode": "settings"
+        },
+        {
+          "label": "Account management",
+          "explored": true,
+          "toNode": "settings"
+        },
+        {
+          "label": "Connect to Coinbase",
+          "explored": true,
+          "toNode": "settings"
+        },
+        {
+          "label": "Privacy & Security",
+          "explored": true,
+          "toNode": "settings"
+        },
+        {
+          "label": "Trading",
+          "explored": true,
+          "toNode": "settings"
+        },
+        {
+          "label": "Help",
+          "explored": false,
+          "toNode": null
+        },
+        {
+          "label": "Legal",
+          "explored": false,
+          "toNode": null
+        }
+      ]
+    }
+  ],
+  "overrides": {
+    "screens": {
+      "home-empty": {
+        "title": "Home (Empty Wallet)",
+        "description": "Main dashboard with $0 balance, Deposit and Receive action buttons, Earn chip, referral announcement card, and Coins/Collectibles/Activity tabs. Empty token list with 'See what's trending' CTA."
+      },
+      "deposit": {
+        "title": "Deposit",
+        "description": "Buy/deposit screen with $0 amount display, USDC selected, Debit Card payment method, numpad, $2/Max presets, and Connect to Coinbase CTA at bottom."
+      },
+      "deposit-token-selector": {
+        "title": "Token Selector (Deposit)",
+        "description": "Modal listing tokens available for deposit with search bar and network filter. Shows USDC, Ethereum, cbBTC, Venice Token, EURC, Aerodrome, cbETH, RaveDAO, KAITO with prices and percentage changes."
+      },
+      "deposit-with-modal": {
+        "title": "Deposit With Modal",
+        "description": "Bottom sheet showing payment method option: Connect to Coinbase with description 'Use payment methods on your Coinbase.com account' and Connect arrow."
+      },
+      "receive": {
+        "title": "Receive",
+        "description": "Receive tab showing wallet address (0x1c7...b282), Ethereum QR code, supported network badges (Base, Optimism, Polygon, Arbitrum, Avalanche, Zora), and Copy Wallet Address button."
+      },
+      "scan-qr": {
+        "title": "Scan QR Code",
+        "description": "Camera viewfinder with QR code scanning frame and text 'Scan a QR code to send crypto'. Part of the Receive/Scan/Request tab group."
+      },
+      "request": {
+        "title": "Request Payment",
+        "description": "Request tab with Add Recipient field, $0 amount, USDC token selector, preset amounts ($5/$10/$25), numpad, and 'Enter an amount' swipe CTA."
+      },
+      "request-add-recipient": {
+        "title": "Request From (Add Recipient)",
+        "description": "Bottom sheet for selecting who to request payment from. Search input with Paste button, QR Code option ('Show your QR code to receive funds'), Tap to Request (proximity), Request via Link (shareable link). Shows 'No recent recipients' empty state."
+      },
+      "request-fee-info": {
+        "title": "Network Fee Info (Request)",
+        "description": "Bottom sheet showing transaction fee details: 'Applies to all transactions and varies based on network usage.' Network: Base. Network fee: Free."
+      },
+      "earn-enrollment": {
+        "title": "Base Rewards Enrollment",
+        "description": "Earn enrollment screen asking 'Where do you live?' with US and non-US options. 'I don't live in the US' pre-selected with Continue button."
+      },
+      "invite-friends": {
+        "title": "Invite Friends to Earn",
+        "description": "Referral screen showing referral code HDNXPRX6, 'Have your friends use your referral link to earn 25% of their fees', Copy Referral Code and Share Referral Link buttons."
+      },
+      "home-collectibles": {
+        "title": "Collectibles Tab",
+        "description": "Collectibles tab on home showing empty state 'Your Collection Awaits' with description about on-chain collectibles."
+      },
+      "home-activity": {
+        "title": "Activity Tab",
+        "description": "Activity tab on home showing 'No transactions found' empty state."
+      },
+      "discover": {
+        "title": "Discover / Search",
+        "description": "Search tab with Pinned Apps (Apps, Verify), trending token list with filter chips (Trending/New/Majors/App Coins), watchlist toggle, and search input at bottom."
+      },
+      "verify": {
+        "title": "Get Verified",
+        "description": "WebView at verify.base.dev showing Get Verified landing page with benefits: Earn Rewards, Build Credibility, Boost Visibility. Continue CTA and Terms of Service link."
+      },
+      "apps-directory": {
+        "title": "Apps Directory",
+        "description": "Mini apps directory with featured carousel (RIP.FUN, Beezie, Clash of Coins) and categorized sections: Trading must-haves (Perps by Avantis, Wasabi, Bankr, Aerodrome), Play games (Cat Town), Earn crypto (Morpho, Mamo, Rips), Make predictions (Limitless, Bookie)."
+      },
+      "token-detail": {
+        "title": "Token Detail",
+        "description": "Token detail page (shown for VIRTUAL Protocol) with price ($0.7785), percentage change, market cap ($510M), 24h volume, interactive price chart with 1H/1D/1W/1M/1Y/All periods, candlestick toggle, top holders, external links (Whitepaper, Official website, GeckoTerminal, Dexscreener), contract address, and Buy CTA."
+      },
+      "trading-requires-usdc": {
+        "title": "Trading Requires USDC",
+        "description": "Interstitial overlay on token detail: 'Trading this coin requires USDC. Add USDC to your wallet to continue with your purchase.' with Continue button."
+      },
+      "trade": {
+        "title": "Trade / Swap (No Funds)",
+        "description": "Token swap screen showing USDC → Ethereum. USDC selected with $0.00 balance, 50%/75%/Max preset buttons, $1 entered with '1 Not enough' warning in orange. Flip tokens button, Ethereum output showing 0.00046 ($0.99), exchange rate (1 USDC ≈ 0.00047028 ETH), and 'Add funds' blue CTA."
+      },
+      "trade-requires-usdc": {
+        "title": "Trading Requires USDC (Trade)",
+        "description": "Interstitial overlay on Trade screen: 'Trading this coin requires USDC. Add USDC to your wallet to continue with your purchase of ETH.' with Continue button."
+      },
+      "trade-deposit-funds": {
+        "title": "Deposit Funds (from Trade)",
+        "description": "Bottom sheet for depositing funds inline from the Trade flow. Shows 'Add funds to your wallet to continue with your purchase.' $2 default amount with USDC, presets ($5/$10/$50), Deposit With Debit Card, Total $2.00, and Connect to Coinbase CTA."
+      },
+      "trade-from-token-selector": {
+        "title": "From-Token Selector (Trade)",
+        "description": "Bottom tray for selecting which token to sell/swap from. Search bar, network filter, token list (USDC, Virtual Protocol, gitlawb, Venice Token, Boon, Aerodrome) all showing $0.00 balance with percentage changes and info icons."
+      },
+      "trade-to-token-selector": {
+        "title": "To-Token Selector (Trade)",
+        "description": "Bottom tray for selecting which token to buy/swap into. Search bar, network filter, token list with prices: Ethereum ($2,125), Virtual Protocol ($0.83), gitlawb, Venice Token ($17.80), Boon, Wrapped PROS ($0.61). Each with contract addresses and info icons."
+      },
+      "social-feed": {
+        "title": "Social Feed",
+        "description": "Live trading feed showing real-time trade broadcast cards. Each card shows avatar, token name, market cap, trade amount, PnL percentage, with Share and Trade action buttons."
+      },
+      "notifications": {
+        "title": "Notifications",
+        "description": "Notifications screen with push notification toggle and ETH price alert notifications (up +5.37%, down 4.42%)."
+      },
+      "notification-settings": {
+        "title": "Notification Settings",
+        "description": "Notification preferences with push toggle and category rows: Trading, Social, Rewards, Subscriptions, Wallet Activity, Chat, Product Announcements."
+      },
+      "profile-drawer": {
+        "title": "Profile Drawer",
+        "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $0 balance, and menu: Invite Friends, View Profile, Settings."
+      },
+      "view-profile": {
+        "title": "View Profile",
+        "description": "User profile page with Edit Profile and Share Profile buttons, network/category/sort filter chips, Deposit CTA, and Coins/Collectibles/Activity tabs."
+      },
+      "edit-profile": {
+        "title": "Edit Profile",
+        "description": "Edit profile screen with follow button, 'Claim Your Unique Basename Today' card, Display name input, and Bio input."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Settings main menu: Display (dark mode, currency, balances), Account management (sign in methods, passcode, biometrics), Connect to Coinbase, Privacy & Security, Trading, Help, Legal. Version 29.95.78, User ID 107426270."
+      },
+      "display-settings": {
+        "title": "Display Settings",
+        "description": "Display settings with Appearance Mode (Auto - light/dark/match device), App Icon selector, Language (English - US), Local currency (USD)."
+      },
+      "account-management": {
+        "title": "Account Management",
+        "description": "Account management with Authenticator App (2FA) option and Sign out button."
+      },
+      "privacy-security": {
+        "title": "Privacy & Security",
+        "description": "Privacy settings with Personalized offers toggle, Privacy mode toggle, Payment requests toggle, Decline all requests button, Token Approvals, and Manage Permissions."
+      },
+      "trading-settings": {
+        "title": "Trading Settings",
+        "description": "Trading preferences: Turn on stealth mode toggle (hide trades from social feed), Dust Coins toggle (auto-hide coins under $0.10), Hidden Coins list."
+      },
+      "connect-coinbase": {
+        "title": "Connect to Coinbase",
+        "description": "Connect to Coinbase screen with wallet illustration and 'Buy or transfer with Coinbase' CTA. Links to Coinbase User Agreement and Privacy Policy."
+      },
+      "chat": {
+        "title": "Chat",
+        "description": "Chat home showing 'Chat with AI Agents' section with Bankr ('Your friendly crypto companion') and Elsa ('Turn words into onchain action'). New conversation FAB at bottom right."
+      },
+      "global-search": {
+        "title": "Global Search",
+        "description": "Full-screen search overlay with filter chips: All, Coins, Apps, Profiles, Sites. Search input for 'Search Base or URL'."
+      },
+      "watchlist-empty": {
+        "title": "Watchlist (Empty)",
+        "description": "Watchlist view on Discover tab showing empty state: 'Start your watchlist — Add assets to your watchlist to monitor price moves' with 'View Trending Coins' CTA."
+      },
+      "trending-filters": {
+        "title": "Trending Filters",
+        "description": "Filter tray for trending tokens: Timeframe (5m/1h/4h/12h/24h), Sort by (Trending/Market Cap/Volume/Price Change/Liquidity/Holders/Transactions), Networks (Base/Ethereum/Polygon/Arbitrum/Optimism/Avalanche/BNB Chain), Apply and Reset buttons."
+      },
+      "home-funded": {
+        "title": "Home (Funded)",
+        "description": "Home dashboard with $1 balance, 4 action buttons (Deposit, Receive, Send, Trade), Earn chip, referral announcement card, Coins/Collectibles/Activity tabs with Network/Category/Sort By filter chips, and USDC row showing 1 USDC = $1.00."
+      },
+      "home-sort-by": {
+        "title": "Sort By",
+        "description": "Sort By bottom sheet with direction toggle (High to Low / Low to High) and sort criteria: Balance, Market Cap, Volume, Price Change. Reset and Apply buttons."
+      },
+      "home-network-filter": {
+        "title": "Network Filter",
+        "description": "Network filter bottom sheet: All Networks, Base, Arbitrum, Optimism, Zora, Polygon, BNB Chain, Avalanche, Ethereum. Clear and Apply buttons."
+      },
+      "home-category-filter": {
+        "title": "Category Filter",
+        "description": "Category filter bottom sheet: Cash, Apps, Memes, Social. Clear and Apply buttons."
+      },
+      "activity-funded": {
+        "title": "Activity (Funded)",
+        "description": "Activity tab showing transaction history. TODAY section with 'Received — From dalxds.base.eth — +$1.00 — 1 USDC' in green."
+      },
+      "transaction-detail": {
+        "title": "Transaction Detail",
+        "description": "Received USDC transaction detail: May 26, 2026 1:30 PM. Status: Complete (green checkmark). From: dalxds.base.eth. Amount: 1 USDC. Price: $1.00. Transaction Hash: 0xbc28...6130. Block Explorer link at bottom."
+      },
+      "send": {
+        "title": "Send",
+        "description": "Send screen with To search input, Paste button, Scan QR code ('Tap to scan an address'), Tap to Send (proximity), Send via Link (shareable), and Recents section ('No recent recipients')."
+      },
+      "trade-funded": {
+        "title": "Trade / Swap (Funded)",
+        "description": "Swap screen with USDC ($1.00 balance) → Ethereum. 50%/75%/Max preset buttons, flip tokens, exchange rate (1 USDC ≈ 0.0004725 ETH), Continue CTA (enabled). When Max is tapped: $1 entered, 'Not enough' (needs gas ETH), shows 'Receive ETH' CTA instead."
+      },
+      "trade-funded-max": {
+        "title": "Trade Max (Needs Gas)",
+        "description": "Swap with Max tapped: $1 USDC amount, '1 Not enough' warning (needs ETH for gas), Ethereum output 0.00047 ($0.99), exchange rate row, 'Receive ETH' CTA instead of Continue."
+      },
+      "usdc-token-detail-owned": {
+        "title": "USDC Token Detail (Owned)",
+        "description": "USDC token detail showing owned balance: $1.00 (1 USDC) with Send/Receive buttons. About section (Stablecoin badge), description. Stats: Token age 2y, Market cap $76.26B, Total supply 76.28B. Links: Whitepaper, Official website, GeckoTerminal, Dexscreener, contract address 0x8335...2913. Buy and Sell CTAs."
+      },
+      "profile-drawer-funded": {
+        "title": "Profile Drawer (Funded)",
+        "description": "Side drawer showing avatar, wallet address (0x1c734aC214...716A50b282), $1 balance, and menu: Invite Friends, View Profile, Settings."
+      },
+      "welcome": {
+        "title": "Welcome to Base",
+        "description": "Welcome screen with animated illustration showing trading/DeFi icons. 'Welcome to Base — Trade, send, discover crypto, all in one place.' Apple and Google sign-in icons, Continue with Email CTA, More Options link, Terms and Privacy Policy footer."
+      },
+      "more-options": {
+        "title": "More Options",
+        "description": "Bottom sheet with three options: Create Account, Import Recovery Phrase, Import Passkey."
+      },
+      "onboarding-email": {
+        "title": "Email Entry (Onboarding)",
+        "description": "\"What's Your Email? You'll use this to sign in and to recover your account.\" Email input with placeholder name@email.com, Next button. Shared by both sign-in and create account flows."
+      },
+      "onboarding-otp": {
+        "title": "OTP Verification",
+        "description": "\"Let's confirm it's you — Enter the 6-digit code sent to your email.\" Six digit input boxes, 'Didn't get a code? Resend' with countdown timer, security warning: 'Base will never ask you to set up a new account or transfer funds. Never enter a code given to you by someone else.' Numeric keypad."
+      },
+      "onboarding-referral-code": {
+        "title": "Referral Code (New Account Only)",
+        "description": "\"Enter a referral code, if you have one.\" Referral Code input with Paste button. Incentive: '10% discount on all swap fees — Enter a referral code from a friend and you'll receive a 10% discount on all swap fees.' Skip and Continue buttons. Only shown during new account creation."
+      },
+      "onboarding-choose-username": {
+        "title": "Choose Username (Basename)",
+        "description": "\"Choose username — Choose your unique onchain handle to trade, create, and socialize.\" Input with name.base.eth placeholder, Personalized Advertising checkbox with info button, Claim CTA."
+      },
+      "onboarding-captcha": {
+        "title": "CAPTCHA Puzzle",
+        "description": "\"Protecting your account — Please solve this puzzle so we know you are a real person.\" Shield icon, Start Puzzle CTA, session ID, Audio alternative. Overlaid on Choose Username screen."
+      },
+      "settings-appearance-mode": {
+        "title": "Appearance Mode Picker",
+        "description": "Bottom sheet with three appearance options: Light, Dark, System. Auto is the default."
+      },
+      "settings-app-icon": {
+        "title": "App Icon Picker",
+        "description": "Bottom sheet grid of 20 app icon variants: Glass series (Shiny Blue, Blue Gradient, Dark Green, Green, Pink, Pink Blue Gradient — each with flat variant) and Theme series (Blue, Black, Chartreuse, Orange, Indigo, Pink, Purple, Yellow)."
+      },
+      "settings-language": {
+        "title": "Language Picker",
+        "description": "Full-screen language list: English-US (selected), Deutsch, Español (Argentina/España/Latam), Français, हिंदी, 日本語, Italiano, Português (Brazil/Portugal), Pусский, ไทย, Türkçe, 繁體中文."
+      },
+      "settings-currency": {
+        "title": "Currency Picker",
+        "description": "Full-screen currency list with search bar. USD selected. Extensive list: AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, and many more."
+      },
+      "settings-authenticator-setup": {
+        "title": "Set Up Authenticator",
+        "description": "Authenticator app 2FA setup: 'Choose an Authenticator App — Use a separate app like Google Authenticator or Authy.' Setup key (ZSQW...YFJL) with copy button. Continue CTA."
+      },
+      "settings-sign-out-confirm": {
+        "title": "Sign Out Confirmation",
+        "description": "Warning screen with red triangle illustration: 'Are you sure you want to sign out? Without access to your wallets, you won't be able to recover the accounts.' Red Sign Out button and Nevermind button."
+      },
+      "settings-token-approvals": {
+        "title": "Token Approvals",
+        "description": "Token approvals management: 'To keep your assets safe, it's a good practice to regularly revoke approvals.' Empty state: 'No active token approvals.'"
+      },
+      "settings-manage-permissions": {
+        "title": "Manage Permissions",
+        "description": "App permissions management. Empty state — no apps have been granted permissions. Shows avatar and close button only."
+      },
+      "settings-hidden-coins": {
+        "title": "Hidden Coins",
+        "description": "Hidden coins management with three tabs: Hidden, Spam, Dust. Hidden tab empty: 'Coins you hide will appear here. You can unhide them at any time.'"
+      },
+      "settings-help": {
+        "title": "Help (External)",
+        "description": "Opens Chrome browser to help.coinbase.com — 'Coinbase Wallet | Coinbase Help'. External website, not in-app."
+      },
+      "settings-legal": {
+        "title": "Legal",
+        "description": "Bottom sheet with two options: Privacy Policy and Terms of Service. Both open external links."
+      }
+    }
+  }
+}

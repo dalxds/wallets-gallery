@@ -1,10 +1,11 @@
 "use client"
 
 import type { FlowEntry } from "@/lib/types"
+import type { StateIndex } from "@/lib/states"
 import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Check, Link2 } from "lucide-react"
+import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
 import { useRef, useState, useEffect, useCallback } from "react"
 import { useQueryState } from "nuqs"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
@@ -14,9 +15,10 @@ import { flowHref } from "@/lib/links"
 interface FlowRowProps {
   flow: FlowEntry
   appSlug: string
+  stateIndex: StateIndex
 }
 
-export function FlowRow({ flow, appSlug }: FlowRowProps) {
+export function FlowRow({ flow, appSlug, stateIndex }: FlowRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
@@ -125,7 +127,9 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
           className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 scrollbar-hide"
           onScroll={updateScrollState}
         >
-          {flow.steps.map((step, idx) => (
+          {flow.steps.map((step, idx) => {
+            const stateCount = stateIndex.variantsForScreen(step.screenId).length
+            return (
             <div
               key={step.number}
               role="button"
@@ -148,6 +152,12 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
                   src={captureUrl(appSlug, step.screenshotPath)}
                   alt={step.title}
                 />
+                {stateCount > 1 && (
+                  <div className="pointer-events-none absolute bottom-1.5 left-1.5 z-10 flex items-center gap-1 rounded-md bg-background/85 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shadow-sm backdrop-blur-sm">
+                    <Layers className="h-2.5 w-2.5" />
+                    {stateCount} states
+                  </div>
+                )}
               </div>
               <div className="mt-1 flex items-center gap-1">
                 <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-medium">
@@ -158,7 +168,7 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
                 </p>
               </div>
             </div>
-          ))}
+          )})}
         </div>
         {canScrollRight && (
           <Button
@@ -178,6 +188,7 @@ export function FlowRow({ flow, appSlug }: FlowRowProps) {
           appSlug={appSlug}
           initialIndex={initialStep}
           onClose={closeLightbox}
+          stateIndex={stateIndex}
         />
       )}
     </div>

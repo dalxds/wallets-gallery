@@ -5,14 +5,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "node scripts/build-data.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build-index": "node scripts/build-search-index.mjs"
+    "build-data": "node scripts/build-data.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

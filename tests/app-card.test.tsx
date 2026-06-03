@@ -27,14 +27,8 @@ const mockApp: AppIndex = {
 }
 
 const mockCapture: AppCapture = {
-  schemaVersion: 1,
   app: { name: "Phantom", slug: "phantom", bundleId: "com.phantom", platform: "ios" },
   captureDate: "2026-04-01",
-  scope: "initial",
-  flowsRecaptured: null,
-  previousCapture: null,
-  mode: "guided",
-  durationSeconds: 300,
   screens: [
     {
       id: "home",
@@ -47,9 +41,7 @@ const mockCapture: AppCapture = {
       primaryCta: null,
       secondaryCtas: [],
       interactiveElements: [],
-      entryPaths: [],
       appearsIn: [],
-      _humanEdited: [],
     },
     {
       id: "send",
@@ -62,9 +54,7 @@ const mockCapture: AppCapture = {
       primaryCta: null,
       secondaryCtas: [],
       interactiveElements: [],
-      entryPaths: [],
       appearsIn: [],
-      _humanEdited: [],
     },
   ],
   flows: [
@@ -73,24 +63,15 @@ const mockCapture: AppCapture = {
       name: "Send Crypto",
       parent: null,
       summary: "Send crypto flow",
-      mode: "guided",
       entryPoints: ["home"],
       replay: null,
       steps: [],
-      notes: "",
-      _humanEdited: [],
+      nameSource: "section",
     },
   ],
   decisionPoints: [],
-  changes: [],
-  stats: {
-    screensInThisCapture: 2,
-    screensVisited: 2,
-    screensAdded: 2,
-    screensModified: 0,
-    screensRemoved: 0,
-    flowsTouched: 1,
-  },
+  stats: { screens: 2, rawNodes: 2, flows: 1, topLevelFlows: 1, replayCoverage: 0 },
+  namingTODO: [],
 }
 
 describe("AppCard", () => {

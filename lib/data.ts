@@ -1,9 +1,4 @@
-import type {
-  AppCapture,
-  AppManifest,
-  AppsRegistry,
-  SearchEntry,
-} from "./types"
+import type { AppCapture, AppsRegistry, SearchEntry } from "./types"
 
 const BASE = "/captures"
 
@@ -12,17 +7,12 @@ export async function getAppsIndex(): Promise<AppsRegistry> {
   return res.json()
 }
 
-export async function fetchAppCapture(
-  slug: string,
-  date: string
-): Promise<AppCapture> {
-  const [manifestRes, captureRes] = await Promise.all([
-    fetch(`${BASE}/${slug}/app.json`),
-    fetch(`${BASE}/${slug}/${date}/capture.json`),
-  ])
-  const manifest: AppManifest = await manifestRes.json()
-  const capture = await captureRes.json()
-  return { ...capture, app: manifest.app }
+// Fetches the derived view for one capture. view.json is generated at build time
+// by the packager from graph.json (the single source of truth); it already carries
+// app metadata, so no manifest merge is needed.
+export async function fetchAppCapture(slug: string, date: string): Promise<AppCapture> {
+  const res = await fetch(`${BASE}/${slug}/${date}/view.json`)
+  return res.json()
 }
 
 export async function fetchSearchIndex(): Promise<SearchEntry[]> {

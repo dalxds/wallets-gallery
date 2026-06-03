@@ -13,7 +13,7 @@ export async function GET() {
   const appLines = index.apps
     .map(
       (app: { name: string; slug: string; platform: string; latest: string }) =>
-        `- ${app.name} (${app.platform.toUpperCase()}) — /captures/${app.slug}/${app.latest}/app.json`
+        `- ${app.name} (${app.platform.toUpperCase()}) — /captures/${app.slug}/${app.latest}/view.json`
     )
     .join("\n")
 
@@ -26,11 +26,13 @@ ${appLines}
 
 ## Data
 
-Each app.json contains the full capture: app metadata, screens, flows with inline steps, and decision points.
-All screenshot paths are relative to the capture directory.
+Each capture is a source graph.json (nodes, edges, decision points, overrides) and a
+derived view.json (screens + flow tree with inline steps) produced from it at build time.
+The gallery renders view.json. Screenshot paths are relative to the capture directory.
 
 - GET /captures/index.json — App registry with slugs and capture dates
-- GET /captures/{slug}/{date}/app.json — Full app capture data
+- GET /captures/{slug}/{date}/view.json — Derived view: screens + flow tree
+- GET /captures/{slug}/{date}/graph.json — Source graph (nodes, edges, overrides)
 `
 
   return new Response(body, {

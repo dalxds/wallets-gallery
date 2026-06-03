@@ -1,10 +1,11 @@
 "use client"
 
 import type { AppCapture, FlowEntry } from "@/lib/types"
+import { buildStateIndex, type StateIndex } from "@/lib/states"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
 import { PanelLeftOpen } from "lucide-react"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 interface FlowsViewProps {
   app: AppCapture
@@ -18,12 +19,14 @@ function FlowTree({
   depth,
   appSlug,
   flowRefs,
+  stateIndex,
 }: {
   flow: FlowEntry
   allFlows: FlowEntry[]
   depth: number
   appSlug: string
   flowRefs: React.MutableRefObject<Map<string, HTMLDivElement>>
+  stateIndex: StateIndex
 }) {
   const children = allFlows.filter((f) => f.parent === flow.slug)
 
@@ -35,7 +38,7 @@ function FlowTree({
         }}
         className="scroll-mt-16 lg:scroll-mt-[var(--content-top)]"
       >
-        <FlowRow flow={flow} appSlug={appSlug} />
+        <FlowRow flow={flow} appSlug={appSlug} stateIndex={stateIndex} />
       </div>
       {children.length > 0 && (
         <div className="ml-6 mt-4 space-y-6 border-l pl-6">
@@ -47,6 +50,7 @@ function FlowTree({
               depth={depth + 1}
               appSlug={appSlug}
               flowRefs={flowRefs}
+              stateIndex={stateIndex}
             />
           ))}
         </div>
@@ -85,6 +89,7 @@ export function FlowsView({
   }, [activeFlowSlug])
 
   const topLevel = app.flows.filter((f) => f.parent === null)
+  const stateIndex = useMemo(() => buildStateIndex(app.screens), [app.screens])
 
   // Sidebar/rail are pinned just below the chrome (--content-top, set by the
   // page) and span the rest of the viewport, scrolling internally. The page
@@ -147,6 +152,7 @@ export function FlowsView({
               depth={0}
               appSlug={appSlug}
               flowRefs={flowRefs}
+              stateIndex={stateIndex}
             />
           ))}
         </div>

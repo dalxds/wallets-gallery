@@ -1,6 +1,6 @@
 # Exploration Reference
 
-How the skill walks an app during initial capture. Covers Tier 1/2/3 fallback, fingerprint-keyed BFS, decision points, scroll handling, and hang recovery.
+How the skill walks an app during initial capture and **records a graph** (`nodes` + `edges` + `decisionPoints`). Covers Tier 1/2/3 fallback, fingerprint-keyed BFS, per-node identity signals, edge recording, decision points, scroll handling, and hang recovery. The flow tree, screen states, and replay are derived later by the packager — see [Package](#package).
 
 ## Interaction tiers
 
@@ -96,14 +96,14 @@ NEW SCREEN
        │            │  └──────────────────────────┘
        │            │
        ▼            ▼
-   capture screen + advance
+   record node + edge, advance
 ```
 
 ## Fingerprint-keyed BFS
 
-The core exploration loop.
+The core exploration loop. Every screen becomes a **node** in `graph.json`; every tap that changes the screen becomes an **edge**. You record observation faithfully — you do not classify states or build flows (the packager does, see [Package](#package)).
 
-### Per-screen capture routine
+### Per-screen capture routine — record a NODE
 
 At every screen, **always in this order**:
 
@@ -114,42 +114,70 @@ agent-device snapshot -i --json > /tmp/snap.json
 # 2. Check sufficiency. Count interactive elements, scan for labels, validate against screen.
 #    If insufficient (see Tier 1→2 triggers above), proceed in Tier 2 for this screen.
 
-# 3. SECONDARY — screenshot. Evidence only. Used for:
-#    - Reading screen content WHEN snapshot is insufficient (Tier 2)
-#    - Final visual record for capture.json (every screen, regardless of tier)
+# 3. SECONDARY — screenshot. Evidence + the node's screenshotPath, and the input to pHash.
 agent-device screenshot {staging}/{NNN}.png
-
-# 4. MANDATORY — compute fingerprint NOW and record it in the staging log.
-#    sha256 of sorted (role, label) pairs from interactive elements.
-#    If Tier 2/3 (no usable snapshot), compute "sha256-text:" fingerprint from texts.
-#    NEVER defer this to packaging — compute and store per screen, immediately.
 ```
 
-**Never skip step 1.** Even when you suspect a screen will be hostile to snapshots (loading screen, animation-heavy onboarding), try snapshot first. If it returns useful structure, you stay in Tier 1.
+Then assemble the node and append it to `graph.nodes[]` (shape: `lib/packager/types.ts` → `GraphNode`):
 
-**Never skip step 4.** Fingerprints are mandatory at capture time. Storing `null` and "computing later" is a known failure mode — the agent forgets and writes a null-fingerprint capture. Compute immediately, store in the staging log, propagate to `capture.json` at packaging.
+- `id` — stable slug from snapshot content (page identifier, dominant text, structure), e.g. `home`, `deposit-source-picker`. Reuse the same id when you re-encounter the same screen.
+- `role` — one of `home`/`list`/`picker`/`form`/`confirmation`/`auth`/`modal`/`settings`/`error`/`other`.
+- `screenshotPath`, `snapshotPath` — paths into `assets/` (content-addressed); `snapshotPath` is `null` in Tier 2/3.
+- `texts`, `interactiveElements`, `primaryCta`, `secondaryCtas` — observed content.
+- **Four identity signals — all computed at capture time, never deferred:**
 
-The fingerprint = `sha256` of sorted `(role, label)` pairs from the interactive nodes in the snapshot. Cheap, deterministic, stable across minor UI changes. In Tier 2/3 where the snapshot is empty/missing, derive a fallback fingerprint from extracted screenshot text — prefix `sha256-text:` so downstream code can distinguish. See [references/temporal.md](temporal.md) → Fingerprints for the exact algorithm and fallback rules.
+| Signal | What it is | How to compute |
+|---|---|---|
+| `fingerprint` | identity hash | `sha256:` + sha256 of the sorted `(role,label)` pairs of interactive elements. In Tier 2/3 with no usable snapshot, derive from `texts[]` and prefix `sha256-text:`. **Mandatory, never `null`.** |
+| `skeletonHash` | structure-only hash (labels/text stripped) | hash of the snapshot tree (roles + nesting). Clusters variants of one logical screen and drives `in-place` edge detection. |
+| `pHash` | perceptual hash of the screenshot | `p:`-prefixed; visual backstop for identity. `null` when there's no usable shot. |
+| `routeKey` | platform screen key | Android resource-id / iOS view-controller class when recoverable, else `null`. |
+
+See [temporal.md](temporal.md) → Identity signals for exact algorithms and fallbacks.
+
+**Never skip step 1.** Even on a screen you expect to be hostile to snapshots (loader, animation-heavy onboarding), try snapshot first. If it returns useful structure, you stay in Tier 1.
+
+**Never defer the identity signals.** Storing `null` and "computing later" is a known failure mode — the agent forgets and writes a node with a null fingerprint, which the packager rejects. Compute per screen, immediately.
+
+### Per-tap routine — record an EDGE
+
+Every tap that changes the screen is an edge appended to `graph.edges[]` (shape: `GraphEdge`):
+
+```json
+{ "from": "trade", "to": "trade", "action": "Tap \"Max\"",
+  "selector": "label=\"Max\"", "kind": "in-place", "observedAtStep": 42 }
+```
+
+- `from` / `to` — node ids of the pre-tap and post-tap screens.
+- `action` — human-readable, e.g. `Tap "Max"`.
+- `selector` — the selector you tapped, or `null` (never `""`).
+- `observedAtStep` — the BFS step counter (used for deterministic tie-breaks).
+- `kind` — set by comparing the **pre-tap and post-tap `skeletonHash`**:
+
+| `kind` | When | Signal |
+|---|---|---|
+| `in-place` | Same logical screen, only data/condition changed (e.g. a "Max" amount state) | **post-tap `skeletonHash` == pre-tap `skeletonHash`** — `from` and `to` are variants of one screen. This is what lets the packager detect on-step state toggles. |
+| `overlay` | A modal/sheet was pushed on top | a modal appeared over the prior screen |
+| `back` | Back-navigation | `agent-device back`, or a tap that returns to a prior screen |
+| `nav` | A normal navigation to a different screen | post-tap `skeletonHash` differs and it's not an overlay/back |
 
 ### The loop
 
 ```
-1. Compute fingerprint of current screen.
-2. If fingerprint already in seen[] → backtrack (we've cycled).
-3. Else: capture screenshot + save snapshot to assets/ by content hash.
-   Extract texts, interactive elements, infer role, propose title and primary CTA.
-   Add fingerprint to seen[].
-4. Enumerate interactive elements as candidate next actions.
-   Sort by priority (see below).
-5. Decision point if ≥2 unfollowed candidates remain. In guided mode, present
-   options + screenshot to user; wait. In free-roam, pick top-priority unexplored.
-6. Tap the chosen element. Re-snapshot. Compute new fingerprint.
-7. If new fingerprint → recurse from step 1.
-8. If old fingerprint → action didn't transition; mark element as non-navigational
-   and try the next candidate.
-9. Backtracking: agent-device back. Re-snapshot. Verify fingerprint matches parent.
-   If not, agent-device open {pkg} --relaunch and replay the captured .ad chain
-   up to the parent.
+1. Compute the current screen's fingerprint (+ skeletonHash, pHash, routeKey).
+2. If fingerprint already in seen[] → record the edge into the existing node id; backtrack (cycled).
+3. Else: record a NODE (screenshot + snapshot saved to assets/ by content hash; texts,
+   interactiveElements, role, title proposal). Add fingerprint to seen[].
+4. Enumerate interactive elements as candidate next actions. Sort by priority (below).
+5. Decision point if ≥2 unfollowed candidates remain. In guided mode, present options +
+   screenshot to user; wait. In free-roam, pick top-priority unexplored.
+6. Tap the chosen element. Re-snapshot. Compute the new screen's signals.
+7. Record an EDGE (from, to, action, selector, kind — set kind via the pre/post skeletonHash
+   comparison above).
+8. If the new fingerprint is new → recurse from step 1. If it matches the pre-tap screen,
+   the tap was non-navigational (still record nothing as an edge); try the next candidate.
+9. Backtracking: agent-device back. Re-snapshot. Verify fingerprint matches the parent.
+   If not, agent-device open {pkg} --relaunch and replay the captured .ad chain to the parent.
 ```
 
 ### Candidate priority for interactive elements
@@ -165,10 +193,10 @@ When sorting candidates from a screen's interactive elements:
 
 ### Decision points
 
-At every screen with ≥2 unfollowed interactive elements, record a decision point:
+At every screen with ≥2 unfollowed interactive elements, record a decision point in `graph.decisionPoints[]` (shape: `DecisionPoint`):
 
 ```
-Decision Point at {screen-id}: N options available
+Decision Point at {node-id}: N options available
 
   1. {label} — {description from snapshot}
   2. {label} — {description from snapshot}
@@ -177,7 +205,7 @@ Decision Point at {screen-id}: N options available
 Which paths should I capture? (numbers, "all", or "skip")
 ```
 
-In **guided mode**, present to the user and wait. The user picks specific numbers, says "all", or "skip". The agent records every option in `decisionPoints[].options[]` regardless of whether explored.
+In **guided mode**, present to the user and wait. The user picks specific numbers, says "all", or "skip". Record every option in `decisionPoints[].options[]` regardless of whether explored, with `{label, explored, toNode?}` — set `toNode` to the node id an option leads to once known.
 
 In **free-roam mode**, the agent picks top-priority unexplored automatically and records its choices.
 
@@ -191,7 +219,7 @@ The BFS terminates when ANY of:
 
 - **Screen budget**: default 100 unique fingerprints per app. Configurable.
 - **Saturation**: 5 consecutive screen visits add 0 new fingerprints.
-- **Per-flow budget**: 20 steps per flow before terminating that branch.
+- **Per-flow budget**: 20 steps along one branch before terminating it.
 - **Auth wall**: screen requires credentials we don't have → ask user.
 - **Sensitive action gate**: send money, sign transaction, delete account → ask user.
 - **Cycle**: re-encountering only previously-seen fingerprints 3 times in a row from the same parent.
@@ -203,11 +231,11 @@ The BFS terminates when ANY of:
 When a screen has a scrollable list of homogeneous items:
 
 - **DO scroll** during exploration to understand the full content.
-- **DO NOT package scroll states** as separate screens or flow steps if the scrolled content is just more of the same type.
-- Instead, capture one representative view of the list, then pick an item to enter its detail screen.
-- **DO package scroll states** when scrolling reveals meaningfully different content (a new section, different UI elements, a footer with actions).
+- **DO NOT record scroll positions** as separate nodes if the scrolled content is just more of the same type — they share a `skeletonHash` and the packager would merge them anyway.
+- Instead, record one representative node for the list, then pick an item to enter its detail screen.
+- **DO record a node** when scrolling reveals meaningfully different content (a new section, different UI elements, a footer with actions).
 
-The fingerprint will differ slightly between scrolled positions because labels change. Treat fingerprints from scroll states as variants of the same screen ID; pick the most representative one for packaging.
+The fingerprint differs slightly between scrolled positions because labels change; the `skeletonHash` does not. Record the most representative position.
 
 ## Staging during exploration
 
@@ -217,16 +245,9 @@ mkdir -p {OUTPUT_DIR}/{app-slug}/_staging
 agent-device screenshot {OUTPUT_DIR}/{app-slug}/_staging/{NNN}.png
 ```
 
-Keep a running log of what was done at each step. The log is in-memory during exploration; written out as a sidecar during packaging:
+Keep a running log of what was done at each step (step number, fingerprint, node id, action, snapshot path, what `diff snapshot` showed). The log is in-memory during exploration and becomes the raw material for the `nodes[]`/`edges[]` you write.
 
-- Step number (NNN)
-- Fingerprint
-- Screen-id (assigned)
-- Action taken (what was pressed/filled/scrolled)
-- Snapshot path (in assets/, content-hashed)
-- What changed (from diff snapshot)
-
-The agent-device session's `--save-script` is also accumulating an authoritative master `.ad` file in `_staging/`. This is the source for per-flow `.ad` extraction during packaging.
+The agent-device session's `--save-script` accumulates an authoritative `master.ad` in `_staging/`. This is the source the packager uses to harden edge selectors and emit replay — see [temporal.md](temporal.md) → `.ad` mechanics.
 
 ## Recovery from hangs and failures
 
@@ -239,205 +260,37 @@ Some screens prevent the runner from reaching idle (continuous animations, live 
 5. **Never** `pkill -9 -f xcodebuild` or kill platform-specific runner processes directly.
 6. **If reopen doesn't help** — the screen likely has continuous animations (Tier 3). Ask the user to navigate away from the blocking screen, then reopen and continue.
 7. **Queue for retry** — add the failed screen to a retry list. After all other exploration is complete, attempt these screens again. The app state may have changed or animations may have settled.
-8. **If retry also fails** — record it as unexplored in the decision point data. Do not block the rest of the capture.
+8. **If retry also fails** — record it as an unexplored option in the decision-point data. Do not block the rest of the capture.
 
 **After any kill/restart:** always `agent-device open {pkg} --device "{device}"` before any other command. Without an active session, all commands fail with `SESSION_NOT_FOUND`.
 
 **IMPORTANT: One device, one session.** Never spawn background agents or subagents that drive the device in parallel. Hung subagents also hold the device — kill them too.
 
-## Packaging (after exploration)
+## Package
 
-After exploration is complete, use the saved snapshots (not just screenshots) to group screens into flows and build the JSON output.
-
-### Save unique screens
-
-For each unique fingerprint encountered:
+After exploration, you have a complete `graph.json` (`nodes` + `edges` + `decisionPoints` + `root` + `meta`, with `overrides: {}`). The flow tree, screen-state classification, screen merging, names, and replay scripts are **derived deterministically** by the packager — you do **not** hand-build any of them.
 
 ```bash
-# Screenshot already exists in assets/ if we used content-addressing during staging.
-# If staged with sequential NNN names, move to assets/{hash}.png.
+node scripts/package.ts {date}/graph.json
 ```
 
-The screenshot's content hash is computed from its bytes. Same-bytes = same hash = stored once.
+This validates the graph (via `lib/packager/validate.ts` — fails loudly on bad node references, empty-string selectors, or missing/invalid fingerprints) and, on success, derives the `View`: it merges duplicate nodes, clusters logical screens, classifies states (`in-place` edges become on-step toggles), segments the flow tree, and emits inline replay. It prints the derived flow tree, stats, and a **`namingTODO`** list.
 
-### Assign screen IDs
-
-For each unique fingerprint, assign a stable **screen-id** (lowercase, dashes, e.g. `home`, `deposit-source-picker`, `send-token-select`). Reuse the same screen-id when the same fingerprint appears in different flows.
-
-Decide the screen-id from the snapshot content (page identifier, dominant text, screen structure), not from screenshots.
-
-### Build flows
-
-The packaging step turns the BFS exploration log into a tree of flows. The shape of that tree is what readers will navigate, so it matters as much as the screen data itself. Follow these rules in order.
-
-**Every captured screen must belong to at least one flow.** No orphan screens. A screen can naturally appear in multiple flows when journeys overlap.
-
-#### Tree shape: entry-point-driven, mirrors the app's navigation
-
-The output tree mirrors the app's navigation. A flow's `parent` describes where its entry screen comes from — **each level's entry point IS a screen in the level above.** Top-level flows are journeys you can start directly; children are the screens and functionality reachable from within the parent. Trees go 3+ levels deep when the IA warrants.
-
-```
-Section / destination       (top-level — a nav tab, or a directly-reachable journey)
-├── Functionality A         (child — its entry screen lives in the parent)
-│   └── Sub-screen A'       (grandchild — reachable from inside A)
-├── Detail / picker B       (child — a distinct screen worth its own node)
-└── Functionality C
-```
-
-This shape is validated against how Mobbin packages comparable apps (Base, Phantom, Cash App, MoonPay): the same recursive, entry-point tree holds across crypto wallets and general fintech alike. It is the proven, scalable model — do not flatten it, and do not overfit to any one app.
-
-#### What goes at the top level
-
-A flow is top-level (`parent: null`) when its entry screen is reached **directly**, not from inside another flow:
-
-- **Primary navigation destinations** — every tab / bottom-nav / drawer item: `Wallet`, `Discover`, `Trade`, `Chat`, `Settings`, `Activity`, `Profile`. The entry is a direct tab tap.
-- **Standalone lifecycle journeys** — reachable on launch or around the main nav, not behind a tab: `Onboarding`, `Logging in`.
-- **Prominent button- or menu-entry actions** that deserve top billing even though they launch from a button rather than a tab: `Receiving a token`, `Invite friends`. Entry-from-a-button does NOT force a flow to be a child — judge by prominence. Mobbin floats headline actions to the top level; so should we.
-
-Everything else is a child: its entry screen appears within some parent flow.
-
-#### Granularity: call out distinct screens and functionality as their own flows
-
-**If a screen or piece of functionality is worth showcasing on its own, give it its own flow — do not bury it as a step inside a larger flow.** A pricing-details screen, a coin selector, a payment-method picker, a token-detail page, a fee breakdown — each is a distinct piece of design a reader would want to find directly, so each becomes its own (sub)flow whose entry is the screen that opens it.
-
-This is a design-inspiration gallery: people come to study individual screens and interactions, not just end-to-end tasks. **A flow can be short (1–3 screens) — that is fine and expected.** Prefer more, well-scoped flows over a few long flows that hide their interesting screens inside as steps.
-
-✓ Promote to its own flow when the branch is a distinct screen / functionality:
-- A picker or selector — `Selecting a coin`, `Selecting a payment method`.
-- A detail or info screen — `Price details`, `Coin detail`, `Network fee`, `Transaction detail`, `Holders`.
-- A sub-area with its own screens — `Editing profile`, `Switching to dark mode`, `Setting up quick buy`.
-- An alternative path that diverges meaningfully — `Trading a token (no funds)`.
-
-✗ Keep inline as a step only when the UI is transient and not worth calling out:
-- Pure loading / progress screens.
-- A trivial confirm/dismiss alert or toast with no design substance.
-- A field validation-error state.
-
-Even for these, if it is a deliberately-designed full screen, lean toward promoting it. **The test: "would a reader want to find this screen on its own?" If yes → its own flow.** (This deliberately splits rather than merges — the opposite of an intent-only model that buries pickers and details as steps.)
-
-#### Section / destination flows
-
-A top-level destination flow's spine is a short walkthrough of that destination's main screen(s), in the primary app state (see State below). Distinct sub-content reachable from the destination is promoted to child flows, not stuffed into the spine:
-
-- Actions launched from the destination (Send, Receive, Buy, Filter, Sort) → child flows.
-- Sub-tabs that are genuinely different content (Coins vs. Collectibles vs. Activity) → child flows when each is rich enough to showcase; a minor view-toggle can stay a step.
-
-**A 1-step destination flow is fine** when the destination is a single content-rich screen whose rows each spawn child flows — e.g. `Settings` (just the menu; each row is a child action flow).
-
-#### State: model state changes as flows, never as adjacent steps
-
-Apps have major states — empty vs. funded wallet, signed-out vs. signed-in, free vs. premium. Each state of a screen gets its own screen ID (`home-empty`, `home-funded`; see [schema.md](schema.md) → State-variant convention). The rule for FLOWS:
-
-1. **Choose one primary state as the spine.** Usually the most-populated / most-active state (funded, signed-in, premium) — it has the richest UI and the most branches. Section walkthroughs and the main tree use the primary state.
-
-2. **Surface an alternative state only where a real flow carries the transition into or out of it:**
-   - As the **entry screen of the flow that produces the transition.** The empty wallet is the entry of the deposit / `Buying a token` flow — that flow IS the empty→funded bridge. The signed-out screen is the entry of `Onboarding` / `Logging in`.
-   - As a **parenthetical variant sibling** when the SAME intent diverges by state: `Trading a token` and `Trading a token (no funds)` are siblings; the qualifier names the state. The no-funds variant triggers a deposit interstitial the funded one doesn't — a genuinely different journey.
-
-3. **Never place two state-variants of the same screen as consecutive steps with a fabricated transition action** (e.g. `home-empty` → `home-funded` labelled "Wallet funded"). That is the logical gap: it implies a state change the reader never sees happen. If the transition matters, it is a flow — make it one. If it doesn't, show only the primary state.
-
-A flow whose first and last screens are different state-variants of the same screen (empty home → … → funded home) IS a state-transition flow — exactly the bridge that closes the gap. Mobbin sidesteps this problem by only ever capturing the populated state; we keep the alternative-state screens (they are worth showcasing) but anchor them to the flow that reaches them.
-
-#### Flow naming rules
-
-Naming follows a small set of rules based on the flow's role in the tree (this matches Mobbin's own naming):
-
-| Flow role | Name style | Examples |
-|---|---|---|
-| Top-level destination flow (matches a primary nav item) | Plain navigation label, as a noun | `Wallet`, `Discover`, `Trade`, `Settings`, `Profile`, `Notifications`, `Chat` |
-| Child flow representing an action / intent | Gerund + object | `Buying a token`, `Sending a token`, `Switching to dark mode`, `Editing profile`, `Selecting a coin` |
-| Child flow representing a view, detail, or state variant | Noun phrase, often with a qualifier | `Token detail`, `Price details`, `Trades feed`, `Activity detail (received)`, `Coin detail (USDC)` |
-| Top-level flow that IS the journey (standalone, not a nav section) | Gerund + object OR noun | `Logging in`, `Onboarding`, `Receiving a token` |
-
-**Avoid filler gerunds.** Do not say `Browsing settings`, `Viewing notifications`, `Browsing apps` — the parent section already implies the user is in that area. Use the plain noun (`Settings`, `Notifications`, `Apps directory`). Reserve gerunds for actions that change state or commit to a task.
-
-#### Packaging checklist
-
-Before writing `capture.json`, walk the tree once more and verify:
-
-- [ ] Every top-level flow is a primary nav destination, a standalone lifecycle journey, or a prominent button/menu-entry headline action.
-- [ ] Distinct screens / functionality (pickers, selectors, detail and info screens) are their own flows — not buried as steps. Only transient UI (loaders, trivial confirms, field errors) stays inline.
-- [ ] Every child flow's entry screen appears in its parent's steps (entry-point containment holds at every level).
-- [ ] Exactly one primary state is the spine. Alternative states appear only as entry screens of transition flows or as parenthetical variant siblings.
-- [ ] No two state-variants of one screen sit as adjacent steps with a hand-waved transition action.
-- [ ] Every flow name fits its role in the table above. No filler gerunds on sections.
-- [ ] Every flow name completes "the user is ___" or names a screen/feature — unambiguously vs. its siblings.
-
-### Harden `.ad` files
-
-The master `.ad` recorded via `--save-script` contains `@eN` refs. These are text-resolved on replay and unstable. During packaging, harden them:
-
-1. Read each `@eN` ref's saved snapshot context.
-2. Find the corresponding interactive element.
-3. Pick the most stable selector: `id=` first, then `label=`+`role=` combination, then `text=`. Last resort: position-based selectors (avoid).
-4. Replace `@eN` with the chosen selector in the `.ad` step.
-5. Templatize literal credential values: `{{EMAIL}}`, `{{PASSWORD}}`, `{{OTP}}`, `{{SEED_PHRASE}}`, `{{SMS_CODE}}`. Record present placeholders in `flow.replay.credentialsTemplate`.
-6. Write the per-flow `.ad` to `{date}/{slug}.ad`.
-
-Confidence rating in `flow.replay.confidence`:
-- `high`: all steps use `id=` or unique `label=`.
-- `medium`: some steps use `label=` with potentially-duplicate labels.
-- `low`: any step relies on `text=` only, or coordinate-based.
-
-### Compute entry fingerprints
-
-For each flow, compute `replay.entryFingerprint` = the fingerprint of the entry screen's snapshot. Used to verify replay landed on the right screen before walking.
-
-### Build `changes` array
-
-If `previousCapture` is not null, diff against the prior capture's screens + flows and populate `changes`. See [temporal.md](temporal.md).
-
-### Write capture.json
-
-Assemble screens + flows + decisionPoints + changes + stats.
-
-**Pre-write validation is MANDATORY.** Run the validator before any disk write:
-
-```bash
-# Write to a temp file first
-echo "$capture_json" > {capture_dir}/capture.json.tmp
-
-# Validate
-node {SKILL_DIR}/scripts/validate-capture.mjs {capture_dir}/capture.json.tmp
-# Exit code 0 = pass; non-zero = fail with details on stderr
-
-# Only if validation passes:
-mv {capture_dir}/capture.json.tmp {capture_dir}/capture.json
-```
-
-The validator enforces every rule in [schema.md](schema.md) → Schema enforcement. Common failures and fixes:
-
-| Failure | Fix |
-|---|---|
-| Unknown top-level key `X` | Remove the key. If you need this data, surface a schema-extension request to the user. |
-| `screens[i].fingerprint` is null | Compute it from `interactiveElements`. |
-| `steps[i].fingerprintBefore/After` is null | Use the relevant screen's fingerprint. |
-| Empty-string selector | Set to `null` if no usable selector, or pick a real one. |
-| `flows[i].steps[j].screenId` not in `screens[]` | Add the screen or fix the reference. |
-| `flows[i].replay.path` file missing | Run the deliberate replay pass to generate the `.ad` file. |
-| `_humanEdited` lists a field not on the entity | Remove the stale entry. |
-
-**Never write a capture that fails validation.** If you can't fix the issues yourself, surface them to the user.
-
-Write atomically (tmp file + rename) to avoid corruption on crash.
+**Fill in names.** For each entry in `namingTODO`, add a name to `overrides.flowNames["<flow-id>"]` in `graph.json` (gerund + object for actions — `Buying a token`; plain noun for sections/details — `Settings`, `Token detail`). A flow's id is its anchor node id. Re-run `package.ts` until `namingTODO` is empty or acceptable. To correct anything else the packager derived (a screen's role, a flow's parent, a wrong merge), use `overrides` and re-run — never hand-edit the derived output. See [editing.md](editing.md).
 
 ## Guidance
 
-- **Snapshot first, always.** Every screen begins with `agent-device snapshot -i --json`. Only fall back to screenshot reading when the snapshot is insufficient (0 interactive elements, suspiciously thin tree, mismatched labels, or repeated hangs). Re-test snapshot on every new screen — escalation is per-screen, not per-session.
-- Save snapshot data during exploration so it can be written to content-addressed assets during packaging.
+- **Snapshot first, always.** Every screen begins with `agent-device snapshot -i --json`. Only fall back to screenshot reading when the snapshot is insufficient. Re-test snapshot on every new screen — escalation is per-screen, not per-session.
+- **Record edges, not just nodes.** Every tap that changes the screen is an edge `(from, to, action, selector, kind)`. Set `kind` via the pre/post `skeletonHash` comparison — `in-place` when they're equal.
+- **Compute all four identity signals per node, immediately.** Never write a node with a null `fingerprint`.
 - Use `diff snapshot -i` after every action to detect what changed before describing the transition.
 - Re-snapshot after every navigation/modal/transition before using refs.
-- Assign screen IDs from fingerprints, not labels. Reuse the same screen ID across flows when fingerprints match.
-- Name flows based on user intent ("Send money") not technical paths ("transfer-screen-2").
-- Every screen must belong to at least one flow. No orphans.
-- At decision points, always enumerate ALL options and present to the user (guided) or record choices (free-roam). Do this at every new screen with options, not just the first.
-- Scroll lists to understand content; don't package homogeneous scroll states as separate screens or flow steps.
+- Assign node ids from snapshot content, not labels. Reuse the same id across the walk when fingerprints match.
+- At decision points, enumerate ALL options and present (guided) or record choices (free-roam) — at every new screen with options, not just the first.
+- Scroll lists to understand content; don't record homogeneous scroll positions as separate nodes.
 - When a command hangs or fails, go back to the last known working screen. Queue the failed screen for retry at the end.
 - One phone, one session. Never spawn parallel agents/subagents driving the device concurrently.
-- After any process kill or restart, always `agent-device open {pkg} --device "{device}"` before any other command.
-- Prefer reopen over kill. Only `pkill -9` as last resort.
+- After any process kill or restart, always `agent-device open {pkg} --device "{device}"` before any other command. Prefer reopen over kill; `pkill -9` is a last resort.
 - Escalate to Tier 3 promptly. If 2 consecutive commands hang on the same screen, stop retrying and ask the user to navigate.
-- Test interactivity before presenting decision points. Try one click before listing 16 options you can't follow.
-- Every flow starts from a reachable screen. Step 1 shows how the user gets there.
-- Capture generously during exploration; be selective during packaging.
-- Flows tell a story: someone reading the flow + screenshots should understand what the app does without having the app open.
+- Capture generously during exploration; the packager is selective when it derives the view.
+- **Don't build flows or classify states by hand.** Record the graph; run the packager.

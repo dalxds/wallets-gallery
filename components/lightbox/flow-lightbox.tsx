@@ -1,6 +1,7 @@
 "use client"
 
-import type { FlowEntry, FlowStep } from "@/lib/types"
+import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
+import { stateMeta, type StateIndex } from "@/lib/states"
 import {
   Dialog,
   DialogContent,
@@ -27,6 +28,7 @@ interface FlowLightboxProps {
   appSlug: string
   initialIndex?: number
   onClose: () => void
+  stateIndex: StateIndex
 }
 
 function getStepLabel(step: FlowStep): string {
@@ -44,6 +46,7 @@ export function FlowLightbox({
   appSlug,
   initialIndex = 0,
   onClose,
+  stateIndex,
 }: FlowLightboxProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const stepRefs = useRef<Map<number, HTMLDivElement>>(new Map())
@@ -195,6 +198,7 @@ export function FlowLightbox({
                 src={stepSrc(step)}
                 appSlug={appSlug}
                 flowSlug={flow.slug}
+                variants={stateIndex.variantsForScreen(step.screenId)}
               />
             ))}
           </div>
@@ -221,21 +225,31 @@ const StepCard = forwardRef<
     src: string
     appSlug: string
     flowSlug: string
+    variants: ScreenEntry[]
   }
->(function StepCard({ step, src, appSlug, flowSlug }, ref) {
+>(function StepCard({ step, src, appSlug, flowSlug, variants }, ref) {
   const [copiedImage, setCopiedImage] = useState(false)
   const [copiedLink, setCopiedLink] = useState(false)
+  const [activeId, setActiveId] = useState(step.screenId)
+
+  const hasStates = variants.length > 1
+  const activeVariant = hasStates
+    ? variants.find((v) => v.id === activeId)
+    : undefined
+  const displaySrc = activeVariant
+    ? captureUrl(appSlug, activeVariant.screenshotPath)
+    : src
 
   async function copyImage(e: React.MouseEvent) {
     e.stopPropagation()
     try {
-      const res = await fetch(src)
+      const res = await fetch(displaySrc)
       const blob = await res.blob()
       await navigator.clipboard.write([
         new ClipboardItem({ [blob.type]: blob }),
       ])
     } catch {
-      await navigator.clipboard.writeText(window.location.origin + src)
+      await navigator.clipboard.writeText(window.location.origin + displaySrc)
     }
     setCopiedImage(true)
     setTimeout(() => setCopiedImage(false), 1500)
@@ -252,12 +266,16 @@ const StepCard = forwardRef<
 
   async function downloadImage(e: React.MouseEvent) {
     e.stopPropagation()
-    const res = await fetch(src)
+    const res = await fetch(displaySrc)
     const blob = await res.blob()
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
+    const stateSuffix =
+      activeVariant && activeVariant.id !== step.screenId
+        ? `-${activeVariant.state}`
+        : ""
     a.href = url
-    a.download = `${appSlug}-${flowSlug}-step-${step.number}.png`
+    a.download = `${appSlug}-${flowSlug}-step-${step.number}${stateSuffix}.png`
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -266,8 +284,8 @@ const StepCard = forwardRef<
     <div ref={ref} className="group/card flex shrink-0 flex-col items-center gap-2">
       <div className="relative aspect-[1080/2400] h-[calc(80vh-9rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
         <img
-          src={src}
-          alt={step.description}
+          src={displaySrc}
+          alt={activeVariant?.description ?? step.description}
           className="h-full w-full object-contain"
         />
         {/* Hover action buttons */}
@@ -299,6 +317,39 @@ const StepCard = forwardRef<
             <Download className="h-3.5 w-3.5" />
           </button>
         </div>
+
+        {/* State switcher — overlaid so the screenshot keeps its full height */}
+        {hasStates && (
+          <div
+            className="absolute inset-x-0 bottom-3 z-10 flex justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-0.5 rounded-full border bg-background/90 p-0.5 shadow-md backdrop-blur">
+              {variants.map((v) => {
+                const meta = stateMeta(v.state ?? "default")
+                const active = v.id === activeId
+                return (
+                  <button
+                    key={v.id}
+                    onClick={() => setActiveId(v.id)}
+                    className={cn(
+                      "rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors",
+                      active &&
+                        meta.tone === "warning" &&
+                        "bg-amber-500/15 text-amber-600 dark:text-amber-400",
+                      active &&
+                        meta.tone === "neutral" &&
+                        "bg-foreground text-background",
+                      !active && "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {meta.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-1.5 text-center">
         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-medium">
