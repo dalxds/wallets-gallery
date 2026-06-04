@@ -39,7 +39,7 @@ The flow tree, screen states, names, and replay are all derived — to change th
 
 ## Common edits → override keys
 
-Exact types: `lib/packager/types.ts` → `Overrides`. Flow ids are anchor node ids (`lib/packager/segment.ts`); node ids are stable across re-captures.
+Override keys + types: [schema.md](schema.md) → `overrides`. Flow ids are anchor node ids; node ids are stable across re-captures.
 
 | Request | Override |
 |---|---|

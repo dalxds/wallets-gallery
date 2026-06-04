@@ -6,16 +6,16 @@ How the skill handles re-capturing an app over time: the four per-node identity 
 
 **Each `graph.json` is a complete, self-contained graph of the app at a date** (`nodes` + `edges` + `decisionPoints` + `overrides`). Re-captures never write partial diffs. A re-capture:
 
-1. Reads the prior `graph.json`.
-2. Replays known edges, then walks for new state (full or flow-scoped).
-3. Writes a new complete `graph.json` to a new date directory, carrying `overrides` forward verbatim.
+1. Reads **this app's** prior `graph.json` (the one sanctioned cross-time read — nothing else).
+2. Replays known edges, then walks for new state (full or flow-scoped) into a fresh `walk.json`.
+3. Copies the prior `overrides` into `walk.json.overrides`, then assembles a new complete `graph.json` into a new date directory.
 4. Diffs are computed *from the graphs* (compare node fingerprints + edges across dates) — see [Graph-based diffing](#graph-based-diffing).
 
 History is a directory walk over dated `graph.json` files, not a chain of pointers to reconstruct.
 
 ## Identity signals — four per node
 
-Every node carries four signals, all computed at capture time and **never deferred**. Together they let the packager (and re-capture) decide whether two observations are the same screen state, variants of one logical screen, or genuinely different. The fingerprint is also what re-capture matches on to tell "modified" from "replaced".
+Every node carries four signals — **all computed by `assemble.ts` from your observations**, never by hand (you supply only `routeKey`). Together they let the packager (and re-capture) decide whether two observations are the same screen state, variants of one logical screen, or genuinely different. The fingerprint is also what re-capture matches on to tell "modified" from "replaced". This section explains what each signal *means* and how it's derived — you don't run any of it yourself; assemble does, when it turns `walk.json` into `graph.json`.
 
 ### 1. `fingerprint` — identity hash
 
@@ -48,7 +48,7 @@ A hash of the snapshot tree with labels and text stripped (roles + nesting). It 
 
 A perceptual hash of the screenshot (`p:`-prefixed), `null` when there's no usable shot. It's the **backstop** identity signal: the packager merges two nodes when their `skeletonHash` matches and `pHash` is near-identical, and clusters them as one logical screen when `pHash` is within a looser band. Distance is Hamming over the hex digits (`identity.ts` → `pHashDistance`).
 
-Compute it at capture time from the screenshot: `node scripts/phash.ts <screenshot.png>` prints the `p:…` hash to write into the node (dependency-free PNG → 32×32 → DCT → 64-bit hash; `scripts/phash.ts` also exports `pHashFromPng` for batch use). Rough bands: same logical screen → distance ≲ 14; same screen with identical data → ≲ 4; unrelated screens → ~30+.
+`assemble.ts` computes it from each staged screenshot via `pHashFromPng` (dependency-free PNG → 32×32 → DCT → 64-bit hash). If you ever want to check one by hand, the standalone CLI `node scripts/phash.ts <screenshot.png>` prints the `p:…` hash. Rough bands: same logical screen → distance ≲ 14; same screen with identical data → ≲ 4; unrelated screens → ~30+.
 
 ### 4. `routeKey` — platform screen key
 
@@ -102,8 +102,8 @@ When re-walking a known flow (replay → replay -u → LLM-walk → ask):
 
 ```
 1. Verify entry
-   agent-device snapshot -i --json → compute fingerprint.
-   Compare to the flow's entry fingerprint (ViewReplay.entryFingerprint, from the packager).
+   agent-device snapshot -i --json → compare its interactive elements to the flow's
+   entry fingerprint (ViewReplay.entryFingerprint, from the packager).
    Close (Jaccard ≥ 0.7 on interactive elements)? Continue with a warning. Far? Abort, ask.
 
 2. Deterministic replay
@@ -146,8 +146,8 @@ Compare `edges[]` keyed by `(from, to, action)`: added / removed transitions. Be
 
 The new dated `graph.json` carries the **entire `overrides` block forward verbatim** from the prior capture. This is the single edit-preservation mechanism — there is no per-field `_humanEdited` stamping any more, and no field-by-field provenance to reconcile. Because `overrides` is keyed by stable node ids and flow ids (a flow id is its anchor node id), human corrections survive re-capture automatically:
 
-1. Re-walk the device and build fresh `nodes[]` / `edges[]` / `decisionPoints[]`.
-2. Copy the prior `overrides` object into the new graph unchanged.
+1. Re-walk the device and build a fresh `walk.json` (`nodes[]` / `edges[]` / `decisionPoints[]`).
+2. Copy the prior `overrides` object into `walk.json.overrides` unchanged; assemble carries it into the new `graph.json`.
 3. Re-run the packager; the overrides re-apply on top of the fresh observation.
 
 If a re-capture removed a node/flow that an override still references, the validator emits a warning (`overrides.* "<id>" is not a node id`) — prune the stale key or re-point it. Edits themselves are made only through `overrides`; see [editing.md](editing.md).

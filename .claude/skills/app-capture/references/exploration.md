@@ -1,6 +1,6 @@
 # Exploration Reference
 
-How the skill walks an app during initial capture and **records a graph** (`nodes` + `edges` + `decisionPoints`). Covers Tier 1/2/3 fallback, fingerprint-keyed BFS, per-node identity signals, edge recording, decision points, scroll handling, and hang recovery. The flow tree, screen states, and replay are derived later by the packager — see [Package](#package).
+How the skill walks an app during initial capture and **records raw observation** into `_staging/walk.json` (`nodes` + `edges` + `decisionPoints`). Covers Tier 1/2/3 fallback, fingerprint-keyed BFS, recording nodes/edges, decision points, scroll handling, and hang recovery. The identity signals, flow tree, screen states, and replay are derived later — see [Assemble + Package](#assemble--package).
 
 ## Interaction tiers
 
@@ -139,7 +139,7 @@ NEW SCREEN
 
 ## Fingerprint-keyed BFS
 
-The core exploration loop. Every screen becomes a **node** in `graph.json`; every tap that changes the screen becomes an **edge**. You record observation faithfully — you do not classify states or build flows (the packager does, see [Package](#package)).
+The core exploration loop. Every screen becomes a **node** in `_staging/walk.json`; every tap that changes the screen becomes an **edge**. You record observation faithfully — you do not compute signals, classify states, or build flows (assemble + the packager do, see [Assemble + Package](#assemble--package)).
 
 ### Per-screen capture routine — record a NODE
 
@@ -152,74 +152,71 @@ agent-device snapshot -i --json > /tmp/snap.json
 # 2. Check sufficiency. Count interactive elements, scan for labels, validate against screen.
 #    If insufficient (see Tier 1→2 triggers above), proceed in Tier 2 for this screen.
 
-# 3. SECONDARY — screenshot. Evidence + the node's screenshotPath, and the input to pHash.
-#    SAVE it; do NOT read it into context. pHash is computed from this file on disk by the
-#    packager — you never view it for that. On Tier-2 insufficiency, delegate the read to a
+# 3. SECONDARY — screenshot to a SEQUENTIAL staging path. Evidence + the input to pHash.
+#    SAVE it; do NOT read it into context. pHash is computed from this file on disk by
+#    assemble.ts — you never view it for that. On Tier-2 insufficiency, delegate the read to a
 #    sub-agent (vision oracle, below); the main agent never reads the image itself.
 agent-device screenshot {staging}/{NNN}.png
+agent-device snapshot -i --json > {staging}/{NNN}.snap.json   # save the raw snapshot too (or skip in Tier 2/3)
 ```
 
 This is the single most common way to exhaust the session image budget: reading every `{NNN}.png` "to verify." Don't. The snapshot is your understanding of the screen; the PNG is an artifact for pHash and the View.
 
-Then assemble the node and append it to `graph.nodes[]` (shape: `lib/packager/types.ts` → `GraphNode`):
+Then append a **raw node** to `walk.json` `nodes[]` (shape: [schema.md](schema.md) → walk.json). You record observation only — **no hashes, no `assets/` paths**; `assemble.ts` computes all four identity signals and content-addresses the staging shot/snap:
 
 - `id` — stable slug from snapshot content (page identifier, dominant text, structure), e.g. `home`, `deposit-source-picker`. Reuse the same id when you re-encounter the same screen.
 - `role` — one of `home`/`list`/`picker`/`form`/`confirmation`/`auth`/`modal`/`settings`/`error`/`other`.
-- `screenshotPath`, `snapshotPath` — paths into `assets/` (content-addressed); `snapshotPath` is `null` in Tier 2/3.
+- `shot`, `snap` — the staging paths you just wrote (`{staging}/{NNN}.png` / `.snap.json`); `snap` is `null` in Tier 2/3.
 - `texts`, `interactiveElements`, `primaryCta`, `secondaryCtas` — observed content.
-- **Four identity signals — all computed at capture time, never deferred:**
+- `routeKey` — Android resource-id of the root / iOS VC class when recoverable, else `null`. (The only identity signal you supply; the other three are derived.)
 
-| Signal | What it is | How to compute |
-|---|---|---|
-| `fingerprint` | identity hash | `sha256:` + sha256 of the sorted `(role,label)` pairs of interactive elements. In Tier 2/3 with no usable snapshot, derive from `texts[]` and prefix `sha256-text:`. **Mandatory, never `null`.** |
-| `skeletonHash` | structure-only hash (labels/text stripped) | hash of the snapshot tree (roles + nesting). Clusters variants of one logical screen and drives `in-place` edge detection. |
-| `pHash` | perceptual hash of the screenshot | `p:`-prefixed; visual backstop for identity. `null` when there's no usable shot. |
-| `routeKey` | platform screen key | Android resource-id / iOS view-controller class when recoverable, else `null`. |
-
-See [temporal.md](temporal.md) → Identity signals for exact algorithms and fallbacks.
+**You do not compute `fingerprint`, `skeletonHash`, or `pHash`.** assemble derives them from what you recorded — fingerprint from `interactiveElements` (or `texts` in Tier 2/3), skeleton from structure, pHash from the staged shot. What they *mean*: [temporal.md](temporal.md) → Identity signals. (This is also why a null/garbage fingerprint can't happen any more — the old failure mode of "compute later, forget" is gone.)
 
 **Never skip step 1.** Even on a screen you expect to be hostile to snapshots (loader, animation-heavy onboarding), try snapshot first. If it returns useful structure, you stay in Tier 1.
 
-**Never defer the identity signals.** Storing `null` and "computing later" is a known failure mode — the agent forgets and writes a node with a null fingerprint, which the packager rejects. Compute per screen, immediately.
-
 ### Per-tap routine — record an EDGE
 
-Every tap that changes the screen is an edge appended to `graph.edges[]` (shape: `GraphEdge`):
+Every tap that changes the screen is an edge appended to `walk.json` `edges[]`:
 
 ```json
-{ "from": "trade", "to": "trade", "action": "Tap \"Max\"",
-  "selector": "label=\"Max\"", "kind": "in-place", "observedAtStep": 42 }
+{ "from": "trade", "to": "trade-max", "action": "Tap \"Max\"", "selector": "label=\"Max\"" }
 ```
 
 - `from` / `to` — node ids of the pre-tap and post-tap screens.
 - `action` — human-readable, e.g. `Tap "Max"`.
-- `selector` — the selector you tapped, or `null` (never `""`).
-- `observedAtStep` — the BFS step counter (used for deterministic tie-breaks).
-- `kind` — set by comparing the **pre-tap and post-tap `skeletonHash`**:
+- `selector` — the selector you tapped, or `null`/omit (never `""`).
+- `observedAtStep` — optional; defaults to walk order.
+- `kind` — **usually omit.** You don't have skeleton hashes at walk time, so `assemble.ts` finalizes `in-place` vs `nav` from skeleton equality (the deterministic state-toggle signal). Record `kind` **only** for the two cases skeletons can't detect:
 
-| `kind` | When | Signal |
-|---|---|---|
-| `in-place` | Same logical screen, only data/condition changed (e.g. a "Max" amount state) | **post-tap `skeletonHash` == pre-tap `skeletonHash`** — `from` and `to` are variants of one screen. This is what lets the packager detect on-step state toggles. |
-| `overlay` | A modal/sheet was pushed on top | a modal appeared over the prior screen |
-| `back` | Back-navigation | `agent-device back`, or a tap that returns to a prior screen |
-| `nav` | A normal navigation to a different screen | post-tap `skeletonHash` differs and it's not an overlay/back |
+| `kind` | When |
+|---|---|
+| `back` | Back-navigation — `agent-device back`, or a tap that returns to a prior screen. |
+| `overlay` | A modal/sheet was pushed over the prior screen. |
+
+| Derived by assemble | When |
+|---|---|
+| `in-place` | from/to share a `skeletonHash` (same logical screen, only data/condition changed — e.g. a "Max" amount). Drives on-step state toggles. |
+| `nav` | from/to skeletons differ. |
+
+If assemble's derived `nav`/`in-place` is ever wrong (two genuinely-different screens that happen to share a skeleton), force them apart with `overrides.splits` — don't fight it in `walk.json`.
 
 ### The loop
 
 ```
-1. Compute the current screen's fingerprint (+ skeletonHash, pHash, routeKey).
-2. If fingerprint already in seen[] → record the edge into the existing node id; backtrack (cycled).
-3. Else: record a NODE (screenshot + snapshot saved to assets/ by content hash; texts,
-   interactiveElements, role, title proposal). Add fingerprint to seen[].
+1. Snapshot the current screen. Recognize it: is this a screen you've already recorded?
+   (Judge from its content — the interactive elements + texts — not from a hash; assemble
+   computes hashes later. Keep a running map of {screen you've seen → its node id}.)
+2. If already seen → record the edge into the existing node id; backtrack (cycled).
+3. Else: append a NODE to walk.json (save shot + snap to {staging}/{NNN}; record id, role,
+   texts, interactiveElements, routeKey). Add it to your seen-map.
 4. Enumerate interactive elements as candidate next actions. Sort by priority (below).
 5. Decision point if ≥2 unfollowed candidates remain. In guided mode, present options +
    screenshot to user; wait. In free-roam, pick top-priority unexplored.
-6. Tap the chosen element. Re-snapshot. Compute the new screen's signals.
-7. Record an EDGE (from, to, action, selector, kind — set kind via the pre/post skeletonHash
-   comparison above).
-8. If the new fingerprint is new → recurse from step 1. If it matches the pre-tap screen,
-   the tap was non-navigational (still record nothing as an edge); try the next candidate.
-9. Backtracking: agent-device back. Re-snapshot. Verify fingerprint matches the parent.
+6. Tap the chosen element. Re-snapshot.
+7. Record an EDGE (from, to, action, selector; add kind only for back/overlay).
+8. If the new screen is new → recurse from step 1. If it's the same as the pre-tap screen,
+   the tap was non-navigational (record no edge); try the next candidate.
+9. Backtracking: agent-device back. Re-snapshot. Verify you're back on the parent.
    If not, agent-device open {pkg} --relaunch and replay the captured .ad chain to the parent.
 ```
 
@@ -283,12 +280,13 @@ The fingerprint differs slightly between scrolled positions because labels chang
 ## Staging during exploration
 
 ```bash
-# Sequential numbering in flat staging area
+# Sequential numbering in flat staging area; assemble.ts content-addresses these into assets/
 mkdir -p {OUTPUT_DIR}/{app-slug}/_staging
 agent-device screenshot {OUTPUT_DIR}/{app-slug}/_staging/{NNN}.png
+agent-device snapshot -i --json > {OUTPUT_DIR}/{app-slug}/_staging/{NNN}.snap.json
 ```
 
-Keep a running log of what was done at each step (step number, fingerprint, node id, action, snapshot path, what `diff snapshot` showed). The log is in-memory during exploration and becomes the raw material for the `nodes[]`/`edges[]` you write.
+`_staging/walk.json` is the artifact you build up as you go — append a raw node (referencing `{NNN}.png`/`.snap.json`) per screen and an edge per tap. It's the single input to `assemble.ts`. Keep its fields to raw observation only (id, role, texts, interactiveElements, shot/snap paths, routeKey; edges; decisionPoints) — if a field doesn't map to the walk.json schema, it doesn't belong.
 
 The agent-device session's `--save-script` accumulates an authoritative `master.ad` in `_staging/`. This is the source the packager uses to harden edge selectors and emit replay — see [temporal.md](temporal.md) → `.ad` mechanics.
 
@@ -309,26 +307,27 @@ Some screens prevent the runner from reaching idle (continuous animations, live 
 
 **IMPORTANT: One device, one session.** Never spawn background agents or subagents that drive the device in parallel. Hung subagents also hold the device — kill them too.
 
-## Package
+## Assemble + Package
 
-After exploration, you have a complete `graph.json` (`nodes` + `edges` + `decisionPoints` + `root` + `meta`, with `overrides: {}`). The flow tree, screen-state classification, screen merging, names, and replay scripts are **derived deterministically** by the packager — you do **not** hand-build any of them.
+After exploration you have a complete `_staging/walk.json` (raw `nodes` + `edges` + `decisionPoints` + `root` + `meta`). Two deterministic steps turn it into the derived view — you hand-build none of it:
 
 ```bash
-node scripts/package.ts {date}/graph.json
+node scripts/assemble.ts _staging/walk.json {date}/graph.json   # 1. signals + assets + validate → graph.json
+node scripts/package.ts {date}/graph.json                       # 2. derive flows/states/tree/replay
 ```
 
-This validates the graph (via `lib/packager/validate.ts` — fails loudly on bad node references, empty-string selectors, or missing/invalid fingerprints) and, on success, derives the `View`: it merges duplicate nodes, clusters logical screens, classifies states (`in-place` edges become on-step toggles), segments the flow tree, and emits inline replay. It prints the derived flow tree, stats, and a **`namingTODO`** list.
+**Assemble** computes the four identity signals (fingerprint/skeleton via the engine, pHash from each staged shot), content-addresses the staging shots/snaps into `assets/`, finalizes each edge's `in-place`/`nav` kind from skeleton equality, validates, and writes `graph.json` (refusing to write on a validation error). **Package** validates again and derives the `View`: merges duplicate nodes, clusters logical screens, classifies states (`in-place` edges become on-step toggles), segments the flow tree, and emits inline replay — printing the flow tree, stats, and a **`namingTODO`** list.
 
 **Fill in names.** For each entry in `namingTODO`, add a name to `overrides.flowNames["<flow-id>"]` in `graph.json` (gerund + object for actions — `Buying a token`; plain noun for sections/details — `Settings`, `Token detail`). A flow's id is its anchor node id. Re-run `package.ts` until `namingTODO` is empty or acceptable. To correct anything else the packager derived (a screen's role, a flow's parent, a wrong merge), use `overrides` and re-run — never hand-edit the derived output. See [editing.md](editing.md).
 
 ## Guidance
 
 - **Snapshot first, always.** Every screen begins with `agent-device snapshot -i --json`. Only fall back to screenshot reading when the snapshot is insufficient. Re-test snapshot on every new screen — escalation is per-screen, not per-session.
-- **Record edges, not just nodes.** Every tap that changes the screen is an edge `(from, to, action, selector, kind)`. Set `kind` via the pre/post `skeletonHash` comparison — `in-place` when they're equal.
-- **Compute all four identity signals per node, immediately.** Never write a node with a null `fingerprint`.
+- **Record edges, not just nodes.** Every tap that changes the screen is an edge `(from, to, action, selector)` in walk.json. Add `kind` only for `back`/`overlay`; assemble derives `in-place`/`nav`.
+- **Don't compute identity signals.** Record raw observation; `assemble.ts` derives fingerprint/skeleton/pHash. A null fingerprint can't happen any more.
 - Use `diff snapshot -i` after every action to detect what changed before describing the transition.
 - Re-snapshot after every navigation/modal/transition before using refs.
-- Assign node ids from snapshot content, not labels. Reuse the same id across the walk when fingerprints match.
+- Assign node ids from snapshot content, not labels. Reuse the same id across the walk when you recognize the same screen.
 - At decision points, enumerate ALL options and present (guided) or record choices (free-roam) — at every new screen with options, not just the first.
 - Scroll lists to understand content; don't record homogeneous scroll positions as separate nodes.
 - When a command hangs or fails, go back to the last known working screen. Queue the failed screen for retry at the end.

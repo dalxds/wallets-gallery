@@ -43,6 +43,14 @@ export function computeFingerprint(elements: Pick<InteractiveElement, "role" | "
   return "sha256:" + sha256hex(JSON.stringify(pairs)).slice(0, 24)
 }
 
+// Tier 2/3 fallback: a screen with no usable snapshot has no interactive elements
+// to fingerprint, so derive identity from the sorted, normalized screenshot texts.
+// The `sha256-text:` prefix marks the lower-confidence form (validate accepts both).
+export function computeTextFingerprint(texts: string[]): string {
+  const norm = texts.map(normalize).filter(Boolean).sort()
+  return "sha256-text:" + sha256hex(JSON.stringify(norm)).slice(0, 24)
+}
+
 // ── Dynamic-content normalization (near-duplicate / merge detection) ─────────
 
 const TICKERS =
