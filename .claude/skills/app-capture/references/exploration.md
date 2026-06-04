@@ -36,12 +36,41 @@ Escalate to Tier 2 when the snapshot is insufficient. **Specific triggers:**
 When any trigger fires, fall back for that screen only:
 
 ```bash
-agent-device screenshot {staging}/{NNN}.png
-# READ the screenshot image to understand what's there
-agent-device find "Sign In" click               # text-matching, separate engine from snapshot
-agent-device find label "Email" fill "user@example.com"
-agent-device find role button click             # role-based when label ambiguous
+agent-device screenshot {staging}/{NNN}.png          # FULL-RES — never downscale (see below)
+# Do NOT read this image yourself. Hand the file path to a sub-agent (the "vision oracle");
+# it reads the image in its own context and returns a navigable text report. Then act on it:
+agent-device find "Continue" click                   # preferred: exact label the oracle saw
+agent-device find role button label "Email" fill ... # role+label when text is ambiguous
+agent-device click <x> <y>                           # fallback: the oracle's center coords
 ```
+
+#### Tier-2 vision oracle (sub-agent)
+
+The main agent **never reads a screenshot into its own context.** Those bytes carry over into every subsequent call, and once several accumulate they trip the API's many-image pixel ceiling — so that *no* image can be read just when a sensitive screen needs one. Delegate the *look* instead:
+
+- **Main agent owns the device.** It takes the screenshot and performs every tap/`fill`. The sub-agent is **file-only**: it reads the PNG from disk and reports — it never runs `agent-device`. This keeps "one device, one session" intact (no concurrent driver).
+- **Read full-res, never downscale.** A single-image read isn't subject to the many-image cap, so fidelity is free — and, crucially, the oracle's coordinates are only directly tappable if they're in the screenshot's native pixel space. Downscaling shifts every coordinate.
+
+**The report must be navigable, not just descriptive** — the main agent has to turn it into `agent-device` calls. Require, for every interactive element:
+
+| Field | Why the main agent needs it |
+|---|---|
+| `label` — exact visible text, verbatim (or `(icon: <what it depicts>)` if none) | drives `agent-device find "<label>" click` — the resilient path when the snapshot is poor |
+| `role` — button / input / tab / toggle / link / icon | role-based `find`; understanding the screen |
+| `center: [x, y]` — screenshot pixels, top-left origin | the **coordinate fallback** `agent-device click x y` — the only option for icon-only elements or when `find` misses |
+| `bbox: [x, y, w, h]` | disambiguate overlapping targets; tap a sub-region |
+| `state` — disabled / selected (omit if normal) | don't tap a disabled CTA; read toggle/tab state |
+| `hasText: false` (when no text) | tells the main agent it MUST use coords, not `find` |
+
+Plus once per screen: `screen` (one-line role + purpose) and `imageSize: [W, H]`. Optionally pass the snapshot's claimed labels and ask the oracle to confirm/correct them.
+
+**Coordinate space.** On Android, screenshot pixels == device tap units, so `center` is usable as-is with `agent-device click x y`. On **iOS**, screenshot *pixels* ≠ tap *points* (2×/3× Retina) — scale before tapping: `tap = center × (devicePointSize / imageSize)`. That's why the oracle echoes `imageSize`; pair it with `agent-device`'s reported device size (or `adb shell wm size` on Android) to verify the mapping.
+
+**Main-agent navigation order** with the report: (1) `find "<label>" click`; (2) `find role <r> label "<label>"` if the label repeats; (3) `agent-device click <center.x> <center.y>` when there's no text or `find` misses. For inputs: tap the field (coords or `find`), then `type`/`fill`.
+
+Sub-agent prompt template:
+
+> Read the PNG at `{path}` — a full-res {platform} screen capture. Return ONLY structured data, no prose. `screen:` <what screen this is + its role>. `elements:` for each tappable/interactive element — `label` (exact visible text, or `(icon: …)` if none), `role`, `center:[x,y]` and `bbox:[x,y,w,h]` in the image's own pixels (top-left origin), `state` if disabled/selected, `hasText:false` if it has no text. `imageSize:[W,H]`. [If snapshot labels supplied: `snapshotCheck:` which of these are right / wrong / missing.] All coordinates MUST be in the image's own pixel space.
 
 If `find` returns `AMBIGUOUS_MATCH` (e.g. icon + label both match), narrow with role-based selectors (`role=button label="..."`) before falling back to coordinate-based taps.
 
@@ -115,8 +144,13 @@ agent-device snapshot -i --json > /tmp/snap.json
 #    If insufficient (see Tier 1→2 triggers above), proceed in Tier 2 for this screen.
 
 # 3. SECONDARY — screenshot. Evidence + the node's screenshotPath, and the input to pHash.
+#    SAVE it; do NOT read it into context. pHash is computed from this file on disk by the
+#    packager — you never view it for that. On Tier-2 insufficiency, delegate the read to a
+#    sub-agent (vision oracle, below); the main agent never reads the image itself.
 agent-device screenshot {staging}/{NNN}.png
 ```
+
+This is the single most common way to exhaust the session image budget: reading every `{NNN}.png` "to verify." Don't. The snapshot is your understanding of the screen; the PNG is an artifact for pHash and the View.
 
 Then assemble the node and append it to `graph.nodes[]` (shape: `lib/packager/types.ts` → `GraphNode`):
 

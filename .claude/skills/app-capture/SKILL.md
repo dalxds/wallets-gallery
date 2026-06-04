@@ -24,6 +24,8 @@ The graph schema is defined by `lib/packager/types.ts` (the `Graph` type) — th
 3. If both fail: ask the user to tap, then screenshot the result
 ```
 
+The screenshot at step 1 is **saved, not read** — it's the node's `screenshotPath` and the input to `pHash` (computed from the file on disk, never from your vision). At step 2, when the snapshot is insufficient, **delegate the read to a sub-agent** (the "vision oracle") rather than reading it yourself — the image bytes stay in the sub-agent's isolated context, never the main thread, and it returns a navigable report (labels + coordinates) you act on with `agent-device`. See the Tier-2 vision oracle in [references/exploration.md](references/exploration.md). The main agent itself never reads a screenshot into context — doing so per screen exhausts the session image budget and kills visual fallback exactly when a Tier-2 screen needs it.
+
 Full tier ladder + insufficiency detection: [references/exploration.md](references/exploration.md).
 
 ## Commands this skill handles
@@ -121,6 +123,8 @@ Edit-shaped requests during conversation mutate `graph.json` `overrides`, then r
 
 ## Critical guardrails
 
+- **App isolation — one app per capture, zero cross-references.** A capture describes *only* its target app. Never assume, infer, port, or mention behavior from another app — not in `graph.json`, `overrides`, `credentials.md`, screen titles/descriptions, names, **or in your reasoning to the user**. "Looks like {other app}", "white-label of {X}", "same stack as {Y}" is never a basis for a decision — read *this* app's snapshot. If another app happens to be installed on the same device/emulator, it is irrelevant: before recording, confirm the foreground package matches the target (`adb shell dumpsys window | grep mCurrentFocus`, or `agent-device appstate`). Each capture stands alone.
+- **The main agent never reads a screenshot into its own context.** Every screen's screenshot is *saved* (node `screenshotPath` + `pHash` input, both computed from the file on disk — you never view it for that). When the snapshot is insufficient (Tier 2) and vision is genuinely needed, **delegate the read to a file-only sub-agent (the vision oracle)**: it reads the full-res PNG in its own context and returns a *navigable* report — exact `label`, `role`, `center [x,y]`, `bbox`, `state` per element, plus `imageSize` — so the main agent can drive `agent-device find`/`click` from text and coordinates. The sub-agent never touches `agent-device` (keeps "one device, one session"). Phone screenshots are tall (≥2000px); reading them in the main thread accumulates across calls and trips the many-image pixel ceiling, killing visual fallback when you need it. Full recipe + prompt template: [references/exploration.md](references/exploration.md) → Tier-2 vision oracle.
 - **`--save-script` on every `open`.** Without it, edge selectors can't be hardened.
 - **Record edges, not just screens.** Every tap that changes the screen is an edge `(from, to, action, selector, kind)`. `kind` = `in-place` when the post-tap skeletonHash equals the pre-tap (same screen, data changed) — this is what the packager uses to detect state toggles. Otherwise `nav` (or `overlay` for a pushed modal, `back` for back-nav).
 - **Identity signals are mandatory per node:** `fingerprint` (sha256 of sorted (role,label) of interactive elements), `skeletonHash` (structure, labels stripped), `pHash` (screenshot perceptual hash), `routeKey` (resource-id / VC class when available). See [references/temporal.md](references/temporal.md).
