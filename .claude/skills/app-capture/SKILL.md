@@ -12,7 +12,7 @@ package  →  node scripts/package.ts graph.json                          ← de
 edit     →  write overrides + re-run the packager                        ← never hand-edit derived data
 ```
 
-The graph schema is defined by `lib/packager/types.ts` (the `Graph` type) — that file is the contract. Do **not** invent fields.
+The graph schema is defined by `lib/packager/types.ts` (the `Graph` type) — that file is the contract. Do **not** invent fields. Build each capture from this schema (and the identity helpers in `lib/packager/identity.ts` / `scripts/phash.ts`), **not** by reading another capture's `graph.json`/`view.json` for reference — that pollutes context and risks carrying another app's quirks or errors into this one.
 
 ## Navigation hierarchy — snapshot-first, always
 
@@ -73,15 +73,28 @@ Each `graph.json` is a complete graph snapshot at a date. Re-captures write a ne
 
 ## Mandatory at session start
 
-**Every `agent-device open` MUST include `--save-script`.** The master `.ad` is the source for hardening edge selectors during packaging.
+**Two non-negotiables on every `agent-device open`: a dedicated `--session` and `--save-script`.**
+
+- **`--session {app-slug}-{YYYY-MM-DD}` — never the shared `default`.** Each capture gets its own session namespace. The `default` session is shared across every app you've ever captured; reusing it lets one app's session state/baseline bleed into another's diffs. A per-capture session is cheap isolation — always set it.
+- **`--save-script {…}/master.ad`** — the master `.ad` is the source for hardening edge selectors during packaging.
+
+**Cold-boot the device first (Android).** Always cold-boot the emulator before a capture — not just `am force-stop`. A soft restart leaves the device-side accessibility-node cache intact, which on a secure surface can resurface a *previous* screen (the stale-snapshot trap); only a cold boot clears it. For a first-time capture, also `pm clear` the app so it starts at first-launch.
 
 ```bash
+# Android: cold-boot the emulator (clears the device a11y cache), then start the app fresh
+adb emu kill                                        # stop the running emulator
+emulator -avd {avd} -no-snapshot-load -no-boot-anim &   # relaunch cold (no saved snapshot)
+adb wait-for-device                                 # then poll `getprop sys.boot_completed` == 1
+adb shell pm clear {pkg}                            # FIRST-TIME capture only: reset app to first-launch
 mkdir -p {OUTPUT_DIR}/{app-slug}/_staging
 agent-device open {pkg} --platform {p} --relaunch \
+  --session {app-slug}-{YYYY-MM-DD} \
   --save-script {OUTPUT_DIR}/{app-slug}/_staging/master.ad
 ```
 
-Pre-flight: confirm `--save-script` is in the command; `session list` shows the session; `appstate` shows the right app.
+(iOS: `xcrun simctl shutdown {udid}` then `boot`; `simctl uninstall`/reinstall for a first-launch state.)
+
+Pre-flight: confirm `--session` (dedicated, not `default`) and `--save-script` are in the command; `session list` shows the session; `appstate` shows the right app.
 
 ## Workflow
 
@@ -124,11 +137,12 @@ Edit-shaped requests during conversation mutate `graph.json` `overrides`, then r
 ## Critical guardrails
 
 - **App isolation — one app per capture, zero cross-references.** A capture describes *only* its target app. Never assume, infer, port, or mention behavior from another app — not in `graph.json`, `overrides`, `credentials.md`, screen titles/descriptions, names, **or in your reasoning to the user**. "Looks like {other app}", "white-label of {X}", "same stack as {Y}" is never a basis for a decision — read *this* app's snapshot. If another app happens to be installed on the same device/emulator, it is irrelevant: before recording, confirm the foreground package matches the target (`adb shell dumpsys window | grep mCurrentFocus`, or `agent-device appstate`). Each capture stands alone.
+- **Secure screens (FLAG_SECURE) — get the visual from the user, don't trust a blank snapshot.** Auth/OTP, payment, and KYC screens in finance apps render to a secure surface: `agent-device screenshot` / `adb screencap` come back **black**, and when the live a11y read is also empty the `snapshot` can return a **stale tree from an earlier screen** — so never record a node from a snapshot that contradicts where you actually are. Say plainly it's a secure screen, ask the user for a **host screenshot** (the emulator's own screenshot bypasses `FLAG_SECURE`), and record the node from that (`snapshotPath: null`, text-derived `sha256-text:` fingerprint). Many finance apps set FLAG_SECURE **app-wide**, so once you hit one, expect *every* programmatic screenshot to stay black — plan to source visuals from the user for the whole capture. (More: [references/exploration.md](references/exploration.md) → Tier-S.)
 - **The main agent never reads a screenshot into its own context.** Every screen's screenshot is *saved* (node `screenshotPath` + `pHash` input, both computed from the file on disk — you never view it for that). When the snapshot is insufficient (Tier 2) and vision is genuinely needed, **delegate the read to a file-only sub-agent (the vision oracle)**: it reads the full-res PNG in its own context and returns a *navigable* report — exact `label`, `role`, `center [x,y]`, `bbox`, `state` per element, plus `imageSize` — so the main agent can drive `agent-device find`/`click` from text and coordinates. The sub-agent never touches `agent-device` (keeps "one device, one session"). Phone screenshots are tall (≥2000px); reading them in the main thread accumulates across calls and trips the many-image pixel ceiling, killing visual fallback when you need it. Full recipe + prompt template: [references/exploration.md](references/exploration.md) → Tier-2 vision oracle.
 - **`--save-script` on every `open`.** Without it, edge selectors can't be hardened.
 - **Record edges, not just screens.** Every tap that changes the screen is an edge `(from, to, action, selector, kind)`. `kind` = `in-place` when the post-tap skeletonHash equals the pre-tap (same screen, data changed) — this is what the packager uses to detect state toggles. Otherwise `nav` (or `overlay` for a pushed modal, `back` for back-nav).
 - **Identity signals are mandatory per node:** `fingerprint` (sha256 of sorted (role,label) of interactive elements), `skeletonHash` (structure, labels stripped), `pHash` (screenshot perceptual hash), `routeKey` (resource-id / VC class when available). See [references/temporal.md](references/temporal.md).
-- **Never invent graph fields.** The contract is `lib/packager/types.ts`. Need a new field? STOP and ask about a schema extension.
+- **Never invent fields — and don't accrete scaffolding.** The graph contract is `lib/packager/types.ts`; need a new graph field? STOP and ask about a schema extension. Apply the *same* restraint where no validator reaches — the staging log (`walk.json`), helper scripts, and this skill's own prose: a novel screen or surprising failure (a secure screen, a stale snapshot, an odd state) is almost never a reason for new infrastructure. The fix is a one-line observation plus asking the user — not a new flag, a detection script, or a forensic write-up here. Test for any staging field: if it doesn't map to a `types.ts` field or raw observation (`shot` path, `texts`, `interactive`, edges), drop it. Incident-specific detail lives in that capture's notes, never in the skill.
 - **Don't hand-build flows or classify states.** That logic lives in `lib/packager` and is deterministic. If the derived tree is wrong, fix it with an `override`, not by editing output.
 - **`overrides` is the only hand-edited surface,** and it's preserved across re-captures.
 - **No empty-string selectors** — a real selector or `null`.
