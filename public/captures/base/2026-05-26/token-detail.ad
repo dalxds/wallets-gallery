@@ -1,6 +1,0 @@
-context platform=android device="pixel test" kind=emulator theme=unknown
-open "org.toshi" --relaunch
-click "id=\"SearchTabButton\" || role=\"button\" label=\"Search\" || label=\"Search\""
-click "role=\"button\" label=\"ORBIT, $321.2K MC, $0.0₅32231, , 45.39%\" || label=\"ORBIT, $321.2K MC, $0.0₅32231, , 45.39%\""
-back
-close

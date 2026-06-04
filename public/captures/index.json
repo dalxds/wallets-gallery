@@ -1,13 +1,3 @@
 {
-  "apps": [
-    {
-      "slug": "base",
-      "name": "Base",
-      "platform": "android",
-      "captures": [
-        "2026-05-26"
-      ],
-      "latest": "2026-05-26"
-    }
-  ]
+  "apps": []
 }

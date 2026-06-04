@@ -1,5 +1,0 @@
-context platform=android device="pixel test" kind=emulator theme=unknown
-open "org.toshi" --relaunch
-click "id=\"send-button\" || role=\"button\" label=\"Send\" || label=\"Send\""
-back
-close
