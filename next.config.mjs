@@ -7,6 +7,10 @@ const nextConfig = {
   // next/image's default loader needs a server; we render plain <img> against
   // the content-addressed PNGs in public/, so opt out of optimization.
   images: { unoptimized: true },
+  // Dev-only: allow loading /_next/* when you open the dev server from another
+  // device on the LAN (e.g. a phone hitting the Mac's IP). Ignored in the
+  // static export. Add more origins/IPs here as needed.
+  allowedDevOrigins: ["192.168.1.11"],
 }
 
 export default nextConfig
