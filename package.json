@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "node scripts/build-data.ts && next build",
-    "start": "next start",
+    "build": "node scripts/build-data.ts && next build && node scripts/prune-export.ts",
+    "start": "npx serve out",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
