@@ -13,6 +13,11 @@
     "previousCapture": null
   },
   "root": "welcome",
+  "mainNav": [
+    "home",
+    "earn",
+    "rewards-intro"
+  ],
   "nodes": [
     {
       "id": "welcome",
@@ -2886,6 +2891,7 @@
       "earn-convert-review": "Converting tokens",
       "add-money-source@earn": "Adding money",
       "send-find-tuyo@home": "Sending money",
+      "send-find-tuyo@earn": "Sending money",
       "earn-token-detail@earn-invest-explorer": "Token detail"
     }
   }

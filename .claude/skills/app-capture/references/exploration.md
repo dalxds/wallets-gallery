@@ -305,9 +305,17 @@ Some screens prevent the runner from reaching idle (continuous animations, live 
 
 **IMPORTANT: One device, one session.** Never spawn background agents or subagents that drive the device in parallel. Hung subagents also hold the device — kill them too.
 
+### Main navigation → `mainNav`
+
+A persistent primary navigation — a bottom-tab bar, nav rail, or drawer shown across the app's top-level screens — defines its top-level sections. Record the node id each nav item lands on in the walk-level `mainNav` array, e.g. `"mainNav": ["home", "search", "profile"]`. The packager makes each one a **top-level flow that roots its own subtree** instead of nesting it under whatever screen you tapped it from (a peer section, not a child of Home).
+
+- Record the node a nav item navigates TO — the section's landing screen in the state you first reach it — and include the home/default tab too.
+- Optional: omit `mainNav` for apps with no persistent main navigation (pure onboarding, a single linear tool). Absence changes nothing about the derivation.
+- A typo'd id fails validation in `assemble.ts` (it refuses to write), so you catch it immediately.
+
 ## Assemble + Package
 
-After exploration you have a complete `_staging/walk.json` (raw `nodes` + `edges` + `decisionPoints` + `root` + `meta`). Two deterministic steps turn it into the derived view — you hand-build none of it:
+After exploration you have a complete `_staging/walk.json` (raw `nodes` + `edges` + `decisionPoints` + `root` + optional `mainNav` + `meta`). Two deterministic steps turn it into the derived view — you hand-build none of it:
 
 ```bash
 node scripts/assemble.ts _staging/walk.json {date}/graph.json   # 1. signals + assets + validate → graph.json

@@ -89,11 +89,12 @@ export interface DecisionPoint {
 export interface Overrides {
   /** flow id (= anchor node id) → flow name (LLM-/human-chosen; must persist for the static build). */
   flowNames?: Record<string, string>
-  /** flow id (= anchor node id) → structural corrections to the derived tree. */
-  structure?: Record<
-    string,
-    { parent?: string | null; promote?: boolean; topLevel?: boolean }
-  >
+  /**
+   * flow id → corrections to the derived tree's shape. One lever: `parent` re-parents a
+   * flow under another, or pins it to the root with `parent: null`. (Main-nav sections are
+   * handled generally by graph.mainNav — they never need a per-flow override here.)
+   */
+  structure?: Record<string, { parent?: string | null }>
   /** node id → screen-fact corrections (incl. forced state classification). */
   screens?: Record<
     string,
@@ -119,6 +120,13 @@ export interface Graph {
   meta: GraphMeta
   /** Launch node id (BFS root). */
   root: string
+  /**
+   * Main-navigation destination node ids — the app's top-level sections, however they're
+   * presented (bottom-tab bar, nav rail, drawer). Each becomes a top-level flow that roots
+   * its own subtree instead of nesting under whatever screen launched it. Record the node
+   * each nav item navigates TO; omit/empty for apps with no persistent main navigation.
+   */
+  mainNav?: string[]
   nodes: GraphNode[]
   edges: GraphEdge[]
   decisionPoints: DecisionPoint[]

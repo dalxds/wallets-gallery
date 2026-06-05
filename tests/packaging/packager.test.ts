@@ -125,3 +125,89 @@ describe("packager — journeys", () => {
     expect(JSON.stringify(packageGraph(fixture()))).toBe(JSON.stringify(packageGraph(fixture())))
   })
 })
+
+// Home (root + hub) with one normal branch (Send/Receive nest under it) and one
+// main-nav destination (Activity), which has its own sub-screens. Activity is a peer
+// section, not something "launched from Home" — so it should top-level, not nest.
+function navFixture(opts: { mainNav?: string[]; overrides?: Graph["overrides"] } = {}): Graph {
+  const nodes: GraphNode[] = [
+    node("home", "home", "sk:home", ["Home"], ["Send", "Receive", "Activity"]),
+    node("send", "form", "sk:send", ["Send"], ["Confirm"]),
+    node("receive", "form", "sk:receive", ["Receive"], ["Share"]),
+    node("activity", "list", "sk:activity", ["Activity"], ["Filter", "Detail"]),
+    node("activity-detail", "form", "sk:actdetail", ["Transaction"], ["Repeat"]),
+    node("activity-filter", "form", "sk:actfilter", ["Filter activity"], ["Apply"]),
+  ]
+  const edges: GraphEdge[] = [
+    edge("home", "send", "Tap Send", 'id="send"', "nav", 1),
+    edge("home", "receive", "Tap Receive", 'id="receive"', "nav", 2),
+    edge("home", "activity", "Tap Activity tab", 'id="activity-tab"', "nav", 3),
+    edge("activity", "activity-detail", "Tap a transaction", 'id="txn"', "nav", 4),
+    edge("activity", "activity-filter", "Tap Filter", 'id="filter"', "nav", 5),
+  ]
+  return {
+    meta: { schemaVersion: 2, app: { name: "Nav", slug: "nav", bundleId: "com.nav.app", platform: "ios" }, captureDate: "2026-06-05", scope: "initial", mode: "free-roam", previousCapture: null },
+    root: "home",
+    ...(opts.mainNav ? { mainNav: opts.mainNav } : {}),
+    nodes,
+    edges,
+    decisionPoints: [],
+    overrides: opts.overrides ?? {},
+  }
+}
+
+describe("packager — main-nav destinations are top-level", () => {
+  const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+  const find = (view: ReturnType<typeof packageGraph>, ids: string[]) =>
+    view.flows.find((f) => stepsOf(f).join(">") === ids.join(">"))
+
+  it("without mainNav: a tab destination nests under whatever launched it (Home)", () => {
+    const view = packageGraph(navFixture())
+    const activity = find(view, ["home", "activity"])!
+    const home = find(view, ["home"])!
+    expect(activity).toBeTruthy() // Activity hangs off Home as a child
+    expect(activity.parent).toBe(home.slug)
+    expect(view.flows.find((f) => stepsOf(f).join(">") === "activity")).toBeUndefined()
+  })
+
+  it("with mainNav: the tab destination roots its OWN top-level subtree, not under Home", () => {
+    const view = packageGraph(navFixture({ mainNav: ["home", "activity"] }))
+    const home = find(view, ["home"])!
+    const activity = find(view, ["activity"])!
+    const send = find(view, ["home", "send"])!
+    const detail = find(view, ["activity", "activity-detail"])!
+    expect(home.parent).toBeNull()
+    expect(activity.parent).toBeNull() // top-level, a peer of Home
+    expect(send.parent).toBe(home.slug) // normal branch still nests under Home
+    expect(detail.parent).toBe(activity.slug) // Activity's sub-screen nests under Activity
+    // Home no longer owns Activity
+    expect(view.flows.some((f) => stepsOf(f).join(">") === "home>activity")).toBe(false)
+    expect(view.stats.topLevelFlows).toBe(2) // Home + Activity
+  })
+
+  it("an unknown mainNav id is ignored (no crash, no effect)", () => {
+    const view = packageGraph(navFixture({ mainNav: ["home", "does-not-exist"] }))
+    expect(find(view, ["home", "activity"])!.parent).toBe(find(view, ["home"])!.slug)
+  })
+})
+
+describe("packager — overrides.structure (the hand lever over the tree)", () => {
+  const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+  const find = (view: ReturnType<typeof packageGraph>, ids: string[]) =>
+    view.flows.find((f) => stepsOf(f).join(">") === ids.join(">"))
+
+  it("parent: null pins a derived child to the root", () => {
+    const base = packageGraph(navFixture())
+    expect(find(base, ["home", "activity"])!.parent).not.toBeNull() // child by default
+    const view = packageGraph(navFixture({ overrides: { structure: { activity: { parent: null } } } }))
+    const activity = view.flows.find((f) => f.slug === find(base, ["home", "activity"])!.slug)!
+    expect(activity.parent).toBeNull()
+  })
+
+  it("parent re-parents a flow explicitly", () => {
+    const view = packageGraph(navFixture({ overrides: { structure: { send: { parent: "receive" } } } }))
+    const send = find(view, ["home", "send"])!
+    const receive = find(view, ["home", "receive"])!
+    expect(send.parent).toBe(receive.slug)
+  })
+})

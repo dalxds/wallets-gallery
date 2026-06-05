@@ -6,8 +6,15 @@
 // journey nests under whatever it launches from — Send under Home, Privacy under
 // Settings, Request under Receive — all the way up. Pickers / modals flow through
 // as side-screens (browsable in the Screens tab), never their own flow.
+//
+// Two anchors break the nest-under-launcher rule and root their OWN top-level tree:
+// completion hubs (home / launch screens — see `hubSet`) and main-navigation roots
+// (`navRoots`, from graph.mainNav — a bottom-tab bar, nav rail, or drawer). A main-nav
+// section is a peer, not a child of whatever screen launched it, so it gets its own
+// top-level subtree instead of nesting under the launcher.
+// Hand corrections to the derived tree live in overrides.structure (applied last).
 
-import type { GraphEdge } from "./types.ts"
+import type { GraphEdge, Overrides } from "./types.ts"
 import type { Adjacency } from "./graph.ts"
 import type { SafResult } from "./saf.ts"
 import type { ClassifyResult } from "./classify.ts"
@@ -28,7 +35,15 @@ export interface SegmentResult {
   dist: Map<string, number>
 }
 
-export function segment(saf: SafResult, cls: ClassifyResult, adj: Adjacency, edges: GraphEdge[], root: string): SegmentResult {
+export function segment(
+  saf: SafResult,
+  cls: ClassifyResult,
+  adj: Adjacency,
+  edges: GraphEdge[],
+  root: string,
+  navRoots: Set<string> = new Set(),
+  overrides: Overrides = {}
+): SegmentResult {
   const folded = new Set<string>()
   for (const [id, r] of cls.route) if (r === "toggle") folded.add(id)
 
@@ -125,9 +140,10 @@ export function segment(saf: SafResult, cls: ClassifyResult, adj: Adjacency, edg
   let flowSeq = 0
 
   // FEATURE journeys (hub → leaf, branch-nested). Continuations heading toward a
-  // completion hub are excluded — those become completion journeys below.
+  // completion hub are excluded — those become completion journeys below. Nav roots
+  // are excluded too: a main-nav destination is never a child, it roots its own tree.
   const featureConts = (cur: string, seen: Set<string>) =>
-    continuations(cur, seen).filter((c) => !hubSet.has(c) && !reachesHub(c))
+    continuations(cur, seen).filter((c) => !hubSet.has(c) && !navRoots.has(c) && !reachesHub(c))
   function build(steps0: string[], start: string, parentId: string | null, seen: Set<string>) {
     const trunk = [...steps0]
     let cur: string | undefined = start
@@ -135,7 +151,7 @@ export function segment(saf: SafResult, cls: ClassifyResult, adj: Adjacency, edg
     while (cur && !seen.has(cur) && trunk.length < MAX_TRUNK) {
       trunk.push(cur)
       seen.add(cur)
-      if (hubSet.has(cur) && cur !== trunk[0]) {
+      if ((hubSet.has(cur) || navRoots.has(cur)) && cur !== trunk[0]) {
         conts = []
         break
       }
@@ -150,11 +166,12 @@ export function segment(saf: SafResult, cls: ClassifyResult, adj: Adjacency, edg
     raws.push({ id: myId, entry: trunk[0], steps: trunk, parent: parentId, goal: trunk[trunk.length - 1] })
     for (const c of conts) build([trunk[trunk.length - 1]], c, myId, new Set(seen))
   }
-  // Feature trees root at every entry point AND every hub, so home's tree builds even
-  // when home is reached from onboarding rather than being the launch screen.
+  // Feature trees root at every entry point, every hub, AND every main-nav root — so the
+  // home tree builds even when reached from onboarding, and each top-level nav section
+  // roots its own tree instead of hanging off whatever screen launched it.
   const featureRoots: string[] = []
   const seenRoot = new Set<string>()
-  for (const id of [...topStarts, ...hubSet]) if (!seenRoot.has(id)) { seenRoot.add(id); featureRoots.push(id) }
+  for (const id of [...topStarts, ...hubSet, ...navRoots]) if (!seenRoot.has(id)) { seenRoot.add(id); featureRoots.push(id) }
   for (const s of featureRoots) build([], s, null, new Set())
 
   // COMPLETION journeys: shortest path from each entry to each reachable hub
@@ -232,6 +249,20 @@ export function segment(saf: SafResult, cls: ClassifyResult, adj: Adjacency, edg
   for (const j of kept) {
     if (j.parent) j.parent = stableOf.get(j.parent) ?? j.parent
     j.id = stableOf.get(j.id)!
+  }
+
+  // Structure overrides — the one hand lever over the derived tree's SHAPE, keyed by
+  // stable flow id and applied LAST so it always wins. `parent` re-parents a flow under
+  // another, or pins it to the root with `parent: null`. (Main-nav sections are handled
+  // generally via navRoots above — they never need an override here.) A self-parent is
+  // ignored; a dangling parent falls back to top-level downstream (index.ts resolves an
+  // unknown parent to null).
+  const st = overrides.structure ?? {}
+  if (Object.keys(st).length) {
+    for (const j of kept) {
+      const o = st[j.id]
+      if (o && o.parent !== undefined && o.parent !== j.id) j.parent = o.parent
+    }
   }
 
   return { journeys: kept, dist }

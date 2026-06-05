@@ -39,6 +39,8 @@ export function validateGraph(graph: Graph): ValidationResult {
 
   if (!ids.has(graph.root)) err(`root "${graph.root}" not in nodes`)
 
+  for (const t of graph.mainNav ?? []) if (!ids.has(t)) err(`mainNav id "${t}" not in nodes`)
+
   for (let i = 0; i < (graph.edges ?? []).length; i++) {
     const e = graph.edges[i]
     const ctx = `edges[${i}] (${e.from}→${e.to})`

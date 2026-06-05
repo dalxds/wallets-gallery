@@ -63,6 +63,8 @@ export interface WalkEdge {
 export interface Walk {
   meta: Omit<GraphMeta, "schemaVersion">
   root: string
+  /** Main-navigation destination node ids (bottom-tab bar, nav rail, drawer) — the app's top-level sections. */
+  mainNav?: string[]
   nodes: WalkNode[]
   edges?: WalkEdge[]
   decisionPoints?: DecisionPoint[]
@@ -122,6 +124,7 @@ export function assembleGraph(walk: Walk, io: AssembleIO): { graph: Graph; warni
   const graph: Graph = {
     meta: { schemaVersion: 2, ...walk.meta, previousCapture: walk.meta.previousCapture ?? null },
     root: walk.root,
+    ...(walk.mainNav && walk.mainNav.length ? { mainNav: walk.mainNav } : {}),
     nodes,
     edges,
     decisionPoints: walk.decisionPoints ?? [],

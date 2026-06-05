@@ -45,9 +45,7 @@ Override keys + types: [schema.md](schema.md) → `overrides`. Flow ids are anch
 |---|---|
 | Rename a flow | `overrides.flowNames["<flow-id>"] = "New Name"` |
 | Re-parent a flow under another | `overrides.structure["<flow-id>"] = { parent: "<parent-flow-id>" }` |
-| Force a flow to the top level | `overrides.structure["<flow-id>"] = { topLevel: true }` (or `{ parent: null }`) |
-| Promote a screen to its own flow | `overrides.structure["<node-id>"] = { promote: true }` |
-| Demote a screen (don't make it a flow) | `overrides.structure["<node-id>"] = { promote: false }` |
+| Force a flow to the top level | `overrides.structure["<flow-id>"] = { parent: null }` |
 | Fix a screen's role / title / description | `overrides.screens["<node-id>"] = { role: "picker", title: "…", description: "…" }` |
 | Force a screen's state / group (on-step toggle) | `overrides.screens["<node-id>"] = { state: "empty", stateGroup: "<logical-screen-id>" }` |
 | Merge screens the packager kept separate | `overrides.merges = [["<node-a>", "<node-b>", …]]` |

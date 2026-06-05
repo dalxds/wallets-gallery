@@ -24,6 +24,7 @@ The single artifact you write during exploration. `assemble.ts` turns it into `g
   "meta": { "app": { "name": "Acme Bank", "slug": "acme-bank", "bundleId": "com.acme.bank", "platform": "android" },
             "captureDate": "2026-05-25", "scope": "initial", "mode": "guided", "previousCapture": null },
   "root": "login",
+  "mainNav": ["home", "accounts", "settings"],                   // optional: main-nav landing screens (see below)
   "nodes": [
     {
       "id": "login",
@@ -53,6 +54,7 @@ The single artifact you write during exploration. `assemble.ts` turns it into `g
 - **`nodes[]`** — one per unique screen. Record `id`, `role`, `texts`, `interactiveElements`, the `shot`/`snap` staging paths, and `routeKey` if recoverable. **No `fingerprint`/`skeletonHash`/`pHash`/`screenshotPath`** — assemble computes those. Reuse the same `id` when you re-encounter a screen (record only new edges from it).
 - **`edges[]`** — `{from, to, action}` plus optional `selector` (a real selector or omit/`null`) and optional `kind`. Record `kind` **only** for `back` (you pressed back) or `overlay` (a sheet over the prior screen); assemble derives `in-place` vs `nav` from skeleton equality. `observedAtStep` is optional (defaults to walk order).
 - **`decisionPoints[]`** — `{nodeId, options[{label, explored, toNode?}]}`.
+- **`mainNav[]`** — optional. Node ids of the app's persistent main-navigation destinations (bottom-tab bar / nav rail / drawer) — the landing screen each nav item navigates to, home/default tab included. The packager makes each a **top-level flow that roots its own subtree** instead of nesting it under whatever launched it. Omit for apps with no persistent main nav. A bad id fails validation.
 - **`overrides`** — omit on a fresh capture. On a re-capture, copy the prior `graph.json`'s `overrides` here verbatim so assemble carries it forward.
 
 ## `app.json`
@@ -126,6 +128,7 @@ The committed source-of-truth file per capture, `schemaVersion: 2`. **You don't 
 - **`edges[]`** — transitions `{from, to, action, selector, kind, observedAtStep}`. `kind` ∈ `nav` / `overlay` / `in-place` / `back`. An `in-place` edge (from/to share a `skeletonHash`) is the deterministic state-toggle signal — assemble derives `in-place`/`nav`; you record only `back`/`overlay`.
 - **`decisionPoints[]`** — branch points `{nodeId, options[{label, explored, toNode?}]}`.
 - **`root`** — the launch node id (BFS root).
+- **`mainNav`** — optional main-navigation landing-screen ids; each becomes a top-level flow (carried through from `walk.json`).
 - **`overrides`** — see below.
 
 ### `overrides` — the only hand-edited block
@@ -135,7 +138,7 @@ Written exclusively by the edit agent and carried forward verbatim across re-cap
 | Key | Type | Corrects |
 |---|---|---|
 | `flowNames` | flow-id → name | the name of a derived flow (flow id = its anchor node id) |
-| `structure` | flow-id → `{parent?, promote?, topLevel?}` | the derived tree: re-parent, force/suppress promotion to its own flow, pin top-level |
+| `structure` | flow-id → `{parent?}` | the derived tree: re-parent a flow (`parent: null` pins it top-level). Main-nav sections are handled generally by `mainNav` — no per-flow override needed |
 | `screens` | node-id → `{role?, title?, description?, state?, stateGroup?}` | a screen's facts, incl. forcing its state classification / group |
 | `merges` | node-id groups (`string[][]`) | force-merge nodes the packager kept separate into one logical screen |
 | `splits` | node-ids (`string[]`) | force-keep nodes distinct that the packager would merge |
