@@ -169,7 +169,7 @@ export interface ViewReplay {
   credentialsTemplate: string[]
 }
 
-export type NameSource = "override" | "section" | "state" | "mechanical"
+export type NameSource = "override" | "mechanical"
 
 export interface ViewFlow {
   slug: string

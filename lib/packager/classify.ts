@@ -61,13 +61,6 @@ export function classify(
   const route = new Map<string, Route>()
   const defaultOf = new Map<string, string>()
 
-  // Honor forced stateGroup overrides first: any node tagged with a stateGroup
-  // forms/joins that group as a toggle member.
-  for (const n of saf.canonicalNodes) {
-    const g = ov[n.id]?.stateGroup
-    if (g) stateGroup.set(n.id, g)
-  }
-
   for (const [logicalId, memberIds] of saf.members) {
     const members = memberIds.map((id) => nodeById.get(id)!).filter(Boolean)
     const defaults = members.filter((n) => state.get(n.id) === "default")
@@ -80,7 +73,7 @@ export function classify(
     for (const v of members) {
       if (v.id === def.id) continue
 
-      const forcedGroup = stateGroup.get(v.id)
+      const forcedGroup = ov[v.id]?.stateGroup
       const inPlaceEdge = edges.some(
         (e) =>
           ((e.from === def.id && e.to === v.id) || (e.from === v.id && e.to === def.id)) &&

@@ -66,7 +66,7 @@ const mockCapture: AppCapture = {
       entryPoints: ["home"],
       replay: null,
       steps: [],
-      nameSource: "section",
+      nameSource: "mechanical",
     },
   ],
   decisionPoints: [],
