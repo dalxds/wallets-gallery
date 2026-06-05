@@ -97,12 +97,10 @@ Mark animation-blocked screens in the staging log so re-encountering them later 
 
 ### Tier-S — Secure screens (FLAG_SECURE)
 
-Auth/OTP, payment, and KYC screens render to a secure surface: programmatic screenshots (`agent-device screenshot`, `adb screencap`) come back **black**, and when the live a11y read is also empty `agent-device snapshot` may return a **stale tree from an earlier screen** instead of failing — recording from it injects a foreign screen into the graph (this happened once: a secure OTP screen returned a logged-in "home" tree from a prior session). Two rules:
+Some finance apps mark auth/OTP/payment/KYC windows secure, so `agent-device screenshot` / `adb screencap` can return an **all-black** frame (the structure snapshot is usually still fine). Detect it — a black PNG via a cheap mean-brightness check, not an assumption — then:
 
-1. **Don't record from a snapshot that contradicts where you are.** If the screenshot is black and the snapshot looks empty/unchanged/wrong for this screen, treat it as unreadable — say plainly it's a secure screen rather than inventing a node.
-2. **Source the visual from the user.** The emulator's own host screenshot bypasses FLAG_SECURE; ask for it and record the node from that (`snapshotPath: null`, `pHash` of the manual PNG, `sha256-text:` fingerprint over visible text). Many finance apps set FLAG_SECURE **app-wide**, so expect *every* programmatic screenshot to stay black — plan to get visuals from the user for the whole capture.
-
-The stale tree clears once the app reaches a normal screen; re-test Tier 1 there. Note the common, non-trap case: a black screenshot with a *live, plausible* snapshot is just a screenshot-blocked screen — structure is fine to record, only the visual needs the user.
+1. **Treat an unreadable read honestly.** A black screenshot, or a snapshot that's empty/errors, means the screen can't be read programmatically — say plainly it's a secure/unreadable screen rather than inventing a node. (Snapshot freshness is the CLI's job: an up-to-date `agent-device` returns the current screen or an error, never a cached prior one — so don't reboot or clear device caches to "fix" it.)
+2. **Source the visual from the user.** The emulator's own host screenshot bypasses FLAG_SECURE; ask for it and record the node from that (`snapshotPath: null`, `pHash` of the manual PNG, `sha256-text:` fingerprint over visible text). If one screen is secure more may be — but when screenshots read fine (the common case), there's nothing to handle.
 
 ### Per-screen escalation flow
 
