@@ -1,18 +1,18 @@
 "use client"
 
-import type { AppIndex, AppCapture } from "@/lib/types"
+import type { AppIndex } from "@/lib/types"
+import { captureUrl } from "@/lib/images"
 import { formatDate } from "@/lib/utils"
 import Link from "next/link"
 
 interface AppCardProps {
   app: AppIndex
-  capture?: AppCapture
   view: "grid" | "list"
 }
 
-export function AppCard({ app, capture, view }: AppCardProps) {
-  const screenCount = capture?.screens.length ?? 0
-  const flowCount = capture?.flows.length ?? 0
+export function AppCard({ app, view }: AppCardProps) {
+  const screenCount = app.screens
+  const flowCount = app.flows
 
   if (view === "list") {
     return (
@@ -42,6 +42,19 @@ export function AppCard({ app, capture, view }: AppCardProps) {
       href={`/apps/${app.slug}`}
       className="group flex flex-col gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-accent"
     >
+      {app.cover && (
+        <div
+          className="overflow-hidden rounded-lg border bg-muted"
+          style={{ aspectRatio: "4/3" }}
+        >
+          <img
+            src={captureUrl(app.slug, app.cover)}
+            alt={`${app.name} preview`}
+            loading="lazy"
+            className="h-full w-full object-cover object-top transition-transform group-hover:scale-[1.02]"
+          />
+        </div>
+      )}
       <div className="flex items-center gap-3">
         <img
           src={`https://avatar.vercel.sh/${app.slug}`}

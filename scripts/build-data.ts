@@ -11,6 +11,7 @@ import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
 import type { Graph, View } from "../lib/packager/types.ts"
+import type { SearchEntry } from "../lib/types.ts"
 
 const capturesDir = join(process.cwd(), "public/captures")
 
@@ -20,9 +21,19 @@ interface RegistryEntry {
   platform: string
   captures: string[]
   latest: string
+  cover: string
+  screens: number
+  flows: number
+}
+
+// The browse page renders from index.json alone, so each entry needs a cover
+// thumbnail. Prefer the home screen; fall back to the first screen.
+function coverOf(view: View): string {
+  const screen = view.screens.find((s) => s.role === "home") ?? view.screens[0]
+  return screen ? screen.screenshotPath : ""
 }
 const registry: RegistryEntry[] = []
-const searchEntries: any[] = []
+const searchEntries: SearchEntry[] = []
 let viewCount = 0
 
 for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
@@ -31,8 +42,9 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
   const manifestPath = join(appDir, "app.json")
   if (!existsSync(manifestPath)) continue
   const manifest = JSON.parse(readFileSync(manifestPath, "utf8"))
-  const dates: string[] = (manifest.captures ?? []).map((c: any) => c.date)
+  const dates: string[] = (manifest.captures ?? []).map((c: { date: string }) => c.date)
 
+  let latestView: View | null = null
   for (const date of dates) {
     const graphPath = join(appDir, date, "graph.json")
     if (!existsSync(graphPath)) {
@@ -44,8 +56,11 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
     writeFileSync(join(appDir, date, "view.json"), JSON.stringify(view))
     viewCount++
 
-    // search entries come from the latest view only
-    if (date === manifest.latestCapture) addSearchEntries(view)
+    // search entries + registry summary come from the latest view only
+    if (date === manifest.latestCapture) {
+      addSearchEntries(view)
+      latestView = view
+    }
   }
 
   registry.push({
@@ -54,6 +69,9 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
     platform: manifest.app.platform,
     captures: dates,
     latest: manifest.latestCapture,
+    cover: latestView ? coverOf(latestView) : "",
+    screens: latestView?.screens.length ?? 0,
+    flows: latestView?.flows.length ?? 0,
   })
 }
 

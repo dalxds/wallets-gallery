@@ -7,7 +7,10 @@
       "captures": [
         "2026-06-05"
       ],
-      "latest": "2026-06-05"
+      "latest": "2026-06-05",
+      "cover": "assets/10dd0dcf5019.png",
+      "screens": 53,
+      "flows": 28
     }
   ]
 }

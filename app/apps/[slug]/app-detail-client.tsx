@@ -5,8 +5,7 @@ import { AppHeader } from "@/components/app-detail/app-header"
 import { ScreensGrid } from "@/components/app-detail/screens-grid"
 import { FlowsView } from "@/components/app-detail/flows-view"
 import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
-import { AppDetailSkeleton } from "./app-detail-skeleton"
-import { getAppsIndex, fetchAppCapture } from "@/lib/data"
+import { fetchAppCapture } from "@/lib/data"
 import type { AppCapture, AppIndex } from "@/lib/types"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
@@ -14,11 +13,18 @@ import { useQueryState, parseAsStringLiteral } from "nuqs"
 
 const tabs = ["screens", "flows"] as const
 
-export function AppDetailClient({ slug }: { slug: string }) {
-  const [app, setApp] = useState<AppCapture | null>(null)
-  const [appIndex, setAppIndex] = useState<AppIndex | null>(null)
-  const [loading, setLoading] = useState(true)
+interface AppDetailClientProps {
+  slug: string
+  /** Latest-capture view, read at build time — the initial (and usually only) data. */
+  initialView: AppCapture
+  initialAppIndex: AppIndex
+}
 
+export function AppDetailClient({
+  slug,
+  initialView,
+  initialAppIndex,
+}: AppDetailClientProps) {
   const [tab, setTab] = useQueryState(
     "tab",
     parseAsStringLiteral(tabs).withDefault("screens")
@@ -27,6 +33,15 @@ export function AppDetailClient({ slug }: { slug: string }) {
   const [, setStepParam] = useQueryState("step")
   const [dateParam] = useQueryState("date")
   const [activeScreenId, setActiveScreenId] = useQueryState("screen")
+
+  // The latest capture is seeded from build-time props, so the client renders
+  // content immediately on hydration — no fetch, no loading state. Only an
+  // older selected date triggers a fetch; until it resolves we keep showing the
+  // latest. `app` is derived (no setState-in-effect) to avoid cascading renders.
+  const date = dateParam ?? initialAppIndex.latest
+  const isLatest = date === initialAppIndex.latest
+  const [olderView, setOlderView] = useState<AppCapture | null>(null)
+  const app = isLatest ? initialView : olderView ?? initialView
 
   // The chrome (app header + tabs) is pinned on the Flows tab; measure its
   // height so the fixed sidebar can sit exactly below it. This is a stable
@@ -44,36 +59,17 @@ export function AppDetailClient({ slug }: { slug: string }) {
     return () => ro.disconnect()
   }, [app, tab])
 
+  // Fetch only when an older capture is selected.
   useEffect(() => {
-    async function load() {
-      setLoading(true)
-      const registry = await getAppsIndex()
-      const idx = registry.apps.find((a) => a.slug === slug)
-      if (!idx) {
-        setLoading(false)
-        return
-      }
-      setAppIndex(idx)
-
-      const date = dateParam ?? idx.latest
-      const capture = await fetchAppCapture(slug, date)
-      setApp(capture)
-      setLoading(false)
+    if (isLatest) return
+    let cancelled = false
+    fetchAppCapture(slug, date).then((capture) => {
+      if (!cancelled) setOlderView(capture)
+    })
+    return () => {
+      cancelled = true
     }
-    load()
-  }, [slug, dateParam])
-
-  if (loading) {
-    return <AppDetailSkeleton />
-  }
-
-  if (!app || !appIndex) {
-    return (
-      <AppShell>
-        <p>App not found.</p>
-      </AppShell>
-    )
-  }
+  }, [slug, date, isLatest])
 
   const isFlows = tab === "flows"
 
@@ -95,7 +91,11 @@ export function AppDetailClient({ slug }: { slug: string }) {
               "lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background lg:px-4 lg:pt-6 lg:pb-6"
           )}
         >
-          <AppHeader app={app} appIndex={appIndex} currentDate={dateParam ?? appIndex.latest} />
+          <AppHeader
+            app={app}
+            appIndex={initialAppIndex}
+            currentDate={dateParam ?? initialAppIndex.latest}
+          />
 
           <div className="flex gap-4 border-b">
             <button
