@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 0,
+      "totalNodeCount": 0,
+      "reasons": []
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 179,
+      "helperTruncated": false,
+      "elapsedMs": 3
+    },
+    "warnings": [
+      "Interactive snapshot is empty after filtering 73 raw Android nodes. Likely causes: the app content is not accessibility-visible yet, a transient route change, or depth/filter options hid the target.",
+      "Recent snapshots dropped sharply in node count, which suggests stale or mid-transition UI. Use screenshot as visual truth, wait briefly, then re-snapshot once."
+    ]
+  }
+}

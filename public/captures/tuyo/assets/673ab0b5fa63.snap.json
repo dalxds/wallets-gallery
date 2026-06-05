@@ -1,0 +1,147 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 137,
+          "width": 1080,
+          "height": 2263
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "hiddenContentBelow": true,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.TextView",
+        "label": "To:",
+        "value": "To:",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 332,
+          "width": 55,
+          "height": 46
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.widget.EditText",
+        "label": "@satoshi",
+        "value": "@satoshi",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 139,
+          "y": 305,
+          "width": 783,
+          "height": 101
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 922,
+          "y": 324,
+          "width": 63,
+          "height": 63
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.widget.TextView",
+        "label": "Find people on Tuyo",
+        "value": "Find people on Tuyo",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 264,
+          "y": 808,
+          "width": 552,
+          "height": 71
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.widget.TextView",
+        "label": "Just enter their @Tuyoname",
+        "value": "Just enter their @Tuyoname",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 293,
+          "y": 900,
+          "width": 493,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e6"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": true,
+      "visibleNodeCount": 6,
+      "totalNodeCount": 6,
+      "reasons": [
+        "scroll-hidden-below"
+      ]
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 118,
+      "helperTruncated": false,
+      "elapsedMs": 77
+    },
+    "warnings": [
+      "Recent snapshots dropped sharply in node count, which suggests stale or mid-transition UI. Use screenshot as visual truth, wait briefly, then re-snapshot once."
+    ]
+  }
+}

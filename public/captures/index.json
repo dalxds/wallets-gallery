@@ -1,3 +1,13 @@
 {
-  "apps": []
+  "apps": [
+    {
+      "slug": "tuyo",
+      "name": "Tuyo",
+      "platform": "android",
+      "captures": [
+        "2026-06-05"
+      ],
+      "latest": "2026-06-05"
+    }
+  ]
 }

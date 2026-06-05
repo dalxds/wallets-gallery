@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 911,
+          "y": 1932,
+          "width": 63,
+          "height": 63
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 12,
+        "ref": "e1"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 1,
+      "totalNodeCount": 1,
+      "reasons": []
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 228,
+      "helperTruncated": false,
+      "elapsedMs": 2
+    },
+    "warnings": [
+      "Recent snapshots dropped sharply in node count, which suggests stale or mid-transition UI. Use screenshot as visual truth, wait briefly, then re-snapshot once."
+    ]
+  }
+}

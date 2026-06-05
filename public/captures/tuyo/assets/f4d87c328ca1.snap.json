@@ -1,0 +1,134 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 2117,
+          "width": 168,
+          "height": 168
+        },
+        "enabled": false,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 467,
+          "y": 2191,
+          "width": 21,
+          "height": 21
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 509,
+          "y": 2191,
+          "width": 21,
+          "height": 21
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 551,
+          "y": 2191,
+          "width": 21,
+          "height": 21
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 593,
+          "y": 2191,
+          "width": 21,
+          "height": 21
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 849,
+          "y": 2117,
+          "width": 168,
+          "height": 168
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "ref": "e6"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 6,
+      "totalNodeCount": 6,
+      "reasons": []
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 328,
+      "helperTruncated": false,
+      "elapsedMs": 425
+    },
+    "warnings": [
+      "Recent snapshots dropped sharply in node count, which suggests stale or mid-transition UI. Use screenshot as visual truth, wait briefly, then re-snapshot once."
+    ]
+  }
+}

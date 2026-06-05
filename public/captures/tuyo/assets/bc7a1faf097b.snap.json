@@ -1,0 +1,429 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 199,
+          "width": 1080,
+          "height": 2201
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 11,
+        "hiddenContentBelow": true,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.TextView",
+        "label": "+$1.00",
+        "value": "+$1.00",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 394,
+          "y": 635,
+          "width": 293,
+          "height": 128
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.widget.TextView",
+        "label": "Received from",
+        "value": "Received from",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 231,
+          "y": 796,
+          "width": 301,
+          "height": 53
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.widget.TextView",
+        "label": "0XD1FF...3239",
+        "value": "0XD1FF...3239",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 631,
+          "y": 802,
+          "width": 196,
+          "height": 42
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.widget.TextView",
+        "label": "Today · 4:14 PM",
+        "value": "Today · 4:14 PM",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 873,
+          "width": 954,
+          "height": 48
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.widget.TextView",
+        "label": "Details",
+        "value": "Details",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1026,
+          "width": 142,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "type": "android.widget.TextView",
+        "label": "From",
+        "value": "From",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1125,
+          "width": 94,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "type": "android.widget.TextView",
+        "label": "0XD1FF...3239",
+        "value": "0XD1FF...3239",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 799,
+          "y": 1143,
+          "width": 196,
+          "height": 42
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "type": "android.widget.TextView",
+        "label": "Payment",
+        "value": "Payment",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1309,
+          "width": 182,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "type": "android.widget.TextView",
+        "label": "Amount",
+        "value": "Amount",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1408,
+          "width": 146,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "type": "android.widget.TextView",
+        "label": "$1.00",
+        "value": "$1.00",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 230,
+          "y": 1408,
+          "width": 787,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e11"
+      },
+      {
+        "index": 11,
+        "type": "android.widget.TextView",
+        "label": "Fees",
+        "value": "Fees",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1510,
+          "width": 82,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 14,
+        "parentIndex": 0,
+        "ref": "e12"
+      },
+      {
+        "index": 12,
+        "type": "android.widget.TextView",
+        "label": "No fee",
+        "value": "No fee",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 883,
+          "y": 1517,
+          "width": 108,
+          "height": 42
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 14,
+        "parentIndex": 0,
+        "ref": "e13"
+      },
+      {
+        "index": 13,
+        "type": "android.widget.TextView",
+        "label": "Transaction",
+        "value": "Transaction",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1675,
+          "width": 241,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e14"
+      },
+      {
+        "index": 14,
+        "type": "android.widget.TextView",
+        "label": "Network",
+        "value": "Network",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1774,
+          "width": 152,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e15"
+      },
+      {
+        "index": 15,
+        "type": "android.widget.TextView",
+        "label": "Base",
+        "value": "Base",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 931,
+          "y": 1774,
+          "width": 86,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e16"
+      },
+      {
+        "index": 16,
+        "type": "android.widget.TextView",
+        "label": "Explorer",
+        "value": "Explorer",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1884,
+          "width": 152,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e17"
+      },
+      {
+        "index": 17,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 812,
+          "y": 1873,
+          "width": 205,
+          "height": 79
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e18"
+      },
+      {
+        "index": 18,
+        "type": "android.widget.TextView",
+        "label": "View",
+        "value": "View",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 844,
+          "y": 1889,
+          "width": 79,
+          "height": 48
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 14,
+        "parentIndex": 17,
+        "ref": "e19"
+      },
+      {
+        "index": 19,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 397,
+          "y": 2120,
+          "width": 286,
+          "height": 105
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e20"
+      },
+      {
+        "index": 20,
+        "type": "android.widget.TextView",
+        "label": "Get Help",
+        "value": "Get Help",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 496,
+          "y": 2148,
+          "width": 144,
+          "height": 48
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 15,
+        "parentIndex": 19,
+        "ref": "e21"
+      },
+      {
+        "index": 21,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 283,
+          "width": 121,
+          "height": 121
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 13,
+        "parentIndex": 0,
+        "ref": "e22"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": true,
+      "visibleNodeCount": 22,
+      "totalNodeCount": 22,
+      "reasons": [
+        "scroll-hidden-below"
+      ]
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 256,
+      "helperTruncated": false,
+      "elapsedMs": 20
+    }
+  }
+}

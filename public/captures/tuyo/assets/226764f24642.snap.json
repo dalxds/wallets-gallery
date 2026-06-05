@@ -1,0 +1,279 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 2400
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 10,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 136,
+          "width": 1080,
+          "height": 2201
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 0,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.widget.TextView",
+        "label": "Add Recipient",
+        "value": "Add Recipient",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 409,
+          "width": 295,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 508,
+          "width": 996,
+          "height": 322
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.widget.TextView",
+        "label": "BEST",
+        "value": "BEST",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 907,
+          "y": 572,
+          "width": 63,
+          "height": 34
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 3,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.widget.TextView",
+        "label": "Find on Tuyo",
+        "value": "Find on Tuyo",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 692,
+          "width": 211,
+          "height": 48
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 3,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "type": "android.widget.TextView",
+        "label": "Send money instantly with their @Tuyoname",
+        "value": "Send money instantly with their @Tuyoname",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 750,
+          "width": 621,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 3,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 851,
+          "width": 488,
+          "height": 345
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "type": "android.widget.TextView",
+        "label": "Wallet Address",
+        "value": "Wallet Address",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1019,
+          "width": 246,
+          "height": 48
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 7,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "type": "android.widget.TextView",
+        "label": "Wallet address for crypto transfers",
+        "value": "Wallet address for crypto transfers",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1077,
+          "width": 403,
+          "height": 76
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 7,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 551,
+          "y": 851,
+          "width": 487,
+          "height": 345
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e11"
+      },
+      {
+        "index": 11,
+        "type": "android.widget.TextView",
+        "label": "Bank Account",
+        "value": "Bank Account",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 593,
+          "y": 1019,
+          "width": 229,
+          "height": 48
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 10,
+        "ref": "e12"
+      },
+      {
+        "index": 12,
+        "type": "android.widget.TextView",
+        "label": "Account details for bank transfers",
+        "value": "Account details for bank transfers",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 593,
+          "y": 1077,
+          "width": 403,
+          "height": 76
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 20,
+        "parentIndex": 10,
+        "ref": "e13"
+      },
+      {
+        "index": 13,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 160,
+          "width": 121,
+          "height": 120
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 17,
+        "parentIndex": 0,
+        "ref": "e14"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": false,
+      "visibleNodeCount": 14,
+      "totalNodeCount": 14,
+      "reasons": []
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 91,
+      "helperTruncated": false,
+      "elapsedMs": 5
+    }
+  }
+}

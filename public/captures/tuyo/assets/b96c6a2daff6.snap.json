@@ -1,0 +1,151 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.ScrollView",
+        "identifier": "com.tuyo.mobile.android:id/nestedScroll",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 2166
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 14,
+        "hiddenContentBelow": true,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.ImageView",
+        "label": "close",
+        "identifier": "com.tuyo.mobile.android:id/nav_bar_cancel_button",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 923,
+          "y": 167,
+          "width": 126,
+          "height": 126
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 17,
+        "parentIndex": 0,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.widget.TextView",
+        "label": "Getting started",
+        "value": "Getting started",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 324,
+          "width": 954,
+          "height": 77
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 18,
+        "parentIndex": 0,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.widget.TextView",
+        "label": "We need some information to help us confirm your identity.",
+        "value": "We need some information to help us confirm your identity.",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 443,
+          "width": 954,
+          "height": 127
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 18,
+        "parentIndex": 0,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.widget.TextView",
+        "label": "By clicking the button below, you consent to Persona, our vendor, collecting, using, and utilizing its service providers to process your biometric information to verify your identity, identify fraud, and improve Persona’s platform in accordance with its Privacy Policy. Your biometric information will be stored for no more than 3 years.",
+        "value": "By clicking the button below, you consent to Persona, our vendor, collecting, using, and utilizing its service providers to process your biometric information to verify your identity, identify fraud, and improve Persona’s platform in accordance with its Privacy Policy. Your biometric information will be stored for no more than 3 years.",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1284,
+          "width": 954,
+          "height": 235
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 0,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.widget.Button",
+        "label": "Begin verifying",
+        "value": "Begin verifying",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1550,
+          "width": 954,
+          "height": 126
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 19,
+        "parentIndex": 0,
+        "ref": "e6"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": true,
+      "visibleNodeCount": 6,
+      "totalNodeCount": 6,
+      "reasons": [
+        "scroll-hidden-below"
+      ]
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 60,
+      "helperTruncated": false,
+      "elapsedMs": 15
+    },
+    "warnings": [
+      "Recent snapshots dropped sharply in node count, which suggests stale or mid-transition UI. Use screenshot as visual truth, wait briefly, then re-snapshot once."
+    ]
+  }
+}

@@ -1,1 +1,1539 @@
-[]
+[
+  {
+    "type": "app",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Tuyo",
+    "description": "ANDROID app — 53 screens, 28 flows",
+    "href": "/apps/tuyo"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "description": "",
+    "screenId": "welcome",
+    "href": "/apps/tuyo?tab=screens&screen=welcome"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recover account",
+    "description": "",
+    "screenId": "recover-account",
+    "href": "/apps/tuyo?tab=screens&screen=recover-account"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recovery phrase",
+    "description": "",
+    "screenId": "recover-phrase-import",
+    "href": "/apps/tuyo?tab=screens&screen=recover-phrase-import"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Referral code",
+    "description": "",
+    "screenId": "referral-code",
+    "href": "/apps/tuyo?tab=screens&screen=referral-code"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Let's get started!",
+    "description": "",
+    "screenId": "email-entry",
+    "href": "/apps/tuyo?tab=screens&screen=email-entry"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Enter your code",
+    "description": "",
+    "screenId": "otp",
+    "href": "/apps/tuyo?tab=screens&screen=otp"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Your legal name",
+    "description": "",
+    "screenId": "legal-name",
+    "href": "/apps/tuyo?tab=screens&screen=legal-name"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose a username",
+    "description": "",
+    "screenId": "choose-username",
+    "href": "/apps/tuyo?tab=screens&screen=choose-username"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Notifications priming",
+    "description": "",
+    "screenId": "notifications-priming",
+    "href": "/apps/tuyo?tab=screens&screen=notifications-priming"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Where are you based?",
+    "description": "",
+    "screenId": "country-residence",
+    "href": "/apps/tuyo?tab=screens&screen=country-residence"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Country name",
+    "description": "",
+    "screenId": "country-picker",
+    "href": "/apps/tuyo?tab=screens&screen=country-picker"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Top up your account",
+    "description": "",
+    "screenId": "top-up",
+    "href": "/apps/tuyo?tab=screens&screen=top-up"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Funds",
+    "description": "",
+    "screenId": "add-funds-amount",
+    "href": "/apps/tuyo?tab=screens&screen=add-funds-amount"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add money from",
+    "description": "",
+    "screenId": "add-funds-method-picker",
+    "href": "/apps/tuyo?tab=screens&screen=add-funds-method-picker"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send",
+    "description": "",
+    "screenId": "deposit-onchain",
+    "href": "/apps/tuyo?tab=screens&screen=deposit-onchain"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send",
+    "description": "",
+    "screenId": "deposit-onchain-pending",
+    "href": "/apps/tuyo?tab=screens&screen=deposit-onchain-pending"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Deposit complete",
+    "description": "",
+    "screenId": "deposit-complete",
+    "href": "/apps/tuyo?tab=screens&screen=deposit-complete"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Turn on notifications",
+    "description": "",
+    "screenId": "enable-notifications-modal",
+    "href": "/apps/tuyo?tab=screens&screen=enable-notifications-modal"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "New update",
+    "description": "",
+    "screenId": "whats-new-promo",
+    "href": "/apps/tuyo?tab=screens&screen=whats-new-promo"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "description": "",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=screens&screen=home"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "+$1.00",
+    "description": "",
+    "screenId": "transaction-detail",
+    "href": "/apps/tuyo?tab=screens&screen=transaction-detail"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Card intro",
+    "description": "",
+    "screenId": "card-intro",
+    "href": "/apps/tuyo?tab=screens&screen=card-intro"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TAKES 2 MIN",
+    "description": "",
+    "screenId": "kyc-verify-prompt",
+    "href": "/apps/tuyo?tab=screens&screen=kyc-verify-prompt"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Getting started",
+    "description": "",
+    "screenId": "kyc-persona-start",
+    "href": "/apps/tuyo?tab=screens&screen=kyc-persona-start"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Kyc persona country",
+    "description": "",
+    "screenId": "kyc-persona-country",
+    "href": "/apps/tuyo?tab=screens&screen=kyc-persona-country"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Upload a photo ID",
+    "description": "",
+    "screenId": "kyc-persona-id-type",
+    "href": "/apps/tuyo?tab=screens&screen=kyc-persona-id-type"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Recipient",
+    "description": "",
+    "screenId": "send-recipient",
+    "href": "/apps/tuyo?tab=screens&screen=send-recipient"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "To:",
+    "description": "",
+    "screenId": "send-find-tuyo",
+    "href": "/apps/tuyo?tab=screens&screen=send-find-tuyo"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose the source",
+    "description": "",
+    "screenId": "add-money-source",
+    "href": "/apps/tuyo?tab=screens&screen=add-money-source"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "description": "",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=screens&screen=settings"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose your handle",
+    "description": "",
+    "screenId": "settings-account-handle",
+    "href": "/apps/tuyo?tab=screens&screen=settings-account-handle"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TAKES 2 MIN",
+    "description": "",
+    "screenId": "settings-verification",
+    "href": "/apps/tuyo?tab=screens&screen=settings-verification"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Privacy",
+    "description": "",
+    "screenId": "settings-privacy",
+    "href": "/apps/tuyo?tab=screens&screen=settings-privacy"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Permissions",
+    "description": "",
+    "screenId": "settings-permissions",
+    "href": "/apps/tuyo?tab=screens&screen=settings-permissions"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Security",
+    "description": "",
+    "screenId": "settings-keys-security",
+    "href": "/apps/tuyo?tab=screens&screen=settings-keys-security"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Hi there 👋",
+    "description": "",
+    "screenId": "settings-help",
+    "href": "/apps/tuyo?tab=screens&screen=settings-help"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Get TUYOs. Get rewarded.",
+    "description": "",
+    "screenId": "rewards-intro",
+    "href": "/apps/tuyo?tab=screens&screen=rewards-intro"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TUYOs balance",
+    "description": "",
+    "screenId": "rewards",
+    "href": "/apps/tuyo?tab=screens&screen=rewards"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Pay with Tuyo Card.",
+    "description": "",
+    "screenId": "rewards-get-tuyos",
+    "href": "/apps/tuyo?tab=screens&screen=rewards-get-tuyos"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Refer your friends.",
+    "description": "",
+    "screenId": "rewards-invite",
+    "href": "/apps/tuyo?tab=screens&screen=rewards-invite"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Leaderboard",
+    "description": "",
+    "screenId": "rewards-leaderboard",
+    "href": "/apps/tuyo?tab=screens&screen=rewards-leaderboard"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "description": "",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=screens&screen=earn"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Search token",
+    "description": "",
+    "screenId": "earn-invest-explorer",
+    "href": "/apps/tuyo?tab=screens&screen=earn-invest-explorer"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "ETHEREUM",
+    "description": "",
+    "screenId": "earn-token-detail",
+    "href": "/apps/tuyo?tab=screens&screen=earn-token-detail"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Convert",
+    "description": "",
+    "screenId": "earn-convert",
+    "href": "/apps/tuyo?tab=screens&screen=earn-convert"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Strategies Overview",
+    "description": "",
+    "screenId": "earn-strategies",
+    "href": "/apps/tuyo?tab=screens&screen=earn-strategies"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Available strategies",
+    "description": "",
+    "screenId": "earn-strategy-list",
+    "href": "/apps/tuyo?tab=screens&screen=earn-strategy-list"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Morpho Moonwell Flagship USDC",
+    "description": "",
+    "screenId": "earn-strategy-deposit",
+    "href": "/apps/tuyo?tab=screens&screen=earn-strategy-deposit"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Search token",
+    "description": "",
+    "screenId": "earn-token-search",
+    "href": "/apps/tuyo?tab=screens&screen=earn-token-search"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Convert",
+    "description": "",
+    "screenId": "earn-convert-pair",
+    "href": "/apps/tuyo?tab=screens&screen=earn-convert-pair"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Review order",
+    "description": "",
+    "screenId": "earn-convert-review",
+    "href": "/apps/tuyo?tab=screens&screen=earn-convert-review"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Deposit to vault",
+    "description": "",
+    "screenId": "earn-vault-deposit",
+    "href": "/apps/tuyo?tab=screens&screen=earn-vault-deposit"
+  },
+  {
+    "type": "screen",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Review deposit",
+    "description": "",
+    "screenId": "earn-vault-deposit-review",
+    "href": "/apps/tuyo?tab=screens&screen=earn-vault-deposit-review"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "description": "",
+    "flowSlug": "welcome",
+    "href": "/apps/tuyo?tab=flows&flow=welcome"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "flowSlug": "welcome",
+    "flowName": "Welcome",
+    "screenId": "welcome",
+    "href": "/apps/tuyo?tab=flows&flow=welcome&step=0"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Creating an account",
+    "description": "",
+    "flowSlug": "creating-an-account",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "welcome",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Let's get started!",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "email-entry",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Enter your code",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "otp",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Your legal name",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "legal-name",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=3"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose a username",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "choose-username",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=4"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Notifications priming",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "notifications-priming",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=5"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Where are you based?",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "country-residence",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=6"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Top up your account",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "top-up",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=7"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Funds",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "add-funds-amount",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=8"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "deposit-onchain",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=9"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Send",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "deposit-onchain-pending",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=10"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Deposit complete",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "deposit-complete",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=11"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "New update",
+    "flowSlug": "creating-an-account",
+    "flowName": "Creating an account",
+    "screenId": "whats-new-promo",
+    "href": "/apps/tuyo?tab=flows&flow=creating-an-account&step=12"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recovering an account",
+    "description": "",
+    "flowSlug": "recovering-an-account",
+    "href": "/apps/tuyo?tab=flows&flow=recovering-an-account"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "flowSlug": "recovering-an-account",
+    "flowName": "Recovering an account",
+    "screenId": "welcome",
+    "href": "/apps/tuyo?tab=flows&flow=recovering-an-account&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recover account",
+    "flowSlug": "recovering-an-account",
+    "flowName": "Recovering an account",
+    "screenId": "recover-account",
+    "href": "/apps/tuyo?tab=flows&flow=recovering-an-account&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Recovery phrase",
+    "flowSlug": "recovering-an-account",
+    "flowName": "Recovering an account",
+    "screenId": "recover-phrase-import",
+    "href": "/apps/tuyo?tab=flows&flow=recovering-an-account&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Entering a referral code",
+    "description": "",
+    "flowSlug": "entering-a-referral-code",
+    "href": "/apps/tuyo?tab=flows&flow=entering-a-referral-code"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Welcome",
+    "flowSlug": "entering-a-referral-code",
+    "flowName": "Entering a referral code",
+    "screenId": "welcome",
+    "href": "/apps/tuyo?tab=flows&flow=entering-a-referral-code&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Referral code",
+    "flowSlug": "entering-a-referral-code",
+    "flowName": "Entering a referral code",
+    "screenId": "referral-code",
+    "href": "/apps/tuyo?tab=flows&flow=entering-a-referral-code&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Home",
+    "description": "",
+    "flowSlug": "home",
+    "href": "/apps/tuyo?tab=flows&flow=home"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "home",
+    "flowName": "Home",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=home&step=0"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Adding money",
+    "description": "",
+    "flowSlug": "adding-money",
+    "href": "/apps/tuyo?tab=flows&flow=adding-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "adding-money",
+    "flowName": "Adding money",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=adding-money&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose the source",
+    "flowSlug": "adding-money",
+    "flowName": "Adding money",
+    "screenId": "add-money-source",
+    "href": "/apps/tuyo?tab=flows&flow=adding-money&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Getting the Tuyo Card",
+    "description": "",
+    "flowSlug": "getting-the-tuyo-card",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "getting-the-tuyo-card",
+    "flowName": "Getting the Tuyo Card",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Card intro",
+    "flowSlug": "getting-the-tuyo-card",
+    "flowName": "Getting the Tuyo Card",
+    "screenId": "card-intro",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TAKES 2 MIN",
+    "flowSlug": "getting-the-tuyo-card",
+    "flowName": "Getting the Tuyo Card",
+    "screenId": "kyc-verify-prompt",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Getting started",
+    "flowSlug": "getting-the-tuyo-card",
+    "flowName": "Getting the Tuyo Card",
+    "screenId": "kyc-persona-start",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card&step=3"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Kyc persona country",
+    "flowSlug": "getting-the-tuyo-card",
+    "flowName": "Getting the Tuyo Card",
+    "screenId": "kyc-persona-country",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card&step=4"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Upload a photo ID",
+    "flowSlug": "getting-the-tuyo-card",
+    "flowName": "Getting the Tuyo Card",
+    "screenId": "kyc-persona-id-type",
+    "href": "/apps/tuyo?tab=flows&flow=getting-the-tuyo-card&step=5"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Earn",
+    "description": "",
+    "flowSlug": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=earn"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "earn",
+    "flowName": "Earn",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=earn&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "flowSlug": "earn",
+    "flowName": "Earn",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=earn&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Adding money",
+    "description": "",
+    "flowSlug": "adding-money-2",
+    "href": "/apps/tuyo?tab=flows&flow=adding-money-2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "flowSlug": "adding-money-2",
+    "flowName": "Adding money",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=adding-money-2&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose the source",
+    "flowSlug": "adding-money-2",
+    "flowName": "Adding money",
+    "screenId": "add-money-source",
+    "href": "/apps/tuyo?tab=flows&flow=adding-money-2&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Sending money",
+    "description": "",
+    "flowSlug": "sending-money",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "flowSlug": "sending-money",
+    "flowName": "Sending money",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Recipient",
+    "flowSlug": "sending-money",
+    "flowName": "Sending money",
+    "screenId": "send-recipient",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "To:",
+    "flowSlug": "sending-money",
+    "flowName": "Sending money",
+    "screenId": "send-find-tuyo",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Converting tokens",
+    "description": "",
+    "flowSlug": "converting-tokens",
+    "href": "/apps/tuyo?tab=flows&flow=converting-tokens"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "flowSlug": "converting-tokens",
+    "flowName": "Converting tokens",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=converting-tokens&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Convert",
+    "flowSlug": "converting-tokens",
+    "flowName": "Converting tokens",
+    "screenId": "earn-convert",
+    "href": "/apps/tuyo?tab=flows&flow=converting-tokens&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Convert",
+    "flowSlug": "converting-tokens",
+    "flowName": "Converting tokens",
+    "screenId": "earn-convert-pair",
+    "href": "/apps/tuyo?tab=flows&flow=converting-tokens&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Review order",
+    "flowSlug": "converting-tokens",
+    "flowName": "Converting tokens",
+    "screenId": "earn-convert-review",
+    "href": "/apps/tuyo?tab=flows&flow=converting-tokens&step=3"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Investing",
+    "description": "",
+    "flowSlug": "investing",
+    "href": "/apps/tuyo?tab=flows&flow=investing"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "flowSlug": "investing",
+    "flowName": "Investing",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=investing&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Search token",
+    "flowSlug": "investing",
+    "flowName": "Investing",
+    "screenId": "earn-invest-explorer",
+    "href": "/apps/tuyo?tab=flows&flow=investing&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Token detail",
+    "description": "",
+    "flowSlug": "token-detail",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Search token",
+    "flowSlug": "token-detail",
+    "flowName": "Token detail",
+    "screenId": "earn-invest-explorer",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "ETHEREUM",
+    "flowSlug": "token-detail",
+    "flowName": "Token detail",
+    "screenId": "earn-token-detail",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Token detail",
+    "description": "",
+    "flowSlug": "token-detail-2",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail-2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Search token",
+    "flowSlug": "token-detail-2",
+    "flowName": "Token detail",
+    "screenId": "earn-invest-explorer",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail-2&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Search token",
+    "flowSlug": "token-detail-2",
+    "flowName": "Token detail",
+    "screenId": "earn-token-search",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail-2&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "ETHEREUM",
+    "flowSlug": "token-detail-2",
+    "flowName": "Token detail",
+    "screenId": "earn-token-detail",
+    "href": "/apps/tuyo?tab=flows&flow=token-detail-2&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Earning yield",
+    "description": "",
+    "flowSlug": "earning-yield",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Total balance",
+    "flowSlug": "earning-yield",
+    "flowName": "Earning yield",
+    "screenId": "earn",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Strategies Overview",
+    "flowSlug": "earning-yield",
+    "flowName": "Earning yield",
+    "screenId": "earn-strategies",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Available strategies",
+    "flowSlug": "earning-yield",
+    "flowName": "Earning yield",
+    "screenId": "earn-strategy-list",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield&step=2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Morpho Moonwell Flagship USDC",
+    "flowSlug": "earning-yield",
+    "flowName": "Earning yield",
+    "screenId": "earn-strategy-deposit",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield&step=3"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Deposit to vault",
+    "flowSlug": "earning-yield",
+    "flowName": "Earning yield",
+    "screenId": "earn-vault-deposit",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield&step=4"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Review deposit",
+    "flowSlug": "earning-yield",
+    "flowName": "Earning yield",
+    "screenId": "earn-vault-deposit-review",
+    "href": "/apps/tuyo?tab=flows&flow=earning-yield&step=5"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Rewards",
+    "description": "",
+    "flowSlug": "rewards",
+    "href": "/apps/tuyo?tab=flows&flow=rewards"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "rewards",
+    "flowName": "Rewards",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=rewards&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Get TUYOs. Get rewarded.",
+    "flowSlug": "rewards",
+    "flowName": "Rewards",
+    "screenId": "rewards-intro",
+    "href": "/apps/tuyo?tab=flows&flow=rewards&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TUYOs balance",
+    "flowSlug": "rewards",
+    "flowName": "Rewards",
+    "screenId": "rewards",
+    "href": "/apps/tuyo?tab=flows&flow=rewards&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Earning TUYOs",
+    "description": "",
+    "flowSlug": "earning-tuyos",
+    "href": "/apps/tuyo?tab=flows&flow=earning-tuyos"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TUYOs balance",
+    "flowSlug": "earning-tuyos",
+    "flowName": "Earning TUYOs",
+    "screenId": "rewards",
+    "href": "/apps/tuyo?tab=flows&flow=earning-tuyos&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Pay with Tuyo Card.",
+    "flowSlug": "earning-tuyos",
+    "flowName": "Earning TUYOs",
+    "screenId": "rewards-get-tuyos",
+    "href": "/apps/tuyo?tab=flows&flow=earning-tuyos&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Inviting friends",
+    "description": "",
+    "flowSlug": "inviting-friends",
+    "href": "/apps/tuyo?tab=flows&flow=inviting-friends"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TUYOs balance",
+    "flowSlug": "inviting-friends",
+    "flowName": "Inviting friends",
+    "screenId": "rewards",
+    "href": "/apps/tuyo?tab=flows&flow=inviting-friends&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Refer your friends.",
+    "flowSlug": "inviting-friends",
+    "flowName": "Inviting friends",
+    "screenId": "rewards-invite",
+    "href": "/apps/tuyo?tab=flows&flow=inviting-friends&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Leaderboard",
+    "description": "",
+    "flowSlug": "leaderboard",
+    "href": "/apps/tuyo?tab=flows&flow=leaderboard"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TUYOs balance",
+    "flowSlug": "leaderboard",
+    "flowName": "Leaderboard",
+    "screenId": "rewards",
+    "href": "/apps/tuyo?tab=flows&flow=leaderboard&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Leaderboard",
+    "flowSlug": "leaderboard",
+    "flowName": "Leaderboard",
+    "screenId": "rewards-leaderboard",
+    "href": "/apps/tuyo?tab=flows&flow=leaderboard&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Sending money",
+    "description": "",
+    "flowSlug": "sending-money-2",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money-2"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "sending-money-2",
+    "flowName": "Sending money",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money-2&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Add Recipient",
+    "flowSlug": "sending-money-2",
+    "flowName": "Sending money",
+    "screenId": "send-recipient",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money-2&step=1"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "To:",
+    "flowSlug": "sending-money-2",
+    "flowName": "Sending money",
+    "screenId": "send-find-tuyo",
+    "href": "/apps/tuyo?tab=flows&flow=sending-money-2&step=2"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "description": "",
+    "flowSlug": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=settings"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=settings&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "settings",
+    "flowName": "Settings",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=settings&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Account handle",
+    "description": "",
+    "flowSlug": "account-handle",
+    "href": "/apps/tuyo?tab=flows&flow=account-handle"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "account-handle",
+    "flowName": "Account handle",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=account-handle&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Choose your handle",
+    "flowSlug": "account-handle",
+    "flowName": "Account handle",
+    "screenId": "settings-account-handle",
+    "href": "/apps/tuyo?tab=flows&flow=account-handle&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Help & support",
+    "description": "",
+    "flowSlug": "help-support",
+    "href": "/apps/tuyo?tab=flows&flow=help-support"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "help-support",
+    "flowName": "Help & support",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=help-support&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Hi there 👋",
+    "flowSlug": "help-support",
+    "flowName": "Help & support",
+    "screenId": "settings-help",
+    "href": "/apps/tuyo?tab=flows&flow=help-support&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Keys & security",
+    "description": "",
+    "flowSlug": "keys-security",
+    "href": "/apps/tuyo?tab=flows&flow=keys-security"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "keys-security",
+    "flowName": "Keys & security",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=keys-security&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Security",
+    "flowSlug": "keys-security",
+    "flowName": "Keys & security",
+    "screenId": "settings-keys-security",
+    "href": "/apps/tuyo?tab=flows&flow=keys-security&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Permissions",
+    "description": "",
+    "flowSlug": "permissions",
+    "href": "/apps/tuyo?tab=flows&flow=permissions"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "permissions",
+    "flowName": "Permissions",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=permissions&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Permissions",
+    "flowSlug": "permissions",
+    "flowName": "Permissions",
+    "screenId": "settings-permissions",
+    "href": "/apps/tuyo?tab=flows&flow=permissions&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Privacy",
+    "description": "",
+    "flowSlug": "privacy",
+    "href": "/apps/tuyo?tab=flows&flow=privacy"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "privacy",
+    "flowName": "Privacy",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=privacy&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Privacy",
+    "flowSlug": "privacy",
+    "flowName": "Privacy",
+    "screenId": "settings-privacy",
+    "href": "/apps/tuyo?tab=flows&flow=privacy&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Verifying identity",
+    "description": "",
+    "flowSlug": "verifying-identity",
+    "href": "/apps/tuyo?tab=flows&flow=verifying-identity"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Settings",
+    "flowSlug": "verifying-identity",
+    "flowName": "Verifying identity",
+    "screenId": "settings",
+    "href": "/apps/tuyo?tab=flows&flow=verifying-identity&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "TAKES 2 MIN",
+    "flowSlug": "verifying-identity",
+    "flowName": "Verifying identity",
+    "screenId": "settings-verification",
+    "href": "/apps/tuyo?tab=flows&flow=verifying-identity&step=1"
+  },
+  {
+    "type": "flow",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Transaction detail",
+    "description": "",
+    "flowSlug": "transaction-detail",
+    "href": "/apps/tuyo?tab=flows&flow=transaction-detail"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "Spending balance",
+    "flowSlug": "transaction-detail",
+    "flowName": "Transaction detail",
+    "screenId": "home",
+    "href": "/apps/tuyo?tab=flows&flow=transaction-detail&step=0"
+  },
+  {
+    "type": "step",
+    "appSlug": "tuyo",
+    "appName": "Tuyo",
+    "label": "+$1.00",
+    "flowSlug": "transaction-detail",
+    "flowName": "Transaction detail",
+    "screenId": "transaction-detail",
+    "href": "/apps/tuyo?tab=flows&flow=transaction-detail&step=1"
+  }
+]

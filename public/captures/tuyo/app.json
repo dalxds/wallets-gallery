@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "app": { "name": "Tuyo", "slug": "tuyo", "bundleId": "com.tuyo.mobile.android", "platform": "android" },
+  "firstCapturedAt": "2026-06-05",
+  "lastCapturedAt": "2026-06-05",
+  "latestCapture": "2026-06-05",
+  "captures": [
+    { "date": "2026-06-05", "scope": "initial", "mode": "guided", "previousCapture": null, "path": "2026-06-05/graph.json" }
+  ]
+}

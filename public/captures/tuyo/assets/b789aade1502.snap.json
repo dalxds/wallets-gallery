@@ -1,0 +1,239 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.ImageView",
+        "label": "back",
+        "identifier": "com.tuyo.mobile.android:id/nav_bar_back_button",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 31,
+          "y": 167,
+          "width": 126,
+          "height": 126
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 15,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.ImageView",
+        "label": "close",
+        "identifier": "com.tuyo.mobile.android:id/nav_bar_cancel_button",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 923,
+          "y": 167,
+          "width": 126,
+          "height": 126
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 15,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "androidx.recyclerview.widget.RecyclerView",
+        "identifier": "com.tuyo.mobile.android:id/recyclerview_governmentid_idlist",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 734,
+          "width": 954,
+          "height": 1603
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 14,
+        "hiddenContentBelow": true,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.view.ViewGroup",
+        "identifier": "com.tuyo.mobile.android:id/root_layout",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 734,
+          "width": 954,
+          "height": 168
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 15,
+        "parentIndex": 2,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.widget.TextView",
+        "label": "Driver License",
+        "value": "Driver License",
+        "identifier": "com.tuyo.mobile.android:id/label",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 147,
+          "y": 790,
+          "width": 807,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 16,
+        "parentIndex": 3,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.view.ViewGroup",
+        "identifier": "com.tuyo.mobile.android:id/root_layout",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 905,
+          "width": 954,
+          "height": 168
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 15,
+        "parentIndex": 2,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "type": "android.widget.TextView",
+        "label": "Passport",
+        "value": "Passport",
+        "identifier": "com.tuyo.mobile.android:id/label",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 147,
+          "y": 961,
+          "width": 807,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 16,
+        "parentIndex": 5,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "type": "android.view.ViewGroup",
+        "identifier": "com.tuyo.mobile.android:id/root_layout",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1076,
+          "width": 954,
+          "height": 168
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 15,
+        "parentIndex": 2,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "type": "android.widget.TextView",
+        "label": "Permanent Resident Card",
+        "value": "Permanent Resident Card",
+        "identifier": "com.tuyo.mobile.android:id/label",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 147,
+          "y": 1132,
+          "width": 807,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 16,
+        "parentIndex": 7,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "type": "android.view.ViewGroup",
+        "identifier": "com.tuyo.mobile.android:id/root_layout",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 63,
+          "y": 1247,
+          "width": 954,
+          "height": 168
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 15,
+        "parentIndex": 2,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "type": "android.widget.TextView",
+        "label": "Visa",
+        "value": "Visa",
+        "identifier": "com.tuyo.mobile.android:id/label",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 147,
+          "y": 1303,
+          "width": 807,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 16,
+        "parentIndex": 9,
+        "ref": "e11"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": true,
+      "visibleNodeCount": 11,
+      "totalNodeCount": 11,
+      "reasons": [
+        "scroll-hidden-below"
+      ]
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 70,
+      "helperTruncated": false,
+      "elapsedMs": 5
+    }
+  }
+}

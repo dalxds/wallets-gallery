@@ -1,0 +1,698 @@
+{
+  "success": true,
+  "data": {
+    "nodes": [
+      {
+        "index": 0,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 2400
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 10,
+        "ref": "e1"
+      },
+      {
+        "index": 1,
+        "type": "android.widget.ScrollView",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 0,
+          "y": 136,
+          "width": 1080,
+          "height": 2201
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 16,
+        "parentIndex": 0,
+        "hiddenContentBelow": true,
+        "ref": "e2"
+      },
+      {
+        "index": 2,
+        "type": "android.widget.TextView",
+        "label": "All Strategies",
+        "value": "All Strategies",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 409,
+          "width": 996,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e3"
+      },
+      {
+        "index": 3,
+        "type": "android.view.ViewGroup",
+        "label": "USD, BALANCE, 0, MAX APY, 4.92%, ASSETS, $33.97M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 529,
+          "width": 996,
+          "height": 342
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e4"
+      },
+      {
+        "index": 4,
+        "type": "android.widget.TextView",
+        "label": "USD",
+        "value": "USD",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 199,
+          "y": 591,
+          "width": 90,
+          "height": 53
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e5"
+      },
+      {
+        "index": 5,
+        "type": "android.widget.TextView",
+        "label": "BALANCE",
+        "value": "BALANCE",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 729,
+          "width": 140,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e6"
+      },
+      {
+        "index": 6,
+        "type": "android.widget.TextView",
+        "label": "MAX APY",
+        "value": "MAX APY",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 729,
+          "width": 134,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e7"
+      },
+      {
+        "index": 7,
+        "type": "android.widget.TextView",
+        "label": "ASSETS",
+        "value": "ASSETS",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 729,
+          "width": 110,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e8"
+      },
+      {
+        "index": 8,
+        "type": "android.widget.TextView",
+        "label": "0",
+        "value": "0",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 767,
+          "width": 24,
+          "height": 63
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e9"
+      },
+      {
+        "index": 9,
+        "type": "android.widget.TextView",
+        "label": "4.92%",
+        "value": "4.92%",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 767,
+          "width": 108,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e10"
+      },
+      {
+        "index": 10,
+        "type": "android.widget.TextView",
+        "label": "$33.97M",
+        "value": "$33.97M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 767,
+          "width": 150,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 3,
+        "ref": "e11"
+      },
+      {
+        "index": 11,
+        "type": "android.view.ViewGroup",
+        "label": "ETH, BALANCE, 0, MAX APY, 2.26%, ASSETS, $6.53M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 934,
+          "width": 996,
+          "height": 342
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e12"
+      },
+      {
+        "index": 12,
+        "type": "android.widget.TextView",
+        "label": "ETH",
+        "value": "ETH",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 199,
+          "y": 996,
+          "width": 84,
+          "height": 53
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e13"
+      },
+      {
+        "index": 13,
+        "type": "android.widget.TextView",
+        "label": "BALANCE",
+        "value": "BALANCE",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1134,
+          "width": 140,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e14"
+      },
+      {
+        "index": 14,
+        "type": "android.widget.TextView",
+        "label": "MAX APY",
+        "value": "MAX APY",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 1134,
+          "width": 134,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e15"
+      },
+      {
+        "index": 15,
+        "type": "android.widget.TextView",
+        "label": "ASSETS",
+        "value": "ASSETS",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 1134,
+          "width": 110,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e16"
+      },
+      {
+        "index": 16,
+        "type": "android.widget.TextView",
+        "label": "0",
+        "value": "0",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1172,
+          "width": 24,
+          "height": 63
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e17"
+      },
+      {
+        "index": 17,
+        "type": "android.widget.TextView",
+        "label": "2.26%",
+        "value": "2.26%",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 1172,
+          "width": 108,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e18"
+      },
+      {
+        "index": 18,
+        "type": "android.widget.TextView",
+        "label": "$6.53M",
+        "value": "$6.53M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 1172,
+          "width": 135,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 11,
+        "ref": "e19"
+      },
+      {
+        "index": 19,
+        "type": "android.view.ViewGroup",
+        "label": "EUR, BALANCE, 0, MAX APY, 1.85%, ASSETS, $2.35M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 1339,
+          "width": 996,
+          "height": 341
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e20"
+      },
+      {
+        "index": 20,
+        "type": "android.widget.TextView",
+        "label": "EUR",
+        "value": "EUR",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 199,
+          "y": 1401,
+          "width": 88,
+          "height": 53
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e21"
+      },
+      {
+        "index": 21,
+        "type": "android.widget.TextView",
+        "label": "BALANCE",
+        "value": "BALANCE",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1539,
+          "width": 140,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e22"
+      },
+      {
+        "index": 22,
+        "type": "android.widget.TextView",
+        "label": "MAX APY",
+        "value": "MAX APY",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 1539,
+          "width": 134,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e23"
+      },
+      {
+        "index": 23,
+        "type": "android.widget.TextView",
+        "label": "ASSETS",
+        "value": "ASSETS",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 1539,
+          "width": 110,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e24"
+      },
+      {
+        "index": 24,
+        "type": "android.widget.TextView",
+        "label": "0",
+        "value": "0",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1577,
+          "width": 24,
+          "height": 63
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e25"
+      },
+      {
+        "index": 25,
+        "type": "android.widget.TextView",
+        "label": "1.85%",
+        "value": "1.85%",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 1577,
+          "width": 98,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e26"
+      },
+      {
+        "index": 26,
+        "type": "android.widget.TextView",
+        "label": "$2.35M",
+        "value": "$2.35M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 1577,
+          "width": 132,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 19,
+        "ref": "e27"
+      },
+      {
+        "index": 27,
+        "type": "android.view.ViewGroup",
+        "label": "BTC, BALANCE, 0, MAX APY, 0.00%, ASSETS, $4.61M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 1743,
+          "width": 996,
+          "height": 342
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 18,
+        "parentIndex": 1,
+        "ref": "e28"
+      },
+      {
+        "index": 28,
+        "type": "android.widget.TextView",
+        "label": "BTC",
+        "value": "BTC",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 199,
+          "y": 1805,
+          "width": 84,
+          "height": 53
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e29"
+      },
+      {
+        "index": 29,
+        "type": "android.widget.TextView",
+        "label": "BALANCE",
+        "value": "BALANCE",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1943,
+          "width": 140,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e30"
+      },
+      {
+        "index": 30,
+        "type": "android.widget.TextView",
+        "label": "MAX APY",
+        "value": "MAX APY",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 1943,
+          "width": 134,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e31"
+      },
+      {
+        "index": 31,
+        "type": "android.widget.TextView",
+        "label": "ASSETS",
+        "value": "ASSETS",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 1943,
+          "width": 110,
+          "height": 38
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e32"
+      },
+      {
+        "index": 32,
+        "type": "android.widget.TextView",
+        "label": "0",
+        "value": "0",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 84,
+          "y": 1981,
+          "width": 24,
+          "height": 63
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e33"
+      },
+      {
+        "index": 33,
+        "type": "android.widget.TextView",
+        "label": "0.00%",
+        "value": "0.00%",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 385,
+          "y": 1981,
+          "width": 112,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e34"
+      },
+      {
+        "index": 34,
+        "type": "android.widget.TextView",
+        "label": "$4.61M",
+        "value": "$4.61M",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 686,
+          "y": 1981,
+          "width": 127,
+          "height": 57
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "depth": 21,
+        "parentIndex": 27,
+        "ref": "e35"
+      },
+      {
+        "index": 35,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 42,
+          "y": 160,
+          "width": 121,
+          "height": 120
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 17,
+        "parentIndex": 0,
+        "ref": "e36"
+      },
+      {
+        "index": 36,
+        "type": "android.view.ViewGroup",
+        "bundleId": "com.tuyo.mobile.android",
+        "rect": {
+          "x": 917,
+          "y": 160,
+          "width": 121,
+          "height": 120
+        },
+        "enabled": true,
+        "visibleToUser": true,
+        "hittable": true,
+        "depth": 17,
+        "parentIndex": 0,
+        "ref": "e37"
+      }
+    ],
+    "truncated": false,
+    "appName": "com.tuyo.mobile.android",
+    "appBundleId": "com.tuyo.mobile.android",
+    "visibility": {
+      "partial": true,
+      "visibleNodeCount": 37,
+      "totalNodeCount": 37,
+      "reasons": [
+        "scroll-hidden-below"
+      ]
+    },
+    "androidSnapshot": {
+      "backend": "android-helper",
+      "helperVersion": "0.16.13",
+      "helperApiVersion": "1",
+      "helperTransport": "persistent-session",
+      "helperSessionReused": true,
+      "installReason": "current",
+      "waitForIdleTimeoutMs": 500,
+      "waitForIdleQuietMs": 100,
+      "timeoutMs": 5000,
+      "maxDepth": 128,
+      "maxNodes": 5000,
+      "rootPresent": true,
+      "captureMode": "interactive-windows",
+      "windowCount": 2,
+      "nodeCount": 135,
+      "helperTruncated": false,
+      "elapsedMs": 13
+    }
+  }
+}
