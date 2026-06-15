@@ -19,7 +19,7 @@ function baseWalk(): Walk {
     meta: { app: { name: "Demo", slug: "demo", bundleId: "com.demo", platform: "android" }, captureDate: "2026-06-05", scope: "initial", mode: "guided", previousCapture: null },
     root: "home",
     nodes: [
-      { id: "home", role: "home", shot: "001", snap: "001snap", routeKey: "com.demo:id/home", texts: ["Balance"], interactiveElements: [el("Deposit"), el("Trade")] },
+      { id: "home", role: "home", shot: "001", snap: "001snap", texts: ["Balance"], interactiveElements: [el("Deposit"), el("Trade")] },
       // a structural twin of home (same role + element roles) → same skeletonHash
       { id: "home-loaded", role: "home", shot: "002", snap: null, texts: ["Balance", "$10"], interactiveElements: [el("Send"), el("Swap")] },
       { id: "detail", role: "list", shot: "003", snap: "003snap", texts: ["Activity"], interactiveElements: [el("Row 1")] },
@@ -40,7 +40,6 @@ describe("assembleGraph", () => {
     expect(home.pHash).toBe("p:001")
     expect(home.screenshotPath).toBe("assets/001.png")
     expect(home.snapshotPath).toBe("assets/001snap.snap.json")
-    expect(home.routeKey).toBe("com.demo:id/home")
   })
 
   it("falls back to text fingerprint for a shot-less / element-less screen", () => {

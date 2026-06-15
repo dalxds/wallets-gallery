@@ -42,6 +42,5 @@ export function buildReplay(
     commands,
     entryFingerprint: entryNode?.fingerprint ?? "",
     confidence: missing ? "low" : confidence,
-    credentialsTemplate: [],
   }
 }

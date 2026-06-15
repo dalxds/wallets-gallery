@@ -5,13 +5,12 @@ import type { Graph, GraphEdge, GraphNode, InteractiveElement, ScreenRole } from
 function el(label: string): InteractiveElement {
   return { label, role: "button", selector: `label="${label}"` }
 }
-function node(id: string, role: ScreenRole, skeletonHash: string, texts: string[], elements: string[]): GraphNode {
+function node(id: string, role: ScreenRole, skeletonHash: string, texts: string[], elements: string[], pHash: string | null = null): GraphNode {
   return {
     id,
     fingerprint: "sha256:" + id,
     skeletonHash,
-    pHash: null,
-    routeKey: null,
+    pHash,
     role,
     screenshotPath: `assets/${id}.png`,
     snapshotPath: null,
@@ -37,8 +36,10 @@ function fixture(): Graph {
     node("scan", "other", "sk:scan", ["Scan a QR code"], ["Flash"]),
     node("trade-funded", "form", "sk:trade", ["Trade", "50%", "Continue"], ["FiftyPct", "Continue"]),
     node("trade-funded-max", "form", "sk:trade", ["Trade", "Max", "Not enough", "Receive ETH"], ["Max", "Receive"]),
-    node("requires-usdc-a", "modal", "sk:requsdc", ["Trading requires USDC", "Add USDC to buy VIRTUAL", "Continue"], []),
-    node("requires-usdc-b", "modal", "sk:requsdc", ["Trading requires USDC", "Add USDC to buy ETH", "Continue"], []),
+    // Same screen, different token: identical structure (skeletonHash) + near-identical
+    // pixels (pHash). Production merges these on skeleton + pHash, not a ticker word list.
+    node("requires-usdc-a", "modal", "sk:requsdc", ["Trading requires USDC", "Add USDC to buy VIRTUAL", "Continue"], [], "p:00ff00ff00ff00ff"),
+    node("requires-usdc-b", "modal", "sk:requsdc", ["Trading requires USDC", "Add USDC to buy ETH", "Continue"], [], "p:00ff00ff00ff00ff"),
   ]
   const edges: GraphEdge[] = [
     edge("welcome", "home", "Tap Get Started", 'label="Get Started"', "nav", 1),

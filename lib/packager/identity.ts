@@ -53,14 +53,16 @@ export function computeTextFingerprint(texts: string[]): string {
 
 // ── Dynamic-content normalization (near-duplicate / merge detection) ─────────
 
-const TICKERS =
-  /\b(?:usdc|usdt|eth|btc|sol|bnb|matic|dai|weth|wbtc|ada|xrp|doge|avax|link|virtual|degen|aero|base)\b/gi
-
 /**
  * Strip volatile content so two captures of the same screen with different data
- * compare equal: currency amounts, bare numbers, percentages, token tickers,
- * @handles, hex/addresses, and timestamps all collapse to typed placeholders.
- * This is what merges e.g. "…purchase of VIRTUAL" and "…purchase of ETH".
+ * compare equal: currency amounts, bare numbers, percentages, @handles,
+ * hex/addresses, and timestamps all collapse to typed placeholders.
+ *
+ * Token/coin NAMES are deliberately NOT normalized here. Two screens that differ
+ * only by a token ("…purchase of VIRTUAL" vs "…ETH") share a skeletonHash and have
+ * near-identical pixels, so the SAF already merges them on skeleton + pHash — no
+ * hardcoded ticker vocabulary (which is app-specific, rots, and only helps screens
+ * that happen to lack a usable screenshot) belongs in this identity primitive.
  */
 export function normalizeDynamic(text: string): string {
   return normalize(
@@ -69,7 +71,6 @@ export function normalizeDynamic(text: string): string {
       .replace(/\b\d{1,2}:\d{2}(?::\d{2})?\b/g, "{time}")
       .replace(/[$€£]\s?\d[\d,]*(?:\.\d+)?/g, "{money}")
       .replace(/\b\d+(?:\.\d+)?\s?%/g, "{pct}")
-      .replace(TICKERS, "{tok}")
       .replace(/@[a-z0-9_.]+/gi, "{handle}")
       .replace(/\b\d[\d,]*(?:\.\d+)?\b/g, "{num}")
   )

@@ -24,7 +24,6 @@
       "fingerprint": "sha256:9cade6c83b260617d82a1dcf",
       "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
       "pHash": "p:0d782bfea1a1f603",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/cd4f6196b531.png",
       "snapshotPath": "assets/2919a41502e7.snap.json",
@@ -40,7 +39,8 @@
         {
           "label": "Get started",
           "role": "button",
-          "selector": "label=\"Get started\""
+          "selector": "label=\"Get started\"",
+          "emphasis": "primary"
         },
         {
           "label": "Already have a Tuyo account?",
@@ -52,20 +52,13 @@
           "role": "button",
           "selector": "label=\"I have a referral code\""
         }
-      ],
-      "primaryCta": {
-        "label": "Get started",
-        "role": "button",
-        "selector": "label=\"Get started\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "recover-account",
       "fingerprint": "sha256:3ce5fe464f5dd779ae433138",
       "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
       "pHash": "p:4c181fbca7b1fc03",
-      "routeKey": null,
       "role": "picker",
       "screenshotPath": "assets/2b790a5d17f3.png",
       "snapshotPath": "assets/832a247c59f6.snap.json",
@@ -87,16 +80,13 @@
           "role": "button",
           "selector": "label=\"With recovery phrase\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "recover-phrase-import",
       "fingerprint": "sha256:491f835edf98cae03f63f2b2",
       "skeletonHash": "sk:5f05e3403f998d100e5ccddc",
       "pHash": "p:c791dc89dc765603",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/5aa41ab18e23.png",
       "snapshotPath": "assets/e51701150ed4.snap.json",
@@ -133,22 +123,16 @@
         {
           "label": "Import",
           "role": "button",
-          "selector": "label=\"Import\""
+          "selector": "label=\"Import\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Import",
-        "role": "button",
-        "selector": "label=\"Import\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "referral-code",
       "fingerprint": "sha256:c99d50a99252378f259ccac8",
       "skeletonHash": "sk:f255365bbddebbad574d6549",
       "pHash": "p:8791ccb9fc2b5603",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/680dc875d179.png",
       "snapshotPath": "assets/18fd4404a867.snap.json",
@@ -168,22 +152,16 @@
         {
           "label": "Next",
           "role": "button",
-          "selector": "label=\"Next\""
+          "selector": "label=\"Next\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Next",
-        "role": "button",
-        "selector": "label=\"Next\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "email-entry",
       "fingerprint": "sha256:6997305f865d66d45c67a766",
       "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
       "pHash": "p:8599dc99dc237623",
-      "routeKey": null,
       "role": "auth",
       "screenshotPath": "assets/8edc611b4508.png",
       "snapshotPath": "assets/3fc64c515aa9.snap.json",
@@ -203,22 +181,16 @@
         {
           "label": "Next",
           "role": "button",
-          "selector": "label=\"Next\""
+          "selector": "label=\"Next\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Next",
-        "role": "button",
-        "selector": "label=\"Next\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "otp",
       "fingerprint": "sha256:be9115cc774f0697b724a059",
       "skeletonHash": "sk:d26687b16f42209b07c8f4c5",
       "pHash": "p:e999075666f0a399",
-      "routeKey": null,
       "role": "auth",
       "screenshotPath": "assets/f8b0a79a0d63.png",
       "snapshotPath": "assets/f2c81fea032d.snap.json",
@@ -233,16 +205,13 @@
           "role": "input",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "legal-name",
       "fingerprint": "sha256:e26bdcec0fd940553301fff7",
       "skeletonHash": "sk:084d59a5021c9d560df09593",
       "pHash": "p:c4998cb9fc337603",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/b89e66a57c76.png",
       "snapshotPath": "assets/15fc23d79b1e.snap.json",
@@ -269,22 +238,16 @@
         {
           "label": "Continue",
           "role": "button",
-          "selector": "label=\"Continue\""
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Continue",
-        "role": "button",
-        "selector": "label=\"Continue\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "choose-username",
       "fingerprint": "sha256:7a7881f172f6e889e6f7e030",
       "skeletonHash": "sk:f255365bbddebbad574d6549",
       "pHash": "p:8981e4f9fc2b7603",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/33bfc6ed27c5.png",
       "snapshotPath": "assets/c538bceb9f11.snap.json",
@@ -305,22 +268,16 @@
         {
           "label": "Continue",
           "role": "button",
-          "selector": "label=\"Continue\""
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Continue",
-        "role": "button",
-        "selector": "label=\"Continue\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "notifications-priming",
       "fingerprint": "sha256:848171b7e44d9d4054098601",
       "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
       "pHash": "p:85f071d9f8764683",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/ba2c6d88c040.png",
       "snapshotPath": "assets/d3fa0ea4cb4f.snap.json",
@@ -334,27 +291,21 @@
         {
           "label": "Turn on free purchases",
           "role": "button",
-          "selector": "label=\"Turn on free purchases\""
+          "selector": "label=\"Turn on free purchases\"",
+          "emphasis": "primary"
         },
         {
           "label": "I don't want any free purchases",
           "role": "button",
           "selector": "label=\"I don't want any free purchases\""
         }
-      ],
-      "primaryCta": {
-        "label": "Turn on free purchases",
-        "role": "button",
-        "selector": "label=\"Turn on free purchases\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "country-residence",
       "fingerprint": "sha256:2f399e0e1e8122313420683c",
       "skeletonHash": "sk:f64a31c9b5b8d1e1ba4ddebd",
       "pHash": "p:8581e4f9fc3b5603",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/2862d5c5f9b3.png",
       "snapshotPath": "assets/42be6d1be4d4.snap.json",
@@ -374,22 +325,16 @@
         {
           "label": "Continue",
           "role": "button",
-          "selector": "label=\"Continue\""
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Continue",
-        "role": "button",
-        "selector": "label=\"Continue\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "country-picker",
       "fingerprint": "sha256:0c432bd82755042f5597fe40",
       "skeletonHash": "sk:2e694c9fea067b769c14e762",
       "pHash": "p:4c727cb8fcb8e007",
-      "routeKey": null,
       "role": "picker",
       "screenshotPath": "assets/0f440f712a5f.png",
       "snapshotPath": "assets/d6ce86381127.snap.json",
@@ -415,16 +360,13 @@
           "role": "button",
           "selector": "label=\"United States\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "top-up",
       "fingerprint": "sha256:8d29b3d2e53011142bce5414",
       "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
       "pHash": "p:85d97c235689fc23",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/2ba21ff6338a.png",
       "snapshotPath": "assets/f12496e47d30.snap.json",
@@ -437,22 +379,16 @@
         {
           "label": "Add funds",
           "role": "button",
-          "selector": "label=\"Add funds\""
+          "selector": "label=\"Add funds\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Add funds",
-        "role": "button",
-        "selector": "label=\"Add funds\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "add-funds-amount",
       "fingerprint": "sha256:4ae1ce62748afcb606dab8f7",
       "skeletonHash": "sk:f64a31c9b5b8d1e1ba4ddebd",
       "pHash": "p:07c1b4f8fc194f13",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/dbc4d5fa56cc.png",
       "snapshotPath": "assets/c41d8d45777f.snap.json",
@@ -484,22 +420,16 @@
         {
           "label": "Continue",
           "role": "button",
-          "selector": "label=\"Continue\""
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Continue",
-        "role": "button",
-        "selector": "label=\"Continue\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "add-funds-method-picker",
       "fingerprint": "sha256:8f85d9c6c87399035dc5d905",
       "skeletonHash": "sk:56521897d3fd22e96039f6bc",
       "pHash": "p:66d0e7f8ec13cc03",
-      "routeKey": null,
       "role": "picker",
       "screenshotPath": "assets/ec06932ada59.png",
       "snapshotPath": "assets/7674ed081227.snap.json",
@@ -528,16 +458,13 @@
           "role": "button",
           "selector": "label=\"Transfer stablecoins\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "deposit-onchain",
       "fingerprint": "sha256:2fde68088c5903bc8ec1b822",
       "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
       "pHash": "p:86966c69dc9c6363",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/29b9a851b31c.png",
       "snapshotPath": "assets/ac4bc1223ac5.snap.json",
@@ -558,16 +485,13 @@
           "role": "button",
           "selector": "label=\"0x78e6...BCa9\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "deposit-onchain-pending",
       "fingerprint": "sha256:0ecb2ed793b08c9401fe4e2d",
       "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
       "pHash": "p:941d69f99c346363",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/e6fc54b337e8.png",
       "snapshotPath": "assets/9cb0d8c21946.snap.json",
@@ -595,16 +519,13 @@
           "role": "button",
           "selector": "label=\"Talk to support\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "deposit-complete",
       "fingerprint": "sha256:069632aeb7ea50b5a592a9a5",
       "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
       "pHash": "p:c9d87623dc897623",
-      "routeKey": null,
       "role": "confirmation",
       "screenshotPath": "assets/d49d2c38b367.png",
       "snapshotPath": "assets/f6b9181ff014.snap.json",
@@ -620,22 +541,16 @@
         {
           "label": "Continue",
           "role": "button",
-          "selector": "label=\"Continue\""
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Continue",
-        "role": "button",
-        "selector": "label=\"Continue\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "enable-notifications-modal",
       "fingerprint": "sha256:e9bbab078bdc6bdbc37464e6",
       "skeletonHash": "sk:6f4007b141df67b363a9256c",
       "pHash": "p:87962579dc8d5643",
-      "routeKey": null,
       "role": "modal",
       "screenshotPath": "assets/63d85442471c.png",
       "snapshotPath": "assets/5346890ec2cc.snap.json",
@@ -650,27 +565,21 @@
         {
           "label": "Enable push notifications",
           "role": "button",
-          "selector": "label=\"Enable push notifications\""
+          "selector": "label=\"Enable push notifications\"",
+          "emphasis": "primary"
         },
         {
           "label": "Not now",
           "role": "button",
           "selector": "label=\"Not now\""
         }
-      ],
-      "primaryCta": {
-        "label": "Enable push notifications",
-        "role": "button",
-        "selector": "label=\"Enable push notifications\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "whats-new-promo",
       "fingerprint": "sha256:4e3eff5bedf0af732c039264",
       "skeletonHash": "sk:305e1493d43db2e13586e9bb",
       "pHash": "p:f48b07f1265cd827",
-      "routeKey": null,
       "role": "modal",
       "screenshotPath": "assets/d35ec8f95721.png",
       "snapshotPath": "assets/701c82155d8d.snap.json",
@@ -698,16 +607,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "home",
       "fingerprint": "sha256:4a68303362c361e5b38ea222",
       "skeletonHash": "sk:2aa72b0ca74355b686bdacb7",
       "pHash": "p:5e89ded481767423",
-      "routeKey": null,
       "role": "home",
       "screenshotPath": "assets/10dd0dcf5019.png",
       "snapshotPath": "assets/139b2ad8a8c4.snap.json",
@@ -752,16 +658,13 @@
           "role": "button",
           "selector": "label=\"Received from 0xD1ff...3239\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "transaction-detail",
       "fingerprint": "sha256:886821b45684c7adb248b28d",
       "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
       "pHash": "p:e0c6ccccceb03a3b",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/ccf60f7154a7.png",
       "snapshotPath": "assets/bc7a1faf097b.snap.json",
@@ -795,16 +698,13 @@
           "role": "button",
           "selector": "label=\"Get Help\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "card-intro",
       "fingerprint": "sha256:4acf48790ce81d0b8e23246b",
       "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
       "pHash": "p:0ff4a5561711fc0b",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/064c5486a2b7.png",
       "snapshotPath": "assets/21b998b10111.snap.json",
@@ -820,22 +720,16 @@
         {
           "label": "Get Tuyo Card for free",
           "role": "button",
-          "selector": "label=\"Get Tuyo Card for free\""
+          "selector": "label=\"Get Tuyo Card for free\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Get Tuyo Card for free",
-        "role": "button",
-        "selector": "label=\"Get Tuyo Card for free\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "kyc-verify-prompt",
       "fingerprint": "sha256:8068cf0835e05de3857ba6c0",
       "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
       "pHash": "p:01f4adf45789fc03",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/af3bc85c0a0b.png",
       "snapshotPath": "assets/dcc0286df57c.snap.json",
@@ -853,27 +747,21 @@
         {
           "label": "Verify identity",
           "role": "button",
-          "selector": "label=\"Verify identity\""
+          "selector": "label=\"Verify identity\"",
+          "emphasis": "primary"
         },
         {
           "label": "Not now",
           "role": "button",
           "selector": "label=\"Not now\""
         }
-      ],
-      "primaryCta": {
-        "label": "Verify identity",
-        "role": "button",
-        "selector": "label=\"Verify identity\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "kyc-persona-start",
       "fingerprint": "sha256:b9ddb5cf753a5df8f938722a",
       "skeletonHash": "sk:01f6ddb7a71c2be3f6bc8091",
       "pHash": "p:235683077c69b9d5",
-      "routeKey": null,
       "role": "auth",
       "screenshotPath": "assets/d0c760a83638.png",
       "snapshotPath": "assets/b96c6a2daff6.snap.json",
@@ -887,27 +775,21 @@
         {
           "label": "Begin verifying",
           "role": "button",
-          "selector": "label=\"Begin verifying\""
+          "selector": "label=\"Begin verifying\"",
+          "emphasis": "primary"
         },
         {
           "label": "close",
           "role": "button",
           "selector": "label=\"close\""
         }
-      ],
-      "primaryCta": {
-        "label": "Begin verifying",
-        "role": "button",
-        "selector": "label=\"Begin verifying\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "kyc-persona-country",
       "fingerprint": "sha256:be07046ca639d3f30e061f05",
       "skeletonHash": "sk:08957898001c4927dcb65b50",
       "pHash": "p:296e5e0f0381f4f5",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/6b29d02f05a7.png",
       "snapshotPath": "assets/c3e0d4e73d58.snap.json",
@@ -926,7 +808,8 @@
         {
           "label": "Select",
           "role": "button",
-          "selector": "label=\"Select\""
+          "selector": "label=\"Select\"",
+          "emphasis": "primary"
         },
         {
           "label": "back",
@@ -938,20 +821,13 @@
           "role": "button",
           "selector": "label=\"close\""
         }
-      ],
-      "primaryCta": {
-        "label": "Select",
-        "role": "button",
-        "selector": "label=\"Select\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "kyc-persona-id-type",
       "fingerprint": "sha256:97ed0a34aee0c71efa72eb4c",
       "skeletonHash": "sk:d93846050c0595e7667b144c",
       "pHash": "p:23073363030ff8fd",
-      "routeKey": null,
       "role": "picker",
       "screenshotPath": "assets/007dd3b14bd7.png",
       "snapshotPath": "assets/b789aade1502.snap.json",
@@ -995,16 +871,13 @@
           "role": "button",
           "selector": "label=\"close\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "send-recipient",
       "fingerprint": "sha256:7414cbd35a09d7f034dcef39",
       "skeletonHash": "sk:56521897d3fd22e96039f6bc",
       "pHash": "p:24b1c9f8f4360f0f",
-      "routeKey": null,
       "role": "picker",
       "screenshotPath": "assets/20eb91a052b2.png",
       "snapshotPath": "assets/226764f24642.snap.json",
@@ -1035,16 +908,13 @@
           "role": "button",
           "selector": "label=\"Bank Account\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "send-find-tuyo",
       "fingerprint": "sha256:98970507cda2046e84c06804",
       "skeletonHash": "sk:409fab6c65cb1092ffc8bdb1",
       "pHash": "p:1e7b635ccc9491b1",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/bc30783c938c.png",
       "snapshotPath": "assets/673ab0b5fa63.snap.json",
@@ -1060,16 +930,13 @@
           "role": "input",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "add-money-source",
       "fingerprint": "sha256:c90ec91ffcfcd782c630dd60",
       "skeletonHash": "sk:d93846050c0595e7667b144c",
       "pHash": "p:67c8ccc56798fc03",
-      "routeKey": null,
       "role": "picker",
       "screenshotPath": "assets/af48ec2b83a3.png",
       "snapshotPath": "assets/5a89572ad2c2.snap.json",
@@ -1118,16 +985,13 @@
           "role": "button",
           "selector": "label=\"Coinbase\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings",
       "fingerprint": "sha256:f2a29d3172b7b27c65e01a8f",
       "skeletonHash": "sk:d8bc61f3dbba8afda2b9238c",
       "pHash": "p:edcdce4c4e90b113",
-      "routeKey": null,
       "role": "settings",
       "screenshotPath": "assets/94f4fd68e414.png",
       "snapshotPath": "assets/d327cb2d52d0.snap.json",
@@ -1194,16 +1058,13 @@
           "role": "button",
           "selector": "label=\"Get Help\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings-account-handle",
       "fingerprint": "sha256:7a7881f172f6e889e6f7e030",
       "skeletonHash": "sk:f255365bbddebbad574d6549",
       "pHash": "p:8594453b5e0f5e2b",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/431d2abd4160.png",
       "snapshotPath": "assets/855dd3553dac.snap.json",
@@ -1221,22 +1082,16 @@
         {
           "label": "Continue",
           "role": "button",
-          "selector": "label=\"Continue\""
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Continue",
-        "role": "button",
-        "selector": "label=\"Continue\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings-verification",
       "fingerprint": "sha256:7bfdcff881cb1c71f14cb3d2",
       "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
       "pHash": "p:070347dcdcfc2723",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/24e7cb0652b2.png",
       "snapshotPath": "assets/b0defc52c6e6.snap.json",
@@ -1251,16 +1106,13 @@
           "role": "button",
           "selector": "label=\"Verify your identity\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings-privacy",
       "fingerprint": "sha256:9f013ca893eb0bec8b0de1a7",
       "skeletonHash": "sk:b3daec7cc3e0226744f5bb7a",
       "pHash": "p:44585c585e9ba7b3",
-      "routeKey": null,
       "role": "settings",
       "screenshotPath": "assets/43c03b3c1186.png",
       "snapshotPath": "assets/93c92abf74eb.snap.json",
@@ -1274,16 +1126,13 @@
           "role": "switch",
           "selector": "label=\"Hide Holdings & Earn Balances\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings-permissions",
       "fingerprint": "sha256:349a8f6199e0a80f8af10ed9",
       "skeletonHash": "sk:5ef7fa274be3384ada0340b7",
       "pHash": "p:a591545a5e1ba7a3",
-      "routeKey": null,
       "role": "settings",
       "screenshotPath": "assets/105553fccd02.png",
       "snapshotPath": "assets/9deebf0c3b4a.snap.json",
@@ -1303,16 +1152,13 @@
           "role": "switch",
           "selector": "label=\"Push Notifications\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings-keys-security",
       "fingerprint": "sha256:24de7d4c0942c184e2aa6883",
       "skeletonHash": "sk:8e5884713b71d722b25731a7",
       "pHash": "p:a1d45c397c7c8783",
-      "routeKey": null,
       "role": "settings",
       "screenshotPath": "assets/4e0bf7ec5b0b.png",
       "snapshotPath": "assets/0cdf3e287b42.snap.json",
@@ -1348,16 +1194,13 @@
           "role": "button",
           "selector": "label=\"Delete account & data\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "settings-help",
       "fingerprint": "sha256:14b96b5d7b950a9cdd1c84e9",
       "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
       "pHash": "p:a9a9bd5d5606a2a3",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/c4ace836458d.png",
       "snapshotPath": "assets/f86812f16398.snap.json",
@@ -1383,16 +1226,13 @@
           "role": "button",
           "selector": "label=\"Close\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "rewards-intro",
       "fingerprint": "sha256:06f12db77b9afafa75093bbd",
       "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
       "pHash": "p:0fdb6da48678f403",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/a44076d7a407.png",
       "snapshotPath": "assets/5378fce6a03c.snap.json",
@@ -1406,22 +1246,16 @@
         {
           "label": "Start earning TUYOs",
           "role": "button",
-          "selector": null
+          "selector": null,
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Start earning TUYOs",
-        "role": "button",
-        "selector": null
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "rewards",
       "fingerprint": "sha256:a30c73baf09b956ab3461c12",
       "skeletonHash": "sk:dd98044e4ef1e811768fba73",
       "pHash": "p:56724d65d6f2b409",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/be20a703302f.png",
       "snapshotPath": "assets/386b5f2c4b5a.snap.json",
@@ -1462,16 +1296,13 @@
           "role": "button",
           "selector": "label=\"Redeem\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "rewards-get-tuyos",
       "fingerprint": "sha256-text:17d88b11a79662c7379fa730",
       "skeletonHash": "skt:be23f71f797207ea4d5a7a83",
       "pHash": "p:c65665ec17b1dc03",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/9ea77507fcd9.png",
       "snapshotPath": "assets/f4d87c328ca1.snap.json",
@@ -1481,16 +1312,13 @@
         "Spend $100",
         "50"
       ],
-      "interactiveElements": [],
-      "primaryCta": null,
-      "secondaryCtas": []
+      "interactiveElements": []
     },
     {
       "id": "rewards-invite",
       "fingerprint": "sha256:66755f95378c8b545f4a953d",
       "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
       "pHash": "p:6c5e07a1dcf8f403",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/0f3c6ee30620.png",
       "snapshotPath": "assets/10b6ff557255.snap.json",
@@ -1511,22 +1339,16 @@
         {
           "label": "Share your invite",
           "role": "button",
-          "selector": "label=\"Share your invite\""
+          "selector": "label=\"Share your invite\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Share your invite",
-        "role": "button",
-        "selector": "label=\"Share your invite\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "rewards-leaderboard",
       "fingerprint": "sha256-text:2ea057ae73e2c250fc5ea216",
       "skeletonHash": "skt:5d284b6f330b11b49ece027b",
       "pHash": "p:e35c5ca3e11cb4a3",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/e59327b37674.png",
       "snapshotPath": "assets/ba80e4e2ca59.snap.json",
@@ -1535,16 +1357,13 @@
         "You're not part of any league yet.",
         "Earn TUYOs and climb the leaderboard."
       ],
-      "interactiveElements": [],
-      "primaryCta": null,
-      "secondaryCtas": []
+      "interactiveElements": []
     },
     {
       "id": "earn",
       "fingerprint": "sha256:e3b0ee04b68f2173bd5808ab",
       "skeletonHash": "sk:dd98044e4ef1e811768fba73",
       "pHash": "p:8eccdb8cf97024b1",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/56f00ccc027b.png",
       "snapshotPath": "assets/94aa852c87f9.snap.json",
@@ -1580,22 +1399,16 @@
         {
           "label": "Start investing",
           "role": "button",
-          "selector": "label=\"Start investing\""
+          "selector": "label=\"Start investing\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Start investing",
-        "role": "button",
-        "selector": "label=\"Start investing\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-invest-explorer",
       "fingerprint": "sha256:8b4b9da03dad336fce5231d0",
       "skeletonHash": "sk:aa122954b981896dcaf39d4c",
       "pHash": "p:fef0c038e0e02f1f",
-      "routeKey": null,
       "role": "list",
       "screenshotPath": "assets/fa0afef1ad96.png",
       "snapshotPath": "assets/01a34904390f.snap.json",
@@ -1641,16 +1454,13 @@
           "role": "button",
           "selector": "label=\"Bitcoin (Coinbase)\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-token-detail",
       "fingerprint": "sha256:c533daa21a06f8f6e5f802fe",
       "skeletonHash": "sk:dd98044e4ef1e811768fba73",
       "pHash": "p:f3594c0ee49cf093",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/2c4015d61d50.png",
       "snapshotPath": "assets/b24067d91a2f.snap.json",
@@ -1684,7 +1494,8 @@
         {
           "label": "Buy",
           "role": "button",
-          "selector": "label=\"Buy\""
+          "selector": "label=\"Buy\"",
+          "emphasis": "primary"
         },
         {
           "label": "Sell",
@@ -1701,20 +1512,13 @@
           "role": "button",
           "selector": "label=\"Send\""
         }
-      ],
-      "primaryCta": {
-        "label": "Buy",
-        "role": "button",
-        "selector": "label=\"Buy\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-convert",
       "fingerprint": "sha256:32617dfd63383ff5bd26000a",
       "skeletonHash": "sk:08957898001c4927dcb65b50",
       "pHash": "p:e1f047701ff0f00f",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/6ed696a61d6c.png",
       "snapshotPath": "assets/6b519f6daa89.snap.json",
@@ -1760,16 +1564,13 @@
           "role": "button",
           "selector": "label=\"Bitcoin (Coinbase)\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-strategies",
       "fingerprint": "sha256:06515d539adade16468f86e2",
       "skeletonHash": "sk:1fdb4655c86cc5a7d6abef6d",
       "pHash": "p:69f029f0d5f4d40b",
-      "routeKey": null,
       "role": "list",
       "screenshotPath": "assets/0b5039ea32a1.png",
       "snapshotPath": "assets/ce3ccca5fbfa.snap.json",
@@ -1813,16 +1614,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-strategy-list",
       "fingerprint": "sha256:b9839520c06185e3b7dc04fc",
       "skeletonHash": "sk:32fc74c00959f521100e2879",
       "pHash": "p:0c1bf0d17efc0f03",
-      "routeKey": null,
       "role": "list",
       "screenshotPath": "assets/3ca367b2f98f.png",
       "snapshotPath": "assets/f6992b52ab8b.snap.json",
@@ -1856,16 +1654,13 @@
           "role": "button",
           "selector": "label=\"Aave USDC\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-strategy-deposit",
       "fingerprint": "sha256:ea28b8a5a849884062af1199",
       "skeletonHash": "sk:3df1224b45c876006c9f0545",
       "pHash": "p:b09374cde61ff003",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/c82f217e5f1f.png",
       "snapshotPath": "assets/2e40ea42fed3.snap.json",
@@ -1895,7 +1690,8 @@
         {
           "label": "Deposit",
           "role": "button",
-          "selector": "label=\"Deposit\""
+          "selector": "label=\"Deposit\"",
+          "emphasis": "primary"
         },
         {
           "label": "Withdraw",
@@ -1907,20 +1703,13 @@
           "role": "button",
           "selector": "label=\"Get USDC\""
         }
-      ],
-      "primaryCta": {
-        "label": "Deposit",
-        "role": "button",
-        "selector": "label=\"Deposit\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-token-search",
       "fingerprint": "sha256:b0c77a9eb6da6e0d5dec9c94",
       "skeletonHash": "sk:db42ec7e478130874a69b95e",
       "pHash": "p:ccd83fc08039771f",
-      "routeKey": null,
       "role": "list",
       "screenshotPath": "assets/aed8403c7b67.png",
       "snapshotPath": "assets/1da0f9e78c0a.snap.json",
@@ -1958,16 +1747,13 @@
           "role": "button",
           "selector": "label=\"Solv Protocol solvBTC\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-convert-pair",
       "fingerprint": "sha256:80685d86cf8cb2ce851b619b",
       "skeletonHash": "sk:660b700f2352917bb7b965b6",
       "pHash": "p:054b1ed0f4b10f3f",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/d0915f6b6a49.png",
       "snapshotPath": "assets/bcd5d302b8c4.snap.json",
@@ -2003,22 +1789,16 @@
         {
           "label": "Review order",
           "role": "button",
-          "selector": "label=\"Review order\""
+          "selector": "label=\"Review order\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Review order",
-        "role": "button",
-        "selector": "label=\"Review order\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-convert-review",
       "fingerprint": "sha256:c675eb8b049f39172a085116",
       "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
       "pHash": "p:0ff07a1be51af007",
-      "routeKey": null,
       "role": "confirmation",
       "screenshotPath": "assets/d852e52b72ff.png",
       "snapshotPath": "assets/dc89baa50b99.snap.json",
@@ -2038,22 +1818,16 @@
         {
           "label": "Slide to confirm",
           "role": "button",
-          "selector": null
+          "selector": null,
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Slide to confirm",
-        "role": "button",
-        "selector": null
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-vault-deposit",
       "fingerprint": "sha256:2e37e2d90c88f137f6badbcf",
       "skeletonHash": "sk:f64a31c9b5b8d1e1ba4ddebd",
       "pHash": "p:f4839cdc21f45e0b",
-      "routeKey": null,
       "role": "form",
       "screenshotPath": "assets/7fb4aa93db8f.png",
       "snapshotPath": "assets/ad7bb93a6019.snap.json",
@@ -2081,22 +1855,16 @@
         {
           "label": "Review deposit",
           "role": "button",
-          "selector": "label=\"Review deposit\""
+          "selector": "label=\"Review deposit\"",
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Review deposit",
-        "role": "button",
-        "selector": "label=\"Review deposit\""
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-vault-deposit-review",
       "fingerprint": "sha256:c675eb8b049f39172a085116",
       "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
       "pHash": "p:07b14a1ef51ef00f",
-      "routeKey": null,
       "role": "confirmation",
       "screenshotPath": "assets/19ae5fbc7764.png",
       "snapshotPath": "assets/790647779c02.snap.json",
@@ -2114,22 +1882,16 @@
         {
           "label": "Slide to confirm",
           "role": "button",
-          "selector": null
+          "selector": null,
+          "emphasis": "primary"
         }
-      ],
-      "primaryCta": {
-        "label": "Slide to confirm",
-        "role": "button",
-        "selector": null
-      },
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "strategies-info-1",
       "fingerprint": "sha256:4e3eff5bedf0af732c039264",
       "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
       "pHash": "p:4eb8d927f09c4e13",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/9b46766303b1.png",
       "snapshotPath": null,
@@ -2153,16 +1915,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "strategies-info-2",
       "fingerprint": "sha256:4e3eff5bedf0af732c039264",
       "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
       "pHash": "p:cc39668df0ec4e13",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/cf5055b7abe8.png",
       "snapshotPath": null,
@@ -2186,16 +1945,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "strategies-info-3",
       "fingerprint": "sha256:4e3eff5bedf0af732c039264",
       "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
       "pHash": "p:0e7c31a5fcbc4613",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/214baf3a783f.png",
       "snapshotPath": null,
@@ -2219,16 +1975,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "earn-funded",
       "fingerprint": "sha256:83ccb9b5a8659d2b80048df5",
       "skeletonHash": "sk:76b818a8537d4d0a755f94eb",
       "pHash": "p:e04ecfec0f70f403",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/884b31fd5355.png",
       "snapshotPath": "assets/40f16111bf0c.snap.json",
@@ -2277,16 +2030,13 @@
           "role": "button",
           "selector": "label=\"View all holdings\""
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "leaderboard-info-1",
       "fingerprint": "sha256:2402cea530bec600f3887ae2",
       "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
       "pHash": "p:a3a35e39a31c5ca3",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/f1a1f5cc2fe6.png",
       "snapshotPath": null,
@@ -2305,16 +2055,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "leaderboard-info-2",
       "fingerprint": "sha256:2402cea530bec600f3887ae2",
       "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
       "pHash": "p:8d0b7eb9039cfc03",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/f53778a0924b.png",
       "snapshotPath": null,
@@ -2333,16 +2080,13 @@
           "role": "button",
           "selector": null
         }
-      ],
-      "primaryCta": null,
-      "secondaryCtas": []
+      ]
     },
     {
       "id": "rewards-get-tuyos-trade",
       "fingerprint": "sha256-text:6ed735ed2ba54c56bd177bba",
       "skeletonHash": "skt:9e241b3ddc94b5be9d5f9b80",
       "pHash": "p:06566dbc47b1f80b",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/ddc5a908bb3a.png",
       "snapshotPath": null,
@@ -2352,16 +2096,13 @@
         "Trade $1,000",
         "50"
       ],
-      "interactiveElements": [],
-      "primaryCta": null,
-      "secondaryCtas": []
+      "interactiveElements": []
     },
     {
       "id": "rewards-get-tuyos-yield",
       "fingerprint": "sha256-text:5d6104288d5a9cbb9d12657c",
       "skeletonHash": "skt:f44c5ed2ed36862a2aaed9fc",
       "pHash": "p:8e72e5ec47b1d803",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/3ad4d67ad7c5.png",
       "snapshotPath": null,
@@ -2371,16 +2112,13 @@
         "$1,000/day",
         "2.73"
       ],
-      "interactiveElements": [],
-      "primaryCta": null,
-      "secondaryCtas": []
+      "interactiveElements": []
     },
     {
       "id": "rewards-get-tuyos-referral",
       "fingerprint": "sha256-text:e638d3d04aa3e03e4bb602f3",
       "skeletonHash": "skt:25dc3d9b600c853bc920dabd",
       "pHash": "p:0656e57c4793f80b",
-      "routeKey": null,
       "role": "other",
       "screenshotPath": "assets/3947ca2291a5.png",
       "snapshotPath": null,
@@ -2390,9 +2128,7 @@
         "Share to 1 Friend",
         "20%"
       ],
-      "interactiveElements": [],
-      "primaryCta": null,
-      "secondaryCtas": []
+      "interactiveElements": []
     }
   ],
   "edges": [

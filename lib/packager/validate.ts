@@ -58,14 +58,17 @@ export function validateGraph(graph: Graph): ValidationResult {
   }
 
   const ov = graph.overrides ?? {}
-  const refs: [string, string[]][] = [
+  // Only node-id-keyed overrides are checked against the node set here. `flowNames` and
+  // `structure` are keyed by FLOW ids (a flow's anchor node id, disambiguated as
+  // `goal@entry` / `goal-2` when names collide) — not raw node ids — so they can't be
+  // validated without running the packager; the packager applies them and silently
+  // ignores any that don't resolve, so a stale key is harmless (the rename just no-ops).
+  const nodeKeyedRefs: [string, string[]][] = [
     ["overrides.screens", Object.keys(ov.screens ?? {})],
-    ["overrides.flowNames", Object.keys(ov.flowNames ?? {})],
-    ["overrides.structure", Object.keys(ov.structure ?? {})],
     ["overrides.splits", ov.splits ?? []],
     ["overrides.merges", (ov.merges ?? []).flat()],
   ]
-  for (const [label, keys] of refs) {
+  for (const [label, keys] of nodeKeyedRefs) {
     for (const k of keys) if (!ids.has(k)) warn(`${label}: "${k}" is not a node id`)
   }
 

@@ -285,7 +285,7 @@ const StepCard = forwardRef<
       <div className="relative aspect-[1080/2400] h-[calc(80vh-9rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
         <img
           src={displaySrc}
-          alt={activeVariant?.description ?? step.description}
+          alt={activeVariant?.description ?? step.title}
           className="h-full w-full object-contain"
         />
         {/* Hover action buttons */}

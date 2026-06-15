@@ -20,6 +20,16 @@ const RX_ERROR = /\b(?:failed|error|try again|something went wrong|declined|unab
 const RX_LOADING = /\b(?:loading|please wait|fetching|just a moment)\b/i
 const RX_EMPTY = /\b(?:no [a-z ]+(?:yet|found)|nothing here|empty|no transactions|no results|0 (?:transactions|items|results))\b/i
 
+// A genuine loading screen is sparse (spinner + maybe a label/cancel). This guard
+// stops a stray "Loading…" word on an otherwise-busy screen (e.g. a button mid-tap)
+// from mislabelling the whole screen as loading.
+const LOADING_MAX_ELEMENTS = 3
+
+// Assigns the human STATE LABEL (empty/loading/error/max) to a screen from its text.
+// These are generic UI-state words, not app vocabulary, and `overrides.screens[id].state`
+// wins over any of them. Labeling is separate from DETECTION: whether a screen is a
+// state variant at all is decided structurally (an in-place edge between two variants
+// of one skeleton — see classify() below), not here.
 export function stateLabel(n: GraphNode): StateLabel {
   const text = n.texts.join(" ")
   const insufficient = RX_INSUFFICIENT.test(text)
@@ -27,7 +37,7 @@ export function stateLabel(n: GraphNode): StateLabel {
   // on the normal screen must not flip the default into a max state.
   if (RX_MAX.test(text) && insufficient) return "max"
   if (RX_ERROR.test(text) || insufficient) return "error"
-  if (RX_LOADING.test(text) && n.interactiveElements.length <= 3) return "loading"
+  if (RX_LOADING.test(text) && n.interactiveElements.length <= LOADING_MAX_ELEMENTS) return "loading"
   if (RX_EMPTY.test(text)) return "empty"
   return "default"
 }

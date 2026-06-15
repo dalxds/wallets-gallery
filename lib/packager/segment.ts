@@ -8,7 +8,7 @@
 // as side-screens (browsable in the Screens tab), never their own flow.
 //
 // Two anchors break the nest-under-launcher rule and root their OWN top-level tree:
-// completion hubs (home / launch screens — see `hubSet`) and main-navigation roots
+// completion hubs (home / launch screens — see `completionHubs`) and main-navigation roots
 // (`navRoots`, from graph.mainNav — a bottom-tab bar, nav rail, or drawer). A main-nav
 // section is a peer, not a child of whatever screen launched it, so it gets its own
 // top-level subtree instead of nesting under the launcher.
@@ -19,6 +19,9 @@ import type { Adjacency } from "./graph.ts"
 import type { SafResult } from "./saf.ts"
 import type { ClassifyResult } from "./classify.ts"
 
+// Safety cap on one flow's trunk length. The seen-set/cycle guard in build() is the
+// real protection against runaway trunks; this just bounds a pathologically long linear
+// chain so a single flow can't swallow the whole graph. Generous by design.
 const MAX_TRUNK = 14
 
 export interface Journey {
@@ -87,28 +90,28 @@ export function segment(
   // Completion hubs = home / launch screens. Reaching one COMPLETES a journey
   // (onboarding → unfunded home, sign-in → funded home). Sub-sections (Settings,
   // Discover) are NOT hubs — they nest with their children.
-  const hubSet = new Set<string>([root])
+  const completionHubs = new Set<string>([root])
   for (const n of saf.canonicalNodes) {
-    if (!folded.has(n.id) && isFamilyDefault(n.id) && n.role === "home") hubSet.add(n.id)
+    if (!folded.has(n.id) && isFamilyDefault(n.id) && n.role === "home") completionHubs.add(n.id)
   }
 
   // Does a screen lead onward (a forward/hub nav exit)? Used to tell a pass-through
   // modal (captcha → home, confirmation → next) from a dismissable side-modal.
   const leadsOnward = (id: string) =>
-    outAll(id).some((e) => e.kind === "nav" && (distOf(e.to) >= distOf(id) || hubSet.has(e.to)))
+    outAll(id).some((e) => e.kind === "nav" && (distOf(e.to) >= distOf(id) || completionHubs.has(e.to)))
   // Exits that ADVANCE a journey: a non-backward nav (>= handles DAG shortcuts like
   // welcome→email vs welcome→more-options→email), an edge to a hub, or an overlay
   // into a pass-through modal that itself leads onward.
   const advancingExits = (id: string) =>
     outAll(id).filter(
       (e) =>
-        (e.kind === "nav" && (distOf(e.to) >= distOf(id) || hubSet.has(e.to))) ||
+        (e.kind === "nav" && (distOf(e.to) >= distOf(id) || completionHubs.has(e.to))) ||
         (e.kind === "overlay" && leadsOnward(e.to))
     )
   // A target is a side-screen (picker/modal/dropdown) if it only returns — no
   // advancing exit of its own — and isn't itself a hub.
   const isSideTarget = (toId: string) =>
-    !hubSet.has(toId) &&
+    !completionHubs.has(toId) &&
     advancingExits(toId).length === 0 &&
     outAll(toId).some((x) => distOf(x.to) < distOf(toId))
   const continuations = (cur: string, seen: Set<string>) =>
@@ -125,7 +128,7 @@ export function segment(
     stack.add(node)
     let r = false
     for (const c of continuations(node, new Set())) {
-      if (hubSet.has(c) || reachesHub(c, stack)) {
+      if (completionHubs.has(c) || reachesHub(c, stack)) {
         r = true
         break
       }
@@ -143,7 +146,7 @@ export function segment(
   // completion hub are excluded — those become completion journeys below. Nav roots
   // are excluded too: a main-nav destination is never a child, it roots its own tree.
   const featureConts = (cur: string, seen: Set<string>) =>
-    continuations(cur, seen).filter((c) => !hubSet.has(c) && !navRoots.has(c) && !reachesHub(c))
+    continuations(cur, seen).filter((c) => !completionHubs.has(c) && !navRoots.has(c) && !reachesHub(c))
   function build(steps0: string[], start: string, parentId: string | null, seen: Set<string>) {
     const trunk = [...steps0]
     let cur: string | undefined = start
@@ -151,7 +154,7 @@ export function segment(
     while (cur && !seen.has(cur) && trunk.length < MAX_TRUNK) {
       trunk.push(cur)
       seen.add(cur)
-      if ((hubSet.has(cur) || navRoots.has(cur)) && cur !== trunk[0]) {
+      if ((completionHubs.has(cur) || navRoots.has(cur)) && cur !== trunk[0]) {
         conts = []
         break
       }
@@ -166,13 +169,18 @@ export function segment(
     raws.push({ id: myId, entry: trunk[0], steps: trunk, parent: parentId, goal: trunk[trunk.length - 1] })
     for (const c of conts) build([trunk[trunk.length - 1]], c, myId, new Set(seen))
   }
-  // Feature trees root at every entry point, every hub, AND every main-nav root — so the
-  // home tree builds even when reached from onboarding, and each top-level nav section
-  // roots its own tree instead of hanging off whatever screen launched it.
-  const featureRoots: string[] = []
-  const seenRoot = new Set<string>()
-  for (const id of [...topStarts, ...hubSet, ...navRoots]) if (!seenRoot.has(id)) { seenRoot.add(id); featureRoots.push(id) }
-  for (const s of featureRoots) build([], s, null, new Set())
+  // TOP-LEVEL ANCHORS — nodes that root their OWN tree instead of nesting under a launcher.
+  // One concept, three sources (unioned — any source makes a node top-level):
+  //   • entry points    — the launch root + screens nothing navigates to   (topStarts)
+  //   • completion hubs  — home / launch screens                            (completionHubs)
+  //   • nav sections     — main-nav destinations from graph.mainNav         (navRoots)
+  // So the home tree builds even when reached from onboarding (home is a hub), and each
+  // main-nav section roots its own tree instead of hanging off whatever launched it.
+  // (Completion hubs additionally mark where a journey ENDS — see the completion journeys below.)
+  const topLevelAnchors: string[] = []
+  const seenAnchor = new Set<string>()
+  for (const id of [...topStarts, ...completionHubs, ...navRoots]) if (!seenAnchor.has(id)) { seenAnchor.add(id); topLevelAnchors.push(id) }
+  for (const s of topLevelAnchors) build([], s, null, new Set())
 
   // COMPLETION journeys: shortest path from each entry to each reachable hub
   // (onboarding/sign-in). Distinct full paths, never split into a shared funnel flow.
@@ -197,13 +205,13 @@ export function segment(
           path.push(from)
           return path.reverse()
         }
-        if (!hubSet.has(nx)) q.push(nx) // don't traverse past an intermediate hub
+        if (!completionHubs.has(nx)) q.push(nx) // don't traverse past an intermediate hub
       }
     }
     return null
   }
   for (const E of topStarts) {
-    for (const H of hubSet) {
+    for (const H of completionHubs) {
       if (H === E) continue
       const path = shortestToHub(E, H)
       if (path && path.length >= 2) raws.push({ id: `f${flowSeq++}`, entry: E, steps: path, parent: null, goal: H })

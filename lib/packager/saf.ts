@@ -8,7 +8,7 @@
 //   2. CLUSTER — canonical nodes that are the SAME logical screen but a genuinely
 //                DIFFERENT state (home empty vs funded, trade vs trade-max).
 //                Kept as distinct nodes, grouped into a family. Signal: equal
-//                skeleton, equal routeKey, or pHash within the (looser) cluster band.
+//                skeleton, or pHash within the (looser) cluster band.
 //
 // Pure / signal-driven — no image work here (pHash is precomputed onto nodes).
 
@@ -139,9 +139,8 @@ export function runSAF(nodes: GraphNode[], overrides: Overrides = {}): SafResult
       const b = canonicalNodes[j]
       if (splits.has(a.id) || splits.has(b.id)) continue
       const sameSkeleton = !!a.skeletonHash && a.skeletonHash === b.skeletonHash
-      const sameRoute = !!a.routeKey && a.routeKey === b.routeKey
       const closeVisually = pHashDistance(a.pHash, b.pHash) <= T_CLUSTER_PHASH
-      if (sameSkeleton || sameRoute || closeVisually) cuf.union(a.id, b.id)
+      if (sameSkeleton || closeVisually) cuf.union(a.id, b.id)
     }
   }
 

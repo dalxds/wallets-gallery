@@ -24,20 +24,17 @@ export interface FlowName {
   source: "override" | "mechanical"
 }
 
-const LEADING_INSTANCE = /^(?:usdc|usdt|eth|btc|sol|bnb|matic|dai|weth|wbtc|virtual|degen|aero|base)\s+/i
-const TRAILING_STATE = /\s+(?:max|funded|empty|owned|loading|error|default)$/i
-
 /**
- * Strip what describes the SCREEN (not the journey): trailing parentheticals, a
- * leading instance token, and a trailing state word. A flow is its intent, not the
- * state or specific data of its goal screen. "USDC Token Detail (Owned)" → "Token
- * Detail"; "Help (External)" → "Help"; "Trade Max (Needs Gas)" → "Trade".
+ * Strip what describes the SCREEN, not the journey: a flow is its intent, not the
+ * specific data or state of its goal screen. Trailing parentheticals — the generic
+ * place annotations like "(Owned)", "(External)", "(Needs Gas)" — are removed:
+ * "Token Detail (Owned)" → "Token Detail"; "Help (External)" → "Help". No hardcoded
+ * token/state word list (app-specific, drift-prone); this only shapes the mechanical
+ * PLACEHOLDER name anyway — a real name comes from overrides.flowNames.
  */
 export function cleanFlowName(title: string): string {
   let s = title.trim()
   while (/\([^)]*\)\s*$/.test(s)) s = s.replace(/\s*\([^)]*\)\s*$/, "").trim()
-  s = s.replace(LEADING_INSTANCE, "").trim()
-  s = s.replace(TRAILING_STATE, "").trim()
   return s || title
 }
 

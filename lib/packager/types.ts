@@ -36,6 +36,13 @@ export interface InteractiveElement {
   label: string
   role: string
   selector: string | null
+  /**
+   * Call-to-action emphasis, tagged inline at capture: "primary" for the screen's
+   * main action, "secondary" for a notable alternate. Omit for ordinary elements.
+   * Read the primary CTA as `interactiveElements.find(e => e.emphasis === "primary")`.
+   * Does NOT affect screen identity (fingerprint/skeleton ignore it).
+   */
+  emphasis?: "primary" | "secondary"
 }
 
 // ─────────────────────────── GRAPH (source) ───────────────────────────
@@ -49,15 +56,11 @@ export interface GraphNode {
   skeletonHash: string
   /** Perceptual hash of the screenshot; backstop identity signal. Null when no usable shot. */
   pHash: string | null
-  /** Platform screen key (Android resource-id / iOS VC class) when recoverable. */
-  routeKey: string | null
   role: ScreenRole
   screenshotPath: string
   snapshotPath: string | null
   texts: string[]
   interactiveElements: InteractiveElement[]
-  primaryCta?: InteractiveElement | null
-  secondaryCtas?: InteractiveElement[]
 }
 
 export interface GraphEdge {
@@ -135,6 +138,10 @@ export interface Graph {
 
 // ─────────────────────────── VIEW (derived) ───────────────────────────
 
+// The rendered projection of a screen: its content (texts + interactive elements,
+// CTAs tagged via element.emphasis), the flows it appears in, and any derived state
+// grouping. The internal identity fingerprint stays on the GRAPH node — it's packager
+// plumbing, not view data — as does the raw snapshot.
 export interface ViewScreen {
   /** Logical screen id (post-merge). */
   id: string
@@ -142,14 +149,12 @@ export interface ViewScreen {
   role: ScreenRole
   description: string
   screenshotPath: string
-  fingerprint: string
   texts: string[]
   interactiveElements: InteractiveElement[]
-  primaryCta?: InteractiveElement | null
-  secondaryCtas?: InteractiveElement[]
   /** Set only when this screen is part of a multi-variant group (on-step switcher). */
   state?: StateLabel
   stateGroup?: string
+  /** Flows (and the step within each) where this screen appears — derived from the flow tree. */
   appearsIn: { flow: string; step: number }[]
 }
 
@@ -158,8 +163,6 @@ export interface ViewStep {
   title: string
   screenId: string
   action: string
-  selector: string | null
-  description?: string
   screenshotPath: string
 }
 
@@ -174,7 +177,6 @@ export interface ViewReplay {
   commands: ReplayCommand[]
   entryFingerprint: string
   confidence: "high" | "medium" | "low"
-  credentialsTemplate: string[]
 }
 
 export type NameSource = "override" | "mechanical"

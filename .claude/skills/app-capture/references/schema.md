@@ -31,13 +31,11 @@ The single artifact you write during exploration. `assemble.ts` turns it into `g
       "role": "auth",
       "shot": "public/captures/acme-bank/_staging/003.png",     // staging path, relative to repo root
       "snap": "public/captures/acme-bank/_staging/003.snap.json", // or null in Tier 2/3
-      "routeKey": "com.acme.bank:id/login_root",                 // or null
       "texts": ["Sign In", "Email", "Password", "Forgot password?"],
       "interactiveElements": [
-        { "label": "Sign in", "role": "button", "selector": "id=\"primary-cta\"" },
+        { "label": "Sign in", "role": "button", "selector": "id=\"primary-cta\"", "emphasis": "primary" },
         { "label": "Forgot password?", "role": "button", "selector": "label=\"Forgot password?\"" }
-      ],
-      "primaryCta": { "label": "Sign in", "role": "button", "selector": "id=\"primary-cta\"" }
+      ]
     }
   ],
   "edges": [
@@ -51,7 +49,7 @@ The single artifact you write during exploration. `assemble.ts` turns it into `g
 }
 ```
 
-- **`nodes[]`** — one per unique screen. Record `id`, `role`, `texts`, `interactiveElements`, the `shot`/`snap` staging paths, and `routeKey` if recoverable. **No `fingerprint`/`skeletonHash`/`pHash`/`screenshotPath`** — assemble computes those. Reuse the same `id` when you re-encounter a screen (record only new edges from it).
+- **`nodes[]`** — one per unique screen. Record `id`, `role`, `texts`, `interactiveElements`, and the `shot`/`snap` staging paths. Tag the screen's main call-to-action inline on its element with `"emphasis": "primary"` (and `"secondary"` for a notable alternate) — there is no separate `primaryCta` field. **No `fingerprint`/`skeletonHash`/`pHash`/`screenshotPath`** — assemble computes those. Reuse the same `id` when you re-encounter a screen (record only new edges from it).
 - **`edges[]`** — `{from, to, action}` plus optional `selector` (a real selector or omit/`null`) and optional `kind`. Record `kind` **only** for `back` (you pressed back) or `overlay` (a sheet over the prior screen); assemble derives `in-place` vs `nav` from skeleton equality. `observedAtStep` is optional (defaults to walk order).
 - **`decisionPoints[]`** — `{nodeId, options[{label, explored, toNode?}]}`.
 - **`mainNav[]`** — optional. Node ids of the app's persistent main-navigation destinations (bottom-tab bar / nav rail / drawer) — the landing screen each nav item navigates to, home/default tab included. The packager makes each a **top-level flow that roots its own subtree** instead of nesting it under whatever launched it. Omit for apps with no persistent main nav. A bad id fails validation.
@@ -98,16 +96,14 @@ The committed source-of-truth file per capture, `schemaVersion: 2`. **You don't 
       "fingerprint": "sha256:e0a3a14b9f22cd0b1f4e7a90",
       "skeletonHash": "sk:91b3e0c2a7d4f1098e2c5b6a",
       "pHash": "p:c1a2b3d4e5f60718",
-      "routeKey": "com.acme.bank:id/login_root",
       "role": "auth",
       "screenshotPath": "assets/e0a3a14b9f22.png",
       "snapshotPath": "assets/e0a3a14b9f22.snap.json",
       "texts": ["Sign In", "Email", "Password", "Forgot password?"],
       "interactiveElements": [
-        { "label": "Sign in", "role": "button", "selector": "id=\"primary-cta\"" },
+        { "label": "Sign in", "role": "button", "selector": "id=\"primary-cta\"", "emphasis": "primary" },
         { "label": "Forgot password?", "role": "button", "selector": "label=\"Forgot password?\"" }
-      ],
-      "primaryCta": { "label": "Sign in", "role": "button", "selector": "id=\"primary-cta\"" }
+      ]
     }
   ],
   "edges": [
@@ -124,7 +120,7 @@ The committed source-of-truth file per capture, `schemaVersion: 2`. **You don't 
 }
 ```
 
-- **`nodes[]`** — screen states. Four identity signals (`fingerprint`, `skeletonHash`, `pHash`, `routeKey`) — all computed by `assemble.ts`, you only supply `routeKey` — plus content (`texts`, `interactiveElements`, `primaryCta`, `secondaryCtas`), `role`, and asset paths. What you record (in walk.json): [exploration.md](exploration.md) → Per-screen capture routine. What the signals mean: [temporal.md](temporal.md) → Identity signals.
+- **`nodes[]`** — screen states. Three computed identity signals (`fingerprint`, `skeletonHash`, `pHash`) from `assemble.ts`, plus content (`texts`, `interactiveElements`, with CTAs tagged inline via `emphasis`), `role`, and asset paths. What you record (in walk.json): [exploration.md](exploration.md) → Per-screen capture routine. What the signals mean: [temporal.md](temporal.md) → Identity signals.
 - **`edges[]`** — transitions `{from, to, action, selector, kind, observedAtStep}`. `kind` ∈ `nav` / `overlay` / `in-place` / `back`. An `in-place` edge (from/to share a `skeletonHash`) is the deterministic state-toggle signal — assemble derives `in-place`/`nav`; you record only `back`/`overlay`.
 - **`decisionPoints[]`** — branch points `{nodeId, options[{label, explored, toNode?}]}`.
 - **`root`** — the launch node id (BFS root).

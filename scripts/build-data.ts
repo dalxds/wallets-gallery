@@ -112,7 +112,6 @@ function addSearchEntries(view: View) {
         appSlug: slug,
         appName: name,
         label: step.title,
-        description: step.description,
         flowSlug: f.slug,
         flowName: f.name,
         screenId: step.screenId,

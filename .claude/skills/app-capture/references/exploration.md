@@ -95,12 +95,7 @@ Tier 3 is a productive mode, not a failure state. Many apps have animated screen
 
 Mark animation-blocked screens in the staging log so re-encountering them later skips re-attempting Tier 1/2.
 
-### Tier-S — Secure screens (FLAG_SECURE)
-
-Some finance apps mark auth/OTP/payment/KYC windows secure, so `agent-device screenshot` / `adb screencap` can return an **all-black** frame (the structure snapshot is usually still fine). Detect it — a black PNG via a cheap mean-brightness check, not an assumption — then:
-
-1. **Treat an unreadable read honestly.** A black screenshot, or a snapshot that's empty/errors, means the screen can't be read programmatically — say plainly it's a secure/unreadable screen rather than inventing a node. (Snapshot freshness is the CLI's job: an up-to-date `agent-device` returns the current screen or an error, never a cached prior one — so don't reboot or clear device caches to "fix" it.)
-2. **Source the visual from the user.** The emulator's own host screenshot bypasses FLAG_SECURE; ask for it and record the node from that (`snapshotPath: null`, `pHash` of the manual PNG, `sha256-text:` fingerprint over visible text). If one screen is secure more may be — but when screenshots read fine (the common case), there's nothing to handle.
+Secure screens (FLAG_SECURE → an all-black screenshot) are not an interaction tier — they're a guardrail. Detection + the host-screenshot fallback live in **SKILL.md → Critical guardrails → "Secure screens"**.
 
 ### Per-screen escalation flow
 
@@ -160,13 +155,12 @@ agent-device snapshot -i --json > {staging}/{NNN}.snap.json   # save the raw sna
 
 This is the single most common way to exhaust the session image budget: reading every `{NNN}.png` "to verify." Don't. The snapshot is your understanding of the screen; the PNG is an artifact for pHash and the View.
 
-Then append a **raw node** to `walk.json` `nodes[]` (shape: [schema.md](schema.md) → walk.json). You record observation only — **no hashes, no `assets/` paths**; `assemble.ts` computes all four identity signals and content-addresses the staging shot/snap:
+Then append a **raw node** to `walk.json` `nodes[]` (shape: [schema.md](schema.md) → walk.json). You record observation only — **no hashes, no `assets/` paths**; `assemble.ts` computes the three identity hashes (fingerprint/skeleton/pHash) and content-addresses the staging shot/snap:
 
 - `id` — stable slug from snapshot content (page identifier, dominant text, structure), e.g. `home`, `deposit-source-picker`. Reuse the same id when you re-encounter the same screen.
 - `role` — one of `home`/`list`/`picker`/`form`/`confirmation`/`auth`/`modal`/`settings`/`error`/`other`.
 - `shot`, `snap` — the staging paths you just wrote (`{staging}/{NNN}.png` / `.snap.json`); `snap` is `null` in Tier 2/3.
-- `texts`, `interactiveElements`, `primaryCta`, `secondaryCtas` — observed content.
-- `routeKey` — Android resource-id of the root / iOS VC class when recoverable, else `null`. (The only identity signal you supply; the other three are derived.)
+- `texts`, `interactiveElements` — observed content. Tag the screen's main call-to-action inline on its element with `emphasis: "primary"` (`"secondary"` for a notable alternate); there is no separate CTA field.
 
 **You do not compute `fingerprint`, `skeletonHash`, or `pHash`.** assemble derives them from what you recorded — fingerprint from `interactiveElements` (or `texts` in Tier 2/3), skeleton from structure, pHash from the staged shot. What they *mean*: [temporal.md](temporal.md) → Identity signals. (This is also why a null/garbage fingerprint can't happen any more — the old failure mode of "compute later, forget" is gone.)
 
@@ -206,7 +200,7 @@ If assemble's derived `nav`/`in-place` is ever wrong (two genuinely-different sc
    computes hashes later. Keep a running map of {screen you've seen → its node id}.)
 2. If already seen → record the edge into the existing node id; backtrack (cycled).
 3. Else: append a NODE to walk.json (save shot + snap to {staging}/{NNN}; record id, role,
-   texts, interactiveElements, routeKey). Add it to your seen-map.
+   texts, interactiveElements). Add it to your seen-map.
 4. Enumerate interactive elements as candidate next actions. Sort by priority (below).
 5. Decision point if ≥2 unfollowed candidates remain. In guided mode, present options +
    screenshot to user; wait. In free-roam, pick top-priority unexplored.
@@ -284,7 +278,7 @@ agent-device screenshot {OUTPUT_DIR}/{app-slug}/_staging/{NNN}.png
 agent-device snapshot -i --json > {OUTPUT_DIR}/{app-slug}/_staging/{NNN}.snap.json
 ```
 
-`_staging/walk.json` is the artifact you build up as you go — append a raw node (referencing `{NNN}.png`/`.snap.json`) per screen and an edge per tap. It's the single input to `assemble.ts`. Keep its fields to raw observation only (id, role, texts, interactiveElements, shot/snap paths, routeKey; edges; decisionPoints) — if a field doesn't map to the walk.json schema, it doesn't belong.
+`_staging/walk.json` is the artifact you build up as you go — append a raw node (referencing `{NNN}.png`/`.snap.json`) per screen and an edge per tap. It's the single input to `assemble.ts`. Keep its fields to raw observation only (id, role, texts, interactiveElements, shot/snap paths; edges; decisionPoints) — if a field doesn't map to the walk.json schema, it doesn't belong.
 
 The agent-device session's `--save-script` accumulates an authoritative `master.ad` in `_staging/`. This is the source the packager uses to harden edge selectors and emit replay — see [temporal.md](temporal.md) → `.ad` mechanics.
 

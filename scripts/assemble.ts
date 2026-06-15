@@ -1,8 +1,8 @@
 // Assemble a validated graph.json from a raw _staging/walk.json of observations.
 //
 // During the walk the capture agent records ONLY raw observation — one entry per
-// screen (role + texts + interactiveElements + a staging screenshot/snapshot path
-// + optional routeKey), plus edges and decisionPoints. This tool turns that into
+// screen (role + texts + interactiveElements + a staging screenshot/snapshot path),
+// plus edges and decisionPoints. This tool turns that into
 // the source-of-truth graph.json:
 //
 //   • computes the four identity signals deterministically — fingerprint +
@@ -37,12 +37,8 @@ export interface WalkNode {
   shot: string | null
   /** Staging raw-snapshot path; null in Tier 2/3 (no usable snapshot). */
   snap?: string | null
-  /** Android resource-id of the root / iOS VC class when recoverable, else null. */
-  routeKey?: string | null
   texts?: string[]
   interactiveElements?: InteractiveElement[]
-  primaryCta?: InteractiveElement | null
-  secondaryCtas?: InteractiveElement[]
 }
 
 export interface WalkEdge {
@@ -94,14 +90,11 @@ export function assembleGraph(walk: Walk, io: AssembleIO): { graph: Graph; warni
       fingerprint: elements.length ? computeFingerprint(elements) : computeTextFingerprint(texts),
       skeletonHash: elements.length ? skeletonFromElements(n.role, elements) : skeletonFromTexts(n.role, texts),
       pHash: io.pHashOf(n.shot),
-      routeKey: n.routeKey ?? null,
       role: n.role,
       screenshotPath: io.addressShot(n.shot),
       snapshotPath: io.addressSnap(n.snap),
       texts,
       interactiveElements: elements,
-      primaryCta: n.primaryCta ?? null,
-      secondaryCtas: n.secondaryCtas ?? [],
     }
   })
 

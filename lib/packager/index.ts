@@ -6,7 +6,7 @@ import { runSAF } from "./saf.ts"
 import { classify } from "./classify.ts"
 import { segment } from "./segment.ts"
 import { buildAdjacency } from "./graph.ts"
-import { screenTitle, journeyName, slugify } from "./naming.ts"
+import { screenTitle, journeyName, slugify, type FlowName } from "./naming.ts"
 import { buildReplay } from "./replay.ts"
 
 export function packageGraph(graph: Graph): View {
@@ -44,11 +44,14 @@ export function packageGraph(graph: Graph): View {
   const nodeById = new Map(saf.canonicalNodes.map((n) => [n.id, n]))
   const edgeBetween = (a: string, b: string) => edges.find((e) => e.from === a && e.to === b) ?? null
 
-  // Slugs (assigned before steps so parent refs resolve).
+  // Names + slugs (assigned before steps so parent refs resolve). journeyName is
+  // computed once here and reused when building the flows below.
+  const nameByJourney = new Map<string, FlowName>()
   const slugByJourney = new Map<string, string>()
   const used = new Set<string>()
   for (const j of seg.journeys) {
     const nm = journeyName(j, nodeById.get(j.goal), overrides)
+    nameByJourney.set(j.id, nm)
     let slug = slugify(nm.name) || j.id
     const base = slug
     let i = 2
@@ -61,7 +64,7 @@ export function packageGraph(graph: Graph): View {
   const nodeToFlow = new Map<string, string>()
   const namingTODO: View["namingTODO"] = []
   const flows: ViewFlow[] = seg.journeys.map((j) => {
-    const nm = journeyName(j, nodeById.get(j.goal), overrides)
+    const nm = nameByJourney.get(j.id)!
     const slug = slugByJourney.get(j.id)!
     const steps: ViewStep[] = j.steps.map((nid, idx) => {
       const node = nodeById.get(nid)!
@@ -75,7 +78,6 @@ export function packageGraph(graph: Graph): View {
         title: screenTitle(node, overrides),
         screenId: nid,
         action: idx === 0 ? "Entry point" : e?.action ?? "Navigate",
-        selector: idx === 0 ? null : e?.selector ?? null,
         screenshotPath: node.screenshotPath,
       }
     })
@@ -103,11 +105,8 @@ export function packageGraph(graph: Graph): View {
       role: overrides.screens?.[n.id]?.role ?? n.role,
       description: overrides.screens?.[n.id]?.description ?? "",
       screenshotPath: n.screenshotPath,
-      fingerprint: n.fingerprint,
       texts: n.texts,
       interactiveElements: n.interactiveElements,
-      primaryCta: n.primaryCta ?? null,
-      secondaryCtas: n.secondaryCtas ?? [],
       state: grp ? cls.state.get(n.id) : undefined,
       stateGroup: grp,
       appearsIn: appearsIn.get(n.id) ?? [],

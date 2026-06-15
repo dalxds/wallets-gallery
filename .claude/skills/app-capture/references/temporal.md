@@ -13,9 +13,11 @@ How the skill handles re-capturing an app over time: the four per-node identity 
 
 History is a directory walk over dated `graph.json` files, not a chain of pointers to reconstruct.
 
-## Identity signals — four per node
+## Identity signals
 
-Every node carries four signals — **all computed by `assemble.ts` from your observations**, never by hand (you supply only `routeKey`). Together they let the packager (and re-capture) decide whether two observations are the same screen state, variants of one logical screen, or genuinely different. The fingerprint is also what re-capture matches on to tell "modified" from "replaced". This section explains what each signal *means* and how it's derived — you don't run any of it yourself; assemble does, when it turns `walk.json` into `graph.json`.
+Each node carries **three computed identity signals** — `fingerprint`, `skeletonHash`, `pHash` — all derived by `assemble.ts` from your observations, never by hand. Together they let the packager (and re-capture) decide whether two observations are the same screen state, variants of one logical screen, or genuinely different. The fingerprint is also what re-capture matches on to tell "modified" from "replaced". This section explains what each signal *means* and how it's derived — you don't run any of it yourself; assemble does, when it turns `walk.json` into `graph.json`.
+
+> Platform screen keys (Android resource-id / iOS view-controller class) are deliberately **not** part of the identity model — they're too inconsistently available to rely on, so identity rests on the three signals above. (Resource-ids are still used for *selectors*, just not as a screen-identity signal.)
 
 ### 1. `fingerprint` — identity hash
 
@@ -50,11 +52,7 @@ A perceptual hash of the screenshot (`p:`-prefixed), `null` when there's no usab
 
 `assemble.ts` computes it from each staged screenshot via `pHashFromPng` (dependency-free PNG → 32×32 → DCT → 64-bit hash). If you ever want to check one by hand, the standalone CLI `node scripts/phash.ts <screenshot.png>` prints the `p:…` hash. Rough bands: same logical screen → distance ≲ 14; same screen with identical data → ≲ 4; unrelated screens → ~30+.
 
-### 4. `routeKey` — platform screen key
-
-Android resource-id of the root / iOS view-controller class when recoverable, else `null`. A strong same-logical-screen signal when present.
-
-How to record all four per screen: [exploration.md](exploration.md) → Per-screen capture routine.
+How to record these per screen: [exploration.md](exploration.md) → Per-screen capture routine.
 
 ## `.ad` mechanics
 
