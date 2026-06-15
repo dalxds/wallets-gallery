@@ -2123,6 +2123,276 @@
         "selector": null
       },
       "secondaryCtas": []
+    },
+    {
+      "id": "strategies-info-1",
+      "fingerprint": "sha256:4e3eff5bedf0af732c039264",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:4eb8d927f09c4e13",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/9b46766303b1.png",
+      "snapshotPath": null,
+      "texts": [
+        "Tuyo allows you to access the best strategies in DeFi",
+        "Tuyo doesn't manage your funds. They're operated by third-party protocols. Please review and understand the inherent risks."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Slide 1 of 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 2 of 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 3 of 3",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "strategies-info-2",
+      "fingerprint": "sha256:4e3eff5bedf0af732c039264",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:cc39668df0ec4e13",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/cf5055b7abe8.png",
+      "snapshotPath": null,
+      "texts": [
+        "Put your crypto to work",
+        "Earn is like a smart savings account powered by crypto. Deposit your tokens and start generating returns (APY)."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Slide 1 of 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 2 of 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 3 of 3",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "strategies-info-3",
+      "fingerprint": "sha256:4e3eff5bedf0af732c039264",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:0e7c31a5fcbc4613",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/214baf3a783f.png",
+      "snapshotPath": null,
+      "texts": [
+        "How does it work?",
+        "When you deposit, the strategy automatically uses your assets in strategies like lending, staking, or liquidity pools. You just earn yield."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Slide 1 of 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 2 of 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 3 of 3",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "earn-funded",
+      "fingerprint": "sha256:83ccb9b5a8659d2b80048df5",
+      "skeletonHash": "sk:76b818a8537d4d0a755f94eb",
+      "pHash": "p:e04ecfec0f70f403",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/884b31fd5355.png",
+      "snapshotPath": "assets/40f16111bf0c.snap.json",
+      "texts": [
+        "Total balance",
+        "$1.00",
+        "Add money",
+        "Send",
+        "Convert",
+        "CASH",
+        "$0.90",
+        "EARN",
+        "$0.00",
+        "HOLDINGS",
+        "$0.10",
+        "Ethereum",
+        "0.0001 ETH",
+        "4.02%",
+        "View all holdings",
+        "Portfolio activity",
+        "Today"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add money",
+          "role": "button",
+          "selector": "label=\"Add money\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "label=\"Send\""
+        },
+        {
+          "label": "Convert",
+          "role": "button",
+          "selector": "label=\"Convert\""
+        },
+        {
+          "label": "Ethereum",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "View all holdings",
+          "role": "button",
+          "selector": "label=\"View all holdings\""
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "leaderboard-info-1",
+      "fingerprint": "sha256:2402cea530bec600f3887ae2",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": "p:a3a35e39a31c5ca3",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/f1a1f5cc2fe6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Rank Up",
+        "There are six different leagues where users compete with each others to rank up. Use Tuyo, earn TUYOs, rank up and get rewarded."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Slide 1 of 2",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 2 of 2",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "leaderboard-info-2",
+      "fingerprint": "sha256:2402cea530bec600f3887ae2",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": "p:8d0b7eb9039cfc03",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/f53778a0924b.png",
+      "snapshotPath": null,
+      "texts": [
+        "Chase the top",
+        "See how your TUYOs compare to other users, check the leaders of your league and how close you are to ranking up."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Slide 1 of 2",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Slide 2 of 2",
+          "role": "button",
+          "selector": null
+        }
+      ],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "rewards-get-tuyos-trade",
+      "fingerprint": "sha256-text:6ed735ed2ba54c56bd177bba",
+      "skeletonHash": "skt:9e241b3ddc94b5be9d5f9b80",
+      "pHash": "p:06566dbc47b1f80b",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/ddc5a908bb3a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Trade on Tuyo.",
+        "Get 0.05 TUYOs per dollar traded. Bridging and stablecoin to stablecoin trades don't apply.",
+        "Trade $1,000",
+        "50"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "rewards-get-tuyos-yield",
+      "fingerprint": "sha256-text:5d6104288d5a9cbb9d12657c",
+      "skeletonHash": "skt:f44c5ed2ed36862a2aaed9fc",
+      "pHash": "p:8e72e5ec47b1d803",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/3ad4d67ad7c5.png",
+      "snapshotPath": null,
+      "texts": [
+        "Boost your yield.",
+        "Get additional yield on every strategy available on Tuyo. TUYOs are rewarded once a day.",
+        "$1,000/day",
+        "2.73"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
+    },
+    {
+      "id": "rewards-get-tuyos-referral",
+      "fingerprint": "sha256-text:e638d3d04aa3e03e4bb602f3",
+      "skeletonHash": "skt:25dc3d9b600c853bc920dabd",
+      "pHash": "p:0656e57c4793f80b",
+      "routeKey": null,
+      "role": "other",
+      "screenshotPath": "assets/3947ca2291a5.png",
+      "snapshotPath": null,
+      "texts": [
+        "Refer a friend.",
+        "Share Tuyo with your friends and both earn TUYOs.",
+        "Share to 1 Friend",
+        "20%"
+      ],
+      "interactiveElements": [],
+      "primaryCta": null,
+      "secondaryCtas": []
     }
   ],
   "edges": [
@@ -2589,6 +2859,94 @@
       "selector": "label=\"I have a referral code\"",
       "kind": "nav",
       "observedAtStep": 58
+    },
+    {
+      "from": "earn-strategies",
+      "to": "strategies-info-1",
+      "action": "Tap info (i) button",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 59
+    },
+    {
+      "from": "strategies-info-1",
+      "to": "strategies-info-2",
+      "action": "Swipe to next slide",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 60
+    },
+    {
+      "from": "strategies-info-2",
+      "to": "strategies-info-3",
+      "action": "Swipe to next slide",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 61
+    },
+    {
+      "from": "strategies-info-1",
+      "to": "earn-strategies",
+      "action": "Tap back",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 62
+    },
+    {
+      "from": "earn-convert-review",
+      "to": "earn-funded",
+      "action": "Slide to confirm — conversion complete",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 63
+    },
+    {
+      "from": "rewards-leaderboard",
+      "to": "leaderboard-info-1",
+      "action": "Tap info (i) button",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 64
+    },
+    {
+      "from": "leaderboard-info-1",
+      "to": "leaderboard-info-2",
+      "action": "Tap next slide arrow",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 65
+    },
+    {
+      "from": "leaderboard-info-1",
+      "to": "rewards-leaderboard",
+      "action": "Tap back",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 66
+    },
+    {
+      "from": "rewards-get-tuyos",
+      "to": "rewards-get-tuyos-trade",
+      "action": "Tap next slide arrow",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 67
+    },
+    {
+      "from": "rewards-get-tuyos-trade",
+      "to": "rewards-get-tuyos-yield",
+      "action": "Tap next slide arrow",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 68
+    },
+    {
+      "from": "rewards-get-tuyos-yield",
+      "to": "rewards-get-tuyos-referral",
+      "action": "Tap next slide arrow",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 69
     }
   ],
   "decisionPoints": [
@@ -2876,7 +3234,6 @@
       "earn-invest-explorer": "Investing",
       "earn-token-detail": "Token detail",
       "rewards": "Rewards",
-      "rewards-get-tuyos": "Earning TUYOs",
       "rewards-invite": "Inviting friends",
       "rewards-leaderboard": "Leaderboard",
       "settings": "Settings",
@@ -2892,7 +3249,16 @@
       "add-money-source@earn": "Adding money",
       "send-find-tuyo@home": "Sending money",
       "send-find-tuyo@earn": "Sending money",
-      "earn-token-detail@earn-invest-explorer": "Token detail"
+      "earn-token-detail@earn-invest-explorer": "Token detail",
+      "rewards-get-tuyos-referral": "Earning TUYOs"
+    },
+    "screens": {
+      "earn": {
+        "stateGroup": "earn"
+      },
+      "earn-funded": {
+        "stateGroup": "earn"
+      }
     }
   }
 }
