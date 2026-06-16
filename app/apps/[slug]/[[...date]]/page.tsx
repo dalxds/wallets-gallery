@@ -57,7 +57,7 @@ export async function generateMetadata({
   const app = readRegistry().apps.find((a) => a.slug === slug)
   if (!app) return {}
   const d = date?.[0]
-  const title = d ? `${app.name} (${d}) — Inspo` : `${app.name} — Inspo`
+  const title = d ? `${app.name} (${d}) — Wallets Gallery` : `${app.name} — Wallets Gallery`
   const description = d
     ? `Captured ${app.platform.toUpperCase()} UI for ${app.name} — ${d} capture.`
     : `Captured ${app.platform.toUpperCase()} UI — ${app.screens} screens and ${app.flows} flows for ${app.name}.`

@@ -15,7 +15,7 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Inspo — Design Inspiration Gallery",
+  title: "Wallets Gallery — Design Inspiration Gallery",
   description:
     "Browse captured UI flows from crypto wallets and fintech apps",
 }

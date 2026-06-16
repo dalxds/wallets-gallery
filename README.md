@@ -1,4 +1,4 @@
-# Inspo
+# Wallets Gallery
 
 A gallery of **captured mobile-app UI flows** — crypto-wallet and fintech apps, explored
 on a device, recorded as a graph, and published as a fast static site you can browse by

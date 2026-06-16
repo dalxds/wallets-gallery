@@ -16,7 +16,7 @@ export async function GET() {
     )
     .join("\n")
 
-  const body = `# Inspo — Design Inspiration Gallery
+  const body = `# Wallets Gallery — Design Inspiration Gallery
 > Captured UI flows from crypto wallet and fintech apps
 
 ## Apps
