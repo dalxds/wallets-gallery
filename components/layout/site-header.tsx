@@ -11,7 +11,7 @@ interface SiteHeaderProps {
 export function SiteHeader({ onSearchOpen }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
+      <div className="mx-auto flex h-14 max-w-[1600px] items-center justify-between px-4">
         <Link href="/" className="text-lg font-semibold tracking-tight">
           inspo
         </Link>
