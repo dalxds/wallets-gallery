@@ -73,8 +73,20 @@ export function classify(
   const route = new Map<string, Route>()
   const defaultOf = new Map<string, string>()
 
+  // In-place edges (a Max flip, a carousel swipe 1->2->3) form undirected toggle CHAINS.
+  // Build the adjacency once so a family's toggle group can follow the whole chain, not
+  // just the edges incident on the default.
+  const inPlaceAdj = new Map<string, Set<string>>()
+  const linkInPlace = (a: string, b: string) => (inPlaceAdj.get(a) ?? inPlaceAdj.set(a, new Set()).get(a)!).add(b)
+  for (const e of edges) {
+    if (e.kind !== "in-place") continue
+    linkInPlace(e.from, e.to)
+    linkInPlace(e.to, e.from)
+  }
+
   for (const [logicalId, memberIds] of saf.members) {
     const members = memberIds.map((id) => nodeById.get(id)!).filter(Boolean)
+    const memberSet = new Set(members.map((n) => n.id))
     const defaults = members.filter((n) => state.get(n.id) === "default")
     // representative (members[0]) breaks ties when zero or multiple labelled defaults
     const def = defaults.length === 1 ? defaults[0] : members[0]
@@ -85,25 +97,26 @@ export function classify(
     // so a fallback representative isn't surfaced tagged "error"/"empty" in the switcher.
     if (defaults.length !== 1) state.set(def.id, "default")
 
-    for (const v of members) {
-      if (v.id === def.id) continue
-
-      // Forced stateGroups (overrides.screens[id].stateGroup) are handled
-      // authoritatively by the forced block below — keyed by the AUTHOR's group, not
-      // this SAF family. Reacting to them here also folded the family's representative
-      // default into an unrelated group (e.g. a screen that merely shares a skeleton).
-      const inPlaceEdge = edges.some(
-        (e) =>
-          ((e.from === def.id && e.to === v.id) || (e.from === v.id && e.to === def.id)) &&
-          e.kind === "in-place"
-      )
-      if (inPlaceEdge) {
-        // structural toggle: same screen, in-place change. Group keyed by the family default.
-        route.set(v.id, "toggle")
-        stateGroup.set(v.id, def.id)
-        stateGroup.set(def.id, def.id)
+    // Toggle group = the members reachable from the default along a CHAIN of in-place
+    // edges (staying inside the family). The chain matters: a carousel's slide-3 connects
+    // through slide-2, never directly to the default, so a default-adjacency-only check
+    // (the old code) folded slide-2 but stranded slide-3. Forced overrides.stateGroup is
+    // applied authoritatively by the block below, so it is intentionally ignored here.
+    const inGroup = new Set<string>([def.id])
+    const queue = [def.id]
+    while (queue.length) {
+      const cur = queue.shift()!
+      for (const nb of inPlaceAdj.get(cur) ?? []) {
+        if (memberSet.has(nb) && !inGroup.has(nb)) { inGroup.add(nb); queue.push(nb) }
       }
-      // A non-default, non-toggle member is just a distinct screen — no route entry needed.
+    }
+    if (inGroup.size > 1) {
+      stateGroup.set(def.id, def.id)
+      for (const id of inGroup) {
+        if (id === def.id) continue
+        route.set(id, "toggle")
+        stateGroup.set(id, def.id)
+      }
     }
   }
 

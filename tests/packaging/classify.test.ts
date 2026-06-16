@@ -77,6 +77,23 @@ describe("classify — family default fallback", () => {
   })
 })
 
+describe("classify — in-place toggle chains", () => {
+  it("folds a whole carousel (slide-1 -> slide-2 -> slide-3) into one toggle group", () => {
+    // slide-3's in-place edge comes from slide-2, not the default (slide-1). The old
+    // default-adjacency check folded slide-2 but stranded slide-3 as its own screen.
+    const nodes = [
+      node("slide-1", "sk:slide", ["How it works", "One"], ["Next", "Skip", "Close"]),
+      node("slide-2", "sk:slide", ["How it works", "Two"], ["Next"]),
+      node("slide-3", "sk:slide", ["How it works", "Three"], ["Done"]),
+    ]
+    const cls = run(nodes, [edge("slide-1", "slide-2", "in-place"), edge("slide-2", "slide-3", "in-place")])
+    expect(cls.route.get("slide-1")).toBe("default")
+    expect(cls.stateGroup.get("slide-2")).toBe("slide-1")
+    expect(cls.stateGroup.get("slide-3")).toBe("slide-1") // the chain endpoint is no longer stranded
+    expect(cls.route.get("slide-3")).toBe("toggle")
+  })
+})
+
 describe("SAF — CLUSTER is a true equivalence relation (no pHash chaining)", () => {
   it("does not weld the far-apart endpoints of a within-band chain into one family", () => {
     // d(A,B)=8 and d(B,C)=8, but d(A,C)=16 (beyond any band). Distinct skeletons, so only
