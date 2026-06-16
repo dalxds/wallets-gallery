@@ -1,17 +1,16 @@
-// State classification + routing.
+// State classification.
 //
-// For each logical-screen family (from the SAF), label each member's state and
-// decide how a non-default variant relates to the default — the three homes:
-//   toggle     — same screen, in-place data/condition change (an `in-place` edge
-//                between default and variant). Renders as an on-step switcher.
-//   divergent  — the variant opens screens the default never reaches (a different
-//                multi-screen path). Becomes a sibling flow.
-//   lifecycle  — a stage on the way to the default (empty → … → funded). A normal
-//                step in whatever journey traverses it.
+// For each logical-screen family (from the SAF), label each member's state and detect
+// in-place TOGGLES: a non-default variant joined to the family default by an `in-place`
+// edge is the same screen in a different data/condition (renders as an on-step switcher),
+// so it folds into the default's stateGroup instead of becoming a navigation step.
+// Everything else stays an ordinary distinct screen.
+//
+// (An earlier version also routed non-toggle variants "divergent" vs "lifecycle" from a
+// reachability comparison, but nothing consumed those values — segmentation only folds
+// "toggle" — so that dead computation was removed.)
 
 import type { GraphEdge, GraphNode, Overrides, StateLabel } from "./types.ts"
-import type { Adjacency } from "./graph.ts"
-import { reachableFrom } from "./graph.ts"
 import type { SafResult } from "./saf.ts"
 
 const RX_INSUFFICIENT = /\b(?:insufficient|not enough)\b/i
@@ -46,14 +45,14 @@ export function stateLabel(n: GraphNode): StateLabel {
   return "default"
 }
 
-export type Route = "default" | "toggle" | "divergent" | "lifecycle"
+export type Route = "default" | "toggle"
 
 export interface ClassifyResult {
   /** canonical node id → state label */
   state: Map<string, StateLabel>
   /** canonical node id → stateGroup id (set only for toggle members: the default + its in-place variants) */
   stateGroup: Map<string, string>
-  /** canonical node id → routing decision */
+  /** canonical node id → "default" or "toggle" (set for the family default and its in-place variants) */
   route: Map<string, Route>
   /** logical screen id → its default node id */
   defaultOf: Map<string, string>
@@ -61,7 +60,6 @@ export interface ClassifyResult {
 
 export function classify(
   saf: SafResult,
-  adj: Adjacency,
   edges: GraphEdge[],
   overrides: Overrides = {}
 ): ClassifyResult {
@@ -104,14 +102,8 @@ export function classify(
         route.set(v.id, "toggle")
         stateGroup.set(v.id, def.id)
         stateGroup.set(def.id, def.id)
-        continue
       }
-
-      // does v reach screens the default cannot (each without going through the other)?
-      const fromV = reachableFrom(adj, v.id, { exclude: new Set([def.id]) })
-      const fromD = reachableFrom(adj, def.id, { exclude: new Set([v.id]) })
-      const opensNew = [...fromV].some((x) => x !== v.id && x !== def.id && !fromD.has(x))
-      route.set(v.id, opensNew ? "divergent" : "lifecycle")
+      // A non-default, non-toggle member is just a distinct screen — no route entry needed.
     }
   }
 

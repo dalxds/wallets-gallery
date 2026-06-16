@@ -44,7 +44,7 @@ export function packageGraph(graph: Graph): View {
   const canonIds = saf.canonicalNodes.map((n) => n.id)
   const adj = buildAdjacency(canonIds, edges)
   const root = canon(graph.root)
-  const cls = classify(saf, adj, edges, overridesC)
+  const cls = classify(saf, edges, overridesC)
   // Main-navigation destinations → canonical ids that survived merging. Each roots its
   // own top-level flow (see segment.ts); unknown ids are dropped.
   const canonSet = new Set(canonIds)

@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { runSAF } from "@/lib/packager/saf.ts"
 import { classify, stateLabel } from "@/lib/packager/classify.ts"
-import { buildAdjacency } from "@/lib/packager/graph.ts"
 import type { GraphEdge, GraphNode, InteractiveElement, Overrides, ScreenRole } from "@/lib/packager/types.ts"
 
 const el = (label: string): InteractiveElement => ({ label, role: "button", selector: null })
@@ -14,8 +13,7 @@ function run(nodes: GraphNode[], edges: GraphEdge[], overrides: Overrides = {}) 
   const saf = runSAF(nodes, overrides)
   const canon = (id: string) => saf.canonicalOf.get(id) ?? id
   const remapped = edges.map((e) => ({ ...e, from: canon(e.from), to: canon(e.to) })).filter((e) => e.from !== e.to)
-  const adj = buildAdjacency(saf.canonicalNodes.map((n) => n.id), remapped)
-  return classify(saf, adj, remapped, overrides)
+  return classify(saf, remapped, overrides)
 }
 
 describe("classify — forced stateGroup", () => {
