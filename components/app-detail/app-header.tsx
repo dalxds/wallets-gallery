@@ -37,7 +37,10 @@ export function AppHeader({ app, appIndex, currentDate }: AppHeaderProps) {
       name={app.app.name}
       dateControl={
         <Select value={currentDate} onValueChange={handleDateChange}>
-          <SelectTrigger size="sm" className="h-7 text-xs">
+          <SelectTrigger
+            size="sm"
+            className="h-auto gap-1 border-0 bg-transparent p-0 text-xs text-muted-foreground shadow-none transition-colors hover:text-foreground data-[size=sm]:h-auto dark:bg-transparent dark:hover:bg-transparent"
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
