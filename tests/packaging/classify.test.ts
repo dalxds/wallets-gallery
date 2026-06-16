@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { runSAF } from "@/lib/packager/saf.ts"
-import { classify } from "@/lib/packager/classify.ts"
+import { classify, stateLabel } from "@/lib/packager/classify.ts"
 import { buildAdjacency } from "@/lib/packager/graph.ts"
 import type { GraphEdge, GraphNode, InteractiveElement, Overrides, ScreenRole } from "@/lib/packager/types.ts"
 
@@ -94,5 +94,24 @@ describe("SAF — CLUSTER is a true equivalence relation (no pHash chaining)", (
     const fam = (id: string) => saf.logicalOf.get(id)
     expect(fam("A")).not.toBe(fam("C")) // endpoints never chained
     expect(new Set([fam("A"), fam("B"), fam("C")]).size).toBe(3) // distinct skeletons => 3 families
+  })
+})
+
+describe("stateLabel", () => {
+  const n = (texts: string[], els: string[] = []) => node("s", "sk:s", texts, els)
+  it("labels genuine states from generic UI words", () => {
+    expect(stateLabel(n(["No transactions yet"]))).toBe("empty")
+    expect(stateLabel(n(["Nothing here"]))).toBe("empty")
+    expect(stateLabel(n(["Loading…"]))).toBe("loading") // sparse: 0 interactive elements
+    expect(stateLabel(n(["Something went wrong"], ["Retry"]))).toBe("error")
+    expect(stateLabel(n(["Payment failed", "Try again"], ["Retry"]))).toBe("error")
+    expect(stateLabel(n(["Insufficient balance", "Tap Max"], ["Max"]))).toBe("max")
+  })
+  it("does not over-trigger on incidental words", () => {
+    expect(stateLabel(n(["Add funds with no hidden fees"], ["Add funds"]))).toBe("default") // not empty
+    expect(stateLabel(n(["Amount", "Max"], ["Max", "Send", "Edit"]))).toBe("default") // Max button, no insufficiency
+    expect(stateLabel(n(["Loading"], ["A", "B", "C", "D"]))).toBe("default") // "loading" on a busy screen (>3 els)
+    // wallet warning copy must NOT read as an error (RX_ERROR no longer matches "unable to")
+    expect(stateLabel(n(["If you lose your phrase you'll be unable to recover your account"], ["Continue"]))).toBe("default")
   })
 })

@@ -16,9 +16,13 @@ import type { SafResult } from "./saf.ts"
 
 const RX_INSUFFICIENT = /\b(?:insufficient|not enough)\b/i
 const RX_MAX = /\bmax(?:imum)?\b/i
-const RX_ERROR = /\b(?:failed|error|try again|something went wrong|declined|unable to)\b/i
+// "unable to" dropped: in wallet copy it is usually an informational warning
+// ("if you lose your phrase you'll be unable to recover"), not an error state.
+const RX_ERROR = /\b(?:failed|error|try again|something went wrong|declined)\b/i
 const RX_LOADING = /\b(?:loading|please wait|fetching|just a moment)\b/i
-const RX_EMPTY = /\b(?:no [a-z ]+(?:yet|found)|nothing here|empty|no transactions|no results|0 (?:transactions|items|results))\b/i
+// Bound the gap between "no" and yet/found to 1-4 words. The old `no [a-z ]+(?:yet|found)`
+// let `[a-z ]+` run greedily across whole sentences, so an unrelated later "…found" matched.
+const RX_EMPTY = /\b(?:no (?:[a-z]+ ){1,4}(?:yet|found)|nothing here|empty|no transactions|no results|0 (?:transactions|items|results))\b/i
 
 // A genuine loading screen is sparse (spinner + maybe a label/cancel). This guard
 // stops a stray "Loading…" word on an otherwise-busy screen (e.g. a button mid-tap)
