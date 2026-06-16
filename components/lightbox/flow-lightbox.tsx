@@ -244,6 +244,9 @@ const StepCard = forwardRef<
     e.stopPropagation()
     try {
       const res = await fetch(displaySrc)
+      // A 404 (e.g. a shot-less screen → empty path → directory URL) returns an HTML
+      // page; guard so we don't write that HTML to the clipboard as an "image".
+      if (!res.ok) throw new Error(`fetch ${displaySrc}: ${res.status}`)
       const blob = await res.blob()
       await navigator.clipboard.write([
         new ClipboardItem({ [blob.type]: blob }),
@@ -257,8 +260,10 @@ const StepCard = forwardRef<
 
   async function copyLink(e: React.MouseEvent) {
     e.stopPropagation()
+    // Deep-link to THIS step (step param is the 0-based index; step.number is 1-based),
+    // matching the grid's per-step link — not the flow's first step.
     await navigator.clipboard.writeText(
-      `${window.location.origin}${flowHref(appSlug, flowSlug)}`
+      `${window.location.origin}${flowHref(appSlug, flowSlug, step.number - 1)}`
     )
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
@@ -267,6 +272,7 @@ const StepCard = forwardRef<
   async function downloadImage(e: React.MouseEvent) {
     e.stopPropagation()
     const res = await fetch(displaySrc)
+    if (!res.ok) return // missing screenshot — don't download a broken/HTML file
     const blob = await res.blob()
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")

@@ -24,8 +24,14 @@ function readCapture(slug: string): { appIndex: AppIndex; view: AppCapture } | n
   const appIndex = readRegistry().apps.find((a) => a.slug === slug)
   if (!appIndex) return null
   const viewPath = join(capturesDir, slug, appIndex.latest, "view.json")
-  const view = JSON.parse(readFileSync(viewPath, "utf8")) as AppCapture
-  return { appIndex, view }
+  try {
+    const view = JSON.parse(readFileSync(viewPath, "utf8")) as AppCapture
+    return { appIndex, view }
+  } catch (e) {
+    // build-data.ts guarantees the latest view exists; if it somehow doesn't, fail
+    // with a pointer to the cause instead of a bare ENOENT partway through export.
+    throw new Error(`Missing view.json for "${slug}" at ${appIndex.latest} (${viewPath}) — run build-data. Cause: ${e}`)
+  }
 }
 
 export function generateStaticParams() {

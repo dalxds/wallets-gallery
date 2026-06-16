@@ -5,6 +5,12 @@ import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
 import { screenHref } from "@/lib/links"
 import { ImageActions } from "@/components/shared/image-actions"
+import {
+  ScreensGridLayout,
+  ScreenTile,
+  screenTileWrapperClass,
+} from "@/components/app-detail/screen-tile"
+import { cn } from "@/lib/utils"
 import { useQueryState } from "nuqs"
 
 interface ScreensGridProps {
@@ -16,7 +22,7 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
   const [, setScreen] = useQueryState("screen")
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+    <ScreensGridLayout>
       {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
         const screenUrl = `${typeof window !== "undefined" ? window.location.origin : ""}${screenHref(appSlug, screen.id)}`
@@ -32,18 +38,21 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
                 setScreen(screen.id)
               }
             }}
-            className="group/card relative flex cursor-pointer flex-col gap-1.5 text-left"
+            className={cn(
+              screenTileWrapperClass,
+              "group/card relative cursor-pointer"
+            )}
           >
-            <div className="relative overflow-hidden rounded-lg border transition-shadow group-hover/card:shadow-lg">
+            <ScreenTile
+              title={screen.title}
+              imageBoxClassName="relative transition-shadow group-hover/card:shadow-lg"
+            >
               <ImageActions src={src} screenUrl={screenUrl} />
               <LazyImage src={src} alt={screen.description} />
-            </div>
-            <p className="truncate text-xs font-medium">
-              {screen.title}
-            </p>
+            </ScreenTile>
           </div>
         )
       })}
-    </div>
+    </ScreensGridLayout>
   )
 }

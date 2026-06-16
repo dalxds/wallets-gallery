@@ -3,6 +3,7 @@
 import { AppShell } from "@/components/layout/app-shell"
 import { AppHeader } from "@/components/app-detail/app-header"
 import { ScreensGrid } from "@/components/app-detail/screens-grid"
+import { TabBar } from "@/components/app-detail/tab-bar"
 import { FlowsView } from "@/components/app-detail/flows-view"
 import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 import { fetchAppCapture } from "@/lib/data"
@@ -34,14 +35,16 @@ export function AppDetailClient({
   const [dateParam] = useQueryState("date")
   const [activeScreenId, setActiveScreenId] = useQueryState("screen")
 
-  // The latest capture is seeded from build-time props, so the client renders
-  // content immediately on hydration — no fetch, no loading state. Only an
-  // older selected date triggers a fetch; until it resolves we keep showing the
-  // latest. `app` is derived (no setState-in-effect) to avoid cascading renders.
+  // One view per capture date, seeded with the latest (read at build time, so it
+  // renders instantly on hydration — no fetch). Older dates are fetched on demand
+  // and cached here. The latest is just a pre-populated key, so there's no special
+  // "is this the latest?" branch to keep in sync: `app` is simply the view for the
+  // selected date, and `undefined` (an older date still loading) drives the skeleton.
   const date = dateParam ?? initialAppIndex.latest
-  const isLatest = date === initialAppIndex.latest
-  const [olderView, setOlderView] = useState<AppCapture | null>(null)
-  const app = isLatest ? initialView : olderView ?? initialView
+  const [viewByDate, setViewByDate] = useState<Record<string, AppCapture>>({
+    [initialAppIndex.latest]: initialView,
+  })
+  const app: AppCapture | undefined = viewByDate[date]
 
   // The chrome (app header + tabs) is pinned on the Flows tab; measure its
   // height so the fixed sidebar can sit exactly below it. This is a stable
@@ -59,17 +62,49 @@ export function AppDetailClient({
     return () => ro.disconnect()
   }, [app, tab])
 
-  // Fetch only when an older capture is selected.
+  // Fetch the selected date's view if we don't already have it (the latest is
+  // pre-seeded, so this only fires for older dates, once each — the result is
+  // cached). On failure it stays absent, leaving the skeleton up rather than a
+  // dangling rejection or stale data; the date selector still works.
   useEffect(() => {
-    if (isLatest) return
+    if (viewByDate[date]) return
     let cancelled = false
-    fetchAppCapture(slug, date).then((capture) => {
-      if (!cancelled) setOlderView(capture)
-    })
+    fetchAppCapture(slug, date)
+      .then((view) => {
+        if (!cancelled) setViewByDate((m) => ({ ...m, [date]: view }))
+      })
+      .catch(() => {})
     return () => {
       cancelled = true
     }
-  }, [slug, date, isLatest])
+  }, [slug, date, viewByDate])
+
+  // An older date is still loading (or failed). Show a skeleton rather than
+  // flashing the latest capture's content under the selected (older) date.
+  if (!app) {
+    return (
+      <AppShell>
+        <div className="space-y-6">
+          <div className="flex items-center gap-4">
+            <div className="h-16 w-16 animate-pulse rounded-2xl bg-muted" />
+            <div className="space-y-2">
+              <div className="h-6 w-32 animate-pulse rounded bg-muted" />
+              <div className="h-4 w-48 animate-pulse rounded bg-muted" />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div
+                key={i}
+                className="animate-pulse rounded-lg bg-muted"
+                style={{ aspectRatio: "9/19.5" }}
+              />
+            ))}
+          </div>
+        </div>
+      </AppShell>
+    )
+  }
 
   const isFlows = tab === "flows"
 
@@ -80,7 +115,9 @@ export function AppDetailClient({
     <AppShell>
       <div
         style={
-          { "--content-top": contentTop ? `${contentTop}px` : "13rem" } as React.CSSProperties
+          {
+            "--content-top": contentTop ? `${contentTop}px` : "13rem",
+          } as React.CSSProperties
         }
       >
         <div
@@ -97,37 +134,29 @@ export function AppDetailClient({
             currentDate={dateParam ?? initialAppIndex.latest}
           />
 
-          <div className="flex gap-4 border-b">
-            <button
-              onClick={() => {
-                setTab("screens")
-                setActiveFlowSlug(null)
-                setStepParam(null)
-              }}
-              className={cn(
-                "border-b-2 pb-2 text-sm font-medium transition-colors",
-                tab === "screens"
-                  ? "border-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Screens ({app.screens.length})
-            </button>
-            <button
-              onClick={() => {
-                setTab("flows")
-                setActiveScreenId(null)
-              }}
-              className={cn(
-                "border-b-2 pb-2 text-sm font-medium transition-colors",
-                tab === "flows"
-                  ? "border-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              )}
-            >
-              Flows ({app.flows.length})
-            </button>
-          </div>
+          <TabBar
+            items={[
+              {
+                label: "Screens",
+                count: app.screens.length,
+                active: tab === "screens",
+                onSelect: () => {
+                  setTab("screens")
+                  setActiveFlowSlug(null)
+                  setStepParam(null)
+                },
+              },
+              {
+                label: "Flows",
+                count: app.flows.length,
+                active: tab === "flows",
+                onSelect: () => {
+                  setTab("flows")
+                  setActiveScreenId(null)
+                },
+              },
+            ]}
+          />
         </div>
 
         {/* Content scrolls with the page. The gap below the chrome is part of

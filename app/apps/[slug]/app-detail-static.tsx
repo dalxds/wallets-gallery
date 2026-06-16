@@ -1,4 +1,11 @@
 import { AppShell } from "@/components/layout/app-shell"
+import { AppHeaderLayout } from "@/components/app-detail/app-header-layout"
+import { TabBar } from "@/components/app-detail/tab-bar"
+import {
+  ScreensGridLayout,
+  ScreenTile,
+  screenTileWrapperClass,
+} from "@/components/app-detail/screen-tile"
 import { captureUrl } from "@/lib/images"
 import { screenHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
@@ -10,7 +17,9 @@ import Link from "next/link"
 // which bails out of static rendering — so the static HTML would otherwise be a
 // skeleton. Rendering the real screens here puts actual content (images +
 // titles) into the prerendered HTML for crawlers/LLMs and first paint; the
-// client takes over on hydration. Kept free of any search-param reads itself.
+// client takes over on hydration. The chrome and cards come from the same
+// presentational pieces the client uses, so the two can't drift — this file
+// just supplies the inert, search-param-free variants of their inputs.
 export function AppDetailStatic({
   view,
   appIndex,
@@ -23,45 +32,32 @@ export function AppDetailStatic({
   return (
     <AppShell>
       <div className="space-y-6">
-        <div className="flex items-center gap-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`https://avatar.vercel.sh/${appSlug}`}
-            alt={view.app.name}
-            className="h-16 w-16 rounded-2xl"
-          />
-          <div>
-            <h1 className="text-2xl font-bold">{view.app.name}</h1>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>{formatDate(appIndex.latest)}</span>
-              <span>·</span>
-              <span>{view.screens.length} screens</span>
-              <span>·</span>
-              <span>{view.flows.length} flows</span>
-            </div>
-          </div>
-        </div>
+        <AppHeaderLayout
+          slug={appSlug}
+          name={view.app.name}
+          screens={view.screens.length}
+          flows={view.flows.length}
+          dateControl={<span>{formatDate(appIndex.latest)}</span>}
+        />
 
-        <div className="flex gap-4 border-b">
-          <span className="border-b-2 border-primary pb-2 text-sm font-medium">
-            Screens ({view.screens.length})
-          </span>
-          <span className="border-b-2 border-transparent pb-2 text-sm font-medium text-muted-foreground">
-            Flows ({view.flows.length})
-          </span>
-        </div>
+        <TabBar
+          items={[
+            { label: "Screens", count: view.screens.length, active: true },
+            { label: "Flows", count: view.flows.length, active: false },
+          ]}
+        />
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+      <ScreensGridLayout className="mt-6">
         {view.screens.map((screen) => (
           <Link
             key={screen.id}
             href={screenHref(appSlug, screen.id)}
-            className="flex flex-col gap-1.5 text-left"
+            className={screenTileWrapperClass}
           >
-            <div
-              className="overflow-hidden rounded-lg border"
-              style={{ aspectRatio: "9/19.5" }}
+            <ScreenTile
+              title={screen.title}
+              imageBoxStyle={{ aspectRatio: "9/19.5" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -70,11 +66,10 @@ export function AppDetailStatic({
                 loading="lazy"
                 className="h-full w-full object-cover"
               />
-            </div>
-            <p className="truncate text-xs font-medium">{screen.title}</p>
+            </ScreenTile>
           </Link>
         ))}
-      </div>
+      </ScreensGridLayout>
     </AppShell>
   )
 }

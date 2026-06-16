@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { AppHeaderLayout } from "@/components/app-detail/app-header-layout"
 import { useQueryState } from "nuqs"
 
 interface AppHeaderProps {
@@ -31,36 +32,25 @@ export function AppHeader({ app, appIndex, currentDate }: AppHeaderProps) {
   }
 
   return (
-    <div className="flex items-center gap-4">
-      <img
-        src={`https://avatar.vercel.sh/${app.app.slug}`}
-        alt={app.app.name}
-        className="h-16 w-16 rounded-2xl"
-      />
-      <div>
-        <h1 className="text-2xl font-bold">{app.app.name}</h1>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Select
-            value={currentDate}
-            onValueChange={handleDateChange}
-          >
-            <SelectTrigger size="sm" className="h-7 text-xs">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {appIndex.captures.map((date) => (
-                <SelectItem key={date} value={date}>
-                  {formatDate(date)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <span>·</span>
-          <span>{app.screens.length} screens</span>
-          <span>·</span>
-          <span>{app.flows.length} flows</span>
-        </div>
-      </div>
-    </div>
+    <AppHeaderLayout
+      slug={app.app.slug}
+      name={app.app.name}
+      screens={app.screens.length}
+      flows={app.flows.length}
+      dateControl={
+        <Select value={currentDate} onValueChange={handleDateChange}>
+          <SelectTrigger size="sm" className="h-7 text-xs">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {appIndex.captures.map((date) => (
+              <SelectItem key={date} value={date}>
+                {formatDate(date)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      }
+    />
   )
 }
