@@ -11,7 +11,7 @@ import {
 import { captureUrl } from "@/lib/images"
 import { flowHref } from "@/lib/links"
 import { cn } from "@/lib/utils"
-import { forwardRef, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import {
   Copy,
   Check,
@@ -160,7 +160,7 @@ export function FlowLightbox({
   return (
     <Dialog open onOpenChange={() => onClose()}>
       <DialogContent
-        className="flex h-[80vh] max-w-[80vw] sm:max-w-[80vw] flex-col gap-0 overflow-hidden p-0"
+        className="flex h-[80vh] max-w-[80vw] flex-col gap-0 overflow-hidden p-0 sm:max-w-[80vw]"
         showCloseButton={false}
       >
         <DialogTitle className="sr-only">{flow.name}</DialogTitle>
@@ -199,7 +199,7 @@ export function FlowLightbox({
           <div
             ref={scrollRef}
             className={cn(
-              "flex h-full items-center gap-4 overflow-x-auto px-14 py-4 scrollbar-hide transition-opacity duration-150",
+              "scrollbar-hide flex h-full items-center gap-4 overflow-x-auto px-14 py-4 transition-opacity duration-150",
               ready ? "opacity-100" : "opacity-0"
             )}
             onScroll={updateScrollState}
@@ -263,16 +263,21 @@ export function FlowLightbox({
   )
 }
 
-const StepCard = forwardRef<
-  HTMLDivElement,
-  {
-    step: FlowStep
-    src: string
-    appSlug: string
-    flowSlug: string
-    variants: ScreenEntry[]
-  }
->(function StepCard({ step, src, appSlug, flowSlug, variants }, ref) {
+function StepCard({
+  step,
+  src,
+  appSlug,
+  flowSlug,
+  variants,
+  ref,
+}: {
+  step: FlowStep
+  src: string
+  appSlug: string
+  flowSlug: string
+  variants: ScreenEntry[]
+  ref?: React.Ref<HTMLDivElement>
+}) {
   const [copiedImage, setCopiedImage] = useState(false)
   const [copiedLink, setCopiedLink] = useState(false)
   const [activeId, setActiveId] = useState(step.screenId)
@@ -332,7 +337,10 @@ const StepCard = forwardRef<
   }
 
   return (
-    <div ref={ref} className="group/card flex shrink-0 flex-col items-center gap-2">
+    <div
+      ref={ref}
+      className="group/card flex shrink-0 flex-col items-center gap-2"
+    >
       <div className="relative aspect-[1080/2400] h-[calc(80vh-12.5rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
         <img
           src={displaySrc}
@@ -340,7 +348,7 @@ const StepCard = forwardRef<
           className="h-full w-full object-contain"
         />
         {/* Hover action buttons */}
-        <div className="absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
+        <div className="absolute top-1.5 right-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
           <button
             type="button"
             onClick={copyImage}
@@ -416,4 +424,4 @@ const StepCard = forwardRef<
       </div>
     </div>
   )
-})
+}
