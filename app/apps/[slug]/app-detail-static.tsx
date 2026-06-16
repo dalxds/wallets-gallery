@@ -8,7 +8,7 @@ import {
 } from "@/components/app-detail/screen-tile"
 import { captureUrl } from "@/lib/images"
 import { screenHref } from "@/lib/links"
-import { formatDate } from "@/lib/utils"
+import { cn, formatDate } from "@/lib/utils"
 import type { AppCapture, AppIndex } from "@/lib/types"
 import Link from "next/link"
 
@@ -53,7 +53,7 @@ export function AppDetailStatic({
           <Link
             key={screen.id}
             href={screenHref(appSlug, screen.id)}
-            className={screenTileWrapperClass}
+            className={cn(screenTileWrapperClass, "cursor-zoom-in")}
           >
             <ScreenTile imageBoxStyle={{ aspectRatio: "9/19.5" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}

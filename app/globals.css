@@ -126,6 +126,13 @@
   html {
     @apply font-sans;
     }
+  /* Tailwind's reset leaves buttons with the default arrow; give every clickable
+     affordance a hand. Image/flow tiles opt back out with `cursor-zoom-in`
+     (a utility, so it wins over this base rule). */
+  button:not(:disabled),
+  [role="button"] {
+    cursor: pointer;
+    }
 }
 
 /* Hide scrollbar but keep scroll functionality */

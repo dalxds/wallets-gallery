@@ -40,7 +40,7 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
             }}
             className={cn(
               screenTileWrapperClass,
-              "group/card relative cursor-pointer"
+              "group/card relative cursor-zoom-in"
             )}
           >
             <ScreenTile imageBoxClassName="relative transition-shadow group-hover/card:shadow-lg">

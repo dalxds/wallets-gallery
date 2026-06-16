@@ -141,7 +141,7 @@ export function FlowRow({ flow, appSlug, stateIndex }: FlowRowProps) {
                   openLightbox(idx)
                 }
               }}
-              className="group/step w-32 shrink-0 cursor-pointer snap-start text-left sm:w-36"
+              className="group/step w-32 shrink-0 cursor-zoom-in snap-start text-left sm:w-36"
             >
               <div className="group/card relative overflow-hidden rounded-lg border transition-shadow group-hover/step:shadow-md">
                 <ImageActions
