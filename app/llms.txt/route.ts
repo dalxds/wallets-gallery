@@ -3,13 +3,12 @@ import path from "path"
 
 export const dynamic = "force-static"
 
-export async function GET() {
-  const indexPath = path.join(
-    process.cwd(),
-    "public/captures/index.json"
-  )
-  const index = JSON.parse(fs.readFileSync(indexPath, "utf-8"))
+// Read once at module load, not on every request (the route is force-static, so
+// this resolves at build time regardless).
+const indexPath = path.join(process.cwd(), "public/captures/index.json")
+const index = JSON.parse(fs.readFileSync(indexPath, "utf-8"))
 
+export async function GET() {
   const appLines = index.apps
     .map(
       (app: { name: string; slug: string; platform: string; latest: string }) =>
