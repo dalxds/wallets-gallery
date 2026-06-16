@@ -57,6 +57,7 @@ function FlowNode({
 
   const button = (
     <button
+      type="button"
       onClick={() => onFlowClick(flow.slug)}
       className={cn(
         "flex-1 truncate rounded-md px-2 py-1.5 text-left text-sm transition-colors hover:bg-accent",

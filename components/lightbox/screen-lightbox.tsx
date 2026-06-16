@@ -180,6 +180,7 @@ export function ScreenLightbox({
         {/* Stage: the screenshot, flanked by prev/next arrows */}
         <div className="relative flex flex-1 items-center justify-center overflow-hidden bg-muted/30 px-16 py-6">
           <button
+            type="button"
             aria-label="Previous screen"
             onClick={() => goTo(currentIndex - 1)}
             disabled={atStart}
@@ -197,6 +198,7 @@ export function ScreenLightbox({
           )}
 
           <button
+            type="button"
             aria-label="Next screen"
             onClick={() => goTo(currentIndex + 1)}
             disabled={atEnd}
@@ -214,6 +216,7 @@ export function ScreenLightbox({
             )}
             {foundIn.slice(0, MAX_FOUND_IN_CHIPS).map((f) => (
               <button
+                type="button"
                 key={f.slug}
                 onClick={() => openFlow(f.slug, f.step)}
                 className="max-w-40 truncate rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent"

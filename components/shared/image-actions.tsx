@@ -52,6 +52,7 @@ export function ImageActions({ src, screenUrl }: ImageActionsProps) {
   return (
     <div className="absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
       <button
+        type="button"
         onClick={copyImage}
         className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
       >
@@ -62,6 +63,7 @@ export function ImageActions({ src, screenUrl }: ImageActionsProps) {
         )}
       </button>
       <button
+        type="button"
         onClick={copyLink}
         className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
       >
@@ -72,6 +74,7 @@ export function ImageActions({ src, screenUrl }: ImageActionsProps) {
         )}
       </button>
       <button
+        type="button"
         onClick={downloadImage}
         className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
       >

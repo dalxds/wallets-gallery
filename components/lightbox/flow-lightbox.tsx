@@ -186,6 +186,7 @@ export function FlowLightbox({
         {/* Flow strip */}
         <div className="relative flex flex-1 items-center overflow-hidden bg-muted/30">
           <button
+            type="button"
             className={cn(
               "absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/90 text-neutral-900 shadow-lg backdrop-blur-sm transition-opacity hover:bg-white dark:bg-white/20 dark:text-white dark:hover:bg-white/30",
               canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0"
@@ -220,6 +221,7 @@ export function FlowLightbox({
           </div>
 
           <button
+            type="button"
             className={cn(
               "absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/90 text-neutral-900 shadow-lg backdrop-blur-sm transition-opacity hover:bg-white dark:bg-white/20 dark:text-white dark:hover:bg-white/30",
               canScrollRight ? "opacity-100" : "pointer-events-none opacity-0"
@@ -340,6 +342,7 @@ const StepCard = forwardRef<
         {/* Hover action buttons */}
         <div className="absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
           <button
+            type="button"
             onClick={copyImage}
             className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
           >
@@ -350,6 +353,7 @@ const StepCard = forwardRef<
             )}
           </button>
           <button
+            type="button"
             onClick={copyLink}
             className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
           >
@@ -360,6 +364,7 @@ const StepCard = forwardRef<
             )}
           </button>
           <button
+            type="button"
             onClick={downloadImage}
             className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
           >
@@ -379,6 +384,7 @@ const StepCard = forwardRef<
                 const active = v.id === activeId
                 return (
                   <button
+                    type="button"
                     key={v.id}
                     onClick={() => setActiveId(v.id)}
                     className={cn(
