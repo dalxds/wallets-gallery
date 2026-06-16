@@ -234,16 +234,6 @@ export function FlowLightbox({
           <Button
             variant="secondary"
             size="sm"
-            onClick={downloadAll}
-            disabled={downloadingAll}
-            className="gap-1.5"
-          >
-            <Download className="h-4 w-4" />
-            {downloadingAll ? "Downloading…" : "Download all"}
-          </Button>
-          <Button
-            variant="secondary"
-            size="sm"
             onClick={copyFlowLink}
             className="gap-1.5"
           >
@@ -252,7 +242,17 @@ export function FlowLightbox({
             ) : (
               <Link2 className="h-4 w-4" />
             )}
-            Copy link
+            Link
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={downloadAll}
+            disabled={downloadingAll}
+            className="gap-1.5"
+          >
+            <Download className="h-4 w-4" />
+            {downloadingAll ? "Downloading…" : "Download all"}
           </Button>
         </div>
       </DialogContent>
