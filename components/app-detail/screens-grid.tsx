@@ -43,10 +43,7 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
               "group/card relative cursor-pointer"
             )}
           >
-            <ScreenTile
-              title={screen.title}
-              imageBoxClassName="relative transition-shadow group-hover/card:shadow-lg"
-            >
+            <ScreenTile imageBoxClassName="relative transition-shadow group-hover/card:shadow-lg">
               <ImageActions src={src} screenUrl={screenUrl} />
               <LazyImage src={src} alt={screen.description} />
             </ScreenTile>

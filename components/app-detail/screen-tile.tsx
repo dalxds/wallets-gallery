@@ -35,30 +35,25 @@ export function ScreensGridLayout({
 // card footprint matches, then append their own interaction classes.
 export const screenTileWrapperClass = "flex flex-col gap-1.5 text-left"
 
-// A card's non-interactive frame: the bordered image box and the title beneath
-// it. The image is passed as `children` because the static fallback renders a
-// plain <img> (real content for crawlers, no JS) while the client renders a
-// <LazyImage> with a hover <ImageActions> overlay.
+// A card's non-interactive frame: the bordered image box. The image is passed
+// as `children` because the static fallback renders a plain <img> (real content
+// for crawlers, no JS) while the client renders a <LazyImage> with a hover
+// <ImageActions> overlay.
 export function ScreenTile({
-  title,
   imageBoxClassName,
   imageBoxStyle,
   children,
 }: {
-  title: string
   imageBoxClassName?: string
   imageBoxStyle?: CSSProperties
   children: ReactNode
 }) {
   return (
-    <>
-      <div
-        className={cn("overflow-hidden rounded-lg border", imageBoxClassName)}
-        style={imageBoxStyle}
-      >
-        {children}
-      </div>
-      <p className="truncate text-xs font-medium">{title}</p>
-    </>
+    <div
+      className={cn("overflow-hidden rounded-lg border", imageBoxClassName)}
+      style={imageBoxStyle}
+    >
+      {children}
+    </div>
   )
 }

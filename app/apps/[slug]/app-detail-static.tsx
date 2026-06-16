@@ -55,10 +55,7 @@ export function AppDetailStatic({
             href={screenHref(appSlug, screen.id)}
             className={screenTileWrapperClass}
           >
-            <ScreenTile
-              title={screen.title}
-              imageBoxStyle={{ aspectRatio: "9/19.5" }}
-            >
+            <ScreenTile imageBoxStyle={{ aspectRatio: "9/19.5" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={captureUrl(appSlug, screen.screenshotPath)}
