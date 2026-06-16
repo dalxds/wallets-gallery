@@ -93,19 +93,15 @@ export function FlowRow({
           <h3 className="font-medium">
             {flow.name}
             {parent && (
-              <span className="font-normal text-muted-foreground">
-                {" from "}
-                <button
-                  type="button"
-                  onClick={() => onNavigate?.(parent.slug)}
-                  className="underline-offset-2 hover:text-foreground hover:underline"
-                >
+              <>
+                <span className="font-normal text-muted-foreground"> from </span>
+                <button type="button" onClick={() => onNavigate?.(parent.slug)}>
                   {parent.name}
                 </button>
-              </span>
+              </>
             )}
           </h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
             {flow.summary ? ` · ${flow.summary}` : ""}
           </p>
