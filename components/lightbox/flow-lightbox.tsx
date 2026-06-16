@@ -123,7 +123,8 @@ export function FlowLightbox({
   }
 
   async function copyFlowLink() {
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, initialIndex)}`
+    // Link to the flow itself (step 0), not the currently-centered step.
+    const url = `${window.location.origin}${flowHref(appSlug, flow.slug)}`
     await navigator.clipboard.writeText(url)
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
