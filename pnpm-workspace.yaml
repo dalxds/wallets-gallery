@@ -1,0 +1,18 @@
+# Supply-chain hardening: delay installs 7 days so quickly-unpublished malware
+# never lands, and reject packages whose provenance/signature trust weakens
+# between releases. See https://pnpm.io/settings
+minimumReleaseAge: 10080
+trustPolicy: no-downgrade
+# These two legacy transitive deps predate npm provenance attestations, so
+# no-downgrade flags them as trust downgrades. Both verified safe (immutable old
+# versions, not part of the 2025 eslint-ecosystem compromise): semver 6.x is the
+# last of its line (pulled by @babel/*), and eslint-import-resolver-typescript 3.x
+# is pinned by eslint-config-next (^3.5.2). The policy stays strict for everything else.
+trustPolicyExclude:
+  - "semver@6.3.1"
+  - "eslint-import-resolver-typescript@3.10.1"
+
+allowBuilds:
+  msw: true
+  sharp: true
+  unrs-resolver: true
