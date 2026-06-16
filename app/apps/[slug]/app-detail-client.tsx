@@ -119,7 +119,7 @@ export function AppDetailClient({
       >
         <div
           ref={chromeRef}
-          className="space-y-6 lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background lg:px-4 lg:pt-6 lg:pb-6"
+          className="space-y-6 lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background/80 lg:px-4 lg:pt-6 lg:pb-6 lg:backdrop-blur-sm"
         >
           <AppHeader
             app={app}
