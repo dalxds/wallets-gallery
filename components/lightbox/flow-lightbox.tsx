@@ -397,7 +397,7 @@ const StepCard = forwardRef<
           </div>
         )}
       </div>
-      <div className="flex max-w-48 items-start gap-1.5">
+      <div className="flex w-full items-start gap-1.5">
         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-medium">
           {step.number}
         </span>
