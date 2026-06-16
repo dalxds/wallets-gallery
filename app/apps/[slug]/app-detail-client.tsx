@@ -177,8 +177,10 @@ export function AppDetailClient({
       {activeScreenId && app.screens.some((s) => s.id === activeScreenId) && (
         <ScreenLightbox
           screens={app.screens}
+          flows={app.flows}
           activeScreenId={activeScreenId}
           appSlug={slug}
+          platform={app.app.platform}
         />
       )}
     </AppShell>
