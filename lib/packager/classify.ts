@@ -85,7 +85,7 @@ export function classify(
   }
 
   for (const [logicalId, memberIds] of saf.members) {
-    const members = memberIds.map((id) => nodeById.get(id)!).filter(Boolean)
+    const members = memberIds.flatMap((id) => { const n = nodeById.get(id); return n ? [n] : [] })
     const memberSet = new Set(members.map((n) => n.id))
     const defaults = members.filter((n) => state.get(n.id) === "default")
     // representative (members[0]) breaks ties when zero or multiple labelled defaults
