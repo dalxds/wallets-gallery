@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { AppHeaderLayout } from "@/components/app-detail/app-header-layout"
+import { CalendarDays } from "lucide-react"
 import { useQueryState } from "nuqs"
 
 interface AppHeaderProps {
@@ -35,11 +36,13 @@ export function AppHeader({ app, appIndex, currentDate }: AppHeaderProps) {
     <AppHeaderLayout
       slug={app.app.slug}
       name={app.app.name}
-      screens={app.screens.length}
-      flows={app.flows.length}
       dateControl={
         <Select value={currentDate} onValueChange={handleDateChange}>
-          <SelectTrigger size="sm" className="h-7 text-xs">
+          <SelectTrigger
+            size="sm"
+            className="h-7 gap-1.5 rounded-full border-transparent bg-muted pr-2 pl-2.5 text-xs font-medium shadow-none hover:bg-accent focus-visible:ring-0 dark:bg-muted dark:hover:bg-accent"
+          >
+            <CalendarDays className="size-3.5 text-muted-foreground" />
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
