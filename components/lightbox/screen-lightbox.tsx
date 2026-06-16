@@ -248,7 +248,7 @@ export function ScreenLightbox({
             </Button>
             <Button variant="secondary" size="sm" onClick={downloadImage} className="gap-1.5">
               <Download className="h-4 w-4" />
-              Save
+              Download
             </Button>
           </div>
 
