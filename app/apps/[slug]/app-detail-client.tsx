@@ -173,7 +173,6 @@ export function AppDetailClient({
           flows={app.flows}
           activeScreenId={activeScreenId}
           appSlug={slug}
-          platform={app.app.platform}
         />
       )}
     </AppShell>

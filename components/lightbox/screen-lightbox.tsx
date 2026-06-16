@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowEntry, Platform, ScreenEntry } from "@/lib/types"
+import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import {
   Dialog,
   DialogContent,
@@ -27,23 +27,17 @@ interface ScreenLightboxProps {
   flows: FlowEntry[]
   activeScreenId: string
   appSlug: string
-  platform: Platform
 }
 
 // Cap the "Found in" chips so a screen that anchors many flows doesn't overflow
 // the footer; the rest collapse into a "+N" count.
 const MAX_FOUND_IN_CHIPS = 4
 
-function platformLabel(p: Platform): string {
-  return p === "ios" ? "iOS" : "Android"
-}
-
 export function ScreenLightbox({
   screens,
   flows,
   activeScreenId,
   appSlug,
-  platform,
 }: ScreenLightboxProps) {
   const [, setScreen] = useQueryState("screen")
   const [, setTab] = useQueryState("tab")
@@ -173,14 +167,14 @@ export function ScreenLightbox({
               </p>
             )}
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <span className="text-xs tabular-nums text-muted-foreground">
-              {currentIndex + 1} / {screens.length}
-            </span>
-            <Button variant="ghost" size="icon" onClick={close}>
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={close}
+            className="shrink-0"
+          >
+            <X className="h-4 w-4" />
+          </Button>
         </div>
 
         {/* Stage: the screenshot, flanked by prev/next arrows */}
@@ -259,8 +253,8 @@ export function ScreenLightbox({
           </div>
 
           <div className="flex items-center justify-end">
-            <span className="text-xs text-muted-foreground">
-              {platformLabel(platform)}
+            <span className="text-xs tabular-nums text-muted-foreground">
+              {currentIndex + 1} / {screens.length}
             </span>
           </div>
         </div>
