@@ -17,8 +17,6 @@ import { normalizeDynamic, pHashDistance } from "./identity.ts"
 
 // Same screen, data-only difference: pixels essentially identical.
 export const T_MERGE_PHASH = 4
-// Same logical screen, different state: layout similar, content differs.
-export const T_CLUSTER_PHASH = 14
 
 export interface SafResult {
   /** raw node id → canonical (post-merge) node id */
@@ -131,6 +129,13 @@ export function runSAF(nodes: GraphNode[], overrides: Overrides = {}): SafResult
   }
 
   // ── 2. CLUSTER into logical screens ───────────────────────────────────────
+  // Skeleton EQUALITY only — a true equivalence relation. The earlier
+  // `|| pHashDistance <= 14` term was non-transitive (within-14 is not transitive; the
+  // triangle inequality allows 28), so union-find chained far-apart endpoints into one
+  // family — on tuyo a single 29-member family spanning 13 distinct skeletons. The pixel
+  // band was also the wrong tool for its stated job: real cross-skeleton state variants
+  // (earn / earn-funded) sit ~24 apart, outside any sane band, and are grouped
+  // deterministically via overrides.stateGroup instead.
   const cuf = new UnionFind()
   for (const n of canonicalNodes) cuf.add(n.id)
   for (let i = 0; i < canonicalNodes.length; i++) {
@@ -138,9 +143,7 @@ export function runSAF(nodes: GraphNode[], overrides: Overrides = {}): SafResult
       const a = canonicalNodes[i]
       const b = canonicalNodes[j]
       if (splits.has(a.id) || splits.has(b.id)) continue
-      const sameSkeleton = !!a.skeletonHash && a.skeletonHash === b.skeletonHash
-      const closeVisually = pHashDistance(a.pHash, b.pHash) <= T_CLUSTER_PHASH
-      if (sameSkeleton || closeVisually) cuf.union(a.id, b.id)
+      if (a.skeletonHash && a.skeletonHash === b.skeletonHash) cuf.union(a.id, b.id)
     }
   }
 

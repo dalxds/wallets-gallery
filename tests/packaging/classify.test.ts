@@ -78,3 +78,21 @@ describe("classify — family default fallback", () => {
     expect(cls.state.get("e1")).toBe("error") // the variant keeps its real label
   })
 })
+
+describe("SAF — CLUSTER is a true equivalence relation (no pHash chaining)", () => {
+  it("does not weld the far-apart endpoints of a within-band chain into one family", () => {
+    // d(A,B)=8 and d(B,C)=8, but d(A,C)=16 (beyond any band). Distinct skeletons, so only
+    // a pixel term could link them. Skeleton-only clustering keeps all three apart; the old
+    // `pHash <= 14` union-find chained A-B-C into one family via (non-)transitivity.
+    const withHash = (id: string, sk: string, pHash: string): GraphNode => ({ ...node(id, sk, [id], ["x"]), pHash })
+    const nodes = [
+      withHash("A", "sk:A", "p:0000000000000000"),
+      withHash("B", "sk:B", "p:00000000000000ff"), // 8 bits from A
+      withHash("C", "sk:C", "p:000000000000ffff"), // 16 from A, 8 from B
+    ]
+    const saf = runSAF(nodes)
+    const fam = (id: string) => saf.logicalOf.get(id)
+    expect(fam("A")).not.toBe(fam("C")) // endpoints never chained
+    expect(new Set([fam("A"), fam("B"), fam("C")]).size).toBe(3) // distinct skeletons => 3 families
+  })
+})
