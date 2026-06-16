@@ -9,7 +9,6 @@ import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 import { fetchAppCapture } from "@/lib/data"
 import type { AppCapture, AppIndex } from "@/lib/types"
 import { useEffect, useRef, useState } from "react"
-import { cn } from "@/lib/utils"
 import { useQueryState, parseAsStringLiteral } from "nuqs"
 
 const tabs = ["screens", "flows"] as const
@@ -46,8 +45,8 @@ export function AppDetailClient({
   })
   const app: AppCapture | undefined = viewByDate[date]
 
-  // The chrome (app header + tabs) is pinned on the Flows tab; measure its
-  // height so the fixed sidebar can sit exactly below it. This is a stable
+  // The chrome (app header + tabs) is pinned on both tabs; measure its height
+  // so the Flows sidebar rail can sit exactly below it. This is a stable
   // measurement (only fires on resize/content change, never on scroll).
   const chromeRef = useRef<HTMLDivElement>(null)
   const [contentTop, setContentTop] = useState(0)
@@ -106,12 +105,10 @@ export function AppDetailClient({
     )
   }
 
-  const isFlows = tab === "flows"
-
   return (
-    // The whole page scrolls the window. On Flows the chrome (app header +
-    // tabs) is pinned and the sidebar is a fixed rail sitting just below it;
-    // Screens scrolls normally with the chrome.
+    // The whole page scrolls the window; the chrome (app header + tabs) is
+    // pinned on both tabs, and on Flows the sidebar is a fixed rail sitting
+    // just below it.
     <AppShell>
       <div
         style={
@@ -122,11 +119,7 @@ export function AppDetailClient({
       >
         <div
           ref={chromeRef}
-          className={cn(
-            "space-y-6",
-            isFlows &&
-              "lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background lg:px-4 lg:pt-6 lg:pb-6"
-          )}
+          className="space-y-6 lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background lg:px-4 lg:pt-6 lg:pb-6"
         >
           <AppHeader
             app={app}
@@ -159,9 +152,9 @@ export function AppDetailClient({
           />
         </div>
 
-        {/* Content scrolls with the page. The gap below the chrome is part of
-            the pinned chrome on flows (lg:pb-6), so no top margin there. */}
-        <div className={cn("mt-6", isFlows && "lg:mt-0")}>
+        {/* Content scrolls with the page. On desktop the gap below the chrome
+            is the pinned chrome's own padding (lg:pb-6), so no top margin. */}
+        <div className="mt-6 lg:mt-0">
           {tab === "screens" ? (
             <ScreensGrid screens={app.screens} appSlug={slug} />
           ) : (
