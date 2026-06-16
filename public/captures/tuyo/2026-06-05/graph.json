@@ -2990,10 +2990,31 @@
     },
     "screens": {
       "earn": {
-        "stateGroup": "earn"
+        "stateGroup": "earn",
+        "state": "empty"
       },
       "earn-funded": {
         "stateGroup": "earn"
+      },
+      "strategies-info-1": {
+        "stateGroup": "strategies-info",
+        "state": "1"
+      },
+      "strategies-info-2": {
+        "stateGroup": "strategies-info",
+        "state": "2"
+      },
+      "strategies-info-3": {
+        "stateGroup": "strategies-info",
+        "state": "3"
+      },
+      "leaderboard-info-1": {
+        "stateGroup": "leaderboard-info",
+        "state": "1"
+      },
+      "leaderboard-info-2": {
+        "stateGroup": "leaderboard-info",
+        "state": "2"
       }
     }
   }

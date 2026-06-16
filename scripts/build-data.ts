@@ -2,16 +2,15 @@
 //
 // For every app under public/captures, for every capture date with a graph.json,
 // run the packager → write the derived view.json that the app fetches. Then emit
-// the registry (index.json) and search index (search-index.json) from the views.
+// the registry (index.json) from the views.
 //
-// graph.json is the single committed source; view.json + index.json +
-// search-index.json are generated artifacts.
+// graph.json is the single committed source; view.json + index.json are
+// generated artifacts.
 
 import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
 import type { Graph, View } from "../lib/packager/types.ts"
-import type { SearchEntry } from "../lib/types.ts"
 
 const capturesDir = join(process.cwd(), "public/captures")
 
@@ -27,13 +26,15 @@ interface RegistryEntry {
 }
 
 // The browse page renders from index.json alone, so each entry needs a cover
-// thumbnail. Prefer the home screen; fall back to the first screen.
+// thumbnail. Prefer the home screen, but only one that actually has a shot —
+// otherwise fall back to the first screen that does (a shot-less home would
+// yield an empty cover even when usable screenshots exist).
 function coverOf(view: View): string {
-  const screen = view.screens.find((s) => s.role === "home") ?? view.screens[0]
-  return screen ? screen.screenshotPath : ""
+  const withShot = view.screens.filter((s) => s.screenshotPath)
+  const screen = withShot.find((s) => s.role === "home") ?? withShot[0]
+  return screen?.screenshotPath ?? ""
 }
 const registry: RegistryEntry[] = []
-const searchEntries: SearchEntry[] = []
 let viewCount = 0
 
 for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
@@ -56,11 +57,21 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
     writeFileSync(join(appDir, date, "view.json"), JSON.stringify(view))
     viewCount++
 
-    // search entries + registry summary come from the latest view only
+    // the registry summary comes from the latest view only
     if (date === manifest.latestCapture) {
-      addSearchEntries(view)
       latestView = view
     }
+  }
+
+  // The app page (page.tsx readCapture) reads {latest}/view.json unconditionally, so a
+  // registry entry whose latest produced no view would crash `next build` later with an
+  // opaque ENOENT. Fail loudly here instead, naming the misconfiguration.
+  if (!latestView) {
+    throw new Error(
+      `${dir.name}: latestCapture "${manifest.latestCapture}" has no view — ` +
+        `no graph.json at that date, or it is not among captures ${JSON.stringify(dates)}. ` +
+        `Fix ${dir.name}/app.json so latestCapture points at a captured date with a graph.json.`
+    )
   }
 
   registry.push({
@@ -69,58 +80,11 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
     platform: manifest.app.platform,
     captures: dates,
     latest: manifest.latestCapture,
-    cover: latestView ? coverOf(latestView) : "",
-    screens: latestView?.screens.length ?? 0,
-    flows: latestView?.flows.length ?? 0,
+    cover: coverOf(latestView),
+    screens: latestView.screens.length,
+    flows: latestView.flows.length,
   })
-}
-
-function addSearchEntries(view: View) {
-  const { slug, name } = view.app
-  searchEntries.push({
-    type: "app",
-    appSlug: slug,
-    appName: name,
-    label: name,
-    description: `${view.app.platform.toUpperCase()} app — ${view.screens.length} screens, ${view.flows.length} flows`,
-    href: `/apps/${slug}`,
-  })
-  for (const s of view.screens) {
-    searchEntries.push({
-      type: "screen",
-      appSlug: slug,
-      appName: name,
-      label: s.title || s.id,
-      description: s.description,
-      screenId: s.id,
-      href: `/apps/${slug}?tab=screens&screen=${encodeURIComponent(s.id)}`,
-    })
-  }
-  for (const f of view.flows) {
-    searchEntries.push({
-      type: "flow",
-      appSlug: slug,
-      appName: name,
-      label: f.name,
-      description: f.summary,
-      flowSlug: f.slug,
-      href: `/apps/${slug}?tab=flows&flow=${encodeURIComponent(f.slug)}`,
-    })
-    f.steps.forEach((step, i) => {
-      searchEntries.push({
-        type: "step",
-        appSlug: slug,
-        appName: name,
-        label: step.title,
-        flowSlug: f.slug,
-        flowName: f.name,
-        screenId: step.screenId,
-        href: `/apps/${slug}?tab=flows&flow=${encodeURIComponent(f.slug)}&step=${i}`,
-      })
-    })
-  }
 }
 
 writeFileSync(join(capturesDir, "index.json"), JSON.stringify({ apps: registry }, null, 2))
-writeFileSync(join(capturesDir, "search-index.json"), JSON.stringify(searchEntries, null, 2))
-console.log(`built ${viewCount} view(s), ${registry.length} app(s), ${searchEntries.length} search entries`)
+console.log(`built ${viewCount} view(s), ${registry.length} app(s)`)

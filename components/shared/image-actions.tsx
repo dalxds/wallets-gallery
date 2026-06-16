@@ -5,10 +5,11 @@ import { Copy, Check, Link2, Download } from "lucide-react"
 
 interface ImageActionsProps {
   src: string
-  screenUrl: string
+  /** Link to copy for "copy link" — may be relative; resolved against the current URL. */
+  shareHref: string
 }
 
-export function ImageActions({ src, screenUrl }: ImageActionsProps) {
+export function ImageActions({ src, shareHref }: ImageActionsProps) {
   const [copiedImage, setCopiedImage] = useState(false)
   const [copiedLink, setCopiedLink] = useState(false)
 
@@ -31,7 +32,9 @@ export function ImageActions({ src, screenUrl }: ImageActionsProps) {
   async function copyLink(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    await navigator.clipboard.writeText(screenUrl)
+    await navigator.clipboard.writeText(
+      new URL(shareHref, window.location.href).toString()
+    )
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
   }

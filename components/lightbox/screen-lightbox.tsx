@@ -21,6 +21,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useQueryState } from "nuqs"
+import { useRouter } from "next/navigation"
 
 interface ScreenLightboxProps {
   screens: ScreenEntry[]
@@ -40,9 +41,7 @@ export function ScreenLightbox({
   appSlug,
 }: ScreenLightboxProps) {
   const [, setScreen] = useQueryState("screen")
-  const [, setTab] = useQueryState("tab")
-  const [, setFlow] = useQueryState("flow")
-  const [, setStep] = useQueryState("step")
+  const router = useRouter()
   const [currentIndex, setCurrentIndex] = useState(() =>
     screens.findIndex((s) => s.id === activeScreenId)
   )
@@ -132,13 +131,11 @@ export function ScreenLightbox({
     setScreen(null)
   }
 
-  // Jump to the flow where this screen appears, opening it at that step. Dropping
-  // ?screen closes the lightbox; the flow params drive the flows tab + lightbox.
+  // Jump to the flow where this screen appears, opening it at that step. A single
+  // relative navigation: it drops ?screen (closing this lightbox) and switches to
+  // the flows tab with the flow/step params the flow lightbox reads.
   function openFlow(slug: string, step: number) {
-    setScreen(null)
-    setTab("flows")
-    setFlow(slug)
-    setStep(String(step - 1))
+    router.push(`?tab=flows&flow=${encodeURIComponent(slug)}&step=${step - 1}`)
   }
 
   const atStart = currentIndex <= 0

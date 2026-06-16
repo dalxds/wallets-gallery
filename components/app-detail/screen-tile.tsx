@@ -1,16 +1,11 @@
 import type { CSSProperties, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
-// The screens grid is rendered twice: by the interactive client (ScreensGrid)
-// and by the search-param-free <Suspense> fallback (AppDetailStatic). The grid
-// template and card frame live here as the single source of truth — any drift
-// would show as a jump when the client hydrates over the static HTML. Only the
-// interactive parts (how a card opens, how its image loads) differ and stay
-// with each caller.
+// Shared layout primitives for the (server-rendered) screens grid: the column
+// template and the card frame, kept here as one source of truth.
 
 // The responsive column grid that holds the cards. `className` lets the caller
-// add spacing — the static fallback passes `mt-6`; the client keeps that margin
-// on an outer wrapper so the chrome can collapse it on the Flows tab.
+// add spacing.
 export function ScreensGridLayout({
   className,
   children,
@@ -30,15 +25,11 @@ export function ScreensGridLayout({
   )
 }
 
-// Base classes for a card's clickable wrapper — a <Link> in the static
-// fallback, a <div role="button"> in the client. Both start from these so the
-// card footprint matches, then append their own interaction classes.
+// Base classes for a card's wrapper; the caller appends interaction classes.
 export const screenTileWrapperClass = "flex flex-col gap-1.5 text-left"
 
-// A card's non-interactive frame: the bordered image box. The image is passed
-// as `children` because the static fallback renders a plain <img> (real content
-// for crawlers, no JS) while the client renders a <LazyImage> with a hover
-// <ImageActions> overlay.
+// A card's frame: the bordered image box. The image (and any hover overlay) is
+// passed as `children` by the caller.
 export function ScreenTile({
   imageBoxClassName,
   imageBoxStyle,

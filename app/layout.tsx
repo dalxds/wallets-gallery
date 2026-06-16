@@ -1,4 +1,5 @@
 import { Geist_Mono, Inter } from "next/font/google"
+import Script from "next/script";
 import type { Metadata } from "next"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 
@@ -35,6 +36,15 @@ export default function RootLayout({
         inter.variable
       )}
     >
+      <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
+      </head>
       <body>
         <ThemeProvider>
           <NuqsAdapter>{children}</NuqsAdapter>

@@ -1,13 +1,70 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
+import { Suspense, type CSSProperties } from "react"
 import type { AppsRegistry } from "@/lib/types"
-import { BrowseClient } from "./browse-client"
+import { AppShell } from "@/components/layout/app-shell"
+import { AppCard } from "@/components/browse/app-card"
+import { BrowseControls } from "@/components/browse/browse-controls"
 
 // Read the registry at build time and prerender the gallery into static HTML.
-// index.json now carries per-app covers + counts, so the browse page needs
-// nothing else — no per-app view.json fetches.
+// The cards render server-side (crawlable, no client fetch); sort and view are
+// URL state applied by CSS off data attributes the BrowseControls island sets,
+// so the index stays static while the controls stay shareable. Each card carries
+// its precomputed rank for both sort orders, and is rendered in both views — CSS
+// shows the active one.
 export default function BrowsePage() {
   const indexPath = join(process.cwd(), "public/captures/index.json")
   const registry = JSON.parse(readFileSync(indexPath, "utf8")) as AppsRegistry
-  return <BrowseClient apps={registry.apps} />
+  const apps = registry.apps
+
+  const latestRank = new Map(
+    [...apps]
+      .sort((a, b) => b.latest.localeCompare(a.latest))
+      .map((a, i) => [a.slug, i])
+  )
+  const alphaRank = new Map(
+    [...apps]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((a, i) => [a.slug, i])
+  )
+
+  return (
+    <AppShell>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold">Apps</h1>
+            <p className="text-muted-foreground">
+              Browse captured UI flows from crypto wallets and fintech apps
+            </p>
+          </div>
+          <Suspense fallback={null}>
+            <BrowseControls />
+          </Suspense>
+        </div>
+
+        <div id="browse-grid" className="browse-grid">
+          {apps.map((app) => (
+            <div
+              key={app.slug}
+              className="browse-card"
+              style={
+                {
+                  "--rank-latest": String(latestRank.get(app.slug) ?? 0),
+                  "--rank-alpha": String(alphaRank.get(app.slug) ?? 0),
+                } as CSSProperties
+              }
+            >
+              <div className="browse-card-list">
+                <AppCard app={app} view="list" />
+              </div>
+              <div className="browse-card-grid">
+                <AppCard app={app} view="grid" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </AppShell>
+  )
 }

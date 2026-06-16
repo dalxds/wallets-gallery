@@ -143,3 +143,69 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* App-detail Screens/Flows tabs. Both panels render so switching is an instant
+   visibility toggle (no remount, no image-reveal flicker); the active one is
+   shown via CSS keyed off [data-active-tab] on the detail root, which the
+   TabState island reflects from ?tab. Default (attribute absent) = screens,
+   matching the prerendered HTML so there's no JS-needed first paint. */
+[data-tab-panel="flows"] {
+  display: none;
+}
+[data-detail-root][data-active-tab="flows"] [data-tab-panel="flows"] {
+  display: block;
+}
+[data-detail-root][data-active-tab="flows"] [data-tab-panel="screens"] {
+  display: none;
+}
+[data-detail-root]:not([data-active-tab="flows"]) [data-tab-btn="screens"],
+[data-detail-root][data-active-tab="flows"] [data-tab-btn="flows"] {
+  border-color: var(--primary);
+  color: var(--foreground);
+}
+
+/* Browse index: each app card is server-rendered once per view and carries its
+   rank for each sort order; CSS shows the active view (data-view) and orders by
+   the active sort (data-sort), which the BrowseControls island reflects from
+   ?view/?sort. Defaults (attributes absent) = list view, latest sort, matching
+   the static HTML so no JS is needed for first paint. */
+.browse-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.browse-grid[data-view="grid"] {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .browse-grid[data-view="grid"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .browse-grid[data-view="grid"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1280px) {
+  .browse-grid[data-view="grid"] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.browse-card {
+  order: var(--rank-latest);
+}
+.browse-grid[data-sort="alpha"] .browse-card {
+  order: var(--rank-alpha);
+}
+.browse-card-grid {
+  display: none;
+}
+.browse-grid[data-view="grid"] .browse-card-list {
+  display: none;
+}
+.browse-grid[data-view="grid"] .browse-card-grid {
+  display: block;
+}

@@ -14,13 +14,17 @@ export const STATE_META: Record<
 }
 
 export function stateMeta(state: string) {
-  return (
-    STATE_META[state] ?? {
-      label: state.charAt(0).toUpperCase() + state.slice(1),
-      tone: "neutral" as const,
-      order: 9,
-    }
-  )
+  if (STATE_META[state]) return STATE_META[state]
+  // Numeric labels are carousel/onboarding step numbers ("1","2","3"): order by the
+  // number so the switcher keeps slide order regardless of input order, and place them
+  // after the lifecycle states. Any other custom label is a neutral, capitalized fallback.
+  if (/^\d+$/.test(state))
+    return { label: state, tone: "neutral" as const, order: 100 + Number(state) }
+  return {
+    label: state.charAt(0).toUpperCase() + state.slice(1),
+    tone: "neutral" as const,
+    order: 9,
+  }
 }
 
 export interface StateIndex {

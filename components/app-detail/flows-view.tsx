@@ -4,13 +4,13 @@ import type { AppCapture, FlowEntry } from "@/lib/types"
 import { buildStateIndex } from "@/lib/states"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
+import { FlowLightboxIsland } from "./flow-lightbox-island"
 import { PanelLeftOpen } from "lucide-react"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { Suspense, useCallback, useMemo, useRef, useState } from "react"
 
 interface FlowsViewProps {
   app: AppCapture
   appSlug: string
-  activeFlowSlug?: string
 }
 
 // Flatten the flow tree into a single ordered list (parent, then its children,
@@ -35,12 +35,12 @@ function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
   return out
 }
 
-export function FlowsView({
-  app,
-  appSlug,
-  activeFlowSlug,
-}: FlowsViewProps) {
-  const [currentSlug, setCurrentSlug] = useState(activeFlowSlug)
+export function FlowsView({ app, appSlug }: FlowsViewProps) {
+  // Which flow the sidebar highlights — set when the user clicks one. The open
+  // lightbox (driven by ?flow, read only in FlowLightboxIsland) is the source of
+  // truth for "which flow"; this is just the list highlight. No searchParams are
+  // read here, so the flow list server-renders into the static HTML.
+  const [currentSlug, setCurrentSlug] = useState<string | undefined>(undefined)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const flowRefs = useRef<Map<string, HTMLDivElement>>(new Map())
 
@@ -53,16 +53,6 @@ export function FlowsView({
       }
     })
   }, [])
-
-  useEffect(() => {
-    if (!activeFlowSlug) return
-    requestAnimationFrame(() => {
-      const el = flowRefs.current.get(activeFlowSlug)
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" })
-      }
-    })
-  }, [activeFlowSlug])
 
   const orderedFlows = useMemo(() => flattenFlows(app.flows), [app.flows])
   const flowBySlug = useMemo(
@@ -82,6 +72,7 @@ export function FlowsView({
   }
 
   return (
+    <>
     <div className="flex gap-6">
       {/* Desktop: fixed full-height sidebar, or a slim rail when collapsed */}
       {sidebarCollapsed ? (
@@ -131,6 +122,7 @@ export function FlowsView({
             return (
               <div
                 key={flow.slug}
+                id={`flow-${flow.slug}`}
                 ref={(el) => {
                   if (el) flowRefs.current.set(flow.slug, el)
                 }}
@@ -153,5 +145,13 @@ export function FlowsView({
         </div>
       </div>
     </div>
+    <Suspense fallback={null}>
+      <FlowLightboxIsland
+        flows={app.flows}
+        stateIndex={stateIndex}
+        appSlug={appSlug}
+      />
+    </Suspense>
+    </>
   )
 }

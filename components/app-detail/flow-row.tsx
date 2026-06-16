@@ -2,15 +2,13 @@
 
 import type { FlowEntry } from "@/lib/types"
 import type { StateIndex } from "@/lib/states"
-import { LazyImage } from "@/components/shared/lazy-image"
 import { captureUrl } from "@/lib/images"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
-import { useRef, useState, useEffect, useCallback } from "react"
-import { useQueryState } from "nuqs"
-import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
+import { useRef, useState, useEffect } from "react"
 import { ImageActions } from "@/components/shared/image-actions"
 import { flowHref } from "@/lib/links"
+import Link from "next/link"
 
 interface FlowRowProps {
   flow: FlowEntry
@@ -22,6 +20,10 @@ interface FlowRowProps {
   onNavigate?: (slug: string) => void
 }
 
+// Reads no searchParams, so it server-renders into the static HTML (visible
+// screenshots via plain <img>, crawlable) while keeping its scroll affordances
+// and copy-link as client interactivity. Each step is a <Link> into ?flow/?step;
+// the FlowLightboxIsland reads those and opens the lightbox.
 export function FlowRow({
   flow,
   appSlug,
@@ -33,29 +35,6 @@ export function FlowRow({
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
-  const [flowParam, setFlowParam] = useQueryState("flow")
-  const [stepParam, setStepParam] = useQueryState("step")
-
-  // The lightbox is derived from the URL (single source of truth): this flow's
-  // lightbox is open whenever ?flow matches its slug, at the ?step index. This
-  // also covers deep links that arrive after mount (e.g. via search) without
-  // mirroring URL state into an effect.
-  const isLightboxOpen = flowParam === flow.slug
-  const parsedStep = stepParam ? parseInt(stepParam, 10) : 0
-  const initialStep = Number.isNaN(parsedStep) ? 0 : parsedStep
-
-  const openLightbox = useCallback(
-    (idx: number) => {
-      setFlowParam(flow.slug)
-      setStepParam(String(idx))
-    },
-    [flow.slug, setFlowParam, setStepParam]
-  )
-
-  const closeLightbox = useCallback(() => {
-    setFlowParam(null)
-    setStepParam(null)
-  }, [setFlowParam, setStepParam])
 
   function updateScrollState() {
     const el = scrollRef.current
@@ -138,38 +117,42 @@ export function FlowRow({
         >
           {flow.steps.map((step, idx) => {
             const stateCount = stateIndex.variantsForScreen(step.screenId).length
+            const src = captureUrl(appSlug, step.screenshotPath)
+            // Relative href: opens the lightbox via the URL and keeps the date.
+            const href = `?tab=flows&flow=${encodeURIComponent(flow.slug)}&step=${idx}`
             return (
-            <div
-              key={step.number}
-              role="button"
-              tabIndex={0}
-              onClick={() => openLightbox(idx)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault()
-                  openLightbox(idx)
-                }
-              }}
-              className="group/step w-32 shrink-0 cursor-zoom-in snap-start text-left sm:w-36"
-            >
-              <div className="group/card relative overflow-hidden rounded-lg border transition-shadow group-hover/step:shadow-md">
-                <ImageActions
-                  src={captureUrl(appSlug, step.screenshotPath)}
-                  screenUrl={`${typeof window !== "undefined" ? window.location.origin : ""}${flowHref(appSlug, flow.slug, idx)}`}
-                />
-                <LazyImage
-                  src={captureUrl(appSlug, step.screenshotPath)}
-                  alt={step.title}
-                />
-                {stateCount > 1 && (
-                  <div className="pointer-events-none absolute bottom-1.5 left-1.5 z-10 flex items-center gap-1 rounded-md bg-background/85 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shadow-sm backdrop-blur-sm">
-                    <Layers className="h-2.5 w-2.5" />
-                    {stateCount} states
+              <div
+                key={step.number}
+                className="group/step group/card relative w-32 shrink-0 snap-start text-left sm:w-36"
+              >
+                <Link
+                  href={href}
+                  aria-label={step.title}
+                  className="block cursor-zoom-in"
+                >
+                  <div
+                    className="relative overflow-hidden rounded-lg border bg-muted transition-shadow group-hover/step:shadow-md"
+                    style={{ aspectRatio: "9/19.5" }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={src}
+                      alt={step.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                    {stateCount > 1 && (
+                      <div className="pointer-events-none absolute bottom-1.5 left-1.5 z-10 flex items-center gap-1 rounded-md bg-background/85 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shadow-sm backdrop-blur-sm">
+                        <Layers className="h-2.5 w-2.5" />
+                        {stateCount} states
+                      </div>
+                    )}
                   </div>
-                )}
+                </Link>
+                <ImageActions src={src} shareHref={href} />
               </div>
-            </div>
-          )})}
+            )
+          })}
         </div>
         {canScrollRight && (
           <Button
@@ -182,16 +165,6 @@ export function FlowRow({
           </Button>
         )}
       </div>
-
-      {isLightboxOpen && (
-        <FlowLightbox
-          flow={flow}
-          appSlug={appSlug}
-          initialIndex={initialStep}
-          onClose={closeLightbox}
-          stateIndex={stateIndex}
-        />
-      )}
     </div>
   )
 }

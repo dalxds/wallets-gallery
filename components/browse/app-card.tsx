@@ -45,13 +45,13 @@ export function AppCard({ app, view }: AppCardProps) {
       {app.cover && (
         <div
           className="overflow-hidden rounded-lg border bg-muted"
-          style={{ aspectRatio: "4/3" }}
+          style={{ aspectRatio: "9/19.5" }}
         >
           <img
             src={captureUrl(app.slug, app.cover)}
             alt={`${app.name} preview`}
             loading="lazy"
-            className="h-full w-full object-cover object-top transition-transform group-hover:scale-[1.02]"
+            className="h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
           />
         </div>
       )}

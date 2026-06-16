@@ -24,7 +24,12 @@ export type ScreenRole =
   | "error"
   | "other"
 
-export type StateLabel = "default" | "empty" | "loading" | "error" | "max"
+// The canonical lifecycle states (default/empty/loading/error/max) carry presentation
+// in lib/states.ts. A custom string is also allowed for variants that aren't lifecycle
+// states — e.g. carousel/onboarding slides force-grouped via overrides and labelled by
+// step ("1","2","3"); `stateMeta` renders any unknown value, numeric ones in step order.
+// The `string & {}` keeps literal autocomplete for the canonical set.
+export type StateLabel = "default" | "empty" | "loading" | "error" | "max" | (string & {})
 
 // How a transition relates its two screens. Computed at capture time by comparing
 // the pre/post skeleton hash; it is the deterministic signal that drives state
