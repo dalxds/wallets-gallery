@@ -79,32 +79,35 @@ export function classify(
     defaultOf.set(logicalId, def.id)
     route.set(def.id, "default")
     if (members.length < 2) continue
+    // The screen we crown as the group's default IS, by definition, its default state —
+    // so a fallback representative isn't surfaced tagged "error"/"empty" in the switcher.
+    if (defaults.length !== 1) state.set(def.id, "default")
 
     for (const v of members) {
       if (v.id === def.id) continue
 
-      const forcedGroup = ov[v.id]?.stateGroup
+      // Forced stateGroups (overrides.screens[id].stateGroup) are handled
+      // authoritatively by the forced block below — keyed by the AUTHOR's group, not
+      // this SAF family. Reacting to them here also folded the family's representative
+      // default into an unrelated group (e.g. a screen that merely shares a skeleton).
       const inPlaceEdge = edges.some(
         (e) =>
           ((e.from === def.id && e.to === v.id) || (e.from === v.id && e.to === def.id)) &&
           e.kind === "in-place"
       )
+      if (inPlaceEdge) {
+        // structural toggle: same screen, in-place change. Group keyed by the family default.
+        route.set(v.id, "toggle")
+        stateGroup.set(v.id, def.id)
+        stateGroup.set(def.id, def.id)
+        continue
+      }
 
       // does v reach screens the default cannot (each without going through the other)?
       const fromV = reachableFrom(adj, v.id, { exclude: new Set([def.id]) })
       const fromD = reachableFrom(adj, def.id, { exclude: new Set([v.id]) })
       const opensNew = [...fromV].some((x) => x !== v.id && x !== def.id && !fromD.has(x))
-
-      if (forcedGroup || inPlaceEdge) {
-        // group is keyed by its DEFAULT screen, not the SAF representative
-        route.set(v.id, "toggle")
-        stateGroup.set(v.id, forcedGroup ?? def.id)
-        stateGroup.set(def.id, forcedGroup ?? def.id)
-      } else if (opensNew) {
-        route.set(v.id, "divergent")
-      } else {
-        route.set(v.id, "lifecycle")
-      }
+      route.set(v.id, opensNew ? "divergent" : "lifecycle")
     }
   }
 
@@ -117,7 +120,13 @@ export function classify(
     if (g) (forced.get(g) ?? forced.set(g, []).get(g)!).push(n.id)
   }
   for (const [g, ids] of forced) {
-    const def = ids.find((id) => (ov[id]?.state ?? state.get(id)) === "default") ?? ids[0]
+    // Prefer the member the author explicitly tagged state:"default"; only then an
+    // auto-labelled default; else the first. An auto-default must not outrank an
+    // explicit one (which the previous `??` chain let it do via input order).
+    const def =
+      ids.find((id) => ov[id]?.state === "default") ??
+      ids.find((id) => state.get(id) === "default") ??
+      ids[0]
     defaultOf.set(g, def)
     for (const id of ids) {
       stateGroup.set(id, g)

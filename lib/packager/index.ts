@@ -1,7 +1,7 @@
 // package(graph) → View. The single deterministic transform: same graph.json
 // (incl. overrides) always yields the same View. Run by the SSG build and the CLI.
 
-import type { Graph, GraphEdge, View, ViewFlow, ViewScreen, ViewStep } from "./types.ts"
+import type { Graph, GraphEdge, Overrides, View, ViewFlow, ViewScreen, ViewStep } from "./types.ts"
 import { runSAF } from "./saf.ts"
 import { classify } from "./classify.ts"
 import { segment } from "./segment.ts"
@@ -14,23 +14,37 @@ export function packageGraph(graph: Graph): View {
   const saf = runSAF(graph.nodes, overrides)
   const canon = (id: string) => saf.canonicalOf.get(id) ?? id
 
+  // overrides.screens is authored against RAW node ids; remap keys to canonical
+  // (post-merge) ids so a correction on a node the SAF merged away still applies
+  // to its canonical survivor instead of silently no-op'ing.
+  const screenOv = overrides.screens ?? {}
+  const canonScreens: NonNullable<Overrides["screens"]> = {}
+  for (const id of Object.keys(screenOv)) {
+    const c = canon(id)
+    canonScreens[c] = { ...canonScreens[c], ...screenOv[id] }
+  }
+  const overridesC: Overrides = { ...overrides, screens: canonScreens }
+
   // Remap edges to canonical ids; drop self-loops; dedupe by (from,to,action).
-  const seenEdge = new Set<string>()
-  const edges: GraphEdge[] = []
+  // On a collision prefer the in-place edge — it's the state-toggle signal classify
+  // needs, and a nav/overlay duplicate would otherwise mask it (first-seen wins).
+  const edgeByKey = new Map<string, GraphEdge>()
+  const edgeOrder: string[] = []
   for (const e of graph.edges) {
     const from = canon(e.from)
     const to = canon(e.to)
     if (from === to) continue
     const key = `${from}->${to}|${e.action}`
-    if (seenEdge.has(key)) continue
-    seenEdge.add(key)
-    edges.push({ ...e, from, to })
+    const prev = edgeByKey.get(key)
+    if (!prev) { edgeByKey.set(key, { ...e, from, to }); edgeOrder.push(key) }
+    else if (prev.kind !== "in-place" && e.kind === "in-place") edgeByKey.set(key, { ...e, from, to })
   }
+  const edges: GraphEdge[] = edgeOrder.map((k) => edgeByKey.get(k)!)
 
   const canonIds = saf.canonicalNodes.map((n) => n.id)
   const adj = buildAdjacency(canonIds, edges)
   const root = canon(graph.root)
-  const cls = classify(saf, adj, edges, overrides)
+  const cls = classify(saf, adj, edges, overridesC)
   // Main-navigation destinations → canonical ids that survived merging. Each roots its
   // own top-level flow (see segment.ts); unknown ids are dropped.
   const canonSet = new Set(canonIds)
@@ -39,7 +53,7 @@ export function packageGraph(graph: Graph): View {
     const c = canon(t)
     if (canonSet.has(c)) navRoots.add(c)
   }
-  const seg = segment(saf, cls, adj, edges, root, navRoots, overrides)
+  const seg = segment(saf, cls, adj, edges, root, navRoots, overridesC)
 
   const nodeById = new Map(saf.canonicalNodes.map((n) => [n.id, n]))
   const edgeBetween = (a: string, b: string) => edges.find((e) => e.from === a && e.to === b) ?? null
@@ -50,7 +64,7 @@ export function packageGraph(graph: Graph): View {
   const slugByJourney = new Map<string, string>()
   const used = new Set<string>()
   for (const j of seg.journeys) {
-    const nm = journeyName(j, nodeById.get(j.goal), overrides)
+    const nm = journeyName(j, nodeById.get(j.goal), overridesC)
     nameByJourney.set(j.id, nm)
     let slug = slugify(nm.name) || j.id
     const base = slug
@@ -75,7 +89,7 @@ export function packageGraph(graph: Graph): View {
       if (!nodeToFlow.has(nid)) nodeToFlow.set(nid, slug)
       return {
         number: idx + 1,
-        title: screenTitle(node, overrides),
+        title: screenTitle(node, overridesC),
         screenId: nid,
         action: idx === 0 ? "Entry point" : e?.action ?? "Navigate",
         screenshotPath: node.screenshotPath,
@@ -101,9 +115,9 @@ export function packageGraph(graph: Graph): View {
     const grp = cls.stateGroup.get(n.id)
     return {
       id: n.id,
-      title: screenTitle(n, overrides),
-      role: overrides.screens?.[n.id]?.role ?? n.role,
-      description: overrides.screens?.[n.id]?.description ?? "",
+      title: screenTitle(n, overridesC),
+      role: overridesC.screens?.[n.id]?.role ?? n.role,
+      description: overridesC.screens?.[n.id]?.description ?? "",
       screenshotPath: n.screenshotPath,
       texts: n.texts,
       interactiveElements: n.interactiveElements,

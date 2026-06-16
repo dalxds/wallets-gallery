@@ -212,3 +212,86 @@ describe("packager — overrides.structure (the hand lever over the tree)", () =
     expect(send.parent).toBe(receive.slug)
   })
 })
+
+const meta = (slug: string): Graph["meta"] => ({
+  schemaVersion: 2, app: { name: slug, slug, bundleId: `com.${slug}.app`, platform: "ios" },
+  captureDate: "2026-06-05", scope: "initial", mode: "free-roam", previousCapture: null,
+})
+
+describe("packager — edge dedup keeps the in-place signal", () => {
+  it("prefers an in-place edge over a nav duplicate with the same (from,to,action)", () => {
+    // amt + amt-max share a skeleton (one family, distinct text → cluster not merge).
+    // The amt→amt-max transition is recorded twice with the SAME action: nav first,
+    // in-place second. The in-place must win so amt-max folds into a state toggle.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Open"]),
+      node("amt", "form", "sk:amt", ["Amount", "100"], ["Max", "Send", "Edit"]),
+      node("amt-max", "form", "sk:amt", ["Amount", "Max selected"], ["Send", "Edit"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "amt", "Open", 'id="open"', "nav", 1),
+      edge("amt", "amt-max", "Tap Max", 'label="Max"', "nav", 2),
+      edge("amt", "amt-max", "Tap Max", 'label="Max"', "in-place", 3),
+    ]
+    const view = packageGraph({ meta: meta("dedup"), root: "home", nodes, edges, decisionPoints: [], overrides: {} })
+    const amtMax = view.screens.find((s) => s.id === "amt-max")!
+    expect(amtMax.stateGroup).toBe("amt") // folded into amt's toggle group
+    expect(view.flows.some((f) => f.steps.some((s) => s.screenId === "amt-max"))).toBe(false)
+  })
+})
+
+describe("packager — overrides survive SAF merge", () => {
+  it("applies a screen override keyed by a raw node the SAF merged away", () => {
+    // dup-a and dup-b are identical → merge; dup-a (lex-smaller) is canonical. The
+    // override is authored against dup-b (the merged-away id) and must still apply.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Open"]),
+      node("dup-a", "modal", "sk:dup", ["Same screen"], ["Go"]),
+      node("dup-b", "modal", "sk:dup", ["Same screen"], ["Go"]),
+    ]
+    const edges: GraphEdge[] = [edge("home", "dup-a", "Open", 'id="open"', "nav", 1)]
+    const view = packageGraph({
+      meta: meta("merged"), root: "home", nodes, edges, decisionPoints: [],
+      overrides: { screens: { "dup-b": { title: "Custom Title", role: "settings" } } },
+    })
+    expect(view.screens.some((s) => s.id === "dup-b")).toBe(false) // merged away
+    const canon = view.screens.find((s) => s.id === "dup-a")!
+    expect(canon.title).toBe("Custom Title") // override followed the merge
+    expect(canon.role).toBe("settings")
+  })
+})
+
+describe("packager — reachesHub is cycle-proof", () => {
+  // p and q are equidistant from welcome and point at each other — a forward cycle in
+  // the continuation graph — and both reach the home hub via p→home. The old memoized
+  // reachesHub could cache the cycle-guard's `false` and wrongly route q as a feature flow.
+  const g: Graph = {
+    meta: meta("loop"), root: "welcome", decisionPoints: [], overrides: {},
+    nodes: [
+      node("welcome", "auth", "sk:welcome", ["Welcome"], ["Start"]),
+      node("p", "other", "sk:p", ["P"], ["ToQ", "ToHome"]),
+      node("q", "other", "sk:q", ["Q"], ["ToP"]),
+      node("home", "home", "sk:home", ["Home"], ["Settings"]),
+    ],
+    edges: [
+      edge("welcome", "p", "Start", 'id="s1"', "nav", 1),
+      edge("welcome", "q", "Start alt", 'id="s2"', "nav", 2),
+      edge("p", "q", "P to Q", 'id="pq"', "nav", 3),
+      edge("q", "p", "Q to P", 'id="qp"', "nav", 4),
+      edge("p", "home", "P to Home", 'id="ph"', "nav", 5),
+    ],
+  }
+
+  it("completes deterministically and reaches the hub", () => {
+    const view = packageGraph(g)
+    expect(JSON.stringify(packageGraph(g))).toBe(JSON.stringify(view)) // no hang, deterministic
+    expect(view.flows.some((f) => f.steps[f.steps.length - 1].screenId === "home")).toBe(true)
+  })
+
+  it("does not emit the hub-reaching cycle node q as a feature flow", () => {
+    const view = packageGraph(g)
+    // q reaches the hub (q→p→home), so it belongs to completion routing, never a
+    // standalone feature flow. The memo bug would surface q as its own flow.
+    expect(view.flows.some((f) => f.steps.some((s) => s.screenId === "q"))).toBe(false)
+  })
+})

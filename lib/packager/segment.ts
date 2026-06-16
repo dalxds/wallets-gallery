@@ -120,23 +120,32 @@ export function segment(
       .filter((to) => !seen.has(to) && !isSideTarget(to))
       .sort((a, b) => distOf(a) - distOf(b) || (a < b ? -1 : 1))
 
-  // Can `node` reach a completion hub via forward steps? (memoized)
-  const reachesHubMemo = new Map<string, boolean>()
-  const reachesHub = (node: string, stack: Set<string> = new Set()): boolean => {
-    if (reachesHubMemo.has(node)) return reachesHubMemo.get(node)!
-    if (stack.has(node)) return false
-    stack.add(node)
-    let r = false
-    for (const c of continuations(node, new Set())) {
-      if (completionHubs.has(c) || reachesHub(c, stack)) {
-        r = true
-        break
-      }
-    }
-    stack.delete(node)
-    reachesHubMemo.set(node, r)
-    return r
+  // Can `node` reach a completion hub via forward steps? Computed as a fixpoint over
+  // the continuation graph (NOT memoized recursion): a node reaches a hub iff one of
+  // its continuations is a hub or itself reaches one. Seeding from hub-adjacent nodes
+  // and propagating backward is cycle-proof — a recursive memo would cache the `false`
+  // its own on-stack cycle guard produced and wrongly mark a looping branch as dead.
+  const conts = new Map<string, string[]>()
+  const contsOf = (id: string) => {
+    let c = conts.get(id)
+    if (!c) { c = continuations(id, new Set()); conts.set(id, c) }
+    return c
   }
+  const reachesHubSet = new Set<string>()
+  {
+    const preds = new Map<string, string[]>()
+    const queue: string[] = []
+    for (const n of saf.canonicalNodes) {
+      const cs = contsOf(n.id)
+      for (const c of cs) (preds.get(c) ?? preds.set(c, []).get(c)!).push(n.id)
+      if (cs.some((c) => completionHubs.has(c))) { reachesHubSet.add(n.id); queue.push(n.id) }
+    }
+    while (queue.length) {
+      const cur = queue.shift()!
+      for (const p of preds.get(cur) ?? []) if (!reachesHubSet.has(p)) { reachesHubSet.add(p); queue.push(p) }
+    }
+  }
+  const reachesHub = (node: string) => reachesHubSet.has(node)
 
   type Raw = { id: string; entry: string; steps: string[]; parent: string | null; goal: string }
   const raws: Raw[] = []
