@@ -171,11 +171,6 @@ export function FlowLightbox({
         <div className="flex items-center justify-between gap-3 border-b px-4 py-2.5">
           <div className="min-w-0 flex-1">
             <p className="truncate font-medium">{flow.name}</p>
-            <p className="truncate text-sm text-muted-foreground">
-              {flow.steps.length}{" "}
-              {flow.steps.length === 1 ? "screen" : "screens"}
-              {flow.summary ? ` · ${flow.summary}` : ""}
-            </p>
           </div>
           <Button
             variant="ghost"
