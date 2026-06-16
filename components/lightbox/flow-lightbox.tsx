@@ -53,6 +53,7 @@ export function FlowLightbox({
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [flowLinkCopied, setFlowLinkCopied] = useState(false)
+  const [downloadingAll, setDownloadingAll] = useState(false)
   const [ready, setReady] = useState(false)
 
   const updateScrollState = useCallback(() => {
@@ -128,6 +129,33 @@ export function FlowLightbox({
     setTimeout(() => setFlowLinkCopied(false), 1500)
   }
 
+  // Download every step's screenshot in order. Sequential (with a tiny gap) so
+  // the browser doesn't drop a burst of simultaneous downloads; missing shots
+  // (404 → HTML) are skipped rather than saved as broken files.
+  async function downloadAll() {
+    setDownloadingAll(true)
+    try {
+      for (const step of flow.steps) {
+        try {
+          const res = await fetch(stepSrc(step))
+          if (!res.ok) continue
+          const blob = await res.blob()
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement("a")
+          a.href = url
+          a.download = `${appSlug}-${flow.slug}-step-${step.number}.png`
+          a.click()
+          URL.revokeObjectURL(url)
+          await new Promise((r) => setTimeout(r, 150))
+        } catch {
+          // skip a single failed step; keep downloading the rest
+        }
+      }
+    } finally {
+      setDownloadingAll(false)
+    }
+  }
+
   return (
     <Dialog open onOpenChange={() => onClose()}>
       <DialogContent
@@ -140,27 +168,39 @@ export function FlowLightbox({
         </DialogDescription>
 
         {/* Header */}
-        <div className="flex items-center justify-between border-b px-4 py-2">
+        <div className="flex items-center justify-between gap-3 border-b px-4 py-2.5">
           <div className="min-w-0 flex-1">
-            <p className="font-medium">
-              {flow.name}
-              <span className="ml-2 text-sm font-normal text-muted-foreground">
-                {flow.steps.length} steps
-              </span>
+            <p className="truncate font-medium">{flow.name}</p>
+            <p className="truncate text-sm text-muted-foreground">
+              {flow.steps.length}{" "}
+              {flow.steps.length === 1 ? "screen" : "screens"}
+              {flow.summary ? ` · ${flow.summary}` : ""}
             </p>
-            <p className="text-sm text-muted-foreground">{flow.summary}</p>
           </div>
-          <div className="flex items-center gap-1">
-            <button
+          <div className="flex shrink-0 items-center gap-1.5">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={downloadAll}
+              disabled={downloadingAll}
+              className="gap-1.5"
+            >
+              <Download className="h-4 w-4" />
+              {downloadingAll ? "Downloading…" : "Download all"}
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={copyFlowLink}
-              className="flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-muted"
+              className="gap-1.5"
             >
               {flowLinkCopied ? (
                 <Check className="h-4 w-4 text-green-500" />
               ) : (
-                <Link2 className="h-4 w-4 text-muted-foreground" />
+                <Link2 className="h-4 w-4" />
               )}
-            </button>
+              Copy link
+            </Button>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-4 w-4" />
             </Button>
@@ -357,11 +397,11 @@ const StepCard = forwardRef<
           </div>
         )}
       </div>
-      <div className="flex items-center gap-1.5 text-center">
+      <div className="flex max-w-48 items-start gap-1.5">
         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-medium">
           {step.number}
         </span>
-        <span className="max-w-32 truncate text-xs text-muted-foreground">
+        <span className="text-xs text-muted-foreground">
           {getStepLabel(step)}
         </span>
       </div>
