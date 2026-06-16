@@ -5,6 +5,7 @@ import { AppHeaderLayout } from "@/components/app-detail/app-header-layout"
 import { StickyChrome } from "@/components/app-detail/sticky-chrome"
 import { TabBar } from "@/components/app-detail/tab-bar"
 import { TabState } from "@/components/app-detail/tab-state"
+import { LightboxParamGuard } from "@/components/app-detail/lightbox-param-guard"
 import { DateControl } from "@/components/app-detail/date-control"
 import { ScreensGrid } from "@/components/app-detail/screens-grid"
 import { FlowsView } from "@/components/app-detail/flows-view"
@@ -57,6 +58,7 @@ export function AppDetail({
         <Suspense fallback={null}>
           <TabState />
         </Suspense>
+        <LightboxParamGuard />
 
         {/* Both panels render; CSS shows the active one (data-active-tab). */}
         <div className="mt-6 lg:mt-0">

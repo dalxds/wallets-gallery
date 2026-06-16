@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { useQueryState } from "nuqs"
+import { useMaskedLightboxParam } from "@/hooks/use-restored-lightbox-params"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 import type { StateIndex } from "@/lib/states"
 import type { AppCapture } from "@/lib/types"
@@ -19,8 +20,11 @@ export function FlowLightboxIsland({
   stateIndex: StateIndex
   appSlug: string
 }) {
-  const [flowParam, setFlowParam] = useQueryState("flow")
+  const [rawFlowParam, setFlowParam] = useQueryState("flow")
   const [stepParam, setStepParam] = useQueryState("step")
+  // Mask a ?flow restored by the router-cache bug so a closed lightbox doesn't
+  // spring back open on an in-app navigation; LightboxParamGuard clears it.
+  const flowParam = useMaskedLightboxParam(rawFlowParam)
   const flow = flowParam ? flows.find((f) => f.slug === flowParam) : undefined
 
   // Scroll the underlying row into view when a flow opens, so closing the

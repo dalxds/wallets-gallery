@@ -1,6 +1,7 @@
 "use client"
 
 import { useQueryState } from "nuqs"
+import { useMaskedLightboxParam } from "@/hooks/use-restored-lightbox-params"
 import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 import type { AppCapture } from "@/lib/types"
 
@@ -17,7 +18,9 @@ export function ScreenLightboxIsland({
   flows: AppCapture["flows"]
   appSlug: string
 }) {
-  const [activeScreenId] = useQueryState("screen")
+  const [rawScreenId] = useQueryState("screen")
+  // Mask a ?screen restored by the router-cache bug; LightboxParamGuard clears it.
+  const activeScreenId = useMaskedLightboxParam(rawScreenId)
   if (!activeScreenId || !screens.some((s) => s.id === activeScreenId)) return null
   return (
     <ScreenLightbox
