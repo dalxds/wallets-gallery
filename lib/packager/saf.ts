@@ -15,8 +15,13 @@
 import type { GraphNode, Overrides } from "./types.ts"
 import { normalizeDynamic, pHashDistance } from "./identity.ts"
 
-// Same screen, data-only difference: pixels essentially identical.
-export const T_MERGE_PHASH = 4
+// Same screen, data-only difference: near-identical pixels. Deliberately tight — this
+// pHash tolerance is the ONLY guard against a false merge once two nodes share a skeleton,
+// and the element-multiset skeleton is itself coarse (many unrelated screens collide on it,
+// see identity.ts). 6/64 bits absorbs render/encoding jitter between two captures of one
+// state while still rejecting genuinely different screens (the closest distinct
+// same-skeleton pair on tuyo is 8 apart). A tree-based skeleton could safely loosen this.
+export const T_MERGE_PHASH = 6
 
 export interface SafResult {
   /** raw node id → canonical (post-merge) node id */

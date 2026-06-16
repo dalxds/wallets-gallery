@@ -132,7 +132,10 @@ function hashFrom32(g: number[]): string {
   // threshold by the median of the non-DC coefficients
   const sorted = coeffs.slice(1).sort((a, b) => a - b)
   const median = sorted[Math.floor(sorted.length / 2)]
-  // pack 64 bits as two 32-bit halves (avoids BigInt; identical hex to a 64-bit int)
+  // pack 64 bits as two 32-bit halves (avoids BigInt; identical hex to a 64-bit int).
+  // NB bit 0 is the DC coefficient (the largest), so it's > median on essentially every
+  // screen — effectively a constant 1 that contributes 0 to every Hamming distance. The
+  // hash is thus ~63 discriminating bits; harmless, but don't read the width as a full 64.
   let lo = 0, hi = 0
   for (let i = 0; i < 64; i++) {
     if (coeffs[i] > median) {
