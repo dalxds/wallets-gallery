@@ -120,13 +120,18 @@ export function classify(
     if (g) (forced.get(g) ?? forced.set(g, []).get(g)!).push(n.id)
   }
   for (const [g, ids] of forced) {
-    // Prefer the member the author explicitly tagged state:"default"; only then an
-    // auto-labelled default; else the first. An auto-default must not outrank an
-    // explicit one (which the previous `??` chain let it do via input order).
+    // Default selection must be INPUT-ORDER-INDEPENDENT — the view has to be deterministic.
+    // Precedence: the member the author explicitly tagged state:"default"; then the
+    // eponymous node (a group is named after its default — overrides.stateGroup:"earn"
+    // means `earn` is the default); then an auto-labelled default; else lexically first.
+    // The previous `ids.find(state==="default") ?? ids[0]` tail picked by input order, so
+    // reversing the node array flipped e.g. earn <-> earn-funded (default <-> toggle) and
+    // reshaped the flow tree (folding `earn` stripped the edges feeding its sub-sections).
     const def =
       ids.find((id) => ov[id]?.state === "default") ??
-      ids.find((id) => state.get(id) === "default") ??
-      ids[0]
+      (ids.includes(g) ? g : undefined) ??
+      [...ids].filter((id) => state.get(id) === "default").sort()[0] ??
+      [...ids].sort()[0]
     defaultOf.set(g, def)
     for (const id of ids) {
       stateGroup.set(id, g)

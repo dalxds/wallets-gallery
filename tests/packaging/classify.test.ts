@@ -45,6 +45,23 @@ describe("classify — forced stateGroup", () => {
     expect(cls.route.get("y")).toBe("default")
     expect(cls.route.get("x")).toBe("toggle")
   })
+
+  it("picks the forced-group default independent of node order (eponymous group id wins)", () => {
+    // earn + earn-funded both auto-label "default" and are force-grouped under "earn".
+    // The default must be the eponymous member regardless of input order — otherwise
+    // reversing the node array flips earn <-> earn-funded and reshapes the flow tree.
+    const mk = (): GraphNode[] => [
+      node("earn", "sk:a", ["Earn", "Total balance"], ["Invest", "Convert"]),
+      node("earn-funded", "sk:b", ["Earn", "Funded"], ["Withdraw", "Invest"]),
+    ]
+    const ov: Overrides = { screens: { earn: { stateGroup: "earn" }, "earn-funded": { stateGroup: "earn" } } }
+    for (const nodes of [mk(), mk().reverse()]) {
+      const cls = run(nodes, [], ov)
+      expect(cls.defaultOf.get("earn")).toBe("earn")
+      expect(cls.route.get("earn")).toBe("default")
+      expect(cls.route.get("earn-funded")).toBe("toggle")
+    }
+  })
 })
 
 describe("classify — family default fallback", () => {
