@@ -10,7 +10,6 @@ import { captureUrl } from "@/lib/images"
 import { screenHref } from "@/lib/links"
 import { cn, formatDate } from "@/lib/utils"
 import type { AppCapture, AppIndex } from "@/lib/types"
-import { CalendarDays } from "lucide-react"
 import Link from "next/link"
 
 // Server-rendered default view (Screens tab) used as the <Suspense> fallback.
@@ -36,12 +35,7 @@ export function AppDetailStatic({
         <AppHeaderLayout
           slug={appSlug}
           name={view.app.name}
-          dateControl={
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs font-medium">
-              <CalendarDays className="size-3.5 text-muted-foreground" />
-              {formatDate(appIndex.latest)}
-            </span>
-          }
+          dateControl={<span>{formatDate(appIndex.latest)}</span>}
         />
 
         <TabBar

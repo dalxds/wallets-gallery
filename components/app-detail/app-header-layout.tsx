@@ -24,7 +24,9 @@ export function AppHeaderLayout({
       />
       <div>
         <h1 className="text-2xl font-bold">{name}</h1>
-        <div className="mt-1 flex items-center gap-2">{dateControl}</div>
+        <div className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
+          {dateControl}
+        </div>
       </div>
     </div>
   )
