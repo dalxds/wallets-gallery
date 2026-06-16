@@ -88,37 +88,37 @@ export function FlowRow({
 
   return (
     <div className="space-y-2">
-      <div className="flex items-end justify-between gap-4">
-        <div className="min-w-0">
-          <h3 className="font-medium">
-            {flow.name}
-            {parent && (
-              <>
-                <span className="font-normal text-muted-foreground"> from </span>
-                <button type="button" onClick={() => onNavigate?.(parent.slug)}>
-                  {parent.name}
-                </button>
-              </>
-            )}
-          </h3>
+      <div className="flex items-center justify-between gap-4">
+        <h3 className="min-w-0 font-medium">
+          {flow.name}
+          {parent && (
+            <>
+              <span className="font-normal text-muted-foreground"> from </span>
+              <button type="button" onClick={() => onNavigate?.(parent.slug)}>
+                {parent.name}
+              </button>
+            </>
+          )}
+        </h3>
+        <div className="flex shrink-0 items-center gap-2">
           <p className="text-xs text-muted-foreground">
             {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
             {flow.summary ? ` · ${flow.summary}` : ""}
           </p>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={copyFlowLink}
+            aria-label="Copy link to flow"
+            className="text-muted-foreground"
+          >
+            {linkCopied ? (
+              <Check className="h-3.5 w-3.5 text-green-500" />
+            ) : (
+              <Link2 className="h-3.5 w-3.5" />
+            )}
+          </Button>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={copyFlowLink}
-          className="h-7 shrink-0 gap-1 text-xs text-muted-foreground"
-        >
-          {linkCopied ? (
-            <Check className="h-3 w-3 text-green-500" />
-          ) : (
-            <Link2 className="h-3 w-3" />
-          )}
-          Copy link
-        </Button>
       </div>
       <div className="relative">
         {canScrollLeft && (
