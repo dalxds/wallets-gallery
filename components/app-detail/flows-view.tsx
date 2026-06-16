@@ -1,7 +1,7 @@
 "use client"
 
 import type { AppCapture, FlowEntry } from "@/lib/types"
-import { buildStateIndex, type StateIndex } from "@/lib/states"
+import { buildStateIndex } from "@/lib/states"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
 import { PanelLeftOpen } from "lucide-react"
@@ -13,50 +13,26 @@ interface FlowsViewProps {
   activeFlowSlug?: string
 }
 
-function FlowTree({
-  flow,
-  allFlows,
-  depth,
-  appSlug,
-  flowRefs,
-  stateIndex,
-}: {
-  flow: FlowEntry
-  allFlows: FlowEntry[]
-  depth: number
-  appSlug: string
-  flowRefs: React.MutableRefObject<Map<string, HTMLDivElement>>
-  stateIndex: StateIndex
-}) {
-  const children = allFlows.filter((f) => f.parent === flow.slug)
-
-  return (
-    <div>
-      <div
-        ref={(el) => {
-          if (el) flowRefs.current.set(flow.slug, el)
-        }}
-        className="scroll-mt-16 lg:scroll-mt-[var(--content-top)]"
-      >
-        <FlowRow flow={flow} appSlug={appSlug} stateIndex={stateIndex} />
-      </div>
-      {children.length > 0 && (
-        <div className="ml-6 mt-4 space-y-6 border-l pl-6">
-          {children.map((child) => (
-            <FlowTree
-              key={child.slug}
-              flow={child}
-              allFlows={allFlows}
-              depth={depth + 1}
-              appSlug={appSlug}
-              flowRefs={flowRefs}
-              stateIndex={stateIndex}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+// Flatten the flow tree into a single ordered list (parent, then its children,
+// depth-first), preserving each parent group's original order. The hierarchy is
+// no longer drawn with indentation — a nested flow surfaces its parent inline in
+// its title ("… from {parent}") instead.
+function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
+  const byParent = new Map<string | null, FlowEntry[]>()
+  for (const f of flows) {
+    const list = byParent.get(f.parent) ?? []
+    list.push(f)
+    byParent.set(f.parent, list)
+  }
+  const out: FlowEntry[] = []
+  const visit = (parent: string | null) => {
+    for (const f of byParent.get(parent) ?? []) {
+      out.push(f)
+      visit(f.slug)
+    }
+  }
+  visit(null)
+  return out
 }
 
 export function FlowsView({
@@ -88,7 +64,11 @@ export function FlowsView({
     })
   }, [activeFlowSlug])
 
-  const topLevel = app.flows.filter((f) => f.parent === null)
+  const orderedFlows = useMemo(() => flattenFlows(app.flows), [app.flows])
+  const flowBySlug = useMemo(
+    () => new Map(app.flows.map((f) => [f.slug, f])),
+    [app.flows]
+  )
   const stateIndex = useMemo(() => buildStateIndex(app.screens), [app.screens])
 
   // Sidebar/rail are pinned just below the chrome (--content-top, set by the
@@ -144,17 +124,32 @@ export function FlowsView({
           />
         </div>
         <div className="space-y-8">
-          {topLevel.map((flow) => (
-            <FlowTree
-              key={flow.slug}
-              flow={flow}
-              allFlows={app.flows}
-              depth={0}
-              appSlug={appSlug}
-              flowRefs={flowRefs}
-              stateIndex={stateIndex}
-            />
-          ))}
+          {orderedFlows.map((flow) => {
+            const parentFlow = flow.parent
+              ? flowBySlug.get(flow.parent)
+              : undefined
+            return (
+              <div
+                key={flow.slug}
+                ref={(el) => {
+                  if (el) flowRefs.current.set(flow.slug, el)
+                }}
+                className="scroll-mt-16 lg:scroll-mt-[var(--content-top)]"
+              >
+                <FlowRow
+                  flow={flow}
+                  appSlug={appSlug}
+                  stateIndex={stateIndex}
+                  parent={
+                    parentFlow
+                      ? { slug: parentFlow.slug, name: parentFlow.name }
+                      : undefined
+                  }
+                  onNavigate={scrollToFlow}
+                />
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

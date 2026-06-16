@@ -16,9 +16,19 @@ interface FlowRowProps {
   flow: FlowEntry
   appSlug: string
   stateIndex: StateIndex
+  /** Set for nested flows — surfaced as "… from {parent}" in the title. */
+  parent?: { slug: string; name: string }
+  /** Scroll to another flow in the list (used by the parent link). */
+  onNavigate?: (slug: string) => void
 }
 
-export function FlowRow({ flow, appSlug, stateIndex }: FlowRowProps) {
+export function FlowRow({
+  flow,
+  appSlug,
+  stateIndex,
+  parent,
+  onNavigate,
+}: FlowRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
@@ -76,40 +86,43 @@ export function FlowRow({ flow, appSlug, stateIndex }: FlowRowProps) {
     setTimeout(() => setLinkCopied(false), 1500)
   }
 
-  function getStepLabel(step: (typeof flow.steps)[0]): string {
-    if (
-      step.action.toLowerCase() === "entry point" ||
-      step.action.toLowerCase() === "entry"
-    ) {
-      return step.title
-    }
-    return step.action
-  }
-
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="font-medium">{flow.name}</h3>
-          <p className="text-sm text-muted-foreground">{flow.summary}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={copyFlowLink}
-            className="h-7 gap-1 text-xs text-muted-foreground"
-          >
-            {linkCopied ? (
-              <Check className="h-3 w-3 text-green-500" />
-            ) : (
-              <Link2 className="h-3 w-3" />
+      <div className="flex items-end justify-between gap-4">
+        <div className="min-w-0">
+          <h3 className="font-medium">
+            {flow.name}
+            {parent && (
+              <span className="font-normal text-muted-foreground">
+                {" from "}
+                <button
+                  type="button"
+                  onClick={() => onNavigate?.(parent.slug)}
+                  className="underline-offset-2 hover:text-foreground hover:underline"
+                >
+                  {parent.name}
+                </button>
+              </span>
             )}
-          </Button>
-          <span className="shrink-0 text-xs text-muted-foreground">
-            {flow.steps.length} {flow.steps.length === 1 ? "step" : "steps"}
-          </span>
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
+            {flow.summary ? ` · ${flow.summary}` : ""}
+          </p>
         </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={copyFlowLink}
+          className="h-7 shrink-0 gap-1 text-xs text-muted-foreground"
+        >
+          {linkCopied ? (
+            <Check className="h-3 w-3 text-green-500" />
+          ) : (
+            <Link2 className="h-3 w-3" />
+          )}
+          Copy link
+        </Button>
       </div>
       <div className="relative">
         {canScrollLeft && (
@@ -158,14 +171,6 @@ export function FlowRow({ flow, appSlug, stateIndex }: FlowRowProps) {
                     {stateCount} states
                   </div>
                 )}
-              </div>
-              <div className="mt-1 flex items-center gap-1">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-medium">
-                  {step.number}
-                </span>
-                <p className="truncate text-xs text-muted-foreground">
-                  {getStepLabel(step)}
-                </p>
               </div>
             </div>
           )})}
