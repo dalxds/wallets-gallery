@@ -177,34 +177,14 @@ export function FlowLightbox({
               {flow.summary ? ` · ${flow.summary}` : ""}
             </p>
           </div>
-          <div className="flex shrink-0 items-center gap-1.5">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={downloadAll}
-              disabled={downloadingAll}
-              className="gap-1.5"
-            >
-              <Download className="h-4 w-4" />
-              {downloadingAll ? "Downloading…" : "Download all"}
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={copyFlowLink}
-              className="gap-1.5"
-            >
-              {flowLinkCopied ? (
-                <Check className="h-4 w-4 text-green-500" />
-              ) : (
-                <Link2 className="h-4 w-4" />
-              )}
-              Copy link
-            </Button>
-            <Button variant="ghost" size="icon" onClick={onClose}>
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="shrink-0"
+          >
+            <X className="h-4 w-4" />
+          </Button>
         </div>
 
         {/* Flow strip */}
@@ -252,6 +232,33 @@ export function FlowLightbox({
           >
             <ChevronRight className="h-4 w-4" />
           </button>
+        </div>
+
+        {/* Bottom action bar */}
+        <div className="flex items-center justify-center gap-1.5 border-t px-4 py-3">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={downloadAll}
+            disabled={downloadingAll}
+            className="gap-1.5"
+          >
+            <Download className="h-4 w-4" />
+            {downloadingAll ? "Downloading…" : "Download all"}
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={copyFlowLink}
+            className="gap-1.5"
+          >
+            {flowLinkCopied ? (
+              <Check className="h-4 w-4 text-green-500" />
+            ) : (
+              <Link2 className="h-4 w-4" />
+            )}
+            Copy link
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
@@ -328,7 +335,7 @@ const StepCard = forwardRef<
 
   return (
     <div ref={ref} className="group/card flex shrink-0 flex-col items-center gap-2">
-      <div className="relative aspect-[1080/2400] h-[calc(80vh-9rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
+      <div className="relative aspect-[1080/2400] h-[calc(80vh-12.5rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
         <img
           src={displaySrc}
           alt={activeVariant?.description ?? step.title}
