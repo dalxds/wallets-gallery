@@ -1,0 +1,74 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+Wallets Gallery is a Next.js 16 / React 19 static site that publishes **captured mobile-app
+UI flows**. Each capture is a committed `graph.json`; everything the site shows is derived
+from it by a pure, deterministic packager (`lib/packager/`) and exported to static HTML.
+`README.md` is the canonical architecture and capture-model doc — read it before working on
+the packager, the build scripts, or capture data. The on-disk data contract lives in
+`.claude/skills/app-capture/references/schema.md` (with a TypeScript mirror in
+`lib/packager/types.ts`).
+
+## Commands
+
+- **pnpm**, not npm/yarn. TypeScript build scripts run on Node natively (`node scripts/x.ts`,
+  Node ≥ 22) — there is no ts-node step.
+- `pnpm build-data` — regenerate every `view.json` + `index.json` from `graph.json`. This is
+  the fast inner loop after editing a graph or the packager; `pnpm build` is the full static
+  export.
+- `pnpm typecheck` (`tsc --noEmit`), `pnpm lint` (eslint), `pnpm test` (vitest).
+- Single test: `pnpm test <file>` or `pnpm exec vitest run -t "<name>"`. Tests live in
+  `tests/`, not beside source.
+
+## App vs. captures
+
+Treat these as two separate things:
+
+- **The app** — the site and engine: `app/`, `components/`, `lib/`, `scripts/`. App changes
+  are *releases* — they get a version bump and a `CHANGELOG.md` entry (see below).
+- **The captures** — the data under `public/captures/**`. `graph.json` and `app.json` are
+  committed source; `view.json` and `index.json` are generated. Adding or updating a capture
+  is a *content update* — it does **not** bump the version or get a CHANGELOG entry.
+
+## Versioning & CHANGELOG
+
+- The app version is the `version` field in `package.json` (3-segment SemVer). Bump by the
+  **scale** of the change, not the file count: PATCH = bug fix or small additive change;
+  MINOR = a new capability (a packager stage, a UI surface, a build step) or a substantial
+  refactor; MAJOR = a breaking change to the data contract (graph/view schema, `overrides`
+  keys) or the published routes.
+- Every app release gets a `CHANGELOG.md` entry. Lead with what a user can now do, use plain
+  language, keep branch/process narrative out, and put contributor notes under
+  "For contributors". See `CHANGELOG.md` for the format and voice rules.
+
+## Editing rules
+
+- **Never hand-edit generated files.** `view.json` and `index.json` are build artifacts. To
+  change what they contain, edit the source `graph.json` (its `overrides` block is the only
+  hand-editable surface) and re-run `pnpm build-data`.
+- **The packager must stay pure and deterministic** — no clock, no randomness, no
+  input-order dependence: reordering the nodes/edges arrays must not change the view. After
+  any packager or graph change, run `pnpm build-data` and `pnpm test` (the `tests/packaging/`
+  suite pins these invariants).
+- **`lib/packager/` and `scripts/` are intentionally prettier-off** (dense hand-formatted
+  style; see `.prettierignore`). Don't run `prettier --write` on individual files there.
+  `pnpm format` is safe — it respects `.prettierignore`.
+- **Captures are isolated.** When producing or editing capture data, never read another app's
+  files as a reference (only a re-capture reads this app's own latest graph, to carry
+  `overrides` forward).
+
+## Code style
+
+- Prettier: no semicolons, double quotes, 2-space indent, `printWidth` 80, ES5 trailing
+  commas. TypeScript `strict`. Import via the `@/*` alias (e.g. `@/lib/utils`), not deep
+  relative paths.
+- UI is shadcn/ui (style: radix-vega) on Tailwind v4; icons from `lucide-react`.
+
+## Commits
+
+- **Conventional Commits** (`feat:`, `fix:`, `refactor(scope):`, `chore:`, …).
+- Make the app/captures split visible: app changes use the fitting type; a capture content
+  update uses `content(<app-slug>):` (e.g. `content(tuyo): refresh 2026-06-17 capture`).
+- After a graph or packager change, run `pnpm build-data` and **commit the regenerated
+  `view.json` / `index.json` alongside the source edit** so git and the data stay in sync.
