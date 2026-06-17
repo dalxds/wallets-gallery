@@ -11,6 +11,8 @@ import { Suspense, useCallback, useMemo, useRef, useState } from "react"
 interface FlowsViewProps {
   app: AppCapture
   appSlug: string
+  /** Capture date — pins copy-link permalinks to this capture. */
+  date: string
 }
 
 // Flatten the flow tree into a single ordered list (parent, then its children,
@@ -35,7 +37,7 @@ function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
   return out
 }
 
-export function FlowsView({ app, appSlug }: FlowsViewProps) {
+export function FlowsView({ app, appSlug, date }: FlowsViewProps) {
   // Which flow the sidebar highlights — set when the user clicks one. The open
   // lightbox (driven by ?flow, read only in FlowLightboxIsland) is the source of
   // truth for "which flow"; this is just the list highlight. No searchParams are
@@ -131,6 +133,7 @@ export function FlowsView({ app, appSlug }: FlowsViewProps) {
                 <FlowRow
                   flow={flow}
                   appSlug={appSlug}
+                  date={date}
                   stateIndex={stateIndex}
                   parent={
                     parentFlow
@@ -150,6 +153,7 @@ export function FlowsView({ app, appSlug }: FlowsViewProps) {
         flows={app.flows}
         stateIndex={stateIndex}
         appSlug={appSlug}
+        date={date}
       />
     </Suspense>
     </>

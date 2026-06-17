@@ -97,7 +97,7 @@ lib/
     naming.ts  replay.ts      #   flow names; inline .ad replay scripts
     graph.ts  validate.ts     #   adjacency helpers; graph.json validator
   types.ts                    # app-facing types (aliased over the packager's View) + registry/manifest
-  links.ts  states.ts         # deep-link helpers; state presentation for the on-screen state switcher
+  links.ts  states.ts         # navigation + permalink href helpers; state presentation for the on-screen state switcher
   images.ts  utils.ts         # screenshot URL helper; cn() classname helper
 
 scripts/                      # build-time CLIs (intentionally prettier-off, dense style)
@@ -402,6 +402,16 @@ Key properties:
   `/apps/<slug>/<date>` page from its own `view.json` (`dynamicParams = false`, so the set of
   pages is fixed and anything else 404s). There are **no runtime data fetches** — the site is
   plain static files.
+- **Two URL roles, kept distinct (`lib/links.ts`).** The clean `/apps/<slug>` is the *evergreen*
+  route — it tracks "latest" and is what the browse grid and in-app navigation point at (so
+  clicking a screen/flow keeps you on whichever capture you're viewing). Every **copy-link /
+  share** affordance instead emits a *permalink* that always pins the date segment
+  (`/apps/<slug>/<date>?…`), even for the latest capture, so a shared link resolves to exactly
+  the capture that was on screen and never silently re-points when a newer capture lands. Opening
+  a stale permalink is a useful dead-end, not a silent one: a non-latest page toasts "a newer
+  capture is available → View latest", and a deep link to a flow/screen a later capture dropped
+  toasts that it isn't in this capture and clears the dangling param. Toasts use `sonner`
+  (`components/ui/sonner.tsx`, mounted once in `app/layout.tsx`).
 - **`prune-export.ts` is an allowlist**, not a denylist: after `next build` copies all of
   `public/` into `out/`, it removes everything under `out/captures` that isn't a published
   `*.json`/`*.png`, and drops `_staging/` wholesale — so staging shots, `credentials.md`, and

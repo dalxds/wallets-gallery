@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { useQueryState } from "nuqs"
+import { toast } from "sonner"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 import type { StateIndex } from "@/lib/states"
 import type { AppCapture } from "@/lib/types"
@@ -14,10 +15,12 @@ export function FlowLightboxIsland({
   flows,
   stateIndex,
   appSlug,
+  date,
 }: {
   flows: AppCapture["flows"]
   stateIndex: StateIndex
   appSlug: string
+  date: string
 }) {
   const [flowParam, setFlowParam] = useQueryState("flow")
   const [stepParam, setStepParam] = useQueryState("step")
@@ -33,12 +36,27 @@ export function FlowLightboxIsland({
     }
   }, [flow])
 
+  // A deep link whose flow isn't in this capture (e.g. a permalink to a flow
+  // that a later capture dropped/renamed): tell the user instead of silently
+  // doing nothing, and drop the dangling params so the URL reflects reality.
+  useEffect(() => {
+    if (flowParam && !flow) {
+      toast("That flow isn't in this capture", {
+        id: `missing-flow-${flowParam}`,
+        description: "It may have changed in a newer capture.",
+      })
+      setFlowParam(null)
+      setStepParam(null)
+    }
+  }, [flowParam, flow, setFlowParam, setStepParam])
+
   if (!flow) return null
   const parsed = stepParam ? parseInt(stepParam, 10) : 0
   return (
     <FlowLightbox
       flow={flow}
       appSlug={appSlug}
+      date={date}
       initialIndex={Number.isNaN(parsed) ? 0 : parsed}
       stateIndex={stateIndex}
       onClose={() => {

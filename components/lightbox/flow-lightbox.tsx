@@ -26,6 +26,8 @@ import { Button } from "@/components/ui/button"
 interface FlowLightboxProps {
   flow: FlowEntry
   appSlug: string
+  /** Capture date — pins copy-link permalinks to this capture. */
+  date: string
   initialIndex?: number
   onClose: () => void
   stateIndex: StateIndex
@@ -44,6 +46,7 @@ function getStepLabel(step: FlowStep): string {
 export function FlowLightbox({
   flow,
   appSlug,
+  date,
   initialIndex = 0,
   onClose,
   stateIndex,
@@ -124,7 +127,7 @@ export function FlowLightbox({
 
   async function copyFlowLink() {
     // Link to the flow itself (step 0), not the currently-centered step.
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug)}`
+    const url = `${window.location.origin}${flowHref(appSlug, date, flow.slug)}`
     await navigator.clipboard.writeText(url)
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
@@ -214,6 +217,7 @@ export function FlowLightbox({
                 step={step}
                 src={stepSrc(step)}
                 appSlug={appSlug}
+                date={date}
                 flowSlug={flow.slug}
                 variants={stateIndex.variantsForScreen(step.screenId)}
               />
@@ -267,6 +271,7 @@ function StepCard({
   step,
   src,
   appSlug,
+  date,
   flowSlug,
   variants,
   ref,
@@ -274,6 +279,7 @@ function StepCard({
   step: FlowStep
   src: string
   appSlug: string
+  date: string
   flowSlug: string
   variants: ScreenEntry[]
   ref?: React.Ref<HTMLDivElement>
@@ -313,7 +319,7 @@ function StepCard({
     // Deep-link to THIS step (step param is the 0-based index; step.number is 1-based),
     // matching the grid's per-step link — not the flow's first step.
     await navigator.clipboard.writeText(
-      `${window.location.origin}${flowHref(appSlug, flowSlug, step.number - 1)}`
+      `${window.location.origin}${flowHref(appSlug, date, flowSlug, step.number - 1)}`
     )
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)

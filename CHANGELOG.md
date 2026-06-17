@@ -21,6 +21,36 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-17
+
+### Added
+
+- **Shared links now pin the capture you're looking at.** "Copy link" on a screen,
+  a flow, or a single step always produces a dated permalink
+  (`/apps/<app>/<date>?…`) — even when you're on the latest capture. Open that link
+  any time later and you land on exactly the capture that was on screen when it was
+  shared, instead of being silently re-pointed to whatever the latest has since
+  become. The clean `/apps/<app>` URL still exists and still tracks the latest, so
+  in-app browsing and the grid are unchanged.
+- **Stale links tell you what happened instead of failing quietly.** Opening an
+  older capture shows a toast that a newer capture is available, with a "View
+  latest" shortcut. Following a link to a flow or screen that a later capture
+  dropped or renamed now toasts that it isn't in this capture (and tidies the URL),
+  rather than opening nothing.
+
+### For contributors
+
+- `lib/links.ts` now splits navigation hrefs (`appHref`/`dateHref`, latest →
+  clean URL) from permalink hrefs (`captureHref`/`screenHref`/`flowHref`, always
+  dated). `screenHref`/`flowHref` take a `date` argument; the capture date is
+  threaded from `AppDetail` down to every copy-link affordance. In-app navigation
+  `<Link>`s stay relative so they keep you on the current capture.
+- Toasts use [`sonner`](https://sonner.emilkowal.ski/) — `components/ui/sonner.tsx`
+  (themed via `next-themes`), mounted once in `app/layout.tsx`. The "newer capture"
+  notice lives in `components/app-detail/capture-notice.tsx`; the "not in this
+  capture" notices live in the two lightbox islands.
+- `tests/links.test.ts` pins the navigation-vs-permalink behavior.
+
 ## [0.1.1] - 2026-06-17
 
 ### Fixed

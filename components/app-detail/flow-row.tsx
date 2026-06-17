@@ -13,6 +13,8 @@ import Link from "next/link"
 interface FlowRowProps {
   flow: FlowEntry
   appSlug: string
+  /** Capture date — pins copy-link permalinks to this capture. */
+  date: string
   stateIndex: StateIndex
   /** Set for nested flows — surfaced as "… from {parent}" in the title. */
   parent?: { slug: string; name: string }
@@ -27,6 +29,7 @@ interface FlowRowProps {
 export function FlowRow({
   flow,
   appSlug,
+  date,
   stateIndex,
   parent,
   onNavigate,
@@ -59,7 +62,7 @@ export function FlowRow({
 
   async function copyFlowLink(e: React.MouseEvent) {
     e.stopPropagation()
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug)}`
+    const url = `${window.location.origin}${flowHref(appSlug, date, flow.slug)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
@@ -118,7 +121,8 @@ export function FlowRow({
           {flow.steps.map((step, idx) => {
             const stateCount = stateIndex.variantsForScreen(step.screenId).length
             const src = captureUrl(appSlug, step.screenshotPath)
-            // Relative href: opens the lightbox via the URL and keeps the date.
+            // Relative href for in-app navigation: opens the lightbox via the
+            // URL and keeps you on whichever capture you're viewing.
             const href = `?tab=flows&flow=${encodeURIComponent(flow.slug)}&step=${idx}`
             return (
               <div
@@ -149,7 +153,11 @@ export function FlowRow({
                     )}
                   </div>
                 </Link>
-                <ImageActions src={src} shareHref={href} />
+                {/* Copy-link pins the dated permalink (never drifts off latest). */}
+                <ImageActions
+                  src={src}
+                  shareHref={flowHref(appSlug, date, flow.slug, idx)}
+                />
               </div>
             )
           })}

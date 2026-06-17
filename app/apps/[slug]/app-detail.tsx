@@ -6,6 +6,7 @@ import { StickyChrome } from "@/components/app-detail/sticky-chrome"
 import { TabBar } from "@/components/app-detail/tab-bar"
 import { TabState } from "@/components/app-detail/tab-state"
 import { DateControl } from "@/components/app-detail/date-control"
+import { CaptureNotice } from "@/components/app-detail/capture-notice"
 import { ScreensGrid } from "@/components/app-detail/screens-grid"
 import { FlowsView } from "@/components/app-detail/flows-view"
 import { ScreenLightboxIsland } from "@/components/app-detail/screen-lightbox-island"
@@ -61,12 +62,12 @@ export function AppDetail({
         {/* Both panels render; CSS shows the active one (data-active-tab). */}
         <div className="mt-6 lg:mt-0">
           <section data-tab-panel="screens">
-            <ScreensGrid screens={view.screens} appSlug={slug} />
+            <ScreensGrid screens={view.screens} appSlug={slug} date={date} />
           </section>
           {/* FlowsView server-renders the flow list; only its lightbox island
               reads searchParams (Suspense lives inside it). */}
           <section data-tab-panel="flows">
-            <FlowsView app={view} appSlug={slug} />
+            <FlowsView app={view} appSlug={slug} date={date} />
           </section>
         </div>
       </div>
@@ -76,8 +77,12 @@ export function AppDetail({
           screens={view.screens}
           flows={view.flows}
           appSlug={slug}
+          date={date}
         />
       </Suspense>
+
+      {/* Toasts "a newer capture is available" when this is an older permalink. */}
+      <CaptureNotice slug={slug} date={date} latest={appIndex.latest} />
     </AppShell>
   )
 }

@@ -28,6 +28,8 @@ interface ScreenLightboxProps {
   flows: FlowEntry[]
   activeScreenId: string
   appSlug: string
+  /** Capture date — pins the copy-link permalink to this capture. */
+  date: string
 }
 
 // Cap the "Found in" chips so a screen that anchors many flows doesn't overflow
@@ -39,6 +41,7 @@ export function ScreenLightbox({
   flows,
   activeScreenId,
   appSlug,
+  date,
 }: ScreenLightboxProps) {
   const [, setScreen] = useQueryState("screen")
   const router = useRouter()
@@ -108,7 +111,7 @@ export function ScreenLightbox({
 
   async function copyLink() {
     if (!current) return
-    const url = `${window.location.origin}${screenHref(appSlug, current.id)}`
+    const url = `${window.location.origin}${screenHref(appSlug, date, current.id)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)

@@ -1,6 +1,7 @@
 import type { ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { ImageActions } from "@/components/shared/image-actions"
+import { screenHref } from "@/lib/links"
 import {
   ScreensGridLayout,
   ScreenTile,
@@ -12,6 +13,8 @@ import Link from "next/link"
 interface ScreensGridProps {
   screens: ScreenEntry[]
   appSlug: string
+  /** Capture date — pins the copy-link permalink to this capture. */
+  date: string
 }
 
 // Server-rendered: each tile is a real <Link> into ?screen, so the grid lives in
@@ -22,13 +25,14 @@ interface ScreensGridProps {
 // that reads ?screen. Hover actions sit as an absolutely-positioned sibling of
 // the link — not inside it — so the buttons stay valid markup (no button-in-
 // anchor) and don't trigger navigation.
-export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
+export function ScreensGrid({ screens, appSlug, date }: ScreensGridProps) {
   return (
     <ScreensGridLayout>
       {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
-        // Relative href: resolves against the current path, so it keeps the
-        // capture date when viewing /apps/[slug]/[date].
+        // Relative href for in-app navigation: resolves against the current
+        // path, so clicking keeps you on whichever capture you're viewing
+        // (clean stays clean, dated stays dated).
         const href = `?tab=screens&screen=${encodeURIComponent(screen.id)}`
         return (
           <div
@@ -53,7 +57,11 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
                 />
               </ScreenTile>
             </Link>
-            <ImageActions src={src} shareHref={href} />
+            {/* Copy-link pins the dated permalink (never drifts off latest). */}
+            <ImageActions
+              src={src}
+              shareHref={screenHref(appSlug, date, screen.id)}
+            />
           </div>
         )
       })}

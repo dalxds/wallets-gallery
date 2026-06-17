@@ -5,6 +5,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <NuqsAdapter>{children}</NuqsAdapter>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
