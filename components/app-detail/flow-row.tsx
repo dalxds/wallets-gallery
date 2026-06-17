@@ -112,7 +112,7 @@ export function FlowRow({
         )}
         <div
           ref={scrollRef}
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 scrollbar-hide"
+          className="flex snap-x snap-mandatory touch-pan-x gap-3 overflow-x-auto overflow-y-hidden pb-2 scrollbar-hide"
           onScroll={updateScrollState}
         >
           {flow.steps.map((step, idx) => {

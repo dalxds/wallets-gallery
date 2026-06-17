@@ -21,6 +21,15 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-06-17
+
+### Fixed
+
+- Scrolling through a flow's screens no longer drifts the page vertically: the
+  horizontal screen strip is now locked to horizontal panning, so a sideways
+  swipe or trackpad scroll stays on the flow instead of nudging the page up and
+  down.
+
 ## [0.1.0] - 2026-06-17
 
 First documented release of the gallery.
