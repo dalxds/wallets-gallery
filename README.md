@@ -21,9 +21,10 @@ out, and how captures actually work.
 5. [Identity signals](#identity-signals) — how two screenshots become "the same screen"
 6. [From graph to view: the packager](#from-graph-to-view-the-packager)
 7. [Overrides: the one hand-edited surface](#overrides-the-one-hand-edited-surface)
-8. [The build pipeline](#the-build-pipeline)
-9. [Capturing a new app](#capturing-a-new-app)
-10. [Conventions & gotchas](#conventions--gotchas)
+8. [Metadata: stable deep links](#metadata-stable-deep-links)
+9. [The build pipeline](#the-build-pipeline)
+10. [Capturing a new app](#capturing-a-new-app)
+11. [Conventions & gotchas](#conventions--gotchas)
 
 ---
 
@@ -211,7 +212,8 @@ These surface in the UI as "this screen branches" and link each option to the fl
   "nodes": [ ... ],
   "edges": [ ... ],
   "decisionPoints": [ ... ],
-  "overrides": { ... }                // the ONLY hand-edited block (see below)
+  "overrides": { ... },               // the ONLY hand-edited block (see below)
+  "metadata": { ... }                 // machine-maintained URL continuity (slug pins + aliases)
 }
 ```
 
@@ -344,7 +346,10 @@ the selector quality (`id=` > `label=`/`role=` > positional). This is what lets 
   "flows":   [ /* the journey tree: slug, name, parent, ordered steps, replay */ ],
   "decisionPoints": [ ... ],
   "stats": { "screens": N, "rawNodes": M, "flows": F, "topLevelFlows": T, "replayCoverage": 87 },
-  "namingTODO": [ ... ]
+  "namingTODO": [ ... ],
+  "flowSlugs": { "<flow-id>": "<slug>", ... },   // current id→slug assignment (sync-slugs pins from this)
+  "flowAliases": { "<old-slug>": "<slug>", ... }, // active retired→current redirects (filtered to ones that resolve)
+  "screenAliases": { "<old-id>": "<id>", ... }
 }
 ```
 
@@ -371,6 +376,47 @@ one thing the packager derived:
 After editing overrides, re-run `pnpm build-data` (or `node scripts/package.ts <graph.json>`).
 Because everything is derived, an override is a small, reviewable correction — not a rewrite
 of the output.
+
+---
+
+## Metadata: stable deep links
+
+Deep links are query-param based on the one `/apps/[slug]` route — `?flow=<slug>` and
+`?screen=<id>`. Screens are addressed by their stable node **id**; flows by a **slug**
+derived from the flow's name (`slugify(name)`, with `-2`/`-3` suffixes when two names
+collide). Name-derived slugs are readable but fragile: rename a flow and its slug moves; a
+re-capture that re-orders colliding flows can swap which one owns the `-2` suffix — so a
+previously shared link 404s, or worse, opens the *wrong* flow.
+
+`graph.metadata` fixes that. It is **machine-maintained** — written by tooling, not by hand —
+which is the whole reason it is separate from `overrides` (intent, authored by the edit
+agent). Like overrides, it is carried forward verbatim across re-captures.
+
+| Key | Shape | Job |
+|---|---|---|
+| `flowSlugs` | flow-id → slug | **Pin** a flow's URL. When present the packager uses it verbatim instead of `slugify(name)`, so a rename or re-derivation never moves the link. Keyed by stable flow id, so it survives name changes. |
+| `flowAliases` | old-slug → slug | **Redirect** a retired flow slug to its current one (for when the anchor-node id itself changed). |
+| `screenAliases` | old-id → id | Redirect a retired screen id to its current one (after a re-capture renamed/merged the node). |
+
+The packager honours pins (claiming their slot before generated slugs dedup around them) and
+carries the aliases into `view.json`, filtered to ones that still resolve — a redirect whose
+target is gone, or whose source is now a live slug/id, is dropped. The flow/screen lightboxes
+follow one alias hop when a `?flow`/`?screen` value misses, then rewrite the URL to the
+canonical value so the address bar self-heals.
+
+**Seeding pins** is `scripts/sync-slugs.ts`: it packages each capture and pins every flow that
+isn't pinned yet to the slug it currently has (existing pins are never overwritten — that is
+what keeps a URL fixed). Run it after a capture/edit and commit the `graph.json`; it is a
+dry-run by default, `--write` to persist.
+
+```
+node scripts/sync-slugs.ts            # report what would be pinned
+node scripts/sync-slugs.ts --write    # persist pins into each graph.json's metadata
+```
+
+Aliases for the rarer "the anchor id itself changed" case are recorded by hand in
+`metadata.flowAliases` / `metadata.screenAliases` (a future revision of `sync-slugs` could
+derive them from an identity match across consecutive captures).
 
 ---
 

@@ -60,18 +60,31 @@ export function packageGraph(graph: Graph): View {
 
   // Names + slugs (assigned before steps so parent refs resolve). journeyName is
   // computed once here and reused when building the flows below.
+  //
+  // Slug assignment is pin-aware: metadata.flowSlugs[flowId] pins a flow's URL so a
+  // rename (or a re-derived mechanical name) never moves it. Pins are placed first
+  // — claiming their slot in `used` — so the generated slugs below dedup around
+  // them. New flows (no pin) fall back to slugify(name) with numeric-suffix dedup,
+  // exactly as before. Keyed by stable flow id (= anchor node id), like flowNames.
+  const pins = graph.metadata?.flowSlugs ?? {}
   const nameByJourney = new Map<string, FlowName>()
   const slugByJourney = new Map<string, string>()
   const used = new Set<string>()
-  for (const j of seg.journeys) {
-    const nm = journeyName(j, nodeById.get(j.goal), overridesC)
-    nameByJourney.set(j.id, nm)
-    let slug = slugify(nm.name) || j.id
-    const base = slug
+  const dedup = (base: string): string => {
+    let slug = base
     let i = 2
     while (used.has(slug)) slug = `${base}-${i++}`
     used.add(slug)
-    slugByJourney.set(j.id, slug)
+    return slug
+  }
+  for (const j of seg.journeys) nameByJourney.set(j.id, journeyName(j, nodeById.get(j.goal), overridesC))
+  for (const j of seg.journeys) {
+    const pin = pins[j.id]
+    if (pin) slugByJourney.set(j.id, dedup(pin))
+  }
+  for (const j of seg.journeys) {
+    if (slugByJourney.has(j.id)) continue
+    slugByJourney.set(j.id, dedup(slugify(nameByJourney.get(j.id)!.name) || j.id))
   }
 
   const appearsIn = new Map<string, { flow: string; step: number }[]>()
@@ -139,6 +152,23 @@ export function packageGraph(graph: Graph): View {
   const topLevelFlows = flows.filter((f) => f.parent === null).length
   const withReplay = flows.filter((f) => f.replay !== null).length
 
+  // URL-continuity outputs. `flowSlugs` is the current flow-id→slug assignment
+  // (what sync-slugs persists back as pins). Aliases are carried from metadata but
+  // filtered to ones that still apply here: drop a redirect whose target is gone
+  // (dead link) or whose source is now a live slug/id (the real thing must win).
+  const flowSlugs: Record<string, string> = {}
+  for (const j of seg.journeys) flowSlugs[j.id] = slugByJourney.get(j.id)!
+  const filterAliases = (raw: Record<string, string>, live: Set<string>): Record<string, string> => {
+    const out: Record<string, string> = {}
+    for (const [from, to] of Object.entries(raw)) {
+      if (live.has(from) || !live.has(to)) continue
+      out[from] = to
+    }
+    return out
+  }
+  const flowAliases = filterAliases(graph.metadata?.flowAliases ?? {}, new Set(slugByJourney.values()))
+  const screenAliases = filterAliases(graph.metadata?.screenAliases ?? {}, new Set(screens.map((s) => s.id)))
+
   return {
     app: graph.meta.app,
     captureDate: graph.meta.captureDate,
@@ -153,6 +183,9 @@ export function packageGraph(graph: Graph): View {
       replayCoverage: flows.length ? Math.round((withReplay / flows.length) * 100) : 0,
     },
     namingTODO,
+    flowSlugs,
+    flowAliases,
+    screenAliases,
   }
 }
 

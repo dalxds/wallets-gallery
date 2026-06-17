@@ -72,5 +72,16 @@ export function validateGraph(graph: Graph): ValidationResult {
     for (const k of keys) if (!ids.has(k)) warn(`${label}: "${k}" is not a node id`)
   }
 
+  // metadata is machine-maintained URL-continuity data, not hand-authored, so it is
+  // forgiving: the packager filters stale entries at build time (a dead pin just
+  // no-ops; a redirect whose target is gone is dropped). We only sanity-check the
+  // one part tied to the node set — screenAliases values must be current node ids —
+  // and surface it as a warning, never a hard error.
+  const md = graph.metadata ?? {}
+  for (const [from, to] of Object.entries(md.screenAliases ?? {})) {
+    if (!ids.has(to)) warn(`metadata.screenAliases: "${from}" → "${to}" target is not a node id`)
+    if (ids.has(from)) warn(`metadata.screenAliases: "${from}" is still a live node id — alias will be ignored`)
+  }
+
   return { errors, warnings }
 }

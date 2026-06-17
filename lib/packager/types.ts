@@ -124,6 +124,26 @@ export interface GraphMeta {
   durationSeconds?: number
 }
 
+// Machine-maintained persistence that keeps deep links stable — NOT a hand-edited
+// surface (that is `overrides`, written by the edit agent to express intent).
+// `metadata` is written by tooling (scripts/sync-slugs.ts) and carried forward
+// verbatim across re-captures, exactly like `overrides`. Its whole job is URL
+// continuity: pin each flow's slug so it survives a rename/re-segmentation, and
+// record retired→current redirects so links shared before a change still resolve.
+export interface GraphMetadata {
+  /**
+   * flow id (= anchor node id) → pinned slug. When present the packager uses this
+   * verbatim instead of slugify(name), so renaming a flow (or re-deriving its
+   * mechanical name) never moves its URL. Seeded from the first slug a flow was
+   * given; preserved across captures.
+   */
+  flowSlugs?: Record<string, string>
+  /** retired flow slug → current slug. Lets an old /apps/x?flow=<old> link resolve after a slug changed (e.g. the anchor node id shifted on re-capture). */
+  flowAliases?: Record<string, string>
+  /** retired screen id → current screen id. Lets an old ?screen=<old> link resolve after a re-capture renamed or merged the node. */
+  screenAliases?: Record<string, string>
+}
+
 export interface Graph {
   meta: GraphMeta
   /** Launch node id (BFS root). */
@@ -139,6 +159,8 @@ export interface Graph {
   edges: GraphEdge[]
   decisionPoints: DecisionPoint[]
   overrides: Overrides
+  /** URL-continuity persistence (slug pins + retired→current aliases). Machine-written, not hand-edited; optional on older captures. */
+  metadata?: GraphMetadata
 }
 
 // ─────────────────────────── VIEW (derived) ───────────────────────────
@@ -216,4 +238,19 @@ export interface View {
   }
   /** Flows whose name is still mechanical — the agent fills these in via overrides.flowNames. */
   namingTODO: { entryNodeId: string; slug: string; mechanicalName: string }[]
+  /**
+   * flow id (= anchor node id) → the slug this build assigned it. The canonical
+   * record of current assignments: scripts/sync-slugs.ts reads it to seed/refresh
+   * graph.metadata.flowSlugs pins. (Distinct from a flow's display `slug`, which is
+   * keyed by URL; this is keyed by stable flow id.)
+   */
+  flowSlugs: Record<string, string>
+  /**
+   * Active retired→current redirects carried from graph.metadata, filtered to ones
+   * that still resolve in THIS view (target exists, source isn't itself a live
+   * slug/id). The flow/screen lightboxes consult these so a stale deep link opens
+   * the right thing and self-heals the URL.
+   */
+  flowAliases: Record<string, string>
+  screenAliases: Record<string, string>
 }

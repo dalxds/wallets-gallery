@@ -127,6 +127,86 @@ describe("packager — journeys", () => {
   })
 })
 
+describe("packager — slug pins & aliases (metadata, not overrides)", () => {
+  const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+  const slugOfPath = (view: ReturnType<typeof packageGraph>, ids: string[]) =>
+    view.flows.find((f) => stepsOf(f).join(">") === ids.join(">"))!.slug
+
+  it("flowSlugs maps each flow id to the slug it was assigned", () => {
+    const view = packageGraph(fixture())
+    // "confirm" is the anchor (goal) id of the home>deposit>confirm flow, named via override.
+    expect(view.flowSlugs.confirm).toBe(slugOfPath(view, ["home", "deposit", "confirm"]))
+    expect(view.flowSlugs.confirm).toBe("buying-a-token")
+  })
+
+  it("a pin overrides the name-derived slug (URL is keyed by flow id, not name)", () => {
+    const g = fixture()
+    g.metadata = { flowSlugs: { confirm: "buy-token" } }
+    const view = packageGraph(g)
+    expect(slugOfPath(view, ["home", "deposit", "confirm"])).toBe("buy-token")
+    // appearsIn / nested parent refs follow the pinned slug too
+    expect(view.flowSlugs.confirm).toBe("buy-token")
+  })
+
+  it("a pinned slug survives a rename — the link does not move", () => {
+    const renamed = fixture()
+    renamed.overrides = { flowNames: { confirm: "Totally Different Name" } }
+    // without a pin, the rename moves the slug…
+    expect(slugOfPath(packageGraph(renamed), ["home", "deposit", "confirm"])).toBe("totally-different-name")
+    // …with a pin, the same rename leaves the URL untouched
+    renamed.metadata = { flowSlugs: { confirm: "buying-a-token" } }
+    expect(slugOfPath(packageGraph(renamed), ["home", "deposit", "confirm"])).toBe("buying-a-token")
+  })
+
+  it("a pin claims its slot first; a colliding generated slug dedups around it", () => {
+    const base = packageGraph(fixture())
+    const natural = base.flowSlugs.confirm // "buying-a-token", the confirm flow's name-derived slug
+    const otherId = Object.keys(base.flowSlugs).find((id) => id !== "confirm")!
+    // Pin a different flow onto confirm's natural slug — confirm must dedup around it.
+    const g = fixture()
+    g.metadata = { flowSlugs: { [otherId]: natural } }
+    const view = packageGraph(g)
+    const slugs = view.flows.map((f) => f.slug)
+    expect(view.flowSlugs[otherId]).toBe(natural)
+    expect(view.flowSlugs.confirm).toBe(`${natural}-2`)
+    expect(new Set(slugs).size).toBe(slugs.length) // still globally unique
+  })
+
+  it("aliases are carried through but filtered to ones that still resolve", () => {
+    const g = fixture()
+    const liveSlug = packageGraph(fixture()).flowSlugs.confirm // "buying-a-token"
+    g.metadata = {
+      flowAliases: {
+        "old-buy": liveSlug, // valid retired→current redirect
+        "old-dead": "no-such-flow", // target gone → dropped
+        [liveSlug]: "buying-a-token", // source is itself live → dropped (real flow wins)
+      },
+    }
+    const view = packageGraph(g)
+    expect(view.flowAliases).toEqual({ "old-buy": liveSlug })
+  })
+
+  it("screenAliases are filtered the same way (target must be a live screen id)", () => {
+    const g = fixture()
+    g.metadata = {
+      screenAliases: {
+        "old-home": "home", // home survives → kept
+        "old-ghost": "requires-usdc-b", // merged away by the SAF → dropped
+        home: "welcome", // source is live → dropped
+      },
+    }
+    const view = packageGraph(g)
+    expect(view.screenAliases).toEqual({ "old-home": "home" })
+  })
+
+  it("absent metadata yields empty maps and changes nothing", () => {
+    const view = packageGraph(fixture())
+    expect(view.flowAliases).toEqual({})
+    expect(view.screenAliases).toEqual({})
+    expect(Object.keys(view.flowSlugs).length).toBe(view.flows.length)
+  })
+})
+
 // Home (root + hub) with one normal branch (Send/Receive nest under it) and one
 // main-nav destination (Activity), which has its own sub-screens. Activity is a peer
 // section, not something "launched from Home" — so it should top-level, not nest.

@@ -148,6 +148,7 @@ export function FlowsView({ app, appSlug }: FlowsViewProps) {
     <Suspense fallback={null}>
       <FlowLightboxIsland
         flows={app.flows}
+        aliases={app.flowAliases ?? {}}
         stateIndex={stateIndex}
         appSlug={appSlug}
       />

@@ -75,6 +75,7 @@ export function AppDetail({
         <ScreenLightboxIsland
           screens={view.screens}
           flows={view.flows}
+          aliases={view.screenAliases ?? {}}
           appSlug={slug}
         />
       </Suspense>

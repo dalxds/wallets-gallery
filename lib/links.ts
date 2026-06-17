@@ -13,6 +13,15 @@ export function dateHref(appSlug: string, date: string, latest: string): string 
   return date === latest ? `/apps/${appSlug}` : `/apps/${appSlug}/${date}`
 }
 
+// Resolve a deep-link id (flow slug or screen id) to its current value, following
+// at most one retired→current alias hop. Returns the param unchanged when it's
+// already live or simply unknown. The lightbox islands use this so a link shared
+// before a slug/id changed still opens the right thing (and then rewrites the URL
+// to the canonical value). Links we generate always emit canonical ids, never aliases.
+export function followAlias(param: string, aliases: Record<string, string> | undefined): string {
+  return aliases?.[param] ?? param
+}
+
 export function screenHref(appSlug: string, screenId: string): string {
   return `/apps/${appSlug}?tab=screens&screen=${encodeURIComponent(screenId)}`
 }

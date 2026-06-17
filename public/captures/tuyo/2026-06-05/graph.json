@@ -3017,5 +3017,37 @@
         "state": "2"
       }
     }
+  },
+  "metadata": {
+    "flowSlugs": {
+      "welcome": "welcome",
+      "whats-new-promo": "creating-an-account",
+      "recover-phrase-import": "recovering-an-account",
+      "referral-code": "entering-a-referral-code",
+      "home": "home",
+      "add-money-source": "adding-money",
+      "kyc-persona-id-type": "getting-the-tuyo-card",
+      "send-find-tuyo": "sending-money",
+      "settings": "settings",
+      "settings-account-handle": "account-handle",
+      "settings-help": "help-support",
+      "settings-keys-security": "keys-security",
+      "settings-permissions": "permissions",
+      "settings-privacy": "privacy",
+      "settings-verification": "verifying-identity",
+      "transaction-detail": "transaction-detail",
+      "earn": "earn",
+      "add-money-source@earn": "adding-money-2",
+      "send-find-tuyo@earn": "sending-money-2",
+      "earn-convert-review": "converting-tokens",
+      "earn-invest-explorer": "investing",
+      "earn-token-detail": "token-detail",
+      "earn-token-detail@earn-invest-explorer": "token-detail-2",
+      "earn-vault-deposit-review": "earning-yield",
+      "rewards": "rewards",
+      "rewards-get-tuyos-referral": "earning-tuyos",
+      "rewards-invite": "inviting-friends",
+      "rewards-leaderboard": "leaderboard"
+    }
   }
 }
