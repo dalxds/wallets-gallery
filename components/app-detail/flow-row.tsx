@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
 import { ImageActions } from "@/components/shared/image-actions"
-import { flowHref } from "@/lib/links"
+import { flowHref, flowShareHref } from "@/lib/links"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -64,7 +64,7 @@ export function FlowRow({
 
   async function copyFlowLink(e: React.MouseEvent) {
     e.stopPropagation()
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, date, latest)}`
+    const url = `${window.location.origin}${flowShareHref(appSlug, flow.slug, date)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
@@ -123,7 +123,10 @@ export function FlowRow({
           {flow.steps.map((step, idx) => {
             const stateCount = stateIndex.variantsForScreen(step.screenId).length
             const src = captureUrl(appSlug, step.screenshotPath)
+            // Tile nav uses the clean URL (intercepted into the modal); copy-link
+            // uses the dated URL so a shared link stays on this capture.
             const href = flowHref(appSlug, flow.slug, date, latest, idx)
+            const shareHref = flowShareHref(appSlug, flow.slug, date, idx)
             return (
               <div
                 key={step.number}
@@ -153,7 +156,7 @@ export function FlowRow({
                     )}
                   </div>
                 </Link>
-                <ImageActions src={src} shareHref={href} />
+                <ImageActions src={src} shareHref={shareHref} />
               </div>
             )
           })}

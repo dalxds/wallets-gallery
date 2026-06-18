@@ -43,3 +43,35 @@ export function flowHref(
   const base = `${captureBase(appSlug, date, latest)}/flow/${encodeURIComponent(flowSlug)}`
   return step != null ? `${base}?step=${step}` : base
 }
+
+// Copy/share links PIN the capture date (always dated, even for the latest) so a
+// shared link keeps resolving to the same capture after a newer one lands —
+// unlike screenHref/flowHref above, which use the clean URL for the latest.
+export function screenShareHref(
+  appSlug: string,
+  screenId: string,
+  date: string
+): string {
+  return `/apps/${appSlug}/${date}/screen/${encodeURIComponent(screenId)}`
+}
+
+export function flowShareHref(
+  appSlug: string,
+  flowSlug: string,
+  date: string,
+  step?: number
+): string {
+  const base = `/apps/${appSlug}/${date}/flow/${encodeURIComponent(flowSlug)}`
+  return step != null ? `${base}?step=${step}` : base
+}
+
+// The gallery for a capture on a specific tab — used by the standalone page
+// header to link back into the tab (screens/flows) the link came from.
+export function galleryTabHref(
+  appSlug: string,
+  date: string,
+  latest: string,
+  tab: "screens" | "flows"
+): string {
+  return `${captureBase(appSlug, date, latest)}?tab=${tab}`
+}

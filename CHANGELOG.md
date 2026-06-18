@@ -24,10 +24,13 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 ## [0.2.0] - 2026-06-18
 
 Every screen and flow now has its own shareable link with a matching social preview card, and
-images load much faster. Open a screen or flow in the gallery and it appears in a lightbox with
-a clean URL (`/apps/<app>/screen/<id>`, `/apps/<app>/flow/<slug>`); share or refresh that URL
-and it opens as a focused standalone page with its own Open Graph card. Screenshots are now
-optimized on the fly — modern formats, right-sized thumbnails — so grids and flows load quicker.
+images load much faster. Open a screen or flow in the gallery and it appears in a lightbox;
+share or refresh its link and it opens as a **full-screen version of that same lightbox** (same
+prev/next, step strip, and actions) with the app's name + capture date in the header. Paging
+prev/next no longer flickers, and images show a loading skeleton instead of a blank flash.
+Copy-link buttons pin the capture date, so a shared link keeps resolving to the same capture
+even after a newer one lands. Screenshots are optimized on the fly — modern formats, right-sized
+thumbnails — so grids and flows load quicker.
 
 ### For contributors
 
@@ -39,6 +42,11 @@ optimized on the fly — modern formats, right-sized thumbnails — so grids and
   standalone page (`components/standalone/`). Mirrored under `[date]/` so historical captures
   behave the same. The old `?screen=`/`?flow=` query state and the nuqs lightbox islands are
   gone; deep links are real routes built through `captureBase` in `lib/links.ts`.
+- The lightbox and the standalone page share one body — `ScreenViewer` / `FlowViewer` (+
+  `LightboxImage` for the skeleton). The lightbox wraps it in a `Dialog`; the page wraps it in
+  the site navbar + an app-logo header. Prev/next pages via `window.history.replaceState` (no
+  router navigation → no remount, no flicker); copy buttons use the date-pinned
+  `screenShareHref` / `flowShareHref` helpers.
 - Images use `next/image` with a cost-trimmed `images` config (AVIF/WebP, few sizes, one quality,
   1-year TTL) plus immutable `Cache-Control` on the content-addressed PNGs. No build-time image
   precompute — Vercel optimizes on demand.

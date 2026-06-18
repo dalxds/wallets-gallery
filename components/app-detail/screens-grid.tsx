@@ -6,7 +6,7 @@ import {
   ScreenTile,
   screenTileWrapperClass,
 } from "@/components/app-detail/screen-tile"
-import { screenHref } from "@/lib/links"
+import { screenHref, screenShareHref } from "@/lib/links"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
@@ -34,7 +34,10 @@ export function ScreensGrid({
     <ScreensGridLayout>
       {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
+        // Tile navigation uses the clean URL (intercepted into the modal); the
+        // copy-link uses the dated URL so a shared link stays on this capture.
         const href = screenHref(appSlug, screen.id, date, latest)
+        const shareHref = screenShareHref(appSlug, screen.id, date)
         return (
           <div
             key={screen.id}
@@ -58,7 +61,7 @@ export function ScreensGrid({
                 />
               </ScreenTile>
             </Link>
-            <ImageActions src={src} shareHref={href} />
+            <ImageActions src={src} shareHref={shareHref} />
           </div>
         )
       })}

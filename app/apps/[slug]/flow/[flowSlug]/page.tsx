@@ -37,14 +37,18 @@ export async function generateMetadata({
 
 export default async function FlowStandalonePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string; flowSlug: string }>
+  searchParams: Promise<{ step?: string }>
 }) {
   const { slug, flowSlug } = await params
+  const { step } = await searchParams
   const cap = resolveCapture(slug)
   if (!cap) notFound()
   const flow = cap.view.flows.find((f) => f.slug === flowSlug)
   if (!flow) notFound()
+  const parsed = step ? parseInt(step, 10) : 0
   return (
     <FlowPage
       view={cap.view}
@@ -52,6 +56,7 @@ export default async function FlowStandalonePage({
       appSlug={slug}
       date={cap.date}
       latest={cap.latest}
+      initialIndex={Number.isNaN(parsed) ? 0 : parsed}
     />
   )
 }

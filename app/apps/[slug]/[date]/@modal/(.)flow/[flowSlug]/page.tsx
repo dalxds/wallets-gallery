@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { resolveCapture } from "@/lib/captures"
-import { FlowModal } from "@/components/lightbox/flow-modal"
+import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 
 function parseStep(v: string | undefined): number {
   const n = v ? parseInt(v, 10) : 0
@@ -22,12 +22,12 @@ export default async function FlowModalRoute({
   const flow = cap.view.flows.find((f) => f.slug === flowSlug)
   if (!flow) notFound()
   return (
-    <FlowModal
+    <FlowLightbox
       flow={flow}
       screens={cap.view.screens}
       appSlug={slug}
+      appName={cap.view.app.name}
       date={cap.date}
-      latest={cap.latest}
       initialIndex={parseStep(step)}
     />
   )

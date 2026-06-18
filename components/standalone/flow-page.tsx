@@ -1,74 +1,59 @@
-import Image from "next/image"
 import Link from "next/link"
-import { captureUrl } from "@/lib/images"
-import { appHref, captureBase } from "@/lib/links"
+import { SiteHeader } from "@/components/layout/site-header"
+import { FlowViewer } from "@/components/lightbox/flow-viewer"
+import { galleryTabHref } from "@/lib/links"
+import { formatDate } from "@/lib/utils"
 import type { AppCapture, FlowEntry } from "@/lib/types"
 
-// The full standalone flow page — what a shared/refreshed /flow/[slug] link
-// renders (the modal is only shown on in-app soft navigation). Server component:
-// crawlable, with its own OG card (sibling opengraph-image.tsx).
+// The full-screen page form of the flow viewer — what a shared/refreshed
+// /flow/[slug] link renders. Same <FlowViewer> as the modal; the only difference
+// is this chrome (site navbar + app logo/name linking back to the gallery's flows
+// tab + capture date). Server component; the viewer is the client island inside.
 export function FlowPage({
   view,
   flow,
   appSlug,
   date,
   latest,
+  initialIndex = 0,
 }: {
   view: AppCapture
   flow: FlowEntry
   appSlug: string
   date: string
   latest: string
+  initialIndex?: number
 }) {
   return (
-    <div className="mx-auto flex min-h-dvh max-w-5xl flex-col gap-6 px-4 py-8">
-      <div className="flex items-center justify-between gap-4">
-        <Link
-          href={appHref(appSlug)}
-          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          ← {view.app.name}
-        </Link>
-        <Link
-          href={captureBase(appSlug, date, latest)}
-          className="text-sm font-medium hover:underline"
-        >
-          View in gallery →
-        </Link>
-      </div>
-
-      <div className="space-y-1 text-center">
-        <h1 className="text-xl font-semibold">{flow.name}</h1>
-        <p className="text-sm text-muted-foreground">
-          {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
-          {flow.summary ? ` · ${flow.summary}` : ""}
-        </p>
-      </div>
-
-      <div className="scrollbar-hide flex gap-4 overflow-x-auto pb-4">
-        {flow.steps.map((step) => (
-          <div
-            key={step.number}
-            className="flex w-40 shrink-0 flex-col items-center gap-2"
+    <>
+      <SiteHeader />
+      <div className="flex h-[calc(100dvh-3.5rem)] flex-col">
+        <div className="flex items-center gap-2.5 border-b px-4 py-2.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`https://avatar.vercel.sh/${appSlug}`}
+            alt={view.app.name}
+            className="h-7 w-7 rounded-lg"
+          />
+          <Link
+            href={galleryTabHref(appSlug, date, latest, "flows")}
+            className="font-medium hover:underline"
           >
-            <div
-              className="relative w-full overflow-hidden rounded-lg border bg-muted shadow-sm"
-              style={{ aspectRatio: "9/19.5" }}
-            >
-              <Image
-                src={captureUrl(appSlug, step.screenshotPath)}
-                alt={step.title}
-                fill
-                sizes="160px"
-                className="object-cover"
-              />
-            </div>
-            <span className="text-center text-xs text-muted-foreground">
-              {step.number}. {step.title}
-            </span>
-          </div>
-        ))}
+            {view.app.name}
+          </Link>
+          <span className="text-sm text-muted-foreground">
+            {formatDate(date)}
+          </span>
+        </div>
+
+        <FlowViewer
+          flow={flow}
+          screens={view.screens}
+          appSlug={appSlug}
+          date={date}
+          initialIndex={initialIndex}
+        />
       </div>
-    </div>
+    </>
   )
 }
