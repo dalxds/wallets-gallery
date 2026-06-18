@@ -52,6 +52,7 @@ export function ScreenPage({
           appSlug={appSlug}
           date={date}
           latest={latest}
+          priorityInitial
         />
       </div>
     </>

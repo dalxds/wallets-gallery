@@ -32,12 +32,14 @@ export function ScreensGrid({
 }: ScreensGridProps) {
   return (
     <ScreensGridLayout>
-      {screens.map((screen) => {
+      {screens.map((screen, i) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
         // Tile navigation uses the clean URL (intercepted into the modal); the
         // copy-link uses the dated URL so a shared link stays on this capture.
         const href = screenHref(appSlug, screen.id, date, latest)
         const shareHref = screenShareHref(appSlug, screen.id, date)
+        // Eager-load the first row (the LCP is in here); the rest stay lazy.
+        const eager = i < 6
         return (
           <div
             key={screen.id}
@@ -56,6 +58,7 @@ export function ScreensGrid({
                   src={src}
                   alt={screen.description}
                   fill
+                  loading={eager ? "eager" : "lazy"}
                   sizes="(min-width:1536px) 14vw, (min-width:1280px) 16vw, (min-width:1024px) 20vw, (min-width:768px) 25vw, (min-width:640px) 33vw, 50vw"
                   className="object-cover"
                 />

@@ -4,6 +4,7 @@ import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { screenHref, screenShareHref, flowHref } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
+import Image from "next/image"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import {
   Copy,
@@ -23,10 +24,21 @@ interface ScreenViewerProps {
   appSlug: string
   date: string
   latest: string
+  /**
+   * Mark the first-shown screenshot as the LCP (high priority, not lazy). Set by
+   * the standalone page — where the image is the page's largest paint — and left
+   * off in the modal, which opens after the gallery has already painted.
+   */
+  priorityInitial?: boolean
 }
 
 // Cap the "Found in" chips so a screen anchoring many flows doesn't overflow.
 const MAX_FOUND_IN_CHIPS = 4
+
+// The displayed size of the stage image; shared by the visible image and the
+// neighbour preloaders so all three request the SAME optimized variant (the
+// preloaded neighbour is then a cache hit when you page to it).
+const STAGE_SIZES = "(min-width: 768px) 40vw, 90vw"
 
 // The shared screen body used by BOTH the modal (inside a Dialog) and the
 // full-screen page. Paging is internal index + window.history.replaceState — NO
@@ -40,6 +52,7 @@ export function ScreenViewer({
   appSlug,
   date,
   latest,
+  priorityInitial = false,
 }: ScreenViewerProps) {
   const router = useRouter()
   const [index, setIndex] = useState(() =>
@@ -50,9 +63,23 @@ export function ScreenViewer({
   )
   const [imageCopied, setImageCopied] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
+  // Once the user pages, the shown image is no longer the LCP — drop the priority
+  // hint so later swaps don't each inject a preload.
+  const [paged, setPaged] = useState(false)
 
   const current = screens[index]
   const currentSrc = current ? captureUrl(appSlug, current.screenshotPath) : ""
+
+  // The two adjacent screenshots, prefetched (eager, hidden) so prev/next is a
+  // cache hit instead of a fresh download — without eagerly fetching the rest.
+  const neighborSrcs = useMemo(() => {
+    const out: string[] = []
+    for (const i of [index - 1, index + 1]) {
+      const s = screens[i]
+      if (s) out.push(captureUrl(appSlug, s.screenshotPath))
+    }
+    return out
+  }, [screens, index, appSlug])
 
   const flowNameBySlug = useMemo(
     () => new Map(flows.map((f) => [f.slug, f.name])),
@@ -80,6 +107,7 @@ export function ScreenViewer({
       const clamped = Math.max(0, Math.min(screens.length - 1, i))
       if (clamped === index) return
       setIndex(clamped)
+      setPaged(true)
       // Reflect the active screen onto the URL WITHOUT a router navigation, so the
       // modal/page never re-renders (no flicker). Preserve Next's history state so
       // back() still works (closes the modal / returns where you came from).
@@ -169,10 +197,26 @@ export function ScreenViewer({
           <LightboxImage
             src={currentSrc}
             alt={current.description || current.title}
-            sizes="(min-width: 768px) 40vw, 90vw"
+            sizes={STAGE_SIZES}
+            preload={priorityInitial && !paged}
             className="aspect-[1080/2400] h-full max-w-full rounded-2xl shadow-2xl"
           />
         )}
+
+        {/* Prefetch the neighbours (hidden, eager) so prev/next is instant. Same
+            sizes as the stage → the variant is already cached on navigation. */}
+        {neighborSrcs.map((src) => (
+          <Image
+            key={src}
+            src={src}
+            alt=""
+            fill
+            sizes={STAGE_SIZES}
+            loading="eager"
+            aria-hidden
+            className="invisible"
+          />
+        ))}
 
         <button
           type="button"

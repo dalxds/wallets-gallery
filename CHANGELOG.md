@@ -26,8 +26,9 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 Every screen and flow now has its own shareable link with a matching social preview card, and
 images load much faster. Open a screen or flow in the gallery and it appears in a lightbox;
 share or refresh its link and it opens as a **full-screen version of that same lightbox** (same
-prev/next, step strip, and actions) with the app's name + capture date in the header. Paging
-prev/next no longer flickers, and images show a loading skeleton instead of a blank flash.
+prev/next, step strip, and actions) with the app's name + capture date in the header. Opening a
+screen pops a skeleton while it loads, and paging prev/next is instant and flicker-free — the
+adjacent screenshots are prefetched, so the next one is already there.
 Copy-link buttons pin the capture date, so a shared link keeps resolving to the same capture
 even after a newer one lands. Screenshots are optimized on the fly — modern formats, right-sized
 thumbnails — so grids and flows load quicker.
@@ -46,10 +47,14 @@ thumbnails — so grids and flows load quicker.
   `LightboxImage` for the skeleton). The lightbox wraps it in a `Dialog`; the page wraps it in
   the site navbar + an app-logo header. Prev/next pages via `window.history.replaceState` (no
   router navigation → no remount, no flicker); copy buttons use the date-pinned
-  `screenShareHref` / `flowShareHref` helpers.
+  `screenShareHref` / `flowShareHref` helpers. Each `@modal` slot has a `loading.tsx`
+  (`components/lightbox/modal-skeleton.tsx`) so a tile click shows a skeleton immediately while
+  the intercepted route streams, when prefetch hasn't already warmed it.
 - Images use `next/image` with a cost-trimmed `images` config (AVIF/WebP, few sizes, one quality,
   1-year TTL) plus immutable `Cache-Control` on the content-addressed PNGs. No build-time image
-  precompute — Vercel optimizes on demand.
+  precompute — Vercel optimizes on demand. Grids and strips stay lazy; the screen viewer eagerly
+  prefetches the two adjacent screenshots (hidden, same `sizes`) so prev/next is a cache hit, and
+  the standalone hero is marked the LCP (`preload`).
 - Open Graph cards via `next/og` at the site, app, screen, and flow levels (`opengraph-image.tsx`,
   rendered from `lib/og.tsx`). `metadataBase` added in the root layout for absolute URLs.
 - `scripts/prune-export.ts` is removed; `.vercelignore` keeps `_staging/`, `credentials.md`, and
