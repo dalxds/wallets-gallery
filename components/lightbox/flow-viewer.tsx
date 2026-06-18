@@ -6,7 +6,14 @@ import { captureUrl } from "@/lib/images"
 import { flowShareHref } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
 import { cn } from "@/lib/utils"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react"
 import {
   Copy,
   Check,
@@ -55,12 +62,24 @@ export function FlowViewer({
   const [flowLinkCopied, setFlowLinkCopied] = useState(false)
   const [downloadingAll, setDownloadingAll] = useState(false)
   const [ready, setReady] = useState(false)
+  // Step image height in px, measured from the strip so cards fill the available
+  // height with an aspect-derived width. A definite px height (not h-full %) is
+  // required — otherwise aspect-ratio gives the card no width and the cards
+  // collapse/overlap. Falls back to 60vh until measured.
+  const [stepImgH, setStepImgH] = useState<number | null>(null)
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
     setCanScrollLeft(el.scrollLeft > 1)
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+  }, [])
+
+  const measureHeight = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    // strip clientHeight − py-4 padding (32) − label + gap (≈28)
+    setStepImgH(Math.max(160, el.clientHeight - 60))
   }, [])
 
   const scrollToIndex = useCallback(() => {
@@ -75,21 +94,23 @@ export function FlowViewer({
 
   useEffect(() => {
     const raf1 = requestAnimationFrame(() => {
+      measureHeight()
       scrollToIndex()
       requestAnimationFrame(() => setReady(true))
     })
     return () => cancelAnimationFrame(raf1)
-  }, [scrollToIndex])
+  }, [scrollToIndex, measureHeight])
 
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
     const observer = new ResizeObserver(() => {
+      measureHeight()
       if (ready) updateScrollState()
     })
     observer.observe(container)
     return () => observer.disconnect()
-  }, [updateScrollState, ready])
+  }, [updateScrollState, measureHeight, ready])
 
   const scroll = useCallback((direction: "left" | "right") => {
     const el = scrollRef.current
@@ -183,6 +204,11 @@ export function FlowViewer({
             "scrollbar-hide flex h-full items-center gap-4 overflow-x-auto px-14 py-4 transition-opacity duration-150",
             ready ? "opacity-100" : "opacity-0"
           )}
+          style={
+            {
+              "--step-h": stepImgH != null ? `${stepImgH}px` : undefined,
+            } as CSSProperties
+          }
           onScroll={updateScrollState}
         >
           {flow.steps.map((step, idx) => (
@@ -217,7 +243,12 @@ export function FlowViewer({
 
       {/* Bottom action bar */}
       <div className="flex items-center justify-center gap-1.5 border-t px-4 py-3">
-        <Button variant="secondary" size="sm" onClick={copyFlowLink} className="gap-1.5">
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={copyFlowLink}
+          className="gap-1.5"
+        >
           {flowLinkCopied ? (
             <Check className="h-4 w-4 text-green-500" />
           ) : (
@@ -275,7 +306,9 @@ function StepCard({
       const res = await fetch(displaySrc)
       if (!res.ok) throw new Error(`fetch ${displaySrc}: ${res.status}`)
       const blob = await res.blob()
-      await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
+      await navigator.clipboard.write([
+        new ClipboardItem({ [blob.type]: blob }),
+      ])
     } catch {
       await navigator.clipboard.writeText(window.location.origin + displaySrc)
     }
@@ -313,13 +346,13 @@ function StepCard({
   return (
     <div
       ref={ref}
-      className="group/card flex h-full shrink-0 flex-col items-center gap-2"
+      className="group/card flex w-[calc(var(--step-h,60vh)*9/20)] shrink-0 flex-col items-center gap-2"
     >
       <LightboxImage
         src={displaySrc}
         alt={activeVariant?.description ?? step.title}
         sizes="(min-width: 768px) 300px, 60vw"
-        className="aspect-[1080/2400] min-h-0 flex-1 rounded-lg shadow-lg"
+        className="aspect-[1080/2400] h-[var(--step-h,60vh)] rounded-lg shadow-lg"
       >
         {/* Hover action buttons */}
         <div className="absolute top-1.5 right-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
@@ -392,11 +425,11 @@ function StepCard({
         )}
       </LightboxImage>
 
-      <div className="flex w-full items-start justify-center gap-1.5">
+      <div className="flex w-full items-center justify-center gap-1.5">
         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-muted text-[10px] font-medium">
           {step.number}
         </span>
-        <span className="text-center text-xs text-muted-foreground">
+        <span className="min-w-0 truncate text-center text-xs text-muted-foreground">
           {getStepLabel(step)}
         </span>
       </div>
