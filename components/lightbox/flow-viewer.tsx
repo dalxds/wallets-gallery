@@ -370,7 +370,7 @@ function StepCard({
         className="aspect-[1080/2400] h-[var(--step-h,60vh)] rounded-lg shadow-lg"
       >
         {/* Hover action buttons */}
-        <div className="absolute top-1.5 right-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
+        <div className="pointer-events-none absolute top-1.5 right-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:pointer-events-auto group-hover/card:opacity-100">
           <button
             type="button"
             onClick={copyImage}

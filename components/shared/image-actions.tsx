@@ -53,7 +53,7 @@ export function ImageActions({ src, shareHref }: ImageActionsProps) {
   }
 
   return (
-    <div className="absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">
+    <div className="pointer-events-none absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:pointer-events-auto group-hover/card:opacity-100">
       <button
         type="button"
         onClick={copyImage}
