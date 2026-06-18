@@ -21,6 +21,33 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-18
+
+Every screen and flow now has its own shareable link with a matching social preview card, and
+images load much faster. Open a screen or flow in the gallery and it appears in a lightbox with
+a clean URL (`/apps/<app>/screen/<id>`, `/apps/<app>/flow/<slug>`); share or refresh that URL
+and it opens as a focused standalone page with its own Open Graph card. Screenshots are now
+optimized on the fly — modern formats, right-sized thumbnails — so grids and flows load quicker.
+
+### For contributors
+
+- The site is now **Vercel-native**: `output: "export"` is dropped. Home and per-capture gallery
+  pages stay prerendered (SSG); screen/flow pages and their OG images render on demand and cache
+  (`dynamicParams = true`), so the long tail of screens never inflates the build.
+- Screen/flow lightboxes are **intercepting + parallel routes** (`app/apps/[slug]/@modal/…`): a
+  tile click is intercepted into a modal over the gallery; a direct/shared link renders the
+  standalone page (`components/standalone/`). Mirrored under `[date]/` so historical captures
+  behave the same. The old `?screen=`/`?flow=` query state and the nuqs lightbox islands are
+  gone; deep links are real routes built through `captureBase` in `lib/links.ts`.
+- Images use `next/image` with a cost-trimmed `images` config (AVIF/WebP, few sizes, one quality,
+  1-year TTL) plus immutable `Cache-Control` on the content-addressed PNGs. No build-time image
+  precompute — Vercel optimizes on demand.
+- Open Graph cards via `next/og` at the site, app, screen, and flow levels (`opengraph-image.tsx`,
+  rendered from `lib/og.tsx`). `metadataBase` added in the root layout for absolute URLs.
+- `scripts/prune-export.ts` is removed; `.vercelignore` keeps `_staging/`, `credentials.md`, and
+  `*.snap.json` out of the deploy, and the committed `*.snap.json` snapshots were untracked and
+  gitignored. `pnpm start` is now `next start`.
+
 ## [0.1.1] - 2026-06-17
 
 ### Fixed

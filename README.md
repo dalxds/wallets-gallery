@@ -29,9 +29,11 @@ out, and how captures actually work.
 
 ## What it is
 
-- **The app** — a Next.js 16 / React 19 site (Tailwind v4 + shadcn/ui) that exports to
-  fully static HTML (`output: "export"`). There is no server at runtime; the whole gallery
-  is prerendered from JSON on disk and can be served from any CDN.
+- **The app** — a Next.js 16 / React 19 site (Tailwind v4 + shadcn/ui) deployed on Vercel.
+  The home and per-capture gallery pages are prerendered from JSON on disk (SSG); individual
+  screen/flow pages and their Open Graph cards render on demand and cache; screenshots are
+  optimized on demand by `next/image`. No external data fetches — everything derives from
+  local JSON.
 - **The data** — under `public/captures/`, one directory per app. Each capture is a
   `graph.json` (the committed source of truth) plus a `view.json` (generated).
 - **The engine** — `lib/packager/`, a pure, deterministic transform `package(graph) → view`.
@@ -43,7 +45,7 @@ out, and how captures actually work.
 The mental model in one line:
 
 ```
-observe a walk  →  assemble a graph  →  derive a view  →  render a static site
+observe a walk  →  assemble a graph  →  derive a view  →  render the gallery
 ```
 
 ---
@@ -58,8 +60,8 @@ pnpm install
 
 pnpm dev          # next dev (turbopack) — local dev server
 pnpm build-data   # regenerate every view.json + index.json (the registry) from graph.json
-pnpm build        # build-data → next build (static export to out/) → prune-export
-pnpm start        # serve the exported out/ directory
+pnpm build        # build-data → next build (gallery prerendered; long-tail on demand)
+pnpm start        # next start — run the production server locally
 pnpm test         # vitest (unit + packager tests)
 pnpm typecheck    # tsc --noEmit
 pnpm lint         # eslint
@@ -73,18 +75,24 @@ touched a `graph.json` or the packager.
 ## Repository layout
 
 ```
-app/                          # Next.js App Router (all routes are statically prerendered)
+app/                          # Next.js App Router (gallery prerendered; screen/flow on demand)
   page.tsx                    #   /            browse grid (reads public/captures/index.json)
-  apps/[slug]/[[...date]]/    #   /apps/x      latest capture · /apps/x/<date> historical
-    page.tsx                  #     reads {slug}/{date}/view.json at build time
-  apps/[slug]/app-detail.tsx  #     server-rendered detail: Screens tab + Flows tab
+  opengraph-image.tsx         #   site OG card
+  apps/[slug]/                #   /apps/x      latest capture (clean URL)
+    layout.tsx                #     hosts the @modal parallel slot over the gallery
+    page.tsx                  #     latest gallery · [date]/page.tsx for /apps/x/<date>
+    app-detail.tsx            #     server-rendered detail: Screens tab + Flows tab
+    @modal/(.)screen · (.)flow#     intercepting-route modals (lightbox over the gallery)
+    screen/[id] · flow/[slug] #     standalone pages + opengraph-image.tsx (shared-link / SEO)
+    [date]/…                  #     same layout/@modal/screen/flow set for historical captures
   llms.txt/route.ts           #   /llms.txt    machine-readable index of apps + data URLs
 
 components/
-  app-detail/                 # the per-app detail UI (tabs, screen grid, flow rows, lightboxes)
+  app-detail/                 # the per-app detail UI (tabs, screen grid, flow rows)
   browse/                     # the browse grid + sort/view controls
-  lightbox/                   # screen + flow lightboxes
-  layout/  ui/                # app shell + header; shadcn primitives
+  lightbox/                   # screen + flow lightboxes + their route-driven modal wrappers
+  standalone/                 # full-page screen/flow views (shared-link / OG targets)
+  shared/  layout/  ui/       # image actions; app shell + header; shadcn primitives
 
 lib/
   packager/                   # ★ THE ENGINE — graph → view (see below). Pure, deterministic.
@@ -97,15 +105,15 @@ lib/
     naming.ts  replay.ts      #   flow names; inline .ad replay scripts
     graph.ts  validate.ts     #   adjacency helpers; graph.json validator
   types.ts                    # app-facing types (aliased over the packager's View) + registry/manifest
-  links.ts  states.ts         # deep-link helpers; state presentation for the on-screen state switcher
-  images.ts  utils.ts         # screenshot URL helper; cn() classname helper
+  captures.ts                 # server-only reads of index.json + view.json (shared by all routes)
+  links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher presentation
+  images.ts  og.tsx  utils.ts # screenshot URL + dims; Open Graph card renderers; cn() helper
 
 scripts/                      # build-time CLIs (intentionally prettier-off, dense style)
   assemble.ts                 #   walk.json → graph.json  (computes identity signals, validates)
   package.ts                  #   graph.json → view (CLI wrapper around the packager, for the skill)
   build-data.ts               #   every graph.json → view.json + index.json (the registry)
   phash.ts                    #   dependency-free perceptual hash of a PNG
-  prune-export.ts             #   allowlist-prune out/captures after export (no staging/secrets ship)
 
 public/captures/              # ★ THE DATA
   index.json                  #   generated registry (browse page reads this)
@@ -385,11 +393,13 @@ of the output.
                                    then emit the registry  captures/index.json
                           │
                           ▼
-                   next build  (output: "export")  ──▶  out/   (static HTML for every slug/date)
+                   next build  ──▶  gallery pages prerendered (SSG); screen/flow pages +
+                                    OG images render on demand and cache; next/image
+                                    optimizes screenshots on demand
                           │
                           ▼
-                   prune-export.ts  ──▶  strip _staging/, secrets, and anything that isn't
-                                         JSON/PNG from out/captures  (allowlist; leak-proof)
+                   .vercelignore  ──▶  keeps _staging/, credentials.md, and *.snap.json out
+                                       of the deploy (public/ is otherwise served as-is)
 ```
 
 Key properties:
@@ -397,15 +407,19 @@ Key properties:
 - **`graph.json` is the only committed source per capture.** `view.json` and `index.json` are
   generated by `build-data`. They are derivable, but committed too and kept in sync with their
   source — re-run `build-data` after a graph or packager change and commit them alongside it.
-- **Routes are data, not fetches.** Every page is prerendered to static HTML at build time from
-  JSON on disk — the browse grid from `index.json`, and each `/apps/<slug>` /
-  `/apps/<slug>/<date>` page from its own `view.json` (`dynamicParams = false`, so the set of
-  pages is fixed and anything else 404s). There are **no runtime data fetches** — the site is
-  plain static files.
-- **`prune-export.ts` is an allowlist**, not a denylist: after `next build` copies all of
-  `public/` into `out/`, it removes everything under `out/captures` that isn't a published
-  `*.json`/`*.png`, and drops `_staging/` wholesale — so staging shots, `credentials.md`, and
-  any stray secret can't ship.
+- **Routes are data, not fetches.** The browse grid and each `/apps/<slug>` (latest) /
+  `/apps/<slug>/<date>` (historical) gallery are prerendered from JSON on disk
+  (`dynamicParams = false`). Individual screen/flow pages and their OG cards render on the first
+  request and cache (`dynamicParams = true`), so the long tail never inflates the build. Either
+  way there are **no external data fetches** — everything derives from local JSON.
+- **One canonical URL per screen/flow.** A tile click navigates to `/apps/<slug>/screen/<id>`
+  (or `…/flow/<slug>`), which the `@modal` parallel slot intercepts into the lightbox over the
+  gallery; opening or refreshing that URL renders the standalone page with its own OG card. All
+  such URLs are built through `captureBase` in `lib/links.ts` (latest → clean, historical →
+  dated).
+- **Leak prevention is `.vercelignore`** (the static export's `prune-export` allowlist is gone):
+  with `public/` served as-is on Vercel, `.vercelignore` keeps `_staging/`, `credentials.md`,
+  and the raw `*.snap.json` snapshots out of the deploy. `*.snap.json` are also gitignored.
 
 ---
 
