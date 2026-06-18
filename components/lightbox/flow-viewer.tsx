@@ -78,11 +78,17 @@ export function FlowViewer({
   const measureHeight = useCallback(() => {
     const el = scrollRef.current
     if (!el) return
-    // strip clientHeight − py-4 padding (32) − label + gap (≈28)
-    setStepImgH(Math.max(160, el.clientHeight - 60))
+    // Two constraints on the step image height:
+    //   • fit the strip: clientHeight − py-4 padding (32) − label/gap (≈28)
+    //   • keep a card ≤ ~62% of the strip width so the neighbours always peek
+    //     (one screen centered at a time on narrow/mobile). Card width =
+    //     height·9/20, so height ≤ 0.62·width·20/9.
+    const byHeight = el.clientHeight - 60
+    const byWidth = (el.clientWidth * 0.62 * 20) / 9
+    setStepImgH(Math.max(160, Math.min(byHeight, byWidth)))
   }, [])
 
-  const scrollToIndex = useCallback(() => {
+  const centerOnInitial = useCallback(() => {
     const container = scrollRef.current
     const stepEl = stepRefs.current.get(initialIndex)
     if (stepEl && container) {
@@ -92,14 +98,23 @@ export function FlowViewer({
     updateScrollState()
   }, [initialIndex, updateScrollState])
 
+  // Measure the strip on mount so the cards get their final width.
   useEffect(() => {
-    const raf1 = requestAnimationFrame(() => {
-      measureHeight()
-      scrollToIndex()
-      requestAnimationFrame(() => setReady(true))
-    })
+    const raf1 = requestAnimationFrame(() => measureHeight())
     return () => cancelAnimationFrame(raf1)
-  }, [scrollToIndex, measureHeight])
+  }, [measureHeight])
+
+  // Center the ?step card once the cards have their measured width (centering
+  // against the fallback width would land off). Once only — later resizes must
+  // not yank the user's scroll. The strip is opacity-0 until ready, so the jump
+  // to position isn't visible.
+  const didCenter = useRef(false)
+  useEffect(() => {
+    if (stepImgH == null || didCenter.current) return
+    didCenter.current = true
+    centerOnInitial()
+    requestAnimationFrame(() => setReady(true))
+  }, [stepImgH, centerOnInitial])
 
   useEffect(() => {
     const container = scrollRef.current
@@ -190,7 +205,7 @@ export function FlowViewer({
           type="button"
           aria-label="Scroll left"
           className={cn(
-            "absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition-opacity hover:bg-background",
+            "absolute left-3 z-10 hidden h-10 w-10 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition-opacity hover:bg-background md:flex",
             canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0"
           )}
           onClick={() => scroll("left")}
@@ -201,7 +216,7 @@ export function FlowViewer({
         <div
           ref={scrollRef}
           className={cn(
-            "scrollbar-hide flex h-full items-center gap-4 overflow-x-auto px-14 py-4 transition-opacity duration-150",
+            "scrollbar-hide flex h-full snap-x snap-mandatory items-center gap-4 overflow-x-auto px-6 py-4 transition-opacity duration-150 md:snap-none md:px-14",
             ready ? "opacity-100" : "opacity-0"
           )}
           style={
@@ -232,7 +247,7 @@ export function FlowViewer({
           type="button"
           aria-label="Scroll right"
           className={cn(
-            "absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition-opacity hover:bg-background",
+            "absolute right-3 z-10 hidden h-10 w-10 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition-opacity hover:bg-background md:flex",
             canScrollRight ? "opacity-100" : "pointer-events-none opacity-0"
           )}
           onClick={() => scroll("right")}
@@ -346,7 +361,7 @@ function StepCard({
   return (
     <div
       ref={ref}
-      className="group/card flex w-[calc(var(--step-h,60vh)*9/20)] shrink-0 flex-col items-center gap-2"
+      className="group/card flex w-[calc(var(--step-h,60vh)*9/20)] shrink-0 snap-center flex-col items-center gap-2"
     >
       <LightboxImage
         src={displaySrc}

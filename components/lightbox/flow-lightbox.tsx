@@ -40,7 +40,7 @@ export function FlowLightbox({
       }}
     >
       <DialogContent
-        className="flex h-[80vh] max-w-[80vw] flex-col gap-0 overflow-hidden p-0 sm:max-w-[80vw]"
+        className="flex h-[85vh] max-w-[95vw] flex-col gap-0 overflow-hidden p-0 sm:h-[80vh] sm:max-w-[80vw]"
         showCloseButton={false}
       >
         <DialogTitle className="sr-only">{appName} flow</DialogTitle>
