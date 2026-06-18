@@ -8,11 +8,14 @@ import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
 import { ImageActions } from "@/components/shared/image-actions"
 import { flowHref } from "@/lib/links"
+import Image from "next/image"
 import Link from "next/link"
 
 interface FlowRowProps {
   flow: FlowEntry
   appSlug: string
+  date: string
+  latest: string
   stateIndex: StateIndex
   /** Set for nested flows — surfaced as "… from {parent}" in the title. */
   parent?: { slug: string; name: string }
@@ -20,13 +23,15 @@ interface FlowRowProps {
   onNavigate?: (slug: string) => void
 }
 
-// Reads no searchParams, so it server-renders into the static HTML (visible
-// screenshots via plain <img>, crawlable) while keeping its scroll affordances
-// and copy-link as client interactivity. Each step is a <Link> into ?flow/?step;
-// the FlowLightboxIsland reads those and opens the lightbox.
+// Reads no searchParams, so it server-renders into the static HTML while keeping
+// its scroll affordances and copy-link as client interactivity. Each step links
+// to /apps/[slug]/flow/[slug]?step=N — intercepted into the lightbox modal in-app,
+// rendered as the standalone page when opened directly.
 export function FlowRow({
   flow,
   appSlug,
+  date,
+  latest,
   stateIndex,
   parent,
   onNavigate,
@@ -59,7 +64,7 @@ export function FlowRow({
 
   async function copyFlowLink(e: React.MouseEvent) {
     e.stopPropagation()
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug)}`
+    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, date, latest)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
@@ -118,8 +123,7 @@ export function FlowRow({
           {flow.steps.map((step, idx) => {
             const stateCount = stateIndex.variantsForScreen(step.screenId).length
             const src = captureUrl(appSlug, step.screenshotPath)
-            // Relative href: opens the lightbox via the URL and keeps the date.
-            const href = `?tab=flows&flow=${encodeURIComponent(flow.slug)}&step=${idx}`
+            const href = flowHref(appSlug, flow.slug, date, latest, idx)
             return (
               <div
                 key={step.number}
@@ -134,12 +138,12 @@ export function FlowRow({
                     className="relative overflow-hidden rounded-lg border bg-muted transition-shadow group-hover/step:shadow-md"
                     style={{ aspectRatio: "9/19.5" }}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={src}
                       alt={step.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
+                      fill
+                      sizes="(min-width: 640px) 144px, 128px"
+                      className="object-cover"
                     />
                     {stateCount > 1 && (
                       <div className="pointer-events-none absolute bottom-1.5 left-1.5 z-10 flex items-center gap-1 rounded-md bg-background/85 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shadow-sm backdrop-blur-sm">

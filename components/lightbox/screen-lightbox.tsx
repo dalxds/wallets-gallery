@@ -7,7 +7,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { captureUrl } from "@/lib/images"
+import { captureUrl, SCREENSHOT_HEIGHT, SCREENSHOT_WIDTH } from "@/lib/images"
 import { screenHref } from "@/lib/links"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import {
@@ -20,14 +20,21 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useQueryState } from "nuqs"
-import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 interface ScreenLightboxProps {
   screens: ScreenEntry[]
   flows: FlowEntry[]
   activeScreenId: string
   appSlug: string
+  date: string
+  latest: string
+  // Close the modal (the route owner wires this to router.back()).
+  onClose: () => void
+  // Reflect the active screen onto the URL on prev/next (router.replace).
+  onNavigate: (screenId: string) => void
+  // Jump to a flow at a given 0-based step (router.push to the flow route).
+  onOpenFlow: (flowSlug: string, step: number) => void
 }
 
 // Cap the "Found in" chips so a screen that anchors many flows doesn't overflow
@@ -39,11 +46,19 @@ export function ScreenLightbox({
   flows,
   activeScreenId,
   appSlug,
+  date,
+  latest,
+  onClose,
+  onNavigate,
+  onOpenFlow,
 }: ScreenLightboxProps) {
-  const [, setScreen] = useQueryState("screen")
-  const router = useRouter()
+  // Internal index is the source of truth so paging is instant; onNavigate keeps
+  // the URL in sync (router.replace) without re-seeding from the route param.
   const [currentIndex, setCurrentIndex] = useState(() =>
-    screens.findIndex((s) => s.id === activeScreenId)
+    Math.max(
+      0,
+      screens.findIndex((s) => s.id === activeScreenId)
+    )
   )
   const [imageCopied, setImageCopied] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
@@ -77,10 +92,11 @@ export function ScreenLightbox({
   const goTo = useCallback(
     (index: number) => {
       const clamped = Math.max(0, Math.min(screens.length - 1, index))
+      if (clamped === currentIndex) return
       setCurrentIndex(clamped)
-      setScreen(screens[clamped].id)
+      onNavigate(screens[clamped].id)
     },
-    [screens, setScreen]
+    [screens, currentIndex, onNavigate]
   )
 
   useEffect(() => {
@@ -95,6 +111,7 @@ export function ScreenLightbox({
   async function copyImage() {
     if (!current) return
     try {
+      // The original PNG, not the optimized /_next/image variant.
       const res = await fetch(currentSrc)
       if (!res.ok) throw new Error(`fetch ${currentSrc}: ${res.status}`)
       const blob = await res.blob()
@@ -108,7 +125,7 @@ export function ScreenLightbox({
 
   async function copyLink() {
     if (!current) return
-    const url = `${window.location.origin}${screenHref(appSlug, current.id)}`
+    const url = `${window.location.origin}${screenHref(appSlug, current.id, date, latest)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
@@ -127,22 +144,16 @@ export function ScreenLightbox({
     URL.revokeObjectURL(url)
   }
 
-  function close() {
-    setScreen(null)
-  }
-
-  // Jump to the flow where this screen appears, opening it at that step. A single
-  // relative navigation: it drops ?screen (closing this lightbox) and switches to
-  // the flows tab with the flow/step params the flow lightbox reads.
-  function openFlow(slug: string, step: number) {
-    router.push(`?tab=flows&flow=${encodeURIComponent(slug)}&step=${step - 1}`)
-  }
-
   const atStart = currentIndex <= 0
   const atEnd = currentIndex >= screens.length - 1
 
   return (
-    <Dialog open onOpenChange={close}>
+    <Dialog
+      open
+      onOpenChange={(o) => {
+        if (!o) onClose()
+      }}
+    >
       <DialogContent
         className="flex h-[95vh] max-w-[95vw] flex-col gap-0 overflow-hidden p-0 sm:max-w-[95vw]"
         showCloseButton={false}
@@ -167,7 +178,7 @@ export function ScreenLightbox({
           <Button
             variant="ghost"
             size="icon"
-            onClick={close}
+            onClick={onClose}
             className="shrink-0"
           >
             <X className="h-4 w-4" />
@@ -187,10 +198,14 @@ export function ScreenLightbox({
           </button>
 
           {current && (
-            <img
+            <Image
+              key={current.id}
               src={currentSrc}
               alt={current.description || current.title}
-              className="max-h-full max-w-full rounded-2xl object-contain shadow-2xl"
+              width={SCREENSHOT_WIDTH}
+              height={SCREENSHOT_HEIGHT}
+              sizes="(min-width: 768px) 40vw, 90vw"
+              className="h-auto max-h-full w-auto max-w-full rounded-2xl object-contain shadow-2xl"
             />
           )}
 
@@ -215,7 +230,7 @@ export function ScreenLightbox({
               <button
                 type="button"
                 key={f.slug}
-                onClick={() => openFlow(f.slug, f.step)}
+                onClick={() => onOpenFlow(f.slug, Math.max(0, f.step - 1))}
                 className="max-w-40 truncate rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent"
                 title={f.name}
               >

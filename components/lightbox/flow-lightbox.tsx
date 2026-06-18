@@ -22,10 +22,13 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 interface FlowLightboxProps {
   flow: FlowEntry
   appSlug: string
+  date: string
+  latest: string
   initialIndex?: number
   onClose: () => void
   stateIndex: StateIndex
@@ -44,6 +47,8 @@ function getStepLabel(step: FlowStep): string {
 export function FlowLightbox({
   flow,
   appSlug,
+  date,
+  latest,
   initialIndex = 0,
   onClose,
   stateIndex,
@@ -124,7 +129,7 @@ export function FlowLightbox({
 
   async function copyFlowLink() {
     // Link to the flow itself (step 0), not the currently-centered step.
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug)}`
+    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, date, latest)}`
     await navigator.clipboard.writeText(url)
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
@@ -158,7 +163,12 @@ export function FlowLightbox({
   }
 
   return (
-    <Dialog open onOpenChange={() => onClose()}>
+    <Dialog
+      open
+      onOpenChange={(o) => {
+        if (!o) onClose()
+      }}
+    >
       <DialogContent
         className="flex h-[80vh] max-w-[80vw] flex-col gap-0 overflow-hidden p-0 sm:max-w-[80vw]"
         showCloseButton={false}
@@ -215,6 +225,8 @@ export function FlowLightbox({
                 src={stepSrc(step)}
                 appSlug={appSlug}
                 flowSlug={flow.slug}
+                date={date}
+                latest={latest}
                 variants={stateIndex.variantsForScreen(step.screenId)}
               />
             ))}
@@ -268,6 +280,8 @@ function StepCard({
   src,
   appSlug,
   flowSlug,
+  date,
+  latest,
   variants,
   ref,
 }: {
@@ -275,6 +289,8 @@ function StepCard({
   src: string
   appSlug: string
   flowSlug: string
+  date: string
+  latest: string
   variants: ScreenEntry[]
   ref?: React.Ref<HTMLDivElement>
 }) {
@@ -293,9 +309,10 @@ function StepCard({
   async function copyImage(e: React.MouseEvent) {
     e.stopPropagation()
     try {
+      // The original PNG, not the optimized /_next/image variant. A 404 (e.g. a
+      // shot-less screen → empty path → directory URL) returns an HTML page;
+      // guard so we don't write that HTML to the clipboard as an "image".
       const res = await fetch(displaySrc)
-      // A 404 (e.g. a shot-less screen → empty path → directory URL) returns an HTML
-      // page; guard so we don't write that HTML to the clipboard as an "image".
       if (!res.ok) throw new Error(`fetch ${displaySrc}: ${res.status}`)
       const blob = await res.blob()
       await navigator.clipboard.write([
@@ -310,10 +327,10 @@ function StepCard({
 
   async function copyLink(e: React.MouseEvent) {
     e.stopPropagation()
-    // Deep-link to THIS step (step param is the 0-based index; step.number is 1-based),
-    // matching the grid's per-step link — not the flow's first step.
+    // Deep-link to THIS step (step param is the 0-based index; step.number is
+    // 1-based), matching the grid's per-step link — not the flow's first step.
     await navigator.clipboard.writeText(
-      `${window.location.origin}${flowHref(appSlug, flowSlug, step.number - 1)}`
+      `${window.location.origin}${flowHref(appSlug, flowSlug, date, latest, step.number - 1)}`
     )
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
@@ -342,10 +359,12 @@ function StepCard({
       className="group/card flex shrink-0 flex-col items-center gap-2"
     >
       <div className="relative aspect-[1080/2400] h-[calc(80vh-12.5rem)] overflow-hidden rounded-lg bg-muted shadow-lg">
-        <img
+        <Image
           src={displaySrc}
           alt={activeVariant?.description ?? step.title}
-          className="h-full w-full object-contain"
+          fill
+          sizes="(min-width: 768px) 300px, 60vw"
+          className="object-contain"
         />
         {/* Hover action buttons */}
         <div className="absolute top-1.5 right-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:opacity-100">

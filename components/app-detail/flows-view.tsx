@@ -4,13 +4,14 @@ import type { AppCapture, FlowEntry } from "@/lib/types"
 import { buildStateIndex } from "@/lib/states"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
-import { FlowLightboxIsland } from "./flow-lightbox-island"
 import { PanelLeftOpen } from "lucide-react"
-import { Suspense, useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 
 interface FlowsViewProps {
   app: AppCapture
   appSlug: string
+  date: string
+  latest: string
 }
 
 // Flatten the flow tree into a single ordered list (parent, then its children,
@@ -35,11 +36,11 @@ function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
   return out
 }
 
-export function FlowsView({ app, appSlug }: FlowsViewProps) {
-  // Which flow the sidebar highlights — set when the user clicks one. The open
-  // lightbox (driven by ?flow, read only in FlowLightboxIsland) is the source of
-  // truth for "which flow"; this is just the list highlight. No searchParams are
-  // read here, so the flow list server-renders into the static HTML.
+export function FlowsView({ app, appSlug, date, latest }: FlowsViewProps) {
+  // Which flow the sidebar highlights — set when the user clicks one. This is
+  // just the list highlight; opening a flow is a navigation to its route, which
+  // the @modal slot intercepts into the lightbox. No searchParams are read here,
+  // so the flow list server-renders into the static HTML.
   const [currentSlug, setCurrentSlug] = useState<string | undefined>(undefined)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const flowRefs = useRef<Map<string, HTMLDivElement>>(new Map())
@@ -72,7 +73,6 @@ export function FlowsView({ app, appSlug }: FlowsViewProps) {
   }
 
   return (
-    <>
     <div className="flex gap-6">
       {/* Desktop: fixed full-height sidebar, or a slim rail when collapsed */}
       {sidebarCollapsed ? (
@@ -131,6 +131,8 @@ export function FlowsView({ app, appSlug }: FlowsViewProps) {
                 <FlowRow
                   flow={flow}
                   appSlug={appSlug}
+                  date={date}
+                  latest={latest}
                   stateIndex={stateIndex}
                   parent={
                     parentFlow
@@ -145,13 +147,5 @@ export function FlowsView({ app, appSlug }: FlowsViewProps) {
         </div>
       </div>
     </div>
-    <Suspense fallback={null}>
-      <FlowLightboxIsland
-        flows={app.flows}
-        stateIndex={stateIndex}
-        appSlug={appSlug}
-      />
-    </Suspense>
-    </>
   )
 }

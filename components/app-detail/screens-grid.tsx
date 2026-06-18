@@ -6,30 +6,35 @@ import {
   ScreenTile,
   screenTileWrapperClass,
 } from "@/components/app-detail/screen-tile"
+import { screenHref } from "@/lib/links"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 import Link from "next/link"
 
 interface ScreensGridProps {
   screens: ScreenEntry[]
   appSlug: string
+  date: string
+  latest: string
 }
 
-// Server-rendered: each tile is a real <Link> into ?screen, so the grid lives in
-// the static HTML (crawlable, no first-paint swap, works without JS). A plain
-// <img> — not the client LazyImage — so the screenshots are visible in the
-// prerendered HTML rather than hidden at opacity-0 until hydration; the muted box
-// is the loading placeholder. The screen lightbox is a separate client island
-// that reads ?screen. Hover actions sit as an absolutely-positioned sibling of
-// the link — not inside it — so the buttons stay valid markup (no button-in-
-// anchor) and don't trigger navigation.
-export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
+// Server-rendered: each tile is a real <Link> to /apps/[slug]/screen/[id]
+// (latest) or /apps/[slug]/[date]/screen/[id] (historical). In-app that link is
+// intercepted into the lightbox modal; opened directly it renders the standalone
+// page. The grid lives in the static HTML (crawlable). Hover actions sit as an
+// absolutely-positioned sibling of the link — not inside it — so the buttons stay
+// valid markup (no button-in-anchor) and don't trigger navigation.
+export function ScreensGrid({
+  screens,
+  appSlug,
+  date,
+  latest,
+}: ScreensGridProps) {
   return (
     <ScreensGridLayout>
       {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
-        // Relative href: resolves against the current path, so it keeps the
-        // capture date when viewing /apps/[slug]/[date].
-        const href = `?tab=screens&screen=${encodeURIComponent(screen.id)}`
+        const href = screenHref(appSlug, screen.id, date, latest)
         return (
           <div
             key={screen.id}
@@ -44,12 +49,12 @@ export function ScreensGrid({ screens, appSlug }: ScreensGridProps) {
                 imageBoxClassName="relative bg-muted transition-shadow group-hover/card:shadow-lg"
                 imageBoxStyle={{ aspectRatio: "9/19.5" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={src}
                   alt={screen.description}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(min-width:1536px) 14vw, (min-width:1280px) 16vw, (min-width:1024px) 20vw, (min-width:768px) 25vw, (min-width:640px) 33vw, 50vw"
+                  className="object-cover"
                 />
               </ScreenTile>
             </Link>

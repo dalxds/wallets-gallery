@@ -1,28 +1,45 @@
-// Deep links are query-param based on the single /apps/[slug] route, matching
-// the nuqs query state the page reads (tab/flow/step/screen). Path-based URLs
-// such as /apps/x/flows/y are not real routes and would 404.
+// Deep links are real routes. The capture date drives the base: the latest
+// capture lives at the clean /apps/[slug], every other date at
+// /apps/[slug]/[date] (see captureBase). Screens and flows are sub-routes of
+// that base — opened as an intercepted modal in-app, and rendered as a full
+// standalone page (with its own OG card) on a direct or shared link.
 
 export function appHref(appSlug: string): string {
   return `/apps/${appSlug}`
 }
 
-// Capture date is a route segment: the latest lives at the clean /apps/[slug],
-// every other date at /apps/[slug]/[date]. Each is its own prerendered page, so
-// switching date is a navigation (no client fetch).
-export function dateHref(appSlug: string, date: string, latest: string): string {
+// Single source of truth for latest (clean) vs historical (dated) capture URLs.
+// Everything that links into a capture builds on this, so the latest/date split
+// can never drift between callers.
+export function captureBase(
+  appSlug: string,
+  date: string,
+  latest: string
+): string {
   return date === latest ? `/apps/${appSlug}` : `/apps/${appSlug}/${date}`
 }
 
-export function screenHref(appSlug: string, screenId: string): string {
-  return `/apps/${appSlug}?tab=screens&screen=${encodeURIComponent(screenId)}`
+// Switching capture date is a navigation to its own prerendered gallery page.
+export function dateHref(appSlug: string, date: string, latest: string): string {
+  return captureBase(appSlug, date, latest)
+}
+
+export function screenHref(
+  appSlug: string,
+  screenId: string,
+  date: string,
+  latest: string
+): string {
+  return `${captureBase(appSlug, date, latest)}/screen/${encodeURIComponent(screenId)}`
 }
 
 export function flowHref(
   appSlug: string,
   flowSlug: string,
+  date: string,
+  latest: string,
   step?: number
 ): string {
-  let href = `/apps/${appSlug}?tab=flows&flow=${encodeURIComponent(flowSlug)}`
-  if (step != null) href += `&step=${step}`
-  return href
+  const base = `${captureBase(appSlug, date, latest)}/flow/${encodeURIComponent(flowSlug)}`
+  return step != null ? `${base}?step=${step}` : base
 }

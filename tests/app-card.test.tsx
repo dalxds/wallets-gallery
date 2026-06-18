@@ -91,7 +91,11 @@ describe("AppCard", () => {
     it("renders the cover thumbnail when present", () => {
       const { container } = render(<AppCard app={mockApp} view="grid" />)
       const cover = within(container).getByAltText("Phantom preview")
-      expect(cover).toHaveAttribute("src", "/captures/phantom/assets/abc123.png")
+      // next/image rewrites src to the optimizer URL; assert the source path is
+      // encoded within it rather than the bare path.
+      expect(cover.getAttribute("src")).toContain(
+        encodeURIComponent("/captures/phantom/assets/abc123.png")
+      )
     })
 
     it("omits the cover thumbnail when absent", () => {

@@ -1,0 +1,10 @@
+# Defense in depth for the Vercel deploy: with the static export dropped,
+# everything under public/ is served as-is. Keep capture working files, raw
+# accessibility snapshots, and secrets out of the deployment regardless of git
+# state. (The site only needs the PNGs + the generated JSON.)
+public/captures/**/_staging
+**/credentials.md
+public/captures/**/*.snap.json
+public/captures/**/*.bak
+**/*.pem
+.env*.local

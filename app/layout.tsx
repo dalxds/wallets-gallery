@@ -14,7 +14,17 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+// metadataBase resolves OG image + canonical URLs to absolute. Prefer an explicit
+// NEXT_PUBLIC_SITE_URL; on Vercel fall back to the production deploy URL; locally
+// to localhost.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000")
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Wallets Gallery — Design Inspiration Gallery",
   description:
     "Browse captured UI flows from crypto wallets and fintech apps",

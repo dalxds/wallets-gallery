@@ -3,6 +3,7 @@
 import type { AppIndex } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { formatDate } from "@/lib/utils"
+import Image from "next/image"
 import Link from "next/link"
 
 interface AppCardProps {
@@ -20,6 +21,7 @@ export function AppCard({ app, view }: AppCardProps) {
         href={`/apps/${app.slug}`}
         className="group flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:bg-accent"
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`https://avatar.vercel.sh/${app.slug}`}
           alt={app.name}
@@ -44,18 +46,20 @@ export function AppCard({ app, view }: AppCardProps) {
     >
       {app.cover && (
         <div
-          className="overflow-hidden rounded-lg border bg-muted"
+          className="relative overflow-hidden rounded-lg border bg-muted"
           style={{ aspectRatio: "9/19.5" }}
         >
-          <img
+          <Image
             src={captureUrl(app.slug, app.cover)}
             alt={`${app.name} preview`}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
+            fill
+            sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform group-hover:scale-[1.02]"
           />
         </div>
       )}
       <div className="flex items-center gap-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`https://avatar.vercel.sh/${app.slug}`}
           alt={app.name}
