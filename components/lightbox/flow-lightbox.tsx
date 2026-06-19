@@ -8,20 +8,20 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { FlowViewer } from "./flow-viewer"
-import { Button } from "@/components/ui/button"
-import { X } from "lucide-react"
-import { formatDate } from "@/lib/utils"
+import { flowsHref } from "@/lib/links"
 import { useRouter } from "next/navigation"
 
 // The modal form of the flow viewer: rendered by the @modal intercepting route
 // over the gallery. Close = router.back(). The body is the SAME <FlowViewer> the
-// standalone page uses — only this close-chrome differs.
+// standalone page uses — header, strip, and bottom bar all live in the viewer; this
+// wrapper only adds the Dialog and the close handler.
 export function FlowLightbox({
   flow,
   screens,
   appSlug,
   appName,
   date,
+  latest,
   initialIndex,
 }: {
   flow: FlowEntry
@@ -29,6 +29,7 @@ export function FlowLightbox({
   appSlug: string
   appName: string
   date: string
+  latest: string
   initialIndex: number
 }) {
   const router = useRouter()
@@ -40,35 +41,25 @@ export function FlowLightbox({
       }}
     >
       <DialogContent
-        className="flex h-[85vh] max-w-[95vw] flex-col gap-0 overflow-hidden p-0 sm:h-[80vh] sm:max-w-[80vw]"
+        className="flex h-[85vh] max-w-[95vw] flex-col gap-0 overflow-hidden rounded-2xl p-0 sm:h-[80vh] sm:max-w-[80vw]"
         showCloseButton={false}
+        animate={false}
       >
         <DialogTitle className="sr-only">{appName} flow</DialogTitle>
         <DialogDescription className="sr-only">
           Flow lightbox viewer
         </DialogDescription>
 
-        <div className="flex items-center justify-between gap-3 border-b px-4 py-2.5">
-          <div className="min-w-0 truncate text-sm text-muted-foreground">
-            {appName} · {formatDate(date)}
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => router.back()}
-            className="shrink-0"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
-
         <FlowViewer
           key={`${flow.slug}:${initialIndex}`}
           flow={flow}
           screens={screens}
           appSlug={appSlug}
+          appName={appName}
+          backHref={flowsHref(appSlug, date, latest)}
           date={date}
           initialIndex={initialIndex}
+          onClose={() => router.back()}
         />
       </DialogContent>
     </Dialog>

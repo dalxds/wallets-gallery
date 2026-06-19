@@ -23,6 +23,7 @@ export default async function FlowModalRoute({
       appSlug={slug}
       appName={cap.view.app.name}
       date={cap.date}
+      latest={cap.latest}
       initialIndex={parseStepParam(step, flow.steps.length)}
     />
   )

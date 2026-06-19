@@ -5,7 +5,8 @@ import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
 import { flowShareHref } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
-import { cn } from "@/lib/utils"
+import { LightboxHeader } from "./lightbox-header"
+import { cn, formatDate } from "@/lib/utils"
 import {
   useCallback,
   useEffect,
@@ -28,8 +29,14 @@ interface FlowViewerProps {
   flow: FlowEntry
   screens: ScreenEntry[]
   appSlug: string
+  /** App name shown in the header breadcrumb. */
+  appName: string
+  /** Where the header's logo/name links — this capture's flows tab (flowsHref). */
+  backHref: string
   date: string
   initialIndex?: number
+  /** Set by the modal: renders a trailing close (X) in the header. */
+  onClose?: () => void
 }
 
 function getStepLabel(step: FlowStep): string {
@@ -49,8 +56,11 @@ export function FlowViewer({
   flow,
   screens,
   appSlug,
+  appName,
+  backHref,
   date,
   initialIndex = 0,
+  onClose,
 }: FlowViewerProps) {
   // Built here (client) — the state index holds a closure, so it can't cross the
   // server→client boundary as a prop.
@@ -59,6 +69,12 @@ export function FlowViewer({
   const stepRefs = useRef<Map<number, HTMLDivElement>>(new Map())
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  // Whether the whole strip fits without scrolling (a single-screen flow, or a
+  // short one on a wide viewport). When it fits we center the cards; only when it
+  // overflows do we left-align and let centerOnInitial scroll the active card into
+  // the middle — so a one-screen flow looks just like a multi-screen one, not
+  // pinned to the left edge.
+  const [fits, setFits] = useState(false)
   const [flowLinkCopied, setFlowLinkCopied] = useState(false)
   const [downloadingAll, setDownloadingAll] = useState(false)
   const [ready, setReady] = useState(false)
@@ -73,6 +89,7 @@ export function FlowViewer({
     if (!el) return
     setCanScrollLeft(el.scrollLeft > 1)
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+    setFits(el.scrollWidth <= el.clientWidth + 1)
   }, [])
 
   const measureHeight = useCallback(() => {
@@ -190,14 +207,14 @@ export function FlowViewer({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      {/* Caption: flow name + summary */}
-      <div className="border-b px-4 py-2.5">
-        <p className="truncate font-medium">{flow.name}</p>
-        <p className="truncate text-sm text-muted-foreground">
-          {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
-          {flow.summary ? ` · ${flow.summary}` : ""}
-        </p>
-      </div>
+      {/* Header: app logo + name · flow name (+ close in the modal) */}
+      <LightboxHeader
+        appSlug={appSlug}
+        appName={appName}
+        backHref={backHref}
+        title={flow.name}
+        onClose={onClose}
+      />
 
       {/* Flow strip */}
       <div className="relative flex min-h-0 flex-1 items-center overflow-hidden bg-muted/30">
@@ -216,7 +233,12 @@ export function FlowViewer({
         <div
           ref={scrollRef}
           className={cn(
-            "scrollbar-hide flex h-full snap-x snap-mandatory items-center gap-4 overflow-x-auto px-6 py-4 transition-opacity duration-150 md:snap-none md:px-14",
+            // w-full so the strip always spans the stage; without it a strip whose
+            // cards don't overflow shrinks to its content and sits at the left edge.
+            "scrollbar-hide flex h-full w-full snap-x snap-mandatory items-center gap-4 overflow-x-auto px-6 py-4 transition-opacity duration-150 md:snap-none md:px-14",
+            // Center when it fits; left-align only when it overflows (else the
+            // first card is clipped out of reach on a scrollable strip).
+            fits && "justify-center",
             ready ? "opacity-100" : "opacity-0"
           )}
           style={
@@ -256,31 +278,46 @@ export function FlowViewer({
         </button>
       </div>
 
-      {/* Bottom action bar */}
-      <div className="flex items-center justify-center gap-1.5 border-t px-4 py-3">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={copyFlowLink}
-          className="gap-1.5"
-        >
-          {flowLinkCopied ? (
-            <Check className="h-4 w-4 text-green-500" />
-          ) : (
-            <Link2 className="h-4 w-4" />
-          )}
-          Link
-        </Button>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={downloadAll}
-          disabled={downloadingAll}
-          className="gap-1.5"
-        >
-          <Download className="h-4 w-4" />
-          {downloadingAll ? "Downloading…" : "Download all"}
-        </Button>
+      {/* Bottom bar: screen count · actions · capture date */}
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 border-t px-4 py-3">
+        <div className="flex items-center">
+          <span className="text-xs text-muted-foreground">
+            {flow.steps.length}{" "}
+            {flow.steps.length === 1 ? "screen" : "screens"}
+          </span>
+        </div>
+
+        <div className="flex items-center justify-center gap-1.5">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={copyFlowLink}
+            className="gap-1.5"
+          >
+            {flowLinkCopied ? (
+              <Check className="h-4 w-4 text-green-500" />
+            ) : (
+              <Link2 className="h-4 w-4" />
+            )}
+            Link
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={downloadAll}
+            disabled={downloadingAll}
+            className="gap-1.5"
+          >
+            <Download className="h-4 w-4" />
+            {downloadingAll ? "Downloading…" : "Download all"}
+          </Button>
+        </div>
+
+        <div className="flex items-center justify-end">
+          <span className="text-xs text-muted-foreground">
+            {formatDate(date)}
+          </span>
+        </div>
       </div>
     </div>
   )

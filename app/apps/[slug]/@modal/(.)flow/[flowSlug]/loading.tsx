@@ -5,5 +5,5 @@ import { ModalSkeleton } from "@/components/lightbox/modal-skeleton"
 // soft navs (tab/date switches) that resolve the @modal slot to the null
 // catch-all. (Was a single slot-wide @modal/loading.tsx, which covered those too.)
 export default function Loading() {
-  return <ModalSkeleton />
+  return <ModalSkeleton variant="flow" />
 }

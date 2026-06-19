@@ -8,16 +8,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { ScreenViewer } from "./screen-viewer"
-import { Button } from "@/components/ui/button"
-import { X } from "lucide-react"
-import { formatDate } from "@/lib/utils"
+import { captureBase } from "@/lib/links"
 import { useRouter } from "next/navigation"
 
 // The modal form of the screen viewer: rendered by the @modal intercepting route
 // over the gallery. Close = router.back() (returns to the gallery). The body is
-// the SAME <ScreenViewer> the standalone page uses — only this close-chrome
-// differs. Prev/next inside the viewer never navigate the router, so the modal
-// doesn't flicker.
+// the SAME <ScreenViewer> the standalone page uses — header, stage, and footer
+// all live in the viewer, so the two forms can't drift; this wrapper only adds
+// the Dialog and the close handler. Prev/next inside the viewer never navigate
+// the router, so the modal doesn't flicker.
 export function ScreenLightbox({
   screens,
   flows,
@@ -44,27 +43,14 @@ export function ScreenLightbox({
       }}
     >
       <DialogContent
-        className="flex h-[95vh] max-w-[95vw] flex-col gap-0 overflow-hidden p-0 sm:max-w-[95vw]"
+        className="flex h-[95vh] max-w-[95vw] flex-col gap-0 overflow-hidden rounded-2xl p-0 sm:max-w-[95vw]"
         showCloseButton={false}
+        animate={false}
       >
         <DialogTitle className="sr-only">{appName} screen</DialogTitle>
         <DialogDescription className="sr-only">
           Screen lightbox viewer
         </DialogDescription>
-
-        <div className="flex items-center justify-between gap-3 border-b px-4 py-2.5">
-          <div className="min-w-0 truncate text-sm text-muted-foreground">
-            {appName} · {formatDate(date)}
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => router.back()}
-            className="shrink-0"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
 
         <ScreenViewer
           key={activeScreenId}
@@ -72,8 +58,11 @@ export function ScreenLightbox({
           flows={flows}
           initialScreenId={activeScreenId}
           appSlug={appSlug}
+          appName={appName}
+          backHref={captureBase(appSlug, date, latest)}
           date={date}
           latest={latest}
+          onClose={() => router.back()}
         />
       </DialogContent>
     </Dialog>

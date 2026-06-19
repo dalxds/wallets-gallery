@@ -3,7 +3,9 @@
 import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { screenHref, screenShareHref, flowHref } from "@/lib/links"
+import { formatDate } from "@/lib/utils"
 import { LightboxImage } from "./lightbox-image"
+import { LightboxHeader } from "./lightbox-header"
 import Image from "next/image"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import {
@@ -22,8 +24,14 @@ interface ScreenViewerProps {
   flows: FlowEntry[]
   initialScreenId: string
   appSlug: string
+  /** App name shown in the header breadcrumb. */
+  appName: string
+  /** Where the header's logo/name links — this capture's gallery (captureBase). */
+  backHref: string
   date: string
   latest: string
+  /** Set by the modal: renders a trailing close (X) in the header. */
+  onClose?: () => void
   /**
    * Mark the first-shown screenshot as the LCP (high priority, not lazy). Set by
    * the standalone page — where the image is the page's largest paint — and left
@@ -56,8 +64,11 @@ export function ScreenViewer({
   flows,
   initialScreenId,
   appSlug,
+  appName,
+  backHref,
   date,
   latest,
+  onClose,
   priorityInitial = false,
   pinnedDate = false,
 }: ScreenViewerProps) {
@@ -179,15 +190,14 @@ export function ScreenViewer({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      {/* Caption: screen title + description */}
-      <div className="border-b px-4 py-2.5">
-        <p className="truncate font-medium">{current?.title ?? ""}</p>
-        {current?.description && (
-          <p className="truncate text-sm text-muted-foreground">
-            {current.description}
-          </p>
-        )}
-      </div>
+      {/* Header: app logo + name · screen title (+ close in the modal) */}
+      <LightboxHeader
+        appSlug={appSlug}
+        appName={appName}
+        backHref={backHref}
+        title={current?.title ?? ""}
+        onClose={onClose}
+      />
 
       {/* Stage: the screenshot, flanked by prev/next arrows */}
       <div className="relative flex flex-1 items-center justify-center overflow-hidden bg-muted/30 px-16 py-6">
@@ -289,8 +299,11 @@ export function ScreenViewer({
         </div>
 
         <div className="flex items-center justify-end">
-          <span className="text-xs tabular-nums text-muted-foreground">
-            {index + 1} / {screens.length}
+          <span className="text-xs text-muted-foreground">
+            {formatDate(date)} ·{" "}
+            <span className="tabular-nums">
+              {index + 1} / {screens.length}
+            </span>
           </span>
         </div>
       </div>
