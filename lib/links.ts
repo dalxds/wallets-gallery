@@ -79,13 +79,9 @@ export function parseStepParam(
   return Math.max(0, Math.min(count - 1, n))
 }
 
-// The gallery for a capture on a specific tab — used by the standalone page
-// header to link back into the tab (screens/flows) the link came from.
-export function galleryTabHref(
-  appSlug: string,
-  date: string,
-  latest: string,
-  tab: "screens" | "flows"
-): string {
-  return `${captureBase(appSlug, date, latest)}?tab=${tab}`
+// The Flows tab of a capture's gallery — its own prerendered route. (The Screens
+// tab is the capture base itself, so callers use captureBase directly.) Used by a
+// standalone flow page's "back to flows" link.
+export function flowsHref(appSlug: string, date: string, latest: string): string {
+  return `${captureBase(appSlug, date, latest)}/flows`
 }

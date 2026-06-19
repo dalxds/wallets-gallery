@@ -40,6 +40,22 @@ export function appIndexOf(slug: string): AppIndex | undefined {
   return readRegistry().apps.find((a) => a.slug === slug)
 }
 
+// generateStaticParams for the gallery routes (Screens + Flows tabs share one
+// param set). The latest capture prerenders at the clean /apps/[slug]; every
+// non-latest date prerenders under /apps/[slug]/[date]. Re-exported as
+// `generateStaticParams` by each gallery page so the set can never drift.
+export function staticAppParams(): { slug: string }[] {
+  return readRegistry().apps.map((a) => ({ slug: a.slug }))
+}
+
+export function staticDateParams(): { slug: string; date: string }[] {
+  const out: { slug: string; date: string }[] = []
+  for (const app of readRegistry().apps)
+    for (const date of app.captures)
+      if (date !== app.latest) out.push({ slug: app.slug, date })
+  return out
+}
+
 // A specific capture's view. Returns null ONLY when the file is genuinely absent
 // (an unknown date → the caller 404s). A present-but-corrupt view.json throws so
 // stale/truncated data fails loudly instead of silently rendering a 404.

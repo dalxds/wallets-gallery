@@ -1,10 +1,9 @@
 import type { ReactNode } from "react"
 
-// The app header (avatar, name, and the capture date) is shown both by the
-// interactive client (AppHeader, with a date <Select>) and by the search-param-
-// free <Suspense> fallback (AppDetailStatic, with a plain date label). The
-// shared chrome lives here so the two never drift on hydration; only the date
-// control differs and is passed in as `dateControl`.
+// The app header (avatar, name, capture date), rendered once in the gallery
+// chrome (GalleryFrame, in the persisted (gallery) layout). Presentational: the
+// date control is passed in as `dateControl` so this component reads no data and
+// can sit untouched in the static prerender.
 export function AppHeaderLayout({
   slug,
   name,

@@ -144,25 +144,9 @@
   display: none;
 }
 
-/* App-detail Screens/Flows tabs. Both panels render so switching is an instant
-   visibility toggle (no remount, no image-reveal flicker); the active one is
-   shown via CSS keyed off [data-active-tab] on the detail root, which the
-   TabState island reflects from ?tab. Default (attribute absent) = screens,
-   matching the prerendered HTML so there's no JS-needed first paint. */
-[data-tab-panel="flows"] {
-  display: none;
-}
-[data-detail-root][data-active-tab="flows"] [data-tab-panel="flows"] {
-  display: block;
-}
-[data-detail-root][data-active-tab="flows"] [data-tab-panel="screens"] {
-  display: none;
-}
-[data-detail-root]:not([data-active-tab="flows"]) [data-tab-btn="screens"],
-[data-detail-root][data-active-tab="flows"] [data-tab-btn="flows"] {
-  border-color: var(--primary);
-  color: var(--foreground);
-}
+/* The Screens/Flows tabs are now separate prerendered routes (/apps/[slug] and
+   /apps/[slug]/flows), not a CSS panel toggle: the active panel is whichever page
+   is rendered, and the active tab styling lives on the <Link>s in TabBar. */
 
 /* Browse index: each app card is server-rendered once per view and carries its
    rank for each sort order; CSS shows the active view (data-view) and orders by

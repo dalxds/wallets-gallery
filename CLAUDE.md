@@ -65,6 +65,14 @@ Treat these as two separate things:
   real routes built through `captureBase` in `lib/links.ts`. Leak prevention is `.vercelignore`
   (not the removed `prune-export`): it keeps `_staging/`, `credentials.md`, and `*.snap.json`
   out of the deploy; `*.snap.json` are gitignored.
+- **The Screens/Flows tabs are routes, not client state.** Each is its own prerendered page
+  under the `(gallery)` route group — `/apps/[slug]` (screens) and `/apps/[slug]/flows`,
+  mirrored under `[date]/` — with the shared chrome in `(gallery)/layout.tsx` (`GalleryFrame`),
+  so a tab switch is a prefetched soft-nav that swaps only the panel beneath. `TabBar` is
+  `<Link>`s with `usePathname()` for the active state; the `@modal` slot intercepts a
+  screen/flow click over either tab. Don't reintroduce a client-held tab or a `?tab` param — a
+  route keeps each tab SSG, prefetched, and shareable, and avoids the modal-route state leaks
+  the old client tab had.
 
 ## Code style
 
