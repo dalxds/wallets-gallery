@@ -21,6 +21,99 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-06-19
+
+The site now has a logo. The header pairs a stacked-gallery mark with the "wallets gallery"
+wordmark, and the same mark is the browser-tab favicon (it follows the tab's light/dark theme).
+
+### For contributors
+
+- The mark is the `GalleryVerticalEnd` icon from `lucide-react`, used in
+  `components/layout/site-header.tsx`. The favicon is `app/icon.svg` — the same icon drawn as a
+  static SVG with a `prefers-color-scheme` rule for dark tabs; it replaces the old default
+  `app/favicon.ico`, which was removed.
+
+## [1.2.0] - 2026-06-19
+
+The screen and flow lightboxes — and their full-page versions on a shared or refreshed link —
+now open with a single-row header: the app's logo and name, a divider, then the name of the
+screen or flow you're looking at. The logo and app name are a link back to that capture (on its
+date) — to its Screens tab from a screen, its Flows tab from a flow. The capture date moved to the
+bottom: bottom-right next to the screen counter (`Apr 1, 2026 · 7 / 62`) for a screen, and for a
+flow the screen count sits bottom-left with the date bottom-right. The modal and the standalone
+page now look identical apart from the modal's close button and the page's site bar on top. On a
+direct link, the lightbox now lines up under the site's "wallets gallery" logo instead of running
+edge-to-edge on a wide screen.
+
+Two rough edges went away with the rework: opening a screen or flow no longer flickers — the
+loading skeleton now matches the lightbox exactly (same dim, frame, size, and layout), so the image
+drops straight in instead of flashing a dark scrim and re-animating over it; and a one-screen flow
+is centered like a multi-screen one instead of sitting at the left edge.
+
+### For contributors
+
+- New shared `LightboxHeader` (`components/lightbox/lightbox-header.tsx`) renders the one-row
+  breadcrumb (logo + app name `Link` → `backHref`, divider, current title, optional close) for
+  both viewers in both forms. The header now lives **inside** `ScreenViewer` / `FlowViewer`
+  (`components/lightbox/`) rather than in the wrappers, because the screen title and the counter
+  are viewer state and must stay in sync as you page. Each viewer gained `appName`, `backHref`,
+  and an optional `onClose` (set only by the modal, which renders the close `X`).
+- The wrappers compute `backHref` so the latest/date split stays in `lib/links.ts`:
+  `screen-lightbox` / `screen-page` pass `captureBase(slug, date, latest)`; `flow-lightbox` /
+  `flow-page` pass `flowsHref(slug, date, latest)`. `FlowLightbox` now also takes `latest`,
+  threaded from both flow `@modal` routes, to build that link. The standalone pages dropped their
+  own header bar (they keep `SiteHeader`); the modal wrappers dropped theirs (the `X` moved into
+  the header).
+- The standalone pages (`screen-page` / `flow-page`) wrap the viewer in `mx-auto max-w-[1600px]`
+  — the same column as `SiteHeader` — so the app logo lines up vertically with the site logo on
+  screens wider than 1600px (it already matched below that width).
+- `ModalSkeleton` (`components/lightbox/modal-skeleton.tsx`) was rebuilt to mirror the lightbox
+  exactly so the `@modal` fallback never flickers into the real viewer. It takes a `variant`
+  (`"screen"` | `"flow"`), matches the real `Dialog`'s scrim (`bg-black/10` + blur, not the old
+  `bg-black/80`), frame, and per-variant size, and renders the same one header row (logo + name +
+  divider + title + close) and 3-column footer (count/chip · actions · date). When the real viewer
+  swaps in there's no scrim flash, no resize, and no row reflow (sizes match the real controls —
+  `h-8` actions, `size-9` close).
+- `DialogContent` / `DialogOverlay` (`components/ui/dialog.tsx`) gained an `animate` prop; the
+  lightboxes pass `animate={false}` so the dialog appears in place over the skeleton with no
+  enter/exit fade-zoom — the last piece of the no-flicker open.
+- `FlowViewer` (`components/lightbox/flow-viewer.tsx`) gives the step strip `w-full` and centers it
+  (`justify-center`) when the cards don't overflow, so a one-screen flow is centered instead of
+  shrinking to its content at the left edge; overflowing strips still left-align and scroll the
+  active step into the middle.
+- Both forms share one surface color: the standalone wrapper is `bg-popover` (matching the modal's
+  `DialogContent`), so the header, footer, and stage read identically in the lightbox and the full
+  page. In dark mode `--popover` (`0.205`) is lighter than `--background` (`0.145`), which had made
+  the page look darker than the modal; in light mode both are white, so nothing changes there.
+- The lightbox frame is a touch rounder — `rounded-2xl` (18px) on both lightbox `DialogContent`s
+  and `ModalSkeleton`, and `rounded-t-2xl` on the standalone panels (top corners only, since the
+  panel's bottom meets the viewport edge; horizontal size is unchanged, so the logo alignment
+  above is preserved).
+
+## [1.1.0] - 2026-06-19
+
+The gallery's Screens and Flows tabs are now real, shareable pages — Screens at `/apps/<app>` and
+Flows at `/apps/<app>/flows` — so a tab is just a link you can bookmark, share, or open in a new
+tab, and the back button works the way you'd expect. Switching tabs is instant (both pages are
+prebuilt and prefetched). Opening a flow from the Flows tab keeps the gallery behind the modal on
+Flows instead of snapping to Screens, and opening an app from the home page always starts on
+Screens rather than replaying whatever tab you last had open.
+
+### For contributors
+
+- The Screens/Flows tab is now a **route**, not client state. Each tab is its own prerendered page
+  under a `(gallery)` route group — `(gallery)/page.tsx` (Screens, `/apps/[slug]`) and
+  `(gallery)/flows/page.tsx` (Flows, `/apps/[slug]/flows`), mirrored under `[date]/`. The shared
+  chrome lives in `(gallery)/layout.tsx` → `GalleryFrame` (`components/app-detail/gallery-frame.tsx`),
+  so it persists across the tab switch and only the panel beneath swaps. `TabBar` is now `<Link>`s
+  with `usePathname()` for the active state (prefetched, no `?tab`, no de-opt of static
+  generation). This replaces the previous `TabState` client island (`tab-state.tsx`) +
+  `[data-active-tab]` CSS panel toggle: deriving tab visibility from a route removes the modal-route
+  `?tab` drop and the out-of-band `setAttribute` that leaked a stale tab through the App Router
+  cache. The `@modal` intercept slot is unchanged and overlays either tab. Removed: `app-detail.tsx`,
+  `tab-state.tsx`, the `[slug]`/`[date]` `page.tsx` wrappers, `galleryTabHref` (→ `flowsHref` +
+  `captureBase`), and the tab CSS in `globals.css`.
+
 ## [1.0.0] - 2026-06-19
 
 Every screen and flow now has its own shareable link with a matching social preview card, and
