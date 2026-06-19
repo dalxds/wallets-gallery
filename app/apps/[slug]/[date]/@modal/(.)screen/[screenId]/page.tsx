@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { resolveCapture } from "@/lib/captures"
+import { resolveScreen } from "@/lib/captures"
 import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 
 // Intercepts /apps/[slug]/[date]/screen/[id] on in-app navigation → modal.
@@ -9,9 +9,9 @@ export default async function ScreenModalRoute({
   params: Promise<{ slug: string; date: string; screenId: string }>
 }) {
   const { slug, date, screenId } = await params
-  const cap = resolveCapture(slug, date)
-  if (!cap) notFound()
-  if (!cap.view.screens.some((s) => s.id === screenId)) notFound()
+  const res = resolveScreen(slug, screenId, date)
+  if (!res) notFound()
+  const { cap } = res
   return (
     <ScreenLightbox
       screens={cap.view.screens}

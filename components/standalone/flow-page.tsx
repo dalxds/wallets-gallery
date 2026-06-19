@@ -47,6 +47,7 @@ export function FlowPage({
         </div>
 
         <FlowViewer
+          key={`${flow.slug}:${initialIndex}`}
           flow={flow}
           screens={view.screens}
           appSlug={appSlug}

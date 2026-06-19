@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
-import { resolveCapture } from "@/lib/captures"
+import { resolveScreen } from "@/lib/captures"
 import { ScreenPage } from "@/components/standalone/screen-page"
 
 // Standalone screen page for a historical capture. All render on demand (sharing
@@ -18,9 +18,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string; date: string; screenId: string }>
 }): Promise<Metadata> {
   const { slug, date, screenId } = await params
-  const cap = resolveCapture(slug, date)
-  const screen = cap?.view.screens.find((s) => s.id === screenId)
-  if (!cap || !screen) return {}
+  const res = resolveScreen(slug, screenId, date)
+  if (!res) return {}
+  const { cap, screen } = res
   const title = `${screen.title} — ${cap.view.app.name} (${date}) — Wallets Gallery`
   const description =
     screen.description || `${screen.title} in ${cap.view.app.name} (${date}).`
@@ -33,10 +33,9 @@ export default async function ScreenStandalonePage({
   params: Promise<{ slug: string; date: string; screenId: string }>
 }) {
   const { slug, date, screenId } = await params
-  const cap = resolveCapture(slug, date)
-  if (!cap) notFound()
-  const screen = cap.view.screens.find((s) => s.id === screenId)
-  if (!screen) notFound()
+  const res = resolveScreen(slug, screenId, date)
+  if (!res) notFound()
+  const { cap, screen } = res
   return (
     <ScreenPage
       view={cap.view}
@@ -44,6 +43,7 @@ export default async function ScreenStandalonePage({
       appSlug={slug}
       date={cap.date}
       latest={cap.latest}
+      pinnedDate
     />
   )
 }

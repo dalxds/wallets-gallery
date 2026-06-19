@@ -5,8 +5,11 @@ import { AppDetail } from "../app-detail"
 import { appHref } from "@/lib/links"
 
 // A historical capture's gallery. The latest lives at the clean /apps/[slug];
-// every non-latest date gets its own prerendered page here.
-export const dynamicParams = false
+// every non-latest date gets its own prerendered page here. The latest's dated
+// URL is NOT prerendered — it renders on demand so the redirect below can run
+// (with dynamicParams=false it would 404 before the component, making the
+// canonical redirect dead code). Unknown dates render on demand → notFound().
+export const dynamicParams = true
 
 export function generateStaticParams() {
   const out: { slug: string; date: string }[] = []

@@ -67,6 +67,7 @@ export function ScreenLightbox({
         </div>
 
         <ScreenViewer
+          key={activeScreenId}
           screens={screens}
           flows={flows}
           initialScreenId={activeScreenId}

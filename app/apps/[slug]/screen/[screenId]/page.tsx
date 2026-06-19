@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
-import { readRegistry, resolveCapture } from "@/lib/captures"
+import { readRegistry, resolveCapture, resolveScreen } from "@/lib/captures"
 import { ScreenPage } from "@/components/standalone/screen-page"
 
 // Standalone screen page (latest capture). Rendered on a direct/shared/refreshed
@@ -27,9 +27,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string; screenId: string }>
 }): Promise<Metadata> {
   const { slug, screenId } = await params
-  const cap = resolveCapture(slug)
-  const screen = cap?.view.screens.find((s) => s.id === screenId)
-  if (!cap || !screen) return {}
+  const res = resolveScreen(slug, screenId)
+  if (!res) return {}
+  const { cap, screen } = res
   const title = `${screen.title} — ${cap.view.app.name} — Wallets Gallery`
   const description =
     screen.description || `${screen.title} in ${cap.view.app.name}.`
@@ -42,10 +42,9 @@ export default async function ScreenStandalonePage({
   params: Promise<{ slug: string; screenId: string }>
 }) {
   const { slug, screenId } = await params
-  const cap = resolveCapture(slug)
-  if (!cap) notFound()
-  const screen = cap.view.screens.find((s) => s.id === screenId)
-  if (!screen) notFound()
+  const res = resolveScreen(slug, screenId)
+  if (!res) notFound()
+  const { cap, screen } = res
   return (
     <ScreenPage
       view={cap.view}

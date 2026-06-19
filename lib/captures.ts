@@ -5,43 +5,111 @@
 
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
-import type { AppCapture, AppIndex, AppsRegistry } from "@/lib/types"
+import { cache } from "react"
+import type {
+  AppCapture,
+  AppIndex,
+  AppsRegistry,
+  FlowEntry,
+  ScreenEntry,
+} from "@/lib/types"
 
 const capturesDir = join(process.cwd(), "public/captures")
 
-export function readRegistry(): AppsRegistry {
-  return JSON.parse(
-    readFileSync(join(capturesDir, "index.json"), "utf8")
-  ) as AppsRegistry
+// The resolved capture context for a route: the app's registry entry, the view,
+// and the resolved date (the passed date, or the latest when omitted).
+export type CaptureContext = {
+  app: AppIndex
+  view: AppCapture
+  date: string
+  latest: string
 }
+
+// cache() dedupes the read + parse within a single request. One screen/flow
+// request resolves the same capture from the page body, generateMetadata, and
+// the OG route independently — without this, index.json / view.json would be
+// read and JSON-parsed ~3× per request instead of once.
+export const readRegistry = cache(
+  (): AppsRegistry =>
+    JSON.parse(
+      readFileSync(join(capturesDir, "index.json"), "utf8")
+    ) as AppsRegistry
+)
 
 export function appIndexOf(slug: string): AppIndex | undefined {
   return readRegistry().apps.find((a) => a.slug === slug)
 }
 
-// A specific capture's view, or null if it isn't on disk. Callers decide whether
-// a miss is a 404 (unknown date) or a hard error (latest must always exist).
-export function readView(slug: string, date: string): AppCapture | null {
-  try {
-    return JSON.parse(
-      readFileSync(join(capturesDir, slug, date, "view.json"), "utf8")
-    ) as AppCapture
-  } catch {
-    return null
+// A specific capture's view. Returns null ONLY when the file is genuinely absent
+// (an unknown date → the caller 404s). A present-but-corrupt view.json throws so
+// stale/truncated data fails loudly instead of silently rendering a 404.
+export const readView = cache(
+  (slug: string, date: string): AppCapture | null => {
+    const path = join(capturesDir, slug, date, "view.json")
+    let raw: string
+    try {
+      raw = readFileSync(path, "utf8")
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === "ENOENT") return null
+      throw new Error(
+        `Cannot read view.json for "${slug}" at ${date} (${path}) — run build-data.`,
+        { cause: e }
+      )
+    }
+    try {
+      return JSON.parse(raw) as AppCapture
+    } catch (e) {
+      throw new Error(
+        `Corrupt view.json for "${slug}" at ${date} (${path}) — re-run build-data.`,
+        { cause: e }
+      )
+    }
   }
-}
+)
 
-// Resolve the capture context for a route: the app's registry entry, the view,
-// and the resolved date (the passed date, or the latest when omitted). Returns
-// null when the app or the view is missing so the route can notFound().
+// Resolve the capture context for a route. Returns null when the app is unknown
+// or a requested historical date has no view on disk (→ 404). A MISSING latest
+// is a build/data bug, not a 404: the registry lists the app, so its latest
+// capture must exist — so it throws instead of silently 404ing the app's home.
 export function resolveCapture(
   slug: string,
   date?: string
-): { app: AppIndex; view: AppCapture; date: string; latest: string } | null {
+): CaptureContext | null {
   const app = appIndexOf(slug)
   if (!app) return null
   const resolved = date ?? app.latest
   const view = readView(slug, resolved)
-  if (!view) return null
+  if (!view) {
+    if (resolved === app.latest)
+      throw new Error(
+        `Missing view.json for "${slug}" at latest capture ${resolved} — run build-data.`
+      )
+    return null
+  }
   return { app, view, date: resolved, latest: app.latest }
+}
+
+// Resolve a single screen / flow within a capture, or null when the app, date,
+// or entity is unknown. One lookup + one 404 policy shared by the page, the
+// @modal intercept, and the OG route — so they can never disagree on existence.
+export function resolveScreen(
+  slug: string,
+  screenId: string,
+  date?: string
+): { cap: CaptureContext; screen: ScreenEntry } | null {
+  const cap = resolveCapture(slug, date)
+  if (!cap) return null
+  const screen = cap.view.screens.find((s) => s.id === screenId)
+  return screen ? { cap, screen } : null
+}
+
+export function resolveFlow(
+  slug: string,
+  flowSlug: string,
+  date?: string
+): { cap: CaptureContext; flow: FlowEntry } | null {
+  const cap = resolveCapture(slug, date)
+  if (!cap) return null
+  const flow = cap.view.flows.find((f) => f.slug === flowSlug)
+  return flow ? { cap, flow } : null
 }

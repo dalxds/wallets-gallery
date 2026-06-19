@@ -32,14 +32,12 @@ export function ScreensGrid({
 }: ScreensGridProps) {
   return (
     <ScreensGridLayout>
-      {screens.map((screen, i) => {
+      {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
         // Tile navigation uses the clean URL (intercepted into the modal); the
         // copy-link uses the dated URL so a shared link stays on this capture.
         const href = screenHref(appSlug, screen.id, date, latest)
         const shareHref = screenShareHref(appSlug, screen.id, date)
-        // Eager-load the first row (the LCP is in here); the rest stay lazy.
-        const eager = i < 6
         return (
           <div
             key={screen.id}
@@ -54,11 +52,14 @@ export function ScreensGrid({
                 imageBoxClassName="relative bg-muted transition-shadow group-hover/card:shadow-lg"
                 imageBoxStyle={{ aspectRatio: "9/19.5" }}
               >
+                {/* Lazy: the inactive tab panel is display:none, so its tiles
+                    don't fetch until shown; on the default screens view the
+                    in-viewport tiles still load promptly. */}
                 <Image
                   src={src}
                   alt={screen.description}
                   fill
-                  loading={eager ? "eager" : "lazy"}
+                  loading="lazy"
                   sizes="(min-width:1536px) 14vw, (min-width:1280px) 16vw, (min-width:1024px) 20vw, (min-width:768px) 25vw, (min-width:640px) 33vw, 50vw"
                   className="object-cover"
                 />

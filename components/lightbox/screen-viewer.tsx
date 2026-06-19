@@ -30,6 +30,12 @@ interface ScreenViewerProps {
    * off in the modal, which opens after the gallery has already painted.
    */
   priorityInitial?: boolean
+  /**
+   * Keep paging on the dated URL form (never collapse to the clean latest URL).
+   * Set by the dated standalone page, which is reached via a date-pinned share
+   * link — so pressing next/prev there doesn't silently drop the pinned date.
+   */
+  pinnedDate?: boolean
 }
 
 // Cap the "Found in" chips so a screen anchoring many flows doesn't overflow.
@@ -53,6 +59,7 @@ export function ScreenViewer({
   date,
   latest,
   priorityInitial = false,
+  pinnedDate = false,
 }: ScreenViewerProps) {
   const router = useRouter()
   const [index, setIndex] = useState(() =>
@@ -110,14 +117,15 @@ export function ScreenViewer({
       setPaged(true)
       // Reflect the active screen onto the URL WITHOUT a router navigation, so the
       // modal/page never re-renders (no flicker). Preserve Next's history state so
-      // back() still works (closes the modal / returns where you came from).
-      window.history.replaceState(
-        window.history.state,
-        "",
-        screenHref(appSlug, screens[clamped].id, date, latest)
-      )
+      // back() still works (closes the modal / returns where you came from). Keep
+      // the URL in the same form it was opened under — a date-pinned page stays
+      // pinned (pinnedDate); the modal and clean page use the clean latest URL.
+      const href = pinnedDate
+        ? screenShareHref(appSlug, screens[clamped].id, date)
+        : screenHref(appSlug, screens[clamped].id, date, latest)
+      window.history.replaceState(window.history.state, "", href)
     },
-    [screens, index, appSlug, date, latest]
+    [screens, index, appSlug, date, latest, pinnedDate]
   )
 
   useEffect(() => {

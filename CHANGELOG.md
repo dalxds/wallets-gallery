@@ -21,7 +21,7 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
-## [0.2.0] - 2026-06-18
+## [1.0.0] - 2026-06-19
 
 Every screen and flow now has its own shareable link with a matching social preview card, and
 images load much faster. Open a screen or flow in the gallery and it appears in a lightbox;
@@ -32,6 +32,15 @@ adjacent screenshots are prefetched, so the next one is already there.
 Copy-link buttons pin the capture date, so a shared link keeps resolving to the same capture
 even after a newer one lands. Screenshots are optimized on the fly — modern formats, right-sized
 thumbnails — so grids and flows load quicker.
+
+### Breaking changes
+
+- Screen and flow deep links are now real routes — `/apps/<app>/screen/<id>` and
+  `/apps/<app>/flow/<slug>` (dated variants under `/apps/<app>/<date>/…`), built through
+  `captureBase` in `lib/links.ts`. The old `?screen=` / `?flow=` query deep-links and the
+  `[[...date]]` route are gone, so links shared with the old query params no longer open the
+  lightbox. Hosting now requires Vercel (or a Node runtime) — the site is no longer a pure
+  static export servable from any CDN.
 
 ### For contributors
 
@@ -44,12 +53,14 @@ thumbnails — so grids and flows load quicker.
   behave the same. The old `?screen=`/`?flow=` query state and the nuqs lightbox islands are
   gone; deep links are real routes built through `captureBase` in `lib/links.ts`.
 - The lightbox and the standalone page share one body — `ScreenViewer` / `FlowViewer` (+
-  `LightboxImage` for the skeleton). The lightbox wraps it in a `Dialog`; the page wraps it in
-  the site navbar + an app-logo header. Prev/next pages via `window.history.replaceState` (no
-  router navigation → no remount, no flicker); copy buttons use the date-pinned
-  `screenShareHref` / `flowShareHref` helpers. Each `@modal` slot has a `loading.tsx`
-  (`components/lightbox/modal-skeleton.tsx`) so a tile click shows a skeleton immediately while
-  the intercepted route streams, when prefetch hasn't already warmed it.
+  `LightboxImage` for the skeleton, which falls back to an "unavailable" icon if a screenshot
+  fails to load). The lightbox wraps it in a `Dialog`; the page wraps it in the site navbar +
+  an app-logo header. Prev/next pages via `window.history.replaceState` (no router navigation →
+  no remount, no flicker); copy buttons use the date-pinned `screenShareHref` /
+  `flowShareHref` helpers. Each intercepted route (`@modal/(.)screen` / `(.)flow`) has its own
+  `loading.tsx` (`components/lightbox/modal-skeleton.tsx`) so a tile click shows a skeleton
+  immediately while the route streams — scoped to the intercept so a tab/date switch doesn't
+  flash the modal scrim.
 - Images use `next/image` with a cost-trimmed `images` config (AVIF/WebP, few sizes, one quality,
   1-year TTL) plus immutable `Cache-Control` on the content-addressed PNGs. No build-time image
   precompute — Vercel optimizes on demand. Grids and strips stay lazy; the screen viewer eagerly
@@ -57,9 +68,11 @@ thumbnails — so grids and flows load quicker.
   the standalone hero is marked the LCP (`preload`).
 - Open Graph cards via `next/og` at the site, app, screen, and flow levels (`opengraph-image.tsx`,
   rendered from `lib/og.tsx`). `metadataBase` added in the root layout for absolute URLs.
-- `scripts/prune-export.ts` is removed; `.vercelignore` keeps `_staging/`, `credentials.md`, and
-  `*.snap.json` out of the deploy, and the committed `*.snap.json` snapshots were untracked and
-  gitignored. `pnpm start` is now `next start`.
+- `scripts/prune-export.ts` is removed; `.vercelignore` replaces it as an **allowlist** —
+  the deploy ships only `*.json` + `*.png` under `public/captures/` (minus `*.snap.json` and
+  `_staging/`), so a stray secret, snapshot, or `.DS_Store` can't leak by default. The
+  committed `*.snap.json` snapshots were untracked and gitignored. `pnpm start` is now
+  `next start`.
 
 ## [0.1.1] - 2026-06-17
 

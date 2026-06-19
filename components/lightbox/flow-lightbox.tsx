@@ -63,6 +63,7 @@ export function FlowLightbox({
         </div>
 
         <FlowViewer
+          key={`${flow.slug}:${initialIndex}`}
           flow={flow}
           screens={screens}
           appSlug={appSlug}

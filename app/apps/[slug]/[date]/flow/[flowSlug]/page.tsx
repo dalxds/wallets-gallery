@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
-import { resolveCapture } from "@/lib/captures"
+import { resolveFlow } from "@/lib/captures"
+import { parseStepParam } from "@/lib/links"
 import { FlowPage } from "@/components/standalone/flow-page"
 
 // Standalone flow page for a historical capture. Render on demand + cache.
@@ -17,9 +18,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string; date: string; flowSlug: string }>
 }): Promise<Metadata> {
   const { slug, date, flowSlug } = await params
-  const cap = resolveCapture(slug, date)
-  const flow = cap?.view.flows.find((f) => f.slug === flowSlug)
-  if (!cap || !flow) return {}
+  const res = resolveFlow(slug, flowSlug, date)
+  if (!res) return {}
+  const { cap, flow } = res
   const title = `${flow.name} — ${cap.view.app.name} (${date}) — Wallets Gallery`
   const description =
     flow.summary ||
@@ -36,11 +37,9 @@ export default async function FlowStandalonePage({
 }) {
   const { slug, date, flowSlug } = await params
   const { step } = await searchParams
-  const cap = resolveCapture(slug, date)
-  if (!cap) notFound()
-  const flow = cap.view.flows.find((f) => f.slug === flowSlug)
-  if (!flow) notFound()
-  const parsed = step ? parseInt(step, 10) : 0
+  const res = resolveFlow(slug, flowSlug, date)
+  if (!res) notFound()
+  const { cap, flow } = res
   return (
     <FlowPage
       view={cap.view}
@@ -48,7 +47,7 @@ export default async function FlowStandalonePage({
       appSlug={slug}
       date={cap.date}
       latest={cap.latest}
-      initialIndex={Number.isNaN(parsed) ? 0 : parsed}
+      initialIndex={parseStepParam(step, flow.steps.length)}
     />
   )
 }

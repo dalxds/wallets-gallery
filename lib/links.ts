@@ -65,6 +65,20 @@ export function flowShareHref(
   return step != null ? `${base}?step=${step}` : base
 }
 
+// Parse a ?step deep-link param to a 0-based step index, clamped into
+// [0, count-1]. Tolerates a missing, non-numeric, negative, or overflowing value
+// (a stale or hand-edited link, or a step that no longer exists after a
+// re-capture) by landing on the nearest valid step instead of silently failing
+// to center. `count` is the flow's step count.
+export function parseStepParam(
+  raw: string | undefined,
+  count: number
+): number {
+  const n = raw ? parseInt(raw, 10) : 0
+  if (Number.isNaN(n)) return 0
+  return Math.max(0, Math.min(count - 1, n))
+}
+
 // The gallery for a capture on a specific tab — used by the standalone page
 // header to link back into the tab (screens/flows) the link came from.
 export function galleryTabHref(

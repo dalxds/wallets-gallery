@@ -16,12 +16,15 @@ export function ScreenPage({
   appSlug,
   date,
   latest,
+  pinnedDate = false,
 }: {
   view: AppCapture
   screen: ScreenEntry
   appSlug: string
   date: string
   latest: string
+  /** Reached via a date-pinned link (dated route) → keep paging on dated URLs. */
+  pinnedDate?: boolean
 }) {
   return (
     <>
@@ -46,6 +49,7 @@ export function ScreenPage({
         </div>
 
         <ScreenViewer
+          key={screen.id}
           screens={view.screens}
           flows={view.flows}
           initialScreenId={screen.id}
@@ -53,6 +57,7 @@ export function ScreenPage({
           date={date}
           latest={latest}
           priorityInitial
+          pinnedDate={pinnedDate}
         />
       </div>
     </>

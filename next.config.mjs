@@ -3,7 +3,7 @@ const nextConfig = {
   // Vercel-native: the gallery is prerendered (SSG) at build, but screen/flow
   // pages + their OG images render on demand and cache, and next/image is
   // optimized on demand by Vercel's image CDN. (Was output:"export" — dropped in
-  // 0.2.0 to enable per-screen/flow share cards and image optimization.)
+  // 1.0.0 to enable per-screen/flow share cards and image optimization.)
   images: {
     // AVIF preferred, WebP fallback. Each format is cached separately.
     formats: ["image/avif", "image/webp"],
