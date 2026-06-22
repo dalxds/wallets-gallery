@@ -3,7 +3,7 @@
 import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
-import { screenHref, screenShareHref, flowHref } from "@/lib/links"
+import { screenHref, flowHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
@@ -30,7 +30,6 @@ interface ScreenViewerProps {
   /** Where the header's logo/name links — this capture's gallery (captureBase). */
   backHref: string
   date: string
-  latest: string
   /** Set by the modal: renders a trailing close (X) in the header. */
   onClose?: () => void
   /**
@@ -39,12 +38,6 @@ interface ScreenViewerProps {
    * off in the modal, which opens after the gallery has already painted.
    */
   priorityInitial?: boolean
-  /**
-   * Keep paging on the dated URL form (never collapse to the clean latest URL).
-   * Set by the dated standalone page, which is reached via a date-pinned share
-   * link — so pressing next/prev there doesn't silently drop the pinned date.
-   */
-  pinnedDate?: boolean
 }
 
 // Cap the "Found in" chips so a screen anchoring many flows doesn't overflow.
@@ -68,10 +61,8 @@ export function ScreenViewer({
   appName,
   backHref,
   date,
-  latest,
   onClose,
   priorityInitial = false,
-  pinnedDate = false,
 }: ScreenViewerProps) {
   const router = useRouter()
   const [index, setIndex] = useState(() =>
@@ -129,15 +120,15 @@ export function ScreenViewer({
       setPaged(true)
       // Reflect the active screen onto the URL WITHOUT a router navigation, so the
       // modal/page never re-renders (no flicker). Preserve Next's history state so
-      // back() still works (closes the modal / returns where you came from). Keep
-      // the URL in the same form it was opened under — a date-pinned page stays
-      // pinned (pinnedDate); the modal and clean page use the clean latest URL.
-      const href = pinnedDate
-        ? screenShareHref(appSlug, screens[clamped].id, date)
-        : screenHref(appSlug, screens[clamped].id, date, latest)
-      window.history.replaceState(window.history.state, "", href)
+      // back() still works (closes the modal / returns where you came from). The
+      // URL is always dated, so paging stays on this capture.
+      window.history.replaceState(
+        window.history.state,
+        "",
+        screenHref(appSlug, screens[clamped].id, date)
+      )
     },
-    [screens, index, appSlug, date, latest, pinnedDate]
+    [screens, index, appSlug, date]
   )
 
   useEffect(() => {
@@ -160,7 +151,7 @@ export function ScreenViewer({
   async function handleCopyLink() {
     if (!current) return
     // Dated link so it stays valid after a newer capture lands.
-    await copyLink(screenShareHref(appSlug, current.id, date))
+    await copyLink(screenHref(appSlug, current.id, date))
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
   }
@@ -244,13 +235,7 @@ export function ScreenViewer({
               key={f.slug}
               onClick={() =>
                 router.push(
-                  flowHref(
-                    appSlug,
-                    f.slug,
-                    date,
-                    latest,
-                    Math.max(0, f.step - 1)
-                  )
+                  flowHref(appSlug, f.slug, date, Math.max(0, f.step - 1))
                 )
               }
               className="max-w-40 truncate rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent"

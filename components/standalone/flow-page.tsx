@@ -14,14 +14,12 @@ export function FlowPage({
   flow,
   appSlug,
   date,
-  latest,
   initialIndex = 0,
 }: {
   view: AppCapture
   flow: FlowEntry
   appSlug: string
   date: string
-  latest: string
   initialIndex?: number
 }) {
   return (
@@ -36,7 +34,7 @@ export function FlowPage({
           screens={view.screens}
           appSlug={appSlug}
           appName={view.app.name}
-          backHref={flowsHref(appSlug, date, latest)}
+          backHref={flowsHref(appSlug, date)}
           date={date}
           initialIndex={initialIndex}
         />

@@ -24,7 +24,6 @@ export function ScreenLightbox({
   appSlug,
   appName,
   date,
-  latest,
 }: {
   screens: ScreenEntry[]
   flows: FlowEntry[]
@@ -32,7 +31,6 @@ export function ScreenLightbox({
   appSlug: string
   appName: string
   date: string
-  latest: string
 }) {
   const router = useRouter()
   return (
@@ -59,9 +57,8 @@ export function ScreenLightbox({
           initialScreenId={activeScreenId}
           appSlug={appSlug}
           appName={appName}
-          backHref={captureBase(appSlug, date, latest)}
+          backHref={captureBase(appSlug, date)}
           date={date}
-          latest={latest}
           onClose={() => router.back()}
         />
       </DialogContent>

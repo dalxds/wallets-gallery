@@ -4,10 +4,9 @@ import { notFound } from "next/navigation"
 import { resolveCapture } from "@/lib/captures"
 import { GalleryFrame } from "@/components/app-detail/gallery-frame"
 
-// A historical capture's gallery chrome — mirrors the latest one a level down so
-// dated captures get the same persisted chrome across the tab switch. The
-// latest→clean redirect lives on the pages (its target differs per tab), so this
-// layout only renders chrome + metadata. Prerender config is on the pages.
+// A capture's gallery chrome (every capture is canonical at its dated URL). This
+// layout renders the persisted chrome + metadata across the Screens↔Flows tab
+// switch; the prerender config lives on the pages.
 export async function generateMetadata({
   params,
 }: {

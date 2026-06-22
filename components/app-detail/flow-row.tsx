@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
 import { ImageActions } from "@/components/shared/image-actions"
-import { flowHref, flowShareHref } from "@/lib/links"
+import { flowHref } from "@/lib/links"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -15,7 +15,6 @@ interface FlowRowProps {
   flow: FlowEntry
   appSlug: string
   date: string
-  latest: string
   stateIndex: StateIndex
   /** Set for nested flows — surfaced as "… from {parent}" in the title. */
   parent?: { slug: string; name: string }
@@ -25,13 +24,12 @@ interface FlowRowProps {
 
 // Reads no searchParams, so it server-renders into the static HTML while keeping
 // its scroll affordances and copy-link as client interactivity. Each step links
-// to /apps/[slug]/flow/[slug]?step=N — intercepted into the lightbox modal in-app,
-// rendered as the standalone page when opened directly.
+// to /apps/[slug]/[date]/flow/[slug]?step=N — intercepted into the lightbox modal
+// in-app, rendered as the standalone page when opened directly.
 export function FlowRow({
   flow,
   appSlug,
   date,
-  latest,
   stateIndex,
   parent,
   onNavigate,
@@ -64,7 +62,7 @@ export function FlowRow({
 
   async function copyFlowLink(e: React.MouseEvent) {
     e.stopPropagation()
-    const url = `${window.location.origin}${flowShareHref(appSlug, flow.slug, date)}`
+    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, date)}`
     await navigator.clipboard.writeText(url)
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
@@ -109,7 +107,7 @@ export function FlowRow({
           <Button
             variant="secondary"
             size="icon"
-            className="absolute left-1 top-1/2 z-10 h-8 w-8 -translate-y-1/2 rounded-full shadow-md"
+            className="absolute top-1/2 left-1 z-10 h-8 w-8 -translate-y-1/2 rounded-full shadow-md"
             onClick={() => scroll("left")}
           >
             <ChevronLeft className="h-4 w-4" />
@@ -117,16 +115,17 @@ export function FlowRow({
         )}
         <div
           ref={scrollRef}
-          className="flex snap-x snap-mandatory touch-pan-x gap-3 overflow-x-auto overflow-y-hidden pb-2 scrollbar-hide"
+          className="scrollbar-hide flex touch-pan-x snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-hidden pb-2"
           onScroll={updateScrollState}
         >
           {flow.steps.map((step, idx) => {
-            const stateCount = stateIndex.variantsForScreen(step.screenId).length
+            const stateCount = stateIndex.variantsForScreen(
+              step.screenId
+            ).length
             const src = captureUrl(appSlug, step.screenshotPath)
-            // Tile nav uses the clean URL (intercepted into the modal); copy-link
-            // uses the dated URL so a shared link stays on this capture.
-            const href = flowHref(appSlug, flow.slug, date, latest, idx)
-            const shareHref = flowShareHref(appSlug, flow.slug, date, idx)
+            // The tile link and the copy-link share the same dated URL — the tile
+            // click is intercepted into the modal, a direct open renders the page.
+            const href = flowHref(appSlug, flow.slug, date, idx)
             return (
               <div
                 key={step.number}
@@ -156,7 +155,7 @@ export function FlowRow({
                     )}
                   </div>
                 </Link>
-                <ImageActions src={src} shareHref={shareHref} />
+                <ImageActions src={src} shareHref={href} />
               </div>
             )
           })}
@@ -165,7 +164,7 @@ export function FlowRow({
           <Button
             variant="secondary"
             size="icon"
-            className="absolute right-1 top-1/2 z-10 h-8 w-8 -translate-y-1/2 rounded-full shadow-md"
+            className="absolute top-1/2 right-1 z-10 h-8 w-8 -translate-y-1/2 rounded-full shadow-md"
             onClick={() => scroll("right")}
           >
             <ChevronRight className="h-4 w-4" />

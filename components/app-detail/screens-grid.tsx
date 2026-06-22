@@ -6,7 +6,7 @@ import {
   ScreenTile,
   screenTileWrapperClass,
 } from "@/components/app-detail/screen-tile"
-import { screenHref, screenShareHref } from "@/lib/links"
+import { screenHref } from "@/lib/links"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
@@ -15,29 +15,23 @@ interface ScreensGridProps {
   screens: ScreenEntry[]
   appSlug: string
   date: string
-  latest: string
 }
 
-// Server-rendered: each tile is a real <Link> to /apps/[slug]/screen/[id]
-// (latest) or /apps/[slug]/[date]/screen/[id] (historical). In-app that link is
-// intercepted into the lightbox modal; opened directly it renders the standalone
-// page. The grid lives in the static HTML (crawlable). Hover actions sit as an
-// absolutely-positioned sibling of the link — not inside it — so the buttons stay
-// valid markup (no button-in-anchor) and don't trigger navigation.
-export function ScreensGrid({
-  screens,
-  appSlug,
-  date,
-  latest,
-}: ScreensGridProps) {
+// Server-rendered: each tile is a real <Link> to /apps/[slug]/[date]/screen/[id]
+// (every capture is canonical at its dated URL). In-app that link is intercepted
+// into the lightbox modal (interception lives under [date]); opened directly it
+// renders the standalone page. The grid lives in the static HTML (crawlable).
+// Hover actions sit as an absolutely-positioned sibling of the link — not inside
+// it — so the buttons stay valid markup (no button-in-anchor) and don't trigger
+// navigation.
+export function ScreensGrid({ screens, appSlug, date }: ScreensGridProps) {
   return (
     <ScreensGridLayout>
       {screens.map((screen) => {
         const src = captureUrl(appSlug, screen.screenshotPath)
-        // Tile navigation uses the clean URL (intercepted into the modal); the
-        // copy-link uses the dated URL so a shared link stays on this capture.
-        const href = screenHref(appSlug, screen.id, date, latest)
-        const shareHref = screenShareHref(appSlug, screen.id, date)
+        // The tile link and the copy-link share the same dated URL — the tile
+        // click is intercepted into the modal, a direct open renders the page.
+        const href = screenHref(appSlug, screen.id, date)
         return (
           <div
             key={screen.id}
@@ -64,7 +58,7 @@ export function ScreensGrid({
                 />
               </ScreenTile>
             </Link>
-            <ImageActions src={src} shareHref={shareHref} />
+            <ImageActions src={src} shareHref={href} />
           </div>
         )
       })}

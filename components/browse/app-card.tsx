@@ -2,6 +2,7 @@
 
 import type { AppIndex } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
+import { captureBase } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
@@ -18,7 +19,7 @@ export function AppCard({ app, view }: AppCardProps) {
   if (view === "list") {
     return (
       <Link
-        href={`/apps/${app.slug}`}
+        href={captureBase(app.slug, app.latest)}
         className="group flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:bg-accent"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -41,7 +42,7 @@ export function AppCard({ app, view }: AppCardProps) {
 
   return (
     <Link
-      href={`/apps/${app.slug}`}
+      href={captureBase(app.slug, app.latest)}
       className="group flex flex-col gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-accent"
     >
       {app.cover && (

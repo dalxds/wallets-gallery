@@ -40,19 +40,22 @@ export function appIndexOf(slug: string): AppIndex | undefined {
   return readRegistry().apps.find((a) => a.slug === slug)
 }
 
-// generateStaticParams for the gallery routes (Screens + Flows tabs share one
-// param set). The latest capture prerenders at the clean /apps/[slug]; every
-// non-latest date prerenders under /apps/[slug]/[date]. Re-exported as
-// `generateStaticParams` by each gallery page so the set can never drift.
+// generateStaticParams for the bare /apps/[slug] redirect — one per app. That
+// route is a static 307 to the app's latest dated URL; this set bakes the slugs
+// so the redirect prebuilds. Re-exported as `generateStaticParams` by the
+// redirect page so the set can never drift.
 export function staticAppParams(): { slug: string }[] {
   return readRegistry().apps.map((a) => ({ slug: a.slug }))
 }
 
-export function staticDateParams(): { slug: string; date: string }[] {
+// generateStaticParams for the dated gallery routes (Screens + Flows tabs share
+// one param set). EVERY capture is canonical at its dated URL, so every date —
+// including the latest — prerenders under /apps/[slug]/[date]. Re-exported as
+// `generateStaticParams` by each gallery page so the set can never drift.
+export function staticCaptureParams(): { slug: string; date: string }[] {
   const out: { slug: string; date: string }[] = []
   for (const app of readRegistry().apps)
-    for (const date of app.captures)
-      if (date !== app.latest) out.push({ slug: app.slug, date })
+    for (const date of app.captures) out.push({ slug: app.slug, date })
   return out
 }
 

@@ -3,8 +3,8 @@ import type { Metadata } from "next"
 import { resolveScreen } from "@/lib/captures"
 import { ScreenPage } from "@/components/standalone/screen-page"
 
-// Standalone screen page for a historical capture. All render on demand (sharing
-// a past capture's screen is rare) and cache; the modal handles in-app viewing.
+// Standalone screen page for a capture. All render on demand and cache; the modal
+// handles in-app viewing.
 export const dynamicParams = true
 export const revalidate = false
 
@@ -42,8 +42,6 @@ export default async function ScreenStandalonePage({
       screen={screen}
       appSlug={slug}
       date={cap.date}
-      latest={cap.latest}
-      pinnedDate
     />
   )
 }

@@ -28,10 +28,10 @@ the packager, the build scripts, or capture data. The on-disk data contract live
 Treat these as two separate things:
 
 - **The app** — the site and engine: `app/`, `components/`, `lib/`, `scripts/`. App changes
-  are *releases* — they get a version bump and a `CHANGELOG.md` entry (see below).
+  are _releases_ — they get a version bump and a `CHANGELOG.md` entry (see below).
 - **The captures** — the data under `public/captures/**`. `graph.json` and `app.json` are
   committed source; `view.json` and `index.json` are generated. Adding or updating a capture
-  is a *content update* — it does **not** bump the version or get a CHANGELOG entry.
+  is a _content update_ — it does **not** bump the version or get a CHANGELOG entry.
 
 ## Versioning & CHANGELOG
 
@@ -61,15 +61,21 @@ Treat these as two separate things:
   `overrides` forward).
 - **Don't reintroduce `output: "export"`.** The site is Vercel-native; that flag would disable
   `next/image` optimization, on-demand OG (`opengraph-image.tsx` via `lib/og.tsx`), and the
-  intercepting-route lightbox modals (`app/apps/[slug]/@modal/`). Screen/flow deep links are
-  real routes built through `captureBase` in `lib/links.ts`. Leak prevention is `.vercelignore`
+  intercepting-route lightbox modals (`app/apps/[slug]/[date]/@modal/`). Screen/flow deep links
+  are real routes built through `captureBase` in `lib/links.ts`. Leak prevention is `.vercelignore`
   (not the removed `prune-export`): it keeps `_staging/`, `credentials.md`, and `*.snap.json`
   out of the deploy; `*.snap.json` are gitignored.
+- **Every capture is canonical at its dated URL — one route tree.** A capture lives at
+  `/apps/[slug]/[date]` (Screens) and `/apps/[slug]/[date]/flows` (Flows); its screens and flows
+  at `/apps/[slug]/[date]/screen/[id]` and `…/flow/[slug]`. `captureBase` in `lib/links.ts` is
+  **always dated** — there is no separate "clean latest" form. The bare `/apps/[slug]` is a
+  prebuilt static 307 to the latest date (`app/apps/[slug]/page.tsx`); don't give it a gallery.
+  Don't reintroduce the clean per-entity routes or a `latest → clean` branch in the link helpers.
 - **The Screens/Flows tabs are routes, not client state.** Each is its own prerendered page
-  under the `(gallery)` route group — `/apps/[slug]` (screens) and `/apps/[slug]/flows`,
-  mirrored under `[date]/` — with the shared chrome in `(gallery)/layout.tsx` (`GalleryFrame`),
-  so a tab switch is a prefetched soft-nav that swaps only the panel beneath. `TabBar` is
-  `<Link>`s with `usePathname()` for the active state; the `@modal` slot intercepts a
+  under the `(gallery)` route group inside `[date]/` — `/apps/[slug]/[date]` (Screens) and
+  `/apps/[slug]/[date]/flows` (Flows) — with the shared chrome in `[date]/(gallery)/layout.tsx`
+  (`GalleryFrame`), so a tab switch is a prefetched soft-nav that swaps only the panel beneath.
+  `TabBar` is `<Link>`s with `usePathname()` for the active state; the `@modal` slot intercepts a
   screen/flow click over either tab. Don't reintroduce a client-held tab or a `?tab` param — a
   route keeps each tab SSG, prefetched, and shareable, and avoids the modal-route state leaks
   the old client tab had.

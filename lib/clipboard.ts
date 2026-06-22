@@ -20,7 +20,7 @@ export async function copyImageToClipboard(src: string): Promise<void> {
 }
 
 // Copy a link, resolving a relative href against the current URL so callers can
-// pass the share path directly (e.g. screenShareHref).
+// pass the share path directly (e.g. screenHref).
 export async function copyLink(href: string): Promise<void> {
   await navigator.clipboard.writeText(
     new URL(href, window.location.href).toString()

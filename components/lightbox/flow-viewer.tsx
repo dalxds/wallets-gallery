@@ -4,7 +4,7 @@ import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
-import { flowShareHref } from "@/lib/links"
+import { flowHref } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
 import { cn, formatDate } from "@/lib/utils"
@@ -176,7 +176,7 @@ export function FlowViewer({
 
   async function copyFlowLink() {
     // Dated link to the flow (step 0) so it stays valid after a newer capture.
-    await copyLink(flowShareHref(appSlug, flow.slug, date))
+    await copyLink(flowHref(appSlug, flow.slug, date))
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
   }
@@ -357,7 +357,7 @@ function StepCard({
   async function handleCopyLink(e: React.MouseEvent) {
     e.stopPropagation()
     // Dated deep-link to THIS step (0-based; step.number is 1-based).
-    await copyLink(flowShareHref(appSlug, flowSlug, date, step.number - 1))
+    await copyLink(flowHref(appSlug, flowSlug, date, step.number - 1))
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
   }

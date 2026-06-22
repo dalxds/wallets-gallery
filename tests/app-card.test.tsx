@@ -40,11 +40,14 @@ const emptyApp: AppIndex = {
 
 describe("AppCard", () => {
   describe("list view", () => {
-    it("renders app name and links to detail page", () => {
+    it("renders app name and links to the latest dated capture", () => {
       const { container } = render(<AppCard app={mockApp} view="list" />)
       const view = within(container)
       expect(view.getByText("Phantom")).toBeInTheDocument()
-      expect(view.getByRole("link")).toHaveAttribute("href", "/apps/phantom")
+      expect(view.getByRole("link")).toHaveAttribute(
+        "href",
+        "/apps/phantom/2026-04-01"
+      )
     })
 
     it("shows screen and flow counts from the registry entry", () => {
@@ -68,11 +71,14 @@ describe("AppCard", () => {
   })
 
   describe("grid view", () => {
-    it("renders app name and links to detail page", () => {
+    it("renders app name and links to the latest dated capture", () => {
       const { container } = render(<AppCard app={mockApp} view="grid" />)
       const view = within(container)
       expect(view.getByText("Phantom")).toBeInTheDocument()
-      expect(view.getByRole("link")).toHaveAttribute("href", "/apps/phantom")
+      expect(view.getByRole("link")).toHaveAttribute(
+        "href",
+        "/apps/phantom/2026-04-01"
+      )
     })
 
     it("shows screen and flow counts from the registry entry", () => {

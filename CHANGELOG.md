@@ -6,7 +6,7 @@ adding or updating a capture does not get a changelog entry or a version bump. S
 "App vs. captures" in `CLAUDE.md` and the README for the split.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). The app version
-in `package.json` follows [Semantic Versioning](https://semver.org/), bumped by the *scale*
+in `package.json` follows [Semantic Versioning](https://semver.org/), bumped by the _scale_
 of the change rather than the file count:
 
 - **PATCH** (0.0.x): a bug fix, doc tweak, or small additive change.
@@ -20,6 +20,47 @@ no hype, real file names and commands. Keep branch history, review notes, and in
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
 ## [Unreleased]
+
+## [2.0.0] - 2026-06-22
+
+Every capture now has one address, and it always shows the date. Opening an app takes you to
+`/apps/<app>/<date>` — the most recent capture by default — and that dated URL is the page you
+share, bookmark, or refresh, for the gallery and for any single screen or flow inside it. A link
+you copy keeps pointing at the exact capture you copied it from, even after a newer one lands,
+because there's no longer a separate undated "latest" URL that quietly moves. The bare
+`/apps/<app>` still works: it now just forwards you to the latest dated capture.
+
+### Breaking changes
+
+- The undated per-app and per-entity URLs are gone. `/apps/<app>` is now a redirect (307) to
+  `/apps/<app>/<latest>`, and the only screen/flow links are the dated ones —
+  `/apps/<app>/<date>/screen/<id>` and `/apps/<app>/<date>/flow/<slug>`. Old undated links such
+  as `/apps/<app>/screen/<id>` or `/apps/<app>/flows` no longer resolve (these were only ever on
+  an unreleased branch, so no shipped link breaks).
+
+### For contributors
+
+- The two mirrored route trees collapsed into one. The dated tree under
+  `app/apps/[slug]/[date]/` is now the single canonical tree (gallery `(gallery)/`, `@modal`
+  intercept slot, and standalone `screen`/`flow` pages); the old undated tree under
+  `app/apps/[slug]/` was deleted. `app/apps/[slug]/page.tsx` is a new prebuilt static 307 to the
+  latest date (`dynamicParams = false` + `generateStaticParams = staticAppParams`, target baked
+  from `app.latest`); `app/apps/[slug]/opengraph-image.tsx` stays as the inherited app-level OG
+  route.
+- `lib/links.ts` lost its latest-vs-dated split: `captureBase` / `screenHref` / `flowHref` /
+  `flowsHref` are now all always-dated and dropped their `latest` parameter; `appHref`,
+  `dateHref`, `screenShareHref`, and `flowShareHref` were removed (the share helpers folded into
+  the now-identical dated builders). `lib/captures.ts` replaces `staticDateParams` with
+  `staticCaptureParams` (every date, including the latest); `staticAppParams` stays for the
+  redirect. `CaptureContext.latest` / `AppIndex.latest` stay — `latest` is still the redirect
+  target, the date display, and the resolve-the-latest invariant. The viewers and app-detail
+  components dropped their `latest` and `pinnedDate` props throughout, and the browse cards link
+  straight to `captureBase(app.slug, app.latest)`.
+- The dated screen/flow standalone pages keep `generateStaticParams = []` (nothing prebuilt —
+  every screen/flow renders on demand and caches). The flow page additionally sets
+  `dynamic = "force-dynamic"` because it reads `?step`: with an empty static-param set Next would
+  otherwise treat the route as a fully static shell and throw `DYNAMIC_SERVER_USAGE` on the
+  search-param read.
 
 ## [1.2.2] - 2026-06-22
 

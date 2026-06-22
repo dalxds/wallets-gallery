@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter } from "next/navigation"
-import { dateHref, flowsHref } from "@/lib/links"
+import { captureBase, flowsHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import {
   Select,
@@ -19,12 +19,10 @@ export function DateControl({
   slug,
   captures,
   currentDate,
-  latest,
 }: {
   slug: string
   captures: string[]
   currentDate: string
-  latest: string
 }) {
   const router = useRouter()
   // The date control lives in the shared (gallery) chrome, so it renders on both
@@ -37,9 +35,7 @@ export function DateControl({
     <Select
       value={currentDate}
       onValueChange={(date) =>
-        router.push(
-          onFlows ? flowsHref(slug, date, latest) : dateHref(slug, date, latest)
-        )
+        router.push(onFlows ? flowsHref(slug, date) : captureBase(slug, date))
       }
     >
       <SelectTrigger

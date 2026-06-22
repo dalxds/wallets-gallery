@@ -4,9 +4,15 @@ import { resolveFlow } from "@/lib/captures"
 import { parseStepParam } from "@/lib/links"
 import { FlowPage } from "@/components/standalone/flow-page"
 
-// Standalone flow page for a historical capture. Render on demand + cache.
+// Standalone flow page for a capture. Nothing is prebuilt (generateStaticParams
+// returns []); every flow renders on demand. The page reads ?step, a dynamic
+// runtime input, so it must render dynamically — with an empty static-param set
+// Next would otherwise treat the route as a fully static shell and throw
+// DYNAMIC_SERVER_USAGE on the searchParams read. `force-dynamic` opts the route
+// into per-request rendering (the screen page, which reads no searchParams, keeps
+// the default on-demand-then-cache behavior).
+export const dynamic = "force-dynamic"
 export const dynamicParams = true
-export const revalidate = false
 
 export function generateStaticParams() {
   return [] as { slug: string; date: string; flowSlug: string }[]
@@ -46,7 +52,6 @@ export default async function FlowStandalonePage({
       flow={flow}
       appSlug={slug}
       date={cap.date}
-      latest={cap.latest}
       initialIndex={parseStepParam(step, flow.steps.length)}
     />
   )

@@ -11,7 +11,6 @@ interface FlowsViewProps {
   app: AppCapture
   appSlug: string
   date: string
-  latest: string
 }
 
 // Flatten the flow tree into a single ordered list (parent, then its children,
@@ -36,7 +35,7 @@ function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
   return out
 }
 
-export function FlowsView({ app, appSlug, date, latest }: FlowsViewProps) {
+export function FlowsView({ app, appSlug, date }: FlowsViewProps) {
   // Which flow the sidebar highlights — set when the user clicks one. This is
   // just the list highlight; opening a flow is a navigation to its route, which
   // the @modal slot intercepts into the lightbox. No searchParams are read here,
@@ -132,7 +131,6 @@ export function FlowsView({ app, appSlug, date, latest }: FlowsViewProps) {
                   flow={flow}
                   appSlug={appSlug}
                   date={date}
-                  latest={latest}
                   stateIndex={stateIndex}
                   parent={
                     parentFlow

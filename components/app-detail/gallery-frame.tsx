@@ -7,12 +7,13 @@ import { DateControl } from "./date-control"
 import { captureBase } from "@/lib/links"
 import type { CaptureContext } from "@/lib/captures"
 
-// The gallery chrome (app header, date picker, Screens/Flows tabs) shared by the
-// latest and the dated capture. Rendered by the (gallery) route-group layout, so
-// it PERSISTS across the Screens↔Flows tab switch — that switch is a soft
-// navigation between two prerendered routes, and only the panel passed as
-// {children} swaps beneath this frame. The header, tabs, and StickyChrome's
-// height measurement stay mounted (no remount, no flicker, no re-measure).
+// The gallery chrome (app header, date picker, Screens/Flows tabs) for a capture
+// — every capture is canonical at its dated URL. Rendered by the (gallery)
+// route-group layout, so it PERSISTS across the Screens↔Flows tab switch — that
+// switch is a soft navigation between two prerendered routes, and only the panel
+// passed as {children} swaps beneath this frame. The header, tabs, and
+// StickyChrome's height measurement stay mounted (no remount, no flicker, no
+// re-measure).
 //
 // data-detail-root is the hook StickyChrome uses to publish --content-top (the
 // height of the pinned chrome), which the Flows rail sits below; the panels read
@@ -25,8 +26,8 @@ export function GalleryFrame({
   cap: CaptureContext
   children: ReactNode
 }) {
-  const { app, view, date, latest } = cap
-  const base = captureBase(app.slug, date, latest)
+  const { app, view, date } = cap
+  const base = captureBase(app.slug, date)
   return (
     <AppShell>
       <div
@@ -42,7 +43,6 @@ export function GalleryFrame({
                 slug={app.slug}
                 captures={app.captures}
                 currentDate={date}
-                latest={latest}
               />
             }
           />
