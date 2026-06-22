@@ -17,6 +17,10 @@ export function ModalSkeleton({ variant }: { variant: "screen" | "flow" }) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 supports-backdrop-filter:backdrop-blur-xs"
+      // Lets globals.css hide the page scrollbar from the instant the skeleton
+      // paints — matching the Dialog's scroll lock — so the thumb doesn't linger
+      // over the skeleton and blink off a beat later when the Dialog mounts.
+      data-modal-open
       aria-hidden
     >
       <div
