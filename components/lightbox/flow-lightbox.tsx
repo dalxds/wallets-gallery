@@ -21,14 +21,12 @@ export function FlowLightbox({
   appSlug,
   appName,
   date,
-  initialIndex,
 }: {
   flow: FlowEntry
   screens: ScreenEntry[]
   appSlug: string
   appName: string
   date: string
-  initialIndex: number
 }) {
   const router = useRouter()
   return (
@@ -49,14 +47,13 @@ export function FlowLightbox({
         </DialogDescription>
 
         <FlowViewer
-          key={`${flow.slug}:${initialIndex}`}
+          key={flow.slug}
           flow={flow}
           screens={screens}
           appSlug={appSlug}
           appName={appName}
           backHref={flowsHref(appSlug, date)}
           date={date}
-          initialIndex={initialIndex}
           onClose={() => router.back()}
         />
       </DialogContent>

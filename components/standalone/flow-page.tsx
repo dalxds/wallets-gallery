@@ -14,13 +14,11 @@ export function FlowPage({
   flow,
   appSlug,
   date,
-  initialIndex = 0,
 }: {
   view: AppCapture
   flow: FlowEntry
   appSlug: string
   date: string
-  initialIndex?: number
 }) {
   return (
     <>
@@ -29,14 +27,13 @@ export function FlowPage({
           (DialogContent is bg-popover); in dark mode popover ≠ background. */}
       <div className="mx-auto flex h-[calc(100dvh-3.5rem)] w-full max-w-[1600px] flex-col overflow-hidden rounded-2xl bg-popover">
         <FlowViewer
-          key={`${flow.slug}:${initialIndex}`}
+          key={flow.slug}
           flow={flow}
           screens={view.screens}
           appSlug={appSlug}
           appName={view.app.name}
           backHref={flowsHref(appSlug, date)}
           date={date}
-          initialIndex={initialIndex}
         />
       </div>
     </>

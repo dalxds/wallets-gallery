@@ -1,18 +1,16 @@
 import { notFound } from "next/navigation"
 import { resolveFlow } from "@/lib/captures"
-import { parseStepParam } from "@/lib/links"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 
-// Intercepts /apps/[slug]/[date]/flow/[slug]?step=N on in-app navigation → modal.
+// Intercepts /apps/[slug]/[date]/flow/[slug] on in-app navigation → modal. The
+// ?step deep-link is read client-side in FlowViewer (so this slot doesn't depend
+// on searchParams), matching the standalone page.
 export default async function FlowModalRoute({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string; date: string; flowSlug: string }>
-  searchParams: Promise<{ step?: string }>
 }) {
   const { slug, date, flowSlug } = await params
-  const { step } = await searchParams
   const res = resolveFlow(slug, flowSlug, date)
   if (!res) notFound()
   const { cap, flow } = res
@@ -23,7 +21,6 @@ export default async function FlowModalRoute({
       appSlug={slug}
       appName={cap.view.app.name}
       date={cap.date}
-      initialIndex={parseStepParam(step, flow.steps.length)}
     />
   )
 }

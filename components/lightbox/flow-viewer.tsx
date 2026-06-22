@@ -4,7 +4,7 @@ import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
-import { flowHref } from "@/lib/links"
+import { flowHref, parseStepParam } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
 import { cn, formatDate } from "@/lib/utils"
@@ -35,7 +35,6 @@ interface FlowViewerProps {
   /** Where the header's logo/name links — this capture's flows tab (flowsHref). */
   backHref: string
   date: string
-  initialIndex?: number
   /** Set by the modal: renders a trailing close (X) in the header. */
   onClose?: () => void
 }
@@ -60,7 +59,6 @@ export function FlowViewer({
   appName,
   backHref,
   date,
-  initialIndex = 0,
   onClose,
 }: FlowViewerProps) {
   // Built here (client) — the state index holds a closure, so it can't cross the
@@ -68,6 +66,12 @@ export function FlowViewer({
   const stateIndex = useMemo(() => buildStateIndex(screens), [screens])
   const scrollRef = useRef<HTMLDivElement>(null)
   const stepRefs = useRef<Map<number, HTMLDivElement>>(new Map())
+  // The ?step deep-link is read HERE, on the client, not as a server prop — so the
+  // standalone flow page never reads searchParams on the server and stays
+  // cacheable (on-demand-then-cache, like the screen page) instead of needing
+  // force-dynamic. Read once on mount; the strip is opacity-0 until centered, so
+  // there's no visible jump. Clamped to a valid step by parseStepParam.
+  const initialIndexRef = useRef(0)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   // Whether the whole strip fits without scrolling (a single-screen flow, or a
@@ -108,13 +112,23 @@ export function FlowViewer({
 
   const centerOnInitial = useCallback(() => {
     const container = scrollRef.current
-    const stepEl = stepRefs.current.get(initialIndex)
+    const stepEl = stepRefs.current.get(initialIndexRef.current)
     if (stepEl && container) {
       container.scrollLeft =
         stepEl.offsetLeft - (container.clientWidth - stepEl.offsetWidth) / 2
     }
     updateScrollState()
-  }, [initialIndex, updateScrollState])
+  }, [updateScrollState])
+
+  // Resolve the ?step deep-link on mount (client-only), before the strip is
+  // measured and centered below.
+  useEffect(() => {
+    const raw = new URLSearchParams(window.location.search).get("step")
+    initialIndexRef.current = parseStepParam(
+      raw ?? undefined,
+      flow.steps.length
+    )
+  }, [flow.steps.length])
 
   // Measure the strip on mount so the cards get their final width.
   useEffect(() => {

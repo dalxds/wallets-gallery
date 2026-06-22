@@ -57,10 +57,10 @@ because there's no longer a separate undated "latest" URL that quietly moves. Th
   components dropped their `latest` and `pinnedDate` props throughout, and the browse cards link
   straight to `captureBase(app.slug, app.latest)`.
 - The dated screen/flow standalone pages keep `generateStaticParams = []` (nothing prebuilt —
-  every screen/flow renders on demand and caches). The flow page additionally sets
-  `dynamic = "force-dynamic"` because it reads `?step`: with an empty static-param set Next would
-  otherwise treat the route as a fully static shell and throw `DYNAMIC_SERVER_USAGE` on the
-  search-param read.
+  every screen/flow renders on demand and then caches). The flow page's `?step` deep-link is read
+  on the client (in `FlowViewer`) rather than from `searchParams` on the server, so the page never
+  touches request-time input and stays cacheable like the screen page (no `force-dynamic`). The
+  `@modal` flow intercept likewise no longer reads `searchParams`.
 
 ## [1.2.2] - 2026-06-22
 
