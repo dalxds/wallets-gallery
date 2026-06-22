@@ -1,10 +1,11 @@
 import { Geist_Mono, Inter } from "next/font/google"
-import Script from "next/script";
+import Script from "next/script"
 import type { Metadata } from "next"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { siteUrl } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
@@ -14,20 +15,11 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-// metadataBase resolves OG image + canonical URLs to absolute. Prefer an explicit
-// NEXT_PUBLIC_SITE_URL; on Vercel fall back to the production deploy URL; locally
-// to localhost.
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000")
-
+// metadataBase resolves OG image + canonical URLs to absolute (see lib/site).
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Wallets Gallery — Design Inspiration Gallery",
-  description:
-    "Browse captured UI flows from crypto wallets and fintech apps",
+  description: "Browse captured UI flows from crypto wallets and fintech apps",
 }
 
 export default function RootLayout({

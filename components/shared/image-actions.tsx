@@ -2,6 +2,11 @@
 
 import { useState } from "react"
 import { Copy, Check, Link2, Download } from "lucide-react"
+import {
+  copyImageToClipboard,
+  copyLink as copyLinkToClipboard,
+  downloadImage as downloadImageFile,
+} from "@/lib/clipboard"
 
 interface ImageActionsProps {
   src: string
@@ -16,15 +21,7 @@ export function ImageActions({ src, shareHref }: ImageActionsProps) {
   async function copyImage(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    try {
-      const res = await fetch(src)
-      const blob = await res.blob()
-      await navigator.clipboard.write([
-        new ClipboardItem({ [blob.type]: blob }),
-      ])
-    } catch {
-      await navigator.clipboard.writeText(window.location.origin + src)
-    }
+    await copyImageToClipboard(src)
     setCopiedImage(true)
     setTimeout(() => setCopiedImage(false), 1500)
   }
@@ -32,9 +29,7 @@ export function ImageActions({ src, shareHref }: ImageActionsProps) {
   async function copyLink(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    await navigator.clipboard.writeText(
-      new URL(shareHref, window.location.href).toString()
-    )
+    await copyLinkToClipboard(shareHref)
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
   }
@@ -42,18 +37,11 @@ export function ImageActions({ src, shareHref }: ImageActionsProps) {
   async function downloadImage(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    const res = await fetch(src)
-    const blob = await res.blob()
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = src.split("/").pop() ?? "screenshot.png"
-    a.click()
-    URL.revokeObjectURL(url)
+    await downloadImageFile(src, src.split("/").pop() ?? "screenshot.png")
   }
 
   return (
-    <div className="pointer-events-none absolute right-1.5 top-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:pointer-events-auto group-hover/card:opacity-100">
+    <div className="pointer-events-none absolute top-1.5 right-1.5 z-10 flex gap-1 opacity-0 transition-opacity group-hover/card:pointer-events-auto group-hover/card:opacity-100">
       <button
         type="button"
         onClick={copyImage}

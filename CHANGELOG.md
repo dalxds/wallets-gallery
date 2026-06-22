@@ -21,6 +21,32 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-06-22
+
+Shared screen, flow, and app links — and their social preview cards — now hold up on the live
+deployment, not just a local server. The cards build their thumbnails by fetching the screenshots
+from the CDN, and only the small per-capture data ships with the on-demand pages, so a card or a
+deep-linked screen renders the same in production as it does locally.
+
+Switching the capture date now keeps you on the tab you were viewing: change the date while on
+Flows and you stay on Flows, instead of being bounced back to Screens.
+
+### For contributors
+
+- The OG card renderer (`lib/og.tsx`) now `fetch`es the content-addressed PNGs from the CDN
+  (`assetBaseUrl` in the new `lib/site.ts`) instead of `readFileSync` from the function bundle, so
+  no image bytes are traced into the serverless functions. `next.config.mjs` adds
+  `outputFileTracingIncludes` (only `index.json` + `view.json`) and `outputFileTracingExcludes` (the
+  screenshot PNGs, `graph.json`, and `_staging` snapshots) for `/apps/**` — the dynamic
+  `readFileSync` paths in `lib/captures.ts` otherwise make Next glob the whole capture tree into
+  every function, which ENOENTs or blows the 250 MB function limit on Vercel even though it works
+  under `next start`.
+- Copy-image / copy-link / download now live in one place (`lib/clipboard.ts`), shared by
+  `image-actions.tsx` and both viewers, and guard `res.ok` so a missing screenshot is skipped
+  rather than copied/saved as a 404 body. The date picker (`date-control.tsx`) derives its target
+  tab from `usePathname()`. The app-level OG route returns 404 for an unknown slug (matching the
+  page). Every `opengraph-image` route sets `revalidate = false` so each card composites once.
+
 ## [1.2.1] - 2026-06-19
 
 The site now has a logo. The header pairs a stacked-gallery mark with the "wallets gallery"

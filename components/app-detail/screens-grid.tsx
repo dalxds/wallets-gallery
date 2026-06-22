@@ -52,9 +52,8 @@ export function ScreensGrid({
                 imageBoxClassName="relative bg-muted transition-shadow group-hover/card:shadow-lg"
                 imageBoxStyle={{ aspectRatio: "9/19.5" }}
               >
-                {/* Lazy: the inactive tab panel is display:none, so its tiles
-                    don't fetch until shown; on the default screens view the
-                    in-viewport tiles still load promptly. */}
+                {/* Lazy so only in-viewport tiles fetch as the grid scrolls,
+                    rather than the whole capture at once. */}
                 <Image
                   src={src}
                   alt={screen.description}

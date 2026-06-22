@@ -1,7 +1,7 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { dateHref } from "@/lib/links"
+import { usePathname, useRouter } from "next/navigation"
+import { dateHref, flowsHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import {
   Select,
@@ -27,10 +27,20 @@ export function DateControl({
   latest: string
 }) {
   const router = useRouter()
+  // The date control lives in the shared (gallery) chrome, so it renders on both
+  // the Screens and Flows tabs. Switching date must keep the user on the SAME tab
+  // — navigate to the dated Flows page when on Flows, the dated Screens base
+  // otherwise — instead of always bouncing to Screens.
+  const pathname = usePathname()
+  const onFlows = pathname.endsWith("/flows")
   return (
     <Select
       value={currentDate}
-      onValueChange={(date) => router.push(dateHref(slug, date, latest))}
+      onValueChange={(date) =>
+        router.push(
+          onFlows ? flowsHref(slug, date, latest) : dateHref(slug, date, latest)
+        )
+      }
     >
       <SelectTrigger
         size="sm"

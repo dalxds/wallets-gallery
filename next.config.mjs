@@ -23,6 +23,33 @@ const nextConfig = {
     // App avatars (we render these unoptimized, but allow the host just in case).
     remotePatterns: [{ protocol: "https", hostname: "avatar.vercel.sh", pathname: "/**", search: "" }],
   },
+  // On-demand /apps routes (non-prebuilt screen/flow pages, dated galleries, and
+  // the OG cards) read the generated index.json / view.json off disk at request
+  // time (lib/captures.ts). These MUST be disk reads — generateStaticParams + SSG
+  // run at build, before any deploy exists to fetch from. But the read paths are
+  // dynamic (slug/date), which Next's static file tracing can't follow, so it
+  // conservatively globs the ENTIRE public/captures tree into every function. Pin
+  // it down so the functions stay small and scale to ~50k screenshots:
+  //  • include — guarantee the small JSON the runtime actually reads is bundled
+  //    (without it the reads ENOENT on Vercel; works under `next start`, which has
+  //    the full tree on disk);
+  //  • exclude — keep the screenshot PNGs (and the raw graph.json / _staging
+  //    snapshots nft over-pulls) OUT of the bundles. Bundling every PNG would blow
+  //    the 250 MB function limit and is needless: the OG cards fetch screenshots
+  //    from the CDN (lib/og.tsx) and the browser/optimizer serve them from public/.
+  outputFileTracingIncludes: {
+    "/apps/**": [
+      "./public/captures/index.json",
+      "./public/captures/**/view.json",
+    ],
+  },
+  outputFileTracingExcludes: {
+    "/apps/**": [
+      "./public/captures/**/*.png",
+      "./public/captures/**/graph.json",
+      "./public/captures/**/*.snap.json",
+    ],
+  },
   // The content-addressed PNGs are immutable — cache the originals forever. This
   // also lengthens the optimized variants' TTL (the larger of this vs
   // minimumCacheTTL wins).

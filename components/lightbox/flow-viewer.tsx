@@ -3,6 +3,7 @@
 import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
+import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
 import { flowShareHref } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
@@ -175,8 +176,7 @@ export function FlowViewer({
 
   async function copyFlowLink() {
     // Dated link to the flow (step 0) so it stays valid after a newer capture.
-    const url = `${window.location.origin}${flowShareHref(appSlug, flow.slug, date)}`
-    await navigator.clipboard.writeText(url)
+    await copyLink(flowShareHref(appSlug, flow.slug, date))
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
   }
@@ -186,16 +186,12 @@ export function FlowViewer({
     try {
       for (const step of flow.steps) {
         try {
-          const res = await fetch(stepSrc(step))
-          if (!res.ok) continue
-          const blob = await res.blob()
-          const url = URL.createObjectURL(blob)
-          const a = document.createElement("a")
-          a.href = url
-          a.download = `${appSlug}-${flow.slug}-step-${step.number}.png`
-          a.click()
-          URL.revokeObjectURL(url)
-          await new Promise((r) => setTimeout(r, 150))
+          const ok = await downloadImage(
+            stepSrc(step),
+            `${appSlug}-${flow.slug}-step-${step.number}.png`
+          )
+          // Throttle only between saved files; skip a missing/failed step.
+          if (ok) await new Promise((r) => setTimeout(r, 150))
         } catch {
           // skip a single failed step; keep downloading the rest
         }
@@ -282,8 +278,7 @@ export function FlowViewer({
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 border-t px-4 py-3">
         <div className="flex items-center">
           <span className="text-xs text-muted-foreground">
-            {flow.steps.length}{" "}
-            {flow.steps.length === 1 ? "screen" : "screens"}
+            {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
           </span>
         </div>
 
@@ -354,45 +349,29 @@ function StepCard({
 
   async function copyImage(e: React.MouseEvent) {
     e.stopPropagation()
-    try {
-      const res = await fetch(displaySrc)
-      if (!res.ok) throw new Error(`fetch ${displaySrc}: ${res.status}`)
-      const blob = await res.blob()
-      await navigator.clipboard.write([
-        new ClipboardItem({ [blob.type]: blob }),
-      ])
-    } catch {
-      await navigator.clipboard.writeText(window.location.origin + displaySrc)
-    }
+    await copyImageToClipboard(displaySrc)
     setCopiedImage(true)
     setTimeout(() => setCopiedImage(false), 1500)
   }
 
-  async function copyLink(e: React.MouseEvent) {
+  async function handleCopyLink(e: React.MouseEvent) {
     e.stopPropagation()
     // Dated deep-link to THIS step (0-based; step.number is 1-based).
-    await navigator.clipboard.writeText(
-      `${window.location.origin}${flowShareHref(appSlug, flowSlug, date, step.number - 1)}`
-    )
+    await copyLink(flowShareHref(appSlug, flowSlug, date, step.number - 1))
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
   }
 
-  async function downloadImage(e: React.MouseEvent) {
+  async function handleDownload(e: React.MouseEvent) {
     e.stopPropagation()
-    const res = await fetch(displaySrc)
-    if (!res.ok) return
-    const blob = await res.blob()
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
     const stateSuffix =
       activeVariant && activeVariant.id !== step.screenId
         ? `-${activeVariant.state}`
         : ""
-    a.href = url
-    a.download = `${appSlug}-${flowSlug}-step-${step.number}${stateSuffix}.png`
-    a.click()
-    URL.revokeObjectURL(url)
+    await downloadImage(
+      displaySrc,
+      `${appSlug}-${flowSlug}-step-${step.number}${stateSuffix}.png`
+    )
   }
 
   return (
@@ -422,7 +401,7 @@ function StepCard({
           </button>
           <button
             type="button"
-            onClick={copyLink}
+            onClick={handleCopyLink}
             aria-label="Copy link"
             className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
           >
@@ -434,7 +413,7 @@ function StepCard({
           </button>
           <button
             type="button"
-            onClick={downloadImage}
+            onClick={handleDownload}
             aria-label="Download image"
             className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
           >

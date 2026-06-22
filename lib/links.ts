@@ -20,7 +20,11 @@ export function captureBase(
 }
 
 // Switching capture date is a navigation to its own prerendered gallery page.
-export function dateHref(appSlug: string, date: string, latest: string): string {
+export function dateHref(
+  appSlug: string,
+  date: string,
+  latest: string
+): string {
   return captureBase(appSlug, date, latest)
 }
 
@@ -70,10 +74,7 @@ export function flowShareHref(
 // (a stale or hand-edited link, or a step that no longer exists after a
 // re-capture) by landing on the nearest valid step instead of silently failing
 // to center. `count` is the flow's step count.
-export function parseStepParam(
-  raw: string | undefined,
-  count: number
-): number {
+export function parseStepParam(raw: string | undefined, count: number): number {
   const n = raw ? parseInt(raw, 10) : 0
   if (Number.isNaN(n)) return 0
   return Math.max(0, Math.min(count - 1, n))
@@ -82,6 +83,10 @@ export function parseStepParam(
 // The Flows tab of a capture's gallery — its own prerendered route. (The Screens
 // tab is the capture base itself, so callers use captureBase directly.) Used by a
 // standalone flow page's "back to flows" link.
-export function flowsHref(appSlug: string, date: string, latest: string): string {
+export function flowsHref(
+  appSlug: string,
+  date: string,
+  latest: string
+): string {
   return `${captureBase(appSlug, date, latest)}/flows`
 }

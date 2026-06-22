@@ -2,6 +2,7 @@
 
 import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
+import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
 import { screenHref, screenShareHref, flowHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import { LightboxImage } from "./lightbox-image"
@@ -150,39 +151,23 @@ export function ScreenViewer({
 
   async function copyImage() {
     if (!current) return
-    try {
-      // The original PNG, not the optimized /_next/image variant.
-      const res = await fetch(currentSrc)
-      if (!res.ok) throw new Error(`fetch ${currentSrc}: ${res.status}`)
-      const blob = await res.blob()
-      await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
-    } catch {
-      await navigator.clipboard.writeText(window.location.origin + currentSrc)
-    }
+    // The original PNG, not the optimized /_next/image variant.
+    await copyImageToClipboard(currentSrc)
     setImageCopied(true)
     setTimeout(() => setImageCopied(false), 1500)
   }
 
-  async function copyLink() {
+  async function handleCopyLink() {
     if (!current) return
     // Dated link so it stays valid after a newer capture lands.
-    const url = `${window.location.origin}${screenShareHref(appSlug, current.id, date)}`
-    await navigator.clipboard.writeText(url)
+    await copyLink(screenShareHref(appSlug, current.id, date))
     setLinkCopied(true)
     setTimeout(() => setLinkCopied(false), 1500)
   }
 
-  async function downloadImage() {
+  async function handleDownload() {
     if (!current) return
-    const res = await fetch(currentSrc)
-    if (!res.ok) return // missing screenshot — don't download a broken/HTML file
-    const blob = await res.blob()
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${appSlug}-${current.id}.png`
-    a.click()
-    URL.revokeObjectURL(url)
+    await downloadImage(currentSrc, `${appSlug}-${current.id}.png`)
   }
 
   const atStart = index <= 0
@@ -206,7 +191,7 @@ export function ScreenViewer({
           aria-label="Previous screen"
           onClick={() => goTo(index - 1)}
           disabled={atStart}
-          className="absolute left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition hover:bg-background disabled:pointer-events-none disabled:opacity-0"
+          className="absolute top-1/2 left-4 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition hover:bg-background disabled:pointer-events-none disabled:opacity-0"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -241,7 +226,7 @@ export function ScreenViewer({
           aria-label="Next screen"
           onClick={() => goTo(index + 1)}
           disabled={atEnd}
-          className="absolute right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition hover:bg-background disabled:pointer-events-none disabled:opacity-0"
+          className="absolute top-1/2 right-4 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border bg-background/90 text-foreground shadow-lg backdrop-blur transition hover:bg-background disabled:pointer-events-none disabled:opacity-0"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
@@ -259,7 +244,13 @@ export function ScreenViewer({
               key={f.slug}
               onClick={() =>
                 router.push(
-                  flowHref(appSlug, f.slug, date, latest, Math.max(0, f.step - 1))
+                  flowHref(
+                    appSlug,
+                    f.slug,
+                    date,
+                    latest,
+                    Math.max(0, f.step - 1)
+                  )
                 )
               }
               className="max-w-40 truncate rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent"
@@ -276,7 +267,12 @@ export function ScreenViewer({
         </div>
 
         <div className="flex items-center justify-center gap-1.5">
-          <Button variant="secondary" size="sm" onClick={copyImage} className="gap-1.5">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={copyImage}
+            className="gap-1.5"
+          >
             {imageCopied ? (
               <Check className="h-4 w-4 text-green-500" />
             ) : (
@@ -284,7 +280,12 @@ export function ScreenViewer({
             )}
             Copy
           </Button>
-          <Button variant="secondary" size="sm" onClick={copyLink} className="gap-1.5">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleCopyLink}
+            className="gap-1.5"
+          >
             {linkCopied ? (
               <Check className="h-4 w-4 text-green-500" />
             ) : (
@@ -292,7 +293,12 @@ export function ScreenViewer({
             )}
             Link
           </Button>
-          <Button variant="secondary" size="sm" onClick={downloadImage} className="gap-1.5">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleDownload}
+            className="gap-1.5"
+          >
             <Download className="h-4 w-4" />
             Download
           </Button>
