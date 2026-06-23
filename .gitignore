@@ -36,6 +36,8 @@ credentials.md
 **/credentials.md
 public/captures/**/_staging/
 *.bak
+# raw accessibility snapshots: kept locally for re-capture, never shipped/served
+public/captures/**/*.snap.json
 
 # typescript
 *.tsbuildinfo

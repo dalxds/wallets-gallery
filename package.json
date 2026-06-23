@@ -1,12 +1,12 @@
 {
   "name": "wallets-gallery",
-  "version": "0.1.1",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "node scripts/build-data.ts && next build && node scripts/prune-export.ts",
-    "start": "npx serve out",
+    "build": "node scripts/build-data.ts && next build",
+    "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",

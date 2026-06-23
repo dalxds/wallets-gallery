@@ -1,10 +1,11 @@
 import { Geist_Mono, Inter } from "next/font/google"
-import Script from "next/script";
+import Script from "next/script"
 import type { Metadata } from "next"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { siteUrl } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
@@ -14,10 +15,11 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+// metadataBase resolves OG image + canonical URLs to absolute (see lib/site).
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Wallets Gallery — Design Inspiration Gallery",
-  description:
-    "Browse captured UI flows from crypto wallets and fintech apps",
+  description: "Browse captured UI flows from crypto wallets and fintech apps",
 }
 
 export default function RootLayout({

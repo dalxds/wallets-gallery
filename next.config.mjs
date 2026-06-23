@@ -1,15 +1,68 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // The gallery is fully derivable at build time (registry + per-capture
-  // view.json under public/captures), so the whole site exports to static
-  // HTML in `out/` and can be served from any CDN — no Node server at runtime.
-  output: "export",
-  // next/image's default loader needs a server; we render plain <img> against
-  // the content-addressed PNGs in public/, so opt out of optimization.
-  images: { unoptimized: true },
+  // Vercel-native: the gallery is prerendered (SSG) at build, but screen/flow
+  // pages + their OG images render on demand and cache, and next/image is
+  // optimized on demand by Vercel's image CDN. (Was output:"export" — dropped in
+  // 1.0.0 to enable per-screen/flow share cards and image optimization.)
+  images: {
+    // AVIF preferred, WebP fallback. Each format is cached separately.
+    formats: ["image/avif", "image/webp"],
+    // Only the widths we actually render. Screens are 1080×2400 portrait.
+    // imageSizes (grid thumbs + filmstrip) must all be < min(deviceSizes).
+    imageSizes: [128, 200, 256, 384],
+    // deviceSizes: the lightbox/standalone stage. Trimmed hard to cap the number
+    // of transformations billed (one variant per width × format × quality).
+    deviceSizes: [640, 828, 1080],
+    // Required in Next 16. A single value keeps the cache-key matrix minimal.
+    qualities: [70],
+    // 1 year. Safe because screenshot filenames are content hashes — new content
+    // is a new URL, so a long TTL never serves stale.
+    minimumCacheTTL: 31536000,
+    // Lock optimization to our screenshots (search:"" = no query allowed).
+    localPatterns: [{ pathname: "/captures/**", search: "" }],
+    // App avatars (we render these unoptimized, but allow the host just in case).
+    remotePatterns: [{ protocol: "https", hostname: "avatar.vercel.sh", pathname: "/**", search: "" }],
+  },
+  // On-demand /apps routes (non-prebuilt screen/flow pages, dated galleries, and
+  // the OG cards) read the generated index.json / view.json off disk at request
+  // time (lib/captures.ts). These MUST be disk reads — generateStaticParams + SSG
+  // run at build, before any deploy exists to fetch from. But the read paths are
+  // dynamic (slug/date), which Next's static file tracing can't follow, so it
+  // conservatively globs the ENTIRE public/captures tree into every function. Pin
+  // it down so the functions stay small and scale to ~50k screenshots:
+  //  • include — guarantee the small JSON the runtime actually reads is bundled
+  //    (without it the reads ENOENT on Vercel; works under `next start`, which has
+  //    the full tree on disk);
+  //  • exclude — keep the screenshot PNGs (and the raw graph.json / _staging
+  //    snapshots nft over-pulls) OUT of the bundles. Bundling every PNG would blow
+  //    the 250 MB function limit and is needless: the OG cards fetch screenshots
+  //    from the CDN (lib/og.tsx) and the browser/optimizer serve them from public/.
+  outputFileTracingIncludes: {
+    "/apps/**": [
+      "./public/captures/index.json",
+      "./public/captures/**/view.json",
+    ],
+  },
+  outputFileTracingExcludes: {
+    "/apps/**": [
+      "./public/captures/**/*.png",
+      "./public/captures/**/graph.json",
+      "./public/captures/**/*.snap.json",
+    ],
+  },
+  // The content-addressed PNGs are immutable — cache the originals forever. This
+  // also lengthens the optimized variants' TTL (the larger of this vs
+  // minimumCacheTTL wins).
+  async headers() {
+    return [
+      {
+        source: "/captures/:slug/assets/:file*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ]
+  },
   // Dev-only: allow loading /_next/* when you open the dev server from another
-  // device on the LAN (e.g. a phone hitting the Mac's IP). Ignored in the
-  // static export. Add more origins/IPs here as needed.
+  // device on the LAN (e.g. a phone hitting the Mac's IP). Add origins as needed.
   allowedDevOrigins: ["192.168.1.11"],
 }
 

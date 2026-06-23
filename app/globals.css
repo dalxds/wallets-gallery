@@ -125,6 +125,10 @@
     }
   html {
     @apply font-sans;
+    /* Reserve the scrollbar gutter so locking page scroll (Radix dialog /
+       lightbox) doesn't reclaim the scrollbar's width, widen the viewport, and
+       slide the centered modal right. */
+    scrollbar-gutter: stable;
     }
   /* Tailwind's reset leaves buttons with the default arrow; give every clickable
      affordance a hand. Image/flow tiles opt back out with `cursor-zoom-in`
@@ -133,6 +137,26 @@
   [role="button"] {
     cursor: pointer;
     }
+}
+
+/* Radix's scroll lock (react-remove-scroll) adds a body margin to compensate for
+   the scrollbar it removes — but we've already reserved that space with
+   scrollbar-gutter above, so its margin over-compensates and shifts the page
+   behind the modal. Cancel it (the `html body` prefix out-specifies its rule). */
+html body[data-scroll-locked] {
+  margin-right: 0 !important;
+}
+
+/* Hide the page scrollbar the instant the lightbox starts opening (the skeleton)
+   AND keep it hidden through the Dialog, in one continuous rule. Without this the
+   scrollbar stays visible over the skeleton, then Radix's scroll lock removes it a
+   beat later when the real Dialog mounts — a visible thumb flicker. The skeleton
+   carries data-modal-open and the Dialog renders [data-slot="dialog-overlay"], so
+   one of the two always matches from open to close with no gap. scrollbar-gutter
+   above keeps the reserved space, so only the thumb hides — no layout shift. */
+body:has([data-modal-open]),
+body:has([data-slot="dialog-overlay"]) {
+  overflow: hidden;
 }
 
 /* Hide scrollbar but keep scroll functionality */
@@ -144,25 +168,9 @@
   display: none;
 }
 
-/* App-detail Screens/Flows tabs. Both panels render so switching is an instant
-   visibility toggle (no remount, no image-reveal flicker); the active one is
-   shown via CSS keyed off [data-active-tab] on the detail root, which the
-   TabState island reflects from ?tab. Default (attribute absent) = screens,
-   matching the prerendered HTML so there's no JS-needed first paint. */
-[data-tab-panel="flows"] {
-  display: none;
-}
-[data-detail-root][data-active-tab="flows"] [data-tab-panel="flows"] {
-  display: block;
-}
-[data-detail-root][data-active-tab="flows"] [data-tab-panel="screens"] {
-  display: none;
-}
-[data-detail-root]:not([data-active-tab="flows"]) [data-tab-btn="screens"],
-[data-detail-root][data-active-tab="flows"] [data-tab-btn="flows"] {
-  border-color: var(--primary);
-  color: var(--foreground);
-}
+/* The Screens/Flows tabs are now separate prerendered routes (/apps/[slug] and
+   /apps/[slug]/flows), not a CSS panel toggle: the active panel is whichever page
+   is rendered, and the active tab styling lives on the <Link>s in TabBar. */
 
 /* Browse index: each app card is server-rendered once per view and carries its
    rank for each sort order; CSS shows the active view (data-view) and orders by
