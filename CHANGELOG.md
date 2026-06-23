@@ -21,6 +21,18 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-06-23
+
+### Fixed
+
+- A shared or copied link to a flow step now matches the number on the card:
+  `?step=1` is the first screen. The deep-link value used to start at `?step=0`,
+  one less than the step badge you see in the viewer.
+- A flow link with an out-of-range or garbage `?step` (a stale link, or a step
+  that no longer exists after a re-capture) now opens at the first step and
+  removes the `?step` from the URL, instead of jumping to the last step and
+  leaving the broken value in the address bar.
+
 ## [2.0.0] - 2026-06-22
 
 Every capture now has one address, and it always shows the date. Opening an app takes you to

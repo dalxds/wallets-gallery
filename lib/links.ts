@@ -24,6 +24,8 @@ export function flowHref(
   appSlug: string,
   flowSlug: string,
   date: string,
+  // 1-based step number (matches the badge on the card); omit for the flow's
+  // first step.
   step?: number
 ): string {
   const base = `${captureBase(appSlug, date)}/flow/${encodeURIComponent(flowSlug)}`
@@ -37,13 +39,19 @@ export function flowsHref(appSlug: string, date: string): string {
   return `${captureBase(appSlug, date)}/flows`
 }
 
-// Parse a ?step deep-link param to a 0-based step index, clamped into
-// [0, count-1]. Tolerates a missing, non-numeric, negative, or overflowing value
-// (a stale or hand-edited link, or a step that no longer exists after a
-// re-capture) by landing on the nearest valid step instead of silently failing
-// to center. `count` is the flow's step count.
-export function parseStepParam(raw: string | undefined, count: number): number {
-  const n = raw ? parseInt(raw, 10) : 0
-  if (Number.isNaN(n)) return 0
-  return Math.max(0, Math.min(count - 1, n))
+// Resolve a ?step deep-link param (1-based, matching the badge) to a 0-based
+// step index. An in-range value 1..count maps to its index. Anything else —
+// non-numeric, below 1, or past the last step (a stale or hand-edited link, or a
+// step that no longer exists after a re-capture) — lands on the FIRST step.
+// `valid` is false only when a param was present but garbage/out of range, so
+// the caller can strip the stale ?step from the URL; a missing param is valid
+// (nothing to heal). `count` is the flow's step count.
+export function parseStepParam(
+  raw: string | undefined,
+  count: number
+): { index: number; valid: boolean } {
+  if (raw == null) return { index: 0, valid: true }
+  const n = parseInt(raw, 10)
+  if (Number.isNaN(n) || n < 1 || n > count) return { index: 0, valid: false }
+  return { index: n - 1, valid: true }
 }

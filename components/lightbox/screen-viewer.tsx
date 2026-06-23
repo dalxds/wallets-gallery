@@ -234,9 +234,7 @@ export function ScreenViewer({
               type="button"
               key={f.slug}
               onClick={() =>
-                router.push(
-                  flowHref(appSlug, f.slug, date, Math.max(0, f.step - 1))
-                )
+                router.push(flowHref(appSlug, f.slug, date, f.step))
               }
               className="max-w-40 truncate rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent"
               title={f.name}

@@ -70,7 +70,8 @@ export function FlowViewer({
   // standalone flow page never reads searchParams on the server and stays
   // cacheable (on-demand-then-cache, like the screen page) instead of needing
   // force-dynamic. Read once on mount; the strip is opacity-0 until centered, so
-  // there's no visible jump. Clamped to a valid step by parseStepParam.
+  // there's no visible jump. An out-of-range step lands on step 1 and the stale
+  // ?step is stripped from the URL (see the mount effect below).
   const initialIndexRef = useRef(0)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
@@ -124,11 +125,19 @@ export function FlowViewer({
   // measured and centered below.
   useEffect(() => {
     const raw = new URLSearchParams(window.location.search).get("step")
-    initialIndexRef.current = parseStepParam(
-      raw ?? undefined,
-      flow.steps.length
-    )
-  }, [flow.steps.length])
+    const { index, valid } = parseStepParam(raw ?? undefined, flow.steps.length)
+    initialIndexRef.current = index
+    if (!valid) {
+      // Stale / out-of-range deep link: land on step 1 and heal the URL back to
+      // the bare (dated) flow. Preserve Next's history state so back() still
+      // closes the modal / returns where you came from.
+      window.history.replaceState(
+        window.history.state,
+        "",
+        flowHref(appSlug, flow.slug, date)
+      )
+    }
+  }, [appSlug, flow.slug, flow.steps.length, date])
 
   // Measure the strip on mount so the cards get their final width.
   useEffect(() => {
@@ -189,7 +198,8 @@ export function FlowViewer({
   }
 
   async function copyFlowLink() {
-    // Dated link to the flow (step 0) so it stays valid after a newer capture.
+    // Dated link to the flow (no step → lands on step 1) so it stays valid
+    // after a newer capture.
     await copyLink(flowHref(appSlug, flow.slug, date))
     setFlowLinkCopied(true)
     setTimeout(() => setFlowLinkCopied(false), 1500)
@@ -370,8 +380,8 @@ function StepCard({
 
   async function handleCopyLink(e: React.MouseEvent) {
     e.stopPropagation()
-    // Dated deep-link to THIS step (0-based; step.number is 1-based).
-    await copyLink(flowHref(appSlug, flowSlug, date, step.number - 1))
+    // Dated deep-link to THIS step (?step is 1-based, matching step.number).
+    await copyLink(flowHref(appSlug, flowSlug, date, step.number))
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 1500)
   }

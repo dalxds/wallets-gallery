@@ -118,14 +118,14 @@ export function FlowRow({
           className="scrollbar-hide flex touch-pan-x snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-hidden pb-2"
           onScroll={updateScrollState}
         >
-          {flow.steps.map((step, idx) => {
+          {flow.steps.map((step) => {
             const stateCount = stateIndex.variantsForScreen(
               step.screenId
             ).length
             const src = captureUrl(appSlug, step.screenshotPath)
             // The tile link and the copy-link share the same dated URL — the tile
             // click is intercepted into the modal, a direct open renders the page.
-            const href = flowHref(appSlug, flow.slug, date, idx)
+            const href = flowHref(appSlug, flow.slug, date, step.number)
             return (
               <div
                 key={step.number}
