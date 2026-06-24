@@ -53,7 +53,21 @@ export function packageGraph(graph: Graph): View {
     const c = canon(t)
     if (canonSet.has(c)) navRoots.add(c)
   }
-  const seg = segment(saf, cls, adj, edges, root, navRoots, overridesC)
+  // Authored branch order (decisionPoints) → segment sibling ordering. Canonicalize the
+  // decision node and each option's target so the order survives SAF merges; a target hit by
+  // several options keeps its first (smallest) authored index.
+  const decisionOrder = new Map<string, Map<string, number>>()
+  for (const dp of graph.decisionPoints) {
+    const node = canon(dp.nodeId)
+    let m = decisionOrder.get(node)
+    if (!m) { m = new Map(); decisionOrder.set(node, m) }
+    dp.options.forEach((o, i) => {
+      if (!o.toNode) return
+      const to = canon(o.toNode)
+      if (!m!.has(to)) m!.set(to, i)
+    })
+  }
+  const seg = segment(saf, cls, adj, edges, root, navRoots, overridesC, decisionOrder)
 
   const nodeById = new Map(saf.canonicalNodes.map((n) => [n.id, n]))
   const edgeBetween = (a: string, b: string) => edges.find((e) => e.from === a && e.to === b) ?? null

@@ -351,3 +351,78 @@ describe("packager — Stage 1: empty sections, trunk cap, naming context", () =
     expect(root.steps.length).toBeLessThanOrEqual(20) // MAX_TRUNK
   })
 })
+
+describe("packager — Stage 2: decisionPoints drive branch order + completeness", () => {
+  const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+
+  // home (no decisionPoint) branches into settings + menu; settings has a decisionPoint whose
+  // option order (s-z, s-m, s-a) is BOTH non-lexical and non-observed, so it can only win if the
+  // authored order drives the tree. The walk order (#4 s-m, #5 s-z, #6 s-a) and lexical order
+  // (s-a, s-m, s-z) are deliberately each a different permutation.
+  function dpGraph(): Graph {
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Settings", "Menu"]),
+      node("menu", "other", "sk:menu", ["Menu"], ["X"]),
+      node("settings", "settings", "sk:settings", ["Settings"], ["Zed", "Mike", "Alpha"]),
+      node("s-z", "other", "sk:sz", ["Zed page"], ["Z"]),
+      node("s-m", "other", "sk:sm", ["Mike page"], ["M"]),
+      node("s-a", "other", "sk:sa", ["Alpha page"], ["A"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "settings", "Tap Settings", 'id="settings"', "nav", 1),
+      edge("home", "menu", "Tap Menu", 'id="menu"', "nav", 2),
+      edge("settings", "s-m", "Tap Mike", 'id="sm"', "nav", 4),
+      edge("settings", "s-z", "Tap Zed", 'id="sz"', "nav", 5),
+      edge("settings", "s-a", "Tap Alpha", 'id="sa"', "nav", 6),
+    ]
+    const decisionPoints = [
+      {
+        nodeId: "settings",
+        options: [
+          { label: "Zed", explored: true, toNode: "s-z" },
+          { label: "Mike", explored: true, toNode: "s-m" },
+          { label: "Alpha", explored: true, toNode: "s-a" },
+          { label: "Backup", explored: false },
+          { label: "Restore", explored: false },
+        ],
+      },
+    ]
+    return { meta: meta("dp"), root: "home", nodes, edges, decisionPoints, overrides: {} }
+  }
+
+  it("orders a node's children by its decisionPoint option order, not lexically", () => {
+    const view = packageGraph(dpGraph())
+    const settings = view.flows.find((f) => stepsOf(f).join(">") === "home>settings")!
+    const children = view.flows.filter((f) => f.parent === settings.slug).map((f) => f.steps[1].screenId)
+    expect(children).toEqual(["s-z", "s-m", "s-a"]) // authored order, not lexical (a,m,z) or observed (m,z,a)
+  })
+
+  it("falls back to observed-walk order, then lexical, when there is no decisionPoint", () => {
+    const view = packageGraph(dpGraph())
+    const home = view.flows.find((f) => stepsOf(f).join(">") === "home")!
+    const children = view.flows.filter((f) => f.parent === home.slug).map((f) => f.steps[1].screenId)
+    expect(children).toEqual(["settings", "menu"]) // observed (#1 settings, #2 menu), not lexical (menu, settings)
+  })
+
+  it("surfaces every authored option — explored carry a flow, unexplored stay labeled stubs", () => {
+    const view = packageGraph(dpGraph())
+    const dp = view.decisionPoints.find((d) => d.screenId === "settings")!
+    expect(dp.options.map((o) => o.label)).toEqual(["Zed", "Mike", "Alpha", "Backup", "Restore"]) // authored order preserved
+    expect(dp.options.filter((o) => !o.explored).length).toBe(2) // both unexplored methods shown
+    const backup = dp.options.find((o) => o.label === "Backup")!
+    expect(backup.explored).toBe(false)
+    expect(backup.flowSlug).toBeUndefined() // a stub: no captured journey behind it
+    expect(dp.options.find((o) => o.label === "Zed")!.flowSlug).toBeTruthy() // explored option links its flow
+  })
+
+  it("branch ordering is input-order-independent (reversing nodes/edges keeps the flow tree)", () => {
+    // The decisionPoint-driven sort must not depend on array order. (Screen display order
+    // follows capture order by design and is out of scope here, so compare the flow tree
+    // and decisionPoints — the surfaces this stage governs.)
+    const g = dpGraph()
+    const rev: Graph = { ...g, nodes: [...g.nodes].reverse(), edges: [...g.edges].reverse() }
+    const tree = (v: ReturnType<typeof packageGraph>) =>
+      JSON.stringify({ flows: v.flows, decisionPoints: v.decisionPoints })
+    expect(tree(packageGraph(rev))).toBe(tree(packageGraph(g)))
+  })
+})

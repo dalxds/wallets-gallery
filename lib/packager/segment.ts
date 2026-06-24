@@ -52,7 +52,12 @@ export function segment(
   edges: GraphEdge[],
   root: string,
   navRoots: Set<string> = new Set(),
-  overrides: Overrides = {}
+  overrides: Overrides = {},
+  // Authored branch order: a decision node's canonical id -> (canonical target id -> option index).
+  // When a branching screen has a decisionPoint, its children/options render in the AUTHORED option
+  // order, not lexically (Settings' children were alphabetical). A target reached by several options
+  // keeps its first (smallest) index. Falls back to edge observedAtStep, then lexical id.
+  decisionOrder: Map<string, Map<string, number>> = new Map()
 ): SegmentResult {
   const folded = new Set<string>()
   for (const [id, r] of cls.route) if (r === "toggle") folded.add(id)
@@ -123,11 +128,24 @@ export function segment(
     !completionHubs.has(toId) &&
     advancingExits(toId).length === 0 &&
     outAll(toId).some((x) => distOf(x.to) < distOf(toId))
+  // Sibling order is AUTHORED, not derived: a branching screen's children follow its
+  // decisionPoint option order, then the edge's observed-walk order, then lexical id (the
+  // standing deterministic tie-break). This replaces the old distance proxy as the sort key
+  // — distance never modelled what the screen offers, only how the walk happened to reach it.
+  const dpRank = (cur: string, to: string) => {
+    const i = decisionOrder.get(cur)?.get(to)
+    return i === undefined ? Number.MAX_SAFE_INTEGER : i
+  }
+  const obsStep = (cur: string, to: string) => {
+    let best = Number.MAX_SAFE_INTEGER
+    for (const e of outAll(cur)) if (e.to === to && e.observedAtStep < best) best = e.observedAtStep
+    return best
+  }
   const continuations = (cur: string, seen: Set<string>) =>
     advancingExits(cur)
       .map((e) => e.to)
       .filter((to) => !seen.has(to) && !isSideTarget(to))
-      .sort((a, b) => distOf(a) - distOf(b) || (a < b ? -1 : 1))
+      .sort((a, b) => dpRank(cur, a) - dpRank(cur, b) || obsStep(cur, a) - obsStep(cur, b) || (a < b ? -1 : 1))
 
   // Can `node` reach a completion hub via forward steps? Computed as a fixpoint over
   // the continuation graph (NOT memoized recursion): a node reaches a hub iff one of

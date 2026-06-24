@@ -21,6 +21,23 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-06-24
+
+### Changed
+
+- Flows now list a screen's choices in the order the app presents them. A branching screen's
+  sub-flows follow its authored decision-point options (Settings' sub-pages read top-to-bottom
+  as the app lists them — Verify identity, Account handle, Privacy, … — instead of alphabetically),
+  falling back to the order they were walked, then by name, so the result stays stable.
+
+### For contributors
+
+- `lib/packager/segment.ts`: sibling ordering is now keyed by the parent's `decisionPoints`
+  option order (canonicalized and threaded in from `index.ts`), then edge `observedAtStep`, then
+  lexical id — replacing the BFS-distance sort. Membership is unchanged; only sibling order moves.
+- Continues the segmentation rework in `docs/flow-segmentation-redesign.md` (Stage 2). Unexplored
+  decision-point options keep surfacing as labeled stubs in `view.decisionPoints`.
+
 ## [2.1.0] - 2026-06-24
 
 ### Added
