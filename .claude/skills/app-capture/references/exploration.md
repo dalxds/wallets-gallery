@@ -243,6 +243,20 @@ In **free-roam mode**, the agent picks top-priority unexplored automatically and
 
 **IMPORTANT: Decision points apply recursively.** Every new screen with multiple options is a decision point — not just the first. Explore in depth, not just breadth.
 
+**IMPORTANT: a fork becomes sibling flows only if you *walk* ≥2 of its branches — recording an option isn't enough to create one.** The packager (`segment`) builds the flow tree so that a screen becomes a **fork** when ≥2 distinct onward journeys are reachable only by going *through* it, and turns each into a child flow rooted at that screen. The tree is built from the nav/overlay **edges you actually walked** — so an option you record but never tap creates no edge, no branch, no flow, and walking only one option at a real fork collapses what should be siblings into one linear trunk. Your recorded `decisionPoints` aren't inert, though: **their option order now sets the order of the sibling child flows** — so record options in the order you want them to read.
+
+Tell the kinds of multi-option screen apart:
+
+| At this screen… | Walk | Result |
+| --- | --- | --- |
+| **Divergent fork** — distinct journeys (`Bank` vs `Crypto` payee; `Sign in` vs `Create account`; send-to-contact vs send-to-address) | **each** branch, to a natural endpoint (leaf / confirmation / back to a hub) | each becomes a **sibling child flow** rooted at the fork screen |
+| **Homogeneous list** — many like items (tokens, contacts, transactions) | **one** representative | same-skeleton rows merge, and the packager collapses same-family detail screens to a single exemplar — extra rows add no flows |
+
+- **Walk each branch to its endpoint, not one tap in.** A branch abandoned after one tap still becomes a flow — just a thin, half-told one. Branch-walk quality = flow quality.
+- **A return-to-launcher sheet is NOT a fork.** If an option just opens a picker/peek/info sheet that pops back (no onward journey of its own), the packager treats it as an *excursion* and weaves it in as an inline **picker step** of its launcher's flow. Still capture it (tap it, record the node + the return edge) — but don't count it as a branch or expect a child flow from it.
+- **Cover each fork's branches once — not every permutation.** Flows nest as a *tree*: the path *to* a fork is shared by all its children (the fork screen is the parent's last step and step 1 of each child), so return to the fork and take the next option — never re-walk the prefix or take the cartesian product of choices across forks. Coverage is additive in branches, not multiplicative.
+- **Can't walk a branch** (auth gate, sensitive action, budget)? Record it in `decisionPoints[].options[]` with `explored: false` — it surfaces in the view as "branches here — not explored," but yields no flow.
+
 **Test interactivity before presenting options.** Try one click first. If interaction hangs, switch to Tier 3 and ask the user which path directly. Don't enumerate 16 options you can't follow.
 
 ### Stopping criteria
