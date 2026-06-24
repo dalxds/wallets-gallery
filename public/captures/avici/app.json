@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "app": { "name": "Avici", "slug": "avici", "bundleId": "xyz.avici.apps", "platform": "android" },
+  "firstCapturedAt": "2026-06-23",
+  "lastCapturedAt": "2026-06-23",
+  "latestCapture": "2026-06-23",
+  "captures": [
+    { "date": "2026-06-23", "scope": "initial", "mode": "free-roam", "previousCapture": null, "path": "2026-06-23/graph.json" }
+  ]
+}

@@ -1,6 +1,18 @@
 {
   "apps": [
     {
+      "slug": "avici",
+      "name": "Avici",
+      "platform": "android",
+      "captures": [
+        "2026-06-23"
+      ],
+      "latest": "2026-06-23",
+      "cover": "assets/1cdba901ffee.png",
+      "screens": 34,
+      "flows": 12
+    },
+    {
       "slug": "tuyo",
       "name": "Tuyo",
       "platform": "android",

@@ -1,0 +1,2419 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "app": {
+      "name": "Avici",
+      "slug": "avici",
+      "bundleId": "xyz.avici.apps",
+      "platform": "android"
+    },
+    "captureDate": "2026-06-23",
+    "scope": "initial",
+    "mode": "free-roam",
+    "previousCapture": null
+  },
+  "root": "welcome",
+  "mainNav": [
+    "home",
+    "card",
+    "markets",
+    "grow"
+  ],
+  "nodes": [
+    {
+      "id": "welcome",
+      "fingerprint": "sha256:3ff92f29a9156869dad9098d",
+      "skeletonHash": "sk:3413dbf4d6516532670ad57e",
+      "pHash": "p:56227a9a83668b5f",
+      "role": "auth",
+      "screenshotPath": "assets/fd9ae2399dfc.png",
+      "snapshotPath": "assets/c7b2155d291e.snap.json",
+      "texts": [
+        "Money, forever yours",
+        "Forget wallets, exchanges and banks. Save, trade and spend crypto easily",
+        "Skip Login",
+        "Continue with Apple",
+        "Continue with Google",
+        "Continue with email"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Skip Login",
+          "role": "button",
+          "selector": "label=\"Skip Login\""
+        },
+        {
+          "label": "Continue with Apple",
+          "role": "button",
+          "selector": "label=\"Continue with Apple\""
+        },
+        {
+          "label": "Continue with Google",
+          "role": "button",
+          "selector": "label=\"Continue with Google\""
+        },
+        {
+          "label": "Continue with email",
+          "role": "button",
+          "selector": "label=\"Continue with email\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "home-guest",
+      "fingerprint": "sha256:b83c88cfd542ba8fc4bb2c26",
+      "skeletonHash": "sk:0794b1c85680186b9a42908f",
+      "pHash": "p:2952d352ad2c47dd",
+      "role": "home",
+      "screenshotPath": "assets/e1fd00f68812.png",
+      "snapshotPath": "assets/0358c6bede89.snap.json",
+      "texts": [
+        "Assets breakdown",
+        "$0.00",
+        "Add Money",
+        "Withdraw",
+        "Unlock Trading",
+        "Deposit your First Asset",
+        "Get Your Avici Card",
+        "International card built with the future of money",
+        "Get Your Card",
+        "Dollar and Euro Accounts",
+        "Automatically receive USDC in your Avici wallet",
+        "Open Your Account"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Money",
+          "role": "button",
+          "selector": "label=\"Add Money\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Get Your Card",
+          "role": "button",
+          "selector": "label=\"Get Your Card\""
+        },
+        {
+          "label": "Open Your Account",
+          "role": "button",
+          "selector": "label=\"Open Your Account\""
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Wallet (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Earn (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "card-guest",
+      "fingerprint": "sha256:91027725145c814ad4ade641",
+      "skeletonHash": "sk:43b4efb428ce8696656a5eda",
+      "pHash": "p:b112cdcc393847d7",
+      "role": "list",
+      "screenshotPath": "assets/49d7d45fc9c4.png",
+      "snapshotPath": "assets/5c369e21db40.snap.json",
+      "texts": [
+        "$ 0.00",
+        "guest",
+        "Activity",
+        "No transactions yet"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Wallet (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Send (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Profile (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "markets-guest",
+      "fingerprint": "sha256:bb09bc90d060768f0d7aaaf3",
+      "skeletonHash": "sk:76d239eaddf4c57703edd622",
+      "pHash": "p:f712a768690687f1",
+      "role": "list",
+      "screenshotPath": "assets/32dee9e42c01.png",
+      "snapshotPath": "assets/98baca207f37.snap.json",
+      "texts": [
+        "Markets",
+        "Swap From",
+        "Swap To",
+        "USDC",
+        "Explore",
+        "US Stocks",
+        "Tokenized US equities",
+        "SP500 $740.55 -1.47%",
+        "NVIDIA $202.16 -5.36%",
+        "Apple $299.58 -0.57%",
+        "Privates",
+        "Trending private companies as tokenized assets through SPV exposure",
+        "SpaceX $101.62 -9.45%",
+        "Anthropic $714.35 -3.18%"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Swap From (amount)",
+          "role": "button",
+          "selector": "label~=\"Swap From\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Swap To (amount)",
+          "role": "button",
+          "selector": "label~=\"Swap To\""
+        },
+        {
+          "label": "USDC (Swap To asset selector)",
+          "role": "button",
+          "selector": "label=\"USDC\""
+        },
+        {
+          "label": "Explore",
+          "role": "link",
+          "selector": "label=\"Explore\""
+        },
+        {
+          "label": "SP500",
+          "role": "button",
+          "selector": "label~=\"SP500\""
+        },
+        {
+          "label": "NVIDIA",
+          "role": "button",
+          "selector": "label~=\"NVIDIA\""
+        },
+        {
+          "label": "Apple",
+          "role": "button",
+          "selector": "label~=\"Apple\""
+        },
+        {
+          "label": "SpaceX",
+          "role": "button",
+          "selector": "label~=\"SpaceX\""
+        },
+        {
+          "label": "Anthropic",
+          "role": "button",
+          "selector": "label~=\"Anthropic\""
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Wallet (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Profile (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow-guest",
+      "fingerprint": "sha256:c79edb486b73f8591f70dac8",
+      "skeletonHash": "sk:3a806d8848db0681ba12a2d6",
+      "pHash": "p:e7c891a46d9059e7",
+      "role": "error",
+      "screenshotPath": "assets/e74c68b4cf70.png",
+      "snapshotPath": "assets/e372c4d1254e.snap.json",
+      "texts": [
+        "Could not load earn data",
+        "Please check your connection and try again.",
+        "Try Again"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Try Again",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Wallet (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Earn (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-crypto-guest",
+      "fingerprint": "sha256:1648eb87f1e050e6e214adfb",
+      "skeletonHash": "sk:458785d5a736ee55038e0ed5",
+      "pHash": "p:0fd2c3bae138e12d",
+      "role": "other",
+      "screenshotPath": "assets/4c5856235819.png",
+      "snapshotPath": "assets/c300b2e69bae.snap.json",
+      "texts": [
+        "Guest User",
+        "Solana",
+        "Ethereum",
+        "QR Code Error",
+        "N.A",
+        "Copy Address",
+        "Crypto",
+        "Cash"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Solana",
+          "role": "tab",
+          "selector": "label=\"Solana\""
+        },
+        {
+          "label": "Ethereum",
+          "role": "tab",
+          "selector": "label=\"Ethereum\""
+        },
+        {
+          "label": "Copy Address",
+          "role": "button",
+          "selector": "label=\"Copy Address\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Crypto",
+          "role": "tab",
+          "selector": "label=\"Crypto\""
+        },
+        {
+          "label": "Cash",
+          "role": "tab",
+          "selector": "label=\"Cash\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "deposit-cash-guest",
+      "fingerprint": "sha256:32f1fc8e17cce90726bf93c2",
+      "skeletonHash": "sk:5e5df4886922db8632b60b83",
+      "pHash": "p:e7e6e3f2d1180c0d",
+      "role": "other",
+      "screenshotPath": "assets/5d2b28280b52.png",
+      "snapshotPath": "assets/2aa9e77dc67c.snap.json",
+      "texts": [
+        "Dollar and Euro Accounts",
+        "Automatically receive USDC in your Avici wallet",
+        "Receive USD / Euro via regular bank transfers",
+        "Create your account in less than 2 minutes",
+        "Open Your Account",
+        "Crypto",
+        "Cash"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Open Your Account",
+          "role": "button",
+          "selector": "label=\"Open Your Account\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Crypto",
+          "role": "tab",
+          "selector": "label=\"Crypto\""
+        },
+        {
+          "label": "Cash",
+          "role": "tab",
+          "selector": "label=\"Cash\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "swap-token-picker-guest",
+      "fingerprint": "sha256:f91a7ad36c66f641c45f0268",
+      "skeletonHash": "sk:037d834d5d97a39fa133ef38",
+      "pHash": "p:c7d0d83e1e0e86f1",
+      "role": "picker",
+      "screenshotPath": "assets/f66c409e9566.png",
+      "snapshotPath": "assets/177d9ff88167.snap.json",
+      "texts": [
+        "Convert To",
+        "Paste",
+        "SOL Solana $69.15",
+        "WBTC Wrapped BTC (Portal) $62,189.44",
+        "USDT Tether USD $0.9995",
+        "USDC $1.00",
+        "USDS $1.00",
+        "LINK Chainlink $7.60",
+        "cbBTC Coinbase Wrapped BTC $62,376.59",
+        "USD1 World Liberty Financial USD $0.9993",
+        "USDe Ethena USDe $0.9995",
+        "USDG Global Dollar $0.9988"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Search token (input)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "label=\"Paste\""
+        },
+        {
+          "label": "SOL (Solana)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "fingerprint": "sha256:71ef8930ee76cdba54294e98",
+      "skeletonHash": "sk:f34e1eaadfc593fae32c8bfe",
+      "pHash": "p:f99259d0c31807fd",
+      "role": "home",
+      "screenshotPath": "assets/1cdba901ffee.png",
+      "snapshotPath": "assets/076600e396b7.snap.json",
+      "texts": [
+        "Assets breakdown",
+        "$2.06",
+        "Add Money",
+        "Withdraw",
+        "Get Your Avici Card",
+        "Get Your Card",
+        "Dollar and Euro Accounts",
+        "Open Your Account",
+        "Activity",
+        "A list of all your transactions",
+        "USDC Swap $0.5 0.5002",
+        "USD Coin Received $2.001 2.0006"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Settings (gear, top-left)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Profile (avatar, top-right)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Add Money",
+          "role": "button",
+          "selector": "label=\"Add Money\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Get Your Card",
+          "role": "button",
+          "selector": "label=\"Get Your Card\""
+        },
+        {
+          "label": "Open Your Account",
+          "role": "button",
+          "selector": "label=\"Open Your Account\""
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "email-login",
+      "fingerprint": "sha256:e008c6b2e2cf4cbcf0eaed12",
+      "skeletonHash": "sk:340937fa0d89d8a02e48c82e",
+      "pHash": "p:42e602cabea8bde9",
+      "role": "auth",
+      "screenshotPath": "assets/49aab81114a1.png",
+      "snapshotPath": "assets/62e69f578f28.snap.json",
+      "texts": [
+        "Email Login",
+        "We'll send you a code to verify your email",
+        "Login"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Email (input)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Login",
+          "role": "button",
+          "selector": "label=\"Login\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "email-otp",
+      "fingerprint": "sha256:82b25efe3ad7a4287eb28ae5",
+      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
+      "pHash": "p:c7020722a3b8fdf9",
+      "role": "auth",
+      "screenshotPath": "assets/8bb4f812c22f.png",
+      "snapshotPath": "assets/d38a2b1a37d2.snap.json",
+      "texts": [
+        "Email Verification",
+        "Please enter the 6-digit verification code that was sent to",
+        "wallet.inspo@gmail.com",
+        "Resend code in 25 sec",
+        "Self-custody via Web3Auth"
+      ],
+      "interactiveElements": [
+        {
+          "label": "6-digit code (input)",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Resend code",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "web3auth-login",
+      "fingerprint": "sha256:81c3791311631b8617854ee3",
+      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
+      "pHash": "p:cd6666893299c967",
+      "role": "auth",
+      "screenshotPath": "assets/2b382f3b507b.png",
+      "snapshotPath": null,
+      "texts": [
+        "Use your Apple Account to sign in to Web3Auth.",
+        "auth.web3auth.io",
+        "Email or Phone Number",
+        "Continue",
+        "Sign in with iPhone",
+        "Running in Chrome"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Email or Phone Number",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "fingerprint": "sha256:1f2fbaedbb2047e57b050a83",
+      "skeletonHash": "sk:bcded445f28147aeac14a56a",
+      "pHash": "p:8b5a9bb089c807fd",
+      "role": "settings",
+      "screenshotPath": "assets/b024ff70af19.png",
+      "snapshotPath": "assets/dcfdd9870a7d.snap.json",
+      "texts": [
+        "wallet.inspo@gmail.com",
+        "Personal Account",
+        "Contact Support",
+        "Referrals",
+        "Credit Mode",
+        "up to 8.34% APY Rewards",
+        "Solana Private Key",
+        "Theme",
+        "System",
+        "Light",
+        "Dark"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Contact Support",
+          "role": "button",
+          "selector": "label=\"Contact Support\""
+        },
+        {
+          "label": "Referrals",
+          "role": "button",
+          "selector": "label=\"Referrals\""
+        },
+        {
+          "label": "Credit Mode",
+          "role": "button",
+          "selector": "label~=\"Credit Mode\""
+        },
+        {
+          "label": "Solana Private Key (sensitive — export key)",
+          "role": "button",
+          "selector": "label=\"Solana Private Key\""
+        },
+        {
+          "label": "Theme: System",
+          "role": "button",
+          "selector": "label=\"System\""
+        },
+        {
+          "label": "Theme: Light",
+          "role": "button",
+          "selector": "label=\"Light\""
+        },
+        {
+          "label": "Theme: Dark",
+          "role": "button",
+          "selector": "label=\"Dark\""
+        },
+        {
+          "label": "X / Telegram / Discord / Instagram (external social links)",
+          "role": "link",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "referrals",
+      "fingerprint": "sha256:af750fab3817251d05f5feb7",
+      "skeletonHash": "sk:092f10c6a256a18755cbc9d5",
+      "pHash": "p:33341ee0c3daac3d",
+      "role": "other",
+      "screenshotPath": "assets/755f51a6b7ab.png",
+      "snapshotPath": "assets/f3834eb2c0e1.snap.json",
+      "texts": [
+        "Refer your friends, get rewarded with cash",
+        "Share Your Code",
+        "Friend gets 10% discount at checkout",
+        "You get 20% of that instantly",
+        "Successful Referrals",
+        "Earnings",
+        "Your referral code",
+        "A0AKX1",
+        "Copy",
+        "How Much Can You Earn?"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Copy (referral code)",
+          "role": "button",
+          "selector": "label=\"Copy\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "How Much Can You Earn?",
+          "role": "link",
+          "selector": "label~=\"How Much\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "credit-mode",
+      "fingerprint": "sha256:a5980ea7cb97e8d6b6f89f3f",
+      "skeletonHash": "sk:419431fb5ed63a9fad6cd93e",
+      "pHash": "p:e31ae1b0890aadfd",
+      "role": "form",
+      "screenshotPath": "assets/49a854e9fe1f.png",
+      "snapshotPath": "assets/fe087d5a071c.snap.json",
+      "texts": [
+        "Open Credit line",
+        "0 SOL",
+        "Bal. 0 SOL",
+        "You need at least 0.03 SOL in your wallet to cover collateral",
+        "Rewards ~0.00%",
+        "You get paid when you open a credit line with SOL",
+        "25%",
+        "50%",
+        "75%",
+        "MAX",
+        "Continue",
+        "No SOL balance found"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Amount keypad (numeric)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "25%",
+          "role": "button",
+          "selector": "label=\"25%\""
+        },
+        {
+          "label": "50%",
+          "role": "button",
+          "selector": "label=\"50%\""
+        },
+        {
+          "label": "75%",
+          "role": "button",
+          "selector": "label=\"75%\""
+        },
+        {
+          "label": "MAX",
+          "role": "button",
+          "selector": "label=\"MAX\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "fingerprint": "sha256:9e37c0c2877c47345160d691",
+      "skeletonHash": "sk:48e8346beddaebf684d9e13d",
+      "pHash": "p:8da83d591926e6a7",
+      "role": "other",
+      "screenshotPath": "assets/2ce108ed1b9f.png",
+      "snapshotPath": "assets/1f7a5855242a.snap.json",
+      "texts": [
+        "Avici Credit Card",
+        "International card built with the future of money",
+        "Spend across 100M merchants anywhere in the world",
+        "Self custody, only you have access to funds at all times so you can withdraw to any wallet",
+        "Create virtual or Physical card for a fee instantly",
+        "Learn About fees and charges",
+        "Tap to generate card"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Tap to generate card",
+          "role": "button",
+          "selector": "label=\"Tap to generate card\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Learn About fees and charges",
+          "role": "link",
+          "selector": "label~=\"Learn About fees\""
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "markets",
+      "fingerprint": "sha256:9c3e650b2c98ae52c260df2d",
+      "skeletonHash": "sk:59b4b19150629a2eff4fd488",
+      "pHash": "p:6d1a6d68698687f1",
+      "role": "list",
+      "screenshotPath": "assets/271c41e066f4.png",
+      "snapshotPath": "assets/23064841ea9f.snap.json",
+      "texts": [
+        "Markets",
+        "Swap From",
+        "USDC",
+        "MAX 2.00",
+        "Swap To",
+        "Explore",
+        "US Stocks (SP500, NVIDIA, Apple)",
+        "Privates (SpaceX, Anthropic)",
+        "Metals (Gold, Silver)",
+        "Ownership Assets (MetaDAO, Avici, Solomon)",
+        "Ranked by Market Cap (BTC, ETH, USDT, BNB, USDC, SOL, stETH, USDS)",
+        "Tokenized US equities",
+        "Trending private companies as tokenized assets through SPV exposure",
+        "Precious metals as tokenized assets backed by physical reserves",
+        "Governed by decision markets",
+        "Largest tokens by valuation"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Swap From (SOL, amount) — uses wallet SOL balance",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "MAX",
+          "role": "button",
+          "selector": "label~=\"MAX\""
+        },
+        {
+          "label": "Swap To (amount)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC (Swap To asset selector)",
+          "role": "button",
+          "selector": "label=\"USDC\""
+        },
+        {
+          "label": "Section header (US Stocks / Privates / Metals / Ownership Assets / Ranked by Market Cap) — opens category list",
+          "role": "link",
+          "selector": null
+        },
+        {
+          "label": "SP500 (asset row)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "NVIDIA / Apple / SpaceX / Anthropic (asset rows)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow",
+      "fingerprint": "sha256:6eb7373417f14c1089ef0531",
+      "skeletonHash": "sk:685b8ec547491aa2dfc989ed",
+      "pHash": "p:291039b2d72c6dd7",
+      "role": "list",
+      "screenshotPath": "assets/56fd502b4b9a.png",
+      "snapshotPath": "assets/febb8b0eaafd.snap.json",
+      "texts": [
+        "Grow Balance",
+        "$0",
+        "Start up to 11.78%",
+        "Explore Assets",
+        "Stablecoin Yields",
+        "Stablecoins and dollar-denominated yields.",
+        "View",
+        "Asset Yields",
+        "Earn yield on your asset holdings.",
+        "Insurance Backed",
+        "Returns generated by reinsurance market."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Stablecoin Yields (View)",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Asset Yields (View)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Insurance Backed (View)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow-stablecoin-yields",
+      "fingerprint": "sha256:f2907f3ffee1dff892ab25c8",
+      "skeletonHash": "sk:1fdb4655c86cc5a7d6abef6d",
+      "pHash": "p:b1b81b0ee54247ed",
+      "role": "list",
+      "screenshotPath": "assets/0dd72514de9a.png",
+      "snapshotPath": "assets/dc9eab64c0b6.snap.json",
+      "texts": [
+        "Stablecoin Yields",
+        "Stablecoins and dollar-denominated yields.",
+        "JupUSD AUM $75.44M +5.41%",
+        "USDC AUM $404.27M +4.54%",
+        "USDT AUM $17.69M +3.69%",
+        "EURC AUM $4.85M +2.43%",
+        "USDS AUM $8.68M +5.30%"
+      ],
+      "interactiveElements": [
+        {
+          "label": "JupUSD (yield product)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC (yield product)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDT / EURC / USDS (yield products)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "deposit-crypto",
+      "fingerprint": "sha256:57fc789d6030db4c28de460c",
+      "skeletonHash": "sk:3b259477e4e12bcf66afd90d",
+      "pHash": "p:7708ddd42103d5dd",
+      "role": "other",
+      "screenshotPath": "assets/aca316742d8b.png",
+      "snapshotPath": "assets/f04b6f747378.snap.json",
+      "texts": [
+        "Add Crypto",
+        "Download PDF",
+        "Solana",
+        "Ethereum",
+        "2VqchWyVWBELqhFxgyT8gEY5UdnCFfyiRHhtwKdogifK",
+        "Copy Address",
+        "Crypto",
+        "Cash"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Solana",
+          "role": "tab",
+          "selector": "label=\"Solana\""
+        },
+        {
+          "label": "Ethereum",
+          "role": "tab",
+          "selector": "label=\"Ethereum\""
+        },
+        {
+          "label": "Copy Address",
+          "role": "button",
+          "selector": "label=\"Copy Address\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Download PDF",
+          "role": "button",
+          "selector": "label=\"Download PDF\""
+        },
+        {
+          "label": "Crypto",
+          "role": "tab",
+          "selector": "label=\"Crypto\""
+        },
+        {
+          "label": "Cash",
+          "role": "tab",
+          "selector": "label=\"Cash\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "deposit-crypto-eth",
+      "fingerprint": "sha256:57fc789d6030db4c28de460c",
+      "skeletonHash": "sk:3b259477e4e12bcf66afd90d",
+      "pHash": "p:0778c3d66d01c37d",
+      "role": "other",
+      "screenshotPath": "assets/d3c589278085.png",
+      "snapshotPath": "assets/b3376f0492e3.snap.json",
+      "texts": [
+        "Add Crypto",
+        "Download PDF",
+        "Solana",
+        "Ethereum",
+        "Supported Ethereum and EVM L2 networks",
+        "0x4c800361DC371E8901a3D499b70e9fa43F122779",
+        "Copy Address",
+        "Crypto",
+        "Cash"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Solana",
+          "role": "tab",
+          "selector": "label=\"Solana\""
+        },
+        {
+          "label": "Ethereum",
+          "role": "tab",
+          "selector": "label=\"Ethereum\""
+        },
+        {
+          "label": "Copy Address",
+          "role": "button",
+          "selector": "label=\"Copy Address\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Download PDF",
+          "role": "button",
+          "selector": "label=\"Download PDF\""
+        },
+        {
+          "label": "Crypto",
+          "role": "tab",
+          "selector": "label=\"Crypto\""
+        },
+        {
+          "label": "Cash",
+          "role": "tab",
+          "selector": "label=\"Cash\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "deposit-cash",
+      "fingerprint": "sha256:32f1fc8e17cce90726bf93c2",
+      "skeletonHash": "sk:5e5df4886922db8632b60b83",
+      "pHash": "p:e7e6e3f2d1180c0d",
+      "role": "other",
+      "screenshotPath": "assets/5d2b28280b52.png",
+      "snapshotPath": "assets/899a5da9327f.snap.json",
+      "texts": [
+        "Dollar and Euro Accounts",
+        "Automatically receive USDC in your Avici wallet",
+        "Receive USD / Euro via regular bank transfers",
+        "Create your account in less than 2 minutes",
+        "Open Your Account",
+        "Crypto",
+        "Cash"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Open Your Account",
+          "role": "button",
+          "selector": "label=\"Open Your Account\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Crypto",
+          "role": "tab",
+          "selector": "label=\"Crypto\""
+        },
+        {
+          "label": "Cash",
+          "role": "tab",
+          "selector": "label=\"Cash\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "buy-amount",
+      "fingerprint": "sha256:325c1e38582cb36e9a28a490",
+      "skeletonHash": "sk:419431fb5ed63a9fad6cd93e",
+      "pHash": "p:0f0eefb8d380a1f1",
+      "role": "form",
+      "screenshotPath": "assets/3a607e854de3.png",
+      "snapshotPath": "assets/ace386cde9c0.snap.json",
+      "texts": [
+        "You are buying",
+        "<asset ticker> (e.g. SPYx / SPACEX)",
+        "0 USDC",
+        "$0",
+        "You are Paying with USDC",
+        "Bal. 2.00 USDC",
+        "25%",
+        "50%",
+        "75%",
+        "MAX",
+        "Review"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Amount keypad (numeric)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "25%",
+          "role": "button",
+          "selector": "label=\"25%\""
+        },
+        {
+          "label": "50%",
+          "role": "button",
+          "selector": "label=\"50%\""
+        },
+        {
+          "label": "75%",
+          "role": "button",
+          "selector": "label=\"75%\""
+        },
+        {
+          "label": "MAX",
+          "role": "button",
+          "selector": "label=\"MAX\""
+        },
+        {
+          "label": "Review",
+          "role": "button",
+          "selector": "label=\"Review\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "buy-review",
+      "fingerprint": "sha256:eed6cf487a0fe592db2415f7",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:0f1e0f2aa5e0e9d9",
+      "role": "confirmation",
+      "screenshotPath": "assets/985f65427cb2.png",
+      "snapshotPath": "assets/22ccdd2b0729.snap.json",
+      "texts": [
+        "Paying",
+        "0.500153 USDC",
+        "You will Get",
+        "0.000395 SPYx",
+        "1 USDC = 0.000791 SPYx",
+        "Amount Buying",
+        "$0.50",
+        "Network Fees",
+        "Free",
+        "Price impact",
+        "41.4%",
+        "Est. Time",
+        "15 Seconds",
+        "Slide to buy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Slide to buy (confirm)",
+          "role": "button",
+          "selector": "label=\"Slide to buy\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "markets-section-ranked",
+      "fingerprint": "sha256:f2aed0e6d271c506815c0310",
+      "skeletonHash": "sk:32fc74c00959f521100e2879",
+      "pHash": "p:0fb6f45af81606a9",
+      "role": "list",
+      "screenshotPath": "assets/65b87a33aae9.png",
+      "snapshotPath": "assets/5c85142a1dcb.snap.json",
+      "texts": [
+        "Ranked by Market Cap",
+        "Largest tokens by valuation",
+        "BTC $1.25T",
+        "ETH $200.32B",
+        "USDT $186.02B",
+        "BNB $77.39B",
+        "USDC $74.40B",
+        "SOL $40.05B",
+        "stETH $14.98B",
+        "USDS $10.31B"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Token row (e.g. BTC, ETH, SOL...) — opens asset detail",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "spacex-detail",
+      "fingerprint": "sha256:349fe228f8cefdb457cb2155",
+      "skeletonHash": "sk:5f9b6c33938ee60fabe4d01e",
+      "pHash": "p:0f0e0f96f1e0e1f1",
+      "role": "other",
+      "screenshotPath": "assets/b21f393dce1e.png",
+      "snapshotPath": "assets/87b4118e65b7.snap.json",
+      "texts": [
+        "SpaceX",
+        "$SPACEX",
+        "$109.11",
+        "-7.94%",
+        "1H",
+        "1D",
+        "1W",
+        "1M",
+        "1Y",
+        "Token info",
+        "Contract Address",
+        "PreANx...sfTh",
+        "Market Price",
+        "$162.71",
+        "Discount",
+        "+32.94%",
+        "Market Cap",
+        "$1.43T",
+        "AUM",
+        "$4.77M",
+        "About assets",
+        "Privates are on-chain DeFi assets, not available in the U.S., to U.S. persons, or to other ineligible persons.",
+        "Buy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "label=\"Buy\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "1H / 1D / 1W / 1M / 1Y (timeframe)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "About assets",
+          "role": "link",
+          "selector": "label=\"About assets\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "high-impact-warning",
+      "fingerprint": "sha256:5843e4595530e1f677a7e82b",
+      "skeletonHash": "sk:ae618fcf7e4dfecf8b371443",
+      "pHash": "p:031a0f1efdf0f4a1",
+      "role": "modal",
+      "screenshotPath": "assets/0d0b4ec4043a.png",
+      "snapshotPath": "assets/e11f4551a2d8.snap.json",
+      "texts": [
+        "High price impact",
+        "This trade has a price impact of N% (e.g. 39.5% buy / 8.4% swap). You will receive noticeably less value than you are paying...",
+        "Try a smaller amount - impact scales with trade size.",
+        "Double-check the token; low-liquidity pairs can be unverified or thinly traded.",
+        "Proceed only if you understand the value you will lose to this trade.",
+        "Don't show this again",
+        "Swap anyway",
+        "Cancel"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Swap anyway",
+          "role": "button",
+          "selector": "label=\"Swap anyway\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        },
+        {
+          "label": "Don't show this again",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "transaction-detail",
+      "fingerprint": "sha256:3c83e926e2414067f543d476",
+      "skeletonHash": "sk:8dd5c76f3d8d304432176c57",
+      "pHash": "p:cb6e253cd2f86c03",
+      "role": "confirmation",
+      "screenshotPath": "assets/ad741ea9cf35.png",
+      "snapshotPath": "assets/0622a12c5eb8.snap.json",
+      "texts": [
+        "Multichain Convert",
+        "$0.49985",
+        "Status",
+        "COMPLETED",
+        "USD Value",
+        "$ 0.49985",
+        "You Paid",
+        "0.500153 USDC",
+        "You Received",
+        "0.000557239 SpaceX PreStocks",
+        "Network",
+        "Base → solana",
+        "Transaction ID",
+        "0x20...9ae2",
+        "Date",
+        "23 Jun, 2026  19:44",
+        "NEED HELP?"
+      ],
+      "interactiveElements": [
+        {
+          "label": "NEED HELP?",
+          "role": "link",
+          "selector": "label=\"NEED HELP?\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "activity-filter",
+      "fingerprint": "sha256:749419ace7ac9ece82231e31",
+      "skeletonHash": "sk:a177d2d8c4149da70d5c7498",
+      "pHash": "p:074ae506711ac7fd",
+      "role": "picker",
+      "screenshotPath": "assets/fd44ef1fa00b.png",
+      "snapshotPath": "assets/c794c99a93f5.snap.json",
+      "texts": [
+        "All",
+        "Virtual Accounts",
+        "Card Activity",
+        "Wallet Activity"
+      ],
+      "interactiveElements": [
+        {
+          "label": "All",
+          "role": "button",
+          "selector": "label=\"All\""
+        },
+        {
+          "label": "Virtual Accounts",
+          "role": "button",
+          "selector": "label=\"Virtual Accounts\""
+        },
+        {
+          "label": "Card Activity",
+          "role": "button",
+          "selector": "label=\"Card Activity\""
+        },
+        {
+          "label": "Wallet Activity",
+          "role": "button",
+          "selector": "label=\"Wallet Activity\""
+        }
+      ]
+    },
+    {
+      "id": "withdraw",
+      "fingerprint": "sha256:6d051e1b4233d5394b4de2d9",
+      "skeletonHash": "sk:17cc8ee029aa29dedf11fe94",
+      "pHash": "p:2730a5828798fdf9",
+      "role": "form",
+      "screenshotPath": "assets/e783646bf1fe.png",
+      "snapshotPath": "assets/08ab4d5cce1e.snap.json",
+      "texts": [
+        "Withdraw Asset",
+        "Withdraw to:",
+        "No saved wallets",
+        "Paste",
+        "Add Payee",
+        "Saved Wallets",
+        "Bank Accounts"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Destination address (input)",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "label=\"Paste\""
+        },
+        {
+          "label": "Add Payee",
+          "role": "button",
+          "selector": "label=\"Add Payee\""
+        },
+        {
+          "label": "Saved Wallets",
+          "role": "tab",
+          "selector": "label=\"Saved Wallets\""
+        },
+        {
+          "label": "Bank Accounts",
+          "role": "tab",
+          "selector": "label=\"Bank Accounts\""
+        }
+      ]
+    },
+    {
+      "id": "add-payee",
+      "fingerprint": "sha256:8b09c5c317a4beeb1c874c5b",
+      "skeletonHash": "sk:56739e74826b8f1d9b3470eb",
+      "pHash": "p:e3f2e1a0a58c8f0f",
+      "role": "form",
+      "screenshotPath": "assets/b7167b8cd675.png",
+      "snapshotPath": "assets/57097c5e469e.snap.json",
+      "texts": [
+        "Add Wallet Address",
+        "Wallet",
+        "Bank",
+        "Paste"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Wallet",
+          "role": "tab",
+          "selector": "label=\"Wallet\""
+        },
+        {
+          "label": "Bank",
+          "role": "tab",
+          "selector": "label=\"Bank\""
+        },
+        {
+          "label": "Wallet address (input)",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Paste",
+          "role": "button",
+          "selector": "label=\"Paste\""
+        },
+        {
+          "label": "Label / name (input)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Add Wallet Address",
+          "role": "button",
+          "selector": "label=\"Add Wallet Address\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "add-payee-bank",
+      "fingerprint": "sha256:d5a8b5c11b1a03432689516f",
+      "skeletonHash": "sk:8768f20136eabc8884913cfb",
+      "pHash": "p:49d8e9a20726aded",
+      "role": "form",
+      "screenshotPath": "assets/1d17ca4bd055.png",
+      "snapshotPath": "assets/5bca6aa1211e.snap.json",
+      "texts": [
+        "Add bank details",
+        "Wallet",
+        "Bank",
+        "Select country",
+        "US Dollar Account supports ACH, wire transfer",
+        "Euro Account supports SEPA & SEPA instant",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Wallet",
+          "role": "tab",
+          "selector": "label=\"Wallet\""
+        },
+        {
+          "label": "Bank",
+          "role": "tab",
+          "selector": "label=\"Bank\""
+        },
+        {
+          "label": "Select country",
+          "role": "button",
+          "selector": "label~=\"Select country\""
+        },
+        {
+          "label": "US Dollar Account (ACH, wire)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Euro Account (SEPA)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "grow-usdc-yield",
+      "fingerprint": "sha256:6326d378f0e2fb569ecee822",
+      "skeletonHash": "sk:092f10c6a256a18755cbc9d5",
+      "pHash": "p:91b813b05b66e54f",
+      "role": "other",
+      "screenshotPath": "assets/1db85f802a5b.png",
+      "snapshotPath": "assets/95c89a3f2930.snap.json",
+      "texts": [
+        "USDC",
+        "Earn yield on USD Coin via Jupiter Lend.",
+        "No Lockups",
+        "Rewards Daily",
+        "Learn About USDC",
+        "APY",
+        "+4.540%",
+        "Min. Deposit",
+        "$1",
+        "AUM",
+        "$404.28M",
+        "Projected Growth",
+        "If invested $10,000 today",
+        "$27,764.98",
+        "+177.6%",
+        "Start"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Start",
+          "role": "button",
+          "selector": "label=\"Start\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Learn About USDC",
+          "role": "link",
+          "selector": "label~=\"Learn About\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "grow-yield-deposit",
+      "fingerprint": "sha256:61f4cec3970995cf6b4abdb9",
+      "skeletonHash": "sk:08957898001c4927dcb65b50",
+      "pHash": "p:673233b85388adc7",
+      "role": "form",
+      "screenshotPath": "assets/9bfe743dd983.png",
+      "snapshotPath": "assets/2540125e7265.snap.json",
+      "texts": [
+        "Deposit into USDC",
+        "USDC",
+        "$0",
+        "No eligible assets",
+        "Deposit more than $1 of any supported asset to start earning.",
+        "25%",
+        "50%",
+        "75%",
+        "MAX",
+        "Deposit"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Amount keypad (numeric)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "25% / 50% / 75% / MAX",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "label=\"Deposit\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "swap",
+      "fingerprint": "sha256:15f62e587726402d8417b414",
+      "skeletonHash": "sk:6d8d222755dea9c50b190e9e",
+      "pHash": "p:0f0e4f0a63b2b1f5",
+      "role": "form",
+      "screenshotPath": "assets/4311d9dee810.png",
+      "snapshotPath": "assets/82da5fd50494.snap.json",
+      "texts": [
+        "Swap From",
+        "USDC",
+        "MAX 1.50",
+        "0.5",
+        "$0.50",
+        "Swap To",
+        "SOL",
+        "0.006687034",
+        "$0.46",
+        "Fees Free",
+        "This is a gasless transaction.",
+        "Quote Details",
+        "25%",
+        "50%",
+        "75%",
+        "MAX",
+        "Slide to swap"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Swap From amount (input)",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "USDC (Swap From asset)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "SOL (Swap To asset)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "25% / 50% / 75% / MAX",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Quote Details",
+          "role": "link",
+          "selector": "label=\"Quote Details\""
+        },
+        {
+          "label": "Slide to swap",
+          "role": "button",
+          "selector": "label=\"Slide to swap\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "swap-quote-details",
+      "fingerprint": "sha256:a6dca5160282e71fffcb61c5",
+      "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
+      "pHash": "p:8d8a4f5c23b2f4a3",
+      "role": "other",
+      "screenshotPath": "assets/6e56139b9148.png",
+      "snapshotPath": "assets/1a96bd046d72.snap.json",
+      "texts": [
+        "Quote Details",
+        "1 USDC ~ 0.013374 SOL",
+        "Networks",
+        "Base",
+        "Solana",
+        "Network Fees",
+        "Free",
+        "Price impact",
+        "8.02%",
+        "Est. Time",
+        "~5 seconds"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "gold-detail",
+      "fingerprint": "sha256:2667ba0c28c866d000ca23db",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:2f32672663c0a5f9",
+      "role": "other",
+      "screenshotPath": "assets/36a71e790826.png",
+      "snapshotPath": "assets/10056f23025c.snap.json",
+      "texts": [
+        "Gold",
+        "$XAUT0",
+        "$4,115.99",
+        "-1.36%",
+        "Failed to load chart",
+        "1H",
+        "1D",
+        "1W",
+        "1M",
+        "1Y",
+        "Token info",
+        "Contract Address",
+        "Market Price",
+        "$4,158.20",
+        "Discount",
+        "+1.02%",
+        "Market Cap",
+        "$28.91T",
+        "Buy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "label=\"Buy\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "1H / 1D / 1W / 1M / 1Y",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "metadao-detail",
+      "fingerprint": "sha256:2667ba0c28c866d000ca23db",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:a7820f0e5be0e1f9",
+      "role": "other",
+      "screenshotPath": "assets/229f450b760d.png",
+      "snapshotPath": "assets/31cc53fdeae9.snap.json",
+      "texts": [
+        "MetaDAO",
+        "$META",
+        "$3.23",
+        "-6.24%",
+        "1H",
+        "1D",
+        "1W",
+        "1M",
+        "1Y",
+        "Token info",
+        "Buy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "label=\"Buy\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "1H / 1D / 1W / 1M / 1Y",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "wbtc-detail",
+      "fingerprint": "sha256:2667ba0c28c866d000ca23db",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:2f126706e1f0e1f9",
+      "role": "other",
+      "screenshotPath": "assets/119cbd559b30.png",
+      "snapshotPath": "assets/9baaa94fce9a.snap.json",
+      "texts": [
+        "Wrapped BTC (Portal)",
+        "$WBTC",
+        "$62,343.53",
+        "-3.36%",
+        "Failed to load chart",
+        "1H",
+        "1D",
+        "1W",
+        "1M",
+        "1Y",
+        "Token info",
+        "Buy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Buy",
+          "role": "button",
+          "selector": "label=\"Buy\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "1H / 1D / 1W / 1M / 1Y",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": "label=\"Dismiss\""
+        }
+      ]
+    },
+    {
+      "id": "qr-scanner",
+      "fingerprint": "sha256:ea5ad7dd49e203b31e1f38ae",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": "p:f4ce30a0cef4b18b",
+      "role": "other",
+      "screenshotPath": "assets/17f909442b74.png",
+      "snapshotPath": "assets/0210f696cb1d.snap.json",
+      "texts": [
+        "Scan transaction QR"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close / back",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Camera controls (flash / gallery)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "welcome",
+      "to": "web3auth-login",
+      "action": "Tap \"Continue with Apple\"",
+      "selector": "label=\"Continue with Apple\"",
+      "kind": "nav",
+      "observedAtStep": 1
+    },
+    {
+      "from": "welcome",
+      "to": "home-guest",
+      "action": "Tap \"Skip Login\"",
+      "selector": "label=\"Skip Login\"",
+      "kind": "nav",
+      "observedAtStep": 2
+    },
+    {
+      "from": "home-guest",
+      "to": "card-guest",
+      "action": "Tap Wallet nav tab (2nd)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 3
+    },
+    {
+      "from": "card-guest",
+      "to": "markets-guest",
+      "action": "Tap Markets nav tab (3rd)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 4
+    },
+    {
+      "from": "markets-guest",
+      "to": "grow-guest",
+      "action": "Tap Earn nav tab (4th)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 5
+    },
+    {
+      "from": "home-guest",
+      "to": "card-guest",
+      "action": "Tap \"Get Your Card\"",
+      "selector": "label=\"Get Your Card\"",
+      "kind": "nav",
+      "observedAtStep": 6
+    },
+    {
+      "from": "deposit-crypto-guest",
+      "to": "deposit-cash-guest",
+      "action": "Tap \"Cash\" method tab",
+      "selector": "label=\"Cash\"",
+      "kind": "nav",
+      "observedAtStep": 7
+    },
+    {
+      "from": "markets-guest",
+      "to": "swap-token-picker-guest",
+      "action": "Tap \"USDC\" (Swap To asset selector)",
+      "selector": "label=\"USDC\"",
+      "kind": "overlay",
+      "observedAtStep": 8
+    },
+    {
+      "from": "welcome",
+      "to": "email-login",
+      "action": "Tap \"Continue with email\"",
+      "selector": "label=\"Continue with email\"",
+      "kind": "nav",
+      "observedAtStep": 9
+    },
+    {
+      "from": "email-login",
+      "to": "email-otp",
+      "action": "Enter email + tap \"Login\" (opens Web3Auth verify)",
+      "selector": "label=\"Login\"",
+      "kind": "nav",
+      "observedAtStep": 10
+    },
+    {
+      "from": "email-otp",
+      "to": "home",
+      "action": "Enter 6-digit code (Web3Auth verifies, returns to app logged in)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 11
+    },
+    {
+      "from": "home",
+      "to": "settings",
+      "action": "Tap settings gear (top-left)",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 12
+    },
+    {
+      "from": "settings",
+      "to": "referrals",
+      "action": "Tap \"Referrals\"",
+      "selector": "label=\"Referrals\"",
+      "kind": "nav",
+      "observedAtStep": 13
+    },
+    {
+      "from": "settings",
+      "to": "credit-mode",
+      "action": "Tap \"Credit Mode\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 14
+    },
+    {
+      "from": "home",
+      "to": "card",
+      "action": "Tap Card nav tab (2nd)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 15
+    },
+    {
+      "from": "card",
+      "to": "markets",
+      "action": "Tap Markets nav tab (3rd)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 16
+    },
+    {
+      "from": "markets",
+      "to": "grow",
+      "action": "Tap Grow nav tab (4th)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 17
+    },
+    {
+      "from": "grow",
+      "to": "grow-stablecoin-yields",
+      "action": "Tap \"Stablecoin Yields\" → View",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 18
+    },
+    {
+      "from": "home",
+      "to": "deposit-crypto",
+      "action": "Tap \"Add Money\" (round button)",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 19
+    },
+    {
+      "from": "deposit-crypto",
+      "to": "deposit-crypto-eth",
+      "action": "Tap \"Ethereum\" network tab",
+      "selector": "label=\"Ethereum\"",
+      "kind": "in-place",
+      "observedAtStep": 20
+    },
+    {
+      "from": "deposit-crypto",
+      "to": "deposit-cash",
+      "action": "Tap \"Cash\" method tab",
+      "selector": "label=\"Cash\"",
+      "kind": "nav",
+      "observedAtStep": 21
+    },
+    {
+      "from": "buy-amount",
+      "to": "buy-review",
+      "action": "Enter 25% + tap \"Review\"",
+      "selector": "label=\"Review\"",
+      "kind": "nav",
+      "observedAtStep": 22
+    },
+    {
+      "from": "markets",
+      "to": "markets-section-ranked",
+      "action": "Tap \"Ranked by Market Cap\" section title",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 23
+    },
+    {
+      "from": "markets",
+      "to": "spacex-detail",
+      "action": "Tap \"SpaceX\" (Privates) asset row",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 24
+    },
+    {
+      "from": "spacex-detail",
+      "to": "buy-amount",
+      "action": "Tap \"Buy\"",
+      "selector": "label=\"Buy\"",
+      "kind": "overlay",
+      "observedAtStep": 25
+    },
+    {
+      "from": "buy-review",
+      "to": "high-impact-warning",
+      "action": "Slide to buy (high price impact triggers warning)",
+      "selector": "label=\"Slide to buy\"",
+      "kind": "overlay",
+      "observedAtStep": 26
+    },
+    {
+      "from": "high-impact-warning",
+      "to": "markets",
+      "action": "Tap \"Swap anyway\" → device PIN (passkey, secure) → trade executes, returns to Markets",
+      "selector": "label=\"Swap anyway\"",
+      "kind": "nav",
+      "observedAtStep": 27
+    },
+    {
+      "from": "home",
+      "to": "transaction-detail",
+      "action": "Tap a transaction in Activity",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 28
+    },
+    {
+      "from": "home",
+      "to": "activity-filter",
+      "action": "Tap Activity filter icon",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 29
+    },
+    {
+      "from": "home",
+      "to": "withdraw",
+      "action": "Tap \"Withdraw\" (round button)",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 30
+    },
+    {
+      "from": "withdraw",
+      "to": "add-payee",
+      "action": "Tap \"Add Payee\"",
+      "selector": "label=\"Add Payee\"",
+      "kind": "overlay",
+      "observedAtStep": 31
+    },
+    {
+      "from": "add-payee",
+      "to": "add-payee-bank",
+      "action": "Tap \"Bank\" payee type",
+      "selector": "label=\"Bank\"",
+      "kind": "nav",
+      "observedAtStep": 32
+    },
+    {
+      "from": "grow-stablecoin-yields",
+      "to": "grow-usdc-yield",
+      "action": "Tap \"USDC\" yield product",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 33
+    },
+    {
+      "from": "grow-usdc-yield",
+      "to": "grow-yield-deposit",
+      "action": "Tap \"Start\" (deposit; shows \"No eligible assets\" with USDC held on a non-eligible chain)",
+      "selector": "label=\"Start\"",
+      "kind": "nav",
+      "observedAtStep": 34
+    },
+    {
+      "from": "markets",
+      "to": "swap",
+      "action": "Set Swap To = SOL, enter amount (Swap From USDC)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 35
+    },
+    {
+      "from": "swap",
+      "to": "swap-quote-details",
+      "action": "Tap \"Quote Details\"",
+      "selector": "label=\"Quote Details\"",
+      "kind": "overlay",
+      "observedAtStep": 36
+    },
+    {
+      "from": "swap",
+      "to": "high-impact-warning",
+      "action": "Slide to swap (high price impact triggers warning)",
+      "selector": "label=\"Slide to swap\"",
+      "kind": "overlay",
+      "observedAtStep": 37
+    },
+    {
+      "from": "markets",
+      "to": "gold-detail",
+      "action": "Tap \"Gold\" (Metals) asset row",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 38
+    },
+    {
+      "from": "markets",
+      "to": "metadao-detail",
+      "action": "Tap \"MetaDAO\" (Ownership Assets) asset row",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 39
+    },
+    {
+      "from": "markets",
+      "to": "wbtc-detail",
+      "action": "Tap \"BTC\" (Ranked by Market Cap / crypto) asset row",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 40
+    },
+    {
+      "from": "home",
+      "to": "qr-scanner",
+      "action": "Tap QR-scan icon (top-right)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 41
+    }
+  ],
+  "decisionPoints": [
+    {
+      "nodeId": "welcome",
+      "options": [
+        {
+          "label": "Skip Login",
+          "explored": true,
+          "toNode": "home-guest"
+        },
+        {
+          "label": "Continue with Apple",
+          "explored": true,
+          "toNode": "web3auth-login"
+        },
+        {
+          "label": "Continue with Google",
+          "explored": false
+        },
+        {
+          "label": "Continue with email",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "home-guest",
+      "options": [
+        {
+          "label": "Add Money (round) — shows \"Please Login to continue\" toast (guest-gated)",
+          "explored": true
+        },
+        {
+          "label": "Withdraw (round) — guest-gated",
+          "explored": false
+        },
+        {
+          "label": "Get Your Card",
+          "explored": true,
+          "toNode": "card-guest"
+        },
+        {
+          "label": "Open Your Account",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "markets-guest",
+      "options": [
+        {
+          "label": "NVIDIA / Apple / SpaceX / Anthropic (asset rows)",
+          "explored": false
+        },
+        {
+          "label": "USDC (Swap To asset selector)",
+          "explored": true,
+          "toNode": "swap-token-picker-guest"
+        },
+        {
+          "label": "Swap From / Swap To amount entry",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "deposit-crypto-guest",
+      "options": [
+        {
+          "label": "Crypto method",
+          "explored": true
+        },
+        {
+          "label": "Cash method",
+          "explored": true,
+          "toNode": "deposit-cash-guest"
+        },
+        {
+          "label": "Solana / Ethereum network tabs",
+          "explored": false
+        }
+      ]
+    }
+  ],
+  "overrides": {
+    "merges": [
+      [
+        "home",
+        "home-guest"
+      ],
+      [
+        "card",
+        "card-guest"
+      ],
+      [
+        "markets",
+        "markets-guest"
+      ],
+      [
+        "grow",
+        "grow-guest"
+      ],
+      [
+        "deposit-crypto",
+        "deposit-crypto-guest"
+      ],
+      [
+        "deposit-cash",
+        "deposit-cash-guest"
+      ]
+    ],
+    "flowNames": {
+      "web3auth-login": "Signing in (social / Web3Auth)",
+      "home": "Home",
+      "qr-scanner": "Scanning a QR code",
+      "settings": "Settings",
+      "credit-mode": "Opening a credit line",
+      "referrals": "Referrals",
+      "swap": "Swapping tokens",
+      "home@welcome": "Entering the app",
+      "home-2": "Entering the app"
+    }
+  }
+}
