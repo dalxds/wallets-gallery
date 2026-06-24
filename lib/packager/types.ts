@@ -169,6 +169,14 @@ export interface ViewStep {
   screenId: string
   action: string
   screenshotPath: string
+  /**
+   * "forward" — an ordinary step along the journey's spine. "picker" — an excursion woven
+   * inline: a picker/peek sheet opened from the previous step that pops back to it (the spine
+   * then continues from that step's forward exit). The marker is INTERNAL — a picker renders
+   * like any other step; it only keeps the path honest and drives replay (open → select →
+   * continue). Defaults to "forward".
+   */
+  kind: "forward" | "picker"
 }
 
 export interface ReplayCommand {

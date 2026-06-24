@@ -21,6 +21,38 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-06-24
+
+### Changed
+
+- Pickers and sheets are now part of the flow they belong to instead of being hidden in the
+  Screens tab. A picker you open and pick from — choosing a country during onboarding, choosing a
+  deposit method — appears inline as a step in the journey, in the right place, with the journey
+  continuing past it. Informational sheets (a "requires USDC" notice, a "quote details" panel)
+  likewise show up as steps. tuyo's "Creating an account" now reads end to end including its
+  country and deposit-method pickers.
+- A screen whose rows all open the same kind of detail (an asset list where every row opens an
+  identical asset page) shows **one** example journey instead of one flow per row. The other rows
+  stay browsable in the Screens tab.
+
+### Breaking
+
+- Each flow step now carries a `kind` of `"forward"` or `"picker"` (`view.flows[].steps[].kind`).
+  The marker is internal — a picker step renders like any other — but it is a new required field
+  on the step shape.
+
+### For contributors
+
+- `lib/packager/segment.ts` detects return-to-launcher **excursions** structurally and returns
+  them per launcher (`excursionsByLauncher`); `lib/packager/index.ts` weaves them inline as
+  `kind:"picker"` steps right after their launcher (the spine continues from the launcher's
+  forward exit, so the trunk isn't shattered). The homogeneous detail fan-out collapses via the
+  SAF family signal: same-family leaf siblings under a hub keep one exemplar.
+- `lib/packager/replay.ts` (`buildReplay`) now consumes the woven step plan; a picker step
+  expands to open (launcher→picker) + select (picker→launcher) before the spine continues.
+- Completes `docs/flow-segmentation-redesign.md` (Stage 3, built on the Stage 4 dominator core).
+  `ViewStep.kind` added to `types.ts`; README updated.
+
 ## [3.0.0] - 2026-06-24
 
 ### Changed

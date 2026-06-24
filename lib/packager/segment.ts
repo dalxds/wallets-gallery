@@ -54,6 +54,10 @@ export interface SegmentResult {
   truncated: string[]
   /** main-nav section node ids the walk left empty (declared in graph.mainNav, no journey). */
   emptyNavRoots: string[]
+  /** launcher node id → its excursion node ids (ordered): pickers/peeks that pop back to the
+   *  launcher. They are NOT in any journey's `steps`; index.ts weaves them inline as picker
+   *  steps right after their launcher so the forward trunk stays intact. */
+  excursionsByLauncher: Map<string, string[]>
 }
 
 export function segment(
@@ -193,11 +197,36 @@ export function segment(
     for (const e of outAll(cur)) if (e.to === to && e.observedAtStep < best) best = e.observedAtStep
     return best
   }
-  const forwardChildren = (cur: string): string[] => {
+  const order = (cur: string) => (a: string, b: string) =>
+    dpRank(cur, a) - dpRank(cur, b) || obsStep(cur, a) - obsStep(cur, b) || (a < b ? -1 : 1)
+  const rawChildren = (cur: string): string[] => {
     const out: string[] = []
     for (const k of domKids.get(cur) ?? []) if (!excursion.has(k)) out.push(k)
     for (const x of subOut.get(cur) ?? []) if (shared.has(x) && !excursion.has(x) && !out.includes(x)) out.push(x)
-    return out.sort((a, b) => dpRank(cur, a) - dpRank(cur, b) || obsStep(cur, a) - obsStep(cur, b) || (a < b ? -1 : 1))
+    return out
+  }
+  const isLeafChild = (c: string) => rawChildren(c).length === 0
+  // §2c — homogeneous detail fan-out: when a hub's children include several LEAF siblings that
+  // are the same logical screen (one SAF family: tapping any asset row opens an identical detail
+  // screen), they are instances of ONE pattern, not N journeys. Keep the first (the exemplar,
+  // by the order below) and drop the rest — they stay browsable in the Screens tab. A child with
+  // its own onward trunk (e.g. an asset you can go on to Buy) is never collapsed away.
+  const forwardChildren = (cur: string): string[] => {
+    const sorted = rawChildren(cur).sort(order(cur))
+    const seenFamily = new Set<string>()
+    const kept: string[] = []
+    for (const c of sorted) {
+      if (isLeafChild(c)) {
+        const fam = saf.logicalOf.get(c) ?? c
+        const members = saf.members.get(fam)
+        if (members && members.length > 1) {
+          if (seenFamily.has(fam)) continue
+          seenFamily.add(fam)
+        }
+      }
+      kept.push(c)
+    }
+    return kept
   }
 
   type Raw = { id: string; entry: string; steps: string[]; parent: string | null; goal: string }
@@ -286,6 +315,16 @@ export function segment(
     }
   }
 
+  // Group excursions under their launcher (idom), ordered like any sibling set, for index.ts to
+  // weave inline as picker steps. Only launchers that survive as a flow step matter, but we map
+  // them all — index.ts weaves where the launcher actually appears.
+  const excursionsByLauncher = new Map<string, string[]>()
+  for (const x of excursion) {
+    const s = idom.get(x)!
+    ;(excursionsByLauncher.get(s) ?? excursionsByLauncher.set(s, []).get(s)!).push(x)
+  }
+  for (const [s, xs] of excursionsByLauncher) xs.sort(order(s))
+
   const truncated = [...truncatedRaw].map((r) => stableOf.get(r)).filter((x): x is string => !!x)
-  return { journeys: kept, truncated, emptyNavRoots }
+  return { journeys: kept, truncated, emptyNavRoots, excursionsByLauncher }
 }

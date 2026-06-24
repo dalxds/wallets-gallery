@@ -337,13 +337,19 @@ stage ends green on `pnpm build-data && pnpm test` with regenerated `view.json` 
   core was built first (per the implementation recommendation). With the core in place, forward
   sheets already surface as steps; only the return-to-launcher excursions wait for Stage 3.
 
-**Stage 3 — pickers/sheets as steps woven on the dominator core (MAJOR — `ViewStep.kind`)**
-- Weave the held-out excursions back in as inline `kind:"picker"` steps without truncating the
-  trunk (§2a); options as content via diverge/converge (§2b/§3); collapse the homogeneous detail
-  fan-out (§2c).
-- Update `buildReplay` for excursion steps.
-- Tests: `country-picker` appears as a `kind:"picker"` step; trunk past it is intact; a
-  multi-asset picker does not spawn N flows.
+**Stage 3 — pickers/sheets as steps woven on the dominator core (MAJOR — `ViewStep.kind`)** ✅ DONE
+- `ViewStep` gains `kind: "forward" | "picker"`. The held-out excursions are woven back inline as
+  `kind:"picker"` steps right after their launcher (the spine continues from the launcher's
+  forward exit — no trunk truncation, §2a). A picker's options stay content, never one flow per
+  option (§2b). The homogeneous detail fan-out collapses to one exemplar via the SAF family
+  signal: same-family LEAF siblings under a hub are instances of one pattern, so one is kept and
+  the rest stay browsable as screens (§2c). The convergent-sheet case is already handled by the
+  dominator tree (Stage 4: it lands at the common dominator, emitted once).
+- `buildReplay` consumes the woven step plan: a picker step expands to open (launcher→picker) +
+  select (picker→launcher) before the spine continues.
+- Tests: `country-picker`/`add-funds-method-picker`/`enable-notifications-modal` appear as
+  `kind:"picker"` steps in tuyo onboarding with the trunk intact (≤ MAX_TRUNK); a multi-asset
+  fan-out collapses to one exemplar; the old "side pickers are NOT flows" expectation inverted.
 
 CLAUDE.md note: Stages 3–4 touch the view schema / published flow shape ⇒ MAJOR bump +
 CHANGELOG entry; Stages 1–2 are MINOR. Captures are content, re-derived, not versioned.
@@ -369,16 +375,18 @@ CHANGELOG entry; Stages 1–2 are MINOR. Captures are content, re-derived, not v
   name so it's authored once. Dominator hoisting/dedup is *not* adopted.
 - **Excursion rendering (§2a):** the `kind:"picker"` marker is **internal**; a picker renders as
   a normal step in the flow. No required visual distinction.
+- **Homogeneous detail fan-out (§2c) — RESOLVED (Stage 3):** one exemplar journey; the other
+  instances stay browsable as screens, not their own flows. The "these N are one pattern" signal
+  is the **SAF family** (same-skeleton siblings under a hub that are leaves), not the
+  `decisionPoints` lumped option — the family is structural and already computed. A row with its
+  own onward trunk (e.g. an asset you can go on to Buy) is never collapsed away, so the deepest
+  explored journey survives as a full flow alongside the single detail exemplar.
+- **Unexplored stubs in replay (§3) — RESOLVED:** a stub option has no selector and is not on the
+  flow's woven spine, so it is simply absent from the replay script — replay covers the explored
+  spine (forward steps + woven picker open/select) only.
 
 ## Open questions
 
-1. **Homogeneous detail fan-out (§2c):** confirm the "one Buy/View-asset journey + other details
-   as instances" treatment, vs. one child flow per explored asset. (Recommended: one journey +
-   instances.) Needs a signal for "these N nav-targets are instances of one pattern" — the
-   `decisionPoints` lumped option (`"… asset rows"`) is the natural one; the deepest-explored
-   instance is the exemplar.
-2. **Picker result state:** should the capture skill start keeping a picker's *result* state
+1. **Picker result state:** should the capture skill start keeping a picker's *result* state
    distinct (enabling the §2a linear form) when it's meaningful, or always rely on the excursion
    shape? A capture-side call, not segmentation — but it changes how faithful pickers look.
-3. **Unexplored stubs in replay:** a stub option has no selector — confirm it's simply omitted
-   from the replay script (replay covers the explored spine only).

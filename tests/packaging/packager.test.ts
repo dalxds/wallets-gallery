@@ -81,16 +81,21 @@ describe("packager — journeys", () => {
     expect(view.stats.screens).toBe(11)
   })
 
-  it("holds a return-to-launcher picker out of the trunk; a forward sheet is a step", () => {
-    const buying = byPath(["home", "deposit", "confirm"])
+  it("weaves a return-to-launcher picker inline as a kind:'picker' step (trunk intact)", () => {
+    // token-picker pops back to its launcher (deposit). It is woven into the buying trunk right
+    // after deposit, as a picker step — the spine then continues from deposit's forward exit
+    // (confirm). The trunk is not shattered, and the picker is not its own flow.
+    const buying = byPath(["home", "deposit", "token-picker", "confirm"])
     expect(buying).toBeTruthy()
-    // token-picker pops straight back to its launcher (deposit) — a structural excursion, kept
-    // OUT of the trunk so it can't shatter it. (Stage 3 weaves it back as an inline picker step.)
-    expect(screenById.has("token-picker")).toBe(true)
-    expect(view.flows.some((f) => stepsOf(f).includes("token-picker"))).toBe(false)
-    // a forward-only sheet with no return (the "requires USDC" modal) is part of the journey:
-    // a dominated leaf, so it surfaces as a step — sheets are steps (§2), not hidden side-screens.
+    const picker = buying!.steps.find((s) => s.screenId === "token-picker")!
+    expect(picker.kind).toBe("picker")
+    expect(buying!.steps.map((s) => s.kind)).toEqual(["forward", "forward", "picker", "forward"])
+    // the picker is never its own flow root
+    expect(view.flows.some((f) => f.steps[0].screenId === "token-picker")).toBe(false)
+    // a forward-only sheet with no return (the "requires USDC" modal) is an ordinary step
     expect(view.flows.some((f) => stepsOf(f).includes("requires-usdc-a"))).toBe(true)
+    const reqStep = view.flows.flatMap((f) => f.steps).find((s) => s.screenId === "requires-usdc-a")!
+    expect(reqStep.kind).toBe("forward")
   })
 
   it("builds a nav tree: journeys nest under the screen they launch from", () => {
@@ -99,7 +104,7 @@ describe("packager — journeys", () => {
     // request's trunk now runs through the "requires USDC" sheet (a dominated leaf step).
     const request = byPath(["receive", "request", "requires-usdc-a"])!
     const scan = byPath(["receive", "scan"])!
-    const buying = byPath(["home", "deposit", "confirm"])!
+    const buying = byPath(["home", "deposit", "token-picker", "confirm"])! // picker woven inline
     expect(home.parent).toBeNull()
     // launched-from-home journeys nest under Home
     expect(receive.parent).toBe(home.slug)
@@ -122,7 +127,7 @@ describe("packager — journeys", () => {
   })
 
   it("applies override names and flags mechanical ones", () => {
-    const buying = byPath(["home", "deposit", "confirm"])!
+    const buying = byPath(["home", "deposit", "token-picker", "confirm"])!
     expect(buying.name).toBe("Buying a token")
     expect(buying.nameSource).toBe("override")
     expect(view.namingTODO.length).toBeGreaterThan(0)
@@ -509,10 +514,10 @@ describe("packager — Stage 4: the dominator tree is the flow tree", () => {
     expect(fromEarn.nameSource).toBe("override")
   })
 
-  it("a return-to-launcher excursion does not shatter a linear trunk", () => {
-    // s2 opens a picker that pops straight back to s2. Without excursion handling the dominator
-    // tree would make s2 a hub (picker + s3) and split the onboarding; the excursion is held
-    // out so the trunk runs straight through.
+  it("weaves a return-to-launcher excursion inline without shattering a linear trunk", () => {
+    // s2 opens a picker that pops straight back to s2. Naively the dominator tree would make s2 a
+    // hub (picker + s3) and split the onboarding; instead the picker is woven inline after s2 and
+    // the spine continues to s3 — one trunk, the picker a kind:"picker" step, never its own flow.
     const nodes: GraphNode[] = [
       node("home", "home", "sk:home", ["Home"], ["Go"]),
       node("s1", "form", "sk:s1", ["Step 1"], ["Next"]),
@@ -528,7 +533,35 @@ describe("packager — Stage 4: the dominator tree is the flow tree", () => {
       edge("s2", "s3", "Next", 'id="n2"', "nav", 5),
     ]
     const view = packageGraph({ meta: meta("exc"), root: "home", nodes, edges, decisionPoints: [], overrides: {} })
-    expect(byPath(view, ["home", "s1", "s2", "s3"])).toBeTruthy() // trunk intact, not shattered at s2
-    expect(view.flows.some((f) => stepsOf(f).includes("picker"))).toBe(false) // excursion held out (Stage 3 weaves it)
+    const trunk = byPath(view, ["home", "s1", "s2", "picker", "s3"])! // picker woven, trunk intact
+    expect(trunk).toBeTruthy()
+    expect(trunk.steps.find((s) => s.screenId === "picker")!.kind).toBe("picker")
+    expect(trunk.steps.find((s) => s.screenId === "s3")!.kind).toBe("forward") // spine continues from s2
+    expect(view.flows.some((f) => f.steps[0].screenId === "picker")).toBe(false) // never its own flow
+    // replay opens the picker (s2→picker) and selects back (picker→s2) before continuing to s3
+    const clicks = trunk.replay!.commands.filter((c) => c.command === "click").map((c) => c.positionals[0])
+    expect(clicks).toEqual(['id="start"', 'id="n1"', 'id="pick"', 'id="us"', 'id="n2"'])
+  })
+
+  it("collapses a homogeneous detail fan-out to one exemplar (no N flows for N instances)", () => {
+    // A hub whose rows all open the SAME logical detail screen (one SAF family) — tapping any
+    // asset opens an identical detail. They are instances of one pattern, not N journeys: keep
+    // one exemplar flow, drop the rest (still browsable as screens).
+    const nodes: GraphNode[] = [
+      node("markets", "list", "sk:markets", ["Markets"], ["A", "B", "C"]),
+      node("asset-a", "other", "sk:asset", ["Asset A detail"], ["Buy"]),
+      node("asset-b", "other", "sk:asset", ["Asset B detail"], ["Buy"]),
+      node("asset-c", "other", "sk:asset", ["Asset C detail"], ["Buy"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("markets", "asset-a", "Tap asset A", 'id="a"', "overlay", 1),
+      edge("markets", "asset-b", "Tap asset B", 'id="b"', "overlay", 2),
+      edge("markets", "asset-c", "Tap asset C", 'id="c"', "overlay", 3),
+    ]
+    const view = packageGraph({ meta: meta("fan"), root: "markets", nodes, edges, decisionPoints: [], overrides: {} })
+    const detailFlows = view.flows.filter((f) => ["asset-a", "asset-b", "asset-c"].includes(f.steps[f.steps.length - 1].screenId))
+    expect(detailFlows.length).toBe(1) // one exemplar, not three
+    // all three remain browsable as screens
+    for (const id of ["asset-a", "asset-b", "asset-c"]) expect(view.screens.some((s) => s.id === id)).toBe(true)
   })
 })

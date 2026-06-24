@@ -102,19 +102,32 @@ export function packageGraph(graph: Graph): View {
   const flows: ViewFlow[] = seg.journeys.map((j) => {
     const nm = nameByJourney.get(j.id)!
     const slug = slugByJourney.get(j.id)!
-    const steps: ViewStep[] = j.steps.map((nid, idx) => {
-      const node = nodeById.get(nid)!
-      const e = idx > 0 ? edgeBetween(j.steps[idx - 1], nid) : null
-      const list = appearsIn.get(nid) ?? []
-      list.push({ flow: slug, step: idx + 1 })
-      appearsIn.set(nid, list)
-      if (!nodeToFlow.has(nid)) nodeToFlow.set(nid, slug)
+    // Weave plan: the forward trunk, with each launcher's excursions inserted right after it as
+    // picker steps (so the spine continues from the launcher's forward exit — the next trunk
+    // node — not from the picker). `from` is the node the step's action edge comes from: the
+    // previous trunk node for a forward step, the launcher for a picker. A launcher only owns its
+    // excursions where it is a real trunk step (idx >= 1) or its own single-node hub.
+    const plan: { node: string; kind: ViewStep["kind"]; from: string | null }[] = []
+    j.steps.forEach((nid, idx) => {
+      plan.push({ node: nid, kind: "forward", from: idx > 0 ? j.steps[idx - 1] : null })
+      if (idx >= 1 || j.steps.length === 1) {
+        for (const x of seg.excursionsByLauncher.get(nid) ?? []) plan.push({ node: x, kind: "picker", from: nid })
+      }
+    })
+    const steps: ViewStep[] = plan.map((p, i) => {
+      const node = nodeById.get(p.node)!
+      const e = p.from ? edgeBetween(p.from, p.node) : null
+      const list = appearsIn.get(p.node) ?? []
+      list.push({ flow: slug, step: i + 1 })
+      appearsIn.set(p.node, list)
+      if (!nodeToFlow.has(p.node)) nodeToFlow.set(p.node, slug)
       return {
-        number: idx + 1,
+        number: i + 1,
         title: screenTitle(node, overridesC),
-        screenId: nid,
-        action: idx === 0 ? "Entry point" : e?.action ?? "Navigate",
+        screenId: p.node,
+        action: p.from ? e?.action ?? "Navigate" : "Entry point",
         screenshotPath: node.screenshotPath,
+        kind: p.kind,
       }
     })
     if (nm.source === "mechanical") {
@@ -135,7 +148,7 @@ export function packageGraph(graph: Graph): View {
       summary: "",
       entryPoints: j.entries,
       steps,
-      replay: buildReplay(j.entries[0], j.steps, nodeById, edgeBetween, graph.meta.app.bundleId, root),
+      replay: buildReplay(j.entries[0], plan, edgeBetween, nodeById, graph.meta.app.bundleId, root),
       nameSource: nm.source,
     }
   })

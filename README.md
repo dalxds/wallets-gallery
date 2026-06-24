@@ -361,10 +361,11 @@ share one authored name, and a churning goal/last screen no longer detaches it.
 
 ### 5. replay (`replay.ts`)
 
-For each flow, the trunk's edge selectors are compiled into an inline **`.ad` command
+For each flow, the woven step plan's edge selectors are compiled into an inline **`.ad` command
 script** (`open <bundleId>`, then `click <selector>` per step) with a confidence rating from
-the selector quality (`id=` > `label=`/`role=` > positional). This is what lets a flow be
-_re-run_ on a device, not just viewed.
+the selector quality (`id=` > `label=`/`role=` > positional). A woven **picker** step expands to
+two clicks — open the picker from its launcher, then make the selection that returns to it —
+before the spine continues. This is what lets a flow be _re-run_ on a device, not just viewed.
 
 ### The result: `view.json`
 
@@ -372,10 +373,11 @@ _re-run_ on a device, not just viewed.
 {
   "app": {...}, "captureDate": "...",
   "screens": [ /* one per canonical node, with state/stateGroup + which flows it appears in */ ],
-  "flows":   [ /* the journey tree: slug, name, parent, ordered steps, replay */ ],
+  "flows":   [ /* the journey tree: slug, name, parent, ordered steps (each step has a
+                  kind: "forward" | "picker"), replay */ ],
   "decisionPoints": [ ... ],
   "stats": { "screens": N, "rawNodes": M, "flows": F, "topLevelFlows": T, "replayCoverage": 87 },
-  "namingTODO": [ ... ]
+  "namingTODO": [ /* each: { entryNodeId, nameKey, slug, mechanicalName, steps } */ ]
 }
 ```
 
