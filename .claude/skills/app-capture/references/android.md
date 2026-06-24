@@ -34,6 +34,14 @@ adb wait-for-device
 adb shell getprop sys.boot_completed   # should print "1"
 ```
 
+**Camera/liveness flows (KYC selfie, etc.) — the user boots, not you.** If the flow needs the camera
+(AVD has `hw.camera.front=webcam0`), macOS grants Camera permission **per launching app** — an emulator
+you `nohup` from the agent shell has no camera identity, so webcam0 init **wedges the boot** (OS boots
+but the launcher activity never resolves + the notification shade sticks). Don't cold-boot it yourself:
+have the **user** run `emulator -avd {avd} -no-snapshot-load` from their own terminal (which holds the
+permission), then attach with `agent-device open`. This matches the normal case where the device is
+already up and you only attach.
+
 ## Launching an app
 
 ```bash
@@ -97,6 +105,24 @@ The snapshot result includes:
 If `fallbackReason` is non-null, structure quality degrades — be more conservative with selector confidence and consider escalating to Tier 2.
 
 Helper installs touch the device — **warn loudly if running against a non-emulator device** (a borrowed/loaner phone). On emulators we own this is fine.
+
+### Flutter apps → empty snapshot until a11y is on
+
+A **Flutter** app returns `snapshot -i` with **0 nodes** (`rootPresent: false`): Flutter only builds
+its semantics tree once an Android a11y service is active. Enable one, then restart the agent-device
+session so the helper re-grabs UiAutomation (Flutter exposes live, but a stale helper still shows 0):
+
+```bash
+adb shell settings put secure enabled_accessibility_services \
+  com.android.systemui.accessibility.accessibilitymenu/.AccessibilityMenuService
+adb shell settings put secure accessibility_enabled 1
+agent-device close --session {s} && agent-device open {pkg} --session {s}
+```
+
+`AccessibilityMenu` activates the framework without TalkBack's tap-hijacking. Labels arrive as
+`content-desc` → use `label="..."`. Disable when done (`settings delete secure enabled_accessibility_services`).
+Spot Flutter via a `flutter_*` activity in `dumpsys package`. Without this you're stuck in Tier-2
+coordinate-tapping where the vision oracle is unreliable on vertical position.
 
 ## Selectors on Android
 
