@@ -213,7 +213,13 @@ export interface View {
     flows: number
     topLevelFlows: number
     replayCoverage: number
+    /** flows whose linear trunk was cut by the MAX_TRUNK cap (0 in healthy data). */
+    truncatedFlows: number
   }
-  /** Flows whose name is still mechanical — the agent fills these in via overrides.flowNames. */
-  namingTODO: { entryNodeId: string; slug: string; mechanicalName: string }[]
+  /** Flows whose name is still mechanical — the agent names these via overrides.flowNames,
+   *  working from the full `steps` list (the whole journey) rather than the one-screen fallback. */
+  namingTODO: { entryNodeId: string; slug: string; mechanicalName: string; steps: { id: string; title: string }[] }[]
+  /** Main-nav sections (graph.mainNav) with no captured journey — a capture gap to fill, not
+   *  rendered as flows. The capture agent should walk past these tabs and re-capture. */
+  uncapturedSections: string[]
 }

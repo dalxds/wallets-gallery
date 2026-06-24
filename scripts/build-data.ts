@@ -56,6 +56,10 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
     const view = packageGraph(graph)
     writeFileSync(join(appDir, date, "view.json"), JSON.stringify(view))
     viewCount++
+    if (view.stats.truncatedFlows > 0)
+      console.warn(`⚠ ${dir.name}/${date}: ${view.stats.truncatedFlows} flow(s) hit the MAX_TRUNK cap (split into parent+child) — consider raising it or shortening the journey`)
+    if (view.uncapturedSections.length > 0)
+      console.warn(`⚠ ${dir.name}/${date}: main-nav section(s) with no captured journey: ${view.uncapturedSections.join(", ")} — walk past these tabs and re-capture`)
 
     // the registry summary comes from the latest view only
     if (date === manifest.latestCapture) {

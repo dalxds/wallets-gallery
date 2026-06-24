@@ -21,6 +21,38 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-06-24
+
+### Added
+
+- Flow names are drafted from the whole journey. The naming hand-off (`namingTODO` in a
+  capture's `view.json`) now carries every step's screen id and title, so a flow is named from
+  its full path — "Withdraw to bank account" from `withdraw → add-payee → add-payee-bank` —
+  rather than from a single screen.
+- The build surfaces two capture gaps it used to hide. A main-navigation section the walk never
+  went past (a tab you opened but did not explore) is listed in `view.uncapturedSections`, and
+  `pnpm build-data` prints a warning to go capture it — instead of the section silently
+  disappearing from Flows. A flow whose path was cut by the internal length cap is counted in
+  `view.stats.truncatedFlows`, also with a warning.
+
+### Changed
+
+- Long onboarding-style flows can run to 20 steps before being split (the internal trunk cap was
+  14).
+- Journeys built from sheets/overlays — a buy or swap made entirely of bottom-sheets — are no
+  longer mistaken for dead-ends, so they package as complete flows.
+
+### For contributors
+
+- `lib/packager/segment.ts`: `MAX_TRUNK` 14→20 with `SegmentResult.truncated`; empty main-nav
+  sections reported as `SegmentResult.emptyNavRoots`; `leadsOnward` now counts `overlay` edges,
+  not just `nav`.
+- `lib/packager/index.ts` / `types.ts`: additive view fields `stats.truncatedFlows`,
+  `uncapturedSections`, and `namingTODO[].steps`. Mechanical flow naming stays a simple
+  `steps[1]`/goal fallback — real names come from the LLM/human via `overrides.flowNames`.
+- A design note for the broader segmentation rework (Stages 2–4, not yet implemented) lives at
+  `docs/flow-segmentation-redesign.md`.
+
 ## [2.0.1] - 2026-06-23
 
 ### Fixed

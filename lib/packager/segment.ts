@@ -21,8 +21,11 @@ import type { ClassifyResult } from "./classify.ts"
 
 // Safety cap on one flow's trunk length. The seen-set/cycle guard in build() is the
 // real protection against runaway trunks; this just bounds a pathologically long linear
-// chain so a single flow can't swallow the whole graph. Generous by design.
-const MAX_TRUNK = 14
+// chain so a single flow can't swallow the whole graph. Generous by design — a long but
+// legitimate onboarding (tuyo's is ~16 once pickers are woven in) must fit. When the cap
+// DOES bite it splits the trunk into a parent + child rather than dropping steps; segment
+// reports those flows in `truncated` so a future cap-hit is never silent.
+const MAX_TRUNK = 20
 
 export interface Journey {
   id: string
@@ -36,6 +39,10 @@ export interface Journey {
 export interface SegmentResult {
   journeys: Journey[]
   dist: Map<string, number>
+  /** stable ids of flows whose linear trunk was cut by MAX_TRUNK (split into parent+child). */
+  truncated: string[]
+  /** main-nav section node ids the walk left empty (declared in graph.mainNav, no journey). */
+  emptyNavRoots: string[]
 }
 
 export function segment(
@@ -95,10 +102,12 @@ export function segment(
     if (!folded.has(n.id) && isFamilyDefault(n.id) && n.role === "home") completionHubs.add(n.id)
   }
 
-  // Does a screen lead onward (a forward/hub nav exit)? Used to tell a pass-through
-  // modal (captcha → home, confirmation → next) from a dismissable side-modal.
+  // Does a screen lead onward (a forward/hub exit)? Presentation-agnostic: a sheet counts
+  // the same as a page (e.kind nav OR overlay), so sheet-driven journeys (detail→buy→review,
+  // all bottom-sheets) lead onward, while a true dead-end sheet (picker/peek with no forward
+  // exit) does not. Used to tell a pass-through screen from a dismissable side-screen.
   const leadsOnward = (id: string) =>
-    outAll(id).some((e) => e.kind === "nav" && (distOf(e.to) >= distOf(id) || completionHubs.has(e.to)))
+    outAll(id).some((e) => (e.kind === "nav" || e.kind === "overlay") && (distOf(e.to) >= distOf(id) || completionHubs.has(e.to)))
   // Exits that ADVANCE a journey: a non-backward nav (>= handles DAG shortcuts like
   // welcome→email vs welcome→more-options→email), an edge to a hub, or an overlay
   // into a pass-through modal that itself leads onward.
@@ -150,6 +159,9 @@ export function segment(
   type Raw = { id: string; entry: string; steps: string[]; parent: string | null; goal: string }
   const raws: Raw[] = []
   let flowSeq = 0
+  // raw flow ids whose trunk hit MAX_TRUNK while a single continuation was still pending
+  // (i.e. the cap split one linear journey into parent+child). Mapped to stable ids below.
+  const truncatedRaw = new Set<string>()
 
   // FEATURE journeys (hub → leaf, branch-nested). Continuations heading toward a
   // completion hub are excluded — those become completion journeys below. Nav roots
@@ -175,6 +187,9 @@ export function segment(
       break
     }
     const myId = `f${flowSeq++}`
+    // Cap hit on a still-extending linear trunk: exactly one continuation remained but the
+    // length guard stopped us (a natural branch leaves conts.length !== 1 or stops on a hub).
+    if (trunk.length >= MAX_TRUNK && conts.length === 1) truncatedRaw.add(myId)
     raws.push({ id: myId, entry: trunk[0], steps: trunk, parent: parentId, goal: trunk[trunk.length - 1] })
     for (const c of conts) build([trunk[trunk.length - 1]], c, myId, new Set(seen))
   }
@@ -245,10 +260,16 @@ export function segment(
   }
   for (const j of journeys) if (j.parent && mergedInto.has(j.parent)) j.parent = mergedInto.get(j.parent)!
 
-  // Drop lone feature flows (a single screen with no children) — not journeys.
+  // Drop lone feature flows (a single screen with no children) — not journeys. A main-nav
+  // section the walk left empty (its only link leads to another tab, e.g. avici `card`) is
+  // NOT force-kept: an empty section is a CAPTURE GAP, not content. It's reported via
+  // emptyNavRoots so build-data can warn and prompt a re-capture, rather than papering over
+  // the gap with a content-less one-screen flow. (The section's screen stays browsable.)
   const hasChild = new Set<string>()
   for (const j of journeys) if (j.parent) hasChild.add(j.parent)
   const kept = journeys.filter((j) => j.steps.length > 1 || hasChild.has(j.id))
+  // main-nav sections that produced no top-level flow — the walk never went past the tab.
+  const emptyNavRoots = [...navRoots].filter((nr) => !kept.some((j) => j.parent === null && j.steps[0] === nr))
 
   // Stable public ids (goal-based, disambiguated) so overrides.flowNames can
   // reference them across runs.
@@ -282,5 +303,6 @@ export function segment(
     }
   }
 
-  return { journeys: kept, dist }
+  const truncated = [...truncatedRaw].map((r) => stableOf.get(r)).filter((x): x is string => !!x)
+  return { journeys: kept, dist, truncated, emptyNavRoots }
 }

@@ -295,3 +295,59 @@ describe("packager — reachesHub is cycle-proof", () => {
     expect(view.flows.some((f) => f.steps.some((s) => s.screenId === "q"))).toBe(false)
   })
 })
+
+describe("packager — Stage 1: empty sections, trunk cap, naming context", () => {
+  const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+
+  // home hub (with a real feature) + two main-nav sections: `shop` is a single linear chain
+  // (named for the SECTION, not its deepest screen); `vault` is a tab whose only link leads to
+  // another tab — an empty section, i.e. a capture gap (warned, not shown).
+  function navGraph(): Graph {
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Deposit", "Shop", "Vault"]),
+      node("deposit", "form", "sk:deposit", ["Deposit"], ["Confirm"]),
+      node("shop", "list", "sk:shop", ["Shop Balance"], ["Browse"]),
+      node("shop-catalog", "list", "sk:cat", ["Catalog"], ["Pick"]),
+      node("shop-item", "other", "sk:item", ["Item detail"], ["Buy"]),
+      node("vault", "list", "sk:vault", ["Vault"], ["GoShop"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "deposit", "Tap Deposit", 'id="deposit"', "nav", 1),
+      edge("home", "shop", "Tap Shop tab", 'id="shop"', "nav", 2),
+      edge("home", "vault", "Tap Vault tab", 'id="vault"', "nav", 3),
+      edge("shop", "shop-catalog", "Browse", 'id="browse"', "nav", 4),
+      edge("shop-catalog", "shop-item", "Pick", 'id="pick"', "nav", 5),
+      edge("vault", "shop", "Go to shop (another tab)", 'id="goshop"', "nav", 6),
+    ]
+    return { meta: meta("nav"), root: "home", mainNav: ["shop", "vault"], nodes, edges, decisionPoints: [], overrides: {} }
+  }
+
+  it("namingTODO hands the namer the whole journey (every step's id + title)", () => {
+    const view = packageGraph(navGraph())
+    const todo = view.namingTODO.find((t) => t.steps.some((s) => s.id === "shop-item"))!
+    expect(todo).toBeTruthy()
+    expect(todo.steps.map((s) => s.id)).toEqual(["shop", "shop-catalog", "shop-item"])
+    expect(todo.steps[0].title).toBe("Shop Balance") // titles, not just ids, so the LLM has context
+  })
+
+  it("an empty main-nav section is reported, not rendered as a lone flow", () => {
+    const view = packageGraph(navGraph())
+    expect(view.uncapturedSections).toContain("vault")
+    expect(view.flows.some((f) => stepsOf(f).includes("vault"))).toBe(false) // not a flow
+    expect(view.screens.some((s) => s.id === "vault")).toBe(true) // still browsable as a screen
+  })
+
+  it("caps an over-long linear trunk at MAX_TRUNK and reports it", () => {
+    const N = 25
+    const nodes: GraphNode[] = [node("s0", "home", "sk:s0", ["S0"], ["Go"])]
+    const edges: GraphEdge[] = []
+    for (let i = 1; i < N; i++) {
+      nodes.push(node(`s${i}`, "other", `sk:s${i}`, [`S${i}`], ["Go"]))
+      edges.push(edge(`s${i - 1}`, `s${i}`, "Go", `id="g${i}"`, "nav", i))
+    }
+    const view = packageGraph({ meta: meta("long"), root: "s0", nodes, edges, decisionPoints: [], overrides: {} })
+    expect(view.stats.truncatedFlows).toBeGreaterThan(0)
+    const root = view.flows.find((f) => f.steps[0].screenId === "s0")!
+    expect(root.steps.length).toBeLessThanOrEqual(20) // MAX_TRUNK
+  })
+})

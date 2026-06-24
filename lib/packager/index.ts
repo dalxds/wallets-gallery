@@ -59,12 +59,20 @@ export function packageGraph(graph: Graph): View {
   const edgeBetween = (a: string, b: string) => edges.find((e) => e.from === a && e.to === b) ?? null
 
   // Names + slugs (assigned before steps so parent refs resolve). journeyName is
-  // computed once here and reused when building the flows below.
+  // computed once here and reused when building the flows below. Name a flow by its first
+  // DISTINCTIVE screen (steps[1] — the entry into its own trunk, past the launch screen
+  // shared with the parent), not its deepest/goal screen: a multi-step journey reads by its
+  // intent ("Withdraw Asset") rather than its last sheet ("Add bank details"). Single-step
+  // flows (a hub/tab) have only steps[0], so fall back to the goal.
+  // Mechanical name is a deterministic FALLBACK only — the real name comes from the LLM/human
+  // (overrides.flowNames), which sees the whole journey via namingTODO.steps below. So keep this
+  // dumb: the first distinctive screen (steps[1], past the shared launch screen), else the goal.
   const nameByJourney = new Map<string, FlowName>()
   const slugByJourney = new Map<string, string>()
   const used = new Set<string>()
   for (const j of seg.journeys) {
-    const nm = journeyName(j, nodeById.get(j.goal), overridesC)
+    const nameNode = nodeById.get(j.steps.length > 1 ? j.steps[1] : j.goal)
+    const nm = journeyName(j, nameNode, overridesC)
     nameByJourney.set(j.id, nm)
     let slug = slugify(nm.name) || j.id
     const base = slug
@@ -96,7 +104,14 @@ export function packageGraph(graph: Graph): View {
       }
     })
     if (nm.source === "mechanical") {
-      namingTODO.push({ entryNodeId: j.entries[0], slug, mechanicalName: nm.name })
+      // Hand the namer the WHOLE journey (every step's screen + title), not just one screen,
+      // so it can name from full context rather than re-deriving it from the view.
+      namingTODO.push({
+        entryNodeId: j.entries[0],
+        slug,
+        mechanicalName: nm.name,
+        steps: steps.map((s) => ({ id: s.screenId, title: s.title })),
+      })
     }
     return {
       slug,
@@ -151,8 +166,10 @@ export function packageGraph(graph: Graph): View {
       flows: flows.length,
       topLevelFlows,
       replayCoverage: flows.length ? Math.round((withReplay / flows.length) * 100) : 0,
+      truncatedFlows: seg.truncated.length,
     },
     namingTODO,
+    uncapturedSections: seg.emptyNavRoots,
   }
 }
 
