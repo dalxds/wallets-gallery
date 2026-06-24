@@ -1962,6 +1962,232 @@
           "selector": null
         }
       ]
+    },
+    {
+      "id": "card-gen-account-type",
+      "fingerprint": "sha256:6990aed2e128666d0253a07b",
+      "skeletonHash": "sk:56521897d3fd22e96039f6bc",
+      "pHash": "p:0f120782a76c7d7d",
+      "role": "picker",
+      "screenshotPath": "assets/a0e869a98ca8.png",
+      "snapshotPath": "assets/59d603eae3f8.snap.json",
+      "texts": [
+        "Choose your account type",
+        "Account Type",
+        "Personal Account",
+        "Business Account",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Personal Account",
+          "role": "button",
+          "selector": "label=\"Personal Account\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Business Account",
+          "role": "button",
+          "selector": "label=\"Business Account\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\""
+        }
+      ]
+    },
+    {
+      "id": "card-gen-country",
+      "fingerprint": "sha256:1af0ded0d7a971dd5c2eea6d",
+      "skeletonHash": "sk:56521897d3fd22e96039f6bc",
+      "pHash": "p:4d42079283d4f5fd",
+      "role": "picker",
+      "screenshotPath": "assets/e06cd97a8ed3.png",
+      "snapshotPath": "assets/772818a394f6.snap.json",
+      "texts": [
+        "Confirm your country of residence",
+        "Country of Residence",
+        "United States of America",
+        "All countries except USA",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "United States of America",
+          "role": "button",
+          "selector": "label~=\"United States\""
+        },
+        {
+          "label": "All countries except USA",
+          "role": "button",
+          "selector": "label~=\"All countries\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\""
+        }
+      ]
+    },
+    {
+      "id": "card-gen-kyc",
+      "fingerprint": "sha256:b2656c5bf0f8616cfab8eaee",
+      "skeletonHash": "sk:c8de2b4780e753f823784b5b",
+      "pHash": "p:0f32078285dcf5f5",
+      "role": "form",
+      "screenshotPath": "assets/796bdd83cdd3.png",
+      "snapshotPath": "assets/c72beef11693.snap.json",
+      "texts": [
+        "Spending Habits to ensure safety",
+        "Your Occupation",
+        "Select Occupation",
+        "Your Annual Salary",
+        "Spend Volume",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select Occupation",
+          "role": "button",
+          "selector": "label=\"Select Occupation\""
+        },
+        {
+          "label": "Annual Salary (input)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Spend Volume (input)",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-gen-consent",
+      "fingerprint": "sha256:424a4f8611ce25409fda4548",
+      "skeletonHash": "sk:d2660b107227b04094615092",
+      "pHash": "p:0f120b1255f4f5f5",
+      "role": "form",
+      "screenshotPath": "assets/5c763d7e2b60.png",
+      "snapshotPath": "assets/c79be82d3a20.snap.json",
+      "texts": [
+        "Account Purpose and E-sign Consent",
+        "I accept the E-Sign Consent and agree that card will be used for spending purposes",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "I accept the E-Sign Consent (checkbox)",
+          "role": "checkbox",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\""
+        }
+      ]
+    },
+    {
+      "id": "card-gen-terms",
+      "fingerprint": "sha256:a8edf2b0a7a508060995c2a4",
+      "skeletonHash": "sk:070d7c64f39af226de0409d6",
+      "pHash": "p:43c2072e0b12fdfd",
+      "role": "form",
+      "screenshotPath": "assets/c55242925557.png",
+      "snapshotPath": "assets/54029b828e21.snap.json",
+      "texts": [
+        "By continuing, you accept our terms",
+        "I accept the Avici Terms / Privacy Policy",
+        "Use existing documents for verification",
+        "I certify that the information I have provided is accurate and that I will abide by all the rules and requirements related to my Avici Spend Card",
+        "I have reviewed the supported countries List, and confirm I am not a resident of the United States, and also confirm compliance with all applicable local laws and regulations.",
+        "Continue to Sumsub"
+      ],
+      "interactiveElements": [
+        {
+          "label": "I accept the Avici Terms / Privacy Policy (checkbox)",
+          "role": "checkbox",
+          "selector": null
+        },
+        {
+          "label": "Use existing documents for verification (checkbox)",
+          "role": "checkbox",
+          "selector": null
+        },
+        {
+          "label": "I certify the information is accurate (checkbox)",
+          "role": "checkbox",
+          "selector": null
+        },
+        {
+          "label": "Reviewed supported countries / not a US resident (checkbox)",
+          "role": "checkbox",
+          "selector": null
+        },
+        {
+          "label": "Continue to Sumsub",
+          "role": "button",
+          "selector": "label~=\"Continue to Sumsub\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-gen-sumsub",
+      "fingerprint": "sha256:c7eeb53a917c6393d78d3eec",
+      "skeletonHash": "sk:84556a19d8f38207bc667a11",
+      "pHash": "p:fc035e811b56297d",
+      "role": "auth",
+      "screenshotPath": "assets/e1ee55308e39.png",
+      "snapshotPath": "assets/f4a48f02da47.snap.json",
+      "texts": [
+        "Avici Inc Verification",
+        "Let's get you verified",
+        "Follow the simple steps below",
+        "1. Provide identity document",
+        "2. Perform a liveness check",
+        "3. Provide personal information",
+        "4. Phone verification",
+        "5. Email verification",
+        "Get verified faster with Sumsub ID",
+        "Securely save and reuse your verified data for free.",
+        "Start verification",
+        "in.sumsub.com"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Start verification",
+          "role": "button",
+          "selector": "label=\"Start verification\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Get verified faster with Sumsub ID (toggle)",
+          "role": "toggle",
+          "selector": null
+        },
+        {
+          "label": "Change language",
+          "role": "button",
+          "selector": "label=\"Change language\""
+        },
+        {
+          "label": "Close tab",
+          "role": "button",
+          "selector": null
+        }
+      ]
     }
   ],
   "edges": [
@@ -2292,6 +2518,54 @@
       "selector": null,
       "kind": "nav",
       "observedAtStep": 41
+    },
+    {
+      "from": "card",
+      "to": "card-gen-account-type",
+      "action": "Tap \"Tap to generate card\"",
+      "selector": "label=\"Tap to generate card\"",
+      "kind": "nav",
+      "observedAtStep": 42
+    },
+    {
+      "from": "card-gen-account-type",
+      "to": "card-gen-country",
+      "action": "Select \"Personal Account\" + Continue",
+      "selector": "label=\"Continue\"",
+      "kind": "in-place",
+      "observedAtStep": 43
+    },
+    {
+      "from": "card-gen-country",
+      "to": "card-gen-kyc",
+      "action": "Confirm country + Continue",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 44
+    },
+    {
+      "from": "card-gen-kyc",
+      "to": "card-gen-consent",
+      "action": "Fill Spending Habits KYC + Continue",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 45
+    },
+    {
+      "from": "card-gen-consent",
+      "to": "card-gen-terms",
+      "action": "Accept E-sign consent + Continue",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 46
+    },
+    {
+      "from": "card-gen-terms",
+      "to": "card-gen-sumsub",
+      "action": "Accept terms + tap \"Continue to Sumsub\" (opens Sumsub KYC in Chrome)",
+      "selector": "label~=\"Continue to Sumsub\"",
+      "kind": "nav",
+      "observedAtStep": 47
     }
   ],
   "decisionPoints": [
@@ -2405,15 +2679,48 @@
       ]
     ],
     "flowNames": {
-      "welcome": "Welcome",
       "web3auth-login": "Signing in (social / Web3Auth)",
-      "email-login": "Signing in (email)",
       "home": "Home",
-      "qr-scanner": "Scanning a QR code",
       "settings": "Settings",
-      "credit-mode": "Opening a credit line",
       "referrals": "Referrals",
-      "swap": "Swapping tokens"
-    }
+      "credit-mode": "Opening a credit line",
+      "qr-scanner": "Scanning a QR code",
+      "swap": "Swapping tokens",
+      "swap-quote-details": "Swapping tokens",
+      "swapping-tokens": "Swapping tokens",
+      "welcome": "Welcome & sign-in",
+      "money-forever-yours": "Welcome & sign-in",
+      "email-otp": "Signing in with email",
+      "email-login": "Signing in with email",
+      "transaction-detail": "Transaction receipt",
+      "multichain-convert": "Transaction receipt",
+      "activity-filter": "Activity filter",
+      "all": "Activity filter",
+      "add-payee-bank": "Withdrawing funds",
+      "withdraw-asset": "Withdrawing funds",
+      "card-gen-account-type": "Generating a card",
+      "choose-your-account-type": "Generating a card",
+      "markets-guest": "Markets",
+      "markets": "Markets",
+      "swap-token-picker-guest": "Picking a swap token",
+      "convert-to": "Picking a swap token",
+      "markets-section-ranked": "Market-cap rankings",
+      "ranked-by-market-cap": "Market-cap rankings",
+      "buy-review": "Buying a token",
+      "spacex": "Buying a token",
+      "gold-detail": "Token detail",
+      "gold": "Token detail",
+      "high-impact-warning": "High price-impact warning",
+      "high-price-impact": "High price-impact warning",
+      "grow-yield-deposit": "Earning yield",
+      "stablecoin-yields": "Earning yield",
+      "withdraw": "Withdrawing funds",
+      "spacex-detail": "Buying a token (SpaceX)",
+      "grow-stablecoin-yields": "Earning yield"
+    },
+    "splits": [
+      "card-gen-account-type",
+      "card-gen-country"
+    ]
   }
 }
