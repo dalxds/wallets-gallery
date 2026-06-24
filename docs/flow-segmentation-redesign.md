@@ -2,7 +2,9 @@
 
 Design note for reworking how screens are packaged into flows (`lib/packager/segment.ts`,
 with touchpoints in `index.ts` and `naming.ts`). Captures the decisions from the review
-discussion and stages the work. No code yet — this is the spec to build against.
+discussion and stages the work. **Stage 1 is implemented and committed (app v2.1.0); Stages
+2–4 below are still the spec to build against.** Line-number references predate the Stage 1
+edits — treat them as approximate and grep for the named symbols.
 
 The packager front-end (SAF merge/cluster + classify toggles) is sound and stays as-is.
 Everything below is about **segmentation**: turning the canonicalized edge graph into the
@@ -12,8 +14,9 @@ flow tree.
 
 ## Goals
 
-1. A declared section never disappears *silently*, and reads as itself (Avici's `card` and
-   `grow` are the canaries — an empty section warns, a single-child section is named for itself).
+1. A declared section never disappears *silently* and reads as itself: an empty `mainNav`
+   section warns (`uncapturedSections`) instead of vanishing (Avici's `card`), and a flow is
+   named from its full journey by the LLM, not mislabeled by a downstream sheet (Avici's `grow`).
 2. Pickers and sheets are part of the journey, not hidden in the Screens tab.
 3. The Flows view reflects **what a screen offers**, not just **what the walk happened to
    tap** — using authored `decisionPoints`.
@@ -52,8 +55,8 @@ anchors run the trunk straight through), and fix the actual defect, which is **n
 
 | journeys under the anchor | result |
 | --- | --- |
-| **0** (rare) | the flow is just the anchor screen — `[card]`, "Card" (the never-drop safety net) |
-| **1** | **one flow** = anchor + that journey's steps, named after the anchor — `[grow → grow-stablecoin-yields → …]`, "Grow". **Not** a `[grow]` hub with a single child tucked under it. |
+| **0** (rare) | no flow — the empty section warns via `uncapturedSections` (Stage 1, done); the screen stays browsable in Screens |
+| **1** | **one flow** = anchor + that journey's steps (`[grow → grow-stablecoin-yields → …]`); name from the LLM (mechanical fallback `steps[1]`). **Not** a `[grow]` hub with a single child tucked under it. |
 | **2+** | a hub `[anchor]` with the journeys as children (`earn`, `markets`) |
 
 A "journey/child" is counted **after pickers are pulled out (§2) and after dropped/merged
@@ -241,14 +244,22 @@ proxy. The principled replacement is a **dominator tree**.
   downstream: structurally a leaf excursion. No bespoke side-screen test.
 - **feature vs completion** → a hub is just an anchor (an `idom = ⊤` node); a journey that ends
   at a hub is a trunk whose tail is a dominated hub. One pass, no second `shortestToHub`
-  regime, no "returns home flips a feature into a completion flow" artifact. **This also fixes
-  truncation of journeys that return to a hub:** Avici's SpaceX buy is
-  `markets → spacex-detail → buy-amount → buy-review(confirmation) → high-impact-warning(execute)
-  → markets`, but today the flow **stops at `buy-amount`** — the confirmation and execution are
-  dropped because they reach the Markets hub (excluded from `featureConts`, and not recovered by
-  the completion regime). Under hub-as-terminator, the journey keeps its whole tail and simply
-  *ends* when it lands back on the hub. Same for Swap (`markets → swap → … → execute → markets`),
-  which today stops at `swap`.
+  regime, no "returns home flips a feature into a completion flow" artifact.
+- **the distance-proxy mis-drop** (confirmed on avici, post–Stage 1). Avici's SpaceX buy is
+  `markets → spacex-detail → buy-amount → buy-review(confirm) → high-impact-warning(execute) →
+  markets`, but the flow **stops at `buy-amount`** — `buy-review` and `high-impact-warning` are
+  dropped (verified: `appearsIn: []`). Root cause is *not* hub exclusion (Markets is a nav root,
+  not a completion hub, so `featureConts`/`reachesHub` never fire here) — it's `isSideTarget` +
+  the BFS distance proxy: `buy-review`'s only exit is an overlay to `high-impact-warning`, which
+  is **shared with the Swap flow** and reached far more cheaply (`markets → swap →
+  high-impact-warning`), so it carries a *low* distance-from-entry. `isSideTarget(buy-review)`
+  then sees an exit to a lower-distance node, flags `buy-review` as a side-screen, and cuts the
+  trunk. The dominator tree removes the proxy: `buy-review` is dominated by `buy-amount` (only it
+  reaches `buy-review`) so it stays in the buy trunk; `high-impact-warning`, reached from both
+  `buy-review` and `swap`, is dominated by their nearest common ancestor (the Markets hub) and
+  becomes a **shared execute leaf** under Markets — a convergent-sheet case the implementation
+  must handle (a sheet reached from N flows lands at the common dominator, not duplicated into
+  each). Swap is the same shape.
 - **`reachesHub`** → unnecessary; reaching a hub is just an edge to a node that happens to be an
   anchor.
 
