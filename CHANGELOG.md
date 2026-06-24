@@ -21,6 +21,47 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-06-24
+
+### Changed
+
+- Flows are now derived from the app's **navigation structure** rather than the path the walk
+  happened to take, so journeys read truer. A screen you can only reach by passing through
+  another nests under it; a deep journey keeps its full tail instead of being cut short when a
+  later screen happens to be reachable more cheaply elsewhere. For example, a "Buy" flow now runs
+  all the way to its review step instead of stopping at the amount screen.
+- A sheet reached from several flows (a shared "confirm" or "execute" overlay) appears once, at
+  the screen they share, instead of being dropped or duplicated.
+- A journey reachable from more than one section (e.g. "Adding money" from both Home and a tab)
+  shows up under each section, but is **named once** — its name is now authored against the
+  flow's first distinctive screen, not its last. A churning end screen (a promo, a freshly added
+  confirmation) no longer detaches a flow's name.
+
+### Breaking
+
+- `overrides.flowNames` is now keyed by a flow's **name key** — its first distinctive screen
+  (`steps[1]`, or the launch screen for a one-step hub) — instead of its goal/anchor node. The
+  new key is surfaced as `nameKey` in each `view.namingTODO` entry. Existing `flowNames` authored
+  against the old goal-based keys must be re-keyed (the two shipped captures already are).
+- Some flow routes change as a result of the structural rework (a flow's slug follows its name;
+  flows that were artifacts of the old completion-path heuristic are gone, and previously dropped
+  journeys now appear).
+
+### For contributors
+
+- `lib/packager/segment.ts` is rewritten around a **dominator tree** of the nav/overlay subgraph
+  (virtual super-source → anchors; iterative Cooper–Harvey–Kennedy idom). It replaces the
+  BFS-distance proxy and its compensations (`isSideTarget`, `leadsOnward`, `reachesHub`,
+  `shortestToHub`, the separate feature-vs-completion regimes). `idom(X)` is X's parent; a chain
+  is a trunk, a node dominating ≥ 2 onward children is a hub. Return-to-launcher **excursions**
+  are detected structurally and held out of flows (woven back as picker steps in the next stage);
+  **cross-section** journeys are re-emitted under each reaching section rather than hoisted to the
+  common dominator. The fixpoint is order-independent — determinism is preserved.
+- `lib/packager/naming.ts` adds `nameKeyOf(journey)` (the trunk-based name key) and looks up
+  `overrides.flowNames` by it; `view.namingTODO[].nameKey` is additive.
+- Stage 4 of `docs/flow-segmentation-redesign.md`; built before Stage 3 (it removes the machinery
+  Stage 3 would otherwise have to patch). `README.md` and the `app-capture` schema doc updated.
+
 ## [2.2.0] - 2026-06-24
 
 ### Changed

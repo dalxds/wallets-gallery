@@ -61,7 +61,10 @@ function fixture(): Graph {
     nodes,
     edges,
     decisionPoints: [],
-    overrides: { flowNames: { confirm: "Buying a token" } },
+    // flowNames is keyed by the flow's NAME KEY — its first distinctive screen (steps[1]),
+    // not its goal/last screen. The buying flow is home → deposit → confirm, so its key is
+    // `deposit` (decoupled from the routing slug; shared across cross-section copies).
+    overrides: { flowNames: { deposit: "Buying a token" } },
   }
 }
 
@@ -78,20 +81,23 @@ describe("packager — journeys", () => {
     expect(view.stats.screens).toBe(11)
   })
 
-  it("a journey is a full path; side pickers/modals are NOT flows (Screens-tab only)", () => {
+  it("holds a return-to-launcher picker out of the trunk; a forward sheet is a step", () => {
     const buying = byPath(["home", "deposit", "confirm"])
     expect(buying).toBeTruthy()
-    // the token picker is a screen but never a flow step
+    // token-picker pops straight back to its launcher (deposit) — a structural excursion, kept
+    // OUT of the trunk so it can't shatter it. (Stage 3 weaves it back as an inline picker step.)
     expect(screenById.has("token-picker")).toBe(true)
     expect(view.flows.some((f) => stepsOf(f).includes("token-picker"))).toBe(false)
-    // the requires-usdc modals likewise never become flows
-    expect(view.flows.some((f) => stepsOf(f).includes("requires-usdc-a"))).toBe(false)
+    // a forward-only sheet with no return (the "requires USDC" modal) is part of the journey:
+    // a dominated leaf, so it surfaces as a step — sheets are steps (§2), not hidden side-screens.
+    expect(view.flows.some((f) => stepsOf(f).includes("requires-usdc-a"))).toBe(true)
   })
 
   it("builds a nav tree: journeys nest under the screen they launch from", () => {
     const home = byPath(["home"])! // the Home feature tree (home is a hub → its own root)
     const receive = byPath(["home", "receive"])!
-    const request = byPath(["receive", "request"])!
+    // request's trunk now runs through the "requires USDC" sheet (a dominated leaf step).
+    const request = byPath(["receive", "request", "requires-usdc-a"])!
     const scan = byPath(["receive", "scan"])!
     const buying = byPath(["home", "deposit", "confirm"])!
     expect(home.parent).toBeNull()
@@ -261,10 +267,11 @@ describe("packager — overrides survive SAF merge", () => {
   })
 })
 
-describe("packager — reachesHub is cycle-proof", () => {
-  // p and q are equidistant from welcome and point at each other — a forward cycle in
-  // the continuation graph — and both reach the home hub via p→home. The old memoized
-  // reachesHub could cache the cycle-guard's `false` and wrongly route q as a feature flow.
+describe("packager — the dominator tree is cycle-proof", () => {
+  // p and q point at each other — a forward cycle in the nav subgraph — and both hang off
+  // welcome; p also leads to the home hub. The iterative dominator fixpoint must terminate and
+  // be deterministic on the cycle, and the tree must not duplicate the cycle into an infinite
+  // nest. (idom(p)=idom(q)=welcome, so welcome is a hub with p and q as siblings.)
   const g: Graph = {
     meta: meta("loop"), root: "welcome", decisionPoints: [], overrides: {},
     nodes: [
@@ -282,17 +289,21 @@ describe("packager — reachesHub is cycle-proof", () => {
     ],
   }
 
-  it("completes deterministically and reaches the hub", () => {
+  it("terminates deterministically on the cycle", () => {
     const view = packageGraph(g)
     expect(JSON.stringify(packageGraph(g))).toBe(JSON.stringify(view)) // no hang, deterministic
-    expect(view.flows.some((f) => f.steps[f.steps.length - 1].screenId === "home")).toBe(true)
   })
 
-  it("does not emit the hub-reaching cycle node q as a feature flow", () => {
+  it("nests the cycle nodes under their common dominator without looping", () => {
     const view = packageGraph(g)
-    // q reaches the hub (q→p→home), so it belongs to completion routing, never a
-    // standalone feature flow. The memo bug would surface q as its own flow.
-    expect(view.flows.some((f) => f.steps.some((s) => s.screenId === "q"))).toBe(false)
+    const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+    const welcome = view.flows.find((f) => stepsOf(f).join(">") === "welcome")!
+    const p = view.flows.find((f) => stepsOf(f).join(">") === "welcome>p")!
+    const q = view.flows.find((f) => stepsOf(f).join(">") === "welcome>q")!
+    expect(p.parent).toBe(welcome.slug) // welcome dominates p and q → it's their hub
+    expect(q.parent).toBe(welcome.slug)
+    // home is its own anchor (idom = super-source via the home role), never nested under p
+    expect(view.flows.some((f) => f.parent === p.slug)).toBe(false)
   })
 })
 
@@ -424,5 +435,100 @@ describe("packager — Stage 2: decisionPoints drive branch order + completeness
     const tree = (v: ReturnType<typeof packageGraph>) =>
       JSON.stringify({ flows: v.flows, decisionPoints: v.decisionPoints })
     expect(tree(packageGraph(rev))).toBe(tree(packageGraph(g)))
+  })
+})
+
+describe("packager — Stage 4: the dominator tree is the flow tree", () => {
+  const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
+  const byPath = (v: ReturnType<typeof packageGraph>, ids: string[]) =>
+    v.flows.find((f) => stepsOf(f).join(">") === ids.join(">"))
+
+  it("keeps a forward trunk that exits to a sheet shared with another flow (no mis-drop)", () => {
+    // The avici buy-review bug, distilled: home branches into a deep Buy trunk and a shallow
+    // Swap. Buy's last screen (review) exits ONLY to an execute sheet that Swap also reaches.
+    // The old BFS-distance proxy saw that cheap shared sheet and cut the trunk at buy-amount;
+    // the dominator tree keeps review (only buy-amount reaches it) and lands the shared sheet at
+    // the common dominator (home), emitted ONCE — never duplicated into both trunks.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Buy", "Swap"]),
+      node("buy-detail", "other", "sk:bd", ["SpaceX"], ["Buy"]),
+      node("buy-amount", "form", "sk:ba", ["Amount"], ["Review"]),
+      node("buy-review", "confirmation", "sk:br", ["Review order"], ["Slide to buy"]),
+      node("swap", "form", "sk:sw", ["Swap"], ["Slide to swap"]),
+      node("execute", "modal", "sk:ex", ["High price impact"], ["Confirm"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "buy-detail", "Tap an asset", 'id="asset"', "overlay", 1),
+      edge("buy-detail", "buy-amount", "Tap Buy", 'id="buy"', "overlay", 2),
+      edge("buy-amount", "buy-review", "Tap Review", 'id="review"', "nav", 3),
+      edge("buy-review", "execute", "Slide to buy", 'id="slide-buy"', "overlay", 4),
+      edge("home", "swap", "Open swap", 'id="swap"', "nav", 5),
+      edge("swap", "execute", "Slide to swap", 'id="slide-swap"', "overlay", 6),
+      edge("execute", "home", "Confirm → returns home", 'id="confirm"', "nav", 7),
+    ]
+    const view = packageGraph({ meta: meta("conv"), root: "home", nodes, edges, decisionPoints: [], overrides: {} })
+    // the Buy trunk reaches review (the mis-drop is fixed)
+    expect(byPath(view, ["home", "buy-detail", "buy-amount", "buy-review"])).toBeTruthy()
+    const review = view.screens.find((s) => s.id === "buy-review")!
+    expect(review.appearsIn.length).toBeGreaterThan(0)
+    // the shared execute sheet lands at the common dominator (home), as a single leaf — it is
+    // NOT swallowed into the Buy or Swap trunk, and NOT duplicated.
+    expect(byPath(view, ["home", "execute"])).toBeTruthy()
+    expect(view.flows.filter((f) => stepsOf(f).includes("execute")).length).toBe(1)
+    expect(byPath(view, ["home", "buy-detail", "buy-amount", "buy-review"])!.steps.some((s) => s.screenId === "execute")).toBe(false)
+    expect(byPath(view, ["home", "swap"])!.steps.some((s) => s.screenId === "execute")).toBe(false)
+  })
+
+  it("re-emits a cross-section journey under each section, sharing one authored name", () => {
+    // add-money is reachable from both Home and the Earn section. The dominator tree's common
+    // dominator is the super-source, but we keep a copy under EACH reaching section (locked
+    // decision) — with a unique routing slug but ONE name key (steps[1] = add-money), so the
+    // name is authored once.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Earn", "Add money"]),
+      node("earn", "list", "sk:earn", ["Earn"], ["Add money"]),
+      node("add-money", "form", "sk:am", ["Add money"], ["Bank", "Card"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "earn", "Tap Earn tab", 'id="earn"', "nav", 1),
+      edge("home", "add-money", "Tap Add money", 'id="add-home"', "nav", 2),
+      edge("earn", "add-money", "Tap Add money", 'id="add-earn"', "nav", 3),
+    ]
+    const view = packageGraph({
+      meta: meta("xsec"), root: "home", mainNav: ["earn"], nodes, edges, decisionPoints: [],
+      overrides: { flowNames: { "add-money": "Adding money" } },
+    })
+    const fromHome = byPath(view, ["home", "add-money"])!
+    const fromEarn = byPath(view, ["earn", "add-money"])!
+    expect(fromHome).toBeTruthy()
+    expect(fromEarn).toBeTruthy()
+    expect(fromHome.name).toBe("Adding money") // authored once by name key, both copies inherit it
+    expect(fromEarn.name).toBe("Adding money")
+    expect(fromHome.slug).not.toBe(fromEarn.slug) // but each keeps a unique route
+    expect(fromHome.nameSource).toBe("override")
+    expect(fromEarn.nameSource).toBe("override")
+  })
+
+  it("a return-to-launcher excursion does not shatter a linear trunk", () => {
+    // s2 opens a picker that pops straight back to s2. Without excursion handling the dominator
+    // tree would make s2 a hub (picker + s3) and split the onboarding; the excursion is held
+    // out so the trunk runs straight through.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Go"]),
+      node("s1", "form", "sk:s1", ["Step 1"], ["Next"]),
+      node("s2", "form", "sk:s2", ["Step 2", "Country"], ["Pick country", "Next"]),
+      node("picker", "picker", "sk:pick", ["Select country", "US", "CA"], ["US", "CA"]),
+      node("s3", "form", "sk:s3", ["Step 3"], ["Done"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "s1", "Start", 'id="start"', "nav", 1),
+      edge("s1", "s2", "Next", 'id="n1"', "nav", 2),
+      edge("s2", "picker", "Pick country", 'id="pick"', "overlay", 3),
+      edge("picker", "s2", "Select US", 'id="us"', "nav", 4),
+      edge("s2", "s3", "Next", 'id="n2"', "nav", 5),
+    ]
+    const view = packageGraph({ meta: meta("exc"), root: "home", nodes, edges, decisionPoints: [], overrides: {} })
+    expect(byPath(view, ["home", "s1", "s2", "s3"])).toBeTruthy() // trunk intact, not shattered at s2
+    expect(view.flows.some((f) => stepsOf(f).includes("picker"))).toBe(false) // excursion held out (Stage 3 weaves it)
   })
 })

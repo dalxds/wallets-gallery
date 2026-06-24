@@ -2405,15 +2405,15 @@
       ]
     ],
     "flowNames": {
+      "welcome": "Welcome",
       "web3auth-login": "Signing in (social / Web3Auth)",
+      "email-login": "Signing in (email)",
       "home": "Home",
       "qr-scanner": "Scanning a QR code",
       "settings": "Settings",
       "credit-mode": "Opening a credit line",
       "referrals": "Referrals",
-      "swap": "Swapping tokens",
-      "home@welcome": "Entering the app",
-      "home-2": "Entering the app"
+      "swap": "Swapping tokens"
     }
   }
 }

@@ -319,23 +319,31 @@ stage ends green on `pnpm build-data && pnpm test` with regenerated `view.json` 
 - Tests: `namingTODO` carries each flow's full step list; empty section warns + lands in
   `uncapturedSections`, not in flows; over-long trunk → cap + `truncatedFlows`.
 
-**Stage 2 — decisionPoints-driven order + completeness (MINOR)**
+**Stage 2 — decisionPoints-driven order + completeness (MINOR)** ✅ DONE (app v2.2.0)
 - Order children/options by decisionPoint option order → `observedAtStep` → lexical.
 - Surface unexplored options as stubs.
 - Tests pin Settings child order and `add-funds-method-picker`'s 3-option completeness.
 
-**Stage 3 — pickers/sheets as steps (MAJOR — `ViewStep.kind`)**
-- Remove `isSideTarget` demotion; weave overlays as excursion steps without trunk truncation
-  (§2a); options as content via diverge/converge (§2b/§3).
+**Stage 4 — dominator-tree core (MAJOR — internal; routes stable) — built before Stage 3.** ✅ DONE
+- Replaced the distance heuristic + `build`/`shortestToHub`/`isSideTarget`/`reachesHub`/`leadsOnward`
+  with a dominator tree over the nav/overlay subgraph (super-source → anchors; iterative
+  Cooper–Harvey–Kennedy idom). Excursions (return-to-launcher pickers/peeks) are detected
+  structurally and held out of flows; cross-section journeys are re-emitted under each reaching
+  section (no hoist/dedup). Name key decoupled from routing slug (`steps[1]`, parent-independent)
+  so cross-section copies share one authored name and a churning goal no longer detaches it —
+  `view.namingTODO[].nameKey` surfaces it; `overrides.flowNames` is now keyed by it.
+- **Build-order note:** the spec numbers pickers (3) before the core (4), but Stage 4 *removes* the
+  machinery Stage 3 would otherwise patch (the distance proxy / `isSideTarget`), so the dominator
+  core was built first (per the implementation recommendation). With the core in place, forward
+  sheets already surface as steps; only the return-to-launcher excursions wait for Stage 3.
+
+**Stage 3 — pickers/sheets as steps woven on the dominator core (MAJOR — `ViewStep.kind`)**
+- Weave the held-out excursions back in as inline `kind:"picker"` steps without truncating the
+  trunk (§2a); options as content via diverge/converge (§2b/§3); collapse the homogeneous detail
+  fan-out (§2c).
 - Update `buildReplay` for excursion steps.
 - Tests: `country-picker` appears as a `kind:"picker"` step; trunk past it is intact; a
   multi-asset picker does not spawn N flows.
-
-**Stage 4 — dominator-tree core (MAJOR — internal; routes/schema stable)**
-- Replace the distance heuristic + `build`/`shortestToHub`/`isSideTarget`/`reachesHub` with the
-  dominator construction; verify it reproduces Stage 1–3 view diffs intentionally (golden-file
-  review on tuyo + avici), then delete the dead machinery.
-- Resolve the cross-parent hoist per the open decision above.
 
 CLAUDE.md note: Stages 3–4 touch the view schema / published flow shape ⇒ MAJOR bump +
 CHANGELOG entry; Stages 1–2 are MINOR. Captures are content, re-derived, not versioned.

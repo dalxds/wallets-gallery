@@ -323,26 +323,41 @@ connects through slide 2, never directly to the default.)
 
 ### 3. segment — the flow tree (`segment.ts`)
 
-Flows (a.k.a. _journeys_) are built by walking forward from each entry point:
+The flow tree **is the dominator tree** of the app's nav/overlay subgraph. `idom(X)` — the one
+screen every path to `X` must pass through — is `X`'s parent, so a journey nests under whatever
+you must go through to reach it ("Send" under "Home", "Privacy" under "Settings", "Buy" under an
+asset detail). A chain in the dominator tree (each screen dominating exactly one onward child) is
+a **trunk**; a screen dominating ≥ 2 onward children is a **hub** whose children each start a
+child flow.
 
-- A screen with a single forward step **extends the current trunk**.
-- A screen that **branches** (≥ 2 forward steps) ends the current flow; each branch becomes a
-  **child flow** starting from that screen. So a journey nests under whatever launched it —
-  "Send" under "Home", "Privacy" under "Settings".
-- **Completion hubs** (home/launch screens) and **main-nav roots** (`graph.mainNav`) break the
-  nest-under-launcher rule and root their _own_ top-level subtree. Reaching a hub _completes_ a
-  journey (onboarding → funded home).
-- **Pickers / modals** flow through as side-screens (browsable in the Screens tab) rather than
-  spawning their own flow.
+- **Anchors** root their own top-level subtree: a virtual super-source dominates them, so their
+  `idom` is the super-source. Three sources, unioned — entry points (the launch root + screens
+  nothing navigates to), **completion hubs** (home/launch screens), and **main-nav roots**
+  (`graph.mainNav`). A main-nav section is a peer, not a child of whatever launched it.
+- **Excursions** — a picker/peek sheet launched from a trunk screen that only pops back to it —
+  dominate nothing and return to their dominator. They are not branches (they must not shatter
+  the trunk) and are woven in as inline **picker steps**, not their own flow.
+- **Sheets are steps.** A forward-only sheet (a confirmation/info overlay with no return) is a
+  dominated leaf, so it is a normal step. A sheet reached from several flows lands at their
+  common dominator — emitted once there, never duplicated into each.
+- **Cross-section journeys** (reachable from N sections, e.g. "Adding money" from both Home and
+  Earn) would hoist to the super-source; instead a copy is re-emitted under **each** reaching
+  section. The dominator tree governs trunk/nesting shape, not dedup-by-hoisting.
 
-The result is a tree of journeys, each with an ordered list of step nodes.
+Sibling order follows the parent's authored `decisionPoints` option order, then the observed-walk
+order, then lexical id. The iterative dominator fixpoint is order-independent (it computes a
+property of the graph), so the whole pass is deterministic. The result is a tree of journeys,
+each with an ordered list of step nodes.
 
 ### 4. naming (`naming.ts`)
 
-Each flow gets a **mechanical** name derived from its goal screen's title (trailing
-parentheticals like "(Owned)" stripped — those describe the screen, not the intent).
-Mechanical names land in **`namingTODO`** so the capture agent (or a human) can supply a real
-name, which persists in `overrides.flowNames` keyed by the stable flow id.
+Each flow gets a **mechanical** name derived from its first distinctive screen's title (trailing
+parentheticals like "(Owned)" stripped — those describe the screen, not the intent). Mechanical
+names land in **`namingTODO`** so the capture agent (or a human) can supply a real name, which
+persists in `overrides.flowNames` keyed by the flow's **name key** (`nameKey` in `namingTODO`).
+The name key is the flow's first distinctive screen (`steps[1]`, or the launch screen for a
+one-step hub) — the stable entry side, decoupled from the routing slug. So cross-section copies
+share one authored name, and a churning goal/last screen no longer detaches it.
 
 ### 5. replay (`replay.ts`)
 

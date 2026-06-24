@@ -217,8 +217,9 @@ export interface View {
     truncatedFlows: number
   }
   /** Flows whose name is still mechanical — the agent names these via overrides.flowNames,
-   *  working from the full `steps` list (the whole journey) rather than the one-screen fallback. */
-  namingTODO: { entryNodeId: string; slug: string; mechanicalName: string; steps: { id: string; title: string }[] }[]
+   *  keyed by `nameKey` (the flow's first distinctive screen, shared across cross-section copies)
+   *  and working from the full `steps` list (the whole journey) rather than the one-screen fallback. */
+  namingTODO: { entryNodeId: string; nameKey: string; slug: string; mechanicalName: string; steps: { id: string; title: string }[] }[]
   /** Main-nav sections (graph.mainNav) with no captured journey — a capture gap to fill, not
    *  rendered as flows. The capture agent should walk past these tabs and re-capture. */
   uncapturedSections: string[]

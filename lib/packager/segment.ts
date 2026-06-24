@@ -1,17 +1,27 @@
-// Journey segmentation: build a navigation tree of journeys.
+// Journey segmentation: build a navigation tree of journeys from a DOMINATOR TREE.
 //
-// Walk forward from each entry point. A screen with a single forward step extends
-// the current trunk; a screen that BRANCHES (>=2 forward steps) ends the current
-// flow and each branch becomes a CHILD flow that starts from that screen. So a
-// journey nests under whatever it launches from — Send under Home, Privacy under
-// Settings, Request under Receive — all the way up. Pickers / modals flow through
-// as side-screens (browsable in the Screens tab), never their own flow.
+// The flow tree is the dominator tree of the app's nav/overlay subgraph. idom(X) — the
+// single screen every path to X must pass through — is X's parent: a journey nests under
+// whatever you must go through to reach it (Send under Home, Privacy under Settings, Buy
+// under an asset detail). A chain in the dominator tree (each screen dominating exactly one
+// onward child) is a TRUNK; a screen that dominates >=2 onward children is a HUB whose
+// children each start a child flow.
 //
-// Two anchors break the nest-under-launcher rule and root their OWN top-level tree:
-// completion hubs (home / launch screens — see `completionHubs`) and main-navigation roots
-// (`navRoots`, from graph.mainNav — a bottom-tab bar, nav rail, or drawer). A main-nav
-// section is a peer, not a child of whatever screen launched it, so it gets its own
-// top-level subtree instead of nesting under the launcher.
+// Anchors root their OWN top-level tree (a virtual super-source dominates them, so idom is
+// the super-source): entry points (the launch root + screens nothing navigates to),
+// completion hubs (home / launch screens), and main-navigation roots (graph.mainNav). A
+// main-nav section is a peer, not a child of whatever screen launched it.
+//
+// Two structural facts fall out of the dominator tree, replacing the old distance heuristic:
+//   • EXCURSIONS — a picker/peek sheet launched from a trunk screen S that only pops back to
+//     S dominates nothing and returns to its dominator. It is NOT a branch (it must not
+//     shatter the trunk) and, here in segmentation, is not emitted as its own flow. (Stage 3
+//     weaves it back in as an inline picker step.)
+//   • CROSS-SECTION JOURNEYS — a journey reachable from N sections has the super-source as
+//     its common dominator, so the tree would hoist it to the top. We instead RE-EMIT it
+//     under each reaching section (Adding money under both Home and Earn), per the locked
+//     decision — the dominator tree governs trunk/nesting shape, not dedup-by-hoisting.
+//
 // Hand corrections to the derived tree live in overrides.structure (applied last).
 
 import type { GraphEdge, Overrides } from "./types.ts"
@@ -19,13 +29,15 @@ import type { Adjacency } from "./graph.ts"
 import type { SafResult } from "./saf.ts"
 import type { ClassifyResult } from "./classify.ts"
 
-// Safety cap on one flow's trunk length. The seen-set/cycle guard in build() is the
-// real protection against runaway trunks; this just bounds a pathologically long linear
-// chain so a single flow can't swallow the whole graph. Generous by design — a long but
-// legitimate onboarding (tuyo's is ~16 once pickers are woven in) must fit. When the cap
-// DOES bite it splits the trunk into a parent + child rather than dropping steps; segment
-// reports those flows in `truncated` so a future cap-hit is never silent.
+// Safety cap on one flow's trunk length. The dominator tree is acyclic so a trunk can't loop;
+// this just bounds a pathologically long linear chain so a single flow can't swallow the whole
+// graph. Generous by design — a long but legitimate onboarding (tuyo's is ~16 once pickers are
+// woven in) must fit. When the cap DOES bite it splits the trunk into a parent + child rather
+// than dropping steps; segment reports those flows in `truncated` so a cap-hit is never silent.
 const MAX_TRUNK = 20
+
+// The virtual super-source that dominates every anchor. Cannot collide with a node id.
+const SUPER = "⊤" // ⊤
 
 export interface Journey {
   id: string
@@ -38,7 +50,6 @@ export interface Journey {
 
 export interface SegmentResult {
   journeys: Journey[]
-  dist: Map<string, number>
   /** stable ids of flows whose linear trunk was cut by MAX_TRUNK (split into parent+child). */
   truncated: string[]
   /** main-nav section node ids the walk left empty (declared in graph.mainNav, no journey). */
@@ -54,9 +65,9 @@ export function segment(
   navRoots: Set<string> = new Set(),
   overrides: Overrides = {},
   // Authored branch order: a decision node's canonical id -> (canonical target id -> option index).
-  // When a branching screen has a decisionPoint, its children/options render in the AUTHORED option
-  // order, not lexically (Settings' children were alphabetical). A target reached by several options
-  // keeps its first (smallest) index. Falls back to edge observedAtStep, then lexical id.
+  // When a branching screen has a decisionPoint, its children render in the AUTHORED option order,
+  // not lexically. A target reached by several options keeps its first (smallest) index. Falls
+  // back to edge observedAtStep, then lexical id.
   decisionOrder: Map<string, Map<string, number>> = new Map()
 ): SegmentResult {
   const folded = new Set<string>()
@@ -70,68 +81,109 @@ export function segment(
     if (!members || members.length === 1) return true
     return cls.defaultOf.get(logical) === id
   }
+  const live = saf.canonicalNodes.filter((n) => !folded.has(n.id)).map((n) => n.id)
 
-  // Top-level starts: the root + entry points nothing navigates to.
-  const topStarts: string[] = []
-  const seenTop = new Set<string>()
-  const pushTop = (id: string) => {
-    if (!seenTop.has(id)) {
-      seenTop.add(id)
-      topStarts.push(id)
-    }
-  }
-  pushTop(root)
-  for (const n of saf.canonicalNodes) {
-    if (!folded.has(n.id) && isFamilyDefault(n.id) && indeg(n.id) === 0) pushTop(n.id)
+  // Forward subgraph for the dominator tree: nav + overlay edges only (drop back; in-place is
+  // already a state toggle, folded by classify). Each node maps to its onward (subgraph) targets.
+  const subOut = new Map<string, string[]>()
+  for (const id of live) subOut.set(id, [])
+  for (const e of edges) {
+    if (e.kind !== "nav" && e.kind !== "overlay") continue
+    if (folded.has(e.from) || folded.has(e.to) || e.from === e.to) continue
+    const l = subOut.get(e.from)
+    if (l && !l.includes(e.to)) l.push(e.to)
   }
 
-  // Distance from the NEAREST entry (multi-source BFS) so disconnected sections
-  // still get a forward order — single-source-from-root leaves them at Infinity.
-  const dist = new Map<string, number>()
-  {
-    const q = [...topStarts]
-    for (const s of topStarts) dist.set(s, 0)
-    while (q.length) {
-      const c = q.shift()!
-      const d = dist.get(c)!
-      for (const e of adj.out.get(c) ?? []) if (!dist.has(e.to)) { dist.set(e.to, d + 1); q.push(e.to) }
-    }
-  }
-  const distOf = (id: string) => dist.get(id) ?? Number.MAX_SAFE_INTEGER
-
-  // Completion hubs = home / launch screens. Reaching one COMPLETES a journey
-  // (onboarding → unfunded home, sign-in → funded home). Sub-sections (Settings,
-  // Discover) are NOT hubs — they nest with their children.
+  // Top-level anchors — nodes that root their OWN tree. One concept, three sources (unioned):
+  //   • entry points    — the launch root + screens nothing navigates to
+  //   • completion hubs  — home / launch screens
+  //   • nav sections     — main-nav destinations from graph.mainNav
+  const entries: string[] = [root]
+  for (const id of live) if (id !== root && isFamilyDefault(id) && indeg(id) === 0) entries.push(id)
   const completionHubs = new Set<string>([root])
-  for (const n of saf.canonicalNodes) {
-    if (!folded.has(n.id) && isFamilyDefault(n.id) && n.role === "home") completionHubs.add(n.id)
+  for (const id of live) {
+    const n = saf.canonicalNodes.find((x) => x.id === id)!
+    if (isFamilyDefault(id) && n.role === "home") completionHubs.add(id)
+  }
+  const anchors = new Set<string>()
+  const anchorOrder: string[] = []
+  for (const id of [...entries, ...completionHubs, ...navRoots]) if (!anchors.has(id)) { anchors.add(id); anchorOrder.push(id) }
+
+  // ── Dominator tree (iterative Cooper–Harvey–Kennedy over SUPER → anchors → subgraph) ──
+  // The super-source has an edge to every anchor, so idom(anchor) = SUPER (top-level) and
+  // idom(X) for any other reachable X is the screen you must pass through to reach it. The
+  // iterative fixpoint is order-independent (idom is a property of the graph); neighbours are
+  // walked in sorted order only so the reverse-postorder numbering is reproducible.
+  const succ = (id: string): string[] => (id === SUPER ? anchorOrder : subOut.get(id) ?? [])
+  const post: string[] = []
+  const seenDfs = new Set<string>([SUPER])
+  const stack: { node: string; kids: string[]; i: number }[] = [{ node: SUPER, kids: [...anchorOrder].sort(), i: 0 }]
+  while (stack.length) {
+    const top = stack[stack.length - 1]
+    if (top.i < top.kids.length) {
+      const nx = top.kids[top.i++]
+      if (!seenDfs.has(nx)) { seenDfs.add(nx); stack.push({ node: nx, kids: [...succ(nx)].sort(), i: 0 }) }
+    } else { post.push(top.node); stack.pop() }
+  }
+  const rpo = post.slice().reverse()
+  const rpoNum = new Map(rpo.map((n, i) => [n, i]))
+  const preds = new Map<string, string[]>()
+  for (const u of [SUPER, ...live]) for (const v of succ(u)) (preds.get(v) ?? preds.set(v, []).get(v)!).push(u)
+  const idom = new Map<string, string>([[SUPER, SUPER]])
+  const intersect = (a: string, b: string) => {
+    while (a !== b) {
+      while ((rpoNum.get(a) ?? 0) > (rpoNum.get(b) ?? 0)) a = idom.get(a)!
+      while ((rpoNum.get(b) ?? 0) > (rpoNum.get(a) ?? 0)) b = idom.get(b)!
+    }
+    return a
+  }
+  let changed = true
+  while (changed) {
+    changed = false
+    for (const b of rpo) {
+      if (b === SUPER) continue
+      let ni: string | undefined
+      for (const p of preds.get(b) ?? []) if (idom.has(p)) ni = ni === undefined ? p : intersect(p, ni)
+      if (ni !== undefined && idom.get(b) !== ni) { idom.set(b, ni); changed = true }
+    }
   }
 
-  // Does a screen lead onward (a forward/hub exit)? Presentation-agnostic: a sheet counts
-  // the same as a page (e.kind nav OR overlay), so sheet-driven journeys (detail→buy→review,
-  // all bottom-sheets) lead onward, while a true dead-end sheet (picker/peek with no forward
-  // exit) does not. Used to tell a pass-through screen from a dismissable side-screen.
-  const leadsOnward = (id: string) =>
-    outAll(id).some((e) => (e.kind === "nav" || e.kind === "overlay") && (distOf(e.to) >= distOf(id) || completionHubs.has(e.to)))
-  // Exits that ADVANCE a journey: a non-backward nav (>= handles DAG shortcuts like
-  // welcome→email vs welcome→more-options→email), an edge to a hub, or an overlay
-  // into a pass-through modal that itself leads onward.
-  const advancingExits = (id: string) =>
-    outAll(id).filter(
-      (e) =>
-        (e.kind === "nav" && (distOf(e.to) >= distOf(id) || completionHubs.has(e.to))) ||
-        (e.kind === "overlay" && leadsOnward(e.to))
-    )
-  // A target is a side-screen (picker/modal/dropdown) if it only returns — no
-  // advancing exit of its own — and isn't itself a hub.
-  const isSideTarget = (toId: string) =>
-    !completionHubs.has(toId) &&
-    advancingExits(toId).length === 0 &&
-    outAll(toId).some((x) => distOf(x.to) < distOf(toId))
-  // Sibling order is AUTHORED, not derived: a branching screen's children follow its
-  // decisionPoint option order, then the edge's observed-walk order, then lexical id (the
-  // standing deterministic tie-break). This replaces the old distance proxy as the sort key
-  // — distance never modelled what the screen offers, only how the walk happened to reach it.
+  const domKids = new Map<string, string[]>()
+  for (const n of live) {
+    const d = idom.get(n)
+    if (d === undefined) continue // unreachable in the subgraph — a screen, never a flow step
+    ;(domKids.get(d) ?? domKids.set(d, []).get(d)!).push(n)
+  }
+  const isAncestor = (a: string, x: string) => {
+    let c = idom.get(x)
+    while (c !== undefined && c !== SUPER) { if (c === a) return true; c = idom.get(c) }
+    return false
+  }
+
+  // EXCURSIONS — a picker/peek launched from its dominator S that only pops back to S. It is a
+  // dominator-tree leaf, directly launched from S, with a return edge to S (or to an ancestor).
+  // Structural, no distance proxy: it subsumes the old isSideTarget. Convergent sheets (reached
+  // from several deep screens, e.g. avici's high-impact-warning) are NOT excursions — they are
+  // not launched directly from their common dominator, so they stay as a shared leaf there.
+  const excursion = new Set<string>()
+  for (const x of live) {
+    const s = idom.get(x)
+    if (s === undefined || s === SUPER) continue
+    if ((domKids.get(x) ?? []).length > 0) continue // not a leaf
+    if (!(subOut.get(s) ?? []).includes(x)) continue // not launched directly from its dominator
+    const returns = outAll(x).some((e) => e.to === s || isAncestor(e.to, x))
+    if (returns) excursion.add(x)
+  }
+
+  // CROSS-SECTION journeys: a node whose common dominator is the super-source but that isn't
+  // itself an anchor is reachable from >=2 sections. It is re-emitted under each reaching
+  // section (see forwardChildren) rather than hoisted to the top.
+  const shared = new Set<string>()
+  for (const n of live) if (idom.get(n) === SUPER && !anchors.has(n)) shared.add(n)
+
+  // Onward (branch-bearing) children of a screen: the screens it dominates, plus any
+  // cross-section journey it launches (re-emitted here), minus excursions. Ordered by the
+  // authored decisionPoint option order, then observed-walk order, then lexical id.
   const dpRank = (cur: string, to: string) => {
     const i = decisionOrder.get(cur)?.get(to)
     return i === undefined ? Number.MAX_SAFE_INTEGER : i
@@ -141,131 +193,47 @@ export function segment(
     for (const e of outAll(cur)) if (e.to === to && e.observedAtStep < best) best = e.observedAtStep
     return best
   }
-  const continuations = (cur: string, seen: Set<string>) =>
-    advancingExits(cur)
-      .map((e) => e.to)
-      .filter((to) => !seen.has(to) && !isSideTarget(to))
-      .sort((a, b) => dpRank(cur, a) - dpRank(cur, b) || obsStep(cur, a) - obsStep(cur, b) || (a < b ? -1 : 1))
-
-  // Can `node` reach a completion hub via forward steps? Computed as a fixpoint over
-  // the continuation graph (NOT memoized recursion): a node reaches a hub iff one of
-  // its continuations is a hub or itself reaches one. Seeding from hub-adjacent nodes
-  // and propagating backward is cycle-proof — a recursive memo would cache the `false`
-  // its own on-stack cycle guard produced and wrongly mark a looping branch as dead.
-  const conts = new Map<string, string[]>()
-  const contsOf = (id: string) => {
-    let c = conts.get(id)
-    if (!c) { c = continuations(id, new Set()); conts.set(id, c) }
-    return c
+  const forwardChildren = (cur: string): string[] => {
+    const out: string[] = []
+    for (const k of domKids.get(cur) ?? []) if (!excursion.has(k)) out.push(k)
+    for (const x of subOut.get(cur) ?? []) if (shared.has(x) && !excursion.has(x) && !out.includes(x)) out.push(x)
+    return out.sort((a, b) => dpRank(cur, a) - dpRank(cur, b) || obsStep(cur, a) - obsStep(cur, b) || (a < b ? -1 : 1))
   }
-  const reachesHubSet = new Set<string>()
-  {
-    const preds = new Map<string, string[]>()
-    const queue: string[] = []
-    for (const n of saf.canonicalNodes) {
-      const cs = contsOf(n.id)
-      for (const c of cs) (preds.get(c) ?? preds.set(c, []).get(c)!).push(n.id)
-      if (cs.some((c) => completionHubs.has(c))) { reachesHubSet.add(n.id); queue.push(n.id) }
-    }
-    while (queue.length) {
-      const cur = queue.shift()!
-      for (const p of preds.get(cur) ?? []) if (!reachesHubSet.has(p)) { reachesHubSet.add(p); queue.push(p) }
-    }
-  }
-  const reachesHub = (node: string) => reachesHubSet.has(node)
 
   type Raw = { id: string; entry: string; steps: string[]; parent: string | null; goal: string }
   const raws: Raw[] = []
   let flowSeq = 0
-  // raw flow ids whose trunk hit MAX_TRUNK while a single continuation was still pending
-  // (i.e. the cap split one linear journey into parent+child). Mapped to stable ids below.
   const truncatedRaw = new Set<string>()
-
-  // FEATURE journeys (hub → leaf, branch-nested). Continuations heading toward a
-  // completion hub are excluded — those become completion journeys below. Nav roots
-  // are excluded too: a main-nav destination is never a child, it roots its own tree.
-  const featureConts = (cur: string, seen: Set<string>) =>
-    continuations(cur, seen).filter((c) => !completionHubs.has(c) && !navRoots.has(c) && !reachesHub(c))
-  function build(steps0: string[], start: string, parentId: string | null, seen: Set<string>) {
-    const trunk = [...steps0]
+  // Walk a trunk down the dominator tree from `start`; at a hub (>=2 onward children) end the
+  // flow and recurse into each child. A fresh seen-set per child duplicates a cross-section
+  // journey under each section it nests in and guards against any residual cycle.
+  function build(launch: string | null, start: string, parentId: string | null, seen: Set<string>) {
+    const trunk: string[] = launch !== null ? [launch] : []
     let cur: string | undefined = start
     let conts: string[] = []
     while (cur && !seen.has(cur) && trunk.length < MAX_TRUNK) {
       trunk.push(cur)
       seen.add(cur)
-      if ((completionHubs.has(cur) || navRoots.has(cur)) && cur !== trunk[0]) {
-        conts = []
-        break
-      }
-      conts = featureConts(cur, seen)
-      if (conts.length === 1) {
-        cur = conts[0]
-        continue
-      }
+      conts = forwardChildren(cur).filter((c) => !seen.has(c))
+      if (conts.length === 1) { cur = conts[0]; continue }
       break
     }
     const myId = `f${flowSeq++}`
-    // Cap hit on a still-extending linear trunk: exactly one continuation remained but the
-    // length guard stopped us (a natural branch leaves conts.length !== 1 or stops on a hub).
     if (trunk.length >= MAX_TRUNK && conts.length === 1) truncatedRaw.add(myId)
     raws.push({ id: myId, entry: trunk[0], steps: trunk, parent: parentId, goal: trunk[trunk.length - 1] })
-    for (const c of conts) build([trunk[trunk.length - 1]], c, myId, new Set(seen))
+    for (const c of conts) build(trunk[trunk.length - 1], c, myId, new Set(seen))
   }
-  // TOP-LEVEL ANCHORS — nodes that root their OWN tree instead of nesting under a launcher.
-  // One concept, three sources (unioned — any source makes a node top-level):
-  //   • entry points    — the launch root + screens nothing navigates to   (topStarts)
-  //   • completion hubs  — home / launch screens                            (completionHubs)
-  //   • nav sections     — main-nav destinations from graph.mainNav         (navRoots)
-  // So the home tree builds even when reached from onboarding (home is a hub), and each
-  // main-nav section roots its own tree instead of hanging off whatever launched it.
-  // (Completion hubs additionally mark where a journey ENDS — see the completion journeys below.)
-  const topLevelAnchors: string[] = []
-  const seenAnchor = new Set<string>()
-  for (const id of [...topStarts, ...completionHubs, ...navRoots]) if (!seenAnchor.has(id)) { seenAnchor.add(id); topLevelAnchors.push(id) }
-  for (const s of topLevelAnchors) build([], s, null, new Set())
+  for (const a of anchorOrder) build(null, a, null, new Set())
 
-  // COMPLETION journeys: shortest path from each entry to each reachable hub
-  // (onboarding/sign-in). Distinct full paths, never split into a shared funnel flow.
-  const shortestToHub = (from: string, target: string): string[] | null => {
-    if (from === target) return null
-    const prev = new Map<string, string>()
-    const visited = new Set<string>([from])
-    const q = [from]
-    while (q.length) {
-      const c = q.shift()!
-      for (const nx of continuations(c, new Set())) {
-        if (visited.has(nx)) continue
-        visited.add(nx)
-        prev.set(nx, c)
-        if (nx === target) {
-          const path = [target]
-          let p = c
-          while (p !== from) {
-            path.push(p)
-            p = prev.get(p)!
-          }
-          path.push(from)
-          return path.reverse()
-        }
-        if (!completionHubs.has(nx)) q.push(nx) // don't traverse past an intermediate hub
-      }
-    }
-    return null
-  }
-  for (const E of topStarts) {
-    for (const H of completionHubs) {
-      if (H === E) continue
-      const path = shortestToHub(E, H)
-      if (path && path.length >= 2) raws.push({ id: `f${flowSeq++}`, entry: E, steps: path, parent: null, goal: H })
-    }
-  }
-
-  // Merge same-path-under-same-parent (different entry only); remap merged ids.
+  // Dedupe exact same-path-under-same-parent raws (defensive; the dominator walk shouldn't
+  // produce any). The key is the FULL step path INCLUDING the launch screen: cross-section
+  // copies share the same trunk but differ in their launch screen (Home vs Earn), and the
+  // locked decision keeps both — so they must NOT collapse here.
   const byPath = new Map<string, Journey>()
   const mergedInto = new Map<string, string>()
   const journeys: Journey[] = []
   for (const r of raws) {
-    const key = `${r.parent ?? ""}#${r.steps.slice(1).join(">")}|${r.goal}`
+    const key = `${r.parent ?? ""}#${r.steps.join(">")}`
     const existing = byPath.get(key)
     if (existing) {
       if (!existing.entries.includes(r.entry)) existing.entries.push(r.entry)
@@ -279,18 +247,17 @@ export function segment(
   for (const j of journeys) if (j.parent && mergedInto.has(j.parent)) j.parent = mergedInto.get(j.parent)!
 
   // Drop lone feature flows (a single screen with no children) — not journeys. A main-nav
-  // section the walk left empty (its only link leads to another tab, e.g. avici `card`) is
-  // NOT force-kept: an empty section is a CAPTURE GAP, not content. It's reported via
-  // emptyNavRoots so build-data can warn and prompt a re-capture, rather than papering over
-  // the gap with a content-less one-screen flow. (The section's screen stays browsable.)
+  // section the walk left empty (its only link leads to another tab, e.g. avici `card`) is NOT
+  // force-kept: an empty section is a CAPTURE GAP, reported via emptyNavRoots so build-data can
+  // warn and prompt a re-capture, rather than papering over the gap with a one-screen flow.
   const hasChild = new Set<string>()
   for (const j of journeys) if (j.parent) hasChild.add(j.parent)
   const kept = journeys.filter((j) => j.steps.length > 1 || hasChild.has(j.id))
-  // main-nav sections that produced no top-level flow — the walk never went past the tab.
   const emptyNavRoots = [...navRoots].filter((nr) => !kept.some((j) => j.parent === null && j.steps[0] === nr))
 
-  // Stable public ids (goal-based, disambiguated) so overrides.flowNames can
-  // reference them across runs.
+  // Stable public ids (goal-based, disambiguated) so overrides.structure can reference a flow's
+  // SHAPE across runs. (Display NAMES are keyed separately, by a parent-independent trunk key —
+  // see index.ts — so the cross-section copies can share one authored name.)
   const stableOf = new Map<string, string>()
   const usedStable = new Set<string>()
   for (const j of kept) {
@@ -307,12 +274,10 @@ export function segment(
     j.id = stableOf.get(j.id)!
   }
 
-  // Structure overrides — the one hand lever over the derived tree's SHAPE, keyed by
-  // stable flow id and applied LAST so it always wins. `parent` re-parents a flow under
-  // another, or pins it to the root with `parent: null`. (Main-nav sections are handled
-  // generally via navRoots above — they never need an override here.) A self-parent is
-  // ignored; a dangling parent falls back to top-level downstream (index.ts resolves an
-  // unknown parent to null).
+  // Structure overrides — the one hand lever over the derived tree's SHAPE, keyed by stable flow
+  // id and applied LAST so it always wins. `parent` re-parents a flow under another, or pins it
+  // to the root with `parent: null`. A self-parent is ignored; a dangling parent falls back to
+  // top-level downstream (index.ts resolves an unknown parent to null).
   const st = overrides.structure ?? {}
   if (Object.keys(st).length) {
     for (const j of kept) {
@@ -322,5 +287,5 @@ export function segment(
   }
 
   const truncated = [...truncatedRaw].map((r) => stableOf.get(r)).filter((x): x is string => !!x)
-  return { journeys: kept, dist, truncated, emptyNavRoots }
+  return { journeys: kept, truncated, emptyNavRoots }
 }

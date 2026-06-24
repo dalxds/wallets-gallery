@@ -6,7 +6,7 @@ import { runSAF } from "./saf.ts"
 import { classify } from "./classify.ts"
 import { segment } from "./segment.ts"
 import { buildAdjacency } from "./graph.ts"
-import { screenTitle, journeyName, slugify, type FlowName } from "./naming.ts"
+import { screenTitle, journeyName, slugify, nameKeyOf, type FlowName } from "./naming.ts"
 import { buildReplay } from "./replay.ts"
 
 export function packageGraph(graph: Graph): View {
@@ -122,6 +122,7 @@ export function packageGraph(graph: Graph): View {
       // so it can name from full context rather than re-deriving it from the view.
       namingTODO.push({
         entryNodeId: j.entries[0],
+        nameKey: nameKeyOf(j),
         slug,
         mechanicalName: nm.name,
         steps: steps.map((s) => ({ id: s.screenId, title: s.title })),

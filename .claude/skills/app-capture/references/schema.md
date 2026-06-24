@@ -133,7 +133,7 @@ Written exclusively by the edit agent and carried forward verbatim across re-cap
 
 | Key | Type | Corrects |
 |---|---|---|
-| `flowNames` | flow-id → name | the name of a derived flow (flow id = its anchor node id) |
+| `flowNames` | name-key → name | the name of a derived flow. The key is the flow's **name key** (`nameKey` in `view.namingTODO`): its first distinctive screen (`steps[1]`, or the launch screen for a one-step hub), not its goal. Decoupled from the routing slug, so cross-section copies share one authored name |
 | `structure` | flow-id → `{parent?}` | the derived tree: re-parent a flow (`parent: null` pins it top-level). Main-nav sections are handled generally by `mainNav` — no per-flow override needed |
 | `screens` | node-id → `{role?, title?, description?, state?, stateGroup?}` | a screen's facts, incl. forcing its state classification / group |
 | `merges` | node-id groups (`string[][]`) | force-merge nodes the packager kept separate into one logical screen |
