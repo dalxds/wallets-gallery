@@ -61,386 +61,6 @@
       ]
     },
     {
-      "id": "home-guest",
-      "fingerprint": "sha256:b83c88cfd542ba8fc4bb2c26",
-      "skeletonHash": "sk:0794b1c85680186b9a42908f",
-      "pHash": "p:2952d352ad2c47dd",
-      "role": "home",
-      "screenshotPath": "assets/e1fd00f68812.png",
-      "snapshotPath": "assets/0358c6bede89.snap.json",
-      "texts": [
-        "Assets breakdown",
-        "$0.00",
-        "Add Money",
-        "Withdraw",
-        "Unlock Trading",
-        "Deposit your First Asset",
-        "Get Your Avici Card",
-        "International card built with the future of money",
-        "Get Your Card",
-        "Dollar and Euro Accounts",
-        "Automatically receive USDC in your Avici wallet",
-        "Open Your Account"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Add Money",
-          "role": "button",
-          "selector": "label=\"Add Money\"",
-          "emphasis": "primary"
-        },
-        {
-          "label": "Withdraw",
-          "role": "button",
-          "selector": null
-        },
-        {
-          "label": "Get Your Card",
-          "role": "button",
-          "selector": "label=\"Get Your Card\""
-        },
-        {
-          "label": "Open Your Account",
-          "role": "button",
-          "selector": "label=\"Open Your Account\""
-        },
-        {
-          "label": "Home (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Wallet (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Markets (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Earn (nav tab)",
-          "role": "tab",
-          "selector": null
-        }
-      ]
-    },
-    {
-      "id": "card-guest",
-      "fingerprint": "sha256:91027725145c814ad4ade641",
-      "skeletonHash": "sk:43b4efb428ce8696656a5eda",
-      "pHash": "p:b112cdcc393847d7",
-      "role": "list",
-      "screenshotPath": "assets/49d7d45fc9c4.png",
-      "snapshotPath": "assets/5c369e21db40.snap.json",
-      "texts": [
-        "$ 0.00",
-        "guest",
-        "Activity",
-        "No transactions yet"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Home (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Wallet (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Send (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Profile (nav tab)",
-          "role": "tab",
-          "selector": null
-        }
-      ]
-    },
-    {
-      "id": "markets-guest",
-      "fingerprint": "sha256:bb09bc90d060768f0d7aaaf3",
-      "skeletonHash": "sk:76d239eaddf4c57703edd622",
-      "pHash": "p:f712a768690687f1",
-      "role": "list",
-      "screenshotPath": "assets/32dee9e42c01.png",
-      "snapshotPath": "assets/98baca207f37.snap.json",
-      "texts": [
-        "Markets",
-        "Swap From",
-        "Swap To",
-        "USDC",
-        "Explore",
-        "US Stocks",
-        "Tokenized US equities",
-        "SP500 $740.55 -1.47%",
-        "NVIDIA $202.16 -5.36%",
-        "Apple $299.58 -0.57%",
-        "Privates",
-        "Trending private companies as tokenized assets through SPV exposure",
-        "SpaceX $101.62 -9.45%",
-        "Anthropic $714.35 -3.18%"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Swap From (amount)",
-          "role": "button",
-          "selector": "label~=\"Swap From\"",
-          "emphasis": "primary"
-        },
-        {
-          "label": "Swap To (amount)",
-          "role": "button",
-          "selector": "label~=\"Swap To\""
-        },
-        {
-          "label": "USDC (Swap To asset selector)",
-          "role": "button",
-          "selector": "label=\"USDC\""
-        },
-        {
-          "label": "Explore",
-          "role": "link",
-          "selector": "label=\"Explore\""
-        },
-        {
-          "label": "SP500",
-          "role": "button",
-          "selector": "label~=\"SP500\""
-        },
-        {
-          "label": "NVIDIA",
-          "role": "button",
-          "selector": "label~=\"NVIDIA\""
-        },
-        {
-          "label": "Apple",
-          "role": "button",
-          "selector": "label~=\"Apple\""
-        },
-        {
-          "label": "SpaceX",
-          "role": "button",
-          "selector": "label~=\"SpaceX\""
-        },
-        {
-          "label": "Anthropic",
-          "role": "button",
-          "selector": "label~=\"Anthropic\""
-        },
-        {
-          "label": "Home (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Wallet (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Markets (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Profile (nav tab)",
-          "role": "tab",
-          "selector": null
-        }
-      ]
-    },
-    {
-      "id": "grow-guest",
-      "fingerprint": "sha256:c79edb486b73f8591f70dac8",
-      "skeletonHash": "sk:3a806d8848db0681ba12a2d6",
-      "pHash": "p:e7c891a46d9059e7",
-      "role": "error",
-      "screenshotPath": "assets/e74c68b4cf70.png",
-      "snapshotPath": "assets/e372c4d1254e.snap.json",
-      "texts": [
-        "Could not load earn data",
-        "Please check your connection and try again.",
-        "Try Again"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Try Again",
-          "role": "button",
-          "selector": null
-        },
-        {
-          "label": "Home (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Wallet (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Markets (nav tab)",
-          "role": "tab",
-          "selector": null
-        },
-        {
-          "label": "Earn (nav tab)",
-          "role": "tab",
-          "selector": null
-        }
-      ]
-    },
-    {
-      "id": "deposit-crypto-guest",
-      "fingerprint": "sha256:1648eb87f1e050e6e214adfb",
-      "skeletonHash": "sk:458785d5a736ee55038e0ed5",
-      "pHash": "p:0fd2c3bae138e12d",
-      "role": "other",
-      "screenshotPath": "assets/4c5856235819.png",
-      "snapshotPath": "assets/c300b2e69bae.snap.json",
-      "texts": [
-        "Guest User",
-        "Solana",
-        "Ethereum",
-        "QR Code Error",
-        "N.A",
-        "Copy Address",
-        "Crypto",
-        "Cash"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Solana",
-          "role": "tab",
-          "selector": "label=\"Solana\""
-        },
-        {
-          "label": "Ethereum",
-          "role": "tab",
-          "selector": "label=\"Ethereum\""
-        },
-        {
-          "label": "Copy Address",
-          "role": "button",
-          "selector": "label=\"Copy Address\"",
-          "emphasis": "primary"
-        },
-        {
-          "label": "Crypto",
-          "role": "tab",
-          "selector": "label=\"Crypto\""
-        },
-        {
-          "label": "Cash",
-          "role": "tab",
-          "selector": "label=\"Cash\""
-        },
-        {
-          "label": "Dismiss",
-          "role": "button",
-          "selector": "label=\"Dismiss\""
-        }
-      ]
-    },
-    {
-      "id": "deposit-cash-guest",
-      "fingerprint": "sha256:32f1fc8e17cce90726bf93c2",
-      "skeletonHash": "sk:5e5df4886922db8632b60b83",
-      "pHash": "p:e7e6e3f2d1180c0d",
-      "role": "other",
-      "screenshotPath": "assets/5d2b28280b52.png",
-      "snapshotPath": "assets/2aa9e77dc67c.snap.json",
-      "texts": [
-        "Dollar and Euro Accounts",
-        "Automatically receive USDC in your Avici wallet",
-        "Receive USD / Euro via regular bank transfers",
-        "Create your account in less than 2 minutes",
-        "Open Your Account",
-        "Crypto",
-        "Cash"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Open Your Account",
-          "role": "button",
-          "selector": "label=\"Open Your Account\"",
-          "emphasis": "primary"
-        },
-        {
-          "label": "Crypto",
-          "role": "tab",
-          "selector": "label=\"Crypto\""
-        },
-        {
-          "label": "Cash",
-          "role": "tab",
-          "selector": "label=\"Cash\""
-        },
-        {
-          "label": "Dismiss",
-          "role": "button",
-          "selector": "label=\"Dismiss\""
-        }
-      ]
-    },
-    {
-      "id": "swap-token-picker-guest",
-      "fingerprint": "sha256:f91a7ad36c66f641c45f0268",
-      "skeletonHash": "sk:037d834d5d97a39fa133ef38",
-      "pHash": "p:c7d0d83e1e0e86f1",
-      "role": "picker",
-      "screenshotPath": "assets/f66c409e9566.png",
-      "snapshotPath": "assets/177d9ff88167.snap.json",
-      "texts": [
-        "Convert To",
-        "Paste",
-        "SOL Solana $69.15",
-        "WBTC Wrapped BTC (Portal) $62,189.44",
-        "USDT Tether USD $0.9995",
-        "USDC $1.00",
-        "USDS $1.00",
-        "LINK Chainlink $7.60",
-        "cbBTC Coinbase Wrapped BTC $62,376.59",
-        "USD1 World Liberty Financial USD $0.9993",
-        "USDe Ethena USDe $0.9995",
-        "USDG Global Dollar $0.9988"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Search token (input)",
-          "role": "input",
-          "selector": null
-        },
-        {
-          "label": "Paste",
-          "role": "button",
-          "selector": "label=\"Paste\""
-        },
-        {
-          "label": "SOL (Solana)",
-          "role": "button",
-          "selector": null
-        },
-        {
-          "label": "USDC",
-          "role": "button",
-          "selector": null
-        },
-        {
-          "label": "Dismiss",
-          "role": "button",
-          "selector": "label=\"Dismiss\""
-        }
-      ]
-    },
-    {
       "id": "home",
       "fingerprint": "sha256:71ef8930ee76cdba54294e98",
       "skeletonHash": "sk:f34e1eaadfc593fae32c8bfe",
@@ -578,36 +198,6 @@
       ]
     },
     {
-      "id": "web3auth-login",
-      "fingerprint": "sha256:81c3791311631b8617854ee3",
-      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
-      "pHash": "p:cd6666893299c967",
-      "role": "auth",
-      "screenshotPath": "assets/2b382f3b507b.png",
-      "snapshotPath": null,
-      "texts": [
-        "Use your Apple Account to sign in to Web3Auth.",
-        "auth.web3auth.io",
-        "Email or Phone Number",
-        "Continue",
-        "Sign in with iPhone",
-        "Running in Chrome"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Email or Phone Number",
-          "role": "input",
-          "selector": null
-        },
-        {
-          "label": "Continue",
-          "role": "button",
-          "selector": null,
-          "emphasis": "primary"
-        }
-      ]
-    },
-    {
       "id": "settings",
       "fingerprint": "sha256:1f2fbaedbb2047e57b050a83",
       "skeletonHash": "sk:bcded445f28147aeac14a56a",
@@ -707,67 +297,6 @@
           "label": "How Much Can You Earn?",
           "role": "link",
           "selector": "label~=\"How Much\""
-        },
-        {
-          "label": "Dismiss",
-          "role": "button",
-          "selector": "label=\"Dismiss\""
-        }
-      ]
-    },
-    {
-      "id": "credit-mode",
-      "fingerprint": "sha256:a5980ea7cb97e8d6b6f89f3f",
-      "skeletonHash": "sk:419431fb5ed63a9fad6cd93e",
-      "pHash": "p:e31ae1b0890aadfd",
-      "role": "form",
-      "screenshotPath": "assets/49a854e9fe1f.png",
-      "snapshotPath": "assets/fe087d5a071c.snap.json",
-      "texts": [
-        "Open Credit line",
-        "0 SOL",
-        "Bal. 0 SOL",
-        "You need at least 0.03 SOL in your wallet to cover collateral",
-        "Rewards ~0.00%",
-        "You get paid when you open a credit line with SOL",
-        "25%",
-        "50%",
-        "75%",
-        "MAX",
-        "Continue",
-        "No SOL balance found"
-      ],
-      "interactiveElements": [
-        {
-          "label": "Amount keypad (numeric)",
-          "role": "input",
-          "selector": null
-        },
-        {
-          "label": "25%",
-          "role": "button",
-          "selector": "label=\"25%\""
-        },
-        {
-          "label": "50%",
-          "role": "button",
-          "selector": "label=\"50%\""
-        },
-        {
-          "label": "75%",
-          "role": "button",
-          "selector": "label=\"75%\""
-        },
-        {
-          "label": "MAX",
-          "role": "button",
-          "selector": "label=\"MAX\""
-        },
-        {
-          "label": "Continue",
-          "role": "button",
-          "selector": "label=\"Continue\"",
-          "emphasis": "primary"
         },
         {
           "label": "Dismiss",
@@ -1677,35 +1206,42 @@
     },
     {
       "id": "grow-yield-deposit",
-      "fingerprint": "sha256:61f4cec3970995cf6b4abdb9",
-      "skeletonHash": "sk:08957898001c4927dcb65b50",
-      "pHash": "p:673233b85388adc7",
+      "fingerprint": "sha256:05fee2d2095845ca51bbb5c1",
+      "skeletonHash": "sk:660b700f2352917bb7b965b6",
+      "pHash": "p:0712f9f8c3062ded",
       "role": "form",
-      "screenshotPath": "assets/9bfe743dd983.png",
-      "snapshotPath": "assets/2540125e7265.snap.json",
+      "screenshotPath": "assets/950319a5f6ba.png",
+      "snapshotPath": "assets/e591aa202730.snap.json",
       "texts": [
         "Deposit into USDC",
         "USDC",
-        "$0",
-        "No eligible assets",
-        "Deposit more than $1 of any supported asset to start earning.",
+        "$1.22",
+        "Grow per year",
+        "Tap to switch between timelines",
+        "~4.24%",
+        "$0.05 / y",
+        "You are paying with",
+        "USD Coin",
+        "1.22000 USDC",
         "25%",
         "50%",
         "75%",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
         "MAX",
-        "Deposit"
+        "8",
+        ".",
+        "0",
+        "9",
+        "Deposit",
+        "Dismiss"
       ],
       "interactiveElements": [
-        {
-          "label": "Amount keypad (numeric)",
-          "role": "input",
-          "selector": null
-        },
-        {
-          "label": "25% / 50% / 75% / MAX",
-          "role": "button",
-          "selector": null
-        },
         {
           "label": "Deposit",
           "role": "button",
@@ -1713,9 +1249,19 @@
           "emphasis": "primary"
         },
         {
+          "label": "25% / 50% / 75% / MAX",
+          "role": "button",
+          "selector": "label=\"MAX\""
+        },
+        {
+          "label": "Amount keypad (deposit amount)",
+          "role": "button",
+          "selector": null
+        },
+        {
           "label": "Dismiss",
           "role": "button",
-          "selector": "label=\"Dismiss\""
+          "selector": null
         }
       ]
     },
@@ -2188,73 +1734,990 @@
           "selector": null
         }
       ]
+    },
+    {
+      "id": "credit-mode",
+      "fingerprint": "sha256:7e7c6e6c093c468ffcf11408",
+      "skeletonHash": "sk:660b700f2352917bb7b965b6",
+      "pHash": "p:637263325b8c8dcd",
+      "role": "form",
+      "screenshotPath": "assets/6ca0022c1427.png",
+      "snapshotPath": "assets/94acb5ec03ac.snap.json",
+      "texts": [
+        "Open Credit line",
+        "0.04",
+        "SOL",
+        "Bal. 0.05 SOL",
+        "You can Borrow upto",
+        "$1.63",
+        "You can borrow upto 60% of your supply amount",
+        "Rewards",
+        "~4.84%",
+        "You get paid when you open a credit line with SOL",
+        "25%",
+        "50%",
+        "75%",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "MAX",
+        "8",
+        ".",
+        "0",
+        "9",
+        "Continue",
+        "Min collateral: 0.056 SOL",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "25% / 50% / 75% / MAX (supply shortcuts)",
+          "role": "button",
+          "selector": "label=\"MAX\""
+        },
+        {
+          "label": "Amount keypad (numeric SOL collateral)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "credit-borrow",
+      "fingerprint": "sha256:ef226349f31cfac3361f4a1a",
+      "skeletonHash": "sk:4c24ae8a5cf77d67591dd0de",
+      "pHash": "p:cb70633267868dcd",
+      "role": "form",
+      "screenshotPath": "assets/9725232c2123.png",
+      "snapshotPath": "assets/3eda01b69e71.snap.json",
+      "texts": [
+        "Choose Borrow Amount",
+        "USDC",
+        "EURC",
+        "0",
+        "Rewards",
+        "~4.84%",
+        "You get paid when you open a credit line with SOL",
+        "0%",
+        "You can Borrow upto $2.45",
+        "60% of your 0.06 SOL",
+        "25%",
+        "50%",
+        "75%",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "MAX",
+        "8",
+        "9",
+        ".",
+        "Open Credit Line",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Open Credit Line",
+          "role": "button",
+          "selector": "label=\"Open Credit Line\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": "label=\"USDC\""
+        },
+        {
+          "label": "EURC",
+          "role": "button",
+          "selector": "label=\"EURC\""
+        },
+        {
+          "label": "25% / 50% / 75% / MAX (borrow shortcuts)",
+          "role": "button",
+          "selector": "label=\"MAX\""
+        },
+        {
+          "label": "Amount keypad (borrow amount)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "home-credit",
+      "fingerprint": "sha256:99244e883a0fe46890071e82",
+      "skeletonHash": "sk:757e20b399c3437ca841e4c9",
+      "pHash": "p:b9324972c31887fd",
+      "role": "home",
+      "screenshotPath": "assets/20a5b55659ff.png",
+      "snapshotPath": "assets/efcc2a76b6d6.snap.json",
+      "texts": [
+        "Assets breakdown",
+        "$11.13",
+        "Get Your Avici Card",
+        "International card built with the future of money",
+        "Get Your Card",
+        "Dollar and Euro Accounts",
+        "Automatically receive USDC in your Avici wallet",
+        "Open Your Account",
+        "Credit Line Rewards",
+        "~3.95% APY",
+        "$",
+        "0",
+        "1",
+        ".",
+        "2",
+        "3",
+        "7",
+        "8",
+        "Activity",
+        "A list of all your transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Credit Line Rewards (open credit sheet)",
+          "role": "button",
+          "selector": "label~=\"Credit Line Rewards\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Add Money",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Get Your Card",
+          "role": "button",
+          "selector": "label=\"Get Your Card\""
+        },
+        {
+          "label": "Open Your Account",
+          "role": "button",
+          "selector": "label=\"Open Your Account\""
+        },
+        {
+          "label": "Activity (transactions)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "credit-line",
+      "fingerprint": "sha256:79d77b5b79d0d72186d5b051",
+      "skeletonHash": "sk:1b9a064c1514b81d9f7d24bd",
+      "pHash": "p:33f8d912ed0207ed",
+      "role": "confirmation",
+      "screenshotPath": "assets/de3bae0d84bd.png",
+      "snapshotPath": "assets/8f5363726027.snap.json",
+      "texts": [
+        "i",
+        "Borrowed Amount",
+        "$1.22",
+        "50%",
+        "of credit used.  $1.19 available",
+        "Your Reserve",
+        "$4.07 ~ 0.06 SOL",
+        "+",
+        "Live SOL price ~ $67.94",
+        "If SOL hits $23.91, we auto repay your borrowed amount by swapping from your SOL",
+        "Rewards",
+        "$",
+        "0",
+        ".",
+        "1",
+        "5",
+        "you are earning ~ 3.95% APY on SOL",
+        "3",
+        "Manage",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Manage",
+          "role": "button",
+          "selector": "label=\"Manage\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Increase reserve (+)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "How rewards work (info)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "credit-manage",
+      "fingerprint": "sha256:5a46589f4df81142dcc8ea1a",
+      "skeletonHash": "sk:dd98044e4ef1e811768fba73",
+      "pHash": "p:73b8f952ad0246ad",
+      "role": "other",
+      "screenshotPath": "assets/9b4184881ca7.png",
+      "snapshotPath": "assets/e52dc259b3de.snap.json",
+      "texts": [
+        "i",
+        "Borrowed Amount",
+        "$1.22",
+        "50%",
+        "of credit used.  $1.19 available",
+        "Your Reserve",
+        "$4.07 ~ 0.06 SOL",
+        "+",
+        "Live SOL price ~ $67.94",
+        "If SOL hits $23.91, we auto repay your borrowed amount by swapping from your SOL",
+        "Rewards",
+        "$",
+        "0",
+        ".",
+        "1",
+        "6",
+        "you are earning ~ 3.95% APY on SOL",
+        "Increase Reserve",
+        "Add more SOL to increase your credit line",
+        "Borrow More",
+        "Get more from your available credit",
+        "Repay",
+        "Pay back borrowed amount",
+        "Close Credit Line",
+        "Repay your loan and withdraw your assets",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Increase Reserve",
+          "role": "button",
+          "selector": "label~=\"Increase Reserve\""
+        },
+        {
+          "label": "Borrow More",
+          "role": "button",
+          "selector": "label~=\"Borrow More\""
+        },
+        {
+          "label": "Repay",
+          "role": "button",
+          "selector": "label~=\"Repay\""
+        },
+        {
+          "label": "Close Credit Line",
+          "role": "button",
+          "selector": "label~=\"Close Credit Line\""
+        }
+      ]
+    },
+    {
+      "id": "credit-info",
+      "fingerprint": "sha256:0107249fee0ac2cad3f73abf",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": "p:23b8c7787cf2c609",
+      "role": "other",
+      "screenshotPath": "assets/e7e9a916cd20.png",
+      "snapshotPath": "assets/b284a9a6451d.snap.json",
+      "texts": [
+        "Traditionally credit lines charge you interest to borrow but Avici rewards you t",
+        "How does rewards work",
+        "Get rewarded to borrow",
+        "Earn yield on your SOL while borrowing against it. The more borrowing demand, th",
+        "Instant Credit",
+        "Borrow USDC or EURC the moment you deposit.    No waiting.",
+        "Self Custody",
+        "Instant Rewards",
+        "You have complete control over your collateral.",
+        "Rewards are ultra fast every ~400 milliseconds. Your balance grows in real time.",
+        "Your reward rate is calculated on your remaining reserve balance after borrowing",
+        "Learn More",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Learn More (opens web)",
+          "role": "button",
+          "selector": "label=\"Learn More\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow-funded",
+      "fingerprint": "sha256:b1f409d0925c2d1e92e635a7",
+      "skeletonHash": "sk:72914f8c9d59c3bf9fc5efbd",
+      "pHash": "p:232a0f2cd32c6dd7",
+      "role": "list",
+      "screenshotPath": "assets/961793b252a9.png",
+      "snapshotPath": "assets/9d29a8ffe3f7.snap.json",
+      "texts": [
+        "Grow Balance",
+        "$",
+        "1",
+        ".",
+        "2",
+        "9",
+        "7",
+        "0",
+        "3",
+        "4",
+        "~7.26% APY",
+        "All Time Earned",
+        "Last Month",
+        "$0.00",
+        "Growing Assets",
+        "Explore Assets",
+        "Stablecoin Yields",
+        "Stablecoins and dollar-denominated yields.",
+        "View",
+        "Asset Yields",
+        "Earn yield on your asset holdings.",
+        "Insurance Backed",
+        "Returns generated by reinsurance market."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Growing Assets (tab)",
+          "role": "button",
+          "selector": "label=\"Growing Assets\""
+        },
+        {
+          "label": "Explore Assets (tab)",
+          "role": "button",
+          "selector": "label=\"Explore Assets\""
+        },
+        {
+          "label": "Stablecoin Yields",
+          "role": "button",
+          "selector": "label~=\"Stablecoin Yields\""
+        },
+        {
+          "label": "Asset Yields",
+          "role": "button",
+          "selector": "label~=\"Asset Yields\""
+        },
+        {
+          "label": "Insurance Backed",
+          "role": "button",
+          "selector": "label~=\"Insurance Backed\""
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow-growing-assets",
+      "fingerprint": "sha256:586bfabc93dcdb3b2f29f5b4",
+      "skeletonHash": "sk:7ded3013508f5a6f560cd04b",
+      "pHash": "p:0f0e29904f9ee5f1",
+      "role": "list",
+      "screenshotPath": "assets/8e73c239bbfb.png",
+      "snapshotPath": "assets/9b8d5d53b8a1.snap.json",
+      "texts": [
+        "Grow Balance",
+        "$",
+        "1",
+        ".",
+        "2",
+        "9",
+        "7",
+        "0",
+        "~7.26% APY",
+        "All Time Earned",
+        "Last Month",
+        "$0.00",
+        "Growing Assets",
+        "Explore Assets",
+        "USDC",
+        "+7.260%",
+        "$1.22"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Growing Assets (tab, selected)",
+          "role": "button",
+          "selector": "label=\"Growing Assets\""
+        },
+        {
+          "label": "Explore Assets (tab)",
+          "role": "button",
+          "selector": "label=\"Explore Assets\""
+        },
+        {
+          "label": "USDC position (+7.260%)",
+          "role": "button",
+          "selector": "label~=\"USDC\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow-position-detail",
+      "fingerprint": "sha256:39a5c2fd610c3dd941ada891",
+      "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",
+      "pHash": "p:33b01bb07b46a54f",
+      "role": "other",
+      "screenshotPath": "assets/66c854240075.png",
+      "snapshotPath": "assets/5f344c173e19.snap.json",
+      "texts": [
+        "USDC",
+        "Earn yield on USD Coin via Jupiter Lend.",
+        "No Lockups",
+        "Rewards Daily",
+        "Learn About USDC",
+        "Balance",
+        "$1.2197",
+        "Current APY",
+        "+7.260%",
+        "Total earned",
+        "$0",
+        "Est. Weekly",
+        "$0.002",
+        "Projected Growth",
+        "2049",
+        "$6.11",
+        "+401.3%",
+        "Manage",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Manage",
+          "role": "button",
+          "selector": "label=\"Manage\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Learn About USDC",
+          "role": "button",
+          "selector": "label=\"Learn About USDC\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "grow-position-manage",
+      "fingerprint": "sha256:e4d71b43bf13a889b1128cb5",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": "p:39b289726b29d68d",
+      "role": "other",
+      "screenshotPath": "assets/e825cf832561.png",
+      "snapshotPath": "assets/7f38daf187b8.snap.json",
+      "texts": [
+        "Manage",
+        "Deposit More",
+        "Add more funds to earn higher yields",
+        "Withdraw",
+        "Withdraw your deposited funds",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit More",
+          "role": "button",
+          "selector": "label~=\"Deposit More\""
+        },
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": "label~=\"Withdraw\""
+        }
+      ]
+    },
+    {
+      "id": "home-onboarding",
+      "fingerprint": "sha256:4704bfa89ac6884ca768c7a3",
+      "skeletonHash": "sk:757e20b399c3437ca841e4c9",
+      "pHash": "p:2d5853d2a92cc75d",
+      "role": "home",
+      "screenshotPath": "assets/1475e9201ab6.png",
+      "snapshotPath": "assets/9ffa5574e526.snap.json",
+      "texts": [
+        "Assets breakdown",
+        "$0.00",
+        "Spending Balance",
+        "Top Up",
+        "Activity",
+        "A list of all your transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Money",
+          "role": "button",
+          "selector": "label=\"Add Money\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": "label=\"Withdraw\""
+        },
+        {
+          "label": "Add Money (Deposit your First Asset card)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Top Up (Spending Balance)",
+          "role": "button",
+          "selector": "label=\"Top Up\""
+        },
+        {
+          "label": "settings gear (top-left)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "QR-scan (top-right)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "card-my-cards",
+      "fingerprint": "sha256:5d503e517300b58f25e3e7ff",
+      "skeletonHash": "sk:7ded3013508f5a6f560cd04b",
+      "pHash": "p:cd3a4f0e0398e1ed",
+      "role": "list",
+      "screenshotPath": "assets/d698cba62c1d.png",
+      "snapshotPath": "assets/f2425dcccc8b.snap.json",
+      "texts": [
+        "My Cards",
+        "Favourites",
+        "0143",
+        "All Cards",
+        "Get Your Avici Card",
+        "International card built with the future of money",
+        "Get Your Card"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Card ending 0143",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cards menu (top-right)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Get Your Card",
+          "role": "button",
+          "selector": "label=\"Get Your Card\""
+        },
+        {
+          "label": "Home (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Markets (nav tab)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Grow (nav tab)",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "card-tab-menu",
+      "fingerprint": "sha256:2a9fb40565d86a1598680d4f",
+      "skeletonHash": "sk:ae618fcf7e4dfecf8b371443",
+      "pHash": "p:cb98eda42592635b",
+      "role": "modal",
+      "screenshotPath": "assets/321bf896d824.png",
+      "snapshotPath": "assets/865da0ff2ce9.snap.json",
+      "texts": [
+        "My Cards",
+        "Favourites",
+        "0143",
+        "All Cards",
+        "Get Your Avici Card",
+        "International card built with the future of money",
+        "Get Your Card",
+        "Cards Statement",
+        "Withdraw Balance",
+        "Add Card",
+        "Top Up"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Cards Statement",
+          "role": "button",
+          "selector": "label=\"Cards Statement\""
+        },
+        {
+          "label": "Withdraw Balance",
+          "role": "button",
+          "selector": "label=\"Withdraw Balance\""
+        },
+        {
+          "label": "Add Card",
+          "role": "button",
+          "selector": "label=\"Add Card\""
+        },
+        {
+          "label": "Top Up",
+          "role": "button",
+          "selector": "label=\"Top Up\""
+        }
+      ]
+    },
+    {
+      "id": "card-detail",
+      "fingerprint": "sha256:2877fc4440e7af5c7ad82a37",
+      "skeletonHash": "sk:bd7dbc1159cf745f2a28be96",
+      "pHash": "p:edb4a9a8b10a4b57",
+      "role": "other",
+      "screenshotPath": "assets/5ecf347cb7c3.png",
+      "snapshotPath": "assets/9beebc063901.snap.json",
+      "texts": [
+        "Card number",
+        "Expiry Date",
+        "CVV",
+        "Show card details",
+        "Billing",
+        "Freeze",
+        "Nickname",
+        "Limits",
+        "PIN",
+        "Spending Balance left",
+        "$0.00",
+        "Spent on this card",
+        "All Time limit",
+        "$1.00M",
+        "Spent out of $1.00M",
+        "Limit status of 0%",
+        "Spends",
+        "No Transactions",
+        "Your card spends will appear here",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Show card details",
+          "role": "button",
+          "selector": "label=\"Show card details\""
+        },
+        {
+          "label": "Billing",
+          "role": "button",
+          "selector": "label=\"Billing\""
+        },
+        {
+          "label": "Freeze",
+          "role": "button",
+          "selector": "label=\"Freeze\""
+        },
+        {
+          "label": "Nickname",
+          "role": "button",
+          "selector": "label=\"Nickname\""
+        },
+        {
+          "label": "Limits",
+          "role": "button",
+          "selector": "label=\"Limits\""
+        },
+        {
+          "label": "PIN",
+          "role": "button",
+          "selector": "label=\"PIN\""
+        },
+        {
+          "label": "Remove (from favourites)",
+          "role": "button",
+          "selector": "label=\"Remove\""
+        },
+        {
+          "label": "Home (set default)",
+          "role": "button",
+          "selector": "label=\"Home\""
+        },
+        {
+          "label": "Delete",
+          "role": "button",
+          "selector": "label=\"Delete\""
+        }
+      ]
+    },
+    {
+      "id": "card-limits",
+      "fingerprint": "sha256:0e19540f6d72df95f8998837",
+      "skeletonHash": "sk:660b700f2352917bb7b965b6",
+      "pHash": "p:29a5bfb4f05aa40b",
+      "role": "form",
+      "screenshotPath": "assets/abab5ea3cb13.png",
+      "snapshotPath": "assets/e9365e5e5e11.snap.json",
+      "texts": [
+        "1",
+        "2",
+        "3",
+        "Dash",
+        "4",
+        "5",
+        "6",
+        "Space",
+        "7",
+        "8",
+        "9",
+        "Delete",
+        ",",
+        "0",
+        ".",
+        "Done",
+        "Back",
+        "Set your limit",
+        "$",
+        "Per month",
+        "1,000,000",
+        "$100",
+        "$150",
+        "$200",
+        "$250",
+        "Save",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Save",
+          "role": "button",
+          "selector": "label=\"Save\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "$100 / $150 / $200 / $250 (presets)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Amount keypad (monthly limit)",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "card-delete-confirm",
+      "fingerprint": "sha256:c3b78b4602a276591a878440",
+      "skeletonHash": "sk:6f4007b141df67b363a9256c",
+      "pHash": "p:b9326db8a7585683",
+      "role": "modal",
+      "screenshotPath": "assets/b2ee4a782c83.png",
+      "snapshotPath": "assets/a3c0b359e4cf.snap.json",
+      "texts": [
+        "Delete card",
+        "Are you sure you want to",
+        "delete this card",
+        "Delete",
+        "Cancel",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Delete",
+          "role": "button",
+          "selector": "label=\"Delete\""
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-add",
+      "fingerprint": "sha256:8fb291799ede4fee87747408",
+      "skeletonHash": "sk:ea7680bb71dc97e45b1acaa7",
+      "pHash": "p:cf520d283912e7cf",
+      "role": "picker",
+      "screenshotPath": "assets/cfb45c5a7b37.png",
+      "snapshotPath": "assets/0b1f67076c2b.snap.json",
+      "texts": [
+        "Choose card you prefer",
+        "Virtual Card",
+        "Spend across 200M+ merchants anywhere in the world.",
+        "Visa Platinum Fees",
+        "$10",
+        "$10 one time fee per card",
+        "View All Platinum Benefits",
+        "ATM Withdraw",
+        "$1 + 0.65%",
+        "$250 / Day Limit",
+        "3 Transactions / Day (includes declined)",
+        "*Fx fee is charged for non-USD withdrawal",
+        "Decline Fee $0.60",
+        "Balance Inquiry Fee $0.60",
+        "Platinum",
+        "Signature",
+        "Get card for $10",
+        "Dismiss"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Get card for $10",
+          "role": "button",
+          "selector": "label~=\"Get card\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Virtual Card",
+          "role": "button",
+          "selector": "label~=\"Virtual Card\""
+        },
+        {
+          "label": "Platinum",
+          "role": "button",
+          "selector": "label=\"Platinum\""
+        },
+        {
+          "label": "Signature",
+          "role": "button",
+          "selector": "label=\"Signature\""
+        },
+        {
+          "label": "Dismiss",
+          "role": "button",
+          "selector": null
+        }
+      ]
     }
   ],
   "edges": [
-    {
-      "from": "welcome",
-      "to": "web3auth-login",
-      "action": "Tap \"Continue with Apple\"",
-      "selector": "label=\"Continue with Apple\"",
-      "kind": "nav",
-      "observedAtStep": 1
-    },
-    {
-      "from": "welcome",
-      "to": "home-guest",
-      "action": "Tap \"Skip Login\"",
-      "selector": "label=\"Skip Login\"",
-      "kind": "nav",
-      "observedAtStep": 2
-    },
-    {
-      "from": "home-guest",
-      "to": "card-guest",
-      "action": "Tap Wallet nav tab (2nd)",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 3
-    },
-    {
-      "from": "card-guest",
-      "to": "markets-guest",
-      "action": "Tap Markets nav tab (3rd)",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 4
-    },
-    {
-      "from": "markets-guest",
-      "to": "grow-guest",
-      "action": "Tap Earn nav tab (4th)",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 5
-    },
-    {
-      "from": "home-guest",
-      "to": "card-guest",
-      "action": "Tap \"Get Your Card\"",
-      "selector": "label=\"Get Your Card\"",
-      "kind": "nav",
-      "observedAtStep": 6
-    },
-    {
-      "from": "deposit-crypto-guest",
-      "to": "deposit-cash-guest",
-      "action": "Tap \"Cash\" method tab",
-      "selector": "label=\"Cash\"",
-      "kind": "nav",
-      "observedAtStep": 7
-    },
-    {
-      "from": "markets-guest",
-      "to": "swap-token-picker-guest",
-      "action": "Tap \"USDC\" (Swap To asset selector)",
-      "selector": "label=\"USDC\"",
-      "kind": "overlay",
-      "observedAtStep": 8
-    },
     {
       "from": "welcome",
       "to": "email-login",
@@ -2294,14 +2757,6 @@
       "selector": "label=\"Referrals\"",
       "kind": "nav",
       "observedAtStep": 13
-    },
-    {
-      "from": "settings",
-      "to": "credit-mode",
-      "action": "Tap \"Credit Mode\"",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 14
     },
     {
       "from": "home",
@@ -2390,14 +2845,6 @@
       "selector": "label=\"Buy\"",
       "kind": "overlay",
       "observedAtStep": 25
-    },
-    {
-      "from": "buy-review",
-      "to": "high-impact-warning",
-      "action": "Slide to buy (high price impact triggers warning)",
-      "selector": "label=\"Slide to buy\"",
-      "kind": "overlay",
-      "observedAtStep": 26
     },
     {
       "from": "high-impact-warning",
@@ -2532,7 +2979,7 @@
       "to": "card-gen-country",
       "action": "Select \"Personal Account\" + Continue",
       "selector": "label=\"Continue\"",
-      "kind": "in-place",
+      "kind": "nav",
       "observedAtStep": 43
     },
     {
@@ -2566,6 +3013,133 @@
       "selector": "label~=\"Continue to Sumsub\"",
       "kind": "nav",
       "observedAtStep": 47
+    },
+    {
+      "from": "swap-quote-details",
+      "to": "swap",
+      "action": "Close Quote Details → returns to swap",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 36.5
+    },
+    {
+      "from": "settings",
+      "to": "credit-mode",
+      "action": "Tap \"Credit Mode\"",
+      "selector": "label~=\"Credit Mode\"",
+      "kind": "overlay"
+    },
+    {
+      "from": "credit-mode",
+      "to": "credit-borrow",
+      "action": "Enter SOL collateral, tap \"Continue\"",
+      "selector": "label=\"Continue\"",
+      "kind": "nav"
+    },
+    {
+      "from": "credit-borrow",
+      "to": "home-credit",
+      "action": "Tap \"Open Credit Line\", authorize with device PIN",
+      "selector": "label=\"Open Credit Line\"",
+      "kind": "nav"
+    },
+    {
+      "from": "home-credit",
+      "to": "credit-line",
+      "action": "Tap the \"Credit Line Rewards\" section",
+      "selector": "label~=\"Credit Line Rewards\"",
+      "kind": "overlay"
+    },
+    {
+      "from": "credit-line",
+      "to": "credit-manage",
+      "action": "Tap \"Manage\"",
+      "selector": "label=\"Manage\"",
+      "kind": "nav"
+    },
+    {
+      "from": "credit-line",
+      "to": "credit-info",
+      "action": "Tap the info (i) icon",
+      "selector": null,
+      "kind": "nav"
+    },
+    {
+      "from": "grow-yield-deposit",
+      "to": "grow-funded",
+      "action": "Enter amount, tap \"Deposit\", authorize with device PIN",
+      "selector": "label=\"Deposit\"",
+      "kind": "nav"
+    },
+    {
+      "from": "grow-funded",
+      "to": "grow-growing-assets",
+      "action": "Tap \"Growing Assets\" tab",
+      "selector": "label=\"Growing Assets\"",
+      "kind": "nav"
+    },
+    {
+      "from": "grow-growing-assets",
+      "to": "grow-position-detail",
+      "action": "Tap the USDC position",
+      "selector": "label~=\"USDC\"",
+      "kind": "overlay"
+    },
+    {
+      "from": "grow-position-detail",
+      "to": "grow-position-manage",
+      "action": "Tap \"Manage\"",
+      "selector": "label=\"Manage\"",
+      "kind": "overlay"
+    },
+    {
+      "from": "card-gen-sumsub",
+      "to": "card-my-cards",
+      "action": "Complete Sumsub identity verification — card issued, lands on My Cards",
+      "selector": null,
+      "kind": "nav"
+    },
+    {
+      "from": "card-my-cards",
+      "to": "card-detail",
+      "action": "Tap the card",
+      "selector": null,
+      "kind": "overlay"
+    },
+    {
+      "from": "card-my-cards",
+      "to": "card-tab-menu",
+      "action": "Tap the top-right cards menu",
+      "selector": null,
+      "kind": "overlay"
+    },
+    {
+      "from": "card-detail",
+      "to": "card-limits",
+      "action": "Tap \"Limits\"",
+      "selector": "label=\"Limits\"",
+      "kind": "overlay"
+    },
+    {
+      "from": "card-detail",
+      "to": "card-delete-confirm",
+      "action": "Tap \"Delete\"",
+      "selector": "label=\"Delete\"",
+      "kind": "overlay"
+    },
+    {
+      "from": "card-tab-menu",
+      "to": "card-add",
+      "action": "Tap \"Add Card\"",
+      "selector": "label=\"Add Card\"",
+      "kind": "nav"
+    },
+    {
+      "from": "card-my-cards",
+      "to": "deposit-crypto",
+      "action": "Tap \"Top Up\" (card spending balance)",
+      "selector": "label=\"Top Up\"",
+      "kind": "overlay"
     }
   ],
   "decisionPoints": [
@@ -2573,154 +3147,157 @@
       "nodeId": "welcome",
       "options": [
         {
-          "label": "Skip Login",
-          "explored": true,
-          "toNode": "home-guest"
-        },
-        {
-          "label": "Continue with Apple",
-          "explored": true,
-          "toNode": "web3auth-login"
-        },
-        {
-          "label": "Continue with Google",
-          "explored": false
-        },
-        {
           "label": "Continue with email",
+          "explored": true,
+          "toNode": "email-login"
+        }
+      ]
+    },
+    {
+      "nodeId": "credit-line",
+      "options": [
+        {
+          "label": "Manage",
+          "explored": true,
+          "toNode": "credit-manage"
+        },
+        {
+          "label": "How rewards work (info)",
+          "explored": true,
+          "toNode": "credit-info"
+        },
+        {
+          "label": "Increase reserve (+) — reopens the supply screen",
           "explored": false
         }
       ]
     },
     {
-      "nodeId": "home-guest",
+      "nodeId": "credit-manage",
       "options": [
         {
-          "label": "Add Money (round) — shows \"Please Login to continue\" toast (guest-gated)",
-          "explored": true
-        },
-        {
-          "label": "Withdraw (round) — guest-gated",
+          "label": "Increase Reserve",
           "explored": false
         },
         {
-          "label": "Get Your Card",
-          "explored": true,
-          "toNode": "card-guest"
+          "label": "Borrow More",
+          "explored": false
         },
         {
-          "label": "Open Your Account",
+          "label": "Repay",
+          "explored": false
+        },
+        {
+          "label": "Close Credit Line",
           "explored": false
         }
       ]
     },
     {
-      "nodeId": "markets-guest",
+      "nodeId": "card-detail",
       "options": [
         {
-          "label": "NVIDIA / Apple / SpaceX / Anthropic (asset rows)",
+          "label": "Limits",
+          "explored": true,
+          "toNode": "card-limits"
+        },
+        {
+          "label": "Delete",
+          "explored": true,
+          "toNode": "card-delete-confirm"
+        },
+        {
+          "label": "Billing (real PII / device auth)",
           "explored": false
         },
         {
-          "label": "USDC (Swap To asset selector)",
-          "explored": true,
-          "toNode": "swap-token-picker-guest"
+          "label": "PIN (sensitive)",
+          "explored": false
         },
         {
-          "label": "Swap From / Swap To amount entry",
+          "label": "Freeze (in-place toggle)",
+          "explored": false
+        },
+        {
+          "label": "Nickname (requires device auth)",
+          "explored": false
+        },
+        {
+          "label": "Remove / Home (in-place)",
           "explored": false
         }
       ]
     },
     {
-      "nodeId": "deposit-crypto-guest",
+      "nodeId": "card-tab-menu",
       "options": [
         {
-          "label": "Crypto method",
-          "explored": true
-        },
-        {
-          "label": "Cash method",
+          "label": "Add Card",
           "explored": true,
-          "toNode": "deposit-cash-guest"
+          "toNode": "card-add"
         },
         {
-          "label": "Solana / Ethereum network tabs",
+          "label": "Top Up",
+          "explored": true,
+          "toNode": "deposit-crypto"
+        },
+        {
+          "label": "Cards Statement",
+          "explored": false
+        },
+        {
+          "label": "Withdraw Balance",
           "explored": false
         }
       ]
     }
   ],
   "overrides": {
-    "merges": [
-      [
-        "home",
-        "home-guest"
-      ],
-      [
-        "card",
-        "card-guest"
-      ],
-      [
-        "markets",
-        "markets-guest"
-      ],
-      [
-        "grow",
-        "grow-guest"
-      ],
-      [
-        "deposit-crypto",
-        "deposit-crypto-guest"
-      ],
-      [
-        "deposit-cash",
-        "deposit-cash-guest"
-      ]
-    ],
+    "merges": [],
     "flowNames": {
-      "web3auth-login": "Signing in (social / Web3Auth)",
+      "email-login": "Welcome",
       "home": "Home",
       "settings": "Settings",
-      "referrals": "Referrals",
-      "credit-mode": "Opening a credit line",
-      "qr-scanner": "Scanning a QR code",
-      "swap": "Swapping tokens",
-      "swap-quote-details": "Swapping tokens",
-      "swapping-tokens": "Swapping tokens",
-      "welcome": "Welcome & sign-in",
-      "money-forever-yours": "Welcome & sign-in",
-      "email-otp": "Signing in with email",
-      "email-login": "Signing in with email",
       "transaction-detail": "Transaction receipt",
-      "multichain-convert": "Transaction receipt",
       "activity-filter": "Activity filter",
-      "all": "Activity filter",
-      "add-payee-bank": "Withdrawing funds",
-      "withdraw-asset": "Withdrawing funds",
-      "card-gen-account-type": "Generating a card",
-      "choose-your-account-type": "Generating a card",
-      "markets-guest": "Markets",
-      "markets": "Markets",
-      "swap-token-picker-guest": "Picking a swap token",
-      "convert-to": "Picking a swap token",
-      "markets-section-ranked": "Market-cap rankings",
-      "ranked-by-market-cap": "Market-cap rankings",
-      "buy-review": "Buying a token",
-      "spacex": "Buying a token",
-      "gold-detail": "Token detail",
-      "gold": "Token detail",
-      "high-impact-warning": "High price-impact warning",
-      "high-price-impact": "High price-impact warning",
-      "grow-yield-deposit": "Earning yield",
-      "stablecoin-yields": "Earning yield",
       "withdraw": "Withdrawing funds",
+      "qr-scanner": "Scanning a QR code",
+      "card-gen-account-type": "Card",
+      "markets-section-ranked": "Market-cap rankings",
       "spacex-detail": "Buying a token (SpaceX)",
-      "grow-stablecoin-yields": "Earning yield"
+      "swap": "Swapping tokens",
+      "gold-detail": "Token detail",
+      "grow-stablecoin-yields": "Grow balance",
+      "markets": "Markets",
+      "credit-mode": "Opening a credit line",
+      "credit-line": "Managing your credit line",
+      "credit-manage": "Credit line actions",
+      "credit-info": "How credit rewards work",
+      "card-my-cards": "Your cards",
+      "card-detail": "Card details",
+      "card-limits": "Setting a spending limit",
+      "card-delete-confirm": "Deleting a card",
+      "card-tab-menu": "Adding a card",
+      "referrals": "Referrals",
+      "deposit-crypto": "Adding money"
     },
     "splits": [
       "card-gen-account-type",
-      "card-gen-country"
-    ]
+      "card-gen-country",
+      "deposit-crypto",
+      "deposit-crypto-eth"
+    ],
+    "structure": {
+      "credit-line": {
+        "parent": "home"
+      }
+    },
+    "screens": {
+      "home-onboarding": {
+        "role": "home",
+        "state": "empty",
+        "stateGroup": "home"
+      }
+    }
   }
 }
