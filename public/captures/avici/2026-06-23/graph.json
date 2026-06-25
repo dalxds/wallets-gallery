@@ -1870,9 +1870,9 @@
     {
       "id": "home-credit",
       "fingerprint": "sha256:99244e883a0fe46890071e82",
-      "skeletonHash": "sk:757e20b399c3437ca841e4c9",
+      "skeletonHash": "sk:265b98fc3b25b4efa0cab088",
       "pHash": "p:b9324972c31887fd",
-      "role": "home",
+      "role": "confirmation",
       "screenshotPath": "assets/20a5b55659ff.png",
       "snapshotPath": "assets/efcc2a76b6d6.snap.json",
       "texts": [
@@ -2323,9 +2323,9 @@
     {
       "id": "home-onboarding",
       "fingerprint": "sha256:4704bfa89ac6884ca768c7a3",
-      "skeletonHash": "sk:757e20b399c3437ca841e4c9",
+      "skeletonHash": "sk:265b98fc3b25b4efa0cab088",
       "pHash": "p:2d5853d2a92cc75d",
-      "role": "home",
+      "role": "confirmation",
       "screenshotPath": "assets/1475e9201ab6.png",
       "snapshotPath": "assets/9ffa5574e526.snap.json",
       "texts": [
@@ -2735,14 +2735,6 @@
       "observedAtStep": 10
     },
     {
-      "from": "email-otp",
-      "to": "home",
-      "action": "Enter 6-digit code (Web3Auth verifies, returns to app logged in)",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 11
-    },
-    {
       "from": "home",
       "to": "settings",
       "action": "Tap settings gear (top-left)",
@@ -3140,6 +3132,13 @@
       "action": "Tap \"Top Up\" (card spending balance)",
       "selector": "label=\"Top Up\"",
       "kind": "overlay"
+    },
+    {
+      "from": "email-otp",
+      "to": "home-onboarding",
+      "action": "Enter OTP (new account) → first-time home",
+      "selector": null,
+      "kind": "nav"
     }
   ],
   "decisionPoints": [
@@ -3270,7 +3269,6 @@
       "grow-stablecoin-yields": "Grow balance",
       "markets": "Markets",
       "credit-mode": "Opening a credit line",
-      "credit-line": "Managing your credit line",
       "credit-manage": "Credit line actions",
       "credit-info": "How credit rewards work",
       "card-my-cards": "Your cards",
@@ -3287,16 +3285,12 @@
       "deposit-crypto",
       "deposit-crypto-eth"
     ],
-    "structure": {
-      "credit-line": {
-        "parent": "home"
-      }
-    },
     "screens": {
+      "home-credit": {
+        "role": "home"
+      },
       "home-onboarding": {
-        "role": "home",
-        "state": "empty",
-        "stateGroup": "home"
+        "role": "home"
       }
     }
   }
