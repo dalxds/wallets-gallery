@@ -172,33 +172,27 @@ body:has([data-slot="dialog-overlay"]) {
    /apps/[slug]/flows), not a CSS panel toggle: the active panel is whichever page
    is rendered, and the active tab styling lives on the <Link>s in TabBar. */
 
-/* Browse index: each app card is server-rendered once per view and carries its
-   rank for each sort order; CSS shows the active view (data-view) and orders by
-   the active sort (data-sort), which the BrowseControls island reflects from
-   ?view/?sort. Defaults (attributes absent) = list view, latest sort, matching
+/* Browse index: each app card is server-rendered and carries its rank for each
+   sort order; CSS orders by the active sort (data-sort), which the BrowseControls
+   island reflects from ?sort. Default (attribute absent) = latest sort, matching
    the static HTML so no JS is needed for first paint. */
 .browse-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.browse-grid[data-view="grid"] {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr;
 }
 @media (min-width: 640px) {
-  .browse-grid[data-view="grid"] {
+  .browse-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (min-width: 1024px) {
-  .browse-grid[data-view="grid"] {
+  .browse-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @media (min-width: 1280px) {
-  .browse-grid[data-view="grid"] {
+  .browse-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
@@ -207,13 +201,4 @@ body:has([data-slot="dialog-overlay"]) {
 }
 .browse-grid[data-sort="alpha"] .browse-card {
   order: var(--rank-alpha);
-}
-.browse-card-grid {
-  display: none;
-}
-.browse-grid[data-view="grid"] .browse-card-list {
-  display: none;
-}
-.browse-grid[data-view="grid"] .browse-card-grid {
-  display: block;
 }

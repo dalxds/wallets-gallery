@@ -7,11 +7,10 @@ import { AppCard } from "@/components/browse/app-card"
 import { BrowseControls } from "@/components/browse/browse-controls"
 
 // Read the registry at build time and prerender the gallery into static HTML.
-// The cards render server-side (crawlable, no client fetch); sort and view are
-// URL state applied by CSS off data attributes the BrowseControls island sets,
-// so the index stays static while the controls stay shareable. Each card carries
-// its precomputed rank for both sort orders, and is rendered in both views — CSS
-// shows the active one.
+// The cards render server-side (crawlable, no client fetch); the sort order is
+// URL state applied by CSS off a data attribute the BrowseControls island sets,
+// so the index stays static while the control stays shareable. Each card carries
+// its precomputed rank for both sort orders.
 export default function BrowsePage() {
   const indexPath = join(process.cwd(), "public/captures/index.json")
   const registry = JSON.parse(readFileSync(indexPath, "utf8")) as AppsRegistry
@@ -55,12 +54,7 @@ export default function BrowsePage() {
                 } as CSSProperties
               }
             >
-              <div className="browse-card-list">
-                <AppCard app={app} view="list" />
-              </div>
-              <div className="browse-card-grid">
-                <AppCard app={app} view="grid" />
-              </div>
+              <AppCard app={app} />
             </div>
           ))}
         </div>

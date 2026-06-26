@@ -21,6 +21,14 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [4.0.1] - 2026-06-26
+
+### Changed
+
+- The Apps home page is now a single responsive grid. Each app shows just its icon, name, and
+  latest capture date — the preview screenshot and the screen/flow counts are gone, and so is
+  the list/grid view toggle. Sorting (Latest / A–Z) is unchanged.
+
 ## [4.0.0] - 2026-06-24
 
 ### Changed

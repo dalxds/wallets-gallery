@@ -102,7 +102,7 @@ app/                          # Next.js App Router (gallery prerendered; screen/
 
 components/
   app-detail/                 # the per-app detail UI (tabs, screen grid, flow rows)
-  browse/                     # the browse grid + sort/view controls
+  browse/                     # the browse grid + sort control
   lightbox/                   # screen + flow lightboxes + their route-driven modal wrappers
   standalone/                 # full-page screen/flow views (shared-link / OG targets)
   shared/  layout/  ui/       # image actions; app shell + header; shadcn primitives
