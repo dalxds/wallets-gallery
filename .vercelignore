@@ -1,24 +1,22 @@
 # Defense in depth for the Vercel deploy: with the static export dropped,
-# everything under public/ is served as-is. Under public/captures/ the ONLY thing
-# published is the content-addressed screenshot PNGs — expressed as an allowlist so
-# it is leak-proof by default: the capture JSON, working files, raw accessibility
+# everything under public/ is served as-is. The published capture tree is ONLY
+# the generated JSON + the content-addressed screenshot PNGs, expressed as an
+# allowlist so it is leak-proof by default: working files, raw accessibility
 # snapshots, secrets, and OS/editor cruft stay out regardless of git state, and a
 # NEW stray file type is excluded unless it is explicitly allowed below. (Replaces
 # scripts/prune-export.ts, which kept the same allowlist on the old static export;
 # a denylist would silently ship whatever it forgot to list.)
-#
-# The capture JSON is no longer served from here at all: index.json is published at
-# /index.json, and app.json / graph.json / view.json through /apps/... route
-# handlers that bake the bytes into the build output (force-static). So only the
-# PNGs need re-including below.
 
 # Ignore everything under captures, but keep descending into subdirectories so
-# the re-include below can reach nested files.
+# the re-includes below can reach nested files.
 /public/captures/**
 !/public/captures/**/
-# Re-include only the published screenshot PNGs.
+# Re-include only the two published asset types.
+!/public/captures/**/*.json
 !/public/captures/**/*.png
-# _staging is never published — drop its whole subtree even though it holds PNGs.
+# ...except raw accessibility snapshots, which are .json but never published.
+/public/captures/**/*.snap.json
+# _staging is never published — drop its whole subtree even though it holds .json/.png.
 /public/captures/**/_staging/
 
 # Secrets anywhere in the repo (belt-and-suspenders; also covers non-capture paths).

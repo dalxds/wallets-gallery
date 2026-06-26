@@ -12,7 +12,7 @@ export async function GET() {
   const appLines = index.apps
     .map(
       (app: { name: string; slug: string; platform: string; latest: string }) =>
-        `- ${app.name} (${app.platform.toUpperCase()}) — /apps/${app.slug}/view.json`
+        `- ${app.name} (${app.platform.toUpperCase()}) — /captures/${app.slug}/${app.latest}/view.json`
     )
     .join("\n")
 
@@ -27,14 +27,11 @@ ${appLines}
 
 Each capture is a source graph.json (nodes, edges, decision points, overrides) and a
 derived view.json (screens + flow tree with inline steps) produced from it at build time.
-The gallery renders view.json. Screenshot paths are relative to the capture directory and
-served under /captures/{slug}/.
+The gallery renders view.json. Screenshot paths are relative to the capture directory.
 
-- GET /index.json — App registry with slugs and capture dates
-- GET /apps/{slug}/app.json — Per-app metadata and capture history
-- GET /apps/{slug}/{date}/view.json — Derived view: screens + flow tree
-- GET /apps/{slug}/{date}/graph.json — Source graph (nodes, edges, overrides)
-- GET /apps/{slug}/view.json — Latest view (307 → newest dated URL); /graph.json likewise
+- GET /captures/index.json — App registry with slugs and capture dates
+- GET /captures/{slug}/{date}/view.json — Derived view: screens + flow tree
+- GET /captures/{slug}/{date}/graph.json — Source graph (nodes, edges, overrides)
 `
 
   return new Response(body, {
