@@ -1,14 +1,26 @@
 # Wallets Gallery
 
 A gallery of **captured mobile-app UI flows** — crypto-wallet and fintech apps, explored
-on a device, recorded as a graph, and published as a fast static site you can browse by
-screen or by flow.
+on a device, recorded as a graph, and published as a fast site you can browse by screen or
+by flow.
 
 The interesting part of this repo is not the website; it's the **capture model**. Each app
 is walked once, its screens and transitions are written down as a graph, and everything the
 gallery shows — merged screens, named flows, state variants, replay scripts — is _derived
-deterministically_ from that one graph. This README explains both: how the repo is laid
+deterministically_ from that one graph. This README describes both: how the repo is laid
 out, and how captures actually work.
+
+> This README **describes the codebase**. The rules for working in it — editing discipline,
+> the determinism contract, commit and versioning conventions — live in
+> [`CLAUDE.md`](CLAUDE.md).
+
+```mermaid
+flowchart LR
+  walk["📱 device walk"] -->|"observe"| wj["walk.json<br/>raw observation"]
+  wj -->|"assemble.ts"| gph["graph.json<br/>committed source"]
+  gph -->|"packageGraph()"| view["view.json<br/>derived"]
+  view -->|"next build"| gallery["the gallery<br/>screens · flows"]
+```
 
 ---
 
@@ -22,8 +34,9 @@ out, and how captures actually work.
 6. [From graph to view: the packager](#from-graph-to-view-the-packager)
 7. [Overrides: the one hand-edited surface](#overrides-the-one-hand-edited-surface)
 8. [The build pipeline](#the-build-pipeline)
-9. [Capturing a new app](#capturing-a-new-app)
-10. [Conventions & gotchas](#conventions--gotchas)
+9. [Routes & rendering](#routes--rendering)
+10. [Capturing a new app](#capturing-a-new-app)
+11. [Architecture notes](#architecture-notes)
 
 ---
 
@@ -42,7 +55,7 @@ out, and how captures actually work.
   walk an app on a device and produce a `graph.json`. (You don't need it to understand or
   run the site; it's how new data gets made.)
 
-The mental model in one line:
+The mental model in one line — and the diagram at the top of this README:
 
 ```
 observe a walk  →  assemble a graph  →  derive a view  →  render the gallery
@@ -67,8 +80,8 @@ pnpm typecheck    # tsc --noEmit
 pnpm lint         # eslint
 ```
 
-`pnpm build` is the full pipeline; `pnpm build-data` is the fast inner loop when you've only
-touched a `graph.json` or the packager.
+`pnpm build` is the full pipeline; `pnpm build-data` is the fast inner loop when only a
+`graph.json` or the packager has changed.
 
 ---
 
@@ -107,7 +120,8 @@ lib/
   types.ts                    # app-facing types (aliased over the packager's View) + registry/manifest
   captures.ts                 # server-only reads of index.json + view.json (shared by all routes)
   links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher presentation
-  images.ts  og.tsx  utils.ts # screenshot URL + dims; Open Graph card renderers; cn() helper
+  images.ts  og.tsx           # screenshot URL + dims; Open Graph card renderers
+  clipboard.ts  site.ts  utils.ts # copy-link/image/download; site URLs (assetBaseUrl); cn() helper
 
 scripts/                      # build-time CLIs (intentionally prettier-off, dense style)
   assemble.ts                 #   walk.json → graph.json  (computes identity signals, validates)
@@ -134,7 +148,21 @@ tests/                        # vitest: lib utils + tests/packaging/ (assemble, 
 ## The capture model
 
 A **capture** is one independent observation of one app at one moment, recorded as a
-directed graph. There are exactly four kinds of thing in it.
+directed graph. There are exactly four kinds of thing in it: **nodes** (screen states),
+**edges** (transitions), **decision points** (branches), and the **graph** that holds them.
+
+```mermaid
+flowchart TD
+  welcome["welcome"] -->|"Get started · nav"| login["login"]
+  login -->|"Sign in · nav"| home["home"]
+  login -->|"Forgot password? · nav"| forgot["forgot-password"]
+  home ==>|"Send · overlay"| send["send sheet"]
+  home -.->|"hide balance · in-place"| homeHidden["home · balance hidden"]
+```
+
+<sub>A toy capture. Solid arrows are `nav` (a different screen); the thick arrow is an
+`overlay` (a sheet over the prior screen); the dotted self-return is an `in-place` state
+toggle. The packager turns this into merged screens, a flow tree, and replay scripts.</sub>
 
 ### Node — a screen state
 
@@ -247,7 +275,7 @@ The hard problem in a capture is **"are these two screenshots the same screen?"*
 are arguably the same screen in two _states_; the trade screen and the settings screen are
 not. The graph carries **three** orthogonal signals per node so the packager can answer this
 deterministically. All three are computed by `scripts/assemble.ts` (via `lib/packager/identity.ts`
-and `scripts/phash.ts`) — never hand-written.
+and `scripts/phash.ts`) at capture time — never hand-written, never recomputed by the packager.
 
 | Signal             | What it hashes                                           | Answers                                                             |
 | ------------------ | -------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -262,7 +290,9 @@ Why three? Because each fails differently:
   _exact_ identity (and the replay entry check).
 - **`skeletonHash`** strips the volatile labels so "…purchase of VIRTUAL" and "…purchase of
   ETH" share one hash. It's deliberately _coarse_ — many unrelated screens can collide on the
-  element-role multiset — so it is never trusted alone for merging.
+  element-role multiset — so it is never trusted alone for merging. It's also **load-bearing
+  beyond merging**: the same hash drives clustering _and_ the `in-place` edge derivation at
+  assemble time.
 - **`pHash`** compares actual pixels. `pHashDistance` (Hamming distance) guards a merge: two
   nodes that share a skeleton are only collapsed when their pixels are within `T_MERGE_PHASH`
   (6/64 bits) — tight enough to reject genuinely different same-skeleton screens.
@@ -281,17 +311,21 @@ placeholders (`{money}`, `{handle}`, …) before hashing so data churn doesn't f
 **pure, deterministic** function: no I/O, no randomness, no clock — the same graph always
 produces the same view. It runs five stages in order.
 
+```mermaid
+flowchart LR
+  g["graph.json"] --> s1["1 · SAF<br/>merge + cluster"]
+  s1 --> s2["2 · classify<br/>states + toggles"]
+  s2 --> s3["3 · segment<br/>flow tree"]
+  s3 --> s4["4 · naming<br/>+ namingTODO"]
+  s4 --> s5["5 · replay<br/>.ad scripts"]
+  s5 --> v["view.json"]
 ```
-graph.json
-   │
-   ├─ 1. SAF        merge data-dupes → canonical nodes;  cluster states → logical families
-   ├─ 2. classify   label each state (default/empty/loading/error/max); detect in-place toggles
-   ├─ 3. segment    walk the edges into a tree of flows (journeys)
-   ├─ 4. naming     mechanical flow names (+ namingTODO for the agent/human to improve)
-   └─ 5. replay     emit an inline .ad command script per flow
-   ▼
-view.json   →   screens[] · flows[] (tree) · decisionPoints[] · stats · namingTODO
-```
+
+The five stages, in words: SAF merges data-dupes into canonical nodes and clusters states into
+logical families; classify labels each state and detects in-place toggles; segment walks the
+edges into a tree of flows; naming gives each flow a mechanical name (plus a `namingTODO` for a
+human/agent to improve); replay emits an inline `.ad` command script per flow. The result is
+`view.json`: `screens[]` · `flows[]` (a tree) · `decisionPoints[]` · `stats` · `namingTODO`.
 
 ### 1. SAF — the Screen Abstraction Function (`saf.ts`)
 
@@ -304,9 +338,16 @@ Two distinct operations collapse the raw observed nodes into logical screens:
 - **CLUSTER** — canonical nodes that are _the same logical screen in a genuinely different
   state_ (home empty vs. funded, trade vs. trade-at-max). Kept as **distinct** nodes but
   grouped into a **family**. Signal: **skeleton equality only** — a true equivalence relation.
-  (An earlier pHash-band cluster rule was non-transitive and chained far-apart screens into
-  one giant family; it was removed. Cross-skeleton state variants are grouped explicitly via
-  `overrides.stateGroup` instead.)
+  Cross-skeleton state variants are grouped explicitly via `overrides.stateGroup` instead.
+
+```mermaid
+flowchart TD
+  A["two observed nodes"] --> B{"same skeletonHash?"}
+  B -->|"no"| D["distinct screens"]
+  B -->|"yes"| C{"same normalized text,<br/>or pHash within 6 bits?"}
+  C -->|"yes"| M["MERGE<br/>one canonical node"]
+  C -->|"no"| G["CLUSTER<br/>same family · different state"]
+```
 
 The richer node (most elements, then most texts, then lexically-smallest id) wins as the
 representative — deterministically.
@@ -329,6 +370,19 @@ you must go through to reach it ("Send" under "Home", "Privacy" under "Settings"
 asset detail). A chain in the dominator tree (each screen dominating exactly one onward child) is
 a **trunk**; a screen dominating ≥ 2 onward children is a **hub** whose children each start a
 child flow.
+
+```mermaid
+flowchart TD
+  home["Home · root"] --> send["Send · trunk"]
+  home --> settings["Settings · hub"]
+  settings --> verify["Verify identity"]
+  settings --> handle["Account handle"]
+  settings --> privacy["Privacy"]
+  asset["Asset detail · hub"] --> buy["Buy → review"]
+```
+
+<sub>A slice of a resulting flow tree. `Settings` and `Asset detail` are hubs (≥ 2 onward
+children); `Send` is a one-child trunk; `Home` is an anchor that roots its own subtree.</sub>
 
 - **Anchors** root their own top-level subtree: a virtual super-source dominates them, so their
   `idom` is the super-source. Three sources, unioned — entry points (the launch root + screens
@@ -381,17 +435,17 @@ before the spine continues. This is what lets a flow be _re-run_ on a device, no
 }
 ```
 
-`view.json` is a **build artifact** — never hand-edited. To change anything in it, edit the
-graph's `overrides` and re-run the packager.
+`view.json` is a **build artifact**: it is regenerated from the graph (and its `overrides`) by
+the packager. To change anything in it, change the source — the graph's `overrides`.
 
 ---
 
 ## Overrides: the one hand-edited surface
 
-The graph's observation (nodes/edges/decisionPoints) is written by the capture walk and never
-touched by hand. The **only** hand-editable block is `overrides`, written by the edit agent
-(or a person) and **carried forward verbatim across re-captures**. Each key corrects exactly
-one thing the packager derived:
+The graph's observation (nodes/edges/decisionPoints) is written by the capture walk. The
+**only** hand-editable block is `overrides`, written by the edit agent (or a person) and
+**carried forward verbatim across re-captures**. Each key corrects exactly one thing the
+packager derived:
 
 | Key         | Shape                                                            | Corrects                                                        |
 | ----------- | ---------------------------------------------------------------- | --------------------------------------------------------------- |
@@ -401,7 +455,7 @@ one thing the packager derived:
 | `merges`    | `string[][]`                                                     | force-merge nodes the SAF kept separate                         |
 | `splits`    | `string[]`                                                       | force-keep nodes distinct that the SAF would merge              |
 
-After editing overrides, re-run `pnpm build-data` (or `node scripts/package.ts <graph.json>`).
+Regenerating with `pnpm build-data` (or `node scripts/package.ts <graph.json>`) applies them.
 Because everything is derived, an override is a small, reviewable correction — not a rewrite
 of the output.
 
@@ -409,49 +463,62 @@ of the output.
 
 ## The build pipeline
 
-```
-                    ┌─────────────────────── capture (agent, on a device) ───────────────────────┐
-  device walk  ───▶ _staging/walk.json ──assemble.ts──▶ {date}/graph.json   (committed source)
-                    └────────────────────────────────────────────────────────────────────────────┘
-                                                            │
-  pnpm build  ──▶  build-data.ts:  for each graph.json → packageGraph → {date}/view.json
-                                   then emit the registry  captures/index.json
-                          │
-                          ▼
-                   next build  ──▶  gallery pages prerendered (SSG); screen/flow pages +
-                                    OG images render on demand and cache; next/image
-                                    optimizes screenshots on demand
-                          │
-                          ▼
-                   .vercelignore  ──▶  allowlist: only *.json + *.png under captures/ deploy
-                                       (public/ is otherwise served as-is)
+```mermaid
+flowchart TD
+  walk["device walk"] --> wj["_staging/walk.json<br/>raw observation"]
+  wj -->|"scripts/assemble.ts"| g["graph.json<br/>committed source"]
+  g -->|"scripts/build-data.ts"| v["view.json<br/>+ captures/index.json"]
+  v -->|"next build"| pages["gallery prerendered (SSG)<br/>screen · flow · OG on demand"]
+  pages -->|".vercelignore allowlist"| deploy["Vercel deploy<br/>only *.json + *.png under captures/"]
 ```
 
 Key properties:
 
 - **`graph.json` is the only committed source per capture.** `view.json` and `index.json` are
-  generated by `build-data`. They are derivable, but committed too and kept in sync with their
-  source — re-run `build-data` after a graph or packager change and commit them alongside it.
-- **Routes are data, not fetches.** Every capture is canonical at its _dated_ URL. The browse
-  grid and each `/apps/<slug>/<date>` gallery (Screens + Flows tabs) are prerendered from JSON on
-  disk for every known date — including the latest. The bare `/apps/<slug>` is a prebuilt static
-  307 to `/apps/<slug>/<latest>` (the redirect target is baked from `app.latest` at build); it is
-  not a gallery of its own. Unknown dates 404 (`dynamicParams = true`). Individual screen/flow
-  pages and their OG cards render on the first request and cache (`generateStaticParams` returns
-  `[]`, so nothing is prebuilt and the long tail never inflates the build; the flow page sets
-  `dynamic = "force-dynamic"` because it reads `?step`). Either way there are **no external data
-  fetches** — everything derives from local JSON.
-- **One canonical URL per screen/flow — always dated.** A tile click navigates to
-  `/apps/<slug>/<date>/screen/<id>` (or `…/flow/<slug>`), which the `@modal` parallel slot
-  intercepts into the lightbox over the gallery; opening or refreshing that URL renders the
-  standalone page with its own OG card. All such URLs are built through `captureBase` in
-  `lib/links.ts`, which is always dated — there is no separate "clean latest" per-entity route, so
+  derivable build artifacts, generated by `build-data` and committed in sync with their source.
+- **Routes are data, not fetches.** The browse grid and every `/apps/<slug>/<date>` gallery are
+  prerendered from JSON on disk for each known date (SSG); the bare `/apps/<slug>` is a prebuilt
+  static 307 to the latest, and unknown dates 404 (`dynamicParams = true`). Screen/flow pages and
+  their OG cards render on the first request and cache (`generateStaticParams` returns `[]`, so the
+  long tail never inflates the build). Either way there are **no external data fetches** —
+  everything derives from local JSON. The route tree itself is laid out under
+  [Routes & rendering](#routes--rendering).
+- **Leak prevention is `.vercelignore`, an allowlist.** With `public/` served as-is on Vercel,
+  only `*.json` + `*.png` under `public/captures/` are deployed — `*.snap.json`, `_staging/`,
+  `credentials.md`, secrets, and OS/editor cruft stay out by default, so a new stray file type
+  can't leak unless it's explicitly allowed. `*.snap.json` are also gitignored.
+
+---
+
+## Routes & rendering
+
+Every capture is canonical at one **dated** URL. The bare `/apps/<slug>` is a static 307 to the
+latest date; the gallery's Screens and Flows tabs are separate prerendered pages; a screen or
+flow click opens a lightbox via an intercepting `@modal` route, and the same URL opened directly
+(or refreshed) renders a standalone page with its own Open Graph card.
+
+```mermaid
+flowchart TD
+  bare["/apps/[slug]"] -->|"static 307"| dated["/apps/[slug]/[date]"]
+  dated --> screens["Screens<br/>(gallery)/page.tsx"]
+  dated --> flows["Flows<br/>(gallery)/flows/page.tsx"]
+  screens -.->|"tile click"| modal["@modal intercept<br/>lightbox over the gallery"]
+  flows -.->|"tile click"| modal
+  modal -.->|"open / refresh URL"| standalone["standalone page<br/>screen/[id] · flow/[slug] + OG card"]
+```
+
+- The **Screens/Flows tabs are routes**, each its own prerendered page under the `(gallery)`
+  route group inside `[date]/`, sharing chrome via `[date]/(gallery)/layout.tsx` (`GalleryFrame`).
+  A tab switch is a prefetched soft-nav that swaps only the panel beneath; `TabBar` is `<Link>`s
+  using `usePathname()` for the active state.
+- The **`@modal` slot** intercepts a screen/flow click over either tab into a lightbox; the
+  lightbox and the standalone page share one body (`ScreenViewer` / `FlowViewer` in
+  `components/lightbox/`).
+- **Deep links are real routes**, built through `captureBase` in `lib/links.ts` (always dated), so
   a shared link keeps resolving to the same capture after a newer one lands.
-- **Leak prevention is `.vercelignore`, an allowlist** (carrying forward what the static export's
-  `prune-export` did): with `public/` served as-is on Vercel, only `*.json` + `*.png` under
-  `public/captures/` are deployed — `*.snap.json`, `_staging/`, `credentials.md`, secrets, and
-  OS/editor cruft stay out by default, so a new stray file type can't leak unless it's explicitly
-  allowed. `*.snap.json` are also gitignored.
+- **Open Graph cards** render via `next/og` at the site, app, screen, and flow levels
+  (`opengraph-image.tsx`, composed in `lib/og.tsx`, which fetches the content-addressed PNGs
+  from the CDN rather than the function bundle).
 
 ---
 
@@ -467,7 +534,7 @@ assemble  → node scripts/assemble.ts _staging/walk.json {date}/graph.json
              kind from skeleton equality, validates — refuses to write on error)
 package   → node scripts/package.ts {date}/graph.json
             (derives flows/states/tree/replay; prints a namingTODO to fill in)
-edit      → write overrides into graph.json, re-run package — never hand-edit derived data
+edit      → write overrides into graph.json, re-run package
 ```
 
 The agent authors **exactly one** file — `walk.json` — and supplies flow names; it never
@@ -478,34 +545,14 @@ hand-computes a hash, builds a flow, or classifies a state. The contract for wha
 
 ---
 
-## Conventions & gotchas
+## Architecture notes
 
-- **Determinism is the contract.** `packageGraph` must be a pure function of the graph — no
-  clock, no randomness, no input-order dependence. Several past bugs (non-transitive
-  clustering, input-order-dependent default selection) were exactly violations of this; the
-  fixes are documented inline in `saf.ts` / `classify.ts`. If you touch the packager, the
-  invariant to preserve is: _reordering the nodes/edges array must not change the view._
-- **`lib/packager/` is types-only at the boundary.** `types.ts` is pure types (erased at
-  compile time) so client components can import it; all runtime logic lives in the sibling
-  modules, which import `node:crypto` and run only at build time / in the CLI.
-- **The engine is intentionally prettier-off.** `lib/packager/` and `scripts/` use a dense,
-  hand-formatted style (see `.prettierignore`) — don't run `prettier --write` over them.
-- **`skeletonHash` is capture-time and load-bearing.** It's computed once at assemble time and
-  drives merge, cluster, _and_ the `in-place` edge derivation. It is not recomputed by the
-  packager and there's no edge-kind override — to force two same-skeleton nodes apart, use
-  `overrides.splits`.
-- **Regenerate, don't edit.** After any packager or graph change, run `pnpm build-data` and
-  re-run `pnpm test`. The packager tests in `tests/packaging/` pin the tricky invariants
-  (toggle chains, cluster equivalence, override survival across merges, cycle-proof hub
-  reachability).
-- **Captures are isolated.** Each capture is a standalone observation; the capture agent must
-  never read another app's files or this app's own prior captures as a reference (only a
-  re-capture reads this app's latest graph, to carry `overrides` forward). This keeps one
-  app's structure/quirks from leaking into another's graph.
-- **App releases vs. capture content are tracked separately.** The app (site, packager,
-  scripts) is _versioned_: bump `package.json` by the scale of the change (SemVer) and add a
-  `CHANGELOG.md` entry leading with what users can now do. Captures under `public/captures/`
-  are _content_: they're tracked by commit (`content(<slug>): …`) and never bump the version
-  or appear in the changelog. See [`CHANGELOG.md`](CHANGELOG.md).
-  </content>
-  </invoke>
+- **`lib/packager/` is types-only at the boundary.** `types.ts` is pure types (erased at compile
+  time) so client components can import it; all runtime logic lives in the sibling modules, which
+  import `node:crypto` and run only at build time / in the CLI.
+- **`skeletonHash` is capture-time and load-bearing.** Computed once by `scripts/assemble.ts`, it
+  drives merge, cluster, _and_ the `in-place` edge derivation; the packager never recomputes it.
+- **App vs. captures are tracked separately.** The app (site, packager, scripts) is versioned in
+  `package.json` with a `CHANGELOG.md` entry; captures under `public/captures/` are content,
+  tracked by commit. The conventions for both — and the editing/determinism rules for the
+  packager — live in [`CLAUDE.md`](CLAUDE.md) and [`CHANGELOG.md`](CHANGELOG.md).

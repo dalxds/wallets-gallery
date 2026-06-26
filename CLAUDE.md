@@ -8,7 +8,8 @@ derived from it by a pure, deterministic packager (`lib/packager/`). Gallery pag
 prerendered (SSG); individual screen/flow pages, their OG cards, and image optimization happen
 on demand.
 `README.md` is the canonical architecture and capture-model doc — read it before working on
-the packager, the build scripts, or capture data. The on-disk data contract lives in
+the packager, the build scripts, or capture data, and **keep it in sync with the code** (see
+"Keeping the README in sync" below). The on-disk data contract lives in
 `.claude/skills/app-capture/references/schema.md` (with a TypeScript mirror in
 `lib/packager/types.ts`).
 
@@ -43,6 +44,21 @@ Treat these as two separate things:
 - Every app release gets a `CHANGELOG.md` entry. Lead with what a user can now do, use plain
   language, keep branch/process narrative out, and put contributor notes under
   "For contributors". See `CHANGELOG.md` for the format and voice rules.
+
+## Keeping the README in sync
+
+- **`README.md` must always reflect the current codebase.** It is the canonical architecture
+  doc, so any app change that alters the structure, the data contract, the packager stages,
+  the routes, or the build pipeline updates `README.md` **in the same change** — alongside the
+  `CHANGELOG.md` entry and the `package.json` bump. A reader should never find the README
+  describing a shape the code no longer has (e.g. a `lib/` file that moved, a route that was
+  renamed, a packager stage that was added). Capture content updates don't touch the README.
+- **The README only _describes_ the codebase — it is not a rulebook.** It explains what the
+  repo is, how it's laid out, and how the capture → graph → view → gallery model works (the
+  _what_ and _how it works_, with diagrams). Implementation practices, do/don't rules, and
+  process — the editing rules, the determinism contract, commit/versioning discipline — live
+  **here in CLAUDE.md**, not in the README. If a sentence in the README starts with "never…",
+  "always…", or "don't…", it belongs in CLAUDE.md instead.
 
 ## Editing rules
 
