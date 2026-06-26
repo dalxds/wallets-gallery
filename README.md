@@ -98,6 +98,10 @@ app/                          # Next.js App Router (gallery prerendered; screen/
       (gallery)/page.tsx      #     Screens tab · (gallery)/flows/page.tsx for the Flows tab
       @modal/(.)screen · (.)flow #  intercepting-route modals (lightbox over the gallery)
       screen/[id] · flow/[slug]  #  standalone pages + opengraph-image.tsx (shared-link / SEO)
+      graph.json · view.json/route.ts # /apps/x/<date>/graph.json·view.json (raw capture data)
+    graph.json · view.json/route.ts  # /apps/x/graph.json·view.json → 307 to the latest date
+    app.json/route.ts           #     /apps/x/app.json     per-app metadata (raw JSON)
+  index.json/route.ts           #   /index.json  the app registry (raw JSON)
   llms.txt/route.ts           #   /llms.txt    machine-readable index of apps + data URLs
 
 components/
@@ -469,7 +473,7 @@ flowchart TD
   wj -->|"scripts/assemble.ts"| g["graph.json<br/>committed source"]
   g -->|"scripts/build-data.ts"| v["view.json<br/>+ captures/index.json"]
   v -->|"next build"| pages["gallery prerendered (SSG)<br/>screen · flow · OG on demand"]
-  pages -->|".vercelignore allowlist"| deploy["Vercel deploy<br/>only *.json + *.png under captures/"]
+  pages -->|".vercelignore allowlist"| deploy["Vercel deploy<br/>captures/ = screenshots only;<br/>JSON via /index.json + /apps routes"]
 ```
 
 Key properties:
@@ -483,10 +487,16 @@ Key properties:
   long tail never inflates the build). Either way there are **no external data fetches** —
   everything derives from local JSON. The route tree itself is laid out under
   [Routes & rendering](#routes--rendering).
+- **The raw capture data is published through app routes.** The registry is at `/index.json`;
+  per-app metadata at `/apps/<slug>/app.json`; and `/apps/<slug>/<date>/graph.json` · `/view.json`
+  serve each capture's bytes verbatim — all prerendered (force-static, baked into the build
+  output). `/apps/<slug>/graph.json` · `/view.json` 307 to the latest date. The screenshots are
+  the only thing still served statically, at `/captures/<slug>/assets/<hash>.png`.
 - **Leak prevention is `.vercelignore`, an allowlist.** With `public/` served as-is on Vercel,
-  only `*.json` + `*.png` under `public/captures/` are deployed — `*.snap.json`, `_staging/`,
-  `credentials.md`, secrets, and OS/editor cruft stay out by default, so a new stray file type
-  can't leak unless it's explicitly allowed. `*.snap.json` are also gitignored.
+  `public/captures/` ships only the screenshot PNGs — all capture JSON (`index.json`, `app.json`,
+  `graph.json`, `view.json`) is served through the route handlers above instead, and `*.snap.json`,
+  `_staging/`, `credentials.md`, secrets, and OS/editor cruft stay out by default, so a new stray
+  file type can't leak unless it's explicitly allowed. `*.snap.json` are also gitignored.
 
 ---
 
@@ -519,6 +529,10 @@ flowchart TD
 - **Open Graph cards** render via `next/og` at the site, app, screen, and flow levels
   (`opengraph-image.tsx`, composed in `lib/og.tsx`, which fetches the content-addressed PNGs
   from the CDN rather than the function bundle).
+- **The raw capture data is a route too.** `/index.json` (the registry), `/apps/<slug>/app.json`,
+  and the `[date]/graph.json`·`view.json` handlers serve the bytes verbatim (force-static — baked
+  at build); the un-dated `/apps/<slug>/graph.json`·`view.json` 307 to the latest, mirroring the
+  bare-app redirect.
 
 ---
 

@@ -59,6 +59,47 @@ export function staticCaptureParams(): { slug: string; date: string }[] {
   return out
 }
 
+// Raw, unparsed capture JSON (graph.json or view.json) for the public data routes
+// under /apps/[slug]/… These serve the file bytes verbatim — byte-identical to what
+// build-data wrote, so the published download matches the committed source — while
+// the gallery itself uses the parsed forms above. Returns null when the file is
+// absent (the route 404s); any non-ENOENT read error throws so corruption is loud.
+export function readCaptureFile(
+  slug: string,
+  date: string,
+  name: "graph.json" | "view.json"
+): string | null {
+  const path = join(capturesDir, slug, date, name)
+  try {
+    return readFileSync(path, "utf8")
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === "ENOENT") return null
+    throw new Error(`Cannot read ${name} for "${slug}" at ${date} (${path}).`, {
+      cause: e,
+    })
+  }
+}
+
+// The registry (index.json), served verbatim at /index.json. The build always
+// produces it, so a missing file is a build bug — let readFileSync throw loudly
+// rather than 404 the root data route.
+export function readRegistryFile(): string {
+  return readFileSync(join(capturesDir, "index.json"), "utf8")
+}
+
+// A capture's per-app metadata (app.json), served verbatim at /apps/[slug]/app.json
+// — committed source, one per app. Returns null when absent (the route 404s); any
+// non-ENOENT read error throws.
+export function readAppFile(slug: string): string | null {
+  const path = join(capturesDir, slug, "app.json")
+  try {
+    return readFileSync(path, "utf8")
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === "ENOENT") return null
+    throw new Error(`Cannot read app.json for "${slug}" (${path}).`, { cause: e })
+  }
+}
+
 // A specific capture's view. Returns null ONLY when the file is genuinely absent
 // (an unknown date → the caller 404s). A present-but-corrupt view.json throws so
 // stale/truncated data fails loudly instead of silently rendering a 404.

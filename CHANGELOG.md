@@ -21,6 +21,33 @@ version bumps out of it. Put contributor-facing notes under a "For contributors"
 
 ## [Unreleased]
 
+## [4.1.0] - 2026-06-26
+
+### Added
+
+- A capture's raw data is now published from the app's own URLs: the registry at `/index.json`,
+  per-app metadata at `/apps/<slug>/app.json`, the source graph at `/apps/<slug>/<date>/graph.json`,
+  and the derived view at `/apps/<slug>/<date>/view.json`. The un-dated `/apps/<slug>/graph.json`
+  and `/apps/<slug>/view.json` redirect to the latest capture, the same way `/apps/<slug>` does for
+  the gallery. `/llms.txt` now points at these URLs.
+
+### Changed
+
+- The capture JSON is no longer served under `/captures/...` — use the URLs above instead
+  (`/captures/index.json` and `/captures/<slug>/<date>/graph.json`·`view.json` are gone). The only
+  thing still served from `/captures/` is the screenshots (`/captures/<slug>/assets/<hash>.png`),
+  unchanged.
+
+### For contributors
+
+- New route handlers serve the capture JSON from disk, verbatim: `app/index.json/route.ts`,
+  `app/apps/[slug]/app.json/route.ts`, and `app/apps/[slug]/[date]/{graph,view}.json/route.ts`
+  (plus un-dated `/apps/[slug]/{graph,view}.json` redirects to the latest). Reads live in
+  `lib/captures.ts` (`readRegistryFile`, `readAppFile`, `readCaptureFile`). All are `force-static`
+  with `generateStaticParams`, so the bytes are baked into the build output and don't need to ship
+  under `public/captures/` — `.vercelignore` now re-includes only `*.png` there. No files moved on
+  disk, and `next.config.mjs` is unchanged (screenshots still live at `/captures/<slug>/assets/`).
+
 ## [4.0.1] - 2026-06-26
 
 ### Changed
