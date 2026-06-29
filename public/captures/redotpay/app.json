@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "app": {
+    "name": "RedotPay",
+    "slug": "redotpay",
+    "bundleId": "com.redotpay",
+    "platform": "android"
+  },
+  "firstCapturedAt": "2026-06-29",
+  "lastCapturedAt": "2026-06-29",
+  "latestCapture": "2026-06-29",
+  "captures": [
+    {
+      "date": "2026-06-29",
+      "scope": "initial",
+      "mode": "free-roam",
+      "previousCapture": null,
+      "path": "2026-06-29/graph.json"
+    }
+  ]
+}

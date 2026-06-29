@@ -13,6 +13,18 @@
       "flows": 24
     },
     {
+      "slug": "redotpay",
+      "name": "RedotPay",
+      "platform": "android",
+      "captures": [
+        "2026-06-29"
+      ],
+      "latest": "2026-06-29",
+      "cover": "assets/0e61a0a447d0.png",
+      "screens": 94,
+      "flows": 70
+    },
+    {
       "slug": "tuyo",
       "name": "Tuyo",
       "platform": "android",
