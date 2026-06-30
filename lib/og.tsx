@@ -458,7 +458,7 @@ export async function appOgImage(view: AppCapture, slug: string) {
           {`${view.screens.length} screens  ·  ${view.flows.length} flows`}
         </Meta>
         <Meta marginTop={12}>
-          {`Last captured ${formatDate(view.captureDate)}`}
+          {`Captured on ${formatDate(view.captureDate)}`}
         </Meta>
       </Center>
 
@@ -508,7 +508,7 @@ export async function screenOgImage(
         <Title size={58} marginTop={24}>
           {truncate(screen.title, 60)}
         </Title>
-        <Meta marginTop={22}>{`Captured ${formatDate(view.captureDate)}`}</Meta>
+        <Meta marginTop={22}>{`Captured on ${formatDate(view.captureDate)}`}</Meta>
       </div>
 
       <div
@@ -576,7 +576,7 @@ export async function flowOgImage(
           {truncate(flow.name, 32)}
         </Title>
         <Meta marginTop={16}>
-          {`${total} ${total === 1 ? "screen" : "screens"}  ·  Captured ${formatDate(view.captureDate)}`}
+          {`${total} ${total === 1 ? "screen" : "screens"}  ·  Captured on ${formatDate(view.captureDate)}`}
         </Meta>
       </div>
 

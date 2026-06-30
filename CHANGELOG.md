@@ -19,6 +19,14 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [4.1.3] - 2026-06-30
+
+### Changed
+
+- Open Graph cards now read "Captured on <date>" instead of "Last captured <date>", so a
+  shared link to a historical capture reads correctly (the date is that capture's, not the
+  newest). Applied across the app, screen, and flow cards for consistency.
+
 ## [4.1.2] - 2026-06-30
 
 ### Fixed
