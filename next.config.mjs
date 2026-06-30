@@ -1,3 +1,12 @@
+import fs from "fs"
+import path from "path"
+
+// Read the registry once at config eval (build time), the same way the llms.txt
+// route does — used to bake the per-app "latest" data redirects below.
+const captures = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "public/captures/index.json"), "utf-8")
+)
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Vercel-native: the gallery is prerendered (SSG) at build, but screen/flow
@@ -37,11 +46,18 @@ const nextConfig = {
   //    snapshots nft over-pulls) OUT of the bundles. Bundling every PNG would blow
   //    the 250 MB function limit and is needless: the OG cards fetch screenshots
   //    from the CDN (lib/og.tsx) and the browser/optimizer serve them from public/.
+  // The OG functions also read the site's TTF fonts off disk (lib/og.tsx); bundle
+  // lib/og-fonts so they're present. (nft already auto-traces these from the
+  // readFileSync(...".ttf") literals, so every route — page lambdas included —
+  // carries the ~1.5 MB regardless; a narrower include key doesn't change that, so
+  // this just guarantees the OG functions have them.)
   outputFileTracingIncludes: {
     "/apps/**": [
       "./public/captures/index.json",
       "./public/captures/**/view.json",
+      "./lib/og-fonts/*.ttf",
     ],
+    "/opengraph-image": ["./lib/og-fonts/*.ttf"],
   },
   outputFileTracingExcludes: {
     "/apps/**": [
@@ -49,6 +65,26 @@ const nextConfig = {
       "./public/captures/**/graph.json",
       "./public/captures/**/*.snap.json",
     ],
+  },
+  // /captures/<slug>/latest/{view,graph}.json — a stable, date-free data entry
+  // point for consumers (agents, the MCP/skill), mirroring the /apps/<slug> →
+  // /apps/<slug>/<latest> HTML redirect on the data side. We bake one redirect
+  // per known app from index.json (regenerated on every build, so it tracks
+  // app.latest); an unknown slug matches no source and falls through to a normal
+  // 404. permanent:false → 307, NOT 308: "latest" moves when a newer capture
+  // lands, so the redirect must never be cached as permanent. The dated files are
+  // untouched — they stay the immutable, long-cacheable canonical URLs; this is
+  // only an alias that saves consumers the index.json round-trip to resolve the
+  // date. (Screenshot paths in view.json are app-relative — /captures/<slug>/… —
+  // and live above the date dirs, so the alias never affects how they resolve.)
+  async redirects() {
+    return captures.apps.flatMap((app) =>
+      ["view.json", "graph.json"].map((file) => ({
+        source: `/captures/${app.slug}/latest/${file}`,
+        destination: `/captures/${app.slug}/${app.latest}/${file}`,
+        permanent: false,
+      }))
+    )
   },
   // The content-addressed PNGs are immutable — cache the originals forever. This
   // also lengthens the optimized variants' TTL (the larger of this vs

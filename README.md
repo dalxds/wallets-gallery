@@ -99,6 +99,7 @@ app/                          # Next.js App Router (gallery prerendered; screen/
       @modal/(.)screen · (.)flow #  intercepting-route modals (lightbox over the gallery)
       screen/[id] · flow/[slug]  #  standalone pages + opengraph-image.tsx (shared-link / SEO)
   llms.txt/route.ts           #   /llms.txt    machine-readable index of apps + data URLs
+                              #   /captures/x/latest/{view,graph}.json → 307 to latest (next.config.mjs)
 
 components/
   app-detail/                 # the per-app detail UI (tabs, screen grid, flow rows)
@@ -120,7 +121,8 @@ lib/
   types.ts                    # app-facing types (aliased over the packager's View) + registry/manifest
   captures.ts                 # server-only reads of index.json + view.json (shared by all routes)
   links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher presentation
-  images.ts  og.tsx           # screenshot URL + dims; Open Graph card renderers
+  images.ts  og.tsx           # screenshot URL + dims; Open Graph card renderers (site fonts + brand color)
+  og-fonts/                   #   Inter + Geist Mono (+ Noto fallback) TTFs → OG functions (next.config tracing)
   clipboard.ts  site.ts  utils.ts # copy-link/image/download; site URLs (assetBaseUrl); cn() helper
 
 scripts/                      # build-time CLIs (intentionally prettier-off, dense style)
@@ -517,8 +519,18 @@ flowchart TD
 - **Deep links are real routes**, built through `captureBase` in `lib/links.ts` (always dated), so
   a shared link keeps resolving to the same capture after a newer one lands.
 - **Open Graph cards** render via `next/og` at the site, app, screen, and flow levels
-  (`opengraph-image.tsx`, composed in `lib/og.tsx`, which fetches the content-addressed PNGs
-  from the CDN rather than the function bundle).
+  (`opengraph-image.tsx`, composed in `lib/og.tsx`). The four cards share one minimal design
+  system that mirrors the app's dark tokens: a near-black frame, Inter (bundled from
+  `lib/og-fonts/`), the app's radii and white/10% borders, and a soft background wash of the app's
+  brand colour — the two gradient stops of its `avatar.vercel.sh` avatar, so a card matches the
+  avatar on the site. The `wallets.gallery` wordmark is set with the site icon (`app/icon.svg`).
+  Screen and flow cards composite their screenshots in from the CDN (rather than tracing them into
+  the function bundle); the app card is a screenshot-free centred lockup.
+- **The data files have a `latest` alias too.** `/captures/<slug>/latest/view.json` (and
+  `…/graph.json`) is a build-time **307** to the newest dated file — the data-side mirror of the
+  `/apps/<slug>` HTML 307, baked per app from `index.json` in `next.config.mjs`. It lets a
+  consumer (an agent, the capture skill) deep-link "latest" without first reading `index.json` to
+  resolve the date, while the dated files stay the immutable, long-cacheable canonical URLs.
 
 ---
 
