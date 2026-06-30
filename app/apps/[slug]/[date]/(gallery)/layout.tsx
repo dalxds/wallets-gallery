@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { resolveCapture } from "@/lib/captures"
+import { formatDate } from "@/lib/utils"
 import { GalleryFrame } from "@/components/app-detail/gallery-frame"
 
 // A capture's gallery chrome (every capture is canonical at its dated URL). This
@@ -16,8 +17,8 @@ export async function generateMetadata({
   const cap = resolveCapture(slug, date)
   if (!cap) return {}
   const { app } = cap
-  const title = `${app.name} (${date}) — Wallets Gallery`
-  const description = `Captured ${app.platform.toUpperCase()} UI for ${app.name} — ${date} capture.`
+  const title = `wallets.gallery - ${app.name}`
+  const description = `${app.name} on ${formatDate(cap.view.captureDate)}`
   return { title, description, openGraph: { title, description } }
 }
 

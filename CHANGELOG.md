@@ -19,6 +19,21 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [4.1.2] - 2026-06-30
+
+### Fixed
+
+- Sharing a capture's canonical link (`/apps/<slug>/<date>` and its `…/flows` tab) now shows
+  the app's preview card. The dated gallery had no Open Graph image of its own, and the page's
+  `openGraph` metadata overrode the one inherited from the app route, so links unfurled with no
+  image. A dedicated `opengraph-image` now lives in the `(gallery)` route group and is shared by
+  both tabs.
+
+### Changed
+
+- The capture page's share/title metadata now matches the screen and flow pages: the title is
+  `wallets.gallery - <App Name>` and the description is `<App Name> on <Jun 29, 2026>`.
+
 ## [4.1.1] - 2026-06-30
 
 ### Changed
