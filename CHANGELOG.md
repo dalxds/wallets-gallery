@@ -19,7 +19,58 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
-## [Unreleased]
+## [4.1.0] - 2026-06-30
+
+### Added
+
+- You can now fetch a capture's data at a stable, date-free URL:
+  `GET /captures/<slug>/latest/view.json` (and `…/graph.json`) redirects (307) to the newest
+  dated file. A tool or agent reading the gallery no longer has to fetch `index.json` first just
+  to resolve today's date — it's the data-side mirror of the existing `/apps/<slug>` page
+  redirect. The dated URLs are unchanged and remain the canonical, immutable locations; the
+  alias is an additional convenience.
+- `/llms.txt` now documents the `latest` alias and spells out how to resolve a screenshot's
+  relative path (`assets/…` is relative to the app root `/captures/<slug>/`, not the dated
+  `view.json` URL — assets are content-addressed and shared across an app's captures).
+
+#### For contributors
+
+- The redirects are baked per app from `public/captures/index.json` at build time in
+  `next.config.mjs` (`redirects()`), so they track each app's `latest` on every build. They are
+  `permanent: false` (**307**, not 308) on purpose: "latest" moves when a newer capture lands, so
+  the redirect must never be cached as permanent.
+
+### Changed
+
+- Link previews — the Open Graph cards shown when a gallery URL is shared on Slack, X, iMessage,
+  and the like — are redesigned across all four levels to match the app itself: a near-black
+  card, Inter at the app's weights, the app's corner radii and white/10% borders, and just a
+  whisper of the app's brand colour as a background wash. The `wallets.gallery` wordmark carries
+  the site icon (the same gallery glyph as the in-app header):
+  - the **home** card is a centred lockup — the site logo, `wallets.gallery`, and the tagline
+    "A showcase of money apps curated by agents";
+  - an **app** card is a single centred lockup — the app's avatar mark, its name, and a quiet
+    `N screens · N flows` / last-capture line (no screenshot);
+  - a **screen** card pairs the full screenshot with its app, title, and capture date;
+  - a **flow** card shows the app, flow name, and screen count above the first steps as a flat
+    strip, with a `+N` tile counting any remaining screens.
+
+#### For contributors
+
+- `lib/og.tsx` is rebuilt around a shared design system that mirrors the app's dark tokens (one
+  minimal card frame, flat avatar marks, flat bordered screenshot tiles) instead of four ad-hoc
+  layouts. Per-app brand colors are the two gradient stops parsed from `avatar.vercel.sh/<slug>.svg`
+  (fetched + force-cached), used only as a soft background wash, with a deterministic slug-hash
+  fallback so a card is never colorless. The wordmark mark is the site's own icon (`app/icon.svg`),
+  distinct from the per-app avatar mark.
+- The cards are set in Inter (the site sans): TTFs live in `lib/og-fonts/` (with a Noto Sans
+  glyph-coverage fallback) and are bundled into the OG functions by `outputFileTracingIncludes` in
+  `next.config.mjs` — the same mechanism that ships the capture JSON. Fonts are read off disk
+  lazily; a module-top read would crash gallery-page prerendering. One satori gotcha worth
+  knowing: a bare numeric JSX child is miscounted as multiple nodes, so number values are coerced
+  to strings. See `lib/og-fonts/README.md` for font provenance/license.
+- Secondary text meets WCAG AA on the dark card (4.5:1+), screenshots are contained (fully
+  visible, never edge-cropped), and a hairline keeps the near-black card defined on dark surfaces.
 
 ## [4.0.1] - 2026-06-26
 
