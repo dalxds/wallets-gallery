@@ -42,3 +42,11 @@ public/captures/**/*.snap.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# craft-agent / session-tooling state written into the working dir (not project files)
+/config.json
+/events.jsonl
+/views.json
+/labels/
+/statuses/
+/.claude-plugin/
