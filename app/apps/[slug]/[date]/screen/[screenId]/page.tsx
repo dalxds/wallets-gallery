@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { resolveScreen } from "@/lib/captures"
+import { formatDate } from "@/lib/utils"
 import { ScreenPage } from "@/components/standalone/screen-page"
 
 // Standalone screen page for a capture. All render on demand and cache; the modal
@@ -21,9 +22,8 @@ export async function generateMetadata({
   const res = resolveScreen(slug, screenId, date)
   if (!res) return {}
   const { cap, screen } = res
-  const title = `${screen.title} — ${cap.view.app.name} (${date}) — Wallets Gallery`
-  const description =
-    screen.description || `${screen.title} in ${cap.view.app.name} (${date}).`
+  const title = `wallets.gallery - ${cap.view.app.name}`
+  const description = `${screen.title} in ${cap.view.app.name} on ${formatDate(cap.view.captureDate)}`
   return { title, description, openGraph: { title, description } }
 }
 

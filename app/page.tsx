@@ -16,6 +16,21 @@ export default function BrowsePage() {
   const registry = JSON.parse(readFileSync(indexPath, "utf8")) as AppsRegistry
   const apps = registry.apps
 
+  // Live gallery totals, summed from the registry the page already loaded (each
+  // app's `screens`/`flows` are its latest capture's counts — see build-data.ts).
+  const count = (n: number, noun: string) => `${n} ${noun}${n === 1 ? "" : "s"}`
+  const stats = [
+    count(apps.length, "app"),
+    count(
+      apps.reduce((n, a) => n + a.screens, 0),
+      "screen"
+    ),
+    count(
+      apps.reduce((n, a) => n + a.flows, 0),
+      "flow"
+    ),
+  ].join(" · ")
+
   const latestRank = new Map(
     [...apps]
       .sort((a, b) => b.latest.localeCompare(a.latest))
@@ -33,9 +48,7 @@ export default function BrowsePage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Apps</h1>
-            <p className="text-muted-foreground">
-              Browse captured UI flows from crypto wallets and fintech apps
-            </p>
+            <p className="text-muted-foreground">{stats}</p>
           </div>
           <Suspense fallback={null}>
             <BrowseControls />

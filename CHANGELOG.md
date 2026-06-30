@@ -19,6 +19,17 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [4.1.1] - 2026-06-30
+
+### Changed
+
+- The site now reads as **wallets.gallery** throughout: the navbar wordmark carries the dot,
+  the home page tagline is "A showcase of money apps curated by agents" (its share card and
+  `/llms.txt` line use the same phrase), and the Apps gallery subtitle now shows live totals
+  summed from the registry at build time (e.g. "3 apps · 210 screens · 122 flows").
+- Sharing a screen or flow link now shows a cleaner preview: the title is `wallets.gallery -
+  <App Name>` and the description reads `<Screen or Flow name> in <App Name> on <Jun 29, 2026>`.
+
 ## [4.1.0] - 2026-06-30
 
 ### Added

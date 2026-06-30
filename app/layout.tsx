@@ -19,7 +19,7 @@ const fontMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Wallets Gallery — Design Inspiration Gallery",
-  description: "Browse captured UI flows from crypto wallets and fintech apps",
+  description: "wallets.gallery",
 }
 
 export default function RootLayout({

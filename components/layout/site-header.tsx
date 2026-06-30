@@ -10,7 +10,7 @@ export function SiteHeader() {
           className="flex items-center gap-2 text-lg font-semibold tracking-tight"
         >
           <GalleryVerticalEnd className="size-5" aria-hidden />
-          wallets gallery
+          wallets.gallery
         </Link>
       </div>
     </header>

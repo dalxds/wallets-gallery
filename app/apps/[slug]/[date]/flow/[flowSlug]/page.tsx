@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { resolveFlow } from "@/lib/captures"
+import { formatDate } from "@/lib/utils"
 import { FlowPage } from "@/components/standalone/flow-page"
 
 // Standalone flow page for a capture. Nothing is prebuilt (generateStaticParams
@@ -23,10 +24,8 @@ export async function generateMetadata({
   const res = resolveFlow(slug, flowSlug, date)
   if (!res) return {}
   const { cap, flow } = res
-  const title = `${flow.name} — ${cap.view.app.name} (${date}) — Wallets Gallery`
-  const description =
-    flow.summary ||
-    `The ${flow.name} flow in ${cap.view.app.name} (${date}) — ${flow.steps.length} screens.`
+  const title = `wallets.gallery - ${cap.view.app.name}`
+  const description = `${flow.name} in ${cap.view.app.name} on ${formatDate(cap.view.captureDate)}`
   return { title, description, openGraph: { title, description } }
 }
 
