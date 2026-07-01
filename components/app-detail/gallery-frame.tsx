@@ -53,7 +53,7 @@ export function GalleryFrame({
           />
         </StickyChrome>
 
-        <div className="mt-6 lg:mt-0">{children}</div>
+        <div className="mt-6">{children}</div>
       </div>
     </AppShell>
   )

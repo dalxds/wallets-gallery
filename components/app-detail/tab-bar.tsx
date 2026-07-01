@@ -14,6 +14,10 @@ import { cn } from "@/lib/utils"
 const tabClass =
   "border-b-2 border-transparent pb-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
 const activeClass = "border-primary text-foreground"
+// The count rides as a superscript in a lighter tone, so it reads as secondary
+// to the tab label instead of competing with it like the old "(12)" did.
+const countClass =
+  "ml-0.5 text-[0.65rem] font-normal tabular-nums text-muted-foreground/70"
 
 export function TabBar({
   base,
@@ -29,13 +33,15 @@ export function TabBar({
   return (
     <div className="flex gap-4 border-b">
       <Link href={base} className={cn(tabClass, !onFlows && activeClass)}>
-        Screens ({screensCount})
+        Screens
+        <sup className={countClass}>{screensCount}</sup>
       </Link>
       <Link
         href={`${base}/flows`}
         className={cn(tabClass, onFlows && activeClass)}
       >
-        Flows ({flowsCount})
+        Flows
+        <sup className={countClass}>{flowsCount}</sup>
       </Link>
     </div>
   )
