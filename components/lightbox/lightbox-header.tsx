@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { appAvatarSrc } from "@/lib/app-logo"
 
 // The single-row header shared by BOTH viewers (screen + flow) in BOTH forms
 // (modal + standalone page): a breadcrumb of the app's logo + name, a divider,
@@ -11,12 +12,14 @@ import { Button } from "@/components/ui/button"
 export function LightboxHeader({
   appSlug,
   appName,
+  appLogo,
   backHref,
   title,
   onClose,
 }: {
   appSlug: string
   appName: string
+  appLogo: string | null
   backHref: string
   title: string
   onClose?: () => void
@@ -29,9 +32,9 @@ export function LightboxHeader({
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`https://avatar.vercel.sh/${appSlug}`}
+          src={appAvatarSrc(appSlug, appLogo)}
           alt={appName}
-          className="h-7 w-7 rounded-lg"
+          className="h-7 w-7 rounded-lg object-cover"
         />
         <span className="font-medium">{appName}</span>
       </Link>

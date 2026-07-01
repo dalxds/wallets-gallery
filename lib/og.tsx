@@ -7,19 +7,19 @@ import { formatDate } from "@/lib/utils"
 import type { AppCapture, FlowEntry, ScreenEntry } from "@/lib/types"
 
 // Shared Open Graph card renderers (1200×630) for the site, app, screen, and flow
-// routes. Server-only (Node runtime). The look mirrors the app itself: a near-black
-// card (the app's dark `--background`), Inter at the app's weights, white/10%
-// borders, the app's corner radii, and screenshots framed flat like the in-app
-// tiles. Colour is a whisper — one soft radial of the app's brand hue in the
-// background — never gradient text or glow.
-// Two things are pulled in at render time and embedded into the satori card:
+// routes. Server-only (Node runtime). The look mirrors the app itself: a flat
+// near-black card (the app's dark `--background`), Inter at the app's weights,
+// white/10% borders, the app's corner radii, and screenshots framed flat like the
+// in-app tiles. Per-app cards carry no colour — no wash, no gradient text or glow;
+// only the home card keeps a fixed amber/teal wash.
+// Two kinds of image are fetched at render time and embedded into the satori card:
 //   • screenshot PNGs — FETCHED from the CDN (static assets in public/) and inlined
 //     as base64. Fetching over HTTP keeps these functions code-only: no image bytes
 //     traced into the lambda (wouldn't scale to ~50k screenshots). Content-addressed
 //     assets are immutable, so force-cache composites each shot at most once.
-//   • each app's brand colours — the two stops of its avatar.vercel.sh gradient (the
-//     same gradient the site renders as the app's avatar). Fetched + force-cached;
-//     a deterministic slug-hash fallback covers a miss.
+//   • the app mark — its committed logo.png if it has one, else the generated
+//     avatar.vercel.sh avatar (the same mark the site shows). Both are fetched +
+//     force-cached and inlined; a neutral box covers a miss.
 
 export const ogSize = { width: 1200, height: 630 }
 export const ogContentType = "image/png"
@@ -96,62 +96,6 @@ const EDGE = "inset 0 0 0 1px rgba(255,255,255,0.07)"
 
 const PHONE_RATIO = 1080 / 2400 // source screenshots are 9:20 portrait
 
-// ── Color helpers ────────────────────────────────────────────────────────────
-function rgba(hex: string, a: number): string {
-  const h = hex.replace("#", "")
-  const r = parseInt(h.slice(0, 2), 16)
-  const g = parseInt(h.slice(2, 4), 16)
-  const b = parseInt(h.slice(4, 6), 16)
-  return `rgba(${r}, ${g}, ${b}, ${a})`
-}
-
-function hslToHex(h: number, s: number, l: number): string {
-  s /= 100
-  l /= 100
-  const k = (n: number) => (n + h / 30) % 12
-  const a = s * Math.min(l, 1 - l)
-  const f = (n: number) =>
-    l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
-  const to = (x: number) =>
-    Math.round(255 * x)
-      .toString(16)
-      .padStart(2, "0")
-  return `#${to(f(0))}${to(f(8))}${to(f(4))}`
-}
-
-// Deterministic two-color pair from a slug — in the family of the avatar.vercel.sh
-// palette, used only if the avatar fetch fails so a card is never colorless.
-function fallbackColors(slug: string): [string, string] {
-  let h = 0
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0
-  const hue = h % 360
-  return [hslToHex(hue, 88, 52), hslToHex((hue + 150) % 360, 86, 46)]
-}
-
-// The app's brand colors = the two stops of its avatar.vercel.sh gradient (the
-// .svg variant exposes them as `stop-color="#rrggbb"`). force-cache + the route's
-// `revalidate = false` mean one fetch per app, ever.
-async function brandColors(slug: string): Promise<[string, string]> {
-  try {
-    // Timeout so a stalled avatar service degrades to fallbackColors instead of
-    // hanging the render to the function's max duration.
-    const res = await fetch(`https://avatar.vercel.sh/${slug}.svg`, {
-      cache: "force-cache",
-      signal: AbortSignal.timeout(2500),
-    })
-    if (res.ok) {
-      const svg = await res.text()
-      const stops = [...svg.matchAll(/stop-color="(#[0-9a-fA-F]{6})"/g)].map(
-        (m) => m[1]
-      )
-      if (stops.length >= 2) return [stops[0], stops[1]]
-    }
-  } catch {
-    // fall through to the deterministic fallback
-  }
-  return fallbackColors(slug)
-}
-
 // ── Misc helpers ──────────────────────────────────────────────────────────────
 function truncate(s: string, n: number): string {
   // Count + cut by code points ([...s]) not UTF-16 units, so a cut at a
@@ -178,14 +122,42 @@ async function imgDataUrl(
   }
 }
 
-// Background washes — the only place colour appears. Per-app cards get one soft
-// radial of the app's brand hue; the home card a dual amber/teal radial.
-function brandWash(c0: string): string {
-  return `radial-gradient(1100px 760px at 88% -18%, ${rgba(c0, 0.1)}, transparent 64%)`
-}
+// The home card's fixed amber/teal wash — the only place colour appears now.
+// Per-app cards are flat (no brand wash): a real logo has no cheap representative
+// hue to derive, so cards carry none rather than guess one.
 const HOME_WASH =
   "radial-gradient(1000px 720px at 14% -16%, rgba(249,172,6,0.08), transparent 60%), " +
   "radial-gradient(1000px 720px at 100% 116%, rgba(6,249,172,0.07), transparent 60%)"
+
+// The card's app mark, inlined as a data URI: the committed logo.png if the app has
+// one, else the generated avatar.vercel.sh avatar (svg) — the same mark the site
+// shows. Both are force-cached (one fetch per app, ever, given the route's
+// `revalidate = false`); null when both fetches fail (the mark renders a neutral
+// box instead, so a card is never markless).
+async function markDataUrl(
+  slug: string,
+  logo: string | null
+): Promise<string | null> {
+  if (logo) {
+    const url = await imgDataUrl(slug, logo)
+    if (url) return url
+  }
+  try {
+    // Timeout so a stalled avatar service degrades to the neutral box instead of
+    // hanging the render to the function's max duration.
+    const res = await fetch(`https://avatar.vercel.sh/${slug}.svg`, {
+      cache: "force-cache",
+      signal: AbortSignal.timeout(2500),
+    })
+    if (res.ok) {
+      const svg = await res.text()
+      return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`
+    }
+  } catch {
+    // fall through to the neutral box
+  }
+  return null
+}
 
 // ── Shared pieces ─────────────────────────────────────────────────────────────
 
@@ -205,19 +177,32 @@ function SiteMark({ size, color }: { size: number; color: string }) {
   return <img src={siteMarkUri(color)} width={size} height={size} alt="" />
 }
 
-// The per-app avatar mark — the app's avatar.vercel.sh gradient, reconstructed from
-// the parsed stops (pixel-sharp, identical to the site avatar). Flat, like the
-// avatars in the app; radius follows the app's avatar rounding (~0.28 of size).
-function BrandMark({ c0, c1, size }: { c0: string; c1: string; size: number }) {
+// The per-app mark — the app's logo/avatar image, inlined via markDataUrl. Flat,
+// like the avatars in the app; radius follows the app's avatar rounding (~0.28 of
+// size), object-cover so a non-square logo isn't distorted. A neutral surface box
+// stands in when the image is missing so a card is never markless.
+function Mark({ src, size }: { src: string | null; size: number }) {
+  const borderRadius = Math.round(size * 0.28)
+  if (!src)
+    return (
+      <div
+        style={{
+          display: "flex",
+          width: size,
+          height: size,
+          borderRadius,
+          backgroundColor: SURFACE,
+        }}
+      />
+    )
   return (
-    <div
-      style={{
-        display: "flex",
-        width: size,
-        height: size,
-        borderRadius: Math.round(size * 0.28),
-        backgroundImage: `linear-gradient(135deg, ${c0}, ${c1})`,
-      }}
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt=""
+      width={size}
+      height={size}
+      style={{ borderRadius, objectFit: "cover" }}
     />
   )
 }
@@ -277,11 +262,11 @@ function Meta({
   )
 }
 
-// The app-name eyebrow above a screen/flow title: the avatar mark + the app name.
-function Eyebrow({ c0, c1, name }: { c0: string; c1: string; name: string }) {
+// The app-name eyebrow above a screen/flow title: the app mark + the app name.
+function Eyebrow({ mark, name }: { mark: string | null; name: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
-      <BrandMark c0={c0} c1={c1} size={46} />
+      <Mark src={mark} size={46} />
       <div
         style={{
           fontFamily: SANS,
@@ -379,7 +364,8 @@ function Card({
   backgroundImage,
   children,
 }: {
-  backgroundImage: string
+  // Omitted on per-app cards (flat near-black); set only by the home card (wash).
+  backgroundImage?: string
   children: React.ReactNode
 }) {
   return (
@@ -390,7 +376,10 @@ function Card({
         width: "100%",
         height: "100%",
         backgroundColor: BG,
-        backgroundImage,
+        // Only set when a wash is passed (home card). satori calls .trim() on the
+        // backgroundImage value, so a literal `undefined` here crashes the render —
+        // omit the key entirely on the flat per-app cards.
+        ...(backgroundImage ? { backgroundImage } : {}),
         color: FG,
         fontFamily: SANS,
         overflow: "hidden",
@@ -443,14 +432,18 @@ export function siteOgImage() {
 }
 
 // ── App card ─────────────────────────────────────────────────────────────────
-export async function appOgImage(view: AppCapture, slug: string) {
-  const [c0, c1] = await brandColors(slug)
+export async function appOgImage(
+  view: AppCapture,
+  slug: string,
+  logo: string | null
+) {
+  const mark = await markDataUrl(slug, logo)
 
   return render(
-    <Card backgroundImage={brandWash(c0)}>
+    <Card>
       {/* one centred lockup — the app, nothing else */}
       <Center>
-        <BrandMark c0={c0} c1={c1} size={104} />
+        <Mark src={mark} size={104} />
         <Title size={92} marginTop={36}>
           {truncate(view.app.name, 20)}
         </Title>
@@ -482,15 +475,16 @@ export async function appOgImage(view: AppCapture, slug: string) {
 export async function screenOgImage(
   view: AppCapture,
   screen: ScreenEntry,
-  slug: string
+  slug: string,
+  logo: string | null
 ) {
-  const [[c0, c1], src] = await Promise.all([
-    brandColors(slug),
+  const [mark, src] = await Promise.all([
+    markDataUrl(slug, logo),
     imgDataUrl(slug, screen.screenshotPath),
   ])
 
   return render(
-    <Card backgroundImage={brandWash(c0)}>
+    <Card>
       {/* left: app eyebrow + screen title + meta */}
       <div
         style={{
@@ -504,7 +498,7 @@ export async function screenOgImage(
           justifyContent: "center",
         }}
       >
-        <Eyebrow c0={c0} c1={c1} name={view.app.name} />
+        <Eyebrow mark={mark} name={view.app.name} />
         <Title size={58} marginTop={24}>
           {truncate(screen.title, 60)}
         </Title>
@@ -540,7 +534,8 @@ export async function screenOgImage(
 export async function flowOgImage(
   view: AppCapture,
   flow: FlowEntry,
-  slug: string
+  slug: string,
+  logo: string | null
 ) {
   // Show up to MAX tiles; never more than the flow has. If there are more, the
   // last slot becomes a "+N" count of the remaining screens.
@@ -548,8 +543,8 @@ export async function flowOgImage(
   const total = flow.steps.length
   const showCount = total > MAX ? MAX - 1 : total
   const overflow = total > MAX ? total - showCount : 0
-  const [[c0, c1], shots] = await Promise.all([
-    brandColors(slug),
+  const [mark, shots] = await Promise.all([
+    markDataUrl(slug, logo),
     Promise.all(
       flow.steps
         .slice(0, showCount)
@@ -559,7 +554,7 @@ export async function flowOgImage(
   const stripHeight = 300
 
   return render(
-    <Card backgroundImage={brandWash(c0)}>
+    <Card>
       {/* header */}
       <div
         style={{
@@ -571,7 +566,7 @@ export async function flowOgImage(
           flexDirection: "column",
         }}
       >
-        <Eyebrow c0={c0} c1={c1} name={view.app.name} />
+        <Eyebrow mark={mark} name={view.app.name} />
         <Title size={58} marginTop={18}>
           {truncate(flow.name, 32)}
         </Title>

@@ -19,5 +19,5 @@ export default async function Image({
   // served for a URL that renders a 404.
   const res = resolveScreen(slug, screenId, date)
   if (!res) return new Response("Not found", { status: 404 })
-  return await screenOgImage(res.cap.view, res.screen, slug)
+  return await screenOgImage(res.cap.view, res.screen, slug, res.cap.app.logo)
 }

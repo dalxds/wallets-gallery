@@ -41,6 +41,7 @@ export default async function ScreenStandalonePage({
       view={cap.view}
       screen={screen}
       appSlug={slug}
+      appLogo={cap.app.logo}
       date={cap.date}
     />
   )

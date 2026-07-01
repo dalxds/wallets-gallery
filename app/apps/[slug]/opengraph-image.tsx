@@ -19,5 +19,5 @@ export default async function Image({
   // served for a URL that renders a 404.
   const cap = resolveCapture(slug)
   if (!cap) return new Response("Not found", { status: 404 })
-  return await appOgImage(cap.view, slug)
+  return await appOgImage(cap.view, slug, cap.app.logo)
 }

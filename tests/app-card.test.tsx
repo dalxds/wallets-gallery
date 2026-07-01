@@ -27,6 +27,7 @@ const mockApp: AppIndex = {
   cover: "assets/abc123.png",
   screens: 2,
   flows: 1,
+  logo: null,
 }
 
 describe("AppCard", () => {
@@ -45,10 +46,18 @@ describe("AppCard", () => {
     expect(within(container).getByText("Apr 1, 2026")).toBeInTheDocument()
   })
 
-  it("renders the avatar image", () => {
+  it("falls back to the generated avatar when the app has no logo", () => {
     const { container } = render(<AppCard app={mockApp} />)
     const img = within(container).getByAltText("Phantom")
     expect(img).toHaveAttribute("src", "https://avatar.vercel.sh/phantom")
+  })
+
+  it("uses the committed logo when the app has one", () => {
+    const { container } = render(
+      <AppCard app={{ ...mockApp, logo: "logo.png" }} />
+    )
+    const img = within(container).getByAltText("Phantom")
+    expect(img).toHaveAttribute("src", "/captures/phantom/logo.png")
   })
 
   it("does not show screen or flow counts", () => {

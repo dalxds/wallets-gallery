@@ -20,12 +20,14 @@ export function FlowLightbox({
   screens,
   appSlug,
   appName,
+  appLogo,
   date,
 }: {
   flow: FlowEntry
   screens: ScreenEntry[]
   appSlug: string
   appName: string
+  appLogo: string | null
   date: string
 }) {
   const router = useRouter()
@@ -52,6 +54,7 @@ export function FlowLightbox({
           screens={screens}
           appSlug={appSlug}
           appName={appName}
+          appLogo={appLogo}
           backHref={flowsHref(appSlug, date)}
           date={date}
           onClose={() => router.back()}

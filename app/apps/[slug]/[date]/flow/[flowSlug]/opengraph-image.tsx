@@ -19,5 +19,5 @@ export default async function Image({
   // for a URL that renders a 404.
   const res = resolveFlow(slug, flowSlug, date)
   if (!res) return new Response("Not found", { status: 404 })
-  return await flowOgImage(res.cap.view, res.flow, slug)
+  return await flowOgImage(res.cap.view, res.flow, slug, res.cap.app.logo)
 }

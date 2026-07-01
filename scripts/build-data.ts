@@ -23,6 +23,7 @@ interface RegistryEntry {
   cover: string
   screens: number
   flows: number
+  logo: string | null
 }
 
 // The browse page renders from index.json alone, so each entry needs a cover
@@ -87,6 +88,9 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
     cover: coverOf(latestView),
     screens: latestView.screens.length,
     flows: latestView.flows.length,
+    // A committed logo.png in the app folder overrides the generated avatar
+    // everywhere (app UI + OG cards); null falls back to avatar.vercel.sh.
+    logo: existsSync(join(appDir, "logo.png")) ? "logo.png" : null,
   })
 }
 

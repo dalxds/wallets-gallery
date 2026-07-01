@@ -77,6 +77,9 @@ export interface AppIndex {
   /** Screen / flow counts of the latest capture. */
   screens: number
   flows: number
+  /** App-relative path to the committed brand logo (public/captures/<slug>/logo.png),
+   *  or null when absent — then the generated avatar.vercel.sh avatar is used. */
+  logo: string | null
 }
 export interface AppsRegistry {
   apps: AppIndex[]

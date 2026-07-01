@@ -23,6 +23,7 @@ export function ScreenLightbox({
   activeScreenId,
   appSlug,
   appName,
+  appLogo,
   date,
 }: {
   screens: ScreenEntry[]
@@ -30,6 +31,7 @@ export function ScreenLightbox({
   activeScreenId: string
   appSlug: string
   appName: string
+  appLogo: string | null
   date: string
 }) {
   const router = useRouter()
@@ -57,6 +59,7 @@ export function ScreenLightbox({
           initialScreenId={activeScreenId}
           appSlug={appSlug}
           appName={appName}
+          appLogo={appLogo}
           backHref={captureBase(appSlug, date)}
           date={date}
           onClose={() => router.back()}

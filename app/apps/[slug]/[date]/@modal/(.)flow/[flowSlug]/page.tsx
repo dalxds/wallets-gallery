@@ -20,6 +20,7 @@ export default async function FlowModalRoute({
       screens={cap.view.screens}
       appSlug={slug}
       appName={cap.view.app.name}
+      appLogo={cap.app.logo}
       date={cap.date}
     />
   )

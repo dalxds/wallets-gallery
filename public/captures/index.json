@@ -10,7 +10,8 @@
       "latest": "2026-06-23",
       "cover": "assets/1cdba901ffee.png",
       "screens": 54,
-      "flows": 24
+      "flows": 24,
+      "logo": "logo.png"
     },
     {
       "slug": "redotpay",
@@ -22,7 +23,8 @@
       "latest": "2026-06-29",
       "cover": "assets/0e61a0a447d0.png",
       "screens": 94,
-      "flows": 70
+      "flows": 70,
+      "logo": "logo.png"
     },
     {
       "slug": "tuyo",
@@ -34,7 +36,8 @@
       "latest": "2026-06-05",
       "cover": "assets/10dd0dcf5019.png",
       "screens": 62,
-      "flows": 28
+      "flows": 28,
+      "logo": "logo.png"
     }
   ]
 }

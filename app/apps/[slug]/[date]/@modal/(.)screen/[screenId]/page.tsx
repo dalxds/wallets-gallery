@@ -19,6 +19,7 @@ export default async function ScreenModalRoute({
       activeScreenId={screenId}
       appSlug={slug}
       appName={cap.view.app.name}
+      appLogo={cap.app.logo}
       date={cap.date}
     />
   )

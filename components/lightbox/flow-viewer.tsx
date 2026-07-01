@@ -32,6 +32,8 @@ interface FlowViewerProps {
   appSlug: string
   /** App name shown in the header breadcrumb. */
   appName: string
+  /** App logo path (AppIndex.logo) or null → generated avatar. */
+  appLogo: string | null
   /** Where the header's logo/name links — this capture's flows tab (flowsHref). */
   backHref: string
   date: string
@@ -57,6 +59,7 @@ export function FlowViewer({
   screens,
   appSlug,
   appName,
+  appLogo,
   backHref,
   date,
   onClose,
@@ -231,6 +234,7 @@ export function FlowViewer({
       <LightboxHeader
         appSlug={appSlug}
         appName={appName}
+        appLogo={appLogo}
         backHref={backHref}
         title={flow.name}
         onClose={onClose}
