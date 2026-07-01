@@ -1,87 +1,88 @@
 # Wallets Gallery
 
-A gallery of **captured mobile-app UI flows** — crypto-wallet and fintech apps, explored
-on a device, recorded as a graph, and published as a fast site you can browse by screen or
-by flow.
+A website that publishes **captured UI flows** from mobile crypto-wallet and fintech apps.
+Each app is walked once on a device, its screens and transitions are recorded as a single
+graph, and everything the site shows — merged screens, named flows, state variants, and
+replayable scripts — is **derived deterministically from that one graph**.
 
-The interesting part of this repo is not the website; it's the **capture model**. Each app
-is walked once, its screens and transitions are written down as a graph, and everything the
-gallery shows — merged screens, named flows, state variants, replay scripts — is _derived
-deterministically_ from that one graph. This README describes both: how the repo is laid
-out, and how captures actually work.
-
-> This README **describes the codebase**. The rules for working in it — editing discipline,
-> the determinism contract, commit and versioning conventions — live in
-> [`CLAUDE.md`](CLAUDE.md).
+The website is the easy part. The interesting part is the **capture model**: one committed
+`graph.json` per capture, plus a pure function that turns it into everything you browse. This
+README explains both — how the repo is laid out, and how a capture becomes a gallery.
 
 ```mermaid
 flowchart LR
-  walk["📱 device walk"] -->|"observe"| wj["walk.json<br/>raw observation"]
-  wj -->|"assemble.ts"| gph["graph.json<br/>committed source"]
-  gph -->|"packageGraph()"| view["view.json<br/>derived"]
-  view -->|"next build"| gallery["the gallery<br/>screens · flows"]
+  walk["📱 walk the app<br/>on a device"] -->|observe| wj["walk.json<br/>raw observation"]
+  wj -->|assemble.ts| gph["graph.json<br/>committed source"]
+  gph -->|packageGraph| view["view.json<br/>derived"]
+  view -->|next build| gallery["the gallery<br/>screens · flows"]
 ```
+
+> This README **describes** the codebase. The rules for working in it — editing discipline,
+> the determinism contract, commit and versioning conventions — live in [`CLAUDE.md`](CLAUDE.md).
 
 ---
 
-## Table of contents
+## Contents
 
 1. [What it is](#what-it-is)
 2. [Quick start](#quick-start)
 3. [Repository layout](#repository-layout)
-4. [The capture model](#the-capture-model) — nodes, edges, graphs, decision points
-5. [Identity signals](#identity-signals) — how two screenshots become "the same screen"
-6. [From graph to view: the packager](#from-graph-to-view-the-packager)
-7. [Overrides: the one hand-edited surface](#overrides-the-one-hand-edited-surface)
-8. [The build pipeline](#the-build-pipeline)
+4. [The capture model](#the-capture-model) — nodes, edges, graphs
+5. [Screen identity](#screen-identity) — when are two screenshots "the same screen"?
+6. [The packager: graph → view](#the-packager-graph--view) — the five stages
+7. [Overrides](#overrides) — the one hand-edited surface
+8. [Build & deploy](#build--deploy)
 9. [Routes & rendering](#routes--rendering)
 10. [Capturing a new app](#capturing-a-new-app)
-11. [Architecture notes](#architecture-notes)
 
 ---
 
 ## What it is
 
-- **The app** — a Next.js 16 / React 19 site (Tailwind v4 + shadcn/ui) deployed on Vercel.
-  The home and per-capture gallery pages are prerendered from JSON on disk (SSG); individual
-  screen/flow pages and their Open Graph cards render on demand and cache; screenshots are
-  optimized on demand by `next/image`. No external data fetches — everything derives from
-  local JSON.
-- **The data** — under `public/captures/`, one directory per app. Each capture is a
-  `graph.json` (the committed source of truth) plus a `view.json` (generated).
-- **The engine** — `lib/packager/`, a pure, deterministic transform `package(graph) → view`.
-  Same `graph.json` in, byte-identical `view.json` out, every time.
-- **The capture agent** — `.claude/skills/app-capture/`, the playbook an agent follows to
-  walk an app on a device and produce a `graph.json`. (You don't need it to understand or
-  run the site; it's how new data gets made.)
+Three moving parts, plus the tool that makes the data:
 
-The mental model in one line — and the diagram at the top of this README:
+- **The app** — a Next.js 16 / React 19 site (Tailwind v4 + shadcn/ui) on Vercel. Home and
+  gallery pages are prerendered from JSON on disk (SSG); individual screen/flow pages, their
+  Open Graph cards, and image optimization happen on demand. There are **no external data
+  fetches** — everything comes from local JSON.
+- **The data** — under `public/captures/`, one directory per app. Each capture is a
+  `graph.json` (the committed source of truth) plus a generated `view.json`.
+- **The engine** — `lib/packager/`, a pure function `packageGraph(graph) → view`. Same graph
+  in, byte-identical view out, every time.
+- **The capture agent** — `.claude/skills/app-capture/`, the playbook an agent follows to walk
+  an app and produce a `graph.json`. You don't need it to run the site; it's how new data is made.
+
+The whole model in one line:
 
 ```
 observe a walk  →  assemble a graph  →  derive a view  →  render the gallery
 ```
 
+Everything downstream of `graph.json` is computed. Change the graph, re-run the packager, and
+the gallery updates. Nothing about a screen, flow, or replay is written by hand except a small
+`overrides` block (see [Overrides](#overrides)).
+
 ---
 
 ## Quick start
 
-This repo uses **pnpm**, and runs its TypeScript build scripts directly with `node`
-(Node ≥ 22 executes `.ts` natively — no ts-node).
+Uses **pnpm**. TypeScript build scripts run directly on Node (≥ 22 runs `.ts` natively — no
+ts-node step).
 
 ```bash
 pnpm install
 
 pnpm dev          # next dev (turbopack) — local dev server
-pnpm build-data   # regenerate every view.json + index.json (the registry) from graph.json
-pnpm build        # build-data → next build (gallery prerendered; long-tail on demand)
-pnpm start        # next start — run the production server locally
+pnpm build-data   # regenerate every view.json + the captures registry from graph.json
+pnpm build        # build-data → next build
+pnpm start        # run the production server locally
 pnpm test         # vitest (unit + packager tests)
 pnpm typecheck    # tsc --noEmit
 pnpm lint         # eslint
 ```
 
-`pnpm build` is the full pipeline; `pnpm build-data` is the fast inner loop when only a
-`graph.json` or the packager has changed.
+`pnpm build` is the full pipeline. `pnpm build-data` is the fast inner loop when you've only
+touched a `graph.json` or the packager.
 
 ---
 
@@ -90,58 +91,48 @@ pnpm lint         # eslint
 ```
 app/                          # Next.js App Router (gallery prerendered; screen/flow on demand)
   page.tsx                    #   /            browse grid (reads public/captures/index.json)
-  opengraph-image.tsx         #   site OG card
-  apps/[slug]/                #   /apps/x      static 307 → /apps/x/<latest> (page.tsx)
-    opengraph-image.tsx       #     app-level OG card (inherited route)
+  apps/[slug]/                #   /apps/x      static 307 → /apps/x/<latest>
     [date]/                   #   /apps/x/<date>   the one canonical capture tree
-      layout.tsx              #     hosts the @modal parallel slot over the gallery
-      (gallery)/page.tsx      #     Screens tab · (gallery)/flows/page.tsx for the Flows tab
-      @modal/(.)screen · (.)flow #  intercepting-route modals (lightbox over the gallery)
-      screen/[id] · flow/[slug]  #  standalone pages + opengraph-image.tsx (shared-link / SEO)
+      (gallery)/page.tsx      #     Screens tab · (gallery)/flows/page.tsx for Flows
+      @modal/                 #     intercepting-route modals (lightbox over the gallery)
+      screen/[id] · flow/[slug]  # standalone pages + opengraph-image.tsx (shared links / SEO)
   llms.txt/route.ts           #   /llms.txt    machine-readable index of apps + data URLs
-                              #   /captures/x/latest/{view,graph}.json → 307 to latest (next.config.mjs)
 
 components/
-  app-detail/                 # the per-app detail UI (tabs, screen grid, flow rows)
-  browse/                     # the browse grid + sort control
-  lightbox/                   # screen + flow lightboxes + their route-driven modal wrappers
-  standalone/                 # full-page screen/flow views (shared-link / OG targets)
-  shared/  layout/  ui/       # image actions; app shell + header; shadcn primitives
+  app-detail/  browse/        # per-app detail UI (tabs, grids, rows); the browse grid + sort
+  lightbox/  standalone/      # screen/flow viewers, as modals and as full pages
+  shared/  layout/  ui/        # image actions; app shell + header; shadcn primitives
 
 lib/
-  packager/                   # ★ THE ENGINE — graph → view (see below). Pure, deterministic.
-    types.ts                  #   the full type contract for graph + view (read this first)
-    index.ts                  #   packageGraph(graph): View  — orchestrates the transform
+  packager/                   # ★ THE ENGINE — graph → view. Pure, deterministic.
+    types.ts                  #   full type contract for graph + view (read this first)
+    index.ts                  #   packageGraph(graph): View — orchestrates the five stages
     identity.ts               #   fingerprint / skeletonHash / pHash primitives
-    saf.ts                    #   Screen Abstraction Function: merge + cluster raw nodes
-    classify.ts               #   screen-state labels + in-place toggle detection
-    segment.ts                #   journey segmentation: build the flow tree
-    naming.ts  replay.ts      #   flow names; inline .ad replay scripts
+    saf.ts                    #   stage 1: merge + cluster raw nodes
+    classify.ts               #   stage 2: state labels + in-place toggle detection
+    segment.ts                #   stage 3: build the flow tree
+    naming.ts  replay.ts      #   stage 4: flow names · stage 5: inline .ad replay scripts
     graph.ts  validate.ts     #   adjacency helpers; graph.json validator
-  types.ts                    # app-facing types (aliased over the packager's View) + registry/manifest
-  captures.ts                 # server-only reads of index.json + view.json (shared by all routes)
-  links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher presentation
-  images.ts  og.tsx           # screenshot URL + dims; Open Graph card renderers (logo/avatar mark, flat cards)
-  app-logo.ts                 #   appAvatarSrc(slug, logo): committed logo.png, else the generated avatar
-  og-fonts/                   #   Inter + Geist Mono (+ Noto fallback) TTFs → OG functions (next.config tracing)
-  clipboard.ts  site.ts  utils.ts # copy-link/image/download; site URLs (assetBaseUrl); cn() helper
+  captures.ts                 # server-only reads of index.json + view.json (all routes share)
+  links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher UI
+  images.ts  og.tsx           # screenshot URLs; Open Graph card renderers (logo/avatar mark)
+  app-logo.ts                 # appAvatarSrc(slug, logo): committed logo.png, else generated avatar
+  types.ts  site.ts  utils.ts # app-facing types; site URLs; helpers
 
 scripts/                      # build-time CLIs (intentionally prettier-off, dense style)
   assemble.ts                 #   walk.json → graph.json  (computes identity signals, validates)
-  package.ts                  #   graph.json → view (CLI wrapper around the packager, for the skill)
-  build-data.ts               #   every graph.json → view.json + index.json (the registry)
+  package.ts                  #   graph.json → view       (CLI wrapper around the packager)
+  build-data.ts               #   every graph.json → view.json + the captures registry
   phash.ts                    #   dependency-free perceptual hash of a PNG
 
 public/captures/              # ★ THE DATA
-  index.json                  #   generated registry (browse page reads this)
+  index.json                  #   generated registry (the browse page reads this)
   <app-slug>/
     app.json                  #   manifest: metadata + capture history + latest pointer
-    logo.png                  #   optional brand logo; overrides the generated avatar everywhere
-    assets/<sha>.png|.snap.json  # content-addressed screenshots + raw snapshots (deduped)
-    <YYYY-MM-DD>/
-      graph.json              #   ★ the capture — source of truth (committed)
-      view.json               #   generated by the packager (build artifact)
-    _staging/                 #   gitignored working dir from the capture walk
+    logo.png                  #   optional brand logo; overrides the generated avatar
+    assets/<sha>.png          #   content-addressed screenshots (deduped)
+    <YYYY-MM-DD>/graph.json   #   ★ the capture — source of truth (committed)
+    <YYYY-MM-DD>/view.json    #   generated by the packager (build artifact)
 
 .claude/skills/app-capture/   # the capture agent's playbook (how graph.json is produced)
 tests/                        # vitest: lib utils + tests/packaging/ (assemble, classify, packager)
@@ -151,9 +142,9 @@ tests/                        # vitest: lib utils + tests/packaging/ (assemble, 
 
 ## The capture model
 
-A **capture** is one independent observation of one app at one moment, recorded as a
-directed graph. There are exactly four kinds of thing in it: **nodes** (screen states),
-**edges** (transitions), **decision points** (branches), and the **graph** that holds them.
+A **capture** is one observation of one app at one moment, recorded as a directed graph. It
+has exactly four kinds of thing: **nodes** (screen states), **edges** (transitions),
+**decision points** (branches), and the **graph** that holds them.
 
 ```mermaid
 flowchart TD
@@ -168,216 +159,197 @@ flowchart TD
 `overlay` (a sheet over the prior screen); the dotted self-return is an `in-place` state
 toggle. The packager turns this into merged screens, a flow tree, and replay scripts.</sub>
 
-### Node — a screen state
+### Node — one screen in one state
 
-A `GraphNode` is **one screen in one state**. Not "the trade screen" abstractly — _this_
-trade screen, with these texts and these buttons. (Two states of the trade screen — empty
-vs. funded — are two nodes; the packager decides later whether to merge or group them.)
+A `GraphNode` is *this* screen with *these* texts and buttons — not "the trade screen"
+abstractly. Two states of the trade screen (empty vs. funded) are two nodes; the packager
+decides later whether to merge or group them.
 
 ```jsonc
 {
-  "id": "welcome",                              // stable, agent-assigned, human-readable
-  "fingerprint": "sha256:9cade6c83b260617d82a1dcf",  // exact identity (see Identity signals)
-  "skeletonHash": "sk:7c6bc5a2d1a968f1dea04382",     // structure-only identity
-  "pHash": "p:0d782bfea1a1f603",                     // perceptual hash of the screenshot
-  "role": "other",                              // home|list|picker|form|confirmation|auth|modal|settings|error|other
-  "screenshotPath": "assets/cd4f6196b531.png",  // content-addressed PNG
-  "snapshotPath": "assets/2919a41502e7.snap.json",   // raw accessibility snapshot (or null)
-  "texts": ["The card that might not charge you", "Get started", ...],
+  "id": "welcome",                            // stable, agent-assigned, human-readable
+  "fingerprint": "sha256:9cade6c…",           // exact identity  (see Screen identity)
+  "skeletonHash": "sk:7c6bc5a2…",             // structure-only identity
+  "pHash": "p:0d782bfe…",                     // perceptual hash of the screenshot
+  "role": "other",                            // home|list|picker|form|confirmation|auth|modal|settings|error|other
+  "screenshotPath": "assets/cd4f6196.png",
+  "texts": ["The card that might not charge you", "Get started", …],
   "interactiveElements": [
-    { "label": "Get started", "role": "button", "selector": "label=\"Get started\"", "emphasis": "primary" },
-    { "label": "I have a referral code", "role": "button", "selector": "label=\"I have a referral code\"" }
+    { "label": "Get started", "role": "button", "selector": "label=\"Get started\"", "emphasis": "primary" }
   ]
 }
 ```
 
-- **`texts`** — the visible copy on the screen. Used for screen titles and state labels.
+- **`texts`** — the visible copy. Drives screen titles and state labels.
 - **`interactiveElements`** — the hittable controls. `emphasis: "primary"` tags the screen's
-  main call-to-action (`"secondary"` for a notable alternate). Emphasis is presentation only
-  — it does **not** affect identity.
-- **`role`** — a coarse screen category, used by segmentation (e.g. `home` screens are
-  _completion hubs_; see below).
+  main call-to-action; it's presentation only and doesn't affect identity.
+- **`role`** — a coarse category used by segmentation (e.g. `home` screens act as flow anchors).
 
 ### Edge — a transition
 
-A `GraphEdge` is a directed transition between two nodes: "from this screen, this action got
-me to that screen."
+A `GraphEdge` is a directed step: "from this screen, this action got me to that screen."
 
 ```jsonc
 {
   "from": "login",
   "to": "forgot-password",
-  "action": "Tap \"Forgot password?\"", // human-readable
-  "selector": "label=\"Forgot password?\"", // how to re-trigger it (drives replay), or null
-  "kind": "nav", // nav | overlay | in-place | back
-  "observedAtStep": 3, // walk order; deterministic tie-break
+  "action": "Tap \"Forgot password?\"",       // human-readable
+  "selector": "label=\"Forgot password?\"",   // how to re-trigger it (drives replay), or null
+  "kind": "nav",                              // nav | overlay | in-place | back
+  "observedAtStep": 3                          // walk order; deterministic tie-break
 }
 ```
 
 `kind` is the load-bearing field:
 
-| kind       | meaning                                                           | how it's set                                      |
-| ---------- | ----------------------------------------------------------------- | ------------------------------------------------- |
-| `nav`      | navigated to a **different** screen                               | derived: `from`/`to` have **different** skeletons |
-| `in-place` | same screen, **changed state** (a "Max" toggle, a carousel swipe) | derived: `from`/`to` share a `skeletonHash`       |
-| `overlay`  | a sheet/modal opened **over** the prior screen                    | recorded by the agent (skeletons can't see it)    |
-| `back`     | pressed the system/back affordance                                | recorded by the agent                             |
+| kind       | meaning                                                    | how it's set                                |
+| ---------- | ---------------------------------------------------------- | ------------------------------------------- |
+| `nav`      | navigated to a **different** screen                        | derived: `from`/`to` have different skeletons |
+| `in-place` | same screen, **changed state** (a "Max" toggle, a swipe)   | derived: `from`/`to` share a `skeletonHash` |
+| `overlay`  | a sheet/modal opened **over** the prior screen             | recorded by the agent                       |
+| `back`     | pressed the system/back affordance                         | recorded by the agent                       |
 
-The crucial one is **`in-place`**: an edge between two variants of _one logical screen_ is the
-deterministic signal that this is a **state toggle**, not a navigation step. The packager
-folds those variants into an on-step state switcher instead of making each its own flow step.
-`nav` vs `in-place` is **derived from skeleton equality** at assemble time — the agent never
-guesses it; it only records what skeletons can't detect (`back`/`overlay`).
+The key one is **`in-place`**. It's the deterministic signal that two nodes are one logical
+screen in different states — so the packager folds them into a state switcher instead of two
+separate flow steps. `nav` vs. `in-place` is *derived* from skeleton equality at assemble time;
+the agent only records what skeletons can't detect (`back` and `overlay`).
 
 ### Decision point — a branch
 
-A `DecisionPoint` records that a screen offers a real choice, and which options were explored:
+Records that a screen offers a real choice, and which options were explored. Each surfaces in
+the UI as "this screen branches", linking every option to the flow it leads to.
 
 ```jsonc
 {
   "nodeId": "login",
   "options": [
-    { "label": "Sign in", "explored": true, "toNode": "home" },
-    {
-      "label": "Forgot password?",
-      "explored": true,
-      "toNode": "forgot-password",
-    },
-  ],
+    { "label": "Sign in",          "explored": true, "toNode": "home" },
+    { "label": "Forgot password?", "explored": true, "toNode": "forgot-password" }
+  ]
 }
 ```
-
-These surface in the UI as "this screen branches" and link each option to the flow it leads to.
 
 ### Graph — the whole capture
 
 ```jsonc
 {
-  "meta": { "schemaVersion": 2, "app": {...}, "captureDate": "2026-06-05", "scope": "initial", ... },
-  "root": "welcome",                  // the launch node (BFS root of the walk)
-  "mainNav": ["home", "earn", ...],   // optional: top-level sections (tab bar / nav rail / drawer)
-  "nodes": [ ... ],
-  "edges": [ ... ],
-  "decisionPoints": [ ... ],
-  "overrides": { ... }                // the ONLY hand-edited block (see below)
+  "meta": { "schemaVersion": 2, "app": {…}, "captureDate": "2026-06-05", … },
+  "root": "welcome",                  // the launch node — where the walk started
+  "mainNav": ["home", "earn", …],     // optional: top-level sections (tab bar / nav rail)
+  "nodes": [ … ],
+  "edges": [ … ],
+  "decisionPoints": [ … ],
+  "overrides": { … }                  // the ONLY hand-edited block (see below)
 }
 ```
 
-- **`root`** is where the walk started; segmentation roots the flow tree here.
-- **`mainNav`** lists the node each persistent main-nav item lands on. Each becomes a
-  **top-level flow that roots its own subtree** instead of nesting under whatever launched it
-  — so "Settings" is a peer section, not a child of "Home".
-
-That's the entire on-disk contract. Everything the gallery shows is computed from it.
+`root` is where segmentation roots the flow tree. Each entry in `mainNav` becomes a **top-level
+flow that roots its own subtree**, so "Settings" is a peer section rather than a child of
+"Home". That's the entire on-disk contract — everything the gallery shows is computed from it.
 
 ---
 
-## Identity signals
+## Screen identity
 
-The hard problem in a capture is **"are these two screenshots the same screen?"** A list with
-3 rows and the same list with 4 rows are the same screen; an empty wallet and a funded wallet
-are arguably the same screen in two _states_; the trade screen and the settings screen are
-not. The graph carries **three** orthogonal signals per node so the packager can answer this
-deterministically. All three are computed by `scripts/assemble.ts` (via `lib/packager/identity.ts`
-and `scripts/phash.ts`) at capture time — never hand-written, never recomputed by the packager.
+The hard problem in a capture is: **are these two screenshots the same screen?** A list with 3
+rows and the same list with 4 rows are the same. An empty wallet and a funded wallet are the
+same screen in two *states*. The trade screen and the settings screen are not. To answer this
+deterministically, every node carries **three** independent signals, all computed once at
+capture time by `scripts/assemble.ts` — never hand-written, never recomputed by the packager.
 
-| Signal             | What it hashes                                           | Answers                                                             |
-| ------------------ | -------------------------------------------------------- | ------------------------------------------------------------------- |
-| **`fingerprint`**  | sorted `(role, label)` pairs of the interactive elements | "exactly the same controls?" — exact identity                       |
-| **`skeletonHash`** | structure only — element **roles**, labels/text stripped | "same _shape_ of screen?" — clusters variants of one logical screen |
-| **`pHash`**        | a 64-bit perceptual hash of the screenshot pixels        | "do these look nearly identical?" — near-duplicate backstop         |
+| Signal            | What it hashes                                       | Answers                                     |
+| ----------------- | ---------------------------------------------------- | ------------------------------------------- |
+| **`fingerprint`** | sorted `(role, label)` pairs of interactive elements | "exactly the same controls?" — exact identity |
+| **`skeletonHash`**| structure only — element **roles**, labels stripped  | "same *shape* of screen?" — clusters variants |
+| **`pHash`**       | a 64-bit perceptual hash of the screenshot pixels    | "do these *look* nearly identical?"          |
 
-Why three? Because each fails differently:
+Three, because each fails on its own:
 
-- **`fingerprint`** is too strict for merging — a "Send" button labelled with the recipient's
-  name differs from one labelled with another's, yet it's the same screen. It's the canonical
-  _exact_ identity (and the replay entry check).
-- **`skeletonHash`** strips the volatile labels so "…purchase of VIRTUAL" and "…purchase of
-  ETH" share one hash. It's deliberately _coarse_ — many unrelated screens can collide on the
-  element-role multiset — so it is never trusted alone for merging. It's also **load-bearing
-  beyond merging**: the same hash drives clustering _and_ the `in-place` edge derivation at
-  assemble time.
-- **`pHash`** compares actual pixels. `pHashDistance` (Hamming distance) guards a merge: two
-  nodes that share a skeleton are only collapsed when their pixels are within `T_MERGE_PHASH`
-  (6/64 bits) — tight enough to reject genuinely different same-skeleton screens.
+- **`fingerprint`** is too strict to merge with — a "Send" button labelled with one recipient's
+  name differs from another's, yet it's the same screen. It's the canonical *exact* identity.
+- **`skeletonHash`** strips volatile labels, so "…purchase of VIRTUAL" and "…purchase of ETH"
+  share one hash. It's deliberately coarse — unrelated screens can collide — so it's never
+  trusted alone to merge. (The same hash also drives the `in-place` edge derivation.)
+- **`pHash`** compares actual pixels, and guards a merge: two nodes with the same skeleton are
+  only collapsed when their pixels are within 6 of 64 bits (`pHashDistance`).
 
-When a screen has no usable screenshot (a secure/`FLAG_SECURE` screen) or no interactive
-elements, the signals degrade gracefully: a `sha256-text:` fingerprint over the screen's
-texts, a `skt:` text-shape skeleton, and a `null` pHash. Dynamic content (money amounts,
-`@handles`, timestamps, hex addresses, bare numbers, percentages) is normalized to typed
-placeholders (`{money}`, `{handle}`, …) before hashing so data churn doesn't fragment identity.
+**Graceful degradation.** For a secure screen with no usable screenshot, or a screen with no
+interactive elements, the signals fall back to text-based variants (a `sha256-text:`
+fingerprint, an `skt:` text skeleton, a `null` pHash). Dynamic content — money amounts,
+`@handles`, timestamps, hex addresses, bare numbers, percentages — is normalized to typed
+placeholders (`{money}`, `{handle}`, …) before hashing, so data churn doesn't fragment identity.
 
 ---
 
-## From graph to view: the packager
+## The packager: graph → view
 
-`lib/packager/index.ts → packageGraph(graph): View` is the heart of the system. It is a
-**pure, deterministic** function: no I/O, no randomness, no clock — the same graph always
-produces the same view. It runs five stages in order.
+`lib/packager/index.ts → packageGraph(graph): View` is the heart of the system. It's a **pure,
+deterministic** function — no I/O, no randomness, no clock, no dependence on array order. The
+same graph always produces the same view. It runs five stages in order:
 
 ```mermaid
 flowchart LR
   g["graph.json"] --> s1["1 · SAF<br/>merge + cluster"]
   s1 --> s2["2 · classify<br/>states + toggles"]
   s2 --> s3["3 · segment<br/>flow tree"]
-  s3 --> s4["4 · naming<br/>+ namingTODO"]
-  s4 --> s5["5 · replay<br/>.ad scripts"]
+  s3 --> s4["4 · naming"]
+  s4 --> s5["5 · replay"]
   s5 --> v["view.json"]
 ```
 
-The five stages, in words: SAF merges data-dupes into canonical nodes and clusters states into
-logical families; classify labels each state and detects in-place toggles; segment walks the
-edges into a tree of flows; naming gives each flow a mechanical name (plus a `namingTODO` for a
-human/agent to improve); replay emits an inline `.ad` command script per flow. The result is
-`view.json`: `screens[]` · `flows[]` (a tree) · `decisionPoints[]` · `stats` · `namingTODO`.
+### Stage 1 — SAF: collapse raw nodes into logical screens
 
-### 1. SAF — the Screen Abstraction Function (`saf.ts`)
+The walk records a fresh node every time the screen changes *at all* — including when only the
+data changed. The Screen Abstraction Function fixes that with two operations:
 
-Two distinct operations collapse the raw observed nodes into logical screens:
-
-- **MERGE** — nodes that are _the same screen state_, differing only in dynamic data (3 rows
-  vs 4, one token name vs another). Collapsed via union-find into **one canonical node**.
-  Signal: equal skeleton **and** equal dynamic-normalized text, **or** equal skeleton **and**
-  near-identical pHash (≤ 6 bits). This is where "list with N rows" stops being N screens.
-- **CLUSTER** — canonical nodes that are _the same logical screen in a genuinely different
-  state_ (home empty vs. funded, trade vs. trade-at-max). Kept as **distinct** nodes but
-  grouped into a **family**. Signal: **skeleton equality only** — a true equivalence relation.
-  Cross-skeleton state variants are grouped explicitly via `overrides.stateGroup` instead.
+- **Merge** — nodes that are the *same screen state* differing only in data (3 rows vs. 4, one
+  token name vs. another). Collapsed into **one canonical node**.
+  Rule: same skeleton **and** (same normalized text **or** pixels within 6/64 bits).
+- **Cluster** — canonical nodes that are the same logical screen in a *genuinely different
+  state* (home empty vs. funded). Kept as **distinct** nodes, but grouped into a **family**.
+  Rule: same skeleton.
 
 ```mermaid
 flowchart TD
   A["two observed nodes"] --> B{"same skeletonHash?"}
-  B -->|"no"| D["distinct screens"]
-  B -->|"yes"| C{"same normalized text,<br/>or pHash within 6 bits?"}
-  C -->|"yes"| M["MERGE<br/>one canonical node"]
-  C -->|"no"| G["CLUSTER<br/>same family · different state"]
+  B -->|no| D["distinct screens"]
+  B -->|yes| C{"same normalized text,<br/>or pHash within 6 bits?"}
+  C -->|yes| M["MERGE<br/>one canonical node"]
+  C -->|no| G["CLUSTER<br/>same family · different state"]
 ```
 
-The richer node (most elements, then most texts, then lexically-smallest id) wins as the
-representative — deterministically.
+When nodes merge, the richest one wins as the representative — most elements, then most texts,
+then lexically-smallest id. This is where "a list with N rows" stops being N separate screens.
 
-### 2. classify — states & toggles (`classify.ts`)
+### Stage 2 — classify: label states, fold in toggles
 
-For each family, every member gets a **state label** — `default` / `empty` / `loading` /
-`error` / `max` — read from its texts by narrow, generic regexes (these are UI-state words,
-not app vocabulary). Then it detects **in-place toggles**: members joined to the family
-default by a _chain_ of `in-place` edges are the same screen in a different
-data/condition. They fold into the default's **`stateGroup`** and render as an on-step state
-switcher rather than separate navigation steps. (The chain matters: a carousel's slide 3
-connects through slide 2, never directly to the default.)
+Two jobs on the families from stage 1:
 
-### 3. segment — the flow tree (`segment.ts`)
+1. **Label each state** — `default` / `empty` / `loading` / `error` / `max`, read from the
+   screen's text by narrow, generic regexes (these match UI-state words, not app vocabulary).
+2. **Detect in-place toggles** — members joined to the family's default by a *chain* of
+   `in-place` edges are the same screen in a different data/condition. They fold into the
+   default's **`stateGroup`** and render as an on-screen state switcher, not separate steps.
+   (The chain matters: a carousel's slide 3 connects through slide 2, never straight to slide 1.)
 
-The flow tree **is the dominator tree** of the app's nav/overlay subgraph. `idom(X)` — the one
-screen every path to `X` must pass through — is `X`'s parent, so a journey nests under whatever
-you must go through to reach it ("Send" under "Home", "Privacy" under "Settings", "Buy" under an
-asset detail). A chain in the dominator tree (each screen dominating exactly one onward child) is
-a **trunk**; a screen dominating ≥ 2 onward children is a **hub** whose children each start a
-child flow.
+### Stage 3 — segment: build the flow tree
+
+This is where journeys come from, and it's the cleverest stage. **The flow tree is the
+dominator tree** of the app's nav/overlay graph.
+
+In plain English: a journey nests under the one screen you *must* pass through to reach it. To
+get to "Send" you must go through "Home", so "Send" nests under "Home"; "Privacy" nests under
+"Settings". From that single rule, the tree shape falls out:
+
+- A screen leading to exactly **one** onward screen is a **trunk** — a step in a flow.
+- A screen leading to **2+** onward screens is a **hub** — each branch starts a child flow.
+- **Anchors** root their own top-level flow. Three sources are unioned: entry points (the launch
+  root + screens nothing navigates to), completion hubs (home/launch screens), and main-nav
+  sections (`graph.mainNav`).
 
 ```mermaid
 flowchart TD
-  home["Home · root"] --> send["Send · trunk"]
+  home["Home · anchor"] --> send["Send · trunk"]
   home --> settings["Settings · hub"]
   settings --> verify["Verify identity"]
   settings --> handle["Account handle"]
@@ -385,189 +357,151 @@ flowchart TD
   asset["Asset detail · hub"] --> buy["Buy → review"]
 ```
 
-<sub>A slice of a resulting flow tree. `Settings` and `Asset detail` are hubs (≥ 2 onward
-children); `Send` is a one-child trunk; `Home` is an anchor that roots its own subtree.</sub>
+<sub>A slice of a resulting flow tree. `Settings` and `Asset detail` are hubs; `Send` is a
+one-child trunk; `Home` roots its own subtree.</sub>
 
-- **Anchors** root their own top-level subtree: a virtual super-source dominates them, so their
-  `idom` is the super-source. Three sources, unioned — entry points (the launch root + screens
-  nothing navigates to), **completion hubs** (home/launch screens), and **main-nav roots**
-  (`graph.mainNav`). A main-nav section is a peer, not a child of whatever launched it.
-- **Excursions** — a picker/peek sheet launched from a trunk screen that only pops back to it —
-  dominate nothing and return to their dominator. They are not branches (they must not shatter
-  the trunk) and are woven in as inline **picker steps**, not their own flow.
-- **Sheets are steps.** A forward-only sheet (a confirmation/info overlay with no return) is a
-  dominated leaf, so it is a normal step. A sheet reached from several flows lands at their
-  common dominator — emitted once there, never duplicated into each.
-- **Cross-section journeys** (reachable from N sections, e.g. "Adding money" from both Home and
-  Earn) would hoist to the super-source; instead a copy is re-emitted under **each** reaching
-  section. The dominator tree governs trunk/nesting shape, not dedup-by-hoisting.
+A few shapes get special handling so the tree stays clean:
 
-Sibling order follows the parent's authored `decisionPoints` option order, then the observed-walk
-order, then lexical id. The iterative dominator fixpoint is order-independent (it computes a
-property of the graph), so the whole pass is deterministic. The result is a tree of journeys,
-each with an ordered list of step nodes.
+- **Excursions** — a picker/peek sheet opened from a trunk that only pops back to it. It doesn't
+  branch the trunk; it's woven inline as a **picker step**.
+- **Sheets are steps.** A forward-only confirmation/info overlay is just a normal step. A sheet
+  reached from several flows is emitted once, at their common dominator — never duplicated.
+- **Cross-section journeys** — reachable from N sections (e.g. "Adding money" from both Home and
+  Earn). Instead of hoisting to the top, a copy is re-emitted under **each** reaching section.
 
-### 4. naming (`naming.ts`)
+Sibling order is deterministic: authored `decisionPoints` order first, then observed-walk order,
+then lexical id. The dominator computation is order-independent, so the whole stage is
+deterministic. Out comes a tree of journeys, each an ordered list of step nodes.
 
-Each flow gets a **mechanical** name derived from its first distinctive screen's title (trailing
-parentheticals like "(Owned)" stripped — those describe the screen, not the intent). Mechanical
-names land in **`namingTODO`** so the capture agent (or a human) can supply a real name, which
-persists in `overrides.flowNames` keyed by the flow's **name key** (`nameKey` in `namingTODO`).
-The name key is the flow's first distinctive screen (`steps[1]`, or the launch screen for a
-one-step hub) — the stable entry side, decoupled from the routing slug. So cross-section copies
-share one authored name, and a churning goal/last screen no longer detaches it.
+### Stage 4 — naming
 
-### 5. replay (`replay.ts`)
+Each flow gets a **mechanical** name from its first distinctive screen's title. That's a
+*fallback*: the mechanical name is pushed into **`namingTODO`** so a human or the capture agent
+can supply a real one. Authored names persist in `overrides.flowNames`, keyed by the flow's
+**name key** — its first distinctive screen. Keying on the stable entry side (not the routing
+slug) means cross-section copies share one authored name and a churning goal screen can't
+detach it.
 
-For each flow, the woven step plan's edge selectors are compiled into an inline **`.ad` command
-script** (`open <bundleId>`, then `click <selector>` per step) with a confidence rating from
-the selector quality (`id=` > `label=`/`role=` > positional). A woven **picker** step expands to
-two clicks — open the picker from its launcher, then make the selection that returns to it —
-before the spine continues. This is what lets a flow be _re-run_ on a device, not just viewed.
+### Stage 5 — replay
+
+Each flow's woven steps compile into an inline **`.ad` command script** — `open <bundleId>`,
+then `click <selector>` per step — with a confidence rating from selector quality (`id=` beats
+`label=`/`role=` beats positional). A picker step expands to two clicks (open the picker, then
+make the selection that returns). This is what lets a flow be **re-run on a device**, not just
+viewed.
 
 ### The result: `view.json`
 
 ```jsonc
 {
-  "app": {...}, "captureDate": "...",
-  "screens": [ /* one per canonical node, with state/stateGroup + which flows it appears in */ ],
-  "flows":   [ /* the journey tree: slug, name, parent, ordered steps (each step has a
-                  kind: "forward" | "picker"), replay */ ],
-  "decisionPoints": [ ... ],
-  "stats": { "screens": N, "rawNodes": M, "flows": F, "topLevelFlows": T, "replayCoverage": 87 },
-  "namingTODO": [ /* each: { entryNodeId, nameKey, slug, mechanicalName, steps } */ ]
+  "app": {…}, "captureDate": "…",
+  "screens": [ /* one per canonical node: state/stateGroup + which flows it appears in */ ],
+  "flows":   [ /* the journey tree: slug, name, parent, ordered steps (kind: forward|picker), replay */ ],
+  "decisionPoints": [ … ],
+  "stats": { "screens": N, "rawNodes": M, "flows": F, "topLevelFlows": T, "replayCoverage": 87, "truncatedFlows": 0 },
+  "namingTODO": [ /* each: { entryNodeId, nameKey, slug, mechanicalName, steps } */ ],
+  "uncapturedSections": [ /* main-nav sections that had no reachable nodes in this walk */ ]
 }
 ```
 
-`view.json` is a **build artifact**: it is regenerated from the graph (and its `overrides`) by
-the packager. To change anything in it, change the source — the graph's `overrides`.
+`view.json` is a **build artifact** — regenerated from the graph and its overrides. To change
+anything in it, change the source.
 
 ---
 
-## Overrides: the one hand-edited surface
+## Overrides
 
-The graph's observation (nodes/edges/decisionPoints) is written by the capture walk. The
-**only** hand-editable block is `overrides`, written by the edit agent (or a person) and
-**carried forward verbatim across re-captures**. Each key corrects exactly one thing the
-packager derived:
+The observation part of a graph (nodes / edges / decisionPoints) comes from the walk. The
+**only** hand-editable block is `overrides` — written by an edit agent or a person, and carried
+forward verbatim across re-captures. Each key corrects exactly one thing the packager derived:
 
-| Key         | Shape                                                            | Corrects                                                        |
-| ----------- | ---------------------------------------------------------------- | --------------------------------------------------------------- |
-| `flowNames` | flow-id → name                                                   | the name of a derived flow                                      |
-| `structure` | flow-id → `{ parent? }`                                          | re-parent a flow in the tree (`parent: null` pins it top-level) |
-| `screens`   | node-id → `{ role?, title?, description?, state?, stateGroup? }` | a screen's facts, incl. forcing its state / group               |
-| `merges`    | `string[][]`                                                     | force-merge nodes the SAF kept separate                         |
-| `splits`    | `string[]`                                                       | force-keep nodes distinct that the SAF would merge              |
+| Key         | Shape                                                            | Corrects                                                     |
+| ----------- | ---------------------------------------------------------------- | ------------------------------------------------------------ |
+| `flowNames` | flow-id → name                                                   | the name of a derived flow                                   |
+| `structure` | flow-id → `{ parent? }`                                          | re-parent a flow (`parent: null` pins it top-level)          |
+| `screens`   | node-id → `{ role?, title?, description?, state?, stateGroup? }` | a screen's facts, incl. forcing its state / group            |
+| `merges`    | `string[][]`                                                     | force-merge nodes the SAF kept separate                      |
+| `splits`    | `string[]`                                                       | force-keep nodes distinct that the SAF would merge           |
 
-Regenerating with `pnpm build-data` (or `node scripts/package.ts <graph.json>`) applies them.
-Because everything is derived, an override is a small, reviewable correction — not a rewrite
-of the output.
+Re-running `pnpm build-data` (or `node scripts/package.ts <graph.json>`) applies them. Because
+everything else is derived, an override is a small, reviewable correction — not a rewrite of the
+output.
 
 ---
 
-## The build pipeline
+## Build & deploy
 
 ```mermaid
 flowchart TD
   walk["device walk"] --> wj["_staging/walk.json<br/>raw observation"]
-  wj -->|"scripts/assemble.ts"| g["graph.json<br/>committed source"]
-  g -->|"scripts/build-data.ts"| v["view.json<br/>+ captures/index.json"]
-  v -->|"next build"| pages["gallery prerendered (SSG)<br/>screen · flow · OG on demand"]
-  pages -->|".vercelignore allowlist"| deploy["Vercel deploy<br/>only *.json + *.png under captures/"]
+  wj -->|scripts/assemble.ts| g["graph.json<br/>committed source"]
+  g -->|scripts/build-data.ts| v["view.json<br/>+ captures/index.json"]
+  v -->|next build| pages["gallery prerendered (SSG)<br/>screen · flow · OG on demand"]
+  pages -->|.vercelignore allowlist| deploy["Vercel deploy<br/>only *.json + *.png under captures/"]
 ```
 
-Key properties:
-
 - **`graph.json` is the only committed source per capture.** `view.json` and `index.json` are
-  derivable build artifacts, generated by `build-data` and committed in sync with their source.
-- **Routes are data, not fetches.** The browse grid and every `/apps/<slug>/<date>` gallery are
-  prerendered from JSON on disk for each known date (SSG); the bare `/apps/<slug>` is a prebuilt
-  static 307 to the latest, and unknown dates 404 (`dynamicParams = true`). Screen/flow pages and
-  their OG cards render on the first request and cache (`generateStaticParams` returns `[]`, so the
-  long tail never inflates the build). Either way there are **no external data fetches** —
-  everything derives from local JSON. The route tree itself is laid out under
-  [Routes & rendering](#routes--rendering).
-- **Leak prevention is `.vercelignore`, an allowlist.** With `public/` served as-is on Vercel,
-  only `*.json` + `*.png` under `public/captures/` are deployed — `*.snap.json`, `_staging/`,
-  `credentials.md`, secrets, and OS/editor cruft stay out by default, so a new stray file type
-  can't leak unless it's explicitly allowed. `*.snap.json` are also gitignored.
+  build artifacts, generated by `build-data` and committed in sync with their source.
+- **Routes are data, not fetches.** Every gallery page is prerendered from local JSON; screen
+  and flow pages render on first request and cache. Nothing fetches from a network.
+- **Leak prevention is `.vercelignore`, an allowlist.** Only `*.json` and `*.png` under
+  `public/captures/` ship. Raw snapshots, staging dirs, credentials, and editor cruft stay out
+  by default — a new stray file type can't leak unless it's explicitly allowed.
 
 ---
 
 ## Routes & rendering
 
 Every capture is canonical at one **dated** URL. The bare `/apps/<slug>` is a static 307 to the
-latest date; the gallery's Screens and Flows tabs are separate prerendered pages; a screen or
-flow click opens a lightbox via an intercepting `@modal` route, and the same URL opened directly
-(or refreshed) renders a standalone page with its own Open Graph card.
+latest date. The Screens and Flows tabs are separate prerendered pages. Clicking a screen or
+flow opens a lightbox via an intercepting `@modal` route; opening that same URL directly (or
+refreshing) renders a standalone page with its own Open Graph card.
 
 ```mermaid
 flowchart TD
-  bare["/apps/[slug]"] -->|"static 307"| dated["/apps/[slug]/[date]"]
+  bare["/apps/[slug]"] -->|static 307| dated["/apps/[slug]/[date]"]
   dated --> screens["Screens<br/>(gallery)/page.tsx"]
   dated --> flows["Flows<br/>(gallery)/flows/page.tsx"]
-  screens -.->|"tile click"| modal["@modal intercept<br/>lightbox over the gallery"]
-  flows -.->|"tile click"| modal
-  modal -.->|"open / refresh URL"| standalone["standalone page<br/>screen/[id] · flow/[slug] + OG card"]
+  screens -.->|tile click| modal["@modal intercept<br/>lightbox over the gallery"]
+  flows -.->|tile click| modal
+  modal -.->|open / refresh URL| standalone["standalone page<br/>screen/[id] · flow/[slug] + OG card"]
 ```
 
-- The **Screens/Flows tabs are routes**, each its own prerendered page under the `(gallery)`
-  route group inside `[date]/`, sharing chrome via `[date]/(gallery)/layout.tsx` (`GalleryFrame`).
-  A tab switch is a prefetched soft-nav that swaps only the panel beneath; `TabBar` is `<Link>`s
-  using `usePathname()` for the active state.
-- The **`@modal` slot** intercepts a screen/flow click over either tab into a lightbox; the
-  lightbox and the standalone page share one body (`ScreenViewer` / `FlowViewer` in
-  `components/lightbox/`).
-- **Deep links are real routes**, built through `captureBase` in `lib/links.ts` (always dated), so
-  a shared link keeps resolving to the same capture after a newer one lands.
+- **Tabs are routes, not client state.** Each is its own prerendered page under the `(gallery)`
+  route group, sharing chrome via `[date]/(gallery)/layout.tsx`. Switching tabs is a prefetched
+  soft-nav that swaps only the panel beneath.
+- **The `@modal` slot** intercepts a tile click into a lightbox. The lightbox and the standalone
+  page share one body (`ScreenViewer` / `FlowViewer`).
+- **Deep links are real routes**, built through `captureBase` in `lib/links.ts` (always dated),
+  so a shared link keeps resolving to the same capture after a newer one lands.
 - **Open Graph cards** render via `next/og` at the site, app, screen, and flow levels
-  (`opengraph-image.tsx`, composed in `lib/og.tsx`). The four cards share one minimal design
-  system that mirrors the app's dark tokens: a near-black frame, Inter (bundled from
-  `lib/og-fonts/`), the app's radii and white/10% borders. Per-app cards are flat — no brand-colour
-  wash — and carry the app's mark: its committed `logo.png` when it has one, else the generated
-  `avatar.vercel.sh` avatar, so a card matches the mark on the site. The `wallets.gallery` wordmark
-  is set with the site icon (`app/icon.svg`); only the home card keeps a fixed amber/teal wash.
-  Screen and flow cards composite their screenshots in from the CDN (rather than tracing them into
-  the function bundle); the app card is a screenshot-free centred lockup.
-- **The data files have a `latest` alias too.** `/captures/<slug>/latest/view.json` (and
-  `…/graph.json`) is a build-time **307** to the newest dated file — the data-side mirror of the
-  `/apps/<slug>` HTML 307, baked per app from `index.json` in `next.config.mjs`. It lets a
-  consumer (an agent, the capture skill) deep-link "latest" without first reading `index.json` to
-  resolve the date, while the dated files stay the immutable, long-cacheable canonical URLs.
+  (`opengraph-image.tsx`, composed in `lib/og.tsx`). They share one flat dark design system that
+  mirrors the app's tokens; each per-app card carries the app's mark — its committed `logo.png`,
+  else the generated `avatar.vercel.sh` avatar (no brand-colour wash). Screen and flow cards
+  composite the screenshot in from the CDN.
+- **Data files have a `latest` alias too.** `/captures/<slug>/latest/view.json` (and
+  `…/graph.json`) is a build-time 307 to the newest dated file — the data-side mirror of the
+  `/apps/<slug>` HTML redirect — so a consumer can deep-link "latest" without first resolving
+  the date, while the dated files stay immutable and long-cacheable.
 
 ---
 
 ## Capturing a new app
 
-New data is produced by the **app-capture skill** at `.claude/skills/app-capture/` — an agent
-walks the app on an Android emulator or iOS device and records observations. The flow:
+New data is produced by the **app-capture skill** at `.claude/skills/app-capture/`: an agent
+walks the app on an Android emulator or iOS device and records what it sees. The flow:
 
 ```
-walk      → author _staging/walk.json   (raw observation: nodes + edges + decisionPoints)
+walk      → author _staging/walk.json          (raw observation: nodes + edges + decisionPoints)
 assemble  → node scripts/assemble.ts _staging/walk.json {date}/graph.json
-            (computes the 3 identity signals, content-addresses screenshots, finalizes edge
-             kind from skeleton equality, validates — refuses to write on error)
+            (computes the 3 identity signals, content-addresses screenshots,
+             finalizes each edge kind from skeleton equality, validates — refuses to write on error)
 package   → node scripts/package.ts {date}/graph.json
-            (derives flows/states/tree/replay; prints a namingTODO to fill in)
+            (derives flows / states / tree / replay; prints a namingTODO to fill in)
 edit      → write overrides into graph.json, re-run package
 ```
 
-The agent authors **exactly one** file — `walk.json` — and supplies flow names; it never
-hand-computes a hash, builds a flow, or classifies a state. The contract for what goes in
-`walk.json`/`graph.json`/`app.json` lives in
-[`.claude/skills/app-capture/references/schema.md`](.claude/skills/app-capture/references/schema.md);
-`lib/packager/types.ts` is the engine's own copy of those types.
-
----
-
-## Architecture notes
-
-- **`lib/packager/` is types-only at the boundary.** `types.ts` is pure types (erased at compile
-  time) so client components can import it; all runtime logic lives in the sibling modules, which
-  import `node:crypto` and run only at build time / in the CLI.
-- **`skeletonHash` is capture-time and load-bearing.** Computed once by `scripts/assemble.ts`, it
-  drives merge, cluster, _and_ the `in-place` edge derivation; the packager never recomputes it.
-- **App vs. captures are tracked separately.** The app (site, packager, scripts) is versioned in
-  `package.json` with a `CHANGELOG.md` entry; captures under `public/captures/` are content,
-  tracked by commit. The conventions for both — and the editing/determinism rules for the
-  packager — live in [`CLAUDE.md`](CLAUDE.md) and [`CHANGELOG.md`](CHANGELOG.md).
+The agent authors **exactly one** file — `walk.json` — and supplies flow names. It never
+hand-computes a hash, builds a flow, or classifies a state. The full data contract lives in
+[`.claude/skills/app-capture/references/schema.md`](.claude/skills/app-capture/references/schema.md),
+mirrored in TypeScript by [`lib/packager/types.ts`](lib/packager/types.ts).
