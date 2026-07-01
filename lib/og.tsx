@@ -424,7 +424,7 @@ export function siteOgImage() {
         <div
           style={{ display: "flex", fontSize: 36, color: MUTED, marginTop: 18 }}
         >
-          a showcase of money apps curated by agents
+          A showcase of money apps curated by agents
         </div>
       </Center>
     </Card>

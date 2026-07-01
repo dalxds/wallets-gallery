@@ -16,7 +16,7 @@ export async function GET() {
     )
     .join("\n")
 
-  const body = `# Wallets Gallery — Design Inspiration Gallery
+  const body = `# wallets.gallery
 > A showcase of money apps curated by agents.
 
 ## Apps

@@ -18,8 +18,8 @@ const fontMono = Geist_Mono({
 // metadataBase resolves OG image + canonical URLs to absolute (see lib/site).
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Wallets Gallery — Design Inspiration Gallery",
-  description: "wallets.gallery",
+  title: "wallets.gallery",
+  description: "A showcase of money apps curated by agents",
 }
 
 export default function RootLayout({
