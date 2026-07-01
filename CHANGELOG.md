@@ -19,6 +19,21 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [4.1.4] - 2026-07-01
+
+### Changed
+
+- The sticky capture header now reads as one bar when you scroll. The top navbar is solid, so
+  it no longer shows a hairline seam against the frosted app header beneath it (previously two
+  stacked translucent layers met at a visible edge). The rule under the Screens/Flows tabs is
+  the header's clean bottom edge, and the space below it is unfrosted breathing room rather than
+  a frosted band.
+- The Screens/Flows tab counts now sit as lighter superscripts (`Screens⁶²`) instead of
+  `Screens (62)`.
+- On the Flows tab, the sidebar (its filter field and flow tree) keeps a gap below the header
+  when scrolling instead of collapsing flush against it, and it stays aligned with the flows
+  column and with where clicking a flow scrolls to.
+
 ## [4.1.3] - 2026-06-30
 
 ### Changed

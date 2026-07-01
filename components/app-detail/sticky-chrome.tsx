@@ -26,7 +26,7 @@ export function StickyChrome({ children }: { children: ReactNode }) {
   return (
     <div
       ref={ref}
-      className="space-y-6 lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background/80 lg:px-4 lg:pt-6 lg:pb-6 lg:backdrop-blur-sm"
+      className="space-y-6 lg:sticky lg:top-14 lg:z-30 lg:-mx-4 lg:-mt-6 lg:bg-background/80 lg:px-4 lg:pt-6 lg:pb-0 lg:backdrop-blur-sm"
     >
       {children}
     </div>

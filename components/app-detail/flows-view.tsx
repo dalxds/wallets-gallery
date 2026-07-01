@@ -61,14 +61,17 @@ export function FlowsView({ app, appSlug, date }: FlowsViewProps) {
   )
   const stateIndex = useMemo(() => buildStateIndex(app.screens), [app.screens])
 
-  // Sidebar/rail are pinned just below the chrome (--content-top, set by the
-  // page) and span the rest of the viewport, scrolling internally. The page
-  // itself scrolls the window. Sizing is inline so the CSS var resolves
+  // Sidebar/rail are pinned just below the chrome — --content-top (set by the
+  // page) is the chrome's bottom edge, and the +1.5rem keeps the search field a
+  // gap below the bar so it doesn't collapse flush against it when scrolling
+  // (it matches the content column's own 1.5rem top gap, so rail and flows stay
+  // aligned). They span the rest of the viewport, scrolling internally; the
+  // page itself scrolls the window. Sizing is inline so the CSS var resolves
   // cleanly; lg:sticky only engages the positioning on desktop (it's hidden
   // below lg, where the inline mobile sidebar is shown instead).
   const railStyle: React.CSSProperties = {
-    top: "var(--content-top)",
-    height: "calc(100dvh - var(--content-top) - 1.5rem)",
+    top: "calc(var(--content-top) + 1.5rem)",
+    height: "calc(100dvh - var(--content-top) - 3rem)",
   }
 
   return (
@@ -125,7 +128,7 @@ export function FlowsView({ app, appSlug, date }: FlowsViewProps) {
                 ref={(el) => {
                   if (el) flowRefs.current.set(flow.slug, el)
                 }}
-                className="scroll-mt-16 lg:scroll-mt-[var(--content-top)]"
+                className="scroll-mt-16 lg:scroll-mt-[calc(var(--content-top)_+_1.5rem)]"
               >
                 <FlowRow
                   flow={flow}
