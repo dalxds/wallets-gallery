@@ -121,7 +121,8 @@ lib/
   types.ts                    # app-facing types (aliased over the packager's View) + registry/manifest
   captures.ts                 # server-only reads of index.json + view.json (shared by all routes)
   links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher presentation
-  images.ts  og.tsx           # screenshot URL + dims; Open Graph card renderers (site fonts + brand color)
+  images.ts  og.tsx           # screenshot URL + dims; Open Graph card renderers (logo/avatar mark, flat cards)
+  app-logo.ts                 #   appAvatarSrc(slug, logo): committed logo.png, else the generated avatar
   og-fonts/                   #   Inter + Geist Mono (+ Noto fallback) TTFs → OG functions (next.config tracing)
   clipboard.ts  site.ts  utils.ts # copy-link/image/download; site URLs (assetBaseUrl); cn() helper
 
@@ -135,6 +136,7 @@ public/captures/              # ★ THE DATA
   index.json                  #   generated registry (browse page reads this)
   <app-slug>/
     app.json                  #   manifest: metadata + capture history + latest pointer
+    logo.png                  #   optional brand logo; overrides the generated avatar everywhere
     assets/<sha>.png|.snap.json  # content-addressed screenshots + raw snapshots (deduped)
     <YYYY-MM-DD>/
       graph.json              #   ★ the capture — source of truth (committed)
@@ -521,9 +523,10 @@ flowchart TD
 - **Open Graph cards** render via `next/og` at the site, app, screen, and flow levels
   (`opengraph-image.tsx`, composed in `lib/og.tsx`). The four cards share one minimal design
   system that mirrors the app's dark tokens: a near-black frame, Inter (bundled from
-  `lib/og-fonts/`), the app's radii and white/10% borders, and a soft background wash of the app's
-  brand colour — the two gradient stops of its `avatar.vercel.sh` avatar, so a card matches the
-  avatar on the site. The `wallets.gallery` wordmark is set with the site icon (`app/icon.svg`).
+  `lib/og-fonts/`), the app's radii and white/10% borders. Per-app cards are flat — no brand-colour
+  wash — and carry the app's mark: its committed `logo.png` when it has one, else the generated
+  `avatar.vercel.sh` avatar, so a card matches the mark on the site. The `wallets.gallery` wordmark
+  is set with the site icon (`app/icon.svg`); only the home card keeps a fixed amber/teal wash.
   Screen and flow cards composite their screenshots in from the CDN (rather than tracing them into
   the function bundle); the app card is a screenshot-free centred lockup.
 - **The data files have a `latest` alias too.** `/captures/<slug>/latest/view.json` (and

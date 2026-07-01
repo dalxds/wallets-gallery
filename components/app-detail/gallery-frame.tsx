@@ -38,6 +38,7 @@ export function GalleryFrame({
           <AppHeaderLayout
             slug={app.slug}
             name={view.app.name}
+            logo={app.logo}
             dateControl={
               <DateControl
                 slug={app.slug}

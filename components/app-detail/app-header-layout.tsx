@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { appAvatarSrc } from "@/lib/app-logo"
 
 // The app header (avatar, name, capture date), rendered once in the gallery
 // chrome (GalleryFrame, in the persisted (gallery) layout). Presentational: the
@@ -7,19 +8,21 @@ import type { ReactNode } from "react"
 export function AppHeaderLayout({
   slug,
   name,
+  logo,
   dateControl,
 }: {
   slug: string
   name: string
+  logo: string | null
   dateControl: ReactNode
 }) {
   return (
     <div className="flex items-center gap-4">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://avatar.vercel.sh/${slug}`}
+        src={appAvatarSrc(slug, logo)}
         alt={name}
-        className="h-16 w-16 rounded-2xl"
+        className="h-16 w-16 rounded-2xl object-cover"
       />
       <div>
         <h1 className="text-2xl font-bold">{name}</h1>

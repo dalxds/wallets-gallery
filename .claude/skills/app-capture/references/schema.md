@@ -9,6 +9,7 @@ What the skill writes on disk, and the full shape of each file. **This doc is th
 | `{app-slug}/_staging/walk.json` | **What you author** — raw observation: `nodes` (no hashes) + `edges` + `decisionPoints` + `meta` | written by the agent during the walk |
 | `{app-slug}/{date}/graph.json` | **THE capture** — `nodes` + `edges` + `decisionPoints` + `overrides` | **source of truth**, produced by `assemble.ts` from `walk.json` |
 | `{app-slug}/app.json` | App-level manifest: metadata + capture index + latest pointer | written by the agent (every capture/edit) |
+| `{app-slug}/logo.png` | **Optional** brand logo (app-level). When present it overrides the generated `avatar.vercel.sh` avatar everywhere — app UI + OG cards | added by the agent/user; `build-data` records its presence on `index.json` |
 | `{app-slug}/{date}/view.json` | Derived screens + flow tree + inline `.ad` replay | **generated** by `pnpm build-data`; never hand-edited (gitignore-able) |
 | `{app-slug}/assets/{sha256-12}.png` | Content-addressed screenshot, deduped across **this app's** dated captures | written by `assemble.ts` |
 | `{app-slug}/assets/{sha256-12}.snap.json` | Content-addressed raw snapshot | written by `assemble.ts` |

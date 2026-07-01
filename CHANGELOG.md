@@ -19,6 +19,31 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [4.2.0] - 2026-07-01
+
+### Added
+
+- Apps can now show a real **logo**. Drop a `logo.png` into an app's folder
+  (`public/captures/<slug>/logo.png`) and it becomes the app's mark everywhere — the browse
+  grid, the capture header, the screen/flow viewers, and the Open Graph share cards. An app with
+  no `logo.png` keeps the generated `avatar.vercel.sh` avatar, so nothing regresses.
+
+### Changed
+
+- Per-app Open Graph cards are now **flat** (near-black, no brand-colour wash). Each card used to
+  derive a colour from the app's avatar gradient; with real logos there's no cheap colour to
+  extract, so the wash is gone and the logo/avatar mark carries the identity. The home card's
+  fixed amber/teal wash is unchanged.
+
+### For contributors
+
+- New `lib/app-logo.ts` (`appAvatarSrc(slug, logo)`) is the single "logo, else avatar" resolver
+  used across the UI; `lib/og.tsx` keeps its own byte-inlining path for the cards.
+  `scripts/build-data.ts` records each app's logo presence as `logo` on `index.json`
+  (`AppIndex.logo`), so no component reads the filesystem. The colour-derivation helpers
+  (`brandColors` / `brandWash` and friends) were removed from `lib/og.tsx`. Logos are `.png`
+  (already allowlisted by `.vercelignore`).
+
 ## [4.1.3] - 2026-06-30
 
 ### Changed

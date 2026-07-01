@@ -1,4 +1,5 @@
 import type { AppIndex } from "@/lib/types"
+import { appAvatarSrc } from "@/lib/app-logo"
 import { captureBase } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import Link from "next/link"
@@ -15,9 +16,9 @@ export function AppCard({ app }: AppCardProps) {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://avatar.vercel.sh/${app.slug}`}
+        src={appAvatarSrc(app.slug, app.logo)}
         alt={app.name}
-        className="h-12 w-12 shrink-0 rounded-xl"
+        className="h-12 w-12 shrink-0 rounded-xl object-cover"
       />
       <div className="min-w-0 flex-1">
         <h3 className="truncate font-semibold">{app.name}</h3>

@@ -38,5 +38,13 @@ export default async function FlowStandalonePage({
   const res = resolveFlow(slug, flowSlug, date)
   if (!res) notFound()
   const { cap, flow } = res
-  return <FlowPage view={cap.view} flow={flow} appSlug={slug} date={cap.date} />
+  return (
+    <FlowPage
+      view={cap.view}
+      flow={flow}
+      appSlug={slug}
+      appLogo={cap.app.logo}
+      date={cap.date}
+    />
+  )
 }

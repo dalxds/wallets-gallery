@@ -13,11 +13,13 @@ export function ScreenPage({
   view,
   screen,
   appSlug,
+  appLogo,
   date,
 }: {
   view: AppCapture
   screen: ScreenEntry
   appSlug: string
+  appLogo: string | null
   date: string
 }) {
   return (
@@ -33,6 +35,7 @@ export function ScreenPage({
           initialScreenId={screen.id}
           appSlug={appSlug}
           appName={view.app.name}
+          appLogo={appLogo}
           backHref={captureBase(appSlug, date)}
           date={date}
           priorityInitial
