@@ -10,20 +10,33 @@ export const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000")
 
-// `assetBaseUrl` — the origin the server-side OG renderer fetches /captures assets
-// from (lib/og.tsx composites the screenshot PNGs into each card). It MUST be a
-// PUBLICLY reachable origin, so it reuses the canonical `siteUrl` (which resolves to
-// VERCEL_PROJECT_PRODUCTION_URL — the shortest production domain). This follows
-// Vercel's own guidance: VERCEL_URL (the team-scoped `*.vercel.app` this used to
-// use) "cannot be used in conjunction with Standard Deployment Protection" — it
-// 302-redirects to SSO, so a function fetching its own deployment's screenshots got
-// the login page, not the PNG, and cards rendered blank; and the docs recommend
-// VERCEL_PROJECT_PRODUCTION_URL "to reliably generate links that point to production
-// such as OG-image URLs". (Trade-off: a protected preview now reads PRODUCTION's
-// captures, not its own — fine, since it can't serve OG to scrapers anyway, and new
-// captures are validated locally first. To restore per-deploy isolation, generate a
-// Protection Bypass for Automation secret — VERCEL_AUTOMATION_BYPASS_SECRET — and
-// send it as the `x-vercel-protection-bypass` header while fetching VERCEL_URL.)
-// Fetching over HTTP — not readFileSync from the bundle — keeps the OG functions
-// code-only (wouldn't scale to ~50k screenshots).
-export const assetBaseUrl = siteUrl
+// `assetBaseUrl` — the origin the server-side OG renderer fetches /captures assets from
+// (lib/og.tsx composites the screenshot PNGs into each card). It MUST be a PUBLICLY reachable
+// origin, and fetching over HTTP — not readFileSync from the bundle — keeps the OG functions
+// code-only (wouldn't scale to ~50k screenshots). Environment matrix:
+//
+//   • production                → the production origin (siteUrl → VERCEL_PROJECT_PRODUCTION_URL).
+//   • preview + bypass secret   → the deployment's OWN origin (VERCEL_URL), so a preview's OG cards
+//       composite THAT deploy's new/changed captures (the "check share cards on preview before
+//       prod" path). `x-vercel-protection-bypass` (VERCEL_AUTOMATION_BYPASS_SECRET) stops Standard
+//       Deployment Protection 302-redirecting the self-fetch to SSO — the login page, not the PNG,
+//       was why commit 760403b moved to the production origin in the first place.
+//   • preview WITHOUT the secret → fall back to the production origin (today's behavior: a
+//       protected preview reads production captures rather than rendering blank frames). So absent
+//       the secret this change is a no-op — production is byte-identical either way.
+//   • local dev                 → siteUrl (localhost).
+//
+// force-cache is kept: Vercel scopes the Data Cache per-environment (previews isolated from
+// production) and every asset URL is content-addressed (screenshots by hash, logo by `?v=`), so a
+// stale or 404 entry can't leak across environments or outlive a content change.
+const previewOrigin = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined
+const bypassSecret = process.env.VERCEL_AUTOMATION_BYPASS_SECRET
+const useOwnOrigin = process.env.VERCEL_ENV === "preview" && !!bypassSecret && !!previewOrigin
+
+export const assetBaseUrl = useOwnOrigin ? previewOrigin! : siteUrl
+
+// Sent only on the /captures asset fetch (lib/og.tsx imgDataUrl), only when self-fetching a
+// protected preview — never on production, local dev, or the external avatar fallback.
+export const assetFetchHeaders: Record<string, string> = useOwnOrigin
+  ? { "x-vercel-protection-bypass": bypassSecret! }
+  : {}
