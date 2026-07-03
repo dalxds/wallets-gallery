@@ -102,16 +102,17 @@ export function segment(
   //   • entry points    — the launch root + screens nothing navigates to
   //   • completion hubs  — home / launch screens
   //   • nav sections     — main-nav destinations from graph.mainNav
-  const entries: string[] = [root]
-  for (const id of live) if (id !== root && isFamilyDefault(id) && indeg(id) === 0) entries.push(id)
-  const completionHubs = new Set<string>([root])
-  for (const id of live) {
-    const n = saf.canonicalNodes.find((x) => x.id === id)!
-    if (isFamilyDefault(id) && n.role === "home") completionHubs.add(id)
-  }
+  // Anchor order must NOT depend on the nodes input order — it fixes journey emission order,
+  // the flows array, and the `slug`/`slug-2` disambiguation between same-named flows. So sort
+  // the discovered entries/hubs lexically; the dominator numbering (:124) already sorts, but
+  // succ(SUPER) and the build() loop (:255) read anchorOrder directly.
+  const nodeById = new Map(saf.canonicalNodes.map((n) => [n.id, n]))
+  const entries = live.filter((id) => id !== root && isFamilyDefault(id) && indeg(id) === 0).sort()
+  const hubs = live.filter((id) => id !== root && isFamilyDefault(id) && nodeById.get(id)!.role === "home").sort()
   const anchors = new Set<string>()
   const anchorOrder: string[] = []
-  for (const id of [...entries, ...completionHubs, ...navRoots]) if (!anchors.has(id)) { anchors.add(id); anchorOrder.push(id) }
+  // root first; then entries, then hubs (both sorted); then nav sections in authored graph.mainNav order.
+  for (const id of [root, ...entries, ...hubs, ...navRoots]) if (!anchors.has(id)) { anchors.add(id); anchorOrder.push(id) }
 
   // ── Dominator tree (iterative Cooper–Harvey–Kennedy over SUPER → anchors → subgraph) ──
   // The super-source has an edge to every anchor, so idom(anchor) = SUPER (top-level) and

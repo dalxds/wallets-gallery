@@ -472,6 +472,45 @@ describe("packager — Stage 2: decisionPoints drive branch order + completeness
   })
 })
 
+describe("packager — top-level anchor order is input-order-independent", () => {
+  // Two home-role hubs (homeX/homeY) and two indeg-0 orphans exercise both anchor sources;
+  // homeX→addX and homeY→addY are both named "Add money", forcing add-money / add-money-2
+  // disambiguation. Reversing graph.nodes must NOT swap which copy owns which slug (the
+  // published /flow/add-money URL would otherwise open the other cross-section copy).
+  function multiAnchor(): Graph {
+    const nodes: GraphNode[] = [
+      node("start", "auth", "sk:start", ["Welcome"], ["Go"]),
+      node("homeX", "home", "sk:hx", ["Home X", "Balance"], ["Add money"]),
+      node("homeY", "home", "sk:hy", ["Home Y", "Balance"], ["Add money"]),
+      node("addX", "form", "sk:addx", ["Add money", "Amount"], ["Confirm"]),
+      node("addY", "form", "sk:addy", ["Add money", "Amount"], ["Confirm"]),
+      node("orphanA", "other", "sk:oa", ["Orphan A"], ["X"]),
+      node("orphanB", "other", "sk:ob", ["Orphan B"], ["Y"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("start", "homeX", "Go X", 'id="gx"', "nav", 1),
+      edge("start", "homeY", "Go Y", 'id="gy"', "nav", 2),
+      edge("homeX", "addX", "Add money", 'id="ax"', "nav", 3),
+      edge("homeY", "addY", "Add money", 'id="ay"', "nav", 4),
+    ]
+    return { meta: meta("anchors"), root: "start", nodes, edges, decisionPoints: [], overrides: {} }
+  }
+  const g = multiAnchor()
+  const fwd = packageGraph(g)
+  const tree = (v: ReturnType<typeof packageGraph>) => JSON.stringify({ flows: v.flows, decisionPoints: v.decisionPoints })
+
+  it("reversing nodes/edges keeps the flow tree and the -2 slug assignment", () => {
+    const rev: Graph = { ...g, nodes: [...g.nodes].reverse(), edges: [...g.edges].reverse() }
+    expect(tree(packageGraph(rev))).toBe(tree(fwd))
+  })
+
+  it("really does force same-named-flow disambiguation (add-money / add-money-2)", () => {
+    const stepsBySlug = (slug: string) => fwd.flows.find((f) => f.slug === slug)?.steps.map((s) => s.screenId)
+    expect(stepsBySlug("add-money")).toEqual(["homeX", "addX"])
+    expect(stepsBySlug("add-money-2")).toEqual(["homeY", "addY"])
+  })
+})
+
 describe("packager — Stage 4: the dominator tree is the flow tree", () => {
   const stepsOf = (f: { steps: { screenId: string }[] }) => f.steps.map((s) => s.screenId)
   const byPath = (v: ReturnType<typeof packageGraph>, ids: string[]) =>
