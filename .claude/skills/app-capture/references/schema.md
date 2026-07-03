@@ -10,7 +10,7 @@ What the skill writes on disk, and the full shape of each file. **This doc is th
 | `{app-slug}/{date}/graph.json` | **THE capture** — `nodes` + `edges` + `decisionPoints` + `overrides` | **source of truth**, produced by `assemble.ts` from `walk.json` |
 | `{app-slug}/app.json` | App-level manifest: metadata + capture index + latest pointer | written by the agent (every capture/edit) |
 | `{app-slug}/logo.png` | **Optional** brand logo (app-level). When present it overrides the generated `avatar.vercel.sh` avatar everywhere — app UI + OG cards | added by the agent/user; `build-data` records its presence on `index.json` |
-| `{app-slug}/{date}/view.json` | Derived screens + flow tree + inline `.ad` replay | **generated** by `pnpm build-data`; never hand-edited (gitignore-able) |
+| `{app-slug}/{date}/view.json` | Derived screens + flow tree + inline `.ad` replay | **generated** by `pnpm build-data`; never hand-edited, but **committed** alongside the `graph.json` edit that produced it (the gitignored artifacts are `*.snap.json` + `credentials.md`) |
 | `{app-slug}/assets/{sha256-12}.png` | Content-addressed screenshot, deduped across **this app's** dated captures | written by `assemble.ts` |
 | `{app-slug}/assets/{sha256-12}.snap.json` | Content-addressed raw snapshot | written by `assemble.ts` |
 | `{app-slug}/credentials.md` | Auth details (free-form markdown), gitignored | written by the agent |
@@ -146,7 +146,7 @@ Written exclusively by the edit agent and carried forward verbatim across re-cap
 
 ## Screen states & validation (handled by the packager)
 
-You no longer classify states or hand-enforce schema rules — both are deterministic and handled for you. **State classification** labels each screen `default`/`empty`/`loading`/`error`/`max` and routes non-default variants as an on-step *toggle* (an `in-place` edge between variants of one screen), a *divergent* sibling flow, or a *lifecycle* step — `overrides.screens[id].state`/`stateGroup` force a specific outcome. **Validation** runs twice: `assemble.ts` validates before it writes `graph.json` (and refuses to write on error), and `node scripts/package.ts <graph.json>` validates again. It fails loudly on a missing/invalid `fingerprint` (must match `sha256:` or `sha256-text:`), a `root`/edge/decision-point reference not in `nodes[]`, any empty-string selector (use `null`), or `meta.schemaVersion !== 2`, and warns on overrides that point at unknown node ids. Both must exit 0 before you finish.
+You no longer classify states or hand-enforce schema rules — both are deterministic and handled for you. **State classification** labels each screen `default`/`empty`/`loading`/`error`/`max` and, within one logical-screen family, folds a non-default variant joined to the family default by an `in-place` edge into the default's `stateGroup` — it becomes an on-step *toggle* (a switcher on the step), not a separate screen. Every other variant stays an ordinary distinct screen. `overrides.screens[id].state`/`stateGroup` force a specific outcome. **Validation** runs twice: `assemble.ts` validates before it writes `graph.json` (and refuses to write on error), and `node scripts/package.ts <graph.json>` validates again. It fails loudly on a missing/invalid `fingerprint` (must match `sha256:` or `sha256-text:`), a `root`/edge/decision-point reference not in `nodes[]`, any empty-string selector (use `null`), or `meta.schemaVersion !== 2`, and warns on overrides that point at unknown node ids. Both must exit 0 before you finish.
 
 ## Schema versioning
 
