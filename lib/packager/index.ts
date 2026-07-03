@@ -9,6 +9,24 @@ import { buildAdjacency } from "./graph.ts"
 import { screenTitle, journeyName, slugify, nameKeyOf, type FlowName } from "./naming.ts"
 import { buildReplay } from "./replay.ts"
 
+// Deterministic winner among edges sharing a (from,to,action) key. in-place wins first —
+// it's the state-toggle signal classify needs (a nav/overlay duplicate would mask it) —
+// then earliest observed, then selector (nulls last), then kind. A total order, so the
+// survivor is the same regardless of graph.edges array order.
+function betterEdge(a: GraphEdge, b: GraphEdge): GraphEdge {
+  const ai = a.kind === "in-place" ? 0 : 1
+  const bi = b.kind === "in-place" ? 0 : 1
+  if (ai !== bi) return ai < bi ? a : b
+  if (a.observedAtStep !== b.observedAtStep) return a.observedAtStep < b.observedAtStep ? a : b
+  if (a.selector !== b.selector) { // lexically smallest, nulls last
+    if (a.selector == null) return b
+    if (b.selector == null) return a
+    return a.selector < b.selector ? a : b
+  }
+  if (a.kind !== b.kind) return a.kind < b.kind ? a : b
+  return a
+}
+
 export function packageGraph(graph: Graph): View {
   const overrides = graph.overrides ?? {}
   const saf = runSAF(graph.nodes, overrides)
@@ -35,9 +53,10 @@ export function packageGraph(graph: Graph): View {
     const to = canon(e.to)
     if (from === to) continue
     const key = `${from}->${to}|${e.action}`
+    const remapped = { ...e, from, to }
     const prev = edgeByKey.get(key)
-    if (!prev) { edgeByKey.set(key, { ...e, from, to }); edgeOrder.push(key) }
-    else if (prev.kind !== "in-place" && e.kind === "in-place") edgeByKey.set(key, { ...e, from, to })
+    if (!prev) { edgeByKey.set(key, remapped); edgeOrder.push(key) }
+    else edgeByKey.set(key, betterEdge(remapped, prev))
   }
   const edges: GraphEdge[] = edgeOrder.map((k) => edgeByKey.get(k)!)
 
@@ -70,7 +89,21 @@ export function packageGraph(graph: Graph): View {
   const seg = segment(saf, cls, adj, edges, root, navRoots, overridesC, decisionOrder)
 
   const nodeById = new Map(saf.canonicalNodes.map((n) => [n.id, n]))
-  const edgeBetween = (a: string, b: string) => edges.find((e) => e.from === a && e.to === b) ?? null
+  // Among parallel edges (same from/to, different action — SAF merges create these), pick
+  // deterministically: smallest observedAtStep = the transition as first captured, which is
+  // also the best step label; then lexically-smallest action, then selector (nulls last).
+  // buildReplay is handed this same closure, so replay clicks stay deterministic too.
+  const edgeBetween = (a: string, b: string) => {
+    let best: GraphEdge | null = null
+    for (const e of edges) {
+      if (e.from !== a || e.to !== b) continue
+      if (!best || e.observedAtStep < best.observedAtStep) { best = e; continue }
+      if (e.observedAtStep > best.observedAtStep) continue
+      if (e.action !== best.action) { if (e.action < best.action) best = e; continue }
+      if (e.selector != null && (best.selector == null || e.selector < best.selector)) best = e
+    }
+    return best
+  }
 
   // Names + slugs (assigned before steps so parent refs resolve). journeyName is
   // computed once here and reused when building the flows below. Name a flow by its first
