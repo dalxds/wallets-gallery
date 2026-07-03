@@ -49,6 +49,7 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
   const dates: string[] = (manifest.captures ?? []).map((c: { date: string }) => c.date)
 
   let latestView: View | null = null
+  const builtDates: string[] = [] // dates that actually produced a view.json
   for (const date of dates) {
     const graphPath = join(appDir, date, "graph.json")
     if (!existsSync(graphPath)) {
@@ -58,6 +59,7 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
     const graph = JSON.parse(readFileSync(graphPath, "utf8")) as Graph
     const view = packageGraph(graph)
     writeFileSync(join(appDir, date, "view.json"), JSON.stringify(view))
+    builtDates.push(date)
     viewCount++
     if (view.stats.truncatedFlows > 0)
       console.warn(`⚠ ${dir.name}/${date}: ${view.stats.truncatedFlows} flow(s) hit the MAX_TRUNK cap (split into parent+child) — consider raising it or shortening the journey`)
@@ -85,7 +87,7 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
     slug: manifest.app.slug,
     name: manifest.app.name,
     platform: manifest.app.platform,
-    captures: dates,
+    captures: builtDates, // only dates with a view.json — skipped dates would 404 from the picker
     latest: manifest.latestCapture,
     cover: coverOf(latestView),
     screens: latestView.screens.length,
