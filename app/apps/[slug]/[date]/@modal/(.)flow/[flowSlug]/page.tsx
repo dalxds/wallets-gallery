@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { resolveFlow } from "@/lib/captures"
+import { toClientFlow, toClientScreens } from "@/lib/client-view"
 import { FlowLightbox } from "@/components/lightbox/flow-lightbox"
 
 // Intercepts /apps/[slug]/[date]/flow/[slug] on in-app navigation → modal. The
@@ -16,8 +17,8 @@ export default async function FlowModalRoute({
   const { cap, flow } = res
   return (
     <FlowLightbox
-      flow={flow}
-      screens={cap.view.screens}
+      flow={toClientFlow(flow)}
+      screens={toClientScreens(cap.view.screens)}
       appSlug={slug}
       appName={cap.view.app.name}
       appLogo={cap.app.logo}

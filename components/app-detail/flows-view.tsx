@@ -1,6 +1,6 @@
 "use client"
 
-import type { AppCapture, FlowEntry } from "@/lib/types"
+import type { ClientCapture, ClientFlow } from "@/lib/types"
 import { buildStateIndex } from "@/lib/states"
 import { FlowSidebar } from "./flow-sidebar"
 import { FlowRow } from "./flow-row"
@@ -8,7 +8,7 @@ import { PanelLeftOpen } from "lucide-react"
 import { useCallback, useMemo, useRef, useState } from "react"
 
 interface FlowsViewProps {
-  app: AppCapture
+  app: ClientCapture
   appSlug: string
   date: string
 }
@@ -17,14 +17,14 @@ interface FlowsViewProps {
 // depth-first), preserving each parent group's original order. The hierarchy is
 // no longer drawn with indentation — a nested flow surfaces its parent inline in
 // its title ("… from {parent}") instead.
-function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
-  const byParent = new Map<string | null, FlowEntry[]>()
+function flattenFlows(flows: ClientFlow[]): ClientFlow[] {
+  const byParent = new Map<string | null, ClientFlow[]>()
   for (const f of flows) {
     const list = byParent.get(f.parent) ?? []
     list.push(f)
     byParent.set(f.parent, list)
   }
-  const out: FlowEntry[] = []
+  const out: ClientFlow[] = []
   const seen = new Set<string>() // belt-and-braces: the packager guarantees an acyclic tree, but never loop
   const visit = (parent: string | null) => {
     for (const f of byParent.get(parent) ?? []) {

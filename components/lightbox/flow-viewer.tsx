@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
+import type { ClientFlow, FlowStep, ClientScreen } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage, stepDownloadName } from "@/lib/clipboard"
@@ -28,8 +28,8 @@ import {
 import { Button } from "@/components/ui/button"
 
 interface FlowViewerProps {
-  flow: FlowEntry
-  screens: ScreenEntry[]
+  flow: ClientFlow
+  screens: ClientScreen[]
   appSlug: string
   /** App name shown in the header breadcrumb. */
   appName: string
@@ -360,7 +360,7 @@ function StepCard({
   appSlug: string
   flowSlug: string
   date: string
-  variants: ScreenEntry[]
+  variants: ClientScreen[]
   ref?: React.Ref<HTMLDivElement>
 }) {
   // "image"/"url" reflect what actually reached the clipboard (Safari can only get the URL

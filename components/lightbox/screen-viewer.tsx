@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowEntry, ScreenEntry } from "@/lib/types"
+import type { ClientFlow, ClientScreen } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage, screenDownloadName } from "@/lib/clipboard"
 import { useCopyFeedback } from "@/lib/use-copy-feedback"
@@ -22,8 +22,8 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 interface ScreenViewerProps {
-  screens: ScreenEntry[]
-  flows: FlowEntry[]
+  screens: ClientScreen[]
+  flows: ClientFlow[]
   initialScreenId: string
   appSlug: string
   /** App name shown in the header breadcrumb. */

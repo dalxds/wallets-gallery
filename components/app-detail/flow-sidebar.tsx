@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowEntry } from "@/lib/types"
+import type { ClientFlow } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -13,14 +13,14 @@ import { ChevronRight, PanelLeftClose } from "lucide-react"
 import { useMemo, useState } from "react"
 
 interface FlowSidebarProps {
-  flows: FlowEntry[]
+  flows: ClientFlow[]
   activeFlowSlug?: string
   onFlowClick: (slug: string) => void
   onCollapse?: () => void
   className?: string
 }
 
-function matchesFilter(flow: FlowEntry, q: string): boolean {
+function matchesFilter(flow: ClientFlow, q: string): boolean {
   if (!q) return true
   return (
     flow.name.toLowerCase().includes(q) ||
@@ -35,8 +35,8 @@ function FlowNode({
   activeFlowSlug,
   onFlowClick,
 }: {
-  flow: FlowEntry
-  allFlows: FlowEntry[]
+  flow: ClientFlow
+  allFlows: ClientFlow[]
   filter: string
   activeFlowSlug?: string
   onFlowClick: (slug: string) => void
@@ -100,8 +100,8 @@ function FlowNode({
 }
 
 function childOrDescendantMatches(
-  flow: FlowEntry,
-  allFlows: FlowEntry[],
+  flow: ClientFlow,
+  allFlows: ClientFlow[],
   q: string
 ): boolean {
   if (matchesFilter(flow, q)) return true

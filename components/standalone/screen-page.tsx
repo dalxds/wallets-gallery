@@ -1,7 +1,7 @@
 import { SiteHeader } from "@/components/layout/site-header"
 import { ScreenViewer } from "@/components/lightbox/screen-viewer"
 import { captureBase } from "@/lib/links"
-import type { AppCapture, ScreenEntry } from "@/lib/types"
+import type { ClientCapture, ClientScreen } from "@/lib/types"
 
 // The full-screen page form of the screen viewer — what a shared/refreshed
 // /screen/[id] link renders. Same <ScreenViewer> as the modal (header, stage, and
@@ -16,8 +16,8 @@ export function ScreenPage({
   appLogo,
   date,
 }: {
-  view: AppCapture
-  screen: ScreenEntry
+  view: ClientCapture
+  screen: ClientScreen
   appSlug: string
   appLogo: string | null
   date: string

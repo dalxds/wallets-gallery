@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { resolveScreen } from "@/lib/captures"
+import { toClientScreens, toClientFlows } from "@/lib/client-view"
 import { ScreenLightbox } from "@/components/lightbox/screen-lightbox"
 
 // Intercepts /apps/[slug]/[date]/screen/[id] on in-app navigation → modal.
@@ -14,8 +15,8 @@ export default async function ScreenModalRoute({
   const { cap } = res
   return (
     <ScreenLightbox
-      screens={cap.view.screens}
-      flows={cap.view.flows}
+      screens={toClientScreens(cap.view.screens)}
+      flows={toClientFlows(cap.view.flows)}
       activeScreenId={screenId}
       appSlug={slug}
       appName={cap.view.app.name}
