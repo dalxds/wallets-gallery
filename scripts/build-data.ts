@@ -10,6 +10,7 @@
 import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
+import { validateGraph } from "../lib/packager/validate.ts"
 import type { Graph, View } from "../lib/packager/types.ts"
 
 const capturesDir = join(process.cwd(), "public/captures")
@@ -57,6 +58,13 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
       continue
     }
     const graph = JSON.parse(readFileSync(graphPath, "utf8")) as Graph
+    // Validate before packaging — same contract as scripts/package.ts. Invalid graphs
+    // (bad edge endpoint, duplicate id, …) would otherwise package into a silently
+    // corrupt view and deploy. Fail the build loudly instead; warn on soft issues.
+    const { errors, warnings } = validateGraph(graph)
+    for (const w of warnings) console.warn(`⚠ ${dir.name}/${date}: ${w}`)
+    if (errors.length)
+      throw new Error(`${dir.name}/${date}: invalid graph.json —\n  ${errors.join("\n  ")}`)
     const view = packageGraph(graph)
     writeFileSync(join(appDir, date, "view.json"), JSON.stringify(view))
     builtDates.push(date)
