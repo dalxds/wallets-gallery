@@ -12,20 +12,11 @@ import { join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
 import { validateGraph } from "../lib/packager/validate.ts"
 import type { Graph, View } from "../lib/packager/types.ts"
+// Type the registry against the reader's contract so generator and consumer can't
+// drift: add a field to AppIndex and this script stops compiling until it emits it.
+import type { AppIndex } from "../lib/types.ts"
 
 const capturesDir = join(process.cwd(), "public/captures")
-
-interface RegistryEntry {
-  slug: string
-  name: string
-  platform: string
-  captures: string[]
-  latest: string
-  cover: string
-  screens: number
-  flows: number
-  logo: string | null
-}
 
 // The browse page renders from index.json alone, so each entry needs a cover
 // thumbnail. Prefer the home screen, but only one that actually has a shot —
@@ -36,7 +27,7 @@ function coverOf(view: View): string {
   const screen = withShot.find((s) => s.role === "home") ?? withShot[0]
   return screen?.screenshotPath ?? ""
 }
-const registry: RegistryEntry[] = []
+const registry: AppIndex[] = []
 let viewCount = 0
 
 // Sort by name so the registry order is slug order, independent of the host
