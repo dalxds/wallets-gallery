@@ -22,23 +22,3 @@ export function buildAdjacency(nodeIds: Iterable<string>, edges: GraphEdge[]): A
   }
   return { out, in: inn, nodes }
 }
-
-/** Forward-reachable set from `start` (excludes start unless it cycles back). */
-export function reachableFrom(adj: Adjacency, start: string, options: { exclude?: Set<string> } = {}): Set<string> {
-  const seen = new Set<string>()
-  const exclude = options.exclude ?? new Set<string>()
-  const queue = [start]
-  const visited = new Set<string>([start])
-  while (queue.length) {
-    const cur = queue.shift()!
-    for (const e of adj.out.get(cur) ?? []) {
-      if (exclude.has(e.to)) continue
-      if (!seen.has(e.to)) seen.add(e.to)
-      if (!visited.has(e.to)) {
-        visited.add(e.to)
-        queue.push(e.to)
-      }
-    }
-  }
-  return seen
-}
