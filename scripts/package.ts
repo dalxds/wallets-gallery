@@ -48,6 +48,6 @@ console.log("\nflow tree:")
 printFlow(null, 0)
 
 if (view.namingTODO.length) {
-  console.log(`\nnamingTODO (${view.namingTODO.length}) — fill via overrides.flowNames:`)
-  for (const t of view.namingTODO) console.log(`  ${t.slug}: "${t.mechanicalName}"`)
+  console.log(`\nnamingTODO (${view.namingTODO.length}) — fill via overrides.flowNames, keyed by nameKey:`)
+  for (const t of view.namingTODO) console.log(`  ${t.nameKey} → "${t.mechanicalName}"  (flow: ${t.slug})`)
 }

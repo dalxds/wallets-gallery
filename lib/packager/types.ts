@@ -95,7 +95,12 @@ export interface DecisionPoint {
 // The ONLY hand-edited surface. Written exclusively by the edit agent (chat →
 // override → re-derive). Preserved verbatim across re-captures.
 export interface Overrides {
-  /** flow id (= anchor node id) → flow name (LLM-/human-chosen; must persist for the static build). */
+  /** flow NAME KEY → flow name (LLM-/human-chosen; must persist for the static build). The name key
+   *  is the flow's first DISTINCTIVE screen — steps[1], the entry into its own trunk past the launch
+   *  screen shared with its parent (steps[0] for a single-step hub) — exactly the `nameKey` printed
+   *  by namingTODO. NOT the routing slug and NOT the stable flow id used by `structure`. Keyed this
+   *  way so cross-section copies of one journey share a single authored name; canonicalized through
+   *  the SAF map so the name survives a re-capture that merges the key node into a twin. */
   flowNames?: Record<string, string>
   /**
    * flow id → corrections to the derived tree's shape. One lever: `parent` re-parents a

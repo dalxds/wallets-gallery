@@ -41,7 +41,18 @@ export function packageGraph(graph: Graph): View {
     const c = canon(id)
     canonScreens[c] = { ...canonScreens[c], ...screenOv[id] }
   }
-  const overridesC: Overrides = { ...overrides, screens: canonScreens }
+  // overrides.flowNames is authored against a flow's NAME KEY — a node id (steps[1], the first
+  // distinctive screen) — so it needs the same canonicalization: a re-capture that merges the key
+  // node into a richer twin must carry the authored name to the survivor rather than silently
+  // reverting to the mechanical placeholder. On collision (two keys → one canonical id) the
+  // lexically-smallest ORIGINAL key wins — deterministic, order-independent.
+  const nameOv = overrides.flowNames ?? {}
+  const canonFlowNames: NonNullable<Overrides["flowNames"]> = {}
+  for (const id of Object.keys(nameOv).sort()) {
+    const c = canon(id)
+    if (!(c in canonFlowNames)) canonFlowNames[c] = nameOv[id]
+  }
+  const overridesC: Overrides = { ...overrides, screens: canonScreens, flowNames: canonFlowNames }
 
   // Remap edges to canonical ids; drop self-loops; dedupe by (from,to,action).
   // On a collision prefer the in-place edge — it's the state-toggle signal classify
