@@ -25,8 +25,11 @@ function flattenFlows(flows: FlowEntry[]): FlowEntry[] {
     byParent.set(f.parent, list)
   }
   const out: FlowEntry[] = []
+  const seen = new Set<string>() // belt-and-braces: the packager guarantees an acyclic tree, but never loop
   const visit = (parent: string | null) => {
     for (const f of byParent.get(parent) ?? []) {
+      if (seen.has(f.slug)) continue
+      seen.add(f.slug)
       out.push(f)
       visit(f.slug)
     }

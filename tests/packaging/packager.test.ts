@@ -725,3 +725,51 @@ describe("packager — cross-family in-place edges stay in the flow tree", () =>
     expect(tree(packageGraph(rev))).toBe(tree(packageGraph(g)))
   })
 })
+
+describe("packager — overrides.structure parent cycles are broken deterministically", () => {
+  // home launches independent alpha (a1→a2), beta (b1→b2), gamma (c1→c2) flows; their STABLE
+  // flow ids are the goal screens a2/b2/c2, which overrides.structure keys against.
+  function cycleGraph(structure: Record<string, { parent?: string | null }>): Graph {
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["A", "B", "C"]),
+      node("a1", "form", "sk:a1", ["Alpha start"], ["Go"]),
+      node("a2", "confirmation", "sk:a2", ["Alpha done"], ["Fin"]),
+      node("b1", "form", "sk:b1", ["Beta start"], ["Go"]),
+      node("b2", "confirmation", "sk:b2", ["Beta done"], ["Fin"]),
+      node("c1", "form", "sk:c1", ["Gamma start"], ["Go"]),
+      node("c2", "confirmation", "sk:c2", ["Gamma done"], ["Fin"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "a1", "A", 'id="a"', "nav", 1), edge("a1", "a2", "Go", 'id="ga"', "nav", 2),
+      edge("home", "b1", "B", 'id="b"', "nav", 3), edge("b1", "b2", "Go", 'id="gb"', "nav", 4),
+      edge("home", "c1", "C", 'id="c"', "nav", 5), edge("c1", "c2", "Go", 'id="gc"', "nav", 6),
+    ]
+    return { meta: meta("cyc"), root: "home", nodes, edges, decisionPoints: [], overrides: { structure } }
+  }
+  const treeOf = (v: ReturnType<typeof packageGraph>) => v.flows.map((f) => `${f.slug}:${f.parent}`).sort().join("|")
+
+  it("breaks a 2-flow cycle: both flows kept, exactly one re-rooted to null, deterministically", () => {
+    const g = cycleGraph({ a2: { parent: "b2" }, b2: { parent: "a2" } })
+    const v = packageGraph(g)
+    const cyc = v.flows.filter((f) => ["alpha-start", "beta-start"].includes(f.slug))
+    expect(cyc.length).toBe(2) // both present — neither hidden by the cycle
+    expect(cyc.filter((f) => f.parent === null).length).toBe(1) // exactly one broken to root
+    // stable under nodes/edges reversal AND under swapping the two structure entries' key order
+    const rev = packageGraph({ ...g, nodes: [...g.nodes].reverse(), edges: [...g.edges].reverse() })
+    const swap = packageGraph(cycleGraph({ b2: { parent: "a2" }, a2: { parent: "b2" } }))
+    expect(treeOf(rev)).toBe(treeOf(v))
+    expect(treeOf(swap)).toBe(treeOf(v))
+  })
+
+  it("breaks a 3-flow cycle at exactly one member, preserving the rest of the chain", () => {
+    const v = packageGraph(cycleGraph({ a2: { parent: "b2" }, b2: { parent: "c2" }, c2: { parent: "a2" } }))
+    const cyc = v.flows.filter((f) => ["alpha-start", "beta-start", "gamma-start"].includes(f.slug))
+    expect(cyc.length).toBe(3) // all three kept
+    expect(cyc.filter((f) => f.parent === null).length).toBe(1) // one deterministic break, chain otherwise intact
+  })
+
+  it("a dangling structure parent falls back to top-level (no cycle, no loss)", () => {
+    const v = packageGraph(cycleGraph({ a2: { parent: "does-not-exist" } }))
+    expect(v.flows.find((f) => f.slug === "alpha-start")!.parent).toBeNull()
+  })
+})

@@ -64,6 +64,15 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
       console.warn(`⚠ ${dir.name}/${date}: ${view.stats.truncatedFlows} flow(s) hit the MAX_TRUNK cap (split into parent+child) — consider raising it or shortening the journey`)
     if (view.uncapturedSections.length > 0)
       console.warn(`⚠ ${dir.name}/${date}: main-nav section(s) with no captured journey: ${view.uncapturedSections.join(", ")} — walk past these tabs and re-capture`)
+    // Every flow must be reachable from the null-rooted forest the UI walks (flows-view.tsx). The
+    // packager breaks overrides.structure cycles deterministically, so this should never fire — it
+    // is the regression tripwire for any future structure-handling change that re-hides flows.
+    const reachable = new Set<string>()
+    const walk = (parent: string | null) => { for (const f of view.flows) if (f.parent === parent && !reachable.has(f.slug)) { reachable.add(f.slug); walk(f.slug) } }
+    walk(null)
+    const orphans = view.flows.filter((f) => !reachable.has(f.slug)).map((f) => `${f.slug} (parent=${f.parent})`)
+    if (orphans.length > 0)
+      console.warn(`⚠ ${dir.name}/${date}: ${orphans.length} flow(s) unreachable from the flow tree (parent cycle or dangling into one): ${orphans.join(", ")}`)
 
     // the registry summary comes from the latest view only
     if (date === manifest.latestCapture) {
