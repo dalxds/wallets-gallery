@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { resolveScreen } from "@/lib/captures"
+import { toClientCapture } from "@/lib/client-view"
 import { formatDate } from "@/lib/utils"
 import { ScreenPage } from "@/components/standalone/screen-page"
 
@@ -38,7 +39,7 @@ export default async function ScreenStandalonePage({
   const { cap, screen } = res
   return (
     <ScreenPage
-      view={cap.view}
+      view={toClientCapture(cap.view)}
       screen={screen}
       appSlug={slug}
       appLogo={cap.app.logo}

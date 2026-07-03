@@ -29,6 +29,18 @@ export type FlowEntry = ViewFlow
 export type FlowStep = ViewStep
 export type FlowReplay = ViewReplay
 
+// Lean client-facing projections. No UI component reads a screen's `texts` /
+// `interactiveElements` (~82KB per redotpay capture) or a flow's `replay` command list, so the
+// server strips them at the boundary (see lib/client-view.ts) before handing props to the client
+// islands — the full View still lives in view.json and is read server-side (OG, llms.txt). Client
+// components type against these so an accidental re-widening fails typecheck.
+export type ClientScreen = Omit<ViewScreen, "texts" | "interactiveElements">
+export type ClientFlow = Omit<ViewFlow, "replay">
+export type ClientCapture = Omit<View, "screens" | "flows"> & {
+  screens: ClientScreen[]
+  flows: ClientFlow[]
+}
+
 export interface DecisionPointOption {
   label: string
   explored: boolean

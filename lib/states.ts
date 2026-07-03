@@ -1,4 +1,4 @@
-import type { ScreenEntry } from "./types"
+import type { ClientScreen } from "./types"
 
 // Presentation for each screen state. `tone` drives styling: empty/loading are
 // normal lifecycle states (neutral); error/max are exceptional (warning).
@@ -33,11 +33,11 @@ export interface StateIndex {
    * Returns [] when the screen has no group or the group has a single member — i.e.
    * there is nothing to switch between.
    */
-  variantsForScreen(screenId: string): ScreenEntry[]
+  variantsForScreen(screenId: string): ClientScreen[]
 }
 
-export function buildStateIndex(screens: ScreenEntry[]): StateIndex {
-  const byGroup = new Map<string, ScreenEntry[]>()
+export function buildStateIndex(screens: ClientScreen[]): StateIndex {
+  const byGroup = new Map<string, ClientScreen[]>()
   for (const s of screens) {
     if (!s.stateGroup) continue
     const arr = byGroup.get(s.stateGroup) ?? []

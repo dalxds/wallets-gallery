@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { resolveCapture } from "@/lib/captures"
+import { toClientCapture } from "@/lib/client-view"
 import { FlowsView } from "@/components/app-detail/flows-view"
 
 // The Flows tab of a capture, at /apps/[slug]/[date]/flows — the canonical dated
@@ -16,5 +17,5 @@ export default async function DatedFlowsTab({
   const { slug, date } = await params
   const cap = resolveCapture(slug, date)
   if (!cap) notFound()
-  return <FlowsView app={cap.view} appSlug={slug} date={cap.date} />
+  return <FlowsView app={toClientCapture(cap.view)} appSlug={slug} date={cap.date} />
 }

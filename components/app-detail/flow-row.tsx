@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowEntry } from "@/lib/types"
+import type { ClientFlow } from "@/lib/types"
 import type { StateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
 import { copyLink, stepDownloadName } from "@/lib/clipboard"
@@ -14,7 +14,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 interface FlowRowProps {
-  flow: FlowEntry
+  flow: ClientFlow
   appSlug: string
   date: string
   stateIndex: StateIndex

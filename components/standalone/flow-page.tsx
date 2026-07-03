@@ -1,7 +1,7 @@
 import { SiteHeader } from "@/components/layout/site-header"
 import { FlowViewer } from "@/components/lightbox/flow-viewer"
 import { flowsHref } from "@/lib/links"
-import type { AppCapture, FlowEntry } from "@/lib/types"
+import type { ClientCapture, ClientFlow } from "@/lib/types"
 
 // The full-screen page form of the flow viewer — what a shared/refreshed
 // /flow/[slug] link renders. Same <FlowViewer> as the modal (header, strip, and
@@ -16,8 +16,8 @@ export function FlowPage({
   appLogo,
   date,
 }: {
-  view: AppCapture
-  flow: FlowEntry
+  view: ClientCapture
+  flow: ClientFlow
   appSlug: string
   appLogo: string | null
   date: string

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { resolveFlow } from "@/lib/captures"
+import { toClientCapture, toClientFlow } from "@/lib/client-view"
 import { formatDate } from "@/lib/utils"
 import { FlowPage } from "@/components/standalone/flow-page"
 
@@ -40,8 +41,8 @@ export default async function FlowStandalonePage({
   const { cap, flow } = res
   return (
     <FlowPage
-      view={cap.view}
-      flow={flow}
+      view={toClientCapture(cap.view)}
+      flow={toClientFlow(flow)}
       appSlug={slug}
       appLogo={cap.app.logo}
       date={cap.date}

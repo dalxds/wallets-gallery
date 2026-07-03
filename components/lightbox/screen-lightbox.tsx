@@ -1,6 +1,6 @@
 "use client"
 
-import type { FlowEntry, ScreenEntry } from "@/lib/types"
+import type { ClientFlow, ClientScreen } from "@/lib/types"
 import {
   Dialog,
   DialogContent,
@@ -26,8 +26,8 @@ export function ScreenLightbox({
   appLogo,
   date,
 }: {
-  screens: ScreenEntry[]
-  flows: FlowEntry[]
+  screens: ClientScreen[]
+  flows: ClientFlow[]
   activeScreenId: string
   appSlug: string
   appName: string
