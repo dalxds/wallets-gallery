@@ -249,6 +249,35 @@ describe("packager — edge dedup keeps the in-place signal", () => {
     expect(amtMax.stateGroup).toBe("amt") // folded into amt's toggle group
     expect(view.flows.some((f) => f.steps.some((s) => s.screenId === "amt-max"))).toBe(false)
   })
+
+  it("dedup survivor + parallel-edge selection are input-order-independent (edge reversal is byte-identical)", () => {
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Send", "Settings"]),
+      node("send", "form", "sk:send", ["Send money", "Amount"], ["Continue"]),
+      node("settings", "settings", "sk:set", ["Settings"], ["Sign out"]),
+    ]
+    const edges: GraphEdge[] = [
+      // (a) two same-(from,to,action) edges differing only in observedAtStep/selector —
+      // the survivor must be the earliest-observed one, not whichever came first in the array.
+      edge("home", "settings", "Open settings", 'id="settings-late"', "nav", 6),
+      edge("home", "settings", "Open settings", 'id="settings-early"', "nav", 2),
+      // (b) two parallel edges (same pair, different action) — edgeBetween must pick the
+      // earliest-observed action, not the first in the array.
+      edge("home", "send", "Tap Send", 'id="send"', "nav", 3),
+      edge("home", "send", "Tap avatar", 'id="avatar"', "nav", 4),
+    ]
+    const g: Graph = { meta: meta("edgerev"), root: "home", nodes, edges, decisionPoints: [], overrides: {} }
+    // Reverse EDGES only — node order legitimately governs screen display order, so hold it fixed.
+    const rev: Graph = { ...g, edges: [...g.edges].reverse() }
+    const fwd = packageGraph(g)
+    expect(JSON.stringify(packageGraph(rev))).toBe(JSON.stringify(fwd)) // flows, steps, replay all identical
+    // and the choice is the EARLIEST-observed one, not merely stable:
+    const s = JSON.stringify(fwd)
+    expect(s).toContain("settings-early")
+    expect(s).not.toContain("settings-late")
+    expect(s).toContain("Tap Send")
+    expect(s).not.toContain("Tap avatar")
+  })
 })
 
 describe("packager — overrides survive SAF merge", () => {
