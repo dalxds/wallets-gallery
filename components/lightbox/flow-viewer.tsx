@@ -4,6 +4,7 @@ import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage, stepDownloadName } from "@/lib/clipboard"
+import { useCopyFeedback } from "@/lib/use-copy-feedback"
 import { flowHref, parseStepParam } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
@@ -84,7 +85,7 @@ export function FlowViewer({
   // the middle — so a one-screen flow looks just like a multi-screen one, not
   // pinned to the left edge.
   const [fits, setFits] = useState(false)
-  const [flowLinkCopied, setFlowLinkCopied] = useState(false)
+  const [flowLinkCopied, flashFlowLinkCopied] = useCopyFeedback<true>()
   const [downloadingAll, setDownloadingAll] = useState(false)
   const [ready, setReady] = useState(false)
   // Step image height in px, measured from the strip so cards fill the available
@@ -204,8 +205,7 @@ export function FlowViewer({
     // Dated link to the flow (no step → lands on step 1) so it stays valid
     // after a newer capture.
     await copyLink(flowHref(appSlug, flow.slug, date))
-    setFlowLinkCopied(true)
-    setTimeout(() => setFlowLinkCopied(false), 1500)
+    flashFlowLinkCopied(true)
   }
 
   async function downloadAll() {
@@ -363,10 +363,10 @@ function StepCard({
   variants: ScreenEntry[]
   ref?: React.Ref<HTMLDivElement>
 }) {
-  // null = idle; "image"/"url" reflect what actually reached the clipboard (Safari can only
-  // get the URL fallback), so the flash never claims the image was copied when it wasn't.
-  const [copiedImage, setCopiedImage] = useState<"image" | "url" | null>(null)
-  const [copiedLink, setCopiedLink] = useState(false)
+  // "image"/"url" reflect what actually reached the clipboard (Safari can only get the URL
+  // fallback), so the flash never claims the image was copied when it wasn't. null = idle.
+  const [copiedImage, flashImage] = useCopyFeedback<"image" | "url">()
+  const [copiedLink, flashLink] = useCopyFeedback<true>()
   const [activeId, setActiveId] = useState(step.screenId)
 
   const hasStates = variants.length > 1
@@ -381,16 +381,14 @@ function StepCard({
     e.stopPropagation()
     const result = await copyImageToClipboard(displaySrc)
     if (result === "none") return // copy failed — no false success
-    setCopiedImage(result)
-    setTimeout(() => setCopiedImage(null), 1500)
+    flashImage(result)
   }
 
   async function handleCopyLink(e: React.MouseEvent) {
     e.stopPropagation()
     // Dated deep-link to THIS step (?step is 1-based, matching step.number).
     await copyLink(flowHref(appSlug, flowSlug, date, step.number))
-    setCopiedLink(true)
-    setTimeout(() => setCopiedLink(false), 1500)
+    flashLink(true)
   }
 
   async function handleDownload(e: React.MouseEvent) {

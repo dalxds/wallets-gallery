@@ -3,6 +3,7 @@
 import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
 import { copyImageToClipboard, copyLink, downloadImage, screenDownloadName } from "@/lib/clipboard"
+import { useCopyFeedback } from "@/lib/use-copy-feedback"
 import { screenHref, flowHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import { LightboxImage } from "./lightbox-image"
@@ -74,10 +75,10 @@ export function ScreenViewer({
       screens.findIndex((s) => s.id === initialScreenId)
     )
   )
-  // null = idle; "image"/"url" reflect what actually reached the clipboard (Safari can only
-  // get the URL fallback), so the label never claims the image was copied when it wasn't.
-  const [imageCopied, setImageCopied] = useState<"image" | "url" | null>(null)
-  const [linkCopied, setLinkCopied] = useState(false)
+  // "image"/"url" reflect what actually reached the clipboard (Safari can only get the URL
+  // fallback), so the label never claims the image was copied when it wasn't. null = idle.
+  const [imageCopied, flashImageCopied] = useCopyFeedback<"image" | "url">()
+  const [linkCopied, flashLinkCopied] = useCopyFeedback<true>()
   // Once the user pages, the shown image is no longer the LCP — drop the priority
   // hint so later swaps don't each inject a preload.
   const [paged, setPaged] = useState(false)
@@ -150,16 +151,14 @@ export function ScreenViewer({
     // The original PNG, not the optimized /_next/image variant.
     const result = await copyImageToClipboard(currentSrc)
     if (result === "none") return // copy failed — no false success
-    setImageCopied(result)
-    setTimeout(() => setImageCopied(null), 1500)
+    flashImageCopied(result)
   }
 
   async function handleCopyLink() {
     if (!current) return
     // Dated link so it stays valid after a newer capture lands.
     await copyLink(screenHref(appSlug, current.id, date))
-    setLinkCopied(true)
-    setTimeout(() => setLinkCopied(false), 1500)
+    flashLinkCopied(true)
   }
 
   async function handleDownload() {
