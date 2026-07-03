@@ -87,12 +87,19 @@ export function segment(
   }
   const live = saf.canonicalNodes.filter((n) => !folded.has(n.id)).map((n) => n.id)
 
-  // Forward subgraph for the dominator tree: nav + overlay edges only (drop back; in-place is
-  // already a state toggle, folded by classify). Each node maps to its onward (subgraph) targets.
+  // Forward subgraph for the dominator tree: nav + overlay edges, PLUS in-place edges that cross
+  // SAF families. classify only folds in-place edges WITHIN one family (a state toggle); a
+  // cross-family in-place edge — e.g. one assemble.ts forced from a coarse-skeleton nav, then
+  // pinned distinct via overrides.splits — is a real navigation between two logical screens. If we
+  // dropped it here while `indeg` still counted it, its target (and everything reachable only
+  // through it) would vanish from every flow. Invariant: no recorded transition to a surviving,
+  // unfolded screen may silently disappear from the flow tree. (back edges are still dropped.)
+  const crossFamilyInPlace = (e: GraphEdge) =>
+    e.kind === "in-place" && (saf.logicalOf.get(e.from) ?? e.from) !== (saf.logicalOf.get(e.to) ?? e.to)
   const subOut = new Map<string, string[]>()
   for (const id of live) subOut.set(id, [])
   for (const e of edges) {
-    if (e.kind !== "nav" && e.kind !== "overlay") continue
+    if (e.kind !== "nav" && e.kind !== "overlay" && !crossFamilyInPlace(e)) continue
     if (folded.has(e.from) || folded.has(e.to) || e.from === e.to) continue
     const l = subOut.get(e.from)
     if (l && !l.includes(e.to)) l.push(e.to)
