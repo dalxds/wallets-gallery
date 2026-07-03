@@ -688,3 +688,40 @@ describe("packager — excursions launched from a top-level flow's first step", 
     expect(view.flows.flatMap((f) => f.steps).filter((s) => s.screenId === "picker").length).toBe(1)
   })
 })
+
+describe("packager — cross-family in-place edges stay in the flow tree", () => {
+  // A and B share a coarse skeleton; assemble.ts forced the A→B nav to kind:"in-place" and the
+  // agent pinned B distinct via overrides.splits. B is then a singleton family, classify folds
+  // nothing, and the old subgraph (nav/overlay only) dropped the in-place edge — B and everything
+  // reachable through it (C) vanished from every flow while still counting for in-degree.
+  function splitGraph(): Graph {
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Open"]),
+      node("A", "form", "sk:shared", ["Screen A", "Alpha"], ["Next"]),
+      node("B", "form", "sk:shared", ["Screen B", "Beta"], ["More"]),
+      node("C", "confirmation", "sk:c", ["Done screen"], ["Finish"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "A", "Open", 'id="open"', "nav", 1),
+      edge("A", "B", "Go B", 'id="gob"', "in-place", 2), // cross-family in-place (forced from a coarse-skeleton nav)
+      edge("B", "C", "Go C", 'id="goc"', "nav", 3),
+    ]
+    return { meta: meta("split"), root: "home", nodes, edges, decisionPoints: [], overrides: { splits: ["B"] } }
+  }
+
+  it("keeps B (and C reachable through it) in the flow tree", () => {
+    const view = packageGraph(splitGraph())
+    const stepIds = view.flows.flatMap((f) => f.steps.map((s) => s.screenId))
+    expect(stepIds).toContain("B")
+    expect(stepIds).toContain("C")
+    expect(view.screens.find((s) => s.id === "B")!.appearsIn.length).toBeGreaterThan(0)
+    expect(view.screens.find((s) => s.id === "C")!.appearsIn.length).toBeGreaterThan(0)
+  })
+
+  it("is input-order-independent (reversing nodes/edges keeps the flow tree)", () => {
+    const g = splitGraph()
+    const rev: Graph = { ...g, nodes: [...g.nodes].reverse(), edges: [...g.edges].reverse() }
+    const tree = (v: ReturnType<typeof packageGraph>) => JSON.stringify({ flows: v.flows, decisionPoints: v.decisionPoints })
+    expect(tree(packageGraph(rev))).toBe(tree(packageGraph(g)))
+  })
+})
