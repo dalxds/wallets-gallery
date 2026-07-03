@@ -88,10 +88,12 @@ export function runSAF(nodes: GraphNode[], overrides: Overrides = {}): SafResult
     else byMergeKey.set(k, [n])
   }
   for (const group of byMergeKey.values()) {
-    for (let i = 1; i < group.length; i++) {
-      if (splits.has(group[i].id) || splits.has(group[0].id)) continue
-      uf.union(group[0].id, group[i].id)
-    }
+    // Drop split members first, then union the rest pairwise. Anchoring on group[0]
+    // and skipping it when split would block the WHOLE group's merges; it also made
+    // the outcome depend on which member landed at group[0] (input order). Which
+    // member anchors doesn't matter — pickRepresentative chooses the canonical later.
+    const mergeable = group.filter((n) => !splits.has(n.id))
+    for (let i = 1; i < mergeable.length; i++) uf.union(mergeable[0].id, mergeable[i].id)
   }
   // tight-pHash merges (identical layout even when normalized text drifts)
   for (let i = 0; i < nodes.length; i++) {
@@ -105,11 +107,12 @@ export function runSAF(nodes: GraphNode[], overrides: Overrides = {}): SafResult
       }
     }
   }
-  // forced merges (override)
+  // forced merges (override). Drop ids absent after a re-capture first, then union the
+  // survivors — anchoring on grp[0] silently no-oped the whole group when grp[0] was the
+  // stale id (validate.ts warns about the stale id itself).
   for (const grp of overrides.merges ?? []) {
-    for (let i = 1; i < grp.length; i++) {
-      if (byId.has(grp[0]) && byId.has(grp[i])) uf.union(grp[0], grp[i])
-    }
+    const present = grp.filter((id) => byId.has(id))
+    for (let i = 1; i < present.length; i++) uf.union(present[0], present[i])
   }
 
   // canonical node per merge-class
