@@ -31,14 +31,12 @@ function matchesFilter(flow: FlowEntry, q: string): boolean {
 function FlowNode({
   flow,
   allFlows,
-  depth,
   filter,
   activeFlowSlug,
   onFlowClick,
 }: {
   flow: FlowEntry
   allFlows: FlowEntry[]
-  depth: number
   filter: string
   activeFlowSlug?: string
   onFlowClick: (slug: string) => void
@@ -68,7 +66,10 @@ function FlowNode({
     </button>
   )
 
-  if (children.length === 0) {
+  // Decide leaf vs expandable from the SAME list the content renders (visibleChildren),
+  // not the unfiltered children — otherwise a filtered-out subtree still shows a chevron
+  // that expands to an empty indented stub instead of rendering the parent as a leaf row.
+  if (visibleChildren.length === 0) {
     return <div className="flex items-center">{button}</div>
   }
 
@@ -87,7 +88,6 @@ function FlowNode({
               key={child.slug}
               flow={child}
               allFlows={allFlows}
-              depth={depth + 1}
               filter={filter}
               activeFlowSlug={activeFlowSlug}
               onFlowClick={onFlowClick}
@@ -157,7 +157,6 @@ export function FlowSidebar({
             key={flow.slug}
             flow={flow}
             allFlows={flows}
-            depth={0}
             filter={filter}
             activeFlowSlug={activeFlowSlug}
             onFlowClick={onFlowClick}
