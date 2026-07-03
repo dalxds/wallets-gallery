@@ -38,7 +38,9 @@ function coverOf(view: View): string {
 const registry: RegistryEntry[] = []
 let viewCount = 0
 
-for (const dir of readdirSync(capturesDir, { withFileTypes: true })) {
+// Sort by name so the registry order is slug order, independent of the host
+// filesystem's readdir order (macOS APFS vs Linux CI) — index.json is committed.
+for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) => (a.name < b.name ? -1 : 1))) {
   if (!dir.isDirectory()) continue
   const appDir = join(capturesDir, dir.name)
   const manifestPath = join(appDir, "app.json")
