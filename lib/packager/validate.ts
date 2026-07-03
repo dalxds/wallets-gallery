@@ -61,8 +61,10 @@ export function validateGraph(graph: Graph): ValidationResult {
   // Only node-id-keyed overrides are checked against the node set here. `flowNames` and
   // `structure` are keyed by FLOW ids (a flow's anchor node id, disambiguated as
   // `goal@entry` / `goal-2` when names collide) — not raw node ids — so they can't be
-  // validated without running the packager; the packager applies them and silently
-  // ignores any that don't resolve, so a stale key is harmless (the rename just no-ops).
+  // validated without running the packager. A stale/dangling key simply no-ops (flowNames
+  // rename doesn't apply; a structure `parent` pointing nowhere falls back to top-level). A
+  // `structure` PARENT CYCLE is not harmless, but the packager now breaks it deterministically
+  // (segment.ts) and build-data warns on any unreachable flow, so no content is hidden.
   const nodeKeyedRefs: [string, string[]][] = [
     ["overrides.screens", Object.keys(ov.screens ?? {})],
     ["overrides.splits", ov.splits ?? []],

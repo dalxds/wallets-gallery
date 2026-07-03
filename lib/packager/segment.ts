@@ -321,6 +321,26 @@ export function segment(
       const o = st[j.id]
       if (o && o.parent !== undefined && o.parent !== j.id) j.parent = o.parent
     }
+    // Break any parent CYCLE the overrides introduced (self-parent is already ignored above, but
+    // A.parent=B / B.parent=A would flow through — the UI only walks null-rooted trees, so cycle
+    // members and their descendants would silently vanish). Each flow has ≤1 parent, so the parent
+    // graph is functional and its cycles are disjoint. Null the parent of each cycle's
+    // lexically-smallest member (only that one) — deterministic and order-independent, so the
+    // cycle becomes a normal subtree and a mis-authored cycle merely surfaces as a top-level flow.
+    const byStable = new Map(kept.map((j) => [j.id, j]))
+    const onCycle = new Set<string>()
+    for (const start of kept) {
+      if (onCycle.has(start.id)) continue
+      const path: string[] = []
+      const seen = new Set<string>()
+      let cur: Journey | undefined = start
+      while (cur && !seen.has(cur.id)) { seen.add(cur.id); path.push(cur.id); cur = cur.parent != null ? byStable.get(cur.parent) : undefined }
+      if (cur && seen.has(cur.id)) {
+        const cycle = path.slice(path.indexOf(cur.id))
+        for (const id of cycle) onCycle.add(id)
+        byStable.get(cycle.reduce((a, b) => (a < b ? a : b)))!.parent = null
+      }
+    }
   }
 
   // Group excursions under their launcher (idom), ordered like any sibling set, for index.ts to
