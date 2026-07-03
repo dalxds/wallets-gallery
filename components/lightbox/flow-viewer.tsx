@@ -410,7 +410,11 @@ function StepCard({
       <LightboxImage
         src={displaySrc}
         alt={activeVariant?.description ?? step.title}
-        sizes="(min-width: 768px) 300px, 60vw"
+        // Track the same bound measureHeight uses: card width = min(0.62·stripW, (stripH−60)·9/20),
+        // and the strip fills the modal (max-w-[80vw]/95vw, h-[80vh]/85vh). So an upper bound is
+        // min(~50vw, ~40vh) on desktop / min(~60vw, ~40vh) on mobile — err slightly high, never low.
+        // The old flat 300px made the browser fetch the 384px variant and stretch it on wide screens.
+        sizes="(min-width: 768px) min(50vw, 40vh), min(60vw, 40vh)"
         className="aspect-[1080/2400] h-[var(--step-h,60vh)] rounded-lg shadow-lg"
       >
         {/* Hover action buttons */}
