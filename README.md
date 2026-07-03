@@ -90,7 +90,7 @@ touched a `graph.json` or the packager.
 
 ```
 app/                          # Next.js App Router (gallery prerendered; screen/flow on demand)
-  page.tsx                    #   /            browse grid (reads public/captures/index.json)
+  page.tsx                    #   /            browse grid (reads the registry via lib/captures.ts)
   apps/[slug]/                #   /apps/x      static 307 → /apps/x/<latest>
     [date]/                   #   /apps/x/<date>   the one canonical capture tree
       (gallery)/page.tsx      #     Screens tab · (gallery)/flows/page.tsx for Flows
@@ -114,15 +114,18 @@ lib/
     naming.ts  replay.ts      #   stage 4: flow names · stage 5: inline .ad replay scripts
     graph.ts  validate.ts     #   adjacency helpers; graph.json validator
   captures.ts                 # server-only reads of index.json + view.json (all routes share)
+  client-view.ts              # strip a screen's texts/elements + a flow's replay before props
+                              #   cross into client islands (view.json itself stays full)
   links.ts  states.ts         # route/deep-link helpers (captureBase); state switcher UI
   images.ts  og.tsx           # screenshot URLs; Open Graph card renderers (logo/avatar mark)
   app-logo.ts                 # appAvatarSrc(slug, logo): committed logo.png, else generated avatar
+  use-copy-feedback.ts        # shared "copied ✓" flash (with timer cleanup) for copy/download buttons
   types.ts  site.ts  utils.ts # app-facing types; site URLs; helpers
 
 scripts/                      # build-time CLIs (intentionally prettier-off, dense style)
   assemble.ts                 #   walk.json → graph.json  (computes identity signals, validates)
   package.ts                  #   graph.json → view       (CLI wrapper around the packager)
-  build-data.ts               #   every graph.json → view.json + the captures registry
+  build-data.ts               #   validates, then packages every graph.json → view.json + registry
   phash.ts                    #   dependency-free perceptual hash of a PNG
 
 public/captures/              # ★ THE DATA

@@ -19,6 +19,66 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [4.3.0] - 2026-07-03
+
+A reliability pass across the packager, the build, and the viewer UI: flows that used to go
+missing now show up, the lightbox and tabs behave, images and downloads are correct, and the
+pages you load are lighter.
+
+### Fixed
+
+- **Flows no longer vanish.** Two cases that dropped whole flows from the Flows tab are fixed: a
+  picker/sheet opened from a flow's _first_ screen is now woven inline as a step, and a branch
+  reached only through a coarse-skeleton transition that was forced to `in-place` (then pinned
+  apart with `overrides.splits`) is kept instead of silently disappearing. On one existing
+  capture this brought back four flows that were previously unreachable.
+- **The lightbox closes when it should.** Clicking the app name/logo in an open screen lightbox
+  now returns you to the gallery instead of leaving a stale modal floating over it.
+- **The Screens/Flows tab keeps the right highlight** while a lightbox is open (it used to jump
+  to "Screens" behind the scrim).
+- **Filtering the flow sidebar** no longer leaves an empty expandable stub on a parent whose
+  matches are all filtered out — it renders as a plain row.
+- **Flow step screenshots render sharp on large displays.** They used to request a 384px image
+  and stretch it; the requested size now tracks the rendered size.
+- **Copying a screenshot works in Safari**, and the button tells the truth — "Image copied" when
+  the image lands, "Link copied" on the URL fallback, and nothing on failure. Downloads (single
+  and "download all") no longer save zero bytes.
+- **Grid downloads are named like the viewers** (`<app>-<screen>.png`, `<app>-<flow>-step-N.png`)
+  instead of by content hash, so a folder of saved screens is legible.
+- **A dead capture date never reaches the date picker.** A date listed in `app.json` with no
+  `graph.json` used to appear in the dropdown and 404 when selected; it's now excluded.
+- **A replaced app logo reaches the share cards.** `logo.png` is content-versioned, so swapping it
+  busts the cross-deploy Data Cache that pinned the old bytes onto every Open Graph card.
+
+### Changed
+
+- **Pages are lighter and faster.** The client no longer downloads the ~90KB+ per capture of screen
+  text, interactive-element lists, and replay scripts that no UI reads (the archival `view.json`
+  keeps them), and the shared app shell no longer ships an unused tooltip provider — so the browse
+  page and every gallery hydrate less.
+
+### For contributors
+
+- **Packager determinism is now enforced.** Reordering `graph.json`'s nodes or edges can no longer
+  change the view: fixes to the SAF merge/split unions, the `(from,to,action)` edge dedupe and
+  parallel-edge selection, the top-level anchor order, and `overrides.structure` cycle-breaking are
+  each pinned by tests in `tests/packaging/`. `overrides.flowNames` keys are canonicalized through
+  the SAF map (so a re-capture merge doesn't drop an authored name) and the contract is realigned —
+  the key is the flow's **name key** (`nameKey`), documented consistently in `types.ts`, the
+  capture-skill docs, and this README.
+- **`pnpm build-data` validates each `graph.json`** (same contract as `scripts/package.ts`) before
+  packaging and **fails the build** on an invalid graph; it warns on any flow left unreachable from
+  the flow tree. `index.json` is emitted in sorted, filesystem-independent order, omits dead capture
+  dates, is typed against `AppIndex`, and its `logo` field carries a `?v=<hash>` cache-buster.
+- **OG asset fetching is environment-aware:** a preview deploy with a Protection-Bypass secret
+  composites its _own_ captures; production is unchanged (`lib/site.ts`).
+- **New/removed surfaces:** `lib/client-view.ts` strips server-only view fields at the client
+  boundary (typed via `ClientScreen`/`ClientFlow`/`ClientCapture`); `lib/use-copy-feedback.ts` is the
+  one shared copy-flash hook; `readRegistry()` is the single registry read (browse + `llms.txt` no
+  longer re-implement it). Removed the dead bare-slug `opengraph-image` route and
+  `graph.ts`'s unused `reachableFrom`. `lib/packager/` and `scripts/` are now actually excluded from
+  prettier (`.prettierignore`).
+
 ## [4.2.0] - 2026-07-01
 
 ### Added
