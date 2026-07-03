@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs"
 import { join } from "node:path"
 import { ImageResponse } from "next/og"
 import { captureUrl } from "@/lib/images"
-import { assetBaseUrl } from "@/lib/site"
+import { assetBaseUrl, assetFetchHeaders } from "@/lib/site"
 import { formatDate } from "@/lib/utils"
 import type { AppCapture, FlowEntry, ScreenEntry } from "@/lib/types"
 
@@ -112,6 +112,7 @@ async function imgDataUrl(
   try {
     const res = await fetch(`${assetBaseUrl}${captureUrl(slug, relPath)}`, {
       cache: "force-cache",
+      headers: assetFetchHeaders, // protection-bypass on a preview self-fetch; empty otherwise
       signal: AbortSignal.timeout(5000),
     })
     if (!res.ok) return null
