@@ -47,6 +47,17 @@ export async function copyLink(href: string): Promise<void> {
   )
 }
 
+// Download filenames — one place so every surface (viewers + grid/row hover buttons) names
+// files the same way and can't drift. A screen saves as `<app>-<screenId>.png`; a flow step
+// as `<app>-<flowSlug>-step-<n>[-<state>].png`. NOT the content-address src basename, which
+// gives a folder of indistinguishable hash names.
+export function screenDownloadName(appSlug: string, screenId: string): string {
+  return `${appSlug}-${screenId}.png`
+}
+export function stepDownloadName(appSlug: string, flowSlug: string, stepNumber: number, stateSuffix = ""): string {
+  return `${appSlug}-${flowSlug}-step-${stepNumber}${stateSuffix}.png`
+}
+
 // Download the image under `filename`. Returns false (without downloading) when
 // the source is missing, so callers don't save a broken/HTML file.
 export async function downloadImage(

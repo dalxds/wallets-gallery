@@ -3,6 +3,7 @@
 import type { FlowEntry } from "@/lib/types"
 import type { StateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
+import { stepDownloadName } from "@/lib/clipboard"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
@@ -155,7 +156,11 @@ export function FlowRow({
                     )}
                   </div>
                 </Link>
-                <ImageActions src={src} shareHref={href} />
+                <ImageActions
+                  src={src}
+                  shareHref={href}
+                  downloadName={stepDownloadName(appSlug, flow.slug, step.number)}
+                />
               </div>
             )
           })}

@@ -3,7 +3,7 @@
 import type { FlowEntry, FlowStep, ScreenEntry } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
-import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
+import { copyImageToClipboard, copyLink, downloadImage, stepDownloadName } from "@/lib/clipboard"
 import { flowHref, parseStepParam } from "@/lib/links"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
@@ -215,7 +215,7 @@ export function FlowViewer({
         try {
           const ok = await downloadImage(
             stepSrc(step),
-            `${appSlug}-${flow.slug}-step-${step.number}.png`
+            stepDownloadName(appSlug, flow.slug, step.number)
           )
           // Throttle only between saved files; skip a missing/failed step.
           if (ok) await new Promise((r) => setTimeout(r, 150))
@@ -401,7 +401,7 @@ function StepCard({
         : ""
     await downloadImage(
       displaySrc,
-      `${appSlug}-${flowSlug}-step-${step.number}${stateSuffix}.png`
+      stepDownloadName(appSlug, flowSlug, step.number, stateSuffix)
     )
   }
 
