@@ -3,7 +3,8 @@
 import type { FlowEntry } from "@/lib/types"
 import type { StateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
-import { stepDownloadName } from "@/lib/clipboard"
+import { copyLink, stepDownloadName } from "@/lib/clipboard"
+import { useCopyFeedback } from "@/lib/use-copy-feedback"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Check, Link2, Layers } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
@@ -38,7 +39,7 @@ export function FlowRow({
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
-  const [linkCopied, setLinkCopied] = useState(false)
+  const [linkCopied, flashLinkCopied] = useCopyFeedback<true>()
 
   function updateScrollState() {
     const el = scrollRef.current
@@ -63,10 +64,10 @@ export function FlowRow({
 
   async function copyFlowLink(e: React.MouseEvent) {
     e.stopPropagation()
-    const url = `${window.location.origin}${flowHref(appSlug, flow.slug, date)}`
-    await navigator.clipboard.writeText(url)
-    setLinkCopied(true)
-    setTimeout(() => setLinkCopied(false), 1500)
+    // Reuse the shared resolve-and-copy helper instead of re-rolling origin + writeText, so a
+    // future fix there (permission fallback, etc.) reaches this button too.
+    await copyLink(flowHref(appSlug, flow.slug, date))
+    flashLinkCopied(true)
   }
 
   return (

@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import { Copy, Check, Link2, Download } from "lucide-react"
 import {
   copyImageToClipboard,
   copyLink as copyLinkToClipboard,
   downloadImage as downloadImageFile,
 } from "@/lib/clipboard"
+import { useCopyFeedback } from "@/lib/use-copy-feedback"
 
 interface ImageActionsProps {
   src: string
@@ -18,26 +18,24 @@ interface ImageActionsProps {
 }
 
 export function ImageActions({ src, shareHref, downloadName }: ImageActionsProps) {
-  // null = idle; "image"/"url" reflect what actually landed on the clipboard so the flash
-  // doesn't claim the image was copied when Safari only got the URL fallback.
-  const [copiedImage, setCopiedImage] = useState<"image" | "url" | null>(null)
-  const [copiedLink, setCopiedLink] = useState(false)
+  // "image"/"url" reflect what actually landed on the clipboard so the flash doesn't claim the
+  // image was copied when Safari only got the URL fallback. null = idle.
+  const [copiedImage, flashImage] = useCopyFeedback<"image" | "url">()
+  const [copiedLink, flashLink] = useCopyFeedback<true>()
 
   async function copyImage(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
     const result = await copyImageToClipboard(src)
     if (result === "none") return // copy failed — no false success flash
-    setCopiedImage(result)
-    setTimeout(() => setCopiedImage(null), 1500)
+    flashImage(result)
   }
 
   async function copyLink(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
     await copyLinkToClipboard(shareHref)
-    setCopiedLink(true)
-    setTimeout(() => setCopiedLink(false), 1500)
+    flashLink(true)
   }
 
   async function downloadImage(e: React.MouseEvent) {
