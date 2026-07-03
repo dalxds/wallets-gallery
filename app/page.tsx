@@ -1,7 +1,5 @@
-import { readFileSync } from "node:fs"
-import { join } from "node:path"
 import { Suspense, type CSSProperties } from "react"
-import type { AppsRegistry } from "@/lib/types"
+import { readRegistry } from "@/lib/captures"
 import { AppShell } from "@/components/layout/app-shell"
 import { AppCard } from "@/components/browse/app-card"
 import { BrowseControls } from "@/components/browse/browse-controls"
@@ -12,9 +10,8 @@ import { BrowseControls } from "@/components/browse/browse-controls"
 // so the index stays static while the control stays shareable. Each card carries
 // its precomputed rank for both sort orders.
 export default function BrowsePage() {
-  const indexPath = join(process.cwd(), "public/captures/index.json")
-  const registry = JSON.parse(readFileSync(indexPath, "utf8")) as AppsRegistry
-  const apps = registry.apps
+  // The one canonical registry read (cached, shared with the app/OG routes).
+  const apps = readRegistry().apps
 
   // Live gallery totals, summed from the registry the page already loaded (each
   // app's `screens`/`flows` are its latest capture's counts — see build-data.ts).
