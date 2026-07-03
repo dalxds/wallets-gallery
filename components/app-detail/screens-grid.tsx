@@ -1,5 +1,6 @@
 import type { ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
+import { screenDownloadName } from "@/lib/clipboard"
 import { ImageActions } from "@/components/shared/image-actions"
 import {
   ScreensGridLayout,
@@ -58,7 +59,11 @@ export function ScreensGrid({ screens, appSlug, date }: ScreensGridProps) {
                 />
               </ScreenTile>
             </Link>
-            <ImageActions src={src} shareHref={href} />
+            <ImageActions
+              src={src}
+              shareHref={href}
+              downloadName={screenDownloadName(appSlug, screen.id)}
+            />
           </div>
         )
       })}

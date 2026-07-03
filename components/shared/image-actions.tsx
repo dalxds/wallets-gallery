@@ -12,9 +12,12 @@ interface ImageActionsProps {
   src: string
   /** Link to copy for "copy link" — may be relative; resolved against the current URL. */
   shareHref: string
+  /** Filename for the download — built by the caller via screenDownloadName / stepDownloadName so
+   *  the grid names files the same way the viewers do, not by the content-hash src basename. */
+  downloadName: string
 }
 
-export function ImageActions({ src, shareHref }: ImageActionsProps) {
+export function ImageActions({ src, shareHref, downloadName }: ImageActionsProps) {
   // null = idle; "image"/"url" reflect what actually landed on the clipboard so the flash
   // doesn't claim the image was copied when Safari only got the URL fallback.
   const [copiedImage, setCopiedImage] = useState<"image" | "url" | null>(null)
@@ -40,7 +43,7 @@ export function ImageActions({ src, shareHref }: ImageActionsProps) {
   async function downloadImage(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    await downloadImageFile(src, src.split("/").pop() ?? "screenshot.png")
+    await downloadImageFile(src, downloadName)
   }
 
   return (

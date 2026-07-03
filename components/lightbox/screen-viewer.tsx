@@ -2,7 +2,7 @@
 
 import type { FlowEntry, ScreenEntry } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
-import { copyImageToClipboard, copyLink, downloadImage } from "@/lib/clipboard"
+import { copyImageToClipboard, copyLink, downloadImage, screenDownloadName } from "@/lib/clipboard"
 import { screenHref, flowHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
 import { LightboxImage } from "./lightbox-image"
@@ -164,7 +164,7 @@ export function ScreenViewer({
 
   async function handleDownload() {
     if (!current) return
-    await downloadImage(currentSrc, `${appSlug}-${current.id}.png`)
+    await downloadImage(currentSrc, screenDownloadName(appSlug, current.id))
   }
 
   const atStart = index <= 0
