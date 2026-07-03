@@ -8,6 +8,7 @@
 // generated artifacts.
 
 import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
+import { createHash } from "node:crypto"
 import { join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
 import { validateGraph } from "../lib/packager/validate.ts"
@@ -26,6 +27,17 @@ function coverOf(view: View): string {
   const withShot = view.screens.filter((s) => s.screenshotPath)
   const screen = withShot.find((s) => s.role === "home") ?? withShot[0]
   return screen?.screenshotPath ?? ""
+}
+// A committed logo.png overrides the generated avatar everywhere (app UI + OG cards); null falls
+// back to avatar.vercel.sh. Content-version the fixed name with a short hash: screenshots are
+// content-addressed so a change moves their URL, but logo.png is a fixed name — og.tsx fetches it
+// force-cached into Vercel's cross-deploy Data Cache (keyed by URL), so a replaced logo would
+// otherwise composite the OLD bytes onto every new OG card forever. The `?v=<hash>` moves the URL
+// exactly when the bytes change, busting that cache; static serving ignores the query. Pure hash → deterministic.
+function logoRef(appDir: string): string | null {
+  const p = join(appDir, "logo.png")
+  if (!existsSync(p)) return null
+  return `logo.png?v=${createHash("sha256").update(readFileSync(p)).digest("hex").slice(0, 12)}`
 }
 const registry: AppIndex[] = []
 let viewCount = 0
@@ -100,9 +112,7 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
     cover: coverOf(latestView),
     screens: latestView.screens.length,
     flows: latestView.flows.length,
-    // A committed logo.png in the app folder overrides the generated avatar
-    // everywhere (app UI + OG cards); null falls back to avatar.vercel.sh.
-    logo: existsSync(join(appDir, "logo.png")) ? "logo.png" : null,
+    logo: logoRef(appDir), // "logo.png?v=<content-hash>" or null — see logoRef
   })
 }
 

@@ -11,7 +11,7 @@
       "cover": "assets/1cdba901ffee.png",
       "screens": 54,
       "flows": 28,
-      "logo": "logo.png"
+      "logo": "logo.png?v=1e3962a5f409"
     },
     {
       "slug": "redotpay",
@@ -24,7 +24,7 @@
       "cover": "assets/0e61a0a447d0.png",
       "screens": 94,
       "flows": 70,
-      "logo": "logo.png"
+      "logo": "logo.png?v=abd8aac03ac0"
     },
     {
       "slug": "tuyo",
@@ -37,7 +37,7 @@
       "cover": "assets/10dd0dcf5019.png",
       "screens": 62,
       "flows": 28,
-      "logo": "logo.png"
+      "logo": "logo.png?v=dbd3fabfaee6"
     }
   ]
 }
