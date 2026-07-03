@@ -138,12 +138,15 @@ export function packageGraph(graph: Graph): View {
     // Weave plan: the forward trunk, with each launcher's excursions inserted right after it as
     // picker steps (so the spine continues from the launcher's forward exit — the next trunk
     // node — not from the picker). `from` is the node the step's action edge comes from: the
-    // previous trunk node for a forward step, the launcher for a picker. A launcher only owns its
-    // excursions where it is a real trunk step (idx >= 1) or its own single-node hub.
+    // previous trunk node for a forward step, the launcher for a picker. A launcher owns its
+    // excursions where it appears without duplicating a parent's: at a real trunk step (idx >= 1),
+    // at its own single-node hub (steps.length === 1), or at steps[0] of a TOP-LEVEL flow —
+    // which it owns (build() starts the trunk at the anchor itself). A CHILD flow's steps[0] is
+    // the launch screen borrowed from its parent, so it still skips idx 0 (no double-weave).
     const plan: { node: string; kind: ViewStep["kind"]; from: string | null }[] = []
     j.steps.forEach((nid, idx) => {
       plan.push({ node: nid, kind: "forward", from: idx > 0 ? j.steps[idx - 1] : null })
-      if (idx >= 1 || j.steps.length === 1) {
+      if (idx >= 1 || j.steps.length === 1 || j.parent === null) {
         for (const x of seg.excursionsByLauncher.get(nid) ?? []) plan.push({ node: x, kind: "picker", from: nid })
       }
     })

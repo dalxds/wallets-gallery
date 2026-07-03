@@ -633,3 +633,58 @@ describe("packager — Stage 4: the dominator tree is the flow tree", () => {
     for (const id of ["asset-a", "asset-b", "asset-c"]) expect(view.screens.some((s) => s.id === id)).toBe(true)
   })
 })
+
+describe("packager — excursions launched from a top-level flow's first step", () => {
+  const stepsOf = (f: { steps: { screenId: string; kind: string }[] }) => f.steps.map((s) => `${s.screenId}(${s.kind})`)
+
+  it("weaves an excursion launched from a top-level LINEAR trunk's first step (idx 0)", () => {
+    // home has one onward chain (send → confirm) and a picker sheet that pops back to home.
+    // home sits at steps[0] of its own multi-step top-level trunk, so the old `idx >= 1` guard
+    // skipped weaving there and the picker vanished from every flow (appearsIn: []).
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Send", "Pick"]),
+      node("send", "form", "sk:send", ["Send", "Amount"], ["Confirm"]),
+      node("confirm", "confirmation", "sk:confirm", ["Sent"], ["Done"]),
+      node("picker", "picker", "sk:pick", ["Choose account", "Acct A", "Acct B"], ["Acct A", "Acct B"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "send", "Tap Send", 'id="send"', "nav", 1),
+      edge("send", "confirm", "Tap Confirm", 'id="confirm"', "nav", 2),
+      edge("home", "picker", "Tap Pick", 'id="pick"', "nav", 3),
+      edge("picker", "home", "Pick Acct A", 'label="Acct A"', "nav", 4), // pops back → excursion off home
+    ]
+    const view = packageGraph({ meta: meta("weave"), root: "home", nodes, edges, decisionPoints: [], overrides: {} })
+    const trunk = view.flows.find((f) => f.steps.some((s) => s.screenId === "send"))!
+    // picker woven as a picker step immediately after home
+    expect(stepsOf(trunk).slice(0, 2)).toEqual(["home(forward)", "picker(picker)"])
+    // the picker screen is findable in a flow again
+    expect(view.screens.find((s) => s.id === "picker")!.appearsIn.length).toBeGreaterThan(0)
+    // and exactly once across all flows
+    expect(view.flows.flatMap((f) => f.steps).filter((s) => s.screenId === "picker").length).toBe(1)
+  })
+
+  it("does not double-weave a hub anchor's excursion into its child flows", () => {
+    // home is a hub (send → confirm and receive) launching a picker excursion. The picker must
+    // appear only in home's own flow — child flows borrow home as steps[0] (parent !== null) and
+    // must skip weaving there.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Send", "Receive", "Pick"]),
+      node("send", "form", "sk:send", ["Send", "Amount"], ["Confirm"]),
+      node("confirm", "confirmation", "sk:confirm", ["Sent"], ["Done"]),
+      node("receive", "other", "sk:recv", ["Receive", "QR"], ["Share"]),
+      node("picker", "picker", "sk:pick", ["Choose account", "Acct A"], ["Acct A"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "send", "Tap Send", 'id="send"', "nav", 1),
+      edge("send", "confirm", "Tap Confirm", 'id="confirm"', "nav", 2),
+      edge("home", "receive", "Tap Receive", 'id="recv"', "nav", 3),
+      edge("home", "picker", "Tap Pick", 'id="pick"', "nav", 4),
+      edge("picker", "home", "Pick Acct A", 'label="Acct A"', "nav", 5),
+    ]
+    const view = packageGraph({ meta: meta("hub"), root: "home", nodes, edges, decisionPoints: [], overrides: {} })
+    const hub = view.flows.find((f) => f.parent === null)!
+    expect(hub.steps.some((s) => s.screenId === "picker" && s.kind === "picker")).toBe(true)
+    // picker appears once total — not duplicated into the send / receive child flows
+    expect(view.flows.flatMap((f) => f.steps).filter((s) => s.screenId === "picker").length).toBe(1)
+  })
+})
