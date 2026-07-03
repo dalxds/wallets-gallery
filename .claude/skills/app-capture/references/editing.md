@@ -43,7 +43,7 @@ Override keys + types: [schema.md](schema.md) → `overrides`. Flow ids are anch
 
 | Request | Override |
 |---|---|
-| Rename a flow | `overrides.flowNames["<flow-id>"] = "New Name"` |
+| Rename a flow | `overrides.flowNames["<name-key>"] = "New Name"` (name key = the flow's `nameKey` from `namingTODO`) |
 | Re-parent a flow under another | `overrides.structure["<flow-id>"] = { parent: "<parent-flow-id>" }` |
 | Force a flow to the top level | `overrides.structure["<flow-id>"] = { parent: null }` |
 | Fix a screen's role / title / description | `overrides.screens["<node-id>"] = { role: "picker", title: "…", description: "…" }` |
@@ -69,9 +69,9 @@ User: "For all apps with a password-reset flow, rename it to 'Forgot password'."
 ```
 
 1. For each `{app-slug}/app.json`, find `latestCapture` and package its `graph.json`.
-2. Find the matching flow (by slug/name) and note its flow id (anchor node id).
+2. Find the matching flow (by slug/name) and note its **name key** (`nameKey` in `namingTODO` — its first distinctive screen, `steps[1]`).
 3. Present the matches; **never bulk-edit silently — always preview.**
-4. Apply `overrides.flowNames["<flow-id>"]` per app and re-run `package.ts` for each.
+4. Apply `overrides.flowNames["<name-key>"]` per app and re-run `package.ts` for each.
 
 ## Read queries (not edits)
 

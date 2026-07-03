@@ -773,3 +773,50 @@ describe("packager — overrides.structure parent cycles are broken deterministi
     expect(v.flows.find((f) => f.slug === "alpha-start")!.parent).toBeNull()
   })
 })
+
+describe("packager — overrides.flowNames keys are canonicalized (survive merges)", () => {
+  it("keeps an authored flow name when overrides.merges collapses its key node into a twin", () => {
+    // The flow's name key is key1 (steps[1]); a forced merge collapses key1 into the richer key2.
+    // The name is authored against the RAW key1 id (the merged-away node) — it must follow the
+    // merge to the canonical survivor instead of reverting to the mechanical placeholder.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Open"]),
+      node("key1", "form", "sk:k1", ["Key one"], ["Go"]),
+      node("key2", "form", "sk:k2", ["Key two"], ["Go", "Extra"]), // richer → representative
+      node("goal", "confirmation", "sk:goal", ["Done"], ["Finish"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "key1", "Open", 'id="open"', "nav", 1),
+      edge("key1", "goal", "Continue", 'id="cont"', "nav", 2),
+    ]
+    const view = packageGraph({
+      meta: meta("mergename"), root: "home", nodes, edges, decisionPoints: [],
+      overrides: { merges: [["key2", "key1"]], flowNames: { key1: "Custom Flow Name" } },
+    })
+    expect(view.flows.some((f) => f.name === "Custom Flow Name")).toBe(true)
+  })
+
+  it("resolves a canon-key collision by lexically-smallest original key, order-independently", () => {
+    // key1 and key2 both merge into key2 (richer → representative); flowNames authors BOTH. They
+    // collide on the canonical id, and the lexically-smallest ORIGINAL key (key1) wins — the same
+    // whichever way the nodes are ordered.
+    const nodes: GraphNode[] = [
+      node("home", "home", "sk:home", ["Home"], ["Open"]),
+      node("key1", "form", "sk:k1", ["Key one"], ["Go"]),
+      node("key2", "form", "sk:k2", ["Key two"], ["Go", "Extra"]), // richer → representative
+      node("goal", "confirmation", "sk:goal", ["Done"], ["Finish"]),
+    ]
+    const edges: GraphEdge[] = [
+      edge("home", "key1", "Open", 'id="open"', "nav", 1),
+      edge("key1", "goal", "Continue", 'id="cont"', "nav", 2),
+    ]
+    const g: Graph = {
+      meta: meta("collide"), root: "home", nodes, edges, decisionPoints: [],
+      overrides: { merges: [["key1", "key2"]], flowNames: { key1: "One", key2: "Two" } },
+    }
+    const nameOfMerged = (v: ReturnType<typeof packageGraph>) => v.flows.find((f) => f.steps.some((s) => s.screenId === "goal"))!.name
+    expect(nameOfMerged(packageGraph(g))).toBe("One") // lex-smallest key wins
+    const rev: Graph = { ...g, nodes: [...g.nodes].reverse(), edges: [...g.edges].reverse() }
+    expect(nameOfMerged(packageGraph(rev))).toBe("One") // same under nodes/edges reversal
+  })
+})

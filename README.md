@@ -417,7 +417,7 @@ forward verbatim across re-captures. Each key corrects exactly one thing the pac
 
 | Key         | Shape                                                            | Corrects                                                     |
 | ----------- | ---------------------------------------------------------------- | ------------------------------------------------------------ |
-| `flowNames` | flow-id → name                                                   | the name of a derived flow                                   |
+| `flowNames` | name-key → name                                                  | the name of a derived flow (key = its `nameKey`, `steps[1]`) |
 | `structure` | flow-id → `{ parent? }`                                          | re-parent a flow (`parent: null` pins it top-level)          |
 | `screens`   | node-id → `{ role?, title?, description?, state?, stateGroup? }` | a screen's facts, incl. forcing its state / group            |
 | `merges`    | `string[][]`                                                     | force-merge nodes the SAF kept separate                      |

@@ -135,8 +135,9 @@ Pre-flight: confirm `--session` (dedicated, not `default`) and `--save-script` a
                assets/, finalizes edge kind, validates. Refuses to write on a validation error.
 5. Package     a. node scripts/package.ts {date}/graph.json   (derive flows/states/tree/replay).
                b. Name flows: the packager prints a `namingTODO`. For each, add a name to
-                  {date}/graph.json overrides.flowNames["<flow-id>"] (gerund for actions, noun
-                  for sections). Re-run package.ts until namingTODO is empty / acceptable.
+                  {date}/graph.json overrides.flowNames["<name-key>"] — use the entry's nameKey
+                  verbatim (gerund for actions, noun for sections). Re-run package.ts until
+                  namingTODO is empty / acceptable.
 6. Wrap up     Update credentials.md + app.json manifest. Close session.
 ```
 
