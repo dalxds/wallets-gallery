@@ -5,3 +5,7 @@ node_modules/
 coverage/
 pnpm-lock.yaml
 .pnpm-store/
+
+# Intentionally hand-formatted, dense style — keep prettier out (see CLAUDE.md).
+lib/packager/
+scripts/
