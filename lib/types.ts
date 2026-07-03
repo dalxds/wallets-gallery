@@ -77,8 +77,10 @@ export interface AppIndex {
   /** Screen / flow counts of the latest capture. */
   screens: number
   flows: number
-  /** App-relative path to the committed brand logo (public/captures/<slug>/logo.png),
-   *  or null when absent — then the generated avatar.vercel.sh avatar is used. */
+  /** App-relative path to the committed brand logo (public/captures/<slug>/logo.png) with a
+   *  content-version query (`logo.png?v=<hash>`), or null when absent — then the generated
+   *  avatar.vercel.sh avatar is used. The `?v=` moves the URL when the bytes change so the OG
+   *  Data Cache (keyed by URL, cross-deploy) busts exactly on a logo swap. */
   logo: string | null
 }
 export interface AppsRegistry {
