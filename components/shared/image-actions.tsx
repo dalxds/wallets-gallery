@@ -15,15 +15,18 @@ interface ImageActionsProps {
 }
 
 export function ImageActions({ src, shareHref }: ImageActionsProps) {
-  const [copiedImage, setCopiedImage] = useState(false)
+  // null = idle; "image"/"url" reflect what actually landed on the clipboard so the flash
+  // doesn't claim the image was copied when Safari only got the URL fallback.
+  const [copiedImage, setCopiedImage] = useState<"image" | "url" | null>(null)
   const [copiedLink, setCopiedLink] = useState(false)
 
   async function copyImage(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    await copyImageToClipboard(src)
-    setCopiedImage(true)
-    setTimeout(() => setCopiedImage(false), 1500)
+    const result = await copyImageToClipboard(src)
+    if (result === "none") return // copy failed — no false success flash
+    setCopiedImage(result)
+    setTimeout(() => setCopiedImage(null), 1500)
   }
 
   async function copyLink(e: React.MouseEvent) {
@@ -45,10 +48,20 @@ export function ImageActions({ src, shareHref }: ImageActionsProps) {
       <button
         type="button"
         onClick={copyImage}
+        aria-label={
+          copiedImage === "image"
+            ? "Image copied"
+            : copiedImage === "url"
+              ? "Link copied (image copy unavailable)"
+              : "Copy image"
+        }
+        title={copiedImage === "url" ? "Link copied (image copy unavailable)" : "Copy image"}
         className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
       >
-        {copiedImage ? (
+        {copiedImage === "image" ? (
           <Check className="h-3.5 w-3.5 text-green-500" />
+        ) : copiedImage === "url" ? (
+          <Link2 className="h-3.5 w-3.5 text-green-500" />
         ) : (
           <Copy className="h-3.5 w-3.5" />
         )}

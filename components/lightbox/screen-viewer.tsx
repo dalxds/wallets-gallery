@@ -74,7 +74,9 @@ export function ScreenViewer({
       screens.findIndex((s) => s.id === initialScreenId)
     )
   )
-  const [imageCopied, setImageCopied] = useState(false)
+  // null = idle; "image"/"url" reflect what actually reached the clipboard (Safari can only
+  // get the URL fallback), so the label never claims the image was copied when it wasn't.
+  const [imageCopied, setImageCopied] = useState<"image" | "url" | null>(null)
   const [linkCopied, setLinkCopied] = useState(false)
   // Once the user pages, the shown image is no longer the LCP — drop the priority
   // hint so later swaps don't each inject a preload.
@@ -146,9 +148,10 @@ export function ScreenViewer({
   async function copyImage() {
     if (!current) return
     // The original PNG, not the optimized /_next/image variant.
-    await copyImageToClipboard(currentSrc)
-    setImageCopied(true)
-    setTimeout(() => setImageCopied(false), 1500)
+    const result = await copyImageToClipboard(currentSrc)
+    if (result === "none") return // copy failed — no false success
+    setImageCopied(result)
+    setTimeout(() => setImageCopied(null), 1500)
   }
 
   async function handleCopyLink() {
@@ -260,12 +263,14 @@ export function ScreenViewer({
             onClick={copyImage}
             className="gap-1.5"
           >
-            {imageCopied ? (
+            {imageCopied === "image" ? (
               <Check className="h-4 w-4 text-green-500" />
+            ) : imageCopied === "url" ? (
+              <Link2 className="h-4 w-4 text-green-500" />
             ) : (
               <Copy className="h-4 w-4" />
             )}
-            Copy
+            {imageCopied === "image" ? "Copied" : imageCopied === "url" ? "Link copied" : "Copy"}
           </Button>
           <Button
             variant="secondary"

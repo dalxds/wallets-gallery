@@ -363,7 +363,9 @@ function StepCard({
   variants: ScreenEntry[]
   ref?: React.Ref<HTMLDivElement>
 }) {
-  const [copiedImage, setCopiedImage] = useState(false)
+  // null = idle; "image"/"url" reflect what actually reached the clipboard (Safari can only
+  // get the URL fallback), so the flash never claims the image was copied when it wasn't.
+  const [copiedImage, setCopiedImage] = useState<"image" | "url" | null>(null)
   const [copiedLink, setCopiedLink] = useState(false)
   const [activeId, setActiveId] = useState(step.screenId)
 
@@ -377,9 +379,10 @@ function StepCard({
 
   async function copyImage(e: React.MouseEvent) {
     e.stopPropagation()
-    await copyImageToClipboard(displaySrc)
-    setCopiedImage(true)
-    setTimeout(() => setCopiedImage(false), 1500)
+    const result = await copyImageToClipboard(displaySrc)
+    if (result === "none") return // copy failed — no false success
+    setCopiedImage(result)
+    setTimeout(() => setCopiedImage(null), 1500)
   }
 
   async function handleCopyLink(e: React.MouseEvent) {
@@ -422,11 +425,19 @@ function StepCard({
           <button
             type="button"
             onClick={copyImage}
-            aria-label="Copy image"
+            aria-label={
+              copiedImage === "image"
+                ? "Image copied"
+                : copiedImage === "url"
+                  ? "Link copied (image copy unavailable)"
+                  : "Copy image"
+            }
             className="flex h-7 w-7 items-center justify-center rounded-md bg-background/80 shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
           >
-            {copiedImage ? (
+            {copiedImage === "image" ? (
               <Check className="h-3.5 w-3.5 text-green-500" />
+            ) : copiedImage === "url" ? (
+              <Link2 className="h-3.5 w-3.5 text-green-500" />
             ) : (
               <Copy className="h-3.5 w-3.5" />
             )}
