@@ -1,17 +1,13 @@
-import fs from "fs"
-import path from "path"
+import { readRegistry } from "@/lib/captures"
 
 export const dynamic = "force-static"
 
-// Read once at module load, not on every request (the route is force-static, so
-// this resolves at build time regardless).
-const indexPath = path.join(process.cwd(), "public/captures/index.json")
-const index = JSON.parse(fs.readFileSync(indexPath, "utf-8"))
-
 export async function GET() {
-  const appLines = index.apps
-    .map(
-      (app: { name: string; slug: string; platform: string; latest: string }) =>
+  // The one canonical registry read (shared with the browse + /apps routes). The route is
+  // force-static, so this resolves once at build time.
+  const appLines = readRegistry()
+    .apps.map(
+      (app) =>
         `- ${app.name} (${app.platform.toUpperCase()}) — /captures/${app.slug}/${app.latest}/view.json`
     )
     .join("\n")
