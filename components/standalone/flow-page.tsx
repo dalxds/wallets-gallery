@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/components/layout/site-header"
-import { FlowViewer } from "@/components/lightbox/flow-viewer"
+import { FlowNavigator } from "@/components/lightbox/flow-navigator"
 import { flowsHref } from "@/lib/links"
 import type { ClientCapture, ClientFlow } from "@/lib/types"
 
@@ -28,9 +28,9 @@ export function FlowPage({
       {/* bg-popover so the header/footer/stage surface matches the modal lightbox
           (DialogContent is bg-popover); in dark mode popover ≠ background. */}
       <div className="mx-auto flex h-[calc(100dvh-3.5rem)] w-full max-w-[1600px] flex-col overflow-hidden rounded-2xl bg-popover">
-        <FlowViewer
-          key={flow.slug}
-          flow={flow}
+        <FlowNavigator
+          initialFlow={flow}
+          flows={view.flows}
           screens={view.screens}
           appSlug={appSlug}
           appName={view.app.name}

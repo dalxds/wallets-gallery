@@ -1,18 +1,16 @@
 // Data build (run before `next build` and on demand).
 //
-// For every app under public/captures, for every capture date with a graph.json,
-// run the packager → write the derived view.json that the app fetches. Then emit
-// the registry (index.json) from the views.
+// For every dated graph.json + flows.json pair, build the derived view.json.
 //
-// graph.json is the single committed source; view.json + index.json are
-// generated artifacts.
+// graph.json and flows.json are committed sources; view.json + index.json are generated.
 
 import { readdirSync, existsSync, readFileSync, writeFileSync } from "node:fs"
 import { createHash } from "node:crypto"
 import { join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
 import { validateGraph } from "../lib/packager/validate.ts"
-import type { Graph, View } from "../lib/packager/types.ts"
+import { validateFlows } from "../lib/packager/flows.ts"
+import type { FlowsFile, Graph, View } from "../lib/packager/types.ts"
 // Type the registry against the reader's contract so generator and consumer can't
 // drift: add a field to AppIndex and this script stops compiling until it emits it.
 import type { AppIndex } from "../lib/types.ts"
@@ -56,11 +54,15 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
   const builtDates: string[] = [] // dates that actually produced a view.json
   for (const date of dates) {
     const graphPath = join(appDir, date, "graph.json")
+    const flowsPath = join(appDir, date, "flows.json")
     if (!existsSync(graphPath)) {
       console.warn(`skip ${dir.name}/${date}: no graph.json`)
       continue
     }
+    if (!existsSync(flowsPath))
+      throw new Error(`${dir.name}/${date}: missing flows.json beside graph.json`)
     const graph = JSON.parse(readFileSync(graphPath, "utf8")) as Graph
+    const flowSource = JSON.parse(readFileSync(flowsPath, "utf8")) as FlowsFile
     // Validate before packaging — same contract as scripts/package.ts. Invalid graphs
     // (bad edge endpoint, duplicate id, …) would otherwise package into a silently
     // corrupt view and deploy. Fail the build loudly instead; warn on soft issues.
@@ -68,23 +70,17 @@ for (const dir of readdirSync(capturesDir, { withFileTypes: true }).sort((a, b) 
     for (const w of warnings) console.warn(`⚠ ${dir.name}/${date}: ${w}`)
     if (errors.length)
       throw new Error(`${dir.name}/${date}: invalid graph.json —\n  ${errors.join("\n  ")}`)
-    const view = packageGraph(graph)
+    const flowValidation = validateFlows(graph, flowSource, { strict: true })
+    for (const w of flowValidation.warnings) console.warn(`⚠ ${dir.name}/${date}: ${w}`)
+    if (flowValidation.errors.length)
+      throw new Error(`${dir.name}/${date}: invalid flows.json —\n  ${flowValidation.errors.join("\n  ")}`)
+    const view = packageGraph(graph, flowSource)
     writeFileSync(join(appDir, date, "view.json"), JSON.stringify(view))
     builtDates.push(date)
     viewCount++
-    if (view.stats.truncatedFlows > 0)
-      console.warn(`⚠ ${dir.name}/${date}: ${view.stats.truncatedFlows} flow(s) hit the MAX_TRUNK cap (split into parent+child) — consider raising it or shortening the journey`)
-    if (view.uncapturedSections.length > 0)
-      console.warn(`⚠ ${dir.name}/${date}: main-nav section(s) with no captured journey: ${view.uncapturedSections.join(", ")} — walk past these tabs and re-capture`)
-    // Every flow must be reachable from the null-rooted forest the UI walks (flows-view.tsx). The
-    // packager breaks overrides.structure cycles deterministically, so this should never fire — it
-    // is the regression tripwire for any future structure-handling change that re-hides flows.
-    const reachable = new Set<string>()
-    const walk = (parent: string | null) => { for (const f of view.flows) if (f.parent === parent && !reachable.has(f.slug)) { reachable.add(f.slug); walk(f.slug) } }
-    walk(null)
-    const orphans = view.flows.filter((f) => !reachable.has(f.slug)).map((f) => `${f.slug} (parent=${f.parent})`)
-    if (orphans.length > 0)
-      console.warn(`⚠ ${dir.name}/${date}: ${orphans.length} flow(s) unreachable from the flow tree (parent cycle or dangling into one): ${orphans.join(", ")}`)
+    for (const diagnostic of view.diagnostics)
+      if (diagnostic.code === "replay-unavailable")
+        console.warn(`⚠ ${dir.name}/${date}: ${diagnostic.flowId}: ${diagnostic.message}`)
 
     // the registry summary comes from the latest view only
     if (date === manifest.latestCapture) {

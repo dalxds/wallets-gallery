@@ -3,8 +3,8 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 Wallets Gallery is a Next.js 16 / React 19 site (deployed on Vercel) that publishes **captured
-mobile-app UI flows**. Each capture is a committed `graph.json`; everything the site shows is
-derived from it by a pure, deterministic packager (`lib/packager/`). Gallery pages are
+mobile-app UI flows**. Each capture has an observed `graph.json` and authored `flows.json`;
+the presentation view is derived from both by a pure packager (`lib/packager/`). Gallery pages are
 prerendered (SSG); individual screen/flow pages, their OG cards, and image optimization happen
 on demand.
 `README.md` is the canonical architecture and capture-model doc — read it before working on
@@ -17,8 +17,8 @@ the packager, the build scripts, or capture data, and **keep it in sync with the
 
 - **pnpm**, not npm/yarn. TypeScript build scripts run on Node natively (`node scripts/x.ts`,
   Node ≥ 22) — there is no ts-node step.
-- `pnpm build-data` — regenerate every `view.json` + `index.json` from `graph.json`. This is
-  the fast inner loop after editing a graph or the packager; `pnpm build` runs `build-data`
+- `pnpm build-data` — regenerate every `view.json` + `index.json` from graph/flows pairs. This is
+  the fast inner loop after editing capture sources or the packager; `pnpm build` runs `build-data`
   then `next build` (Vercel-native: gallery prerendered, screen/flow pages + OG on demand).
 - `pnpm typecheck` (`tsc --noEmit`), `pnpm lint` (eslint), `pnpm test` (vitest).
 - Single test: `pnpm test <file>` or `pnpm exec vitest run -t "<name>"`. Tests live in
@@ -30,8 +30,8 @@ Treat these as two separate things:
 
 - **The app** — the site and engine: `app/`, `components/`, `lib/`, `scripts/`. App changes
   are _releases_ — they get a version bump and a `CHANGELOG.md` entry (see below).
-- **The captures** — the data under `public/captures/**`. `graph.json` and `app.json` are
-  committed source; `view.json` and `index.json` are generated. Adding or updating a capture
+- **The captures** — the data under `public/captures/**`. `graph.json`, `flows.json`, and
+  `app.json` are committed source; `view.json` and `index.json` are generated. Adding or updating a capture
   is a _content update_ — it does **not** bump the version or get a CHANGELOG entry.
 
 ## Versioning & CHANGELOG
@@ -62,12 +62,13 @@ Treat these as two separate things:
 
 ## Editing rules
 
-- **Never hand-edit generated files.** `view.json` and `index.json` are build artifacts. To
-  change what they contain, edit the source `graph.json` (its `overrides` block is the only
-  hand-editable surface) and re-run `pnpm build-data`.
+- **Never hand-edit generated files.** `view.json` and `index.json` are build artifacts.
+  Screen observation corrections go in `graph.json.overrides`; semantic flow ids, names,
+  parents, steps, entries, and dispositions go in `flows.json`.
 - **The packager must stay pure and deterministic** — no clock, no randomness, no
-  input-order dependence: reordering the nodes/edges arrays must not change the view. After
-  any packager or graph change, run `pnpm build-data` and `pnpm test` (the `tests/packaging/`
+  input-order dependence: reordering graph nodes/edges or unordered flow definitions must not
+  change the view. After any packager or capture-source change, run `pnpm build-data` and
+  `pnpm test` (the `tests/packaging/`
   suite pins these invariants).
 - **`lib/packager/` and `scripts/` are intentionally prettier-off** (dense hand-formatted
   style; see `.prettierignore`). Don't run `prettier --write` on individual files there.
@@ -75,6 +76,10 @@ Treat these as two separate things:
 - **Captures are isolated.** When producing or editing capture data, never read another app's
   files as a reference (only a re-capture reads this app's own latest graph, to carry
   `overrides` forward).
+- **Semantic packaging is authored, not inferred during builds.** Follow the capture skill's
+  `flow-grouping.md` and `naming.md`; keep grouping and parentage independent of replayability.
+- **Temporal retention is deferred.** Do not add observation provenance, retained overlays,
+  retirement, or automatic reference re-binding without the separate pilot/design.
 - **Don't reintroduce `output: "export"`.** The site is Vercel-native; that flag would disable
   `next/image` optimization, on-demand OG (`opengraph-image.tsx` via `lib/og.tsx`), and the
   intercepting-route lightbox modals (`app/apps/[slug]/[date]/@modal/`). Screen/flow deep links

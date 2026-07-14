@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "flows": [
+    { "id": "getting-started", "name": "Getting started", "parentId": null, "order": 0, "steps": ["welcome", "email-login", "email-otp", "home-onboarding"] },
+    { "id": "home", "name": "Home", "parentId": null, "order": 1, "steps": ["home"] },
+    { "id": "managing-settings", "name": "Managing settings", "parentId": "home", "order": 0, "steps": ["settings"] },
+    { "id": "referring-friends", "name": "Referring friends", "parentId": "managing-settings", "order": 0, "steps": ["referrals"] },
+    { "id": "opening-a-credit-line", "name": "Opening a credit line", "parentId": "managing-settings", "order": 1, "steps": ["credit-mode", "credit-borrow", "home-credit", "credit-line"] },
+    { "id": "managing-a-credit-line", "name": "Managing a credit line", "parentId": "opening-a-credit-line", "order": 0, "steps": ["credit-manage"] },
+    { "id": "learning-about-credit-rewards", "name": "Learning about credit rewards", "parentId": "opening-a-credit-line", "order": 1, "steps": ["credit-info"] },
+    { "id": "adding-money", "name": "Adding money", "parentId": "home", "order": 1, "steps": ["deposit-crypto"], "entryPoints": [{ "flowId": "card", "fromScreenId": "card-my-cards", "toScreenId": "deposit-crypto" }] },
+    { "id": "crypto", "name": "Crypto", "parentId": "adding-money", "order": 0, "steps": ["deposit-crypto-eth"] },
+    { "id": "dollar-and-euro-accounts", "name": "Dollar and euro accounts", "parentId": "adding-money", "order": 1, "steps": ["deposit-cash"] },
+    { "id": "reviewing-a-transaction", "name": "Reviewing a transaction", "parentId": "home", "order": 2, "steps": ["transaction-detail"] },
+    { "id": "filtering-activity", "name": "Filtering activity", "parentId": "home", "order": 3, "steps": ["activity-filter"] },
+    { "id": "withdrawing-funds", "name": "Withdrawing funds", "parentId": "home", "order": 4, "steps": ["withdraw", "add-payee", "add-payee-bank"] },
+    { "id": "scanning-a-qr-code", "name": "Scanning a QR code", "parentId": "home", "order": 5, "steps": ["qr-scanner"] },
+    { "id": "card", "name": "Card", "parentId": null, "order": 2, "steps": ["card"] },
+    { "id": "getting-a-card", "name": "Getting a card", "parentId": "card", "order": 0, "steps": ["card-gen-account-type", "card-gen-country", "card-gen-kyc", "card-gen-consent", "card-gen-terms", "card-gen-sumsub"] },
+    { "id": "viewing-card-details", "name": "Viewing card details", "parentId": "card", "order": 1, "steps": ["card-detail"] },
+    { "id": "setting-a-spending-limit", "name": "Setting a spending limit", "parentId": "viewing-card-details", "order": 0, "steps": ["card-limits"] },
+    { "id": "deleting-a-card", "name": "Deleting a card", "parentId": "viewing-card-details", "order": 1, "steps": ["card-delete-confirm"] },
+    { "id": "adding-a-card", "name": "Adding a card", "parentId": "card", "order": 2, "steps": ["card-tab-menu", "card-add"] },
+    { "id": "markets", "name": "Markets", "parentId": null, "order": 3, "steps": ["markets"] },
+    { "id": "browsing-market-cap-rankings", "name": "Browsing market-cap rankings", "parentId": "markets", "order": 0, "steps": ["markets-section-ranked"] },
+    { "id": "buying-spacex", "name": "Buying Space X", "parentId": "markets", "order": 1, "steps": ["spacex-detail", "buy-amount", "buy-review"] },
+    { "id": "swapping-tokens", "name": "Swapping tokens", "parentId": "markets", "order": 2, "steps": ["swap", "swap-quote-details", "high-impact-warning"] },
+    { "id": "viewing-assets", "name": "Viewing assets", "parentId": "markets", "order": 3, "steps": ["gold-detail"] },
+    { "id": "grow", "name": "Grow", "parentId": null, "order": 4, "steps": ["grow", "grow-stablecoin-yields", "grow-usdc-yield", "grow-yield-deposit", "grow-funded", "grow-growing-assets", "grow-position-detail", "grow-position-manage"] }
+  ],
+  "uncovered": {},
+  "flowTODO": []
+}

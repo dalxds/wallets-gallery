@@ -1,6 +1,6 @@
 {
   "name": "wallets-gallery",
-  "version": "4.3.0",
+  "version": "5.0.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -12,7 +12,11 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build-data": "node scripts/build-data.ts"
+    "build-data": "node scripts/build-data.ts",
+    "flows:inventory": "node scripts/flows.ts inventory",
+    "flows:validate": "node scripts/flows.ts validate",
+    "flows:audit": "node scripts/flows.ts audit --all",
+    "flows:migrate": "node scripts/flows.ts migrate --all"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

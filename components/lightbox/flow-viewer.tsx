@@ -3,9 +3,19 @@
 import type { ClientFlow, FlowStep, ClientScreen } from "@/lib/types"
 import { stateMeta, buildStateIndex } from "@/lib/states"
 import { captureUrl } from "@/lib/images"
-import { copyImageToClipboard, copyLink, downloadImage, stepDownloadName } from "@/lib/clipboard"
+import {
+  copyImageToClipboard,
+  copyLink,
+  downloadImage,
+  stepDownloadName,
+} from "@/lib/clipboard"
 import { useCopyFeedback } from "@/lib/use-copy-feedback"
 import { flowHref, parseStepParam } from "@/lib/links"
+import { variationForStep, variationParam } from "@/lib/variations"
+import {
+  buildFlowStepConnections,
+  type FlowStepConnection,
+} from "@/lib/flow-connections"
 import { LightboxImage } from "./lightbox-image"
 import { LightboxHeader } from "./lightbox-header"
 import { cn, formatDate } from "@/lib/utils"
@@ -29,6 +39,7 @@ import { Button } from "@/components/ui/button"
 
 interface FlowViewerProps {
   flow: ClientFlow
+  flows: ClientFlow[]
   screens: ClientScreen[]
   appSlug: string
   /** App name shown in the header breadcrumb. */
@@ -38,6 +49,8 @@ interface FlowViewerProps {
   /** Where the header's logo/name links — this capture's flows tab (flowsHref). */
   backHref: string
   date: string
+  /** Replace the active flow inside the current viewer at an exact screen. */
+  onNavigateFlow: (flowId: string, step: number, screenId: string) => void
   /** Set by the modal: renders a trailing close (X) in the header. */
   onClose?: () => void
 }
@@ -57,17 +70,23 @@ function getStepLabel(step: FlowStep): string {
 // actions, plus a bottom action bar. Only the surrounding chrome differs.
 export function FlowViewer({
   flow,
+  flows,
   screens,
   appSlug,
   appName,
   appLogo,
   backHref,
   date,
+  onNavigateFlow,
   onClose,
 }: FlowViewerProps) {
   // Built here (client) — the state index holds a closure, so it can't cross the
   // server→client boundary as a prop.
   const stateIndex = useMemo(() => buildStateIndex(screens), [screens])
+  const connectionsByScreen = useMemo(
+    () => buildFlowStepConnections(flow.id, flows, screens),
+    [flow.id, flows, screens]
+  )
   const scrollRef = useRef<HTMLDivElement>(null)
   const stepRefs = useRef<Map<number, HTMLDivElement>>(new Map())
   // The ?step deep-link is read HERE, on the client, not as a server prop — so the
@@ -77,6 +96,7 @@ export function FlowViewer({
   // there's no visible jump. An out-of-range step lands on step 1 and the stale
   // ?step is stripped from the URL (see the mount effect below).
   const initialIndexRef = useRef(0)
+  const [initialVariation, setInitialVariation] = useState<string | null>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   // Whether the whole strip fits without scrolling (a single-screen flow, or a
@@ -106,11 +126,11 @@ export function FlowViewer({
     const el = scrollRef.current
     if (!el) return
     // Two constraints on the step image height:
-    //   • fit the strip: clientHeight − py-4 padding (32) − label/gap (≈28)
+    //   • fit the strip: clientHeight − padding, label, and optional connection
     //   • keep a card ≤ ~62% of the strip width so the neighbours always peek
     //     (one screen centered at a time on narrow/mobile). Card width =
     //     height·9/20, so height ≤ 0.62·width·20/9.
-    const byHeight = el.clientHeight - 60
+    const byHeight = el.clientHeight - 84
     const byWidth = (el.clientWidth * 0.62 * 20) / 9
     setStepImgH(Math.max(160, Math.min(byHeight, byWidth)))
   }, [])
@@ -128,7 +148,9 @@ export function FlowViewer({
   // Resolve the ?step deep-link on mount (client-only), before the strip is
   // measured and centered below.
   useEffect(() => {
-    const raw = new URLSearchParams(window.location.search).get("step")
+    const params = new URLSearchParams(window.location.search)
+    const raw = params.get("step")
+    setInitialVariation(params.get("variation"))
     const { index, valid } = parseStepParam(raw ?? undefined, flow.steps.length)
     initialIndexRef.current = index
     if (!valid) {
@@ -284,7 +306,17 @@ export function FlowViewer({
               appSlug={appSlug}
               flowSlug={flow.slug}
               date={date}
-              variants={stateIndex.variantsForScreen(step.screenId)}
+              variants={stateIndex.variantsForScreen(
+                step.screenId,
+                step.variationIds
+              )}
+              initialVariation={variationForStep(
+                initialVariation,
+                initialIndexRef.current,
+                idx
+              )}
+              connectionsByScreen={connectionsByScreen}
+              onNavigateFlow={onNavigateFlow}
             />
           ))}
         </div>
@@ -353,6 +385,9 @@ function StepCard({
   flowSlug,
   date,
   variants,
+  initialVariation,
+  connectionsByScreen,
+  onNavigateFlow,
   ref,
 }: {
   step: FlowStep
@@ -361,6 +396,9 @@ function StepCard({
   flowSlug: string
   date: string
   variants: ClientScreen[]
+  initialVariation: string | null
+  connectionsByScreen: Map<string, FlowStepConnection[]>
+  onNavigateFlow: (flowId: string, step: number, screenId: string) => void
   ref?: React.Ref<HTMLDivElement>
 }) {
   // "image"/"url" reflect what actually reached the clipboard (Safari can only get the URL
@@ -369,6 +407,19 @@ function StepCard({
   const [copiedLink, flashLink] = useCopyFeedback<true>()
   const [activeId, setActiveId] = useState(step.screenId)
 
+  useEffect(() => {
+    if (!initialVariation) return
+    const initialVariant = variants.find(
+      (variant) =>
+        variationParam(stateMeta(variant.state ?? "default").label) ===
+        initialVariation
+    )
+    if (!initialVariant) return
+
+    const raf = requestAnimationFrame(() => setActiveId(initialVariant.id))
+    return () => cancelAnimationFrame(raf)
+  }, [initialVariation, variants])
+
   const hasStates = variants.length > 1
   const activeVariant = hasStates
     ? variants.find((v) => v.id === activeId)
@@ -376,6 +427,7 @@ function StepCard({
   const displaySrc = activeVariant
     ? captureUrl(appSlug, activeVariant.screenshotPath)
     : src
+  const connections = connectionsByScreen.get(activeId) ?? []
 
   async function copyImage(e: React.MouseEvent) {
     e.stopPropagation()
@@ -387,7 +439,17 @@ function StepCard({
   async function handleCopyLink(e: React.MouseEvent) {
     e.stopPropagation()
     // Dated deep-link to THIS step (?step is 1-based, matching step.number).
-    await copyLink(flowHref(appSlug, flowSlug, date, step.number))
+    await copyLink(
+      flowHref(
+        appSlug,
+        flowSlug,
+        date,
+        step.number,
+        activeVariant
+          ? stateMeta(activeVariant.state ?? "default").label
+          : undefined
+      )
+    )
     flashLink(true)
   }
 
@@ -411,7 +473,7 @@ function StepCard({
       <LightboxImage
         src={displaySrc}
         alt={activeVariant?.description ?? step.title}
-        // Track the same bound measureHeight uses: card width = min(0.62·stripW, (stripH−60)·9/20),
+        // Track the same bound measureHeight uses: card width = min(0.62·stripW, (stripH−84)·9/20),
         // and the strip fills the modal (max-w-[80vw]/95vw, h-[80vh]/85vh). So an upper bound is
         // min(~50vw, ~40vh) on desktop / min(~60vw, ~40vh) on mobile — err slightly high, never low.
         // The old flat 300px made the browser fetch the 384px variant and stretch it on wide screens.
@@ -505,6 +567,28 @@ function StepCard({
           {getStepLabel(step)}
         </span>
       </div>
+      {connections.length > 0 && (
+        <div className="flex w-full flex-col items-center gap-1">
+          {connections.map((connection) => (
+            <button
+              type="button"
+              key={`${connection.direction}:${connection.flowId}:${connection.step}:${connection.screenId}`}
+              onClick={() =>
+                onNavigateFlow(
+                  connection.flowId,
+                  connection.step,
+                  connection.screenId
+                )
+              }
+              className="max-w-full truncate rounded-full border bg-background px-2 py-0.5 text-[10px] font-medium text-foreground shadow-sm transition-colors hover:bg-muted"
+              title={`${connection.direction === "to" ? "Open" : "From"} ${connection.flowName}`}
+            >
+              {connection.direction === "to" ? "Open" : "From"}{" "}
+              {connection.flowName}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

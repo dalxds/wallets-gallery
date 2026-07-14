@@ -2,7 +2,12 @@
 
 import type { ClientFlow, ClientScreen } from "@/lib/types"
 import { captureUrl } from "@/lib/images"
-import { copyImageToClipboard, copyLink, downloadImage, screenDownloadName } from "@/lib/clipboard"
+import {
+  copyImageToClipboard,
+  copyLink,
+  downloadImage,
+  screenDownloadName,
+} from "@/lib/clipboard"
 import { useCopyFeedback } from "@/lib/use-copy-feedback"
 import { screenHref, flowHref } from "@/lib/links"
 import { formatDate } from "@/lib/utils"
@@ -240,7 +245,17 @@ export function ScreenViewer({
               type="button"
               key={f.slug}
               onClick={() =>
-                router.push(flowHref(appSlug, f.slug, date, f.step))
+                router.push(
+                  flowHref(
+                    appSlug,
+                    f.slug,
+                    date,
+                    f.step,
+                    current?.stateGroup
+                      ? (current.state ?? "default")
+                      : undefined
+                  )
+                )
               }
               className="max-w-40 truncate rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-foreground transition-colors hover:bg-accent"
               title={f.name}
@@ -269,7 +284,11 @@ export function ScreenViewer({
             ) : (
               <Copy className="h-4 w-4" />
             )}
-            {imageCopied === "image" ? "Copied" : imageCopied === "url" ? "Link copied" : "Copy"}
+            {imageCopied === "image"
+              ? "Copied"
+              : imageCopied === "url"
+                ? "Link copied"
+                : "Copy"}
           </Button>
           <Button
             variant="secondary"

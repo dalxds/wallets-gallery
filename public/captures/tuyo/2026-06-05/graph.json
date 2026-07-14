@@ -2957,41 +2957,14 @@
     }
   ],
   "overrides": {
-    "flowNames": {
-      "welcome": "Welcome",
-      "email-entry": "Creating an account",
-      "recover-account": "Recovering an account",
-      "referral-code": "Entering a referral code",
-      "home": "Home",
-      "add-money-source": "Adding money",
-      "send-recipient": "Sending money",
-      "card-intro": "Getting the Tuyo Card",
-      "transaction-detail": "Transaction detail",
-      "settings": "Settings",
-      "settings-verification": "Verifying identity",
-      "settings-account-handle": "Account handle",
-      "settings-privacy": "Privacy",
-      "settings-permissions": "Permissions",
-      "settings-keys-security": "Keys & security",
-      "settings-help": "Help & support",
-      "earn": "Earn",
-      "earn-convert": "Converting tokens",
-      "earn-invest-explorer": "Investing",
-      "earn-token-detail": "Token detail",
-      "earn-token-search": "Searching for a token",
-      "earn-strategies": "Earning yield",
-      "rewards": "Rewards",
-      "rewards-get-tuyos": "Earning TUYOs",
-      "rewards-invite": "Inviting friends",
-      "rewards-leaderboard": "Leaderboard"
-    },
     "screens": {
       "earn": {
         "stateGroup": "earn",
         "state": "empty"
       },
       "earn-funded": {
-        "stateGroup": "earn"
+        "stateGroup": "earn",
+        "state": "funded"
       },
       "strategies-info-1": {
         "stateGroup": "strategies-info",

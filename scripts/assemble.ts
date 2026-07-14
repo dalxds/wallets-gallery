@@ -18,7 +18,7 @@
 //
 // Run from the repo root: node.shot / node.snap paths in walk.json resolve relative to
 // CWD; assets are written under <appDir>/assets where appDir = dirname(dirname(out)).
-// Then run `node scripts/package.ts <out/graph.json>` for the flow tree + namingTODO.
+// Then emit the semantic inventory, author flows.json, and run package.ts.
 
 import { readFileSync, writeFileSync, copyFileSync, mkdirSync, existsSync } from "node:fs"
 import { createHash } from "node:crypto"

@@ -1,10 +1,9 @@
 // Packager type contracts.
 //
-// Two worlds:
-//   GRAPH  — the single source of truth on disk ({slug}/{date}/graph.json).
-//            Observation (nodes + edges + decisionPoints) written by the capture
-//            agent, plus a small `overrides` block written only by the edit agent.
-//   VIEW   — derived by package(graph). Never stored; the SSG build renders it.
+// Three worlds:
+//   GRAPH  — observed app facts ({slug}/{date}/graph.json).
+//   FLOWS  — authored semantic packaging ({slug}/{date}/flows.json).
+//   VIEW   — deterministic presentation derived from GRAPH + FLOWS.
 //
 // This file is pure types (erased at compile time) so it is safe to import from
 // client components. All runtime logic lives in the sibling modules, which import
@@ -92,22 +91,9 @@ export interface DecisionPoint {
   options: DecisionOption[]
 }
 
-// The ONLY hand-edited surface. Written exclusively by the edit agent (chat →
-// override → re-derive). Preserved verbatim across re-captures.
+// The hand-edited observation-correction surface. Semantic flow edits belong in
+// flows.json, while these overrides remain limited to observed screen identity.
 export interface Overrides {
-  /** flow NAME KEY → flow name (LLM-/human-chosen; must persist for the static build). The name key
-   *  is the flow's first DISTINCTIVE screen — steps[1], the entry into its own trunk past the launch
-   *  screen shared with its parent (steps[0] for a single-step hub) — exactly the `nameKey` printed
-   *  by namingTODO. NOT the routing slug and NOT the stable flow id used by `structure`. Keyed this
-   *  way so cross-section copies of one journey share a single authored name; canonicalized through
-   *  the SAF map so the name survives a re-capture that merges the key node into a twin. */
-  flowNames?: Record<string, string>
-  /**
-   * flow id → corrections to the derived tree's shape. One lever: `parent` re-parents a
-   * flow under another, or pins it to the root with `parent: null`. (Main-nav sections are
-   * handled generally by graph.mainNav — they never need a per-flow override here.)
-   */
-  structure?: Record<string, { parent?: string | null }>
   /** node id → screen-fact corrections (incl. forced state classification). */
   screens?: Record<
     string,
@@ -146,6 +132,71 @@ export interface Graph {
   overrides: Overrides
 }
 
+// ─────────────────────────── FLOWS (semantic source) ─────────────────
+
+export interface FlowTODO {
+  about: string
+  question: string
+}
+
+export interface FlowDefinition {
+  /** Stable semantic identifier and public URL slug. */
+  id: string
+  name: string
+  summary?: string
+  parentId: string | null
+  /** Sibling order; collisions are resolved by id. */
+  order: number
+  /** Ordered local semantic steps. Every entry is rendered. */
+  steps: string[]
+  /** Exact cross-flow navigation points that visibly expose this intent. */
+  entryPoints?: FlowEntryPoint[]
+}
+
+export interface FlowEntryPoint {
+  /** Flow containing the screen that exposes this intent. */
+  flowId: string
+  /** Concrete source screen (a local step or one of its derivations). */
+  fromScreenId: string
+  /** Concrete destination screen (a local step or one of its derivations). */
+  toScreenId: string
+}
+
+export interface FlowsFile {
+  schemaVersion: 1
+  flows: FlowDefinition[]
+  /** screen id → why it is intentionally omitted from semantic flows. */
+  uncovered: Record<string, string>
+  /** Must be empty in a committed capture. */
+  flowTODO: FlowTODO[]
+}
+
+export interface InventoryScreen {
+  id: string
+  title: string
+  role: ScreenRole
+  texts: string[]
+  primaryCTA: string | null
+  screenshotPath: string
+  snapshotPath: string | null
+  state?: StateLabel
+  stateGroup?: string
+  derivationLabel?: string
+}
+
+export interface FlowInventory {
+  schemaVersion: 1
+  app: GraphMeta["app"]
+  captureDate: string
+  root: string
+  mainNav: string[]
+  screens: InventoryScreen[]
+  derivationGroups: { id: string; members: { id: string; label: string }[] }[]
+  edges: GraphEdge[]
+  decisionPoints: DecisionPoint[]
+  canonicalizations: { from: string; to: string }[]
+}
+
 // ─────────────────────────── VIEW (derived) ───────────────────────────
 
 // The rendered projection of a screen: its content (texts + interactive elements,
@@ -174,14 +225,10 @@ export interface ViewStep {
   screenId: string
   action: string
   screenshotPath: string
-  /**
-   * "forward" — an ordinary step along the journey's spine. "picker" — an excursion woven
-   * inline: a picker/peek sheet opened from the previous step that pops back to it (the spine
-   * then continues from that step's forward exit). The marker is INTERNAL — a picker renders
-   * like any other step; it only keeps the path honest and drives replay (open → select →
-   * continue). Defaults to "forward".
-   */
-  kind: "forward" | "picker"
+  /** Context is mechanically derived and never counts as semantic coverage. */
+  kind: "context" | "screen"
+  /** Concrete members of this step's derivation group that expose the flow transition. */
+  variationIds?: string[]
 }
 
 export interface ReplayCommand {
@@ -190,25 +237,41 @@ export interface ReplayCommand {
   flags: Record<string, unknown>
 }
 
-export interface ViewReplay {
-  /** Inline .ad command list (materialized to a temp file only when actually replaying). */
-  commands: ReplayCommand[]
-  entryFingerprint: string
-  confidence: "high" | "medium" | "low"
-}
-
-export type NameSource = "override" | "mechanical"
+export type ViewReplay =
+  | {
+      status: "available"
+      /** Inline .ad commands, materialized only when replaying. */
+      commands: ReplayCommand[]
+      entryFingerprint: string
+      confidence: "high" | "medium" | "low"
+      warnings?: string[]
+    }
+  | {
+      status: "unavailable"
+      reason: string
+    }
 
 export interface ViewFlow {
+  /** Equal to slug; retained explicitly for the semantic contract. */
+  id: string
   slug: string
   name: string
   parent: string | null
   summary: string
-  entryPoints: string[]
+  entryPoints: FlowEntryPoint[]
   steps: ViewStep[]
-  replay: ViewReplay | null
-  /** Provenance of `name`; "mechanical" means it still wants a real (LLM/human) name. */
-  nameSource: NameSource
+  replay: ViewReplay
+}
+
+export interface ViewDiagnostic {
+  code:
+    | "canonicalized-reference"
+    | "replay-incomplete-selector"
+    | "replay-unavailable"
+    | "ambiguous-decision-target"
+  message: string
+  flowId?: string
+  screenId?: string
 }
 
 export interface View {
@@ -225,15 +288,16 @@ export interface View {
     rawNodes: number
     flows: number
     topLevelFlows: number
-    replayCoverage: number
-    /** flows whose linear trunk was cut by the MAX_TRUNK cap (0 in healthy data). */
-    truncatedFlows: number
+    replayAvailable: number
+    replayUnavailable: number
+    coveredScreens: number
+    uncoveredScreens: number
+    unaccountedScreens: number
   }
-  /** Flows whose name is still mechanical — the agent names these via overrides.flowNames,
-   *  keyed by `nameKey` (the flow's first distinctive screen, shared across cross-section copies)
-   *  and working from the full `steps` list (the whole journey) rather than the one-screen fallback. */
-  namingTODO: { entryNodeId: string; nameKey: string; slug: string; mechanicalName: string; steps: { id: string; title: string }[] }[]
-  /** Main-nav sections (graph.mainNav) with no captured journey — a capture gap to fill, not
-   *  rendered as flows. The capture agent should walk past these tabs and re-capture. */
-  uncapturedSections: string[]
+  coverage: {
+    covered: string[]
+    uncovered: Record<string, string>
+    unaccounted: string[]
+  }
+  diagnostics: ViewDiagnostic[]
 }

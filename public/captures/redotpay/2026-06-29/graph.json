@@ -7523,77 +7523,62 @@
     }
   ],
   "overrides": {
-    "flowNames": {
-      "welcome": "Welcome",
-      "login": "Logging in",
-      "signup": "Signing up",
-      "home": "Home",
-      "edit-widgets": "Editing home widgets",
-      "profile": "Account",
-      "security": "Security",
-      "change-password": "Changing password",
-      "app-lock": "App lock",
-      "anti-phishing-code": "Anti-phishing code",
-      "third-party-linking": "Connected accounts",
-      "passkey-setup": "Setting up a passkey",
-      "google-authenticator": "Google Authenticator",
-      "payment-settings": "Payment settings",
-      "community": "Community",
-      "about-us": "About us",
-      "share": "Sharing referral",
-      "notifications": "Notifications",
-      "support": "Support",
-      "qr-scan-to-pay": "Scan & pay",
-      "qr-security-gate": "Scan & pay (verification required)",
-      "more-hub": "More",
-      "mobile-topup": "Mobile top-up",
-      "points": "Points",
-      "mission": "Missions",
-      "card-payment-priority": "Card payment priority",
-      "p2p-express": "P2P",
-      "p2p-marketplace": "P2P marketplace",
-      "p2p-leaderboard": "P2P leaderboard",
-      "p2p-orders": "P2P orders",
-      "p2p-chat": "P2P chat",
-      "p2p-ads": "P2P ads",
-      "deposit-currency": "Depositing crypto",
-      "buy-crypto": "Buying crypto",
-      "swap": "Swapping",
-      "withdraw-method": "Withdrawing",
-      "receive": "Receiving",
-      "send": "Send",
-      "send-global-details": "Sending globally",
-      "send-from-currency": "Choosing send currency",
-      "send-to-currency": "Choosing payout currency",
-      "send-method-chooser": "Sending to a user",
-      "send-notice": "Unverified-recipient notice",
-      "transfer-records": "Transfer records",
-      "send-recipients-manage": "Recent recipients",
-      "assets": "Assets",
-      "token-detail": "Token detail",
-      "earn": "Earn",
-      "verify-identity-gate": "Identity verification",
-      "kyc-country-picker": "Country picker",
-      "kyc-id-selfie-intro": "Document, selfie & questionnaire",
-      "credit-intro": "Credit",
-      "credit-dashboard-scrolled": "Credit dashboard",
-      "credit-collateral": "Collateral",
-      "credit-auto-pledge": "Auto-collateralization",
-      "credit-how-to-increase": "Credit overview",
-      "credit-increase-limit": "Increasing credit limit",
-      "credit-settings": "Credit settings",
-      "credit-risk-management": "Risk management",
-      "credit-collateral-priority": "Collateral priority",
-      "credit-learn": "About Credit",
-      "loan-intro": "Loan",
-      "card-choose": "Cards",
-      "card-pro-membership": "RedotPay Pro membership",
-      "card-confirm-promo": "Applying for a card",
-      "card-confirm-total": "Card application details",
-      "card-activated": "Card activated",
-      "card-limits": "Card limits",
-      "card-transaction-statement": "Card statement",
-      "card-statement-list": "Card statements"
+    "screens": {
+      "home": {
+        "title": "Home"
+      },
+      "edit-widgets": {
+        "title": "Home widgets"
+      },
+      "profile": {
+        "title": "Account"
+      },
+      "welcome": {
+        "title": "Welcome"
+      },
+      "p2p-leaderboard": {
+        "title": "P2P leaderboard"
+      },
+      "login": {
+        "title": "Log in",
+        "stateGroup": "login",
+        "state": "Email"
+      },
+      "login-phone": {
+        "title": "Log in",
+        "stateGroup": "login",
+        "state": "Phone"
+      },
+      "card": {
+        "title": "Cards",
+        "stateGroup": "cards",
+        "state": "Available"
+      },
+      "card-pending": {
+        "title": "Cards",
+        "stateGroup": "cards",
+        "state": "Pending"
+      },
+      "card-active": {
+        "title": "Cards",
+        "stateGroup": "cards",
+        "state": "Active"
+      },
+      "card-confirm": {
+        "title": "Card application",
+        "stateGroup": "card-application",
+        "state": "Default"
+      },
+      "card-confirm-promo": {
+        "title": "Card application",
+        "stateGroup": "card-application",
+        "state": "Promo code"
+      },
+      "card-confirm-total": {
+        "title": "Card application",
+        "stateGroup": "card-application",
+        "state": "Total"
+      }
     }
   }
 }

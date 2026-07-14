@@ -1,6 +1,9 @@
 # Temporal / Re-capture Reference
 
-How the skill handles re-capturing an app over time: the four per-node identity signals, `.ad` hardening + credential templating, the re-capture decision ladder, graph-based diffing, and `overrides` copy-forward.
+Current direct re-capture mechanics: identity signals, `.ad` hardening, credential templating,
+and graph-based comparison. Temporal observation retention, provenance, overlay, proven-absence
+retirement, and automatic reference re-binding are deferred; this release defines no schema or
+automation for them.
 
 ## Mental model
 
@@ -8,8 +11,10 @@ How the skill handles re-capturing an app over time: the four per-node identity 
 
 1. Reads **this app's** prior `graph.json` (the one sanctioned cross-time read — nothing else).
 2. Replays known edges, then walks for new state (full or flow-scoped) into a fresh `walk.json`.
-3. Copies the prior `overrides` into `walk.json.overrides`, then assembles a new complete `graph.json` into a new date directory.
-4. Diffs are computed *from the graphs* (compare node fingerprints + edges across dates) — see [Graph-based diffing](#graph-based-diffing).
+3. Copies prior screen-observation overrides into the walk and assembles a new complete graph.
+4. Generates a fresh inventory and authors/reviews a dated `flows.json`, preserving ids only
+   when the semantic intent is unchanged.
+5. Computes graph diffs from fingerprints and edges; semantic diffs compare authored flow files.
 
 History is a directory walk over dated `graph.json` files, not a chain of pointers to reconstruct.
 
@@ -136,26 +141,32 @@ Diffs are computed by comparing the two `graph.json` files — there is no store
 - **unchanged** — fingerprint matches a prior node.
 - **removed** — a prior node fingerprint absent from the new graph.
 
-### Edge / flow diffs
+### Edge and semantic-flow diffs
 
-Compare `edges[]` keyed by `(from, to, action)`: added / removed transitions. Because the flow tree is *derived*, flow-level changes fall out of the node/edge diff once both graphs are packaged — compare the two derived views' flows/steps if a flow-level summary is wanted. For a `scope: "flow"` re-capture, only the named flow's nodes/edges are re-walked; everything else is carried forward unchanged.
+Compare edges by `(from, to, action)`. Compare `flows.json` separately by stable flow id,
+name, parent, order, local steps, and entries. Graph changes do not automatically regroup,
+rename, re-parent, retain, retire, or re-bind semantic flows.
 
 ## `overrides` copy-forward (replaces `_humanEdited`)
 
-The new dated `graph.json` carries the **entire `overrides` block forward verbatim** from the prior capture. This is the single edit-preservation mechanism — there is no per-field `_humanEdited` stamping any more, and no field-by-field provenance to reconcile. Because `overrides` is keyed by stable node ids and flow ids (a flow id is its anchor node id), human corrections survive re-capture automatically:
+The new dated graph can carry its prior screen-observation overrides forward verbatim. There
+is no per-field provenance or automatic semantic reference reconciliation. Graph overrides are
+keyed only by screen ids:
 
 1. Re-walk the device and build a fresh `walk.json` (`nodes[]` / `edges[]` / `decisionPoints[]`).
 2. Copy the prior `overrides` object into `walk.json.overrides` unchanged; assemble carries it into the new `graph.json`.
-3. Re-run the packager; the overrides re-apply on top of the fresh observation.
+3. Regenerate inventory, review the new semantic source, and re-run the packager.
 
-If a re-capture removed a node/flow that an override still references, the validator emits a warning (`overrides.* "<id>" is not a node id`) — prune the stale key or re-point it. Edits themselves are made only through `overrides`; see [editing.md](editing.md).
+If a screen override references no observed node, graph validation warns. `flows:audit` reports
+semantic reference impacts, but automatic cross-capture re-binding and retained observations
+remain deferred. See [editing.md](editing.md) for the two current edit surfaces.
 
 ## Listing flows / read queries
 
 Listing flows or answering "what changed" is a packager run, not a device session:
 
 ```bash
-node scripts/package.ts {latestCapture}/graph.json        # flow tree + stats + namingTODO
+node scripts/package.ts {latestCapture}/graph.json         # flow tree + stats + diagnostics
 node scripts/package.ts {latestCapture}/graph.json --json  # full derived View
 ```
 

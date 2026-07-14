@@ -1,144 +1,86 @@
-# Editing Reference
+# Editing captured data
 
-How the skill handles ambient, conversational edits to captured data. **Every edit is made by writing to `graph.json`'s `overrides{}` block and re-running the packager** — never by hand-editing the derived `view.json`. `overrides` is the single edit surface, and it is carried forward verbatim across re-captures (see [temporal.md](temporal.md) → `overrides` copy-forward), so a correction made once persists.
+Conversational edits target one of two committed sources. Screen-observation corrections go
+to `graph.json.overrides`; reader-facing semantic edits go to `flows.json`. `view.json` and
+`index.json` are generated.
 
-## When to recognize an edit
+## Workflow
 
-The skill recognizes edit-shaped requests during normal conversation. Trigger phrases (non-exhaustive):
+1. Resolve the app's latest capture from `app.json`.
+2. Read its `graph.json` and `flows.json`.
+3. Identify whether the request changes observed screen identity or semantic packaging.
+4. Edit the relevant source.
+5. Run the strict validator/package command and regenerate data.
+6. Show the resulting semantic or screen change to the user.
 
-- "Rename {flow} to {new name}"
-- "{flow} is a subflow of {parent}" / "Promote {X} to the top level" / "Demote {X}"
-- "The {screen}'s role/title/description is wrong, it's actually {value}"
-- "Mark {screen} as the empty/loading/error state of {group}"
-- "These two screens are the same — merge them" / "Don't merge {A} and {B}, they're different"
-
-If the request is ambiguous, ask before modifying. **Edits are never silent** — confirm what was changed and that you re-ran the packager.
-
-## Edit workflow
-
-```
-1. Identify the target app slug.
-   - Explicit: the user names the app.
-   - Implicit: the user names an entity — package each app's latest graph.json and search the
-     derived view. Unique → proceed. Ambiguous → ask which app.
-
-2. Locate the entity in the derived view.
-   - node scripts/package.ts {latestCapture}/graph.json   (or --json for the full View)
-   - Resolve the flow id (= its anchor node id) or the node id you need to target.
-
-3. Write the override.
-   - Read {app-slug}/app.json → latestCapture; open {latestCapture}/graph.json.
-   - Add/update the right key under `overrides` (table below). Atomic write (tmp + rename).
-
-4. Re-derive and confirm.
-   - node scripts/package.ts {latestCapture}/graph.json  (must exit 0).
-   - Show the user the change in the re-derived view (renamed flow, new parent, merged screen).
+```bash
+node scripts/flows.ts validate <date>/graph.json <date>/flows.json --strict
+node scripts/package.ts <date>/graph.json
+pnpm build-data
 ```
 
-The flow tree, screen states, names, and replay are all derived — to change them you change the *input* (`graph.json` + `overrides`) and re-run, never the *output*. If `package.ts` fails or warns (e.g. an override pointing at an unknown node id), fix the override.
+## Edit mapping
 
-## Common edits → override keys
-
-Override keys + types: [schema.md](schema.md) → `overrides`. Flow ids are anchor node ids; node ids are stable across re-captures.
-
-| Request | Override |
+| Request | Source edit |
 |---|---|
-| Rename a flow | `overrides.flowNames["<name-key>"] = "New Name"` (name key = the flow's `nameKey` from `namingTODO`) |
-| Re-parent a flow under another | `overrides.structure["<flow-id>"] = { parent: "<parent-flow-id>" }` |
-| Force a flow to the top level | `overrides.structure["<flow-id>"] = { parent: null }` |
-| Fix a screen's role / title / description | `overrides.screens["<node-id>"] = { role: "picker", title: "…", description: "…" }` |
-| Force a screen's state / group (on-step toggle) | `overrides.screens["<node-id>"] = { state: "empty", stateGroup: "<logical-screen-id>" }` |
-| Merge screens the packager kept separate | `overrides.merges = [["<node-a>", "<node-b>", …]]` |
-| Split screens the packager merged | `overrides.splits = ["<node-id>", …]` |
+| Rename a flow | change `flows[].name`; keep its stable `id` |
+| Re-parent or reorder a flow | change `parentId` or `order` |
+| Add/remove/reorder semantic steps | change `steps` |
+| Record another visible origin | add its flow, source screen, and destination screen to `entryPoints` |
+| Explain an intentional omission | change `uncovered` |
+| Record unresolved semantics | add a `flowTODO` draft item |
+| Fix screen role/title/description | change `overrides.screens[id]` |
+| Correct a derivation label/group | change `overrides.screens[id].state/stateGroup` |
+| Force an exact merge | change `overrides.merges` |
+| Prevent an incorrect merge/family | change `overrides.splits` |
 
-`flowNames` is the most common edit — it's where the `namingTODO` from packaging lands (see [exploration.md](exploration.md) → Package). The fields under each `structure` / `screens` key are optional; set only what you're correcting.
+Flow grouping follows [flow-grouping.md](flow-grouping.md). Screen names, derivation labels,
+flow names, and stable ids follow [naming.md](naming.md).
 
-### Notes on specific edits
+## Semantic examples
 
-- **Naming.** Gerund + object for actions (`Buying a token`), plain noun for sections/details (`Settings`, `Token detail`). Avoid filler gerunds on sections — `Settings`, not `Browsing settings`.
-- **Re-parenting cycles.** Don't set a flow's `parent` to one of its own descendants. The packager assigns a deterministic parent by default; only override when its choice is wrong.
-- **State (`screens[id].state`/`stateGroup`).** Use this only when the packager misclassified an in-place variant. Tag against a default: a group should have one `default` plus ≥1 alternate. A lone empty screen *is* the screen, not an "empty state" — leave it alone. The mechanics live in `lib/packager/classify.ts`; you're just forcing its outcome.
-- **Merge vs. split.** `merges` forces two node ids into one logical screen (e.g. the SAF saw a data-only difference as distinct); `splits` keeps nodes apart that it merged (e.g. two genuinely different screens with the same skeleton). Both take node ids, not flow ids.
+Rename without moving the URL:
 
-## Cross-app edits
-
-A common pattern: apply the same correction across many apps for consistency.
-
-```
-User: "For all apps with a password-reset flow, rename it to 'Forgot password'."
+```jsonc
+{ "id": "password-recovery", "name": "Recovering a password", ... }
 ```
 
-1. For each `{app-slug}/app.json`, find `latestCapture` and package its `graph.json`.
-2. Find the matching flow (by slug/name) and note its **name key** (`nameKey` in `namingTODO` — its first distinctive screen, `steps[1]`).
-3. Present the matches; **never bulk-edit silently — always preview.**
-4. Apply `overrides.flowNames["<name-key>"]` per app and re-run `package.ts` for each.
+Canonical placement plus an alternate origin:
 
-## Read queries (not edits)
-
-When the user asks to **read**, skip the override pipeline:
-
-- "Show me the login screen of acme-bank" → package the latest graph, find the screen in the view, display its screenshot + summary.
-- "List flows for acme-bank" → `node scripts/package.ts {latest}/graph.json` (flow tree). See [temporal.md](temporal.md) → Listing flows.
-- "What changed in the last capture?" → package the two adjacent graphs and diff their nodes/edges ([temporal.md](temporal.md) → Graph-based diffing).
-
-These don't touch `overrides` and don't write any files.
-
-## Safety rules
-
-- **Edit the source, re-derive the output.** Never hand-edit `view.json` — it is regenerated and your change would be lost. Mutate `overrides`, then run `package.ts`.
-- **Validate after every edit.** `node scripts/package.ts {graph.json}` must exit 0 and should be free of override warnings (an override key that isn't a node id means a stale or mistyped reference — fix it).
-- **Atomic writes.** Tmp file + rename on `graph.json`; never truncate-and-write.
-- **Don't delete via edit.** Screens/flows disappear through re-capture (when the device walk no longer reaches them), not by editing. If the user explicitly wants to drop one, confirm and back up `graph.json` first.
-- **Edits target the latest capture only.** Prior dated `graph.json` files stay frozen as historical record. The `overrides` you write are carried forward to the next capture automatically.
-- **Confirm wide changes.** If a cross-app or multi-flow edit touches several apps, show the preview and require confirmation.
-- **Never invent fields.** If a request can't be expressed via an `overrides` key, it's a schema-extension proposal — bring it to the user (see [schema.md](schema.md)), don't add an ad-hoc field.
-
-## Edit examples
-
-### Rename a flow
-
-```
-User: Rename the "forgot password" flow to "Password recovery".
-
-Agent: Editing acme-bank/2026-05-25/graph.json:
-  overrides.flowNames["forgot-password"] = "Password recovery"
-Re-ran package.ts (exit 0). The flow now reads "Password recovery [password-recovery]"
-in the derived view. Preserved across future re-captures.
+```jsonc
+{
+  "id": "adding-money",
+  "name": "Adding money",
+  "parentId": "home",
+  "order": 1,
+  "steps": ["add-money-source"],
+  "entryPoints": [
+    {
+      "flowId": "earn",
+      "fromScreenId": "earn",
+      "toScreenId": "add-money-source"
+    }
+  ]
+}
 ```
 
-### Re-parent
+One primary member for a derivation group:
 
-```
-User: "Selecting a coin" should sit under "Buying a token", not at the top level.
+```jsonc
+// graph.json overrides
+"gold-detail": { "title": "Asset detail", "stateGroup": "asset-detail", "state": "Gold" },
+"wbtc-detail": { "title": "Asset detail", "stateGroup": "asset-detail", "state": "Wrapped BTC" }
 
-Agent: overrides.structure["coin-picker"] = { parent: "buy-amount" }
-Re-ran package.ts (exit 0). "Selecting a coin" is now a child of "Buying a token".
-```
-
-### Fix a screen's role + force a state
-
-```
-User: The activity-empty screen is the empty state of the Activity tab, and it's a list not "other".
-
-Agent: overrides.screens["activity-empty"] = { role: "list", state: "empty", stateGroup: "activity" }
-Re-ran package.ts (exit 0). It now folds onto the Activity step as an Empty switcher.
+// flows.json
+{ "id": "viewing-assets", "steps": ["gold-detail"], ... }
 ```
 
-### Merge two screens the packager split
+## Read-only queries
 
-```
-User: home-1usdc and home-2usdc are the same screen with different balances — merge them.
+- List flows: `node scripts/package.ts <latest>/graph.json`.
+- Inspect canonical screen inventory: `node scripts/flows.ts inventory <latest>/graph.json`.
+- Find a screen's flows: package with `--json` and read `screens[].appearsIn`.
+- Audit all captures: `pnpm flows:audit --all`.
 
-Agent: overrides.merges = [["home-1usdc", "home-2usdc"]]
-Re-ran package.ts (exit 0). They collapse to one logical Home screen.
-```
-
-### Read query (no edit)
-
-```
-User: Show me the login screen of acme-bank.
-
-Agent: [packages latest graph, shows assets/{hash}.png]
-Login (acme-bank) — role: auth — 5 interactive elements — primary CTA: Sign in
-Appears in: Logging in (step 1), Password recovery (step 1)
-```
+The temporal retention/provenance/re-binding system is deferred. Editing the current source
+does not create provenance records or automatically rebind references in another capture.

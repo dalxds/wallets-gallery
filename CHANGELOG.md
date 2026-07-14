@@ -19,6 +19,57 @@ Lead each entry with what a reader can now do that they could not before. Use pl
 no hype, real file names and commands. Keep branch history, review notes, and internal
 version bumps out of it. Put contributor-facing notes under a "For contributors" subsection.
 
+## [5.0.0] - 2026-07-14
+
+Flows now read as intentional user journeys instead of fragments inferred from navigation
+shape. Alternate origins no longer duplicate flows, one-screen destinations remain visible,
+and data or lifecycle variations share one switchable step.
+
+### Fixed
+
+- Replay is marked available only when it contains a complete, non-empty command sequence;
+  selector-less transitions and back gestures can no longer produce silently truncated picker
+  scripts. Inline pickers also retain the recorded action label on the following spine step.
+- Child-flow context keeps split-pinned in-place launchers while retaining the exact parent
+  variations that expose the transition; unavailable variations no longer appear on that step.
+- Screen-to-flow chips preserve browser history and the active screen variation. Cross-flow chips
+  appear only on their exact source variation, and a variation deep link changes only the step
+  named by `?step`.
+- Flow validation now reports malformed drafts without crashing, accepts legitimate brand casing,
+  warns about uncovered main-navigation sections and canonical disposition collisions, and exits
+  non-zero for hard errors. Audit and migration package scripts now process all captures.
+- Custom variation ordering uses codepoint comparisons, keeping generated data identical across
+  build-machine locales.
+
+### Changed
+
+- Every dated capture now commits `flows.json` beside `graph.json`. Stable flow ids, names,
+  hierarchy, local steps, alternate entries, and intentional omissions are authored there;
+  the graph remains the source for observed screens and transitions.
+- Flow URLs use stable authored ids verbatim. Existing name-derived flow URLs are intentionally
+  replaced without redirects.
+- The gallery shows generalized variation labels, optional immediate context tiles, and
+  semantic flows even when direct replay is unavailable. Alternate entries identify exact
+  source and destination screens and switch flows in place at the corresponding step.
+- Avici, RedotPay, and Tuyo have reviewed semantic packages with complete screen accounting.
+
+### For contributors
+
+- `packageGraph(graph, flows)` is a strict deterministic builder. The dominator segmenter,
+  mechanical flow naming, structural duplicates, length caps, `namingTODO`, and graph-level
+  `flowNames`/`structure` overrides have been removed.
+- New inventory, draft validation, all-capture audit, and mechanical reference-migration
+  commands support the semantic authoring loop. `build-data` requires every graph/flows pair
+  and reports replay gaps without treating them as semantic errors.
+- Hierarchy validation advises authors to merge a sole child's steps into its parent while
+  preserving the parent identity, unless both intents are independently useful.
+- Separate naming validation rejects camel/Pascal-case canonical titles without influencing
+  semantic membership or hierarchy.
+- Variation deep links keep the rendered step and use a lowercase kebab-case variation name;
+  validation rejects missing names and names that would collide after URL normalization.
+- Temporal provenance, retention, retirement, and reference re-binding remain a separate
+  follow-up and are not part of this schema.
+
 ## [4.3.0] - 2026-07-03
 
 A reliability pass across the packager, the build, and the viewer UI: flows that used to go
@@ -151,7 +202,7 @@ pages you load are lighter.
   `/llms.txt` line use the same phrase), and the Apps gallery subtitle now shows live totals
   summed from the registry at build time (e.g. "3 apps · 210 screens · 122 flows").
 - Sharing a screen or flow link now shows a cleaner preview: the title is `wallets.gallery -
-  <App Name>` and the description reads `<Screen or Flow name> in <App Name> on <Jun 29, 2026>`.
+<App Name>` and the description reads `<Screen or Flow name> in <App Name> on <Jun 29, 2026>`.
 
 ## [4.1.0] - 2026-06-30
 

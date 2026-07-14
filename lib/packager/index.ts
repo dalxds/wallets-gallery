@@ -1,234 +1,252 @@
-// package(graph) → View. The single deterministic transform: same graph.json
-// (incl. overrides) always yields the same View. Run by the SSG build and the CLI.
+// packageGraph(graph, flows) → View. The deterministic semantic builder validates
+// authored intent and performs only mechanical projection and best-effort replay.
 
-import type { Graph, GraphEdge, Overrides, View, ViewFlow, ViewScreen, ViewStep } from "./types.ts"
-import { runSAF } from "./saf.ts"
-import { classify } from "./classify.ts"
-import { segment } from "./segment.ts"
-import { buildAdjacency } from "./graph.ts"
-import { screenTitle, journeyName, slugify, nameKeyOf, type FlowName } from "./naming.ts"
-import { buildReplay } from "./replay.ts"
+import type {
+  FlowDefinition,
+  FlowsFile,
+  Graph,
+  View,
+  ViewDiagnostic,
+  ViewFlow,
+  ViewScreen,
+  ViewStep,
+} from "./types.ts"
+import { migrateFlows, orderFlows, validateFlows } from "./flows.ts"
+import { authoredTransitions, buildReplay } from "./replay.ts"
+import {
+  buildInventory,
+  edgeBetween,
+  projectGraph,
+  type ProjectedGraph,
+} from "./project.ts"
+import { screenTitle } from "./naming.ts"
 
-// Deterministic winner among edges sharing a (from,to,action) key. in-place wins first —
-// it's the state-toggle signal classify needs (a nav/overlay duplicate would mask it) —
-// then earliest observed, then selector (nulls last), then kind. A total order, so the
-// survivor is the same regardless of graph.edges array order.
-function betterEdge(a: GraphEdge, b: GraphEdge): GraphEdge {
-  const ai = a.kind === "in-place" ? 0 : 1
-  const bi = b.kind === "in-place" ? 0 : 1
-  if (ai !== bi) return ai < bi ? a : b
-  if (a.observedAtStep !== b.observedAtStep) return a.observedAtStep < b.observedAtStep ? a : b
-  if (a.selector !== b.selector) { // lexically smallest, nulls last
-    if (a.selector == null) return b
-    if (b.selector == null) return a
-    return a.selector < b.selector ? a : b
+export class FlowPackagingError extends Error {
+  readonly errors: string[]
+
+  constructor(errors: string[]) {
+    super(`Invalid semantic flow package:\n  ${errors.join("\n  ")}`)
+    this.name = "FlowPackagingError"
+    this.errors = errors
   }
-  if (a.kind !== b.kind) return a.kind < b.kind ? a : b
-  return a
 }
 
-export function packageGraph(graph: Graph): View {
-  const overrides = graph.overrides ?? {}
-  const saf = runSAF(graph.nodes, overrides)
-  const canon = (id: string) => saf.canonicalOf.get(id) ?? id
+interface DerivedContext {
+  screenId: string
+  variationIds?: string[]
+}
 
-  // overrides.screens is authored against RAW node ids; remap keys to canonical
-  // (post-merge) ids so a correction on a node the SAF merged away still applies
-  // to its canonical survivor instead of silently no-op'ing.
-  const screenOv = overrides.screens ?? {}
-  const canonScreens: NonNullable<Overrides["screens"]> = {}
-  for (const id of Object.keys(screenOv)) {
-    const c = canon(id)
-    canonScreens[c] = { ...canonScreens[c], ...screenOv[id] }
-  }
-  // overrides.flowNames is authored against a flow's NAME KEY — a node id (steps[1], the first
-  // distinctive screen) — so it needs the same canonicalization: a re-capture that merges the key
-  // node into a richer twin must carry the authored name to the survivor rather than silently
-  // reverting to the mechanical placeholder. On collision (two keys → one canonical id) the
-  // lexically-smallest ORIGINAL key wins — deterministic, order-independent.
-  const nameOv = overrides.flowNames ?? {}
-  const canonFlowNames: NonNullable<Overrides["flowNames"]> = {}
-  for (const id of Object.keys(nameOv).sort()) {
-    const c = canon(id)
-    if (!(c in canonFlowNames)) canonFlowNames[c] = nameOv[id]
-  }
-  const overridesC: Overrides = { ...overrides, screens: canonScreens, flowNames: canonFlowNames }
-
-  // Remap edges to canonical ids; drop self-loops; dedupe by (from,to,action).
-  // On a collision prefer the in-place edge — it's the state-toggle signal classify
-  // needs, and a nav/overlay duplicate would otherwise mask it (first-seen wins).
-  const edgeByKey = new Map<string, GraphEdge>()
-  const edgeOrder: string[] = []
-  for (const e of graph.edges) {
-    const from = canon(e.from)
-    const to = canon(e.to)
-    if (from === to) continue
-    const key = `${from}->${to}|${e.action}`
-    const remapped = { ...e, from, to }
-    const prev = edgeByKey.get(key)
-    if (!prev) { edgeByKey.set(key, remapped); edgeOrder.push(key) }
-    else edgeByKey.set(key, betterEdge(remapped, prev))
-  }
-  const edges: GraphEdge[] = edgeOrder.map((k) => edgeByKey.get(k)!)
-
-  const canonIds = saf.canonicalNodes.map((n) => n.id)
-  const adj = buildAdjacency(canonIds, edges)
-  const root = canon(graph.root)
-  const cls = classify(saf, edges, overridesC)
-  // Main-navigation destinations → canonical ids that survived merging. Each roots its
-  // own top-level flow (see segment.ts); unknown ids are dropped.
-  const canonSet = new Set(canonIds)
-  const navRoots = new Set<string>()
-  for (const t of graph.mainNav ?? []) {
-    const c = canon(t)
-    if (canonSet.has(c)) navRoots.add(c)
-  }
-  // Authored branch order (decisionPoints) → segment sibling ordering. Canonicalize the
-  // decision node and each option's target so the order survives SAF merges; a target hit by
-  // several options keeps its first (smallest) authored index.
-  const decisionOrder = new Map<string, Map<string, number>>()
-  for (const dp of graph.decisionPoints) {
-    const node = canon(dp.nodeId)
-    let m = decisionOrder.get(node)
-    if (!m) { m = new Map(); decisionOrder.set(node, m) }
-    dp.options.forEach((o, i) => {
-      if (!o.toNode) return
-      const to = canon(o.toNode)
-      if (!m!.has(to)) m!.set(to, i)
+function deriveContext(
+  projected: ProjectedGraph,
+  flow: FlowDefinition,
+  flowById: Map<string, FlowDefinition>
+): DerivedContext | null {
+  if (!flow.parentId) return null
+  const parent = flowById.get(flow.parentId)
+  if (!parent) return null
+  const parentGroups = new Set(
+    parent.steps.flatMap((screen) => {
+      const group = projected.groupOf.get(screen)
+      return group ? [group] : []
     })
+  )
+  const firstGroup = projected.groupOf.get(flow.steps[0])
+  if (!firstGroup) return null
+  const candidatesByGroup = new Map<string, Set<string>>()
+  for (const edge of projected.edges) {
+    if (edge.kind === "back") continue
+    const fromGroup = projected.groupOf.get(edge.from)
+    const toGroup = projected.groupOf.get(edge.to)
+    if (!fromGroup || !toGroup) continue
+    if (edge.kind === "in-place" && fromGroup === toGroup) continue
+    if (toGroup !== firstGroup) continue
+    if (!parentGroups.has(fromGroup)) continue
+    if (fromGroup === firstGroup) continue
+    const candidates = candidatesByGroup.get(fromGroup) ?? new Set<string>()
+    candidates.add(edge.from)
+    candidatesByGroup.set(fromGroup, candidates)
   }
-  const seg = segment(saf, cls, adj, edges, root, navRoots, overridesC, decisionOrder)
-
-  const nodeById = new Map(saf.canonicalNodes.map((n) => [n.id, n]))
-  // Among parallel edges (same from/to, different action — SAF merges create these), pick
-  // deterministically: smallest observedAtStep = the transition as first captured, which is
-  // also the best step label; then lexically-smallest action, then selector (nulls last).
-  // buildReplay is handed this same closure, so replay clicks stay deterministic too.
-  const edgeBetween = (a: string, b: string) => {
-    let best: GraphEdge | null = null
-    for (const e of edges) {
-      if (e.from !== a || e.to !== b) continue
-      if (!best || e.observedAtStep < best.observedAtStep) { best = e; continue }
-      if (e.observedAtStep > best.observedAtStep) continue
-      if (e.action !== best.action) { if (e.action < best.action) best = e; continue }
-      if (e.selector != null && (best.selector == null || e.selector < best.selector)) best = e
-    }
-    return best
+  if (candidatesByGroup.size !== 1) return null
+  const [group, candidates] = [...candidatesByGroup][0]
+  const members = projected.membersByGroup.get(group) ?? [...candidates]
+  const eligibleMembers = members.filter(
+    (member) => candidates.has(member)
+  )
+  if (!eligibleMembers.length) return null
+  return {
+    screenId: eligibleMembers[0],
+    ...(members.length > 1 ? { variationIds: eligibleMembers } : {}),
   }
+}
 
-  // Names + slugs (assigned before steps so parent refs resolve). journeyName is
-  // computed once here and reused when building the flows below. Name a flow by its first
-  // DISTINCTIVE screen (steps[1] — the entry into its own trunk, past the launch screen
-  // shared with the parent), not its deepest/goal screen: a multi-step journey reads by its
-  // intent ("Withdraw Asset") rather than its last sheet ("Add bank details"). Single-step
-  // flows (a hub/tab) have only steps[0], so fall back to the goal.
-  // Mechanical name is a deterministic FALLBACK only — the real name comes from the LLM/human
-  // (overrides.flowNames), which sees the whole journey via namingTODO.steps below. So keep this
-  // dumb: the first distinctive screen (steps[1], past the shared launch screen), else the goal.
-  const nameByJourney = new Map<string, FlowName>()
-  const slugByJourney = new Map<string, string>()
-  const used = new Set<string>()
-  for (const j of seg.journeys) {
-    const nameNode = nodeById.get(j.steps.length > 1 ? j.steps[1] : j.goal)
-    const nm = journeyName(j, nameNode, overridesC)
-    nameByJourney.set(j.id, nm)
-    let slug = slugify(nm.name) || j.id
-    const base = slug
-    let i = 2
-    while (used.has(slug)) slug = `${base}-${i++}`
-    used.add(slug)
-    slugByJourney.set(j.id, slug)
+function actionFor(
+  projected: ProjectedGraph,
+  authored: string[],
+  index: number,
+  context: DerivedContext | null
+): string {
+  if (index === 0 && !context) return "Entry point"
+  const contextId = context?.screenId ?? null
+  const from = index === 0 ? contextId : authored[index - 1]
+  if (!from) return "Entry point"
+  const direct = edgeBetween(projected, from, authored[index])
+  if (direct) return direct.action
+  const transition = authoredTransitions(projected, authored, contextId).find(
+    (item) => item.index === index
+  )
+  const anchored = transition
+    ? edgeBetween(projected, transition.from, transition.to)
+    : null
+  if (anchored) return anchored.action
+  // Presentation can still name a recorded continuation when replay correctly
+  // rejects an ambiguous or selector-less picker return. Prefer the nearest
+  // earlier authored screen, then context, so a real action never degrades to
+  // the generic label solely because an inline picker sits between the steps.
+  const earlier = [...authored.slice(0, index)].reverse()
+  if (contextId) earlier.push(contextId)
+  for (const candidate of earlier) {
+    const edge = edgeBetween(projected, candidate, authored[index])
+    if (edge) return edge.action
   }
+  return "Continue"
+}
 
+export function packageGraph(graph: Graph, source: FlowsFile): View {
+  const validation = validateFlows(graph, source, { strict: true })
+  if (validation.errors.length) throw new FlowPackagingError(validation.errors)
+
+  const projected = projectGraph(graph)
+  const migrated = migrateFlows(graph, source).flows
+  const definitions = orderFlows(migrated)
+  const flowById = new Map(definitions.map((flow) => [flow.id, flow]))
   const appearsIn = new Map<string, { flow: string; step: number }[]>()
-  const nodeToFlow = new Map<string, string>()
-  const namingTODO: View["namingTODO"] = []
-  const flows: ViewFlow[] = seg.journeys.map((j) => {
-    const nm = nameByJourney.get(j.id)!
-    const slug = slugByJourney.get(j.id)!
-    // Weave plan: the forward trunk, with each launcher's excursions inserted right after it as
-    // picker steps (so the spine continues from the launcher's forward exit — the next trunk
-    // node — not from the picker). `from` is the node the step's action edge comes from: the
-    // previous trunk node for a forward step, the launcher for a picker. A launcher owns its
-    // excursions where it appears without duplicating a parent's: at a real trunk step (idx >= 1),
-    // at its own single-node hub (steps.length === 1), or at steps[0] of a TOP-LEVEL flow —
-    // which it owns (build() starts the trunk at the anchor itself). A CHILD flow's steps[0] is
-    // the launch screen borrowed from its parent, so it still skips idx 0 (no double-weave).
-    const plan: { node: string; kind: ViewStep["kind"]; from: string | null }[] = []
-    j.steps.forEach((nid, idx) => {
-      plan.push({ node: nid, kind: "forward", from: idx > 0 ? j.steps[idx - 1] : null })
-      if (idx >= 1 || j.steps.length === 1 || j.parent === null) {
-        for (const x of seg.excursionsByLauncher.get(nid) ?? []) plan.push({ node: x, kind: "picker", from: nid })
-      }
-    })
-    const steps: ViewStep[] = plan.map((p, i) => {
-      const node = nodeById.get(p.node)!
-      const e = p.from ? edgeBetween(p.from, p.node) : null
-      const list = appearsIn.get(p.node) ?? []
-      list.push({ flow: slug, step: i + 1 })
-      appearsIn.set(p.node, list)
-      if (!nodeToFlow.has(p.node)) nodeToFlow.set(p.node, slug)
-      return {
-        number: i + 1,
-        title: screenTitle(node, overridesC),
-        screenId: p.node,
-        action: p.from ? e?.action ?? "Navigate" : "Entry point",
-        screenshotPath: node.screenshotPath,
-        kind: p.kind,
-      }
-    })
-    if (nm.source === "mechanical") {
-      // Hand the namer the WHOLE journey (every step's screen + title), not just one screen,
-      // so it can name from full context rather than re-deriving it from the view.
-      namingTODO.push({
-        entryNodeId: j.entries[0],
-        nameKey: nameKeyOf(j),
-        slug,
-        mechanicalName: nm.name,
-        steps: steps.map((s) => ({ id: s.screenId, title: s.title })),
-      })
-    }
-    return {
-      slug,
-      name: nm.name,
-      parent: j.parent ? slugByJourney.get(j.parent) ?? null : null,
-      summary: "",
-      entryPoints: j.entries,
-      steps,
-      replay: buildReplay(j.entries[0], plan, edgeBetween, nodeById, graph.meta.app.bundleId, root),
-      nameSource: nm.source,
-    }
-  })
-
-  // Screens (one per canonical node). State/stateGroup only when part of a toggle group.
-  const screens: ViewScreen[] = saf.canonicalNodes.map((n) => {
-    const grp = cls.stateGroup.get(n.id)
-    return {
-      id: n.id,
-      title: screenTitle(n, overridesC),
-      role: overridesC.screens?.[n.id]?.role ?? n.role,
-      description: overridesC.screens?.[n.id]?.description ?? "",
-      screenshotPath: n.screenshotPath,
-      texts: n.texts,
-      interactiveElements: n.interactiveElements,
-      state: grp ? cls.state.get(n.id) : undefined,
-      stateGroup: grp,
-      appearsIn: appearsIn.get(n.id) ?? [],
-    }
-  })
-
-  const decisionPoints = graph.decisionPoints.map((dp) => ({
-    screenId: canon(dp.nodeId),
-    options: dp.options.map((o) => ({
-      label: o.label,
-      explored: o.explored,
-      flowSlug: o.toNode ? nodeToFlow.get(canon(o.toNode)) : undefined,
-    })),
+  const localFlowsByGroup = new Map<string, Set<string>>()
+  const diagnostics: ViewDiagnostic[] = validation.canonicalizations.map((item) => ({
+    code: "canonicalized-reference",
+    message: `${item.location}: ${item.from} → ${item.to}`,
   }))
 
-  const topLevelFlows = flows.filter((f) => f.parent === null).length
-  const withReplay = flows.filter((f) => f.replay !== null).length
+  const flows: ViewFlow[] = definitions.map((definition) => {
+    const context = deriveContext(projected, definition, flowById)
+    const steps: ViewStep[] = []
+    if (context) {
+      const node = projected.nodeById.get(context.screenId)!
+      steps.push({
+        number: 1,
+        title: screenTitle(node, projected.overrides),
+        screenId: context.screenId,
+        action: "Entry point",
+        screenshotPath: node.screenshotPath,
+        kind: "context",
+        ...(context.variationIds ? { variationIds: context.variationIds } : {}),
+      })
+    }
+    for (let index = 0; index < definition.steps.length; index++) {
+      const screenId = definition.steps[index]
+      const node = projected.nodeById.get(screenId)!
+      const number = steps.length + 1
+      steps.push({
+        number,
+        title: screenTitle(node, projected.overrides),
+        screenId,
+        action: actionFor(projected, definition.steps, index, context),
+        screenshotPath: node.screenshotPath,
+        kind: "screen",
+      })
+      const group = projected.groupOf.get(screenId)!
+      const containingFlows = localFlowsByGroup.get(group) ?? new Set<string>()
+      containingFlows.add(definition.id)
+      localFlowsByGroup.set(group, containingFlows)
+      for (const member of projected.membersByGroup.get(group) ?? [screenId]) {
+        const occurrences = appearsIn.get(member) ?? []
+        occurrences.push({ flow: definition.id, step: number })
+        appearsIn.set(member, occurrences)
+      }
+    }
+    const replay = buildReplay(projected, definition.steps, context?.screenId ?? null)
+    if (replay.status === "unavailable") {
+      diagnostics.push({
+        code: "replay-unavailable",
+        flowId: definition.id,
+        message: replay.reason,
+      })
+    } else {
+      for (const warning of replay.warnings ?? []) {
+        diagnostics.push({
+          code: "replay-incomplete-selector",
+          flowId: definition.id,
+          message: warning,
+        })
+      }
+    }
+    return {
+      id: definition.id,
+      slug: definition.id,
+      name: definition.name,
+      parent: definition.parentId,
+      summary: definition.summary ?? "",
+      entryPoints: [...(definition.entryPoints ?? [])].sort((a, b) => {
+        if (a.flowId !== b.flowId) return a.flowId < b.flowId ? -1 : 1
+        if (a.fromScreenId !== b.fromScreenId) return a.fromScreenId < b.fromScreenId ? -1 : 1
+        return a.toScreenId < b.toScreenId ? -1 : a.toScreenId > b.toScreenId ? 1 : 0
+      }),
+      steps,
+      replay,
+    }
+  })
 
+  const flowOrder = new Map(flows.map((flow, index) => [flow.id, index]))
+  const screens: ViewScreen[] = projected.nodes.map((node) => {
+    const group = projected.classify.stateGroup.get(node.id)
+    const occurrences = appearsIn.get(node.id) ?? []
+    occurrences.sort(
+      (a, b) =>
+        (flowOrder.get(a.flow) ?? 0) - (flowOrder.get(b.flow) ?? 0) ||
+        a.step - b.step
+    )
+    return {
+      id: node.id,
+      title: screenTitle(node, projected.overrides),
+      role: projected.overrides.screens?.[node.id]?.role ?? node.role,
+      description: projected.overrides.screens?.[node.id]?.description ?? "",
+      screenshotPath: node.screenshotPath,
+      texts: node.texts,
+      interactiveElements: node.interactiveElements,
+      state: group ? projected.classify.state.get(node.id) : undefined,
+      stateGroup: group,
+      appearsIn: occurrences,
+    }
+  })
+
+  const decisionPoints = projected.decisionPoints.map((point) => ({
+    screenId: point.nodeId,
+    options: point.options.map((option) => {
+      if (!option.toNode) return { label: option.label, explored: option.explored }
+      const target = projected.canonicalOf.get(option.toNode) ?? option.toNode
+      const group = projected.groupOf.get(target) ?? target
+      const candidates = [...(localFlowsByGroup.get(group) ?? [])].sort()
+      if (candidates.length === 1) {
+        return { label: option.label, explored: option.explored, flowSlug: candidates[0] }
+      }
+      if (candidates.length > 1) {
+        diagnostics.push({
+          code: "ambiguous-decision-target",
+          screenId: target,
+          message: `Decision target "${target}" appears in multiple flows: ${candidates.join(", ")}`,
+        })
+      }
+      return { label: option.label, explored: option.explored }
+    }),
+  }))
+
+  diagnostics.sort((a, b) => {
+    if (a.code !== b.code) return a.code < b.code ? -1 : 1
+    if ((a.flowId ?? "") !== (b.flowId ?? "")) return (a.flowId ?? "") < (b.flowId ?? "") ? -1 : 1
+    if ((a.screenId ?? "") !== (b.screenId ?? "")) return (a.screenId ?? "") < (b.screenId ?? "") ? -1 : 1
+    return a.message < b.message ? -1 : a.message > b.message ? 1 : 0
+  })
+
+  const replayAvailable = flows.filter((flow) => flow.replay.status === "available").length
   return {
     app: graph.meta.app,
     captureDate: graph.meta.captureDate,
@@ -239,13 +257,17 @@ export function packageGraph(graph: Graph): View {
       screens: screens.length,
       rawNodes: graph.nodes.length,
       flows: flows.length,
-      topLevelFlows,
-      replayCoverage: flows.length ? Math.round((withReplay / flows.length) * 100) : 0,
-      truncatedFlows: seg.truncated.length,
+      topLevelFlows: flows.filter((flow) => flow.parent === null).length,
+      replayAvailable,
+      replayUnavailable: flows.length - replayAvailable,
+      coveredScreens: validation.coverage.covered.length,
+      uncoveredScreens: Object.keys(validation.coverage.uncovered).length,
+      unaccountedScreens: validation.coverage.unaccounted.length,
     },
-    namingTODO,
-    uncapturedSections: seg.emptyNavRoots,
+    coverage: validation.coverage,
+    diagnostics,
   }
 }
 
-export type { Graph, View } from "./types.ts"
+export { buildInventory, migrateFlows, validateFlows }
+export type { FlowsFile, Graph, View } from "./types.ts"

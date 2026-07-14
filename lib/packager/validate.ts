@@ -1,6 +1,5 @@
-// Validate a graph.json (the source of truth) before packaging. Replaces the
-// legacy standalone validate-capture.mjs — the contract is now the graph, and the
-// view is derived, so there is nothing to validate downstream of package().
+// Validate graph.json observation facts before semantic packaging. Flow semantics
+// are validated separately from flows.json; view.json is derived from both sources.
 
 import type { Graph } from "./types.ts"
 
@@ -58,13 +57,16 @@ export function validateGraph(graph: Graph): ValidationResult {
   }
 
   const ov = graph.overrides ?? {}
-  // Only node-id-keyed overrides are checked against the node set here. `flowNames` and
-  // `structure` are keyed by FLOW ids (a flow's anchor node id, disambiguated as
-  // `goal@entry` / `goal-2` when names collide) — not raw node ids — so they can't be
-  // validated without running the packager. A stale/dangling key simply no-ops (flowNames
-  // rename doesn't apply; a structure `parent` pointing nowhere falls back to top-level). A
-  // `structure` PARENT CYCLE is not harmless, but the packager now breaks it deterministically
-  // (segment.ts) and build-data warns on any unreachable flow, so no content is hidden.
+  const retired = ["flowNames", "structure"]
+  for (const key of retired) {
+    if (Object.prototype.hasOwnProperty.call(ov, key))
+      err(`overrides.${key} is retired; author semantic flows in flows.json`)
+  }
+  const allowed = new Set(["screens", "splits", "merges"])
+  for (const key of Object.keys(ov)) {
+    if (!allowed.has(key)) err(`overrides.${key} is not supported`)
+  }
+  // Only node-id-keyed observation corrections remain in graph.json.
   const nodeKeyedRefs: [string, string[]][] = [
     ["overrides.screens", Object.keys(ov.screens ?? {})],
     ["overrides.splits", ov.splits ?? []],

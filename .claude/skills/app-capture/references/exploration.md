@@ -1,6 +1,8 @@
 # Exploration Reference
 
-How the skill walks an app during initial capture and **records raw observation** into `_staging/walk.json` (`nodes` + `edges` + `decisionPoints`). Covers Tier 1/2/3 fallback, fingerprint-keyed BFS, recording nodes/edges, decision points, scroll handling, and hang recovery. The identity signals, flow tree, screen states, and replay are derived later — see [Assemble + Package](#assemble--package).
+How the skill walks an app during initial capture and records raw observation into
+`_staging/walk.json`. Identity and screen derivations are computed after assembly; semantic
+flows are authored from the inventory before the view and replay are generated.
 
 ## Interaction tiers
 
@@ -132,7 +134,7 @@ NEW SCREEN
 
 ## Fingerprint-keyed BFS
 
-The core exploration loop. Every screen becomes a **node** in `_staging/walk.json`; every tap that changes the screen becomes an **edge**. You record observation faithfully — you do not compute signals, classify states, or build flows (assemble + the packager do, see [Assemble + Package](#assemble--package)).
+The core exploration loop. Every screen becomes a **node** in `_staging/walk.json`; every tap that changes the screen becomes an **edge**. You record observation faithfully — you do not compute signals, classify derivations, or group flows here. Assembly computes the graph signals; the later semantic packaging pass authors `flows.json` (see [Assemble + Package](#assemble--package)).
 
 ### Per-screen capture routine — record a NODE
 
@@ -243,19 +245,25 @@ In **free-roam mode**, the agent picks top-priority unexplored automatically and
 
 **IMPORTANT: Decision points apply recursively.** Every new screen with multiple options is a decision point — not just the first. Explore in depth, not just breadth.
 
-**IMPORTANT: a fork becomes sibling flows only if you *walk* ≥2 of its branches — recording an option isn't enough to create one.** The packager (`segment`) builds the flow tree so that a screen becomes a **fork** when ≥2 distinct onward journeys are reachable only by going *through* it, and turns each into a child flow rooted at that screen. The tree is built from the nav/overlay **edges you actually walked** — so an option you record but never tap creates no edge, no branch, no flow, and walking only one option at a real fork collapses what should be siblings into one linear trunk. Your recorded `decisionPoints` aren't inert, though: **their option order now sets the order of the sibling child flows** — so record options in the order you want them to read.
+**Walk enough branches to understand intent.** Graph shape no longer creates sibling flows,
+but an unexplored option leaves the semantic author without evidence about whether it is a
+method, separate intent, alternate entry, or transient step. `decisionPoints` record the
+app's visible choices; `flows.json.order` separately controls semantic sibling order.
 
 Tell the kinds of multi-option screen apart:
 
 | At this screen… | Walk | Result |
 | --- | --- | --- |
-| **Divergent fork** — distinct journeys (`Bank` vs `Crypto` payee; `Sign in` vs `Create account`; send-to-contact vs send-to-address) | **each** branch, to a natural endpoint (leaf / confirmation / back to a hub) | each becomes a **sibling child flow** rooted at the fork screen |
-| **Homogeneous list** — many like items (tokens, contacts, transactions) | **one** representative | same-skeleton rows merge, and the packager collapses same-family detail screens to a single exemplar — extra rows add no flows |
+| **Divergent fork** — potentially distinct outcomes or methods | **each** branch, to a natural endpoint | enough evidence to author separate semantic flows when appropriate |
+| **Homogeneous list** — many like items | one representative, plus examples needed to establish derivations | same-intent examples can share one screen derivation group |
 
-- **Walk each branch to its endpoint, not one tap in.** A branch abandoned after one tap still becomes a flow — just a thin, half-told one. Branch-walk quality = flow quality.
-- **A return-to-launcher sheet is NOT a fork.** If an option just opens a picker/peek/info sheet that pops back (no onward journey of its own), the packager treats it as an *excursion* and weaves it in as an inline **picker step** of its launcher's flow. Still capture it (tap it, record the node + the return edge) — but don't count it as a branch or expect a child flow from it.
-- **Cover each fork's branches once — not every permutation.** Flows nest as a *tree*: the path *to* a fork is shared by all its children (the fork screen is the parent's last step and step 1 of each child), so return to the fork and take the next option — never re-walk the prefix or take the cartesian product of choices across forks. Coverage is additive in branches, not multiplicative.
-- **Can't walk a branch** (auth gate, sensitive action, budget)? Record it in `decisionPoints[].options[]` with `explored: false` — it surfaces in the view as "branches here — not explored," but yields no flow.
+- **Walk each selected branch to its endpoint.** The semantic author needs the interaction and
+  outcome, not only the first destination.
+- **Record return transitions.** A picker or information sheet can remain a step in its
+  supporting intent; open/return edges enable optional direct replay.
+- **Cover branches once, not every permutation.** Return to the decision surface and take the
+  next option without multiplying independent choices.
+- **Can't walk a branch?** Record it with `explored: false`; do not fabricate semantic content.
 
 **Test interactivity before presenting options.** Try one click first. If interaction hangs, switch to Tier 3 and ask the user which path directly. Don't enumerate 16 options you can't follow.
 
@@ -315,24 +323,33 @@ Some screens prevent the runner from reaching idle (continuous animations, live 
 
 ### Main navigation → `mainNav`
 
-A persistent primary navigation — a bottom-tab bar, nav rail, or drawer shown across the app's top-level screens — defines its top-level sections. Record the node id each nav item lands on in the walk-level `mainNav` array, e.g. `"mainNav": ["home", "search", "profile"]`. The packager makes each one a **top-level flow that roots its own subtree** instead of nesting it under whatever screen you tapped it from (a peer section, not a child of Home).
+A persistent primary navigation defines the app's visible top-level sections. Record the node
+id each item lands on in `mainNav`. The semantic author uses this inventory signal to orient
+top-level flows; graph reachability does not assign their children.
 
 - Record the node a nav item navigates TO — the section's landing screen in the state you first reach it — and include the home/default tab too.
-- Optional: omit `mainNav` for apps with no persistent main navigation (pure onboarding, a single linear tool). Absence changes nothing about the derivation.
+- Optional: omit `mainNav` for apps with no persistent main navigation.
 - A typo'd id fails validation in `assemble.ts` (it refuses to write), so you catch it immediately.
 
 ## Assemble + Package
 
-After exploration you have a complete `_staging/walk.json` (raw `nodes` + `edges` + `decisionPoints` + `root` + optional `mainNav` + `meta`). Two deterministic steps turn it into the derived view — you hand-build none of it:
+After exploration, assemble the observed graph, inspect its deterministic inventory, author
+semantic flows, then validate and package both sources:
 
 ```bash
-node scripts/assemble.ts _staging/walk.json {date}/graph.json   # 1. signals + assets + validate → graph.json
-node scripts/package.ts {date}/graph.json                       # 2. derive flows/states/tree/replay
+node scripts/assemble.ts _staging/walk.json {date}/graph.json
+node scripts/flows.ts inventory {date}/graph.json
+# author {date}/flows.json using flow-grouping.md, then naming.md
+node scripts/flows.ts validate {date}/graph.json --strict
+node scripts/package.ts {date}/graph.json
 ```
 
-**Assemble** computes the four identity signals (fingerprint/skeleton via the engine, pHash from each staged shot), content-addresses the staging shots/snaps into `assets/`, finalizes each edge's `in-place`/`nav` kind from skeleton equality, validates, and writes `graph.json` (refusing to write on a validation error). **Package** validates again and derives the `View`: merges duplicate nodes, clusters logical screens, classifies states (`in-place` edges become on-step toggles), segments the flow tree, and emits inline replay — printing the flow tree, stats, and a **`namingTODO`** list.
-
-**Fill in names.** For each entry in `namingTODO`, add a name to `overrides.flowNames["<name-key>"]` in `graph.json` (gerund + object for actions — `Buying a token`; plain noun for sections/details — `Settings`, `Token detail`). Use the entry's **`nameKey`** verbatim as the key — it is the flow's first distinctive screen (`steps[1]`, or the launch screen for a one-step hub), not the routing slug and not the stable flow id. Re-run `package.ts` until `namingTODO` is empty or acceptable. To correct anything else the packager derived (a screen's role, a flow's parent, a wrong merge), use `overrides` and re-run — never hand-edit the derived output. See [editing.md](editing.md).
+**Assemble** computes identity signals, content-addresses assets, finalizes edge kinds, and
+validates `graph.json`. **Inventory** exposes post-SAF screens, derivation groups, edges,
+decisions, and navigation. Audit derivations, then author structure with
+[flow-grouping.md](flow-grouping.md) and names/ids with [naming.md](naming.md).
+**Package** validates coverage and derives context, replay, reverse occurrences, decision
+links, and the UI read model without changing authored semantics.
 
 ## Guidance
 
@@ -348,5 +365,6 @@ node scripts/package.ts {date}/graph.json                       # 2. derive flow
 - One phone, one session. Never spawn parallel agents/subagents driving the device concurrently.
 - After any process kill or restart, always `agent-device open {pkg} --device "{device}"` before any other command. Prefer reopen over kill; `pkill -9` is a last resort.
 - Escalate to Tier 3 promptly. If 2 consecutive commands hang on the same screen, stop retrying and ask the user to navigate.
-- Capture generously during exploration; the packager is selective when it derives the view.
-- **Don't build flows or classify states by hand.** Record the graph; run the packager.
+- Capture generously; semantic packaging accounts for useful screens and explicitly disposes
+  of noise.
+- Author flows from the canonical inventory; do not infer intent from graph structure alone.

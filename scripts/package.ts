@@ -1,33 +1,37 @@
-// CLI wrapper around the packager, for the capture skill.
+// Strict graph + semantic-flow package builder used by the capture workflow.
 //
-//   node scripts/package.ts <graph.json>            # summary + namingTODO
-//   node scripts/package.ts <graph.json> --json     # full derived View to stdout
-//
-// The SSG build imports packageGraph() directly; this is the skill's entry point
-// for inspecting flows, collecting names to fill into overrides, and validating.
+//   node scripts/package.ts <graph.json> [flows.json] [--json]
 
 import { readFileSync } from "node:fs"
+import { dirname, join } from "node:path"
 import { packageGraph } from "../lib/packager/index.ts"
 import { validateGraph } from "../lib/packager/validate.ts"
-import type { Graph } from "../lib/packager/types.ts"
+import { validateFlows } from "../lib/packager/flows.ts"
+import type { FlowsFile, Graph } from "../lib/packager/types.ts"
 
-const path = process.argv[2]
+const graphPath = process.argv[2]
+const explicitFlowsPath = process.argv.slice(3).find((arg) => !arg.startsWith("--"))
 const asJson = process.argv.includes("--json")
-if (!path) {
-  console.error("usage: node scripts/package.ts <graph.json> [--json]")
+if (!graphPath) {
+  console.error("usage: node scripts/package.ts <graph.json> [flows.json] [--json]")
   process.exit(2)
 }
+const flowsPath = explicitFlowsPath ?? join(dirname(graphPath), "flows.json")
+const graph = JSON.parse(readFileSync(graphPath, "utf8")) as Graph
+const flows = JSON.parse(readFileSync(flowsPath, "utf8")) as FlowsFile
 
-const graph = JSON.parse(readFileSync(path, "utf8")) as Graph
-const { errors, warnings } = validateGraph(graph)
-for (const w of warnings) console.error(`warn:  ${w}`)
+const graphValidation = validateGraph(graph)
+const flowValidation = validateFlows(graph, flows, { strict: true })
+for (const warning of [...graphValidation.warnings, ...flowValidation.warnings])
+  console.error(`warn:  ${warning}`)
+const errors = [...graphValidation.errors, ...flowValidation.errors]
 if (errors.length) {
-  for (const e of errors) console.error(`error: ${e}`)
-  console.error(`\nFAILED: ${errors.length} error(s) in ${path}`)
+  for (const error of errors) console.error(`error: ${error}`)
+  console.error(`\nFAILED: ${errors.length} error(s)`)
   process.exit(1)
 }
-const view = packageGraph(graph)
 
+const view = packageGraph(graph, flows)
 if (asJson) {
   process.stdout.write(JSON.stringify(view, null, 2))
   process.exit(0)
@@ -35,19 +39,28 @@ if (asJson) {
 
 console.log(`${view.app.name} — ${view.captureDate}`)
 console.log(JSON.stringify(view.stats, null, 2))
-
-const childrenOf = new Map<string | null, typeof view.flows>()
-for (const f of view.flows) (childrenOf.get(f.parent) ?? childrenOf.set(f.parent, []).get(f.parent)!).push(f)
-const printFlow = (slug: string | null, depth: number) => {
-  for (const f of childrenOf.get(slug) ?? []) {
-    console.log("  ".repeat(depth) + `• ${f.name} [${f.slug}] (${f.steps.length} steps, replay=${f.replay?.confidence ?? "none"})`)
-    printFlow(f.slug, depth + 1)
+const children = new Map<string | null, typeof view.flows>()
+for (const flow of view.flows) {
+  const siblings = children.get(flow.parent) ?? []
+  siblings.push(flow)
+  children.set(flow.parent, siblings)
+}
+const printTree = (parent: string | null, depth: number) => {
+  for (const flow of children.get(parent) ?? []) {
+    const replay =
+      flow.replay.status === "available"
+        ? flow.replay.confidence
+        : `unavailable: ${flow.replay.reason}`
+    console.log(
+      `${"  ".repeat(depth)}• ${flow.name} [${flow.id}] (${flow.steps.length} rendered, replay=${replay})`
+    )
+    printTree(flow.id, depth + 1)
   }
 }
 console.log("\nflow tree:")
-printFlow(null, 0)
-
-if (view.namingTODO.length) {
-  console.log(`\nnamingTODO (${view.namingTODO.length}) — fill via overrides.flowNames, keyed by nameKey:`)
-  for (const t of view.namingTODO) console.log(`  ${t.nameKey} → "${t.mechanicalName}"  (flow: ${t.slug})`)
+printTree(null, 0)
+if (view.diagnostics.length) {
+  console.log("\ndiagnostics:")
+  for (const diagnostic of view.diagnostics)
+    console.log(`  ${diagnostic.code}: ${diagnostic.message}`)
 }

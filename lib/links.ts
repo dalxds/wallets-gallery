@@ -6,6 +6,8 @@
 // opened as an intercepted modal in-app, and rendered as a full standalone page
 // (with its own OG card) on a direct or shared link.
 
+import { variationParam } from "./variations"
+
 // Single source of truth for a capture's URL. Everything that links into a
 // capture builds on this, so the dated shape can never drift between callers.
 export function captureBase(appSlug: string, date: string): string {
@@ -26,10 +28,21 @@ export function flowHref(
   date: string,
   // 1-based step number (matches the badge on the card); omit for the flow's
   // first step.
-  step?: number
+  step?: number,
+  // Human-facing variation label rendered at the step (for example "Issued").
+  variation?: string
 ): string {
   const base = `${captureBase(appSlug, date)}/flow/${encodeURIComponent(flowSlug)}`
-  return step != null ? `${base}?step=${step}` : base
+  const params = new URLSearchParams()
+  if (step != null) params.set("step", String(step))
+  if (variation != null) {
+    const normalizedVariation = variationParam(variation)
+    if (!normalizedVariation)
+      throw new Error("variation must have a URL-safe name")
+    params.set("variation", normalizedVariation)
+  }
+  const query = params.toString()
+  return query ? `${base}?${query}` : base
 }
 
 // The Flows tab of a capture's gallery — its own prerendered route. (The Screens

@@ -1,5 +1,9 @@
 # Flow segmentation redesign
 
+> Superseded in v5.0.0 by
+> [Semantic journey packaging](journey-packaging-redesign.md). This file is retained only as
+> the historical design record for v2–v4 and does not describe the current implementation.
+
 Design note for reworking how screens are packaged into flows (`lib/packager/segment.ts`,
 with touchpoints in `index.ts` and `naming.ts`). Captures the decisions from the review
 discussion and stages the work. **Stage 1 is implemented and committed (app v2.1.0); Stages

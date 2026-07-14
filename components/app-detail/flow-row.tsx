@@ -152,7 +152,7 @@ export function FlowRow({
                     {stateCount > 1 && (
                       <div className="pointer-events-none absolute bottom-1.5 left-1.5 z-10 flex items-center gap-1 rounded-md bg-background/85 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shadow-sm backdrop-blur-sm">
                         <Layers className="h-2.5 w-2.5" />
-                        {stateCount} states
+                        {stateCount} variations
                       </div>
                     )}
                   </div>

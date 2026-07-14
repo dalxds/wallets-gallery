@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "flows": [
+    { "id": "getting-started", "name": "Getting started", "parentId": null, "order": 0, "steps": ["welcome"] },
+    { "id": "creating-an-account", "name": "Creating an account", "parentId": "getting-started", "order": 0, "steps": ["email-entry", "otp", "legal-name", "choose-username", "notifications-priming", "country-residence", "country-picker", "top-up", "add-funds-amount", "add-funds-method-picker", "deposit-onchain", "enable-notifications-modal", "deposit-onchain-pending", "deposit-complete", "whats-new-promo"] },
+    { "id": "recovering-an-account", "name": "Recovering an account", "parentId": "getting-started", "order": 1, "steps": ["recover-account", "recover-phrase-import"] },
+    { "id": "entering-a-referral-code", "name": "Entering a referral code", "parentId": "getting-started", "order": 2, "steps": ["referral-code"] },
+    { "id": "home", "name": "Home", "parentId": null, "order": 1, "steps": ["home"] },
+    { "id": "adding-money", "name": "Adding money", "parentId": "home", "order": 0, "steps": ["add-money-source"], "entryPoints": [{ "flowId": "earn", "fromScreenId": "earn", "toScreenId": "add-money-source" }] },
+    { "id": "sending-money", "name": "Sending money", "parentId": "home", "order": 1, "steps": ["send-recipient", "send-find-tuyo"], "entryPoints": [{ "flowId": "earn", "fromScreenId": "earn", "toScreenId": "send-recipient" }] },
+    { "id": "getting-the-tuyo-card", "name": "Getting the Tuyo Card", "parentId": "home", "order": 2, "steps": ["card-intro", "kyc-verify-prompt", "kyc-persona-start", "kyc-persona-country", "kyc-persona-id-type"] },
+    { "id": "reviewing-a-transaction", "name": "Reviewing a transaction", "parentId": "home", "order": 3, "steps": ["transaction-detail"] },
+    { "id": "managing-settings", "name": "Managing settings", "parentId": "home", "order": 4, "steps": ["settings"] },
+    { "id": "verifying-identity", "name": "Verifying identity", "parentId": "managing-settings", "order": 0, "steps": ["settings-verification"] },
+    { "id": "changing-an-account-handle", "name": "Changing an account handle", "parentId": "managing-settings", "order": 1, "steps": ["settings-account-handle"] },
+    { "id": "configuring-privacy", "name": "Configuring privacy", "parentId": "managing-settings", "order": 2, "steps": ["settings-privacy"] },
+    { "id": "managing-permissions", "name": "Managing permissions", "parentId": "managing-settings", "order": 3, "steps": ["settings-permissions"] },
+    { "id": "managing-keys-and-security", "name": "Managing keys and security", "parentId": "managing-settings", "order": 4, "steps": ["settings-keys-security"] },
+    { "id": "getting-help", "name": "Getting help", "parentId": "managing-settings", "order": 5, "steps": ["settings-help"] },
+    { "id": "earn", "name": "Earn", "parentId": null, "order": 2, "steps": ["earn"] },
+    { "id": "converting-tokens", "name": "Converting tokens", "parentId": "earn", "order": 0, "steps": ["earn-convert", "earn-convert-pair", "earn-convert-review"] },
+    { "id": "investing", "name": "Investing", "parentId": "earn", "order": 1, "steps": ["earn-invest-explorer"] },
+    { "id": "viewing-a-token", "name": "Viewing a token", "parentId": "investing", "order": 0, "steps": ["earn-token-detail"], "entryPoints": [{ "flowId": "searching-for-a-token", "fromScreenId": "earn-token-search", "toScreenId": "earn-token-detail" }] },
+    { "id": "searching-for-a-token", "name": "Searching for a token", "parentId": "investing", "order": 1, "steps": ["earn-token-search"] },
+    { "id": "earning-yield", "name": "Earning yield", "parentId": "earn", "order": 2, "steps": ["earn-strategies", "strategies-info-1", "earn-strategy-list", "earn-strategy-deposit", "earn-vault-deposit", "earn-vault-deposit-review"] },
+    { "id": "rewards", "name": "Rewards", "parentId": null, "order": 3, "steps": ["rewards-intro", "rewards"] },
+    { "id": "learning-how-to-earn-tuyos", "name": "Learning how to earn TUYOs", "parentId": "rewards", "order": 0, "steps": ["rewards-get-tuyos", "rewards-get-tuyos-trade", "rewards-get-tuyos-yield", "rewards-get-tuyos-referral"] },
+    { "id": "inviting-friends", "name": "Inviting friends", "parentId": "rewards", "order": 1, "steps": ["rewards-invite"] },
+    { "id": "viewing-the-leaderboard", "name": "Viewing the leaderboard", "parentId": "rewards", "order": 2, "steps": ["rewards-leaderboard", "leaderboard-info-1"] }
+  ],
+  "uncovered": {},
+  "flowTODO": []
+}

@@ -3253,31 +3253,6 @@
   ],
   "overrides": {
     "merges": [],
-    "flowNames": {
-      "email-login": "Welcome",
-      "home": "Home",
-      "settings": "Settings",
-      "transaction-detail": "Transaction receipt",
-      "activity-filter": "Activity filter",
-      "withdraw": "Withdrawing funds",
-      "qr-scanner": "Scanning a QR code",
-      "card-gen-account-type": "Card",
-      "markets-section-ranked": "Market-cap rankings",
-      "spacex-detail": "Buying a token (SpaceX)",
-      "swap": "Swapping tokens",
-      "gold-detail": "Token detail",
-      "grow-stablecoin-yields": "Grow balance",
-      "markets": "Markets",
-      "credit-mode": "Opening a credit line",
-      "credit-manage": "Credit line actions",
-      "credit-info": "How credit rewards work",
-      "card-detail": "Card details",
-      "card-limits": "Setting a spending limit",
-      "card-delete-confirm": "Deleting a card",
-      "card-tab-menu": "Adding a card",
-      "referrals": "Referrals",
-      "deposit-crypto": "Adding money"
-    },
     "splits": [
       "card-gen-account-type",
       "card-gen-country",
@@ -3285,11 +3260,39 @@
       "deposit-crypto-eth"
     ],
     "screens": {
+      "spacex-detail": {
+        "title": "Space X"
+      },
       "home-credit": {
         "role": "home"
       },
       "home-onboarding": {
         "role": "home"
+      },
+      "card": {
+        "title": "Card",
+        "stateGroup": "card",
+        "state": "Available"
+      },
+      "card-my-cards": {
+        "title": "Card",
+        "stateGroup": "card",
+        "state": "Issued"
+      },
+      "gold-detail": {
+        "title": "Asset detail",
+        "stateGroup": "asset-detail",
+        "state": "Gold"
+      },
+      "metadao-detail": {
+        "title": "Asset detail",
+        "stateGroup": "asset-detail",
+        "state": "MetaDAO"
+      },
+      "wbtc-detail": {
+        "title": "Asset detail",
+        "stateGroup": "asset-detail",
+        "state": "Wrapped BTC"
       }
     }
   }

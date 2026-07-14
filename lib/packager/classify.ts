@@ -7,7 +7,7 @@
 // Everything else stays an ordinary distinct screen.
 //
 // (An earlier version also routed non-toggle variants "divergent" vs "lifecycle" from a
-// reachability comparison, but nothing consumed those values — segmentation only folds
+// reachability comparison, but nothing consumed those values — view projection only folds
 // "toggle" — so that dead computation was removed.)
 
 import type { GraphEdge, GraphNode, Overrides, StateLabel } from "./types.ts"

@@ -7,7 +7,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { FlowViewer } from "./flow-viewer"
+import { FlowNavigator } from "./flow-navigator"
 import { flowsHref } from "@/lib/links"
 import { useRouter } from "next/navigation"
 
@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation"
 // wrapper only adds the Dialog and the close handler.
 export function FlowLightbox({
   flow,
+  flows,
   screens,
   appSlug,
   appName,
@@ -24,6 +25,7 @@ export function FlowLightbox({
   date,
 }: {
   flow: ClientFlow
+  flows: ClientFlow[]
   screens: ClientScreen[]
   appSlug: string
   appName: string
@@ -48,9 +50,9 @@ export function FlowLightbox({
           Flow lightbox viewer
         </DialogDescription>
 
-        <FlowViewer
-          key={flow.slug}
-          flow={flow}
+        <FlowNavigator
+          initialFlow={flow}
+          flows={flows}
           screens={screens}
           appSlug={appSlug}
           appName={appName}
