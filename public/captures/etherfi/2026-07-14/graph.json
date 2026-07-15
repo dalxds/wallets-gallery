@@ -5469,7 +5469,7 @@
         "stateGroup": "promotions"
       },
       "transaction-history-all-empty": {
-        "state": "all",
+        "state": "default",
         "stateGroup": "transaction-history"
       },
       "transaction-history-vault-empty": {
@@ -5576,9 +5576,7 @@
         "state": "Virtual"
       },
       "earn-after-deposit": {
-        "title": "Earn",
-        "stateGroup": "earn",
-        "state": "Position"
+        "title": "Earn after deposit"
       },
       "transaction-history-pending": {
         "title": "Transaction history",
@@ -5596,34 +5594,22 @@
         "state": "Funded"
       },
       "vault-after-swap": {
-        "title": "Vault",
-        "stateGroup": "vault",
-        "state": "After conversion"
+        "title": "Vault after conversion"
       },
       "vault-after-transfer": {
-        "title": "Vault",
-        "stateGroup": "vault",
-        "state": "After transfer"
+        "title": "Vault after transfer"
       },
       "earn-products": {
-        "title": "Earn",
-        "stateGroup": "earn",
-        "state": "Products"
+        "title": "Earn"
       },
       "earn-overview": {
-        "title": "Earn",
-        "stateGroup": "earn",
-        "state": "Liquid strategies"
+        "title": "Liquid strategies"
       },
       "earn-after-withdrawal": {
-        "title": "Earn",
-        "stateGroup": "earn",
-        "state": "After withdrawal"
+        "title": "Earn after withdrawal"
       },
       "transaction-history-deposit": {
-        "title": "Transaction history",
-        "stateGroup": "transaction-history",
-        "state": "Pending withdrawal"
+        "title": "Transaction history"
       }
     },
     "splits": [

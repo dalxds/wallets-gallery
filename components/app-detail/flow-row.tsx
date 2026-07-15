@@ -87,7 +87,6 @@ export function FlowRow({
         <div className="flex shrink-0 items-center gap-2">
           <p className="text-xs text-muted-foreground">
             {flow.steps.length} {flow.steps.length === 1 ? "screen" : "screens"}
-            {flow.summary ? ` · ${flow.summary}` : ""}
           </p>
           <Button
             variant="ghost"

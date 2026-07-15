@@ -196,6 +196,23 @@ export function packageGraph(graph: Graph, source: FlowsFile): View {
   })
 
   const flowOrder = new Map(flows.map((flow, index) => [flow.id, index]))
+  // Present screens in semantic flow order. This keeps onboarding and other
+  // first-run screens at the front of the Screens tab while remaining fully
+  // deterministic and capture-agnostic. Variations follow their authored state
+  // order; screens outside flows retain lexical order at the end.
+  const screenPresentationOrder = new Map<string, number>()
+  let nextScreenOrder = 0
+  for (const flow of flows) {
+    for (const step of flow.steps) {
+      if (step.kind !== "screen") continue
+      const group = projected.groupOf.get(step.screenId) ?? step.screenId
+      for (const member of projected.membersByGroup.get(group) ?? [step.screenId]) {
+        if (!screenPresentationOrder.has(member))
+          screenPresentationOrder.set(member, nextScreenOrder++)
+      }
+    }
+  }
+
   const screens: ViewScreen[] = projected.nodes.map((node) => {
     const group = projected.classify.stateGroup.get(node.id)
     const occurrences = appearsIn.get(node.id) ?? []
@@ -216,7 +233,12 @@ export function packageGraph(graph: Graph, source: FlowsFile): View {
       stateGroup: group,
       appearsIn: occurrences,
     }
-  })
+  }).sort(
+    (a, b) =>
+      (screenPresentationOrder.get(a.id) ?? Number.MAX_SAFE_INTEGER) -
+        (screenPresentationOrder.get(b.id) ?? Number.MAX_SAFE_INTEGER) ||
+      (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)
+  )
 
   const decisionPoints = projected.decisionPoints.map((point) => ({
     screenId: point.nodeId,

@@ -11,21 +11,14 @@
         "onboarding-credit-card",
         "onboarding-notifications",
         "create-personal-account",
+        "referral-code",
+        "referral-code-applied",
         "email-verification-code",
         "terms-and-conditions",
         "passkey-setup",
-        "passkey-setup-creating-account"
-      ]
-    },
-    {
-      "id": "applying-referral-code",
-      "name": "Applying a referral code",
-      "summary": "Add a referral code while creating a personal account.",
-      "parentId": "getting-started",
-      "order": 0,
-      "steps": [
-        "referral-code",
-        "referral-code-applied"
+        "passkey-setup-creating-account",
+        "cards-verification-required",
+        "vault-empty"
       ]
     },
     {
@@ -40,8 +33,18 @@
       ],
       "entryPoints": [
         {
+          "flowId": "earn",
+          "fromScreenId": "earn-products",
+          "toScreenId": "vault-empty"
+        },
+        {
           "flowId": "cards",
           "fromScreenId": "cards-verification-required",
+          "toScreenId": "vault-empty"
+        },
+        {
+          "flowId": "transactions",
+          "fromScreenId": "transaction-history-all-empty",
           "toScreenId": "vault-empty"
         }
       ]
@@ -96,7 +99,8 @@
         "convert-auth",
         "convert-processing",
         "convert-success",
-        "convert-reset"
+        "convert-reset",
+        "vault-after-swap"
       ]
     },
     {
@@ -116,7 +120,8 @@
         "contract-recipient-warning",
         "transfer-review",
         "transfer-auth",
-        "transfer-processing"
+        "transfer-processing",
+        "vault-after-transfer"
       ]
     },
     {
@@ -135,9 +140,14 @@
           "toScreenId": "earn-products"
         },
         {
-          "flowId": "vault",
-          "fromScreenId": "vault-after-transfer",
-          "toScreenId": "earn-overview"
+          "flowId": "cards",
+          "fromScreenId": "cards-verification-required",
+          "toScreenId": "earn-products"
+        },
+        {
+          "flowId": "transactions",
+          "fromScreenId": "transaction-history-all-empty",
+          "toScreenId": "earn-products"
         }
       ]
     },
@@ -148,11 +158,13 @@
       "parentId": "earn",
       "order": 0,
       "steps": [
+        "earn-overview",
         "yield-deposit-form",
         "yield-deposit-amount",
         "yield-deposit-auth",
         "yield-deposit-complete",
-        "yield-position-after-deposit"
+        "yield-position-after-deposit",
+        "earn-after-deposit"
       ]
     },
     {
@@ -167,7 +179,8 @@
         "yield-withdraw-max",
         "yield-withdraw-auth",
         "yield-withdrawal-requested",
-        "yield-position-withdrawal-pending"
+        "yield-position-withdrawal-pending",
+        "earn-after-withdrawal"
       ]
     },
     {
@@ -187,6 +200,33 @@
         "kyc-identity-overview",
         "kyc-document-type",
         "cards-add-funds",
+        "cards-overview"
+      ],
+      "entryPoints": [
+        {
+          "flowId": "vault",
+          "fromScreenId": "vault-empty",
+          "toScreenId": "cards-verification-required"
+        },
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-products",
+          "toScreenId": "cards-verification-required"
+        },
+        {
+          "flowId": "transactions",
+          "fromScreenId": "transaction-history-all-empty",
+          "toScreenId": "cards-verification-required"
+        }
+      ]
+    },
+    {
+      "id": "registering-a-card",
+      "name": "Registering a card",
+      "summary": "Accept the card terms, choose a virtual card, and complete issuance.",
+      "parentId": "cards",
+      "order": 0,
+      "steps": [
         "card-terms",
         "card-terms-accepted",
         "add-card-virtual",
@@ -194,20 +234,7 @@
         "confirm-legal-name",
         "add-card-virtual-after-name",
         "card-optional-details",
-        "card-issued",
-        "cards-overview"
-      ],
-      "entryPoints": [
-        {
-          "flowId": "getting-started",
-          "fromScreenId": "passkey-setup-creating-account",
-          "toScreenId": "cards-verification-required"
-        },
-        {
-          "flowId": "earn",
-          "fromScreenId": "earn-after-deposit",
-          "toScreenId": "cards-verification-required"
-        }
+        "card-issued"
       ]
     },
     {
@@ -215,7 +242,7 @@
       "name": "Managing a card",
       "summary": "Open card management and review spending limits.",
       "parentId": "cards",
-      "order": 0,
+      "order": 1,
       "steps": [
         "manage-card",
         "spending-limits"
@@ -226,7 +253,7 @@
       "name": "Freezing a card",
       "summary": "Review the confirmation before freezing a card.",
       "parentId": "cards",
-      "order": 1,
+      "order": 2,
       "steps": [
         "freeze-card-confirmation"
       ]
@@ -236,7 +263,7 @@
       "name": "Reporting a decline",
       "summary": "Review the form for reporting an unexpected card decline.",
       "parentId": "cards",
-      "order": 2,
+      "order": 3,
       "steps": [
         "report-decline"
       ]
@@ -253,19 +280,19 @@
       ],
       "entryPoints": [
         {
+          "flowId": "vault",
+          "fromScreenId": "vault-empty",
+          "toScreenId": "transaction-history-all-empty"
+        },
+        {
           "flowId": "earn",
           "fromScreenId": "earn-products",
           "toScreenId": "transaction-history-all-empty"
         },
         {
-          "flowId": "earn",
-          "fromScreenId": "earn-after-deposit",
-          "toScreenId": "transaction-history-pending"
-        },
-        {
-          "flowId": "earn",
-          "fromScreenId": "earn-after-withdrawal",
-          "toScreenId": "transaction-history-pending"
+          "flowId": "cards",
+          "fromScreenId": "cards-verification-required",
+          "toScreenId": "transaction-history-all-empty"
         }
       ]
     },

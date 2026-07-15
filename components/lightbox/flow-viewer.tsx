@@ -126,7 +126,7 @@ export function FlowViewer({
     const el = scrollRef.current
     if (!el) return
     // Two constraints on the step image height:
-    //   • fit the strip: clientHeight − padding, label, and optional connection
+    //   • fit the strip: clientHeight − padding and the step label
     //   • keep a card ≤ ~62% of the strip width so the neighbours always peek
     //     (one screen centered at a time on narrow/mobile). Card width =
     //     height·9/20, so height ≤ 0.62·width·20/9.
@@ -427,7 +427,12 @@ function StepCard({
   const displaySrc = activeVariant
     ? captureUrl(appSlug, activeVariant.screenshotPath)
     : src
-  const connections = connectionsByScreen.get(activeId) ?? []
+  // Entry origins are the useful context here. Outbound "Open" pills merely
+  // repeat persistent app navigation and can double the overlay for main-nav
+  // screens without adding information.
+  const connections = (connectionsByScreen.get(activeId) ?? []).filter(
+    (connection) => connection.direction === "from"
+  )
 
   async function copyImage(e: React.MouseEvent) {
     e.stopPropagation()
@@ -524,6 +529,30 @@ function StepCard({
           </button>
         </div>
 
+        {/* Flow origins stay inside the image so they never change the card
+            height or knock connected screenshots off the shared baseline. */}
+        {connections.length > 0 && (
+          <div className="absolute top-1.5 left-1.5 z-10 flex max-w-[calc(100%-3rem)] flex-wrap gap-1">
+            {connections.map((connection) => (
+              <button
+                type="button"
+                key={`${connection.direction}:${connection.flowId}:${connection.step}:${connection.screenId}`}
+                onClick={() =>
+                  onNavigateFlow(
+                    connection.flowId,
+                    connection.step,
+                    connection.screenId
+                  )
+                }
+                className="max-w-full truncate rounded-full border bg-background/90 px-2 py-0.5 text-[10px] font-medium text-foreground shadow-sm backdrop-blur transition-colors hover:bg-background"
+                title={`From ${connection.flowName}`}
+              >
+                From {connection.flowName}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* State switcher — overlaid so the screenshot keeps its full height */}
         {hasStates && (
           <div
@@ -567,28 +596,6 @@ function StepCard({
           {getStepLabel(step)}
         </span>
       </div>
-      {connections.length > 0 && (
-        <div className="flex w-full flex-col items-center gap-1">
-          {connections.map((connection) => (
-            <button
-              type="button"
-              key={`${connection.direction}:${connection.flowId}:${connection.step}:${connection.screenId}`}
-              onClick={() =>
-                onNavigateFlow(
-                  connection.flowId,
-                  connection.step,
-                  connection.screenId
-                )
-              }
-              className="max-w-full truncate rounded-full border bg-background px-2 py-0.5 text-[10px] font-medium text-foreground shadow-sm transition-colors hover:bg-muted"
-              title={`${connection.direction === "to" ? "Open" : "From"} ${connection.flowName}`}
-            >
-              {connection.direction === "to" ? "Open" : "From"}{" "}
-              {connection.flowName}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   )
 }

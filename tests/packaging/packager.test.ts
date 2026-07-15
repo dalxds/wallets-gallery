@@ -841,6 +841,39 @@ describe("occurrences, decisions, and determinism", () => {
       JSON.stringify(packageGraph(g, source))
     )
   })
+
+  it("orders the Screens tab by semantic flow order with variations together", () => {
+    const g = graph(
+      [node("home"), node("intro-2"), node("intro-1")],
+      [edge("intro-1", "home")],
+      {
+        overrides: {
+          screens: {
+            "intro-1": { stateGroup: "introduction", state: "1" },
+            "intro-2": { stateGroup: "introduction", state: "2" },
+          },
+        },
+      }
+    )
+    const view = packageGraph(
+      g,
+      flows([
+        {
+          id: "getting-started",
+          name: "Getting started",
+          parentId: null,
+          order: 0,
+          steps: ["intro-1", "home"],
+        },
+      ])
+    )
+
+    expect(view.screens.map((screen) => screen.id)).toEqual([
+      "intro-1",
+      "intro-2",
+      "home",
+    ])
+  })
 })
 
 describe("inventory, audit, and mechanical migration", () => {
