@@ -224,7 +224,6 @@
         "kyc-residency-classification",
         "kyc-identity-overview",
         "kyc-document-type",
-        "cards-add-funds",
         "cards-get-card",
         "card-terms",
         "card-terms-accepted",
@@ -233,8 +232,7 @@
         "confirm-legal-name",
         "add-card-virtual-after-name",
         "card-optional-details",
-        "card-issued",
-        "cards-overview"
+        "card-issued"
       ]
     },
     {
