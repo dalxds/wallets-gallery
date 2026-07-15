@@ -128,6 +128,13 @@ export function packageGraph(graph: Graph, source: FlowsFile): View {
 
   const flows: ViewFlow[] = definitions.map((definition) => {
     const context = deriveContext(projected, definition, flowById)
+    const parentGroups = new Set(
+      definition.parentId
+        ? (flowById.get(definition.parentId)?.steps ?? []).map(
+            (screenId) => projected.groupOf.get(screenId) ?? screenId
+          )
+        : []
+    )
     const steps: ViewStep[] = []
     if (context) {
       const node = projected.nodeById.get(context.screenId)!
@@ -145,6 +152,10 @@ export function packageGraph(graph: Graph, source: FlowsFile): View {
       const screenId = definition.steps[index]
       const node = projected.nodeById.get(screenId)!
       const number = steps.length + 1
+      const group = projected.groupOf.get(screenId)!
+      const isExactParentVariation =
+        parentGroups.has(group) &&
+        (projected.membersByGroup.get(group)?.length ?? 0) > 1
       steps.push({
         number,
         title: screenTitle(node, projected.overrides),
@@ -152,8 +163,8 @@ export function packageGraph(graph: Graph, source: FlowsFile): View {
         action: actionFor(projected, definition.steps, index, context),
         screenshotPath: node.screenshotPath,
         kind: "screen",
+        ...(isExactParentVariation ? { variationIds: [screenId] } : {}),
       })
-      const group = projected.groupOf.get(screenId)!
       const containingFlows = localFlowsByGroup.get(group) ?? new Set<string>()
       containingFlows.add(definition.id)
       localFlowsByGroup.set(group, containingFlows)

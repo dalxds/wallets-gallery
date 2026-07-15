@@ -5575,6 +5575,24 @@
         "stateGroup": "add-card-virtual",
         "state": "Virtual"
       },
+      "cards-verification-required": {
+        "title": "Cards",
+        "stateGroup": "cards",
+        "state": "Verify your account"
+      },
+      "cards-add-funds": {
+        "title": "Cards",
+        "stateGroup": "cards",
+        "state": "Add funds"
+      },
+      "cards-get-card": {
+        "title": "Get your card"
+      },
+      "cards-overview": {
+        "title": "Cards",
+        "stateGroup": "cards",
+        "state": "Card"
+      },
       "earn-after-deposit": {
         "title": "Earn after deposit"
       },
@@ -5641,7 +5659,8 @@
       "deposit-address-base",
       "deposit-address-hyperevm",
       "deposit-address-arbitrum",
-      "deposit-address-optimism"
+      "deposit-address-optimism",
+      "cards-get-card"
     ],
     "merges": []
   }

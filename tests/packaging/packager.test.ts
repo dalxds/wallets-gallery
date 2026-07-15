@@ -595,6 +595,56 @@ describe("context and best-effort replay", () => {
     })
   })
 
+  it("allows a child journey to pass through exact states of its parent screen", () => {
+    const g = graph(
+      [node("card-verify"), node("card-funded"), node("card-issued"), node("kyc")],
+      [
+        edge("card-verify", "kyc"),
+        edge("kyc", "card-funded"),
+        edge("card-funded", "card-issued"),
+      ],
+      {
+        overrides: {
+          screens: {
+            "card-verify": { stateGroup: "card", state: "Verify" },
+            "card-funded": { stateGroup: "card", state: "Funded" },
+            "card-issued": { stateGroup: "card", state: "Issued" },
+          },
+        },
+      }
+    )
+    const view = packageGraph(
+      g,
+      flows([
+        {
+          id: "card",
+          name: "Card",
+          parentId: null,
+          order: 0,
+          steps: ["card-verify"],
+        },
+        {
+          id: "registering-card",
+          name: "Registering card",
+          parentId: "card",
+          order: 0,
+          steps: ["kyc", "card-funded", "card-issued"],
+        },
+      ])
+    )
+
+    expect(
+      view.flows
+        .find((flow) => flow.id === "registering-card")
+        ?.steps.map((step) => [step.screenId, step.variationIds])
+    ).toEqual([
+      ["card-verify", ["card-verify"]],
+      ["kyc", undefined],
+      ["card-funded", ["card-funded"]],
+      ["card-issued", ["card-issued"]],
+    ])
+  })
+
   it("compiles direct forward and picker patterns", () => {
     const nodes = [
       node("home"),

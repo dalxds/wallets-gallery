@@ -395,6 +395,13 @@ export function validateFlows(
   const coveredGroups = new Set<string>()
   for (const flow of flowsFile.flows) {
     const localGroups = new Set<string>()
+    const parentGroups = new Set(
+      flow.parentId
+        ? (flowById.get(flow.parentId)?.steps ?? []).map(
+            (screen) => projected.groupOf.get(screen) ?? screen
+          )
+        : []
+    )
     for (let index = 0; index < flow.steps.length; index++) {
       const screen = flow.steps[index]
       if (!projected.nodeById.has(screen)) {
@@ -402,7 +409,10 @@ export function validateFlows(
         continue
       }
       const group = projected.groupOf.get(screen)!
-      if (localGroups.has(group))
+      // A child journey may pass through multiple concrete states of its
+      // parent's screen (for example Verify → Add funds → Issued card). Those
+      // are exact lifecycle checkpoints, not duplicate local steps.
+      if (localGroups.has(group) && !parentGroups.has(group))
         error(`flow "${flow.id}": steps contain more than one member of derivation group "${group}"`)
       localGroups.add(group)
       coveredGroups.add(group)

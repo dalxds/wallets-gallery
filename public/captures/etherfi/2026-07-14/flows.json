@@ -17,7 +17,6 @@
         "terms-and-conditions",
         "passkey-setup",
         "passkey-setup-creating-account",
-        "cards-verification-required",
         "vault-empty"
       ]
     },
@@ -190,17 +189,7 @@
       "parentId": null,
       "order": 3,
       "steps": [
-        "cards-verification-required",
-        "kyc-country-picker",
-        "kyc-residence-confirmation",
-        "kyc-address-form",
-        "kyc-application-overview",
-        "kyc-loading",
-        "kyc-residency-classification",
-        "kyc-identity-overview",
-        "kyc-document-type",
-        "cards-add-funds",
-        "cards-overview"
+        "cards-verification-required"
       ],
       "entryPoints": [
         {
@@ -223,10 +212,20 @@
     {
       "id": "registering-a-card",
       "name": "Registering a card",
-      "summary": "Accept the card terms, choose a virtual card, and complete issuance.",
+      "summary": "Complete identity verification, accept the card terms, and issue a virtual card.",
       "parentId": "cards",
       "order": 0,
       "steps": [
+        "kyc-country-picker",
+        "kyc-residence-confirmation",
+        "kyc-address-form",
+        "kyc-application-overview",
+        "kyc-loading",
+        "kyc-residency-classification",
+        "kyc-identity-overview",
+        "kyc-document-type",
+        "cards-add-funds",
+        "cards-get-card",
         "card-terms",
         "card-terms-accepted",
         "add-card-virtual",
@@ -234,7 +233,8 @@
         "confirm-legal-name",
         "add-card-virtual-after-name",
         "card-optional-details",
-        "card-issued"
+        "card-issued",
+        "cards-overview"
       ]
     },
     {
