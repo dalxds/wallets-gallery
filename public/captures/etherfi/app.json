@@ -7,22 +7,15 @@
     "platform": "android"
   },
   "firstCapturedAt": "2026-07-14",
-  "lastCapturedAt": "2026-07-15",
-  "latestCapture": "2026-07-15",
+  "lastCapturedAt": "2026-07-14",
+  "latestCapture": "2026-07-14",
   "captures": [
     {
       "date": "2026-07-14",
-      "scope": "initial",
+      "scope": "full",
       "mode": "guided",
       "previousCapture": null,
       "path": "2026-07-14/graph.json"
-    },
-    {
-      "date": "2026-07-15",
-      "scope": "full",
-      "mode": "guided",
-      "previousCapture": "2026-07-14",
-      "path": "2026-07-15/graph.json"
     }
   ]
 }

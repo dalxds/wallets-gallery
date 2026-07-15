@@ -31,7 +31,7 @@
     {
       "id": "vault",
       "name": "Vault",
-      "summary": "Review the vault balance, assets, and available money actions.",
+      "summary": "Review empty and funded vault states, assets, and available money actions.",
       "parentId": null,
       "order": 1,
       "steps": [
@@ -79,9 +79,50 @@
       ]
     },
     {
+      "id": "converting-assets",
+      "name": "Converting assets",
+      "summary": "Convert USDC to EURC and follow authorization through completion.",
+      "parentId": "vault",
+      "order": 3,
+      "steps": [
+        "convert-entry",
+        "convert-source-picker",
+        "convert-usdc-selected",
+        "convert-amount-entered",
+        "convert-destination-picker",
+        "convert-quote",
+        "convert-confirmation",
+        "convert-signing-method",
+        "convert-auth",
+        "convert-processing",
+        "convert-success",
+        "convert-reset"
+      ]
+    },
+    {
+      "id": "sending-crypto",
+      "name": "Sending crypto",
+      "summary": "Send USDC over Base, including address checks and email confirmation.",
+      "parentId": "vault",
+      "order": 4,
+      "steps": [
+        "send-method",
+        "transfer-loading",
+        "transfer-form",
+        "transfer-network-picker",
+        "transfer-base-selected",
+        "transfer-amount-entered",
+        "transfer-recipient-entered",
+        "contract-recipient-warning",
+        "transfer-review",
+        "transfer-auth",
+        "transfer-processing"
+      ]
+    },
+    {
       "id": "earn",
       "name": "Earn",
-      "summary": "Browse staking and liquid yield products.",
+      "summary": "Browse staking and liquid yield products and review position states.",
       "parentId": null,
       "order": 2,
       "steps": [
@@ -92,40 +133,139 @@
           "flowId": "vault",
           "fromScreenId": "vault-empty",
           "toScreenId": "earn-products"
+        },
+        {
+          "flowId": "vault",
+          "fromScreenId": "vault-after-transfer",
+          "toScreenId": "earn-overview"
         }
+      ]
+    },
+    {
+      "id": "depositing-into-usd-yield",
+      "name": "Depositing into USD Yield",
+      "summary": "Deposit USDC into USD Yield and review the resulting position.",
+      "parentId": "earn",
+      "order": 0,
+      "steps": [
+        "yield-deposit-form",
+        "yield-deposit-amount",
+        "yield-deposit-auth",
+        "yield-deposit-complete",
+        "yield-position-after-deposit"
+      ]
+    },
+    {
+      "id": "withdrawing-from-usd-yield",
+      "name": "Withdrawing from USD Yield",
+      "summary": "Request a full withdrawal and review its queued position.",
+      "parentId": "earn",
+      "order": 1,
+      "steps": [
+        "yield-deposit-post-balance",
+        "yield-withdraw-form",
+        "yield-withdraw-max",
+        "yield-withdraw-auth",
+        "yield-withdrawal-requested",
+        "yield-position-withdrawal-pending"
       ]
     },
     {
       "id": "cards",
       "name": "Cards",
-      "summary": "Review card availability and the account-verification requirement.",
+      "summary": "Complete account verification, issue a virtual card, and review it.",
       "parentId": null,
       "order": 3,
       "steps": [
-        "cards-verification-required"
+        "cards-verification-required",
+        "kyc-country-picker",
+        "kyc-residence-confirmation",
+        "kyc-address-form",
+        "kyc-application-overview",
+        "kyc-loading",
+        "kyc-residency-classification",
+        "kyc-identity-overview",
+        "kyc-document-type",
+        "cards-add-funds",
+        "card-terms",
+        "card-terms-accepted",
+        "add-card-virtual",
+        "add-card-physical",
+        "confirm-legal-name",
+        "add-card-virtual-after-name",
+        "card-optional-details",
+        "card-issued",
+        "cards-overview"
       ],
       "entryPoints": [
         {
           "flowId": "getting-started",
           "fromScreenId": "passkey-setup-creating-account",
           "toScreenId": "cards-verification-required"
+        },
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-after-deposit",
+          "toScreenId": "cards-verification-required"
         }
+      ]
+    },
+    {
+      "id": "managing-card",
+      "name": "Managing a card",
+      "summary": "Open card management and review spending limits.",
+      "parentId": "cards",
+      "order": 0,
+      "steps": [
+        "manage-card",
+        "spending-limits"
+      ]
+    },
+    {
+      "id": "freezing-card",
+      "name": "Freezing a card",
+      "summary": "Review the confirmation before freezing a card.",
+      "parentId": "cards",
+      "order": 1,
+      "steps": [
+        "freeze-card-confirmation"
+      ]
+    },
+    {
+      "id": "reporting-a-decline",
+      "name": "Reporting a decline",
+      "summary": "Review the form for reporting an unexpected card decline.",
+      "parentId": "cards",
+      "order": 2,
+      "steps": [
+        "report-decline"
       ]
     },
     {
       "id": "transactions",
       "name": "Transactions",
-      "summary": "Review all, vault, and card transaction history.",
+      "summary": "Review empty history, completed activity, and a pending withdrawal.",
       "parentId": null,
       "order": 4,
       "steps": [
-        "transaction-history-all-empty"
+        "transaction-history-all-empty",
+        "deposit-transaction-detail"
       ],
       "entryPoints": [
         {
           "flowId": "earn",
           "fromScreenId": "earn-products",
           "toScreenId": "transaction-history-all-empty"
+        },
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-after-deposit",
+          "toScreenId": "transaction-history-pending"
+        },
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-after-withdrawal",
+          "toScreenId": "transaction-history-pending"
         }
       ]
     },
