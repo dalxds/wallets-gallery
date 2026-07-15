@@ -1,0 +1,3068 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "app": {
+      "name": "ether.fi",
+      "slug": "etherfi",
+      "bundleId": "etherfi.app",
+      "platform": "android"
+    },
+    "captureDate": "2026-07-14",
+    "scope": "initial",
+    "mode": "guided",
+    "previousCapture": null
+  },
+  "root": "onboarding-credit-card",
+  "mainNav": [
+    "vault-empty",
+    "earn-products",
+    "cards-verification-required",
+    "transaction-history-all-empty"
+  ],
+  "nodes": [
+    {
+      "id": "onboarding-credit-card",
+      "fingerprint": "sha256:069632aeb7ea50b5a592a9a5",
+      "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
+      "pHash": "p:eca1f613dc897423",
+      "role": "other",
+      "screenshotPath": "assets/5dfa90531f90.png",
+      "snapshotPath": "assets/baed84cc646e.snap.json",
+      "texts": [
+        "Your crypto native credit card.",
+        "Buy a coffee at your local shop or book your next hotel stay. All with crypto, hassle-free.",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "onboarding-spend-without-selling",
+      "fingerprint": "sha256:069632aeb7ea50b5a592a9a5",
+      "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
+      "pHash": "p:9e4961253cbedb41",
+      "role": "other",
+      "screenshotPath": "assets/82ebf19f931c.png",
+      "snapshotPath": "assets/d8ea364f1bc6.snap.json",
+      "texts": [
+        "Spend without selling your crypto.",
+        "Use your crypto as collateral, pay your card balance automatically using your ether.fi yields",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "onboarding-low-interest-cash-back",
+      "fingerprint": "sha256:069632aeb7ea50b5a592a9a5",
+      "skeletonHash": "sk:11c0f87ba8101d97fd4d0919",
+      "pHash": "p:3c396ec7d2126ca9",
+      "role": "other",
+      "screenshotPath": "assets/fc060cc5edf8.png",
+      "snapshotPath": "assets/0305beb1b02d.snap.json",
+      "texts": [
+        "Low interest, high cash back.",
+        "Earn up to 3% Cash Back on all purchases with your credit card",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "onboarding-notifications",
+      "fingerprint": "sha256:0fd44eec1a36b0b22998bfda",
+      "skeletonHash": "sk:03c366d32a73213e7cfc7aac",
+      "pHash": "p:b392c94d6626d1d9",
+      "role": "other",
+      "screenshotPath": "assets/7a04ed043ebb.png",
+      "snapshotPath": "assets/d60a0cab5020.snap.json",
+      "texts": [
+        "Don't miss a thing",
+        "Get alerts about your exclusive membership perks and important updates.",
+        "Turn On Notifications",
+        "Skip"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Turn On Notifications",
+          "role": "button",
+          "selector": "text=\"Turn On Notifications\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Skip",
+          "role": "button",
+          "selector": "text=\"Skip\"",
+          "emphasis": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "create-personal-account",
+      "fingerprint": "sha256:9ddea45e46e1702f6446ef33",
+      "skeletonHash": "sk:a8d030f0ec219920ccdab3d6",
+      "pHash": "p:5c5487abf45446ab",
+      "role": "auth",
+      "screenshotPath": "assets/dcec3eaadd6f.png",
+      "snapshotPath": "assets/4c9e5cf822e0.snap.json",
+      "texts": [
+        "Create your personal account",
+        "Already have an account?",
+        "Log in",
+        "Enter your email",
+        "Continue",
+        "Or sign up with",
+        "Continue with Google",
+        "Have a referral code?"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Log in",
+          "role": "link",
+          "selector": "text=\"Log in\"",
+          "emphasis": "secondary"
+        },
+        {
+          "label": "Enter your email",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\""
+        },
+        {
+          "label": "Continue with Google",
+          "role": "button",
+          "selector": "text=\"Continue with Google\""
+        },
+        {
+          "label": "Have a referral code?",
+          "role": "link",
+          "selector": "text=\"Have a referral code?\""
+        }
+      ]
+    },
+    {
+      "id": "referral-code",
+      "fingerprint": "sha256:800f6de86ced5325fcb3476e",
+      "skeletonHash": "sk:0a786d10122c9a949b332bae",
+      "pHash": "p:46d8078976dd7689",
+      "role": "modal",
+      "screenshotPath": "assets/449caf492776.png",
+      "snapshotPath": "assets/2ae58a36bd7b.snap.json",
+      "texts": [
+        "Enter your referral code",
+        "Referral code",
+        "Cancel",
+        "Apply"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Referral code",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "text=\"Cancel\""
+        },
+        {
+          "label": "Apply",
+          "role": "button",
+          "selector": "text=\"Apply\""
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "referral-code-filled",
+      "fingerprint": "sha256:b9fd5c1c4f680890d4359984",
+      "skeletonHash": "sk:0a786d10122c9a949b332bae",
+      "pHash": "p:888533dccd773689",
+      "role": "modal",
+      "screenshotPath": "assets/53c9a0b9c30b.png",
+      "snapshotPath": "assets/373a732cde45.snap.json",
+      "texts": [
+        "Enter your referral code",
+        "mike",
+        "Cancel",
+        "Apply"
+      ],
+      "interactiveElements": [
+        {
+          "label": "mike",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "text=\"Cancel\""
+        },
+        {
+          "label": "Apply",
+          "role": "button",
+          "selector": "text=\"Apply\""
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "referral-code-applied",
+      "fingerprint": "sha256:cdd874871636b67d4bb841cb",
+      "skeletonHash": "sk:6f4007b141df67b363a9256c",
+      "pHash": "p:d044deabf411768b",
+      "role": "modal",
+      "screenshotPath": "assets/506e4e7f207b.png",
+      "snapshotPath": "assets/c9c0e6e56fdc.snap.json",
+      "texts": [
+        "Referral code applied!",
+        "Done"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Done",
+          "role": "button",
+          "selector": "text=\"Done\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "create-personal-account-referral-applied",
+      "fingerprint": "sha256:7701c912d8e9c4ea12b139a0",
+      "skeletonHash": "sk:a8d030f0ec219920ccdab3d6",
+      "pHash": "p:5c5487abf45446ab",
+      "role": "auth",
+      "screenshotPath": "assets/fffe59d1bcfe.png",
+      "snapshotPath": "assets/3727b77a0243.snap.json",
+      "texts": [
+        "Create your personal account",
+        "Already have an account?",
+        "Log in",
+        "Enter your email",
+        "Continue",
+        "Or sign up with",
+        "Continue with Google",
+        "Referral code applied."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Log in",
+          "role": "link",
+          "selector": "text=\"Log in\""
+        },
+        {
+          "label": "Enter your email",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\""
+        },
+        {
+          "label": "Continue with Google",
+          "role": "button",
+          "selector": "text=\"Continue with Google\""
+        },
+        {
+          "label": "Referral code applied.",
+          "role": "link",
+          "selector": "text=\"Referral code applied.\""
+        }
+      ]
+    },
+    {
+      "id": "create-personal-account-email-entered",
+      "fingerprint": "sha256:07eeb07ee508b14f63dfc912",
+      "skeletonHash": "sk:a8d030f0ec219920ccdab3d6",
+      "pHash": "p:2a8d39dc5575862b",
+      "role": "auth",
+      "screenshotPath": "assets/b704fe8c696a.png",
+      "snapshotPath": "assets/78ccebd4bd7a.snap.json",
+      "texts": [
+        "Create your personal account",
+        "wallet.inspo@gmail.com",
+        "Continue",
+        "Referral code applied."
+      ],
+      "interactiveElements": [
+        {
+          "label": "wallet.inspo@gmail.com",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\""
+        },
+        {
+          "label": "Log in",
+          "role": "link",
+          "selector": "text=\"Log in\""
+        },
+        {
+          "label": "Continue with Google",
+          "role": "button",
+          "selector": "text=\"Continue with Google\""
+        },
+        {
+          "label": "Referral code applied.",
+          "role": "link",
+          "selector": "text=\"Referral code applied.\""
+        }
+      ]
+    },
+    {
+      "id": "email-verification-code",
+      "fingerprint": "sha256:c99bf1a88d317b0d9decc922",
+      "skeletonHash": "sk:3c58a25341bde7a6c48e6190",
+      "pHash": "p:0895df7c817fea01",
+      "role": "auth",
+      "screenshotPath": "assets/7046554716c0.png",
+      "snapshotPath": "assets/0ccb6933906f.snap.json",
+      "texts": [
+        "Check your email",
+        "We sent a verification code to wallet.inspo@gmail.com",
+        "Didn't receive it?",
+        "Resend Code",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verification code",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Resend Code",
+          "role": "button",
+          "selector": "text=\"Resend Code\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "text=\"Continue\""
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "terms-and-conditions",
+      "fingerprint": "sha256:d18c30e821bbd55fa7f24e7d",
+      "skeletonHash": "sk:01f6ddb7a71c2be3f6bc8091",
+      "pHash": "p:05a3dc1923f6fe09",
+      "role": "auth",
+      "screenshotPath": "assets/202eaedee64a.png",
+      "snapshotPath": "assets/b491399963a7.snap.json",
+      "texts": [
+        "Terms and Conditions",
+        "I hereby confirm that I have read and agreed to the Terms and Conditions and Privacy Policy, and understand that I may receive product and marketing updates that I can opt out at any time.",
+        "Accept & Continue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Accept & Continue",
+          "role": "button",
+          "selector": "text=\"Accept & Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "passkey-setup",
+      "fingerprint": "sha256:f2f279f1c872c8eac17992a1",
+      "skeletonHash": "sk:01f6ddb7a71c2be3f6bc8091",
+      "pHash": "p:8374f09bc434f49b",
+      "role": "auth",
+      "screenshotPath": "assets/119975b8bda8.png",
+      "snapshotPath": "assets/bf754b91d280.snap.json",
+      "texts": [
+        "Fast. Secure. Password-Free.",
+        "Passkeys are credentials that validate your identity using touch, facial recognition, a device password, or a PIN. Adding a passkey will replace email log in and serve as 2FA",
+        "Set Up a Passkey",
+        "Skip for Now"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Set Up a Passkey",
+          "role": "button",
+          "selector": "text=\"Set Up a Passkey\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Skip for Now",
+          "role": "button",
+          "selector": "text=\"Skip for Now\"",
+          "emphasis": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "passkey-setup-creating-account",
+      "fingerprint": "sha256-text:f46f09d9dabb0ed797c543b1",
+      "skeletonHash": "skt:b71723105d2e389d195fd652",
+      "pHash": "p:8774f489c674f419",
+      "role": "other",
+      "screenshotPath": "assets/1061c6cc30a0.png",
+      "snapshotPath": "assets/7cf74d2f1374.snap.json",
+      "texts": [
+        "Fast. Secure. Password-Free.",
+        "Passkeys are credentials that validate your identity using touch, facial recognition, a device password, or a PIN. Adding a passkey will replace email log in and serve as 2FA",
+        "Set Up a Passkey",
+        "Creating Account"
+      ],
+      "interactiveElements": []
+    },
+    {
+      "id": "cards-verification-required",
+      "fingerprint": "sha256:15ee9cbb321be84d5eeeaf3a",
+      "skeletonHash": "sk:7f8fc7089edc19e9fb9752c1",
+      "pHash": "p:7cfc0303fcfc0703",
+      "role": "home",
+      "screenshotPath": "assets/7e0b3488441d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Personal",
+        "My Account",
+        "Ready to create your card?",
+        "Get your new card in seconds",
+        "Verify Your Account",
+        "Vault",
+        "Earn",
+        "Cards",
+        "Transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verify Your Account",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "More account options",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Menu",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "vault-empty",
+      "fingerprint": "sha256:7f773f60c3c1db2812c57380",
+      "skeletonHash": "sk:3bdb73c16ed10cd0ddda3674",
+      "pHash": "p:b0060fdcedfcd203",
+      "role": "home",
+      "screenshotPath": "assets/f845b0cdefe3.png",
+      "snapshotPath": null,
+      "texts": [
+        "Personal",
+        "My Account",
+        "Total Balance",
+        "$0.00",
+        "USD",
+        "Add Funds",
+        "Send",
+        "Convert",
+        "Spend with Cash",
+        "Use your vault assets with your Cash credit card",
+        "Direct Pay",
+        "Assets",
+        "Set Spend Priority",
+        "In Direct Pay Mode, card purchases use your USDC, USDT or LiquidUSD balance.",
+        "Learn More",
+        "USDC",
+        "Earn More",
+        "Vault",
+        "Earn",
+        "Cards",
+        "Transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Convert",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Direct Pay",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Set Spend Priority",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "link",
+          "selector": null
+        },
+        {
+          "label": "Earn More",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "More account options",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Menu",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "earn-products",
+      "fingerprint": "sha256:8f21afc31154ac70b17f12f3",
+      "skeletonHash": "sk:f34e1eaadfc593fae32c8bfe",
+      "pHash": "p:c7984d7c35344f83",
+      "role": "home",
+      "screenshotPath": "assets/1dff55715c65.png",
+      "snapshotPath": null,
+      "texts": [
+        "Personal",
+        "My Account",
+        "Stake",
+        "Earn rewards on your idle crypto with these value-accruing assets you can use across DeFi.",
+        "weETH",
+        "Earn WETH staking yields",
+        "2.36% APY",
+        "sETHFI",
+        "Earn ETHFI staking yields",
+        "5.88% APY",
+        "Liquid",
+        "Earn on autopilot with optimized rewards.",
+        "ETH Yield",
+        "3.72%",
+        "BTC Yield",
+        "1.95%",
+        "USD Yield",
+        "5.21%",
+        "Vault",
+        "Earn",
+        "Cards",
+        "Transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit weETH",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Deposit sETHFI",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Deposit ETH Yield",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Deposit BTC Yield",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "More account options",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Menu",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "transaction-history-all-empty",
+      "fingerprint": "sha256:b1e23a997fbd9d64c1152e71",
+      "skeletonHash": "sk:d67f9e9521254359a6cad823",
+      "pHash": "p:fc786c3347130793",
+      "role": "list",
+      "screenshotPath": "assets/dc3adb036ed4.png",
+      "snapshotPath": null,
+      "texts": [
+        "Transaction History",
+        "All",
+        "Vault",
+        "Card",
+        "No transactions yet"
+      ],
+      "interactiveElements": [
+        {
+          "label": "All",
+          "role": "tab",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Card",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "transaction-history-vault-empty",
+      "fingerprint": "sha256:b1e23a997fbd9d64c1152e71",
+      "skeletonHash": "sk:d67f9e9521254359a6cad823",
+      "pHash": "p:cc5c463367333333",
+      "role": "list",
+      "screenshotPath": "assets/dc658a41a90f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Transaction History",
+        "All",
+        "Vault",
+        "Card",
+        "No transactions yet"
+      ],
+      "interactiveElements": [
+        {
+          "label": "All",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Card",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "transaction-history-card-empty",
+      "fingerprint": "sha256:b1e23a997fbd9d64c1152e71",
+      "skeletonHash": "sk:d67f9e9521254359a6cad823",
+      "pHash": "p:ded2c69367312531",
+      "role": "list",
+      "screenshotPath": "assets/db3db735700c.png",
+      "snapshotPath": null,
+      "texts": [
+        "Transaction History",
+        "All",
+        "Vault",
+        "Card",
+        "No transactions yet"
+      ],
+      "interactiveElements": [
+        {
+          "label": "All",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Card",
+          "role": "tab",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "account-options",
+      "fingerprint": "sha256:3b7072f8f418e3b4e891aab2",
+      "skeletonHash": "sk:6f4007b141df67b363a9256c",
+      "pHash": "p:46995e39743bcc83",
+      "role": "modal",
+      "screenshotPath": "assets/ed949d9ebcea.png",
+      "snapshotPath": null,
+      "texts": [
+        "wallet.inspo@gmail.com",
+        "My Account",
+        "personal",
+        "Log Out",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Log Out",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "main-menu",
+      "fingerprint": "sha256:97989ae891c68ef5194013fd",
+      "skeletonHash": "sk:e05740ae57da722330d6983d",
+      "pHash": "p:6c394eb9f481d607",
+      "role": "modal",
+      "screenshotPath": "assets/10bbd031381c.png",
+      "snapshotPath": null,
+      "texts": [
+        "Personal",
+        "My Account",
+        "Promotions",
+        "Travel",
+        "Settings",
+        "Support",
+        "Log Out",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "label": "My Account",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Promotions",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Travel",
+          "role": "link",
+          "selector": null
+        },
+        {
+          "label": "Settings",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Support",
+          "role": "link",
+          "selector": null
+        },
+        {
+          "label": "Log Out",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "promotions",
+      "fingerprint": "sha256:79cfd0b3ee5666363e931414",
+      "skeletonHash": "sk:6f4007b141df67b363a9256c",
+      "pHash": "p:afad6194d1d4e431",
+      "role": "modal",
+      "screenshotPath": "assets/82a46e0948e4.png",
+      "snapshotPath": null,
+      "texts": [
+        "Promotions",
+        "REFER & EARN",
+        "Earn rewards when you refer your friends to ether.fi",
+        "There are no campaigns at the moment, but refer your friends in the meantime to keep earning rewards.",
+        "Start Referring",
+        "New campaigns will appear on this page when they're live in your region."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Start Referring",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Close promotions",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "promotions-referral-code-prompt",
+      "fingerprint": "sha256:79cfd0b3ee5666363e931414",
+      "skeletonHash": "sk:6f4007b141df67b363a9256c",
+      "pHash": "p:f3adac31d4d4a131",
+      "role": "modal",
+      "screenshotPath": "assets/b710f4920efa.png",
+      "snapshotPath": null,
+      "texts": [
+        "Promotions",
+        "REFER & EARN",
+        "Earn rewards when you refer your friends to ether.fi",
+        "There are no campaigns at the moment, but refer your friends in the meantime to keep earning rewards.",
+        "Be the first of your friends to earn. Click the button below and create your custom referral code to get started.",
+        "Start Referring",
+        "New campaigns will appear on this page when they're live in your region."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Start Referring",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Close promotions",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-overview",
+      "fingerprint": "sha256:24ec6b57ae3f4557a0f4220d",
+      "skeletonHash": "sk:5ad786afb071c364b310410d",
+      "pHash": "p:1c1fe3f30c1cf483",
+      "role": "modal",
+      "screenshotPath": "assets/0d604cf9ba95.png",
+      "snapshotPath": "assets/223db6f576bf.snap.json",
+      "texts": [
+        "Refer others and earn rewards",
+        "Earn rewards when your referrals spend with ether.fi Cash",
+        "Overview",
+        "Activity",
+        "Share your link:",
+        "ether.fi/@1208ad92",
+        "Copy",
+        "Your Stats",
+        "View Activity",
+        "Settled Rewards",
+        "$0.00",
+        "Pending Rewards",
+        "Active Referrals",
+        "0",
+        "Referral Progress",
+        "0 / 0",
+        "Bonus Unlocks",
+        "10 New User Bonuses available"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close referral dashboard",
+          "role": "button",
+          "selector": "label=\"Close\""
+        },
+        {
+          "label": "Overview",
+          "role": "tab",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Activity",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Referral-link selector",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Copy",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Edit referral link",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Show referral QR code",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Share referral link",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "View Activity",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Settled Rewards information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Pending Rewards information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Active Referrals information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Referral Progress information",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-rewards",
+      "fingerprint": "sha256:cc238e997e9d60a1b19bb48d",
+      "skeletonHash": "sk:02352b593f9fa88c1eb715dd",
+      "pHash": "p:837c07d8d4f4bc23",
+      "role": "modal",
+      "screenshotPath": "assets/b8d6b26d095c.png",
+      "snapshotPath": null,
+      "texts": [
+        "Rewards Structure",
+        "Tier 1",
+        "New Me...",
+        "$10",
+        "High Sp...",
+        "$15",
+        "2nd De...",
+        "Spend ...",
+        "0.1%",
+        "Physica...",
+        "20%",
+        "Card Fe...",
+        "50%",
+        "Liquid Y...",
+        "5%",
+        "Staked ...",
+        "Tier 1: Default tier — available to all affiliates.",
+        "Affiliate Benefits",
+        "Learn More",
+        "Higher referral rewards",
+        "higher payout amounts and more ways to earn.",
+        "Lifetime commissions",
+        "Earn from your referrals as long as they keep spending.",
+        "Real-time tracking",
+        "Track your earnings and get dedicated support."
+      ],
+      "interactiveElements": [
+        {
+          "label": "Tier 1",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "New Me... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "High Sp... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "2nd De... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Spend ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Physica... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card Fe... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Liquid Y... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Staked ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-tier-menu",
+      "fingerprint": "sha256:16fa29e6bee989476b69b587",
+      "skeletonHash": "sk:c3633c1ad7fcc7223e206fe7",
+      "pHash": "p:c35c47d8ecf49c03",
+      "role": "modal",
+      "screenshotPath": "assets/fe8a2e6bd81e.png",
+      "snapshotPath": null,
+      "texts": [
+        "Rewards Structure",
+        "Tier 1",
+        "Tier 2",
+        "Tier 3",
+        "Tier 4",
+        "Tier 1: Default tier — available to all affiliates.",
+        "Affiliate Benefits",
+        "Higher referral rewards",
+        "Lifetime commissions",
+        "Real-time tracking"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Tier 1",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Tier 2",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Tier 3",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Tier 4",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-tier2",
+      "fingerprint": "sha256:9a537a76964f45ae92e363f9",
+      "skeletonHash": "sk:02352b593f9fa88c1eb715dd",
+      "pHash": "p:037c07dad4f4bc23",
+      "role": "modal",
+      "screenshotPath": "assets/8a407d526e96.png",
+      "snapshotPath": null,
+      "texts": [
+        "Rewards Structure",
+        "Tier 2",
+        "$15",
+        "$20",
+        "20%",
+        "0.2%",
+        "50%",
+        "7.5%",
+        "Tier 2: Requires 50+ all-time quality conversions and 10+ within a rolling 90-day window.",
+        "Affiliate Benefits",
+        "Learn More"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Tier 2",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "New Me... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "High Sp... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "2nd De... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Spend ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Physica... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card Fe... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Liquid Y... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Staked ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-tier3",
+      "fingerprint": "sha256:b7f3d18d22926407b55ee254",
+      "skeletonHash": "sk:02352b593f9fa88c1eb715dd",
+      "pHash": "p:037d36d2d4f43c23",
+      "role": "modal",
+      "screenshotPath": "assets/b4703271991d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Rewards Structure",
+        "Tier 3",
+        "$20",
+        "$25",
+        "20%",
+        "0.25%",
+        "50%",
+        "10%",
+        "Tier 3: Requires 100+ all-time quality conversions and 20+ within a rolling 90-day window.",
+        "Affiliate Benefits",
+        "Learn More"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Tier 3",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "New Me... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "High Sp... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "2nd De... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Spend ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Physica... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card Fe... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Liquid Y... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Staked ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-tier4",
+      "fingerprint": "sha256:bf61f218523ae0460a5f101b",
+      "skeletonHash": "sk:02352b593f9fa88c1eb715dd",
+      "pHash": "p:037d36d2d4f43c23",
+      "role": "modal",
+      "screenshotPath": "assets/9af99e7ac33d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Rewards Structure",
+        "Tier 4",
+        "$20",
+        "$25",
+        "20%",
+        "0.3%",
+        "25%",
+        "50%",
+        "12.5%",
+        "Tier 4: Requires 500+ all-time quality conversions and 50+ within a rolling 90-day window.",
+        "Affiliate Benefits",
+        "Learn More"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Tier 4",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "New Me... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "High Sp... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "2nd De... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Spend ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Physica... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card Fe... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Liquid Y... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Staked ... information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-activity",
+      "fingerprint": "sha256:09a88a3ef570ac75a117172f",
+      "skeletonHash": "sk:5ad786afb071c364b310410d",
+      "pHash": "p:e41c27d61eb1f40b",
+      "role": "modal",
+      "screenshotPath": "assets/57f16ad4c9f5.png",
+      "snapshotPath": null,
+      "texts": [
+        "Refer others and earn rewards",
+        "Earn rewards when your referrals spend with ether.fi Cash",
+        "Overview",
+        "Activity",
+        "Total referral spend",
+        "$0.00",
+        "All-time signups",
+        "0",
+        "All-time conversions",
+        "All-time affiliate earnings",
+        "Breakdown of your affiliate rewards by type for the selected period. Campaign rewards are shown across all of your activity and are not filtered by referral link.",
+        "No Earnings for this period",
+        "Daily",
+        "7 Days",
+        "All Rewards"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close referral dashboard",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Overview",
+          "role": "tab",
+          "selector": null
+        },
+        {
+          "label": "Activity",
+          "role": "tab",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Daily",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "7 Days",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Download activity data",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Total referral spend information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "All-time signups information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "All-time conversions information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "All-time affiliate earnings information",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "All Rewards",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Bar chart",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Line chart",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-period-menu",
+      "fingerprint": "sha256:48f9ddf726e509c8656d10b2",
+      "skeletonHash": "sk:305e1493d43db2e13586e9bb",
+      "pHash": "p:e41e2ddc16b3f409",
+      "role": "modal",
+      "screenshotPath": "assets/59498032da9f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Daily",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Weekly",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Monthly",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-weekly",
+      "fingerprint": "sha256:909fe9873e897fcc033db9a7",
+      "skeletonHash": "sk:305e1493d43db2e13586e9bb",
+      "pHash": "p:e41c27d61eb1f40b",
+      "role": "modal",
+      "screenshotPath": "assets/73d38f23aee8.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "Weekly",
+        "7 Days",
+        "No Earnings for this period",
+        "All Rewards"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Weekly",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "7 Days",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "All Rewards",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-monthly",
+      "fingerprint": "sha256:a33e3f3b309aeff24615bd83",
+      "skeletonHash": "sk:305e1493d43db2e13586e9bb",
+      "pHash": "p:e41c27d61eb1f40b",
+      "role": "modal",
+      "screenshotPath": "assets/f19e630db66c.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "Monthly",
+        "7 Days",
+        "No Earnings for this period",
+        "All Rewards"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Monthly",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "7 Days",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "All Rewards",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-date-range-menu",
+      "fingerprint": "sha256:141eb90ffa5c625706d25bd0",
+      "skeletonHash": "sk:c3633c1ad7fcc7223e206fe7",
+      "pHash": "p:e47c8dd61661f40b",
+      "role": "modal",
+      "screenshotPath": "assets/f25f31dabed5.png",
+      "snapshotPath": null,
+      "texts": [
+        "7 Days",
+        "2 Weeks",
+        "4 Weeks",
+        "3 Months",
+        "1 Year"
+      ],
+      "interactiveElements": [
+        {
+          "label": "7 Days",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "2 Weeks",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "4 Weeks",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "3 Months",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "1 Year",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-one-year",
+      "fingerprint": "sha256:96aef0a55a6293957e1f6e3d",
+      "skeletonHash": "sk:305e1493d43db2e13586e9bb",
+      "pHash": "p:e41c27d61eb1f40b",
+      "role": "modal",
+      "screenshotPath": "assets/bb91cef56510.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "Monthly",
+        "1 Year",
+        "No Earnings for this period",
+        "All Rewards"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Monthly",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "1 Year",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "All Rewards",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-reward-type-menu",
+      "fingerprint": "sha256:9ba6a2484d28c2527e763748",
+      "skeletonHash": "sk:be2653f3dcbf5e9f78dcb21b",
+      "pHash": "p:e41867561ee5f40b",
+      "role": "modal",
+      "screenshotPath": "assets/e7e7131d42aa.png",
+      "snapshotPath": null,
+      "texts": [
+        "All Rewards",
+        "Staked Yield Rev Share",
+        "Liquid Yield Rev Share",
+        "Card Fee Commission",
+        "Physical Card Commission",
+        "Spend Rev Share",
+        "2nd Degree Share",
+        "High Spender Bonus",
+        "New Member Bonus"
+      ],
+      "interactiveElements": [
+        {
+          "label": "All Rewards",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Staked Yield Rev Share",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Liquid Yield Rev Share",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Card Fee Commission",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Physical Card Commission",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Spend Rev Share",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "2nd Degree Share",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "High Spender Bonus",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "New Member Bonus",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-new-member-bonus",
+      "fingerprint": "sha256:cb175bda5b0616e2ab766fbb",
+      "skeletonHash": "sk:305e1493d43db2e13586e9bb",
+      "pHash": "p:e41c27d61eb1f40b",
+      "role": "modal",
+      "screenshotPath": "assets/0f6f1d8187d1.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "Monthly",
+        "1 Year",
+        "New Member Bonus",
+        "No Earnings for this period"
+      ],
+      "interactiveElements": [
+        {
+          "label": "New Member Bonus",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Bar chart",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Line chart",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-activity-line-chart",
+      "fingerprint": "sha256:79b0b880c6936ee1cfdb94db",
+      "skeletonHash": "sk:520fb969df94ed02d777d564",
+      "pHash": "p:e41c27d61eb1f40b",
+      "role": "modal",
+      "screenshotPath": "assets/a6e7dae96a02.png",
+      "snapshotPath": null,
+      "texts": [
+        "Activity",
+        "Monthly",
+        "1 Year",
+        "New Member Bonus",
+        "No Earnings for this period",
+        "$1",
+        "$2",
+        "$3",
+        "$4"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Bar chart",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Line chart",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Overview",
+          "role": "tab",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "referral-dashboard-qr",
+      "fingerprint": "sha256:61632a6eef4152a48d31841f",
+      "skeletonHash": "sk:a6d951c261fab31ef457fcdd",
+      "pHash": "p:07f45e9621ded621",
+      "role": "modal",
+      "screenshotPath": "assets/06451be68622.png",
+      "snapshotPath": null,
+      "texts": [
+        "Share your unique referral link",
+        "Referral QR code",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "add-funds-options",
+      "fingerprint": "sha256:74e1f05f9019fe666cdf30bf",
+      "skeletonHash": "sk:ea7680bb71dc97e45b1acaa7",
+      "pHash": "p:ec43661346fcd383",
+      "role": "picker",
+      "screenshotPath": "assets/8cf46f376fdd.png",
+      "snapshotPath": "assets/40e8d54dce8f.snap.json",
+      "texts": [
+        "Send from your crypto wallet",
+        "Add supported assets from Ethereum, OP or Base to your account.",
+        "Send from an Exchange",
+        "Connect your exchange account to deposit.",
+        "Share your deposit address",
+        "Send supported assets to your ether.fi deposit address from any supported network.",
+        "Bank transfer",
+        "Make a transfer from your bank.",
+        "Cancel"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Send from your crypto wallet",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Send from an Exchange",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Share your deposit address",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Bank transfer",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "add-funds-wallet-connect",
+      "fingerprint": "sha256:70f312b69357a1aad116a2ec",
+      "skeletonHash": "sk:3edf6e3a57e174efe35eee51",
+      "pHash": "p:e1590ef10799fc13",
+      "role": "modal",
+      "screenshotPath": "assets/48ba6ea3507c.png",
+      "snapshotPath": "assets/2a93272866b4.snap.json",
+      "texts": [
+        "Connect Wallet",
+        "Anchorage Digital",
+        "Binance Wallet",
+        "MetaMask",
+        "SafePal",
+        "Search Wallet 540+"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Anchorage Digital",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Binance Wallet",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "MetaMask",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "SafePal",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Search Wallet 540+",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "add-funds-exchange-selector",
+      "fingerprint": "sha256:e8c8da9464ea061b829a2953",
+      "skeletonHash": "sk:ae618fcf7e4dfecf8b371443",
+      "pHash": "p:877c03b55ca35ca3",
+      "role": "modal",
+      "screenshotPath": "assets/d40c30575178.png",
+      "snapshotPath": null,
+      "texts": [
+        "Select Exchange",
+        "Pay with Binance",
+        "Pay with Coinbase"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close Add Funds",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Close exchange selector",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Pay with Binance",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Pay with Coinbase",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-address-setup",
+      "fingerprint": "sha256:766e5111a2bfb9c329a5caa6",
+      "skeletonHash": "sk:56521897d3fd22e96039f6bc",
+      "pHash": "p:67f80ff00713f413",
+      "role": "picker",
+      "screenshotPath": "assets/b359602effbe.png",
+      "snapshotPath": "assets/3c222dfee9c4.snap.json",
+      "texts": [
+        "USDC",
+        "Select supported network",
+        "OK"
+      ],
+      "interactiveElements": [
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select supported network",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "OK",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-network-picker",
+      "fingerprint": "sha256:09e48cf33c6680db8e19066b",
+      "skeletonHash": "sk:d93846050c0595e7667b144c",
+      "pHash": "p:04f10f907f1fe01f",
+      "role": "picker",
+      "screenshotPath": "assets/9b427a718cbd.png",
+      "snapshotPath": "assets/9bcf5d86133f.snap.json",
+      "texts": [
+        "Ethereum",
+        "Base",
+        "HyperEVM",
+        "Arbitrum",
+        "Optimism"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Ethereum",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Base",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "HyperEVM",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Arbitrum",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Optimism",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-address-ethereum",
+      "fingerprint": "sha256:d44a1aca37b5677b232c9cd2",
+      "skeletonHash": "sk:ce0d059ad5a81d091e52f9b7",
+      "pHash": "p:deb40fa40656f11b",
+      "role": "confirmation",
+      "screenshotPath": "assets/a3a9159e9e6c.png",
+      "snapshotPath": "assets/e593a37e0bd2.snap.json",
+      "texts": [
+        "0x6E7E8715c174FD796F1Be6bf97ab0A77664641AF",
+        "USDC",
+        "Ethereum",
+        "OK"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit address",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Ethereum",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "OK",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-address-base",
+      "fingerprint": "sha256:7127de35aecd6162261fd70f",
+      "skeletonHash": "sk:ce0d059ad5a81d091e52f9b7",
+      "pHash": "p:5cb40fa40676f15b",
+      "role": "confirmation",
+      "screenshotPath": "assets/fa1d32763889.png",
+      "snapshotPath": "assets/4308e6c45a87.snap.json",
+      "texts": [
+        "0x6E7E8715c174FD796F1Be6bf97ab0A77664641AF",
+        "USDC",
+        "Base",
+        "OK"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit address",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Base",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "OK",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-address-hyperevm",
+      "fingerprint": "sha256:04260f1d31ce4d476cbe2c2b",
+      "skeletonHash": "sk:ce0d059ad5a81d091e52f9b7",
+      "pHash": "p:dcb40fa406f2f153",
+      "role": "confirmation",
+      "screenshotPath": "assets/f7cd0d21a77e.png",
+      "snapshotPath": "assets/e157d0a65ee4.snap.json",
+      "texts": [
+        "0x6E7E8715c174FD796F1Be6bf97ab0A77664641AF",
+        "USDC",
+        "HyperEVM",
+        "OK"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit address",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "HyperEVM",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "OK",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-address-arbitrum",
+      "fingerprint": "sha256:87072bb5bbfb38cc5dbbc33b",
+      "skeletonHash": "sk:ce0d059ad5a81d091e52f9b7",
+      "pHash": "p:dcbc0fa40e52f153",
+      "role": "confirmation",
+      "screenshotPath": "assets/1afd586297ce.png",
+      "snapshotPath": "assets/887c9061a241.snap.json",
+      "texts": [
+        "0x6E7E8715c174FD796F1Be6bf97ab0A77664641AF",
+        "USDC",
+        "Arbitrum",
+        "OK"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit address",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Arbitrum",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "OK",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "deposit-address-optimism",
+      "fingerprint": "sha256:5859a2edffa8a6f42c466fe4",
+      "skeletonHash": "sk:ce0d059ad5a81d091e52f9b7",
+      "pHash": "p:dcbc0fa40e52f153",
+      "role": "confirmation",
+      "screenshotPath": "assets/d28522f2bdca.png",
+      "snapshotPath": "assets/f837d9aa7ca2.snap.json",
+      "texts": [
+        "0x6E7E8715c174FD796F1Be6bf97ab0A77664641AF",
+        "USDC",
+        "Optimism",
+        "OK"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit address",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Optimism",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "OK",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "onboarding-credit-card",
+      "to": "onboarding-spend-without-selling",
+      "action": "Tap \"Continue\"",
+      "selector": "text=\"Continue\"",
+      "kind": "in-place",
+      "observedAtStep": 1
+    },
+    {
+      "from": "onboarding-spend-without-selling",
+      "to": "onboarding-low-interest-cash-back",
+      "action": "Tap \"Continue\"",
+      "selector": "text=\"Continue\"",
+      "kind": "in-place",
+      "observedAtStep": 2
+    },
+    {
+      "from": "onboarding-low-interest-cash-back",
+      "to": "onboarding-notifications",
+      "action": "Tap \"Continue\"",
+      "selector": "text=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 3
+    },
+    {
+      "from": "onboarding-notifications",
+      "to": "create-personal-account",
+      "action": "Tap \"Skip\"",
+      "selector": "text=\"Skip\"",
+      "kind": "nav",
+      "observedAtStep": 4
+    },
+    {
+      "from": "create-personal-account",
+      "to": "referral-code",
+      "action": "Tap \"Have a referral code?\"",
+      "selector": "text=\"Have a referral code?\"",
+      "kind": "overlay",
+      "observedAtStep": 5
+    },
+    {
+      "from": "referral-code",
+      "to": "referral-code-filled",
+      "action": "Enter referral code",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 6
+    },
+    {
+      "from": "referral-code-filled",
+      "to": "referral-code-applied",
+      "action": "Tap \"Apply\"",
+      "selector": "text=\"Apply\"",
+      "kind": "nav",
+      "observedAtStep": 7
+    },
+    {
+      "from": "referral-code-applied",
+      "to": "create-personal-account-referral-applied",
+      "action": "Tap \"Done\"",
+      "selector": "text=\"Done\"",
+      "kind": "back",
+      "observedAtStep": 8
+    },
+    {
+      "from": "create-personal-account-referral-applied",
+      "to": "create-personal-account-email-entered",
+      "action": "Enter email",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 9
+    },
+    {
+      "from": "create-personal-account-email-entered",
+      "to": "email-verification-code",
+      "action": "Tap \"Continue\"",
+      "selector": "text=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 10
+    },
+    {
+      "from": "email-verification-code",
+      "to": "terms-and-conditions",
+      "action": "Complete email verification",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 11
+    },
+    {
+      "from": "terms-and-conditions",
+      "to": "passkey-setup",
+      "action": "Tap \"Accept & Continue\"",
+      "selector": "text=\"Accept & Continue\"",
+      "kind": "in-place",
+      "observedAtStep": 12
+    },
+    {
+      "from": "passkey-setup",
+      "to": "passkey-setup-creating-account",
+      "action": "Tap \"Skip for Now\"",
+      "selector": "text=\"Skip for Now\"",
+      "kind": "nav",
+      "observedAtStep": 13
+    },
+    {
+      "from": "passkey-setup-creating-account",
+      "to": "cards-verification-required",
+      "action": "Account creation completed",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 14
+    },
+    {
+      "from": "cards-verification-required",
+      "to": "vault-empty",
+      "action": "Tap \"Vault\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 15
+    },
+    {
+      "from": "vault-empty",
+      "to": "earn-products",
+      "action": "Tap \"Earn\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 16
+    },
+    {
+      "from": "earn-products",
+      "to": "transaction-history-all-empty",
+      "action": "Tap \"Transactions\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 17
+    },
+    {
+      "from": "transaction-history-all-empty",
+      "to": "transaction-history-vault-empty",
+      "action": "Tap \"Vault\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 18
+    },
+    {
+      "from": "transaction-history-vault-empty",
+      "to": "transaction-history-card-empty",
+      "action": "Tap \"Card\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 19
+    },
+    {
+      "from": "transaction-history-card-empty",
+      "to": "earn-products",
+      "action": "Tap \"Back\"",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 20
+    },
+    {
+      "from": "earn-products",
+      "to": "account-options",
+      "action": "Tap \"More account options\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 21
+    },
+    {
+      "from": "account-options",
+      "to": "earn-products",
+      "action": "Tap \"Close\"",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 22
+    },
+    {
+      "from": "earn-products",
+      "to": "main-menu",
+      "action": "Tap \"Menu\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 23
+    },
+    {
+      "from": "main-menu",
+      "to": "promotions",
+      "action": "Tap \"Promotions\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 24
+    },
+    {
+      "from": "promotions",
+      "to": "promotions-referral-code-prompt",
+      "action": "Tap \"Start Referring\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 25
+    },
+    {
+      "from": "promotions-referral-code-prompt",
+      "to": "referral-dashboard-overview",
+      "action": "Tap \"Start Referring\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 26
+    },
+    {
+      "from": "referral-dashboard-overview",
+      "to": "referral-dashboard-rewards",
+      "action": "Scroll down",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 27
+    },
+    {
+      "from": "referral-dashboard-rewards",
+      "to": "referral-dashboard-tier-menu",
+      "action": "Tap \"Tier 1\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 28
+    },
+    {
+      "from": "referral-dashboard-tier-menu",
+      "to": "referral-dashboard-tier2",
+      "action": "Select \"Tier 2\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 29
+    },
+    {
+      "from": "referral-dashboard-tier2",
+      "to": "referral-dashboard-tier3",
+      "action": "Select \"Tier 3\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 30
+    },
+    {
+      "from": "referral-dashboard-tier3",
+      "to": "referral-dashboard-tier4",
+      "action": "Select \"Tier 4\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 31
+    },
+    {
+      "from": "referral-dashboard-overview",
+      "to": "referral-dashboard-activity",
+      "action": "Tap \"Activity\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 32
+    },
+    {
+      "from": "referral-dashboard-activity",
+      "to": "referral-activity-period-menu",
+      "action": "Tap \"Daily\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 33
+    },
+    {
+      "from": "referral-activity-period-menu",
+      "to": "referral-activity-weekly",
+      "action": "Select \"Weekly\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 34
+    },
+    {
+      "from": "referral-activity-weekly",
+      "to": "referral-activity-monthly",
+      "action": "Select \"Monthly\"",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 35
+    },
+    {
+      "from": "referral-activity-monthly",
+      "to": "referral-activity-date-range-menu",
+      "action": "Tap \"7 Days\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 36
+    },
+    {
+      "from": "referral-activity-date-range-menu",
+      "to": "referral-activity-one-year",
+      "action": "Select \"1 Year\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 37
+    },
+    {
+      "from": "referral-activity-one-year",
+      "to": "referral-activity-reward-type-menu",
+      "action": "Tap \"All Rewards\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 38
+    },
+    {
+      "from": "referral-activity-reward-type-menu",
+      "to": "referral-activity-new-member-bonus",
+      "action": "Select \"New Member Bonus\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 39
+    },
+    {
+      "from": "referral-activity-new-member-bonus",
+      "to": "referral-activity-line-chart",
+      "action": "Tap \"Line chart\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 40
+    },
+    {
+      "from": "referral-activity-line-chart",
+      "to": "referral-dashboard-overview",
+      "action": "Tap \"Overview\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 41
+    },
+    {
+      "from": "referral-dashboard-overview",
+      "to": "referral-dashboard-qr",
+      "action": "Tap \"Show referral QR code\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 42
+    },
+    {
+      "from": "referral-dashboard-qr",
+      "to": "referral-dashboard-overview",
+      "action": "Tap \"Close\"",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 43
+    },
+    {
+      "from": "referral-dashboard-overview",
+      "to": "main-menu",
+      "action": "Tap \"Close referral dashboard\"",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 44
+    },
+    {
+      "from": "vault-empty",
+      "to": "add-funds-options",
+      "action": "Tap primary \"Add Funds\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 45
+    },
+    {
+      "from": "vault-empty",
+      "to": "add-funds-options",
+      "action": "Tap USDC \"Add Funds\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 46
+    },
+    {
+      "from": "add-funds-options",
+      "to": "add-funds-wallet-connect",
+      "action": "Tap \"Send from your crypto wallet\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 47
+    },
+    {
+      "from": "add-funds-wallet-connect",
+      "to": "add-funds-options",
+      "action": "Close wallet connector",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 48
+    },
+    {
+      "from": "add-funds-options",
+      "to": "add-funds-exchange-selector",
+      "action": "Tap \"Send from an Exchange\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 49
+    },
+    {
+      "from": "add-funds-exchange-selector",
+      "to": "add-funds-options",
+      "action": "Close exchange selector",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 50
+    },
+    {
+      "from": "add-funds-options",
+      "to": "deposit-address-setup",
+      "action": "Tap \"Share your deposit address\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 51
+    },
+    {
+      "from": "deposit-address-setup",
+      "to": "deposit-network-picker",
+      "action": "Tap \"Select supported network\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 52
+    },
+    {
+      "from": "deposit-network-picker",
+      "to": "deposit-address-ethereum",
+      "action": "Select \"Ethereum\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 53
+    },
+    {
+      "from": "deposit-network-picker",
+      "to": "deposit-address-base",
+      "action": "Select \"Base\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 54
+    },
+    {
+      "from": "deposit-network-picker",
+      "to": "deposit-address-hyperevm",
+      "action": "Select \"HyperEVM\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 55
+    },
+    {
+      "from": "deposit-network-picker",
+      "to": "deposit-address-arbitrum",
+      "action": "Select \"Arbitrum\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 56
+    },
+    {
+      "from": "deposit-network-picker",
+      "to": "deposit-address-optimism",
+      "action": "Select \"Optimism\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 57
+    },
+    {
+      "from": "deposit-address-optimism",
+      "to": "add-funds-options",
+      "action": "Go back to Add Funds",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 58
+    }
+  ],
+  "decisionPoints": [
+    {
+      "nodeId": "onboarding-notifications",
+      "options": [
+        {
+          "label": "Turn On Notifications",
+          "explored": false
+        },
+        {
+          "label": "Skip",
+          "explored": true,
+          "toNode": "create-personal-account"
+        }
+      ]
+    },
+    {
+      "nodeId": "create-personal-account",
+      "options": [
+        {
+          "label": "Enter email and continue",
+          "explored": false
+        },
+        {
+          "label": "Log in",
+          "explored": false
+        },
+        {
+          "label": "Continue with Google",
+          "explored": false
+        },
+        {
+          "label": "Have a referral code?",
+          "explored": true,
+          "toNode": "referral-code"
+        }
+      ]
+    },
+    {
+      "nodeId": "passkey-setup",
+      "options": [
+        {
+          "label": "Set Up a Passkey",
+          "explored": false
+        },
+        {
+          "label": "Skip for Now",
+          "explored": true,
+          "toNode": "passkey-setup-creating-account"
+        }
+      ]
+    },
+    {
+      "nodeId": "add-funds-options",
+      "options": [
+        {
+          "label": "Send from your crypto wallet",
+          "explored": true,
+          "toNode": "add-funds-wallet-connect"
+        },
+        {
+          "label": "Send from an Exchange",
+          "explored": true,
+          "toNode": "add-funds-exchange-selector"
+        },
+        {
+          "label": "Share your deposit address",
+          "explored": true,
+          "toNode": "deposit-address-setup"
+        },
+        {
+          "label": "Bank transfer",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "add-funds-wallet-connect",
+      "options": [
+        {
+          "label": "Anchorage Digital",
+          "explored": false
+        },
+        {
+          "label": "Binance Wallet",
+          "explored": false
+        },
+        {
+          "label": "MetaMask",
+          "explored": false
+        },
+        {
+          "label": "SafePal",
+          "explored": false
+        },
+        {
+          "label": "Search Wallet 540+",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "add-funds-exchange-selector",
+      "options": [
+        {
+          "label": "Pay with Binance",
+          "explored": false
+        },
+        {
+          "label": "Pay with Coinbase",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "deposit-network-picker",
+      "options": [
+        {
+          "label": "Ethereum",
+          "explored": true,
+          "toNode": "deposit-address-ethereum"
+        },
+        {
+          "label": "Base",
+          "explored": true,
+          "toNode": "deposit-address-base"
+        },
+        {
+          "label": "HyperEVM",
+          "explored": true,
+          "toNode": "deposit-address-hyperevm"
+        },
+        {
+          "label": "Arbitrum",
+          "explored": true,
+          "toNode": "deposit-address-arbitrum"
+        },
+        {
+          "label": "Optimism",
+          "explored": true,
+          "toNode": "deposit-address-optimism"
+        }
+      ]
+    }
+  ],
+  "overrides": {
+    "screens": {
+      "account-options": {
+        "title": "Account options"
+      },
+      "onboarding-credit-card": {
+        "title": "Introduction",
+        "state": "1",
+        "stateGroup": "onboarding-slides"
+      },
+      "onboarding-spend-without-selling": {
+        "title": "Introduction",
+        "state": "2",
+        "stateGroup": "onboarding-slides"
+      },
+      "onboarding-low-interest-cash-back": {
+        "title": "Introduction",
+        "state": "3",
+        "stateGroup": "onboarding-slides"
+      },
+      "create-personal-account": {
+        "state": "default",
+        "stateGroup": "create-personal-account"
+      },
+      "create-personal-account-referral-applied": {
+        "state": "referral applied",
+        "stateGroup": "create-personal-account"
+      },
+      "create-personal-account-email-entered": {
+        "state": "email entered",
+        "stateGroup": "create-personal-account"
+      },
+      "referral-code": {
+        "state": "default",
+        "stateGroup": "referral-code"
+      },
+      "referral-code-filled": {
+        "state": "filled",
+        "stateGroup": "referral-code"
+      },
+      "promotions": {
+        "state": "default",
+        "stateGroup": "promotions"
+      },
+      "promotions-referral-code-prompt": {
+        "state": "referral prompt",
+        "stateGroup": "promotions"
+      },
+      "transaction-history-all-empty": {
+        "state": "all",
+        "stateGroup": "transaction-history"
+      },
+      "transaction-history-vault-empty": {
+        "state": "vault",
+        "stateGroup": "transaction-history"
+      },
+      "transaction-history-card-empty": {
+        "state": "card",
+        "stateGroup": "transaction-history"
+      },
+      "referral-dashboard-overview": {
+        "title": "Referral dashboard"
+      },
+      "referral-dashboard-activity": {
+        "title": "Referral activity",
+        "state": "daily",
+        "stateGroup": "referral-activity"
+      },
+      "referral-activity-weekly": {
+        "title": "Referral activity",
+        "state": "weekly",
+        "stateGroup": "referral-activity"
+      },
+      "referral-activity-monthly": {
+        "title": "Referral activity",
+        "state": "monthly",
+        "stateGroup": "referral-activity"
+      },
+      "referral-activity-one-year": {
+        "title": "Referral activity",
+        "state": "1 year",
+        "stateGroup": "referral-activity"
+      },
+      "referral-activity-new-member-bonus": {
+        "title": "Referral activity",
+        "state": "new member bonus",
+        "stateGroup": "referral-activity"
+      },
+      "referral-activity-line-chart": {
+        "title": "Referral activity",
+        "state": "line chart",
+        "stateGroup": "referral-activity"
+      },
+      "referral-activity-period-menu": {
+        "title": "Activity period"
+      },
+      "referral-activity-date-range-menu": {
+        "title": "Activity date range"
+      },
+      "referral-activity-reward-type-menu": {
+        "title": "Activity reward type"
+      },
+      "referral-dashboard-rewards": {
+        "title": "Rewards structure",
+        "state": "tier 1",
+        "stateGroup": "referral-reward-tiers"
+      },
+      "referral-dashboard-tier2": {
+        "title": "Rewards structure",
+        "state": "tier 2",
+        "stateGroup": "referral-reward-tiers"
+      },
+      "referral-dashboard-tier3": {
+        "title": "Rewards structure",
+        "state": "tier 3",
+        "stateGroup": "referral-reward-tiers"
+      },
+      "referral-dashboard-tier4": {
+        "title": "Rewards structure",
+        "state": "tier 4",
+        "stateGroup": "referral-reward-tiers"
+      },
+      "deposit-address-ethereum": {
+        "title": "Deposit address",
+        "state": "ethereum",
+        "stateGroup": "deposit-address"
+      },
+      "deposit-address-base": {
+        "title": "Deposit address",
+        "state": "base",
+        "stateGroup": "deposit-address"
+      },
+      "deposit-address-hyperevm": {
+        "title": "Deposit address",
+        "state": "HyperEVM",
+        "stateGroup": "deposit-address"
+      },
+      "deposit-address-arbitrum": {
+        "title": "Deposit address",
+        "state": "arbitrum",
+        "stateGroup": "deposit-address"
+      },
+      "deposit-address-optimism": {
+        "title": "Deposit address",
+        "state": "optimism",
+        "stateGroup": "deposit-address"
+      }
+    },
+    "splits": [
+      "onboarding-credit-card",
+      "onboarding-spend-without-selling",
+      "onboarding-low-interest-cash-back",
+      "create-personal-account",
+      "create-personal-account-referral-applied",
+      "create-personal-account-email-entered",
+      "terms-and-conditions",
+      "promotions",
+      "promotions-referral-code-prompt",
+      "transaction-history-all-empty",
+      "transaction-history-vault-empty",
+      "transaction-history-card-empty",
+      "referral-dashboard-overview",
+      "referral-dashboard-activity",
+      "referral-dashboard-rewards",
+      "referral-dashboard-tier2",
+      "referral-dashboard-tier3",
+      "referral-dashboard-tier4",
+      "referral-activity-period-menu",
+      "referral-activity-weekly",
+      "referral-activity-monthly",
+      "referral-activity-one-year",
+      "referral-activity-new-member-bonus",
+      "referral-activity-line-chart",
+      "deposit-address-ethereum",
+      "deposit-address-base",
+      "deposit-address-hyperevm",
+      "deposit-address-arbitrum",
+      "deposit-address-optimism"
+    ]
+  }
+}

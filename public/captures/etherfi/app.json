@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "app": {
+    "name": "ether.fi",
+    "slug": "etherfi",
+    "bundleId": "etherfi.app",
+    "platform": "android"
+  },
+  "firstCapturedAt": "2026-07-14",
+  "lastCapturedAt": "2026-07-14",
+  "latestCapture": "2026-07-14",
+  "captures": [
+    {
+      "date": "2026-07-14",
+      "scope": "initial",
+      "mode": "guided",
+      "previousCapture": null,
+      "path": "2026-07-14/graph.json"
+    }
+  ]
+}

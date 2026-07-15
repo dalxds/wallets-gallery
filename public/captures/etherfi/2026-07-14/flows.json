@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "flows": [
+    {
+      "id": "getting-started",
+      "name": "Getting started",
+      "summary": "Learn about ether.fi Cash, create a personal account, and finish the initial setup.",
+      "parentId": null,
+      "order": 0,
+      "steps": [
+        "onboarding-credit-card",
+        "onboarding-notifications",
+        "create-personal-account",
+        "email-verification-code",
+        "terms-and-conditions",
+        "passkey-setup",
+        "passkey-setup-creating-account"
+      ]
+    },
+    {
+      "id": "applying-referral-code",
+      "name": "Applying a referral code",
+      "summary": "Add a referral code while creating a personal account.",
+      "parentId": "getting-started",
+      "order": 0,
+      "steps": [
+        "referral-code",
+        "referral-code-applied"
+      ]
+    },
+    {
+      "id": "vault",
+      "name": "Vault",
+      "summary": "Review the vault balance, assets, and available money actions.",
+      "parentId": null,
+      "order": 1,
+      "steps": [
+        "vault-empty",
+        "add-funds-options"
+      ],
+      "entryPoints": [
+        {
+          "flowId": "cards",
+          "fromScreenId": "cards-verification-required",
+          "toScreenId": "vault-empty"
+        }
+      ]
+    },
+    {
+      "id": "adding-funds-crypto-wallet",
+      "name": "Adding funds from a crypto wallet",
+      "summary": "Connect an external crypto wallet to add funds.",
+      "parentId": "vault",
+      "order": 0,
+      "steps": [
+        "add-funds-wallet-connect"
+      ]
+    },
+    {
+      "id": "adding-funds-exchange",
+      "name": "Adding funds from an exchange",
+      "summary": "Choose a supported exchange as the source of funds.",
+      "parentId": "vault",
+      "order": 1,
+      "steps": [
+        "add-funds-exchange-selector"
+      ]
+    },
+    {
+      "id": "sharing-deposit-address",
+      "name": "Sharing a deposit address",
+      "summary": "Select a network and retrieve the account's USDC deposit address.",
+      "parentId": "vault",
+      "order": 2,
+      "steps": [
+        "deposit-address-setup",
+        "deposit-network-picker",
+        "deposit-address-ethereum"
+      ]
+    },
+    {
+      "id": "earn",
+      "name": "Earn",
+      "summary": "Browse staking and liquid yield products.",
+      "parentId": null,
+      "order": 2,
+      "steps": [
+        "earn-products"
+      ],
+      "entryPoints": [
+        {
+          "flowId": "vault",
+          "fromScreenId": "vault-empty",
+          "toScreenId": "earn-products"
+        }
+      ]
+    },
+    {
+      "id": "cards",
+      "name": "Cards",
+      "summary": "Review card availability and the account-verification requirement.",
+      "parentId": null,
+      "order": 3,
+      "steps": [
+        "cards-verification-required"
+      ],
+      "entryPoints": [
+        {
+          "flowId": "getting-started",
+          "fromScreenId": "passkey-setup-creating-account",
+          "toScreenId": "cards-verification-required"
+        }
+      ]
+    },
+    {
+      "id": "transactions",
+      "name": "Transactions",
+      "summary": "Review all, vault, and card transaction history.",
+      "parentId": null,
+      "order": 4,
+      "steps": [
+        "transaction-history-all-empty"
+      ],
+      "entryPoints": [
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-products",
+          "toScreenId": "transaction-history-all-empty"
+        }
+      ]
+    },
+    {
+      "id": "account",
+      "name": "Account",
+      "summary": "Open account controls and the app's broader navigation menu.",
+      "parentId": null,
+      "order": 5,
+      "steps": [
+        "account-options",
+        "main-menu"
+      ],
+      "entryPoints": [
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-products",
+          "toScreenId": "account-options"
+        },
+        {
+          "flowId": "earn",
+          "fromScreenId": "earn-products",
+          "toScreenId": "main-menu"
+        }
+      ]
+    },
+    {
+      "id": "exploring-referral-rewards",
+      "name": "Exploring referral rewards",
+      "summary": "Start referring, review referral stats, compare reward tiers, and share a referral QR code.",
+      "parentId": "account",
+      "order": 0,
+      "steps": [
+        "promotions",
+        "referral-dashboard-overview",
+        "referral-dashboard-qr",
+        "referral-dashboard-rewards",
+        "referral-dashboard-tier-menu"
+      ]
+    },
+    {
+      "id": "reviewing-referral-activity",
+      "name": "Reviewing referral activity",
+      "summary": "Review referral performance across periods, date ranges, reward types, and chart views.",
+      "parentId": "exploring-referral-rewards",
+      "order": 0,
+      "steps": [
+        "referral-dashboard-activity",
+        "referral-activity-period-menu",
+        "referral-activity-date-range-menu",
+        "referral-activity-reward-type-menu"
+      ]
+    }
+  ],
+  "uncovered": {},
+  "flowTODO": []
+}

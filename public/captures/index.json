@@ -14,6 +14,19 @@
       "logo": "logo.png?v=1e3962a5f409"
     },
     {
+      "slug": "etherfi",
+      "name": "ether.fi",
+      "platform": "android",
+      "captures": [
+        "2026-07-14"
+      ],
+      "latest": "2026-07-14",
+      "cover": "assets/7e0b3488441d.png",
+      "screens": 50,
+      "flows": 12,
+      "logo": null
+    },
+    {
       "slug": "redotpay",
       "name": "RedotPay",
       "platform": "android",
