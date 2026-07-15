@@ -1,0 +1,2601 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "app": {
+      "name": "ether.fi",
+      "slug": "etherfi",
+      "bundleId": "etherfi.app",
+      "platform": "android"
+    },
+    "captureDate": "2026-07-15",
+    "scope": "full",
+    "mode": "guided",
+    "previousCapture": "2026-07-14"
+  },
+  "root": "vault-funded",
+  "mainNav": [
+    "vault-funded",
+    "earn-overview",
+    "cards-overview",
+    "transaction-history-pending"
+  ],
+  "nodes": [
+    {
+      "id": "vault-funded",
+      "fingerprint": "sha256:fee5973d9d78ce2cedfd47d0",
+      "skeletonHash": "sk:1cfa6ab94a2e89fe8656974a",
+      "pHash": "p:a3060fdcedfc5203",
+      "role": "home",
+      "screenshotPath": "assets/7383ccf381a2.png",
+      "snapshotPath": null,
+      "texts": [
+        "Personal",
+        "My Account",
+        "Total Balance",
+        "$2.50",
+        "Assets",
+        "USDC",
+        "Earn 5.23% APY"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "label=\"Send\""
+        },
+        {
+          "label": "Convert",
+          "role": "button",
+          "selector": "label=\"Convert\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Earn More",
+          "role": "button",
+          "selector": "label=\"Earn More\""
+        }
+      ]
+    },
+    {
+      "id": "convert-entry",
+      "fingerprint": "sha256:572d83b6ba8cedfaf58f4095",
+      "skeletonHash": "sk:3df1224b45c876006c9f0545",
+      "pHash": "p:6c2dd6d2d2522d2d",
+      "role": "form",
+      "screenshotPath": "assets/6abde7c6a8d6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Convert",
+        "You pay",
+        "You receive"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select source asset",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select destination asset",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "convert-source-picker",
+      "fingerprint": "sha256:e2dfb113a6b183be181907df",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:4e3055d357d2e80f",
+      "role": "picker",
+      "screenshotPath": "assets/b04668e0ec02.png",
+      "snapshotPath": null,
+      "texts": [
+        "Select asset",
+        "USDC"
+      ],
+      "interactiveElements": [
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": "label=\"USDC\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "convert-usdc-selected",
+      "fingerprint": "sha256:55a5b0328e0db4e53f9ffaab",
+      "skeletonHash": "sk:f255365bbddebbad574d6549",
+      "pHash": "p:56adad92d2522d2d",
+      "role": "form",
+      "screenshotPath": "assets/e5766aa27c8e.png",
+      "snapshotPath": null,
+      "texts": [
+        "Convert",
+        "USDC",
+        "You pay",
+        "You receive"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Amount",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Select destination asset",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "convert-amount-entered",
+      "fingerprint": "sha256:066ee7fe5b310a72f83ecaf9",
+      "skeletonHash": "sk:86d3fe55278c7bae16c00abd",
+      "pHash": "p:5aa5e9f4d353240b",
+      "role": "form",
+      "screenshotPath": "assets/b9349276e02d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Convert",
+        "0.5 USDC",
+        "You receive"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select destination asset",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "convert-destination-picker",
+      "fingerprint": "sha256:55796cc166c51726ce30de8d",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:4e3ce1f147d0e80f",
+      "role": "picker",
+      "screenshotPath": "assets/8cad229c645a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Select asset",
+        "EURC"
+      ],
+      "interactiveElements": [
+        {
+          "label": "EURC",
+          "role": "button",
+          "selector": "label=\"EURC\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "convert-quote",
+      "fingerprint": "sha256:09be871f665842915ecccdb4",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:dc762381dcdc0f23",
+      "role": "confirmation",
+      "screenshotPath": "assets/daaa32f88125.png",
+      "snapshotPath": null,
+      "texts": [
+        "Convert",
+        "0.5 USDC",
+        "EURC",
+        "Quote"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Review conversion",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "convert-confirmation",
+      "fingerprint": "sha256:c8d72610c2cd997d85ee8b99",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:29d6a739d4097e83",
+      "role": "confirmation",
+      "screenshotPath": "assets/93e98e5fc667.png",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm conversion",
+        "USDC",
+        "EURC"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        }
+      ]
+    },
+    {
+      "id": "convert-auth",
+      "fingerprint": "sha256:886fa16eacc05e4fbf41e21e",
+      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
+      "pHash": null,
+      "role": "auth",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Check your email",
+        "Enter verification code"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verification code",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "convert-processing",
+      "fingerprint": "sha256-text:f9874b66ee52017f1bd7a4b5",
+      "skeletonHash": "skt:0fb001f5b56fb413707b7887",
+      "pHash": "p:29d6a778d5096e83",
+      "role": "other",
+      "screenshotPath": "assets/2ec0b89b32fe.png",
+      "snapshotPath": null,
+      "texts": [
+        "Processing conversion"
+      ],
+      "interactiveElements": []
+    },
+    {
+      "id": "convert-success",
+      "fingerprint": "sha256:ba01ce94c3138e756a2407c9",
+      "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
+      "pHash": "p:cc3376a7dc89460b",
+      "role": "confirmation",
+      "screenshotPath": "assets/73df066da9d1.png",
+      "snapshotPath": null,
+      "texts": [
+        "Converted",
+        "EURC",
+        "Conversion completed"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Done",
+          "role": "button",
+          "selector": "label=\"Done\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "convert-reset",
+      "fingerprint": "sha256:fd3ae61b53a743b0f71ed411",
+      "skeletonHash": "sk:f64a31c9b5b8d1e1ba4ddebd",
+      "pHash": "p:6c2dd6d2d2522d2d",
+      "role": "form",
+      "screenshotPath": "assets/6abde7c6a8d6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Convert",
+        "You pay",
+        "You receive"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        },
+        {
+          "label": "Select source asset",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "vault-after-swap",
+      "fingerprint": "sha256:0cc34b4284a20d4537bfd6c9",
+      "skeletonHash": "sk:10e3f0bca28221fb5812a2de",
+      "pHash": "p:27040ffcedfcd003",
+      "role": "home",
+      "screenshotPath": "assets/b3c2d21a56a7.png",
+      "snapshotPath": null,
+      "texts": [
+        "Vault",
+        "USDC",
+        "EURC",
+        "Assets"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "label=\"Send\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Convert",
+          "role": "button",
+          "selector": "label=\"Convert\""
+        },
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\""
+        }
+      ]
+    },
+    {
+      "id": "send-method",
+      "fingerprint": "sha256:389829ce420a5a10037aca79",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:ec634717cc98c783",
+      "role": "picker",
+      "screenshotPath": "assets/62535c4094a8.png",
+      "snapshotPath": null,
+      "texts": [
+        "Send Funds",
+        "Choose how to send"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Send crypto",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "transfer-loading",
+      "fingerprint": "sha256-text:301fa3de2d3de512654816a7",
+      "skeletonHash": "skt:87207d38b03aa759fc7e9657",
+      "pHash": "p:73cdcc3331cce431",
+      "role": "other",
+      "screenshotPath": "assets/129323a22c73.png",
+      "snapshotPath": null,
+      "texts": [
+        "Loading transfer form"
+      ],
+      "interactiveElements": []
+    },
+    {
+      "id": "transfer-form",
+      "fingerprint": "sha256:403cdf39c9b641db66be0fab",
+      "skeletonHash": "sk:c8de2b4780e753f823784b5b",
+      "pHash": null,
+      "role": "form",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Send funds",
+        "Network",
+        "Amount",
+        "Recipient"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Network",
+          "role": "button",
+          "selector": "label=\"Network\""
+        },
+        {
+          "label": "Amount",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Recipient",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Review",
+          "role": "button",
+          "selector": "label=\"Review\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "transfer-network-picker",
+      "fingerprint": "sha256:5ac4cb631203cd8ae5834ef9",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:6c0f0fbdf0f0070b",
+      "role": "picker",
+      "screenshotPath": "assets/1e340804646b.png",
+      "snapshotPath": null,
+      "texts": [
+        "Select network",
+        "Base"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Base",
+          "role": "button",
+          "selector": "label=\"Base\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "transfer-base-selected",
+      "fingerprint": "sha256:50b9d0b9e539f7820d62851a",
+      "skeletonHash": "sk:8bb43cbf1c777d4319a19b41",
+      "pHash": "p:76134d8df1f00f0b",
+      "role": "form",
+      "screenshotPath": "assets/a70913d9c5b4.png",
+      "snapshotPath": null,
+      "texts": [
+        "Send funds",
+        "Base",
+        "Amount",
+        "Recipient"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Amount",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Recipient",
+          "role": "input",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "transfer-amount-entered",
+      "fingerprint": "sha256:62357ff336ebacc165938f49",
+      "skeletonHash": "sk:409fab6c65cb1092ffc8bdb1",
+      "pHash": "p:d2a54b2cf1d3b40b",
+      "role": "form",
+      "screenshotPath": "assets/04faf13b2e4d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Send funds",
+        "Base",
+        "0.5 USDC",
+        "Recipient"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Recipient",
+          "role": "input",
+          "selector": null,
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "transfer-recipient-entered",
+      "fingerprint": "sha256:722f80b1c525e7cb47ba2f80",
+      "skeletonHash": "sk:86d3fe55278c7bae16c00abd",
+      "pHash": null,
+      "role": "form",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Send funds",
+        "Base",
+        "0.5 USDC",
+        "Recipient entered"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Review",
+          "role": "button",
+          "selector": "label=\"Review\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "contract-recipient-warning",
+      "fingerprint": "sha256:5e963a7718f387a2268ecd74",
+      "skeletonHash": "sk:8c8d5a0e8bc8355e786e3b12",
+      "pHash": null,
+      "role": "modal",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Contract address warning",
+        "Confirm you understand the risk"
+      ],
+      "interactiveElements": [
+        {
+          "label": "I understand",
+          "role": "checkbox",
+          "selector": "label=\"I understand\""
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        }
+      ]
+    },
+    {
+      "id": "transfer-review",
+      "fingerprint": "sha256:873d909d481192339b60cfd8",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": null,
+      "role": "confirmation",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Review transfer",
+        "Base",
+        "USDC",
+        "Network fee"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "label=\"Send\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "transfer-auth",
+      "fingerprint": "sha256:886fa16eacc05e4fbf41e21e",
+      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
+      "pHash": null,
+      "role": "auth",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm transfer",
+        "Enter verification code"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verification code",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "transfer-processing",
+      "fingerprint": "sha256:ba01ce94c3138e756a2407c9",
+      "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
+      "pHash": "p:04937d71c71c3cd3",
+      "role": "confirmation",
+      "screenshotPath": "assets/e1f801a859e6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Transfer in progress",
+        "Base"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Done",
+          "role": "button",
+          "selector": "label=\"Done\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "send-method-after-transfer",
+      "fingerprint": "sha256:389829ce420a5a10037aca79",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:ec634717cc98c783",
+      "role": "picker",
+      "screenshotPath": "assets/62535c4094a8.png",
+      "snapshotPath": null,
+      "texts": [
+        "Send Funds",
+        "Choose how to send"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        },
+        {
+          "label": "Send crypto",
+          "role": "button",
+          "selector": null
+        }
+      ]
+    },
+    {
+      "id": "vault-after-transfer",
+      "fingerprint": "sha256:a997f85701b702bdaca29f42",
+      "skeletonHash": "sk:98dd0281ae772f232c927b43",
+      "pHash": "p:27040ffcedfcd003",
+      "role": "home",
+      "screenshotPath": "assets/850bd9624ebc.png",
+      "snapshotPath": null,
+      "texts": [
+        "Vault",
+        "USDC",
+        "EURC",
+        "Assets"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Earn More",
+          "role": "button",
+          "selector": "label=\"Earn More\""
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": "label=\"Earn\""
+        }
+      ]
+    },
+    {
+      "id": "add-funds-options",
+      "fingerprint": "sha256:2f94b3bbf69062c848b85cd1",
+      "skeletonHash": "sk:ae618fcf7e4dfecf8b371443",
+      "pHash": "p:ec43661346fcd383",
+      "role": "modal",
+      "screenshotPath": "assets/8cf46f376fdd.png",
+      "snapshotPath": null,
+      "texts": [
+        "Add Funds to Your Account",
+        "Send from crypto wallet",
+        "Send from Exchange",
+        "Share deposit address",
+        "Bank transfer"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Send from crypto wallet",
+          "role": "button",
+          "selector": "label=\"Send from crypto wallet\""
+        },
+        {
+          "label": "Send from Exchange",
+          "role": "button",
+          "selector": "label=\"Send from Exchange\""
+        },
+        {
+          "label": "Share deposit address",
+          "role": "button",
+          "selector": "label=\"Share deposit address\""
+        },
+        {
+          "label": "Bank transfer",
+          "role": "button",
+          "selector": "label=\"Bank transfer\""
+        }
+      ]
+    },
+    {
+      "id": "earn-overview",
+      "fingerprint": "sha256:696cb62998c36a577f79da6e",
+      "skeletonHash": "sk:d67f9e9521254359a6cad823",
+      "pHash": "p:3d3c1d5c455cc783",
+      "role": "list",
+      "screenshotPath": "assets/b27f204b9bfb.png",
+      "snapshotPath": null,
+      "texts": [
+        "Earn",
+        "Liquid strategies",
+        "USD Yield",
+        "APY"
+      ],
+      "interactiveElements": [
+        {
+          "label": "USD Yield",
+          "role": "button",
+          "selector": "label=\"USD Yield\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": "label=\"Vault\""
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": "label=\"Cards\""
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": "label=\"Transactions\""
+        }
+      ]
+    },
+    {
+      "id": "yield-deposit-form",
+      "fingerprint": "sha256:48f842b485946935c591dd25",
+      "skeletonHash": "sk:9f61a612cd7c9a67d305a8e3",
+      "pHash": "p:abf489d88cb0762b",
+      "role": "form",
+      "screenshotPath": "assets/ec2672a80a1d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit into USD Yield",
+        "USDC",
+        "Receive liquidUSD",
+        "Risk"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit",
+          "role": "tab",
+          "selector": "label=\"Deposit\""
+        },
+        {
+          "label": "Withdraw",
+          "role": "tab",
+          "selector": "label=\"Withdraw\""
+        },
+        {
+          "label": "Amount",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "label=\"Deposit\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "yield-deposit-amount",
+      "fingerprint": "sha256:d3b00ec174f60a25b40d8651",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:a9f689dc0591f623",
+      "role": "confirmation",
+      "screenshotPath": "assets/266c41273045.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit into USD Yield",
+        "1 USDC",
+        "liquidUSD"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "label=\"Deposit\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "yield-deposit-auth",
+      "fingerprint": "sha256:886fa16eacc05e4fbf41e21e",
+      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
+      "pHash": null,
+      "role": "auth",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm deposit",
+        "Enter verification code"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verification code",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "yield-deposit-complete",
+      "fingerprint": "sha256:ba01ce94c3138e756a2407c9",
+      "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
+      "pHash": "p:6f7489dc89857623",
+      "role": "confirmation",
+      "screenshotPath": "assets/557532b17bc4.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit completed",
+        "USD Yield",
+        "USDC"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Done",
+          "role": "button",
+          "selector": "label=\"Done\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "yield-position-after-deposit",
+      "fingerprint": "sha256:3b19baddf75646004a4b33cf",
+      "skeletonHash": "sk:405707d15595acd9e70f4765",
+      "pHash": "p:abf489d88cb0762b",
+      "role": "form",
+      "screenshotPath": "assets/08b3f4faf8ab.png",
+      "snapshotPath": null,
+      "texts": [
+        "USD Yield",
+        "liquidUSD balance",
+        "USDC balance"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit",
+          "role": "tab",
+          "selector": "label=\"Deposit\""
+        },
+        {
+          "label": "Withdraw",
+          "role": "tab",
+          "selector": "label=\"Withdraw\""
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "earn-after-deposit",
+      "fingerprint": "sha256:c0adc363e5956227284f563a",
+      "skeletonHash": "sk:3ef4c479b4d502a36dfeb5f7",
+      "pHash": "p:67b0a53ca55c4f83",
+      "role": "list",
+      "screenshotPath": "assets/426223de926a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Earn",
+        "USD Yield",
+        "Position"
+      ],
+      "interactiveElements": [
+        {
+          "label": "USD Yield",
+          "role": "button",
+          "selector": "label=\"USD Yield\""
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": "label=\"Transactions\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "transaction-history-deposit",
+      "fingerprint": "sha256:9b2511dd47468af2a8241e42",
+      "skeletonHash": "sk:3ef4c479b4d502a36dfeb5f7",
+      "pHash": "p:7cf87c50d2d30707",
+      "role": "list",
+      "screenshotPath": "assets/84b02f9d1c3a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Transactions",
+        "Deposit",
+        "Processed"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Deposit",
+          "role": "button",
+          "selector": "label=\"Deposit\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": "label=\"Earn\""
+        }
+      ]
+    },
+    {
+      "id": "deposit-transaction-detail",
+      "fingerprint": "sha256:6912ef86d2ef4b84066d24ad",
+      "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
+      "pHash": "p:667361c98c973333",
+      "role": "confirmation",
+      "screenshotPath": "assets/2ef6237ab86f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Deposit",
+        "Processed",
+        "USD Yield",
+        "Transaction details"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "yield-deposit-post-balance",
+      "fingerprint": "sha256:c1cf8a551ee9bfaa07a5c476",
+      "skeletonHash": "sk:2553df9dcf1e34a06ff46b8c",
+      "pHash": "p:abf489d88cb0762b",
+      "role": "form",
+      "screenshotPath": "assets/08b3f4faf8ab.png",
+      "snapshotPath": null,
+      "texts": [
+        "USD Yield",
+        "Deposit",
+        "Withdraw",
+        "liquidUSD balance"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Withdraw",
+          "role": "tab",
+          "selector": "label=\"Withdraw\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "yield-withdraw-form",
+      "fingerprint": "sha256:e975b9fb00577bf11c296d4e",
+      "skeletonHash": "sk:f64a31c9b5b8d1e1ba4ddebd",
+      "pHash": "p:a778c4a15c93f60b",
+      "role": "form",
+      "screenshotPath": "assets/b83bc2da0c08.png",
+      "snapshotPath": null,
+      "texts": [
+        "Withdraw from USD Yield",
+        "liquidUSD",
+        "USDC",
+        "3 days"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Max",
+          "role": "button",
+          "selector": "label=\"Max\""
+        },
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": "label=\"Withdraw\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "yield-withdraw-max",
+      "fingerprint": "sha256:c57e036ed1e7fa29bf378328",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:8d79dca15699f403",
+      "role": "confirmation",
+      "screenshotPath": "assets/aa620e070e1f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Withdraw from USD Yield",
+        "Max",
+        "liquidUSD",
+        "USDC",
+        "3 days"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Withdraw",
+          "role": "button",
+          "selector": "label=\"Withdraw\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "yield-withdraw-auth",
+      "fingerprint": "sha256:886fa16eacc05e4fbf41e21e",
+      "skeletonHash": "sk:ae5c358f617edfe7de7a4bdc",
+      "pHash": null,
+      "role": "auth",
+      "screenshotPath": "",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm withdrawal",
+        "Enter verification code"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verification code",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "yield-withdrawal-requested",
+      "fingerprint": "sha256:ba01ce94c3138e756a2407c9",
+      "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
+      "pHash": "p:7299e48ddcf11623",
+      "role": "confirmation",
+      "screenshotPath": "assets/9b055eb4eac3.png",
+      "snapshotPath": null,
+      "texts": [
+        "Withdrawal requested",
+        "USD Yield",
+        "3-day queue"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Done",
+          "role": "button",
+          "selector": "label=\"Done\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "earn-after-withdrawal",
+      "fingerprint": "sha256:7fa68beba35aaafd7ff1dac0",
+      "skeletonHash": "sk:30ff9e240e231a16c0eb1740",
+      "pHash": "p:67b0a53ca55c4f83",
+      "role": "list",
+      "screenshotPath": "assets/426223de926a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Earn",
+        "USD Yield"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": "label=\"Transactions\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": "label=\"Cards\""
+        }
+      ]
+    },
+    {
+      "id": "transaction-history-pending",
+      "fingerprint": "sha256:b63c14561244e2ff13a18208",
+      "skeletonHash": "sk:3ef4c479b4d502a36dfeb5f7",
+      "pHash": "p:2cf87453d2d30727",
+      "role": "list",
+      "screenshotPath": "assets/d7e29631cc07.png",
+      "snapshotPath": null,
+      "texts": [
+        "Transactions",
+        "Withdrawal",
+        "Pending",
+        "Deposit",
+        "Processed"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Withdrawal",
+          "role": "button",
+          "selector": "label=\"Withdrawal\""
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": "label=\"Earn\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "earn-post-history",
+      "fingerprint": "sha256:fc4401872a4cc61eebd04772",
+      "skeletonHash": "sk:3ef4c479b4d502a36dfeb5f7",
+      "pHash": "p:67b0a53ca55c4f83",
+      "role": "list",
+      "screenshotPath": "assets/426223de926a.png",
+      "snapshotPath": null,
+      "texts": [
+        "Earn",
+        "USD Yield"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": "label=\"Cards\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "USD Yield",
+          "role": "button",
+          "selector": "label=\"USD Yield\""
+        }
+      ]
+    },
+    {
+      "id": "cards-verify-account",
+      "fingerprint": "sha256:00bdb1feac952ac20733feca",
+      "skeletonHash": "sk:a1e4ed12a5e61579db89313a",
+      "pHash": "p:7cfc0303fcfc0703",
+      "role": "other",
+      "screenshotPath": "assets/7e0b3488441d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Cards",
+        "Verify Your Account"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verify Your Account",
+          "role": "button",
+          "selector": "label=\"Verify Your Account\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": "label=\"Vault\""
+        }
+      ]
+    },
+    {
+      "id": "kyc-country-picker",
+      "fingerprint": "sha256:fa88a14e5b81aad86ed8ab44",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:67d0d6765cf12107",
+      "role": "picker",
+      "screenshotPath": "assets/a4b877ece89f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Country of residence",
+        "Select country"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Country",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "kyc-residence-confirmation",
+      "fingerprint": "sha256:fa7562d5df0d934800641550",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:cc4746ec46b913b9",
+      "role": "confirmation",
+      "screenshotPath": "assets/a043c54ee468.png",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm country of residence"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Yes",
+          "role": "button",
+          "selector": "label=\"Yes\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "No",
+          "role": "button",
+          "selector": "label=\"No\""
+        }
+      ]
+    },
+    {
+      "id": "kyc-address-form",
+      "fingerprint": "sha256:9ed4a6c31d058b91262fc3f0",
+      "skeletonHash": "sk:f255365bbddebbad574d6549",
+      "pHash": "p:edfc01f04f93460b",
+      "role": "form",
+      "screenshotPath": "assets/f5e31e456738.png",
+      "snapshotPath": null,
+      "texts": [
+        "Where do you live?",
+        "Residential address"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Address",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-application-overview",
+      "fingerprint": "sha256:060eb8267de26be0fc342b31",
+      "skeletonHash": "sk:4381f286b2ed10a15b085f37",
+      "pHash": "p:8972e5161ef8fc03",
+      "role": "confirmation",
+      "screenshotPath": "assets/5576a82bd8b9.png",
+      "snapshotPath": null,
+      "texts": [
+        "Continue Your Application",
+        "Identity verification"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "kyc-loading",
+      "fingerprint": "sha256-text:7960afbf0f2ff1df67b9bce1",
+      "skeletonHash": "skt:482e15f29262ff218fb3f6c2",
+      "pHash": "p:cdd96531c5d94531",
+      "role": "other",
+      "screenshotPath": "assets/b0ccfe4ee46d.png",
+      "snapshotPath": null,
+      "texts": [
+        "Please wait"
+      ],
+      "interactiveElements": []
+    },
+    {
+      "id": "kyc-residency-classification",
+      "fingerprint": "sha256:e5112e0461e8e01d0268a2cc",
+      "skeletonHash": "sk:c2dd4310054fe0e48e5a5ab5",
+      "pHash": "p:97396913c67c6513",
+      "role": "picker",
+      "screenshotPath": "assets/38cc27f122b6.png",
+      "snapshotPath": null,
+      "texts": [
+        "Select residency classification",
+        "All countries except USA"
+      ],
+      "interactiveElements": [
+        {
+          "label": "All countries except USA",
+          "role": "button",
+          "selector": "label=\"All countries except USA\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-identity-overview",
+      "fingerprint": "sha256:069632aeb7ea50b5a592a9a5",
+      "skeletonHash": "sk:0b4ea0876e117c48bbefd46c",
+      "pHash": "p:2736079dfcf84303",
+      "role": "list",
+      "screenshotPath": "assets/fe7b2cb7c18f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Verify your identity",
+        "Identity document",
+        "Selfie",
+        "Review"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-document-type",
+      "fingerprint": "sha256:8e88bed524c2d866efee285b",
+      "skeletonHash": "sk:f7b5dc289ebd3230a150031b",
+      "pHash": "p:474f6c717c390783",
+      "role": "picker",
+      "screenshotPath": "assets/5cd9bd8b4e0e.png",
+      "snapshotPath": null,
+      "texts": [
+        "Choose document type",
+        "Identity document"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Document type",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Back",
+          "role": "button",
+          "selector": "label=\"Back\""
+        }
+      ]
+    },
+    {
+      "id": "cards-add-funds",
+      "fingerprint": "sha256:8d29b3d2e53011142bce5414",
+      "skeletonHash": "sk:50a6f75ade41ecb7e5537708",
+      "pHash": "p:7c7c0303fcfc4703",
+      "role": "home",
+      "screenshotPath": "assets/bdd3ab33a6e7.png",
+      "snapshotPath": null,
+      "texts": [
+        "Cards",
+        "Add Funds"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "cards-get-card",
+      "fingerprint": "sha256:2a06042c3be86654b02ce0f8",
+      "skeletonHash": "sk:50a6f75ade41ecb7e5537708",
+      "pHash": "p:7cfc0303fcfc0703",
+      "role": "home",
+      "screenshotPath": "assets/8d747aa49162.png",
+      "snapshotPath": null,
+      "texts": [
+        "Cards",
+        "Get Your Card"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Get Your Card",
+          "role": "button",
+          "selector": "label=\"Get Your Card\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-terms",
+      "fingerprint": "sha256:cec30bcfd883cdd2a0ad411b",
+      "skeletonHash": "sk:d2660b107227b04094615092",
+      "pHash": "p:0616eca95c5ee3a3",
+      "role": "form",
+      "screenshotPath": "assets/98928cb8df63.png",
+      "snapshotPath": null,
+      "texts": [
+        "Card agreement",
+        "Terms and conditions",
+        "Privacy policy"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Accept terms",
+          "role": "checkbox",
+          "selector": null
+        },
+        {
+          "label": "Agree to Terms",
+          "role": "button",
+          "selector": "label=\"Agree to Terms\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-terms-accepted",
+      "fingerprint": "sha256:7b013be4d0c6b2e487ddab97",
+      "skeletonHash": "sk:86d3fe55278c7bae16c00abd",
+      "pHash": "p:0616eca95c5ee3a3",
+      "role": "form",
+      "screenshotPath": "assets/037dc42abc6c.png",
+      "snapshotPath": null,
+      "texts": [
+        "Card agreement",
+        "Terms accepted"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Agree to Terms",
+          "role": "button",
+          "selector": "label=\"Agree to Terms\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "add-card-virtual",
+      "fingerprint": "sha256:c18f2b6ca370d301bb9c7df0",
+      "skeletonHash": "sk:e519273be9df781e6a1acd8b",
+      "pHash": "p:85fc890376fc7603",
+      "role": "picker",
+      "screenshotPath": "assets/becc4bc0c519.png",
+      "snapshotPath": null,
+      "texts": [
+        "Add Card",
+        "Virtual",
+        "Accepted by 100M+ merchants",
+        "Google Pay"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Virtual",
+          "role": "tab",
+          "selector": "label=\"Virtual\""
+        },
+        {
+          "label": "Physical",
+          "role": "tab",
+          "selector": "label=\"Physical\""
+        },
+        {
+          "label": "Select Virtual Card",
+          "role": "button",
+          "selector": "label=\"Select Virtual Card\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "add-card-physical",
+      "fingerprint": "sha256:2a48bb04e48e8686844c7098",
+      "skeletonHash": "sk:e519273be9df781e6a1acd8b",
+      "pHash": "p:27f40303f6fcdc03",
+      "role": "picker",
+      "screenshotPath": "assets/8dc8d2426679.png",
+      "snapshotPath": null,
+      "texts": [
+        "Add Card",
+        "Physical",
+        "Core Plastic",
+        "$50.00 USD"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Virtual",
+          "role": "tab",
+          "selector": "label=\"Virtual\""
+        },
+        {
+          "label": "Physical",
+          "role": "tab",
+          "selector": "label=\"Physical\""
+        },
+        {
+          "label": "$50.00 USD",
+          "role": "button",
+          "selector": "label=\"$50.00 USD\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "confirm-legal-name",
+      "fingerprint": "sha256:1868f0805420930aabac68ea",
+      "skeletonHash": "sk:084d59a5021c9d560df09593",
+      "pHash": "p:85fca91f4ea17603",
+      "role": "form",
+      "screenshotPath": "assets/d25a2386bab1.png",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm name",
+        "First name",
+        "Last name"
+      ],
+      "interactiveElements": [
+        {
+          "label": "First name",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Last name",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "add-card-virtual-after-name",
+      "fingerprint": "sha256:fb67d88237f146ebe926ad50",
+      "skeletonHash": "sk:4785d61fa378f0e574593130",
+      "pHash": "p:85fc890376fc7603",
+      "role": "picker",
+      "screenshotPath": "assets/becc4bc0c519.png",
+      "snapshotPath": null,
+      "texts": [
+        "Add Card",
+        "Virtual",
+        "Select Virtual Card"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select Virtual Card",
+          "role": "button",
+          "selector": "label=\"Select Virtual Card\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Physical",
+          "role": "tab",
+          "selector": "label=\"Physical\""
+        }
+      ]
+    },
+    {
+      "id": "card-optional-details",
+      "fingerprint": "sha256:ae433bc7341ab88100abb38b",
+      "skeletonHash": "sk:c8de2b4780e753f823784b5b",
+      "pHash": "p:4c79fcb1f4130713",
+      "role": "form",
+      "screenshotPath": "assets/054d9584b36e.png",
+      "snapshotPath": null,
+      "texts": [
+        "Optional card details",
+        "Card nickname",
+        "Daily Spend Limit"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Card nickname",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Daily Spend Limit",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Skip",
+          "role": "button",
+          "selector": "label=\"Skip\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Confirm Options",
+          "role": "button",
+          "selector": "label=\"Confirm Options\""
+        }
+      ]
+    },
+    {
+      "id": "card-issued",
+      "fingerprint": "sha256:cc75d128417b2bc22bc44968",
+      "skeletonHash": "sk:b3e114c6dc6caa715a010d7c",
+      "pHash": "p:2fd4d43354ab542b",
+      "role": "confirmation",
+      "screenshotPath": "assets/b91703b2723f.png",
+      "snapshotPath": null,
+      "texts": [
+        "Confirmed",
+        "View Your Card"
+      ],
+      "interactiveElements": [
+        {
+          "label": "View Your Card",
+          "role": "button",
+          "selector": "label=\"View Your Card\"",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "cards-overview",
+      "fingerprint": "sha256:097125b83028504d1d5c21cd",
+      "skeletonHash": "sk:eb216bde42537f88165e2ee4",
+      "pHash": "p:ab4307bcfcfc0303",
+      "role": "home",
+      "screenshotPath": "assets/6676246b0260.png",
+      "snapshotPath": null,
+      "texts": [
+        "Cards",
+        "Virtual",
+        "Transactions",
+        "No transactions yet"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Report a Decline",
+          "role": "button",
+          "selector": "label=\"Report a Decline\""
+        },
+        {
+          "label": "Add Card",
+          "role": "button",
+          "selector": "label=\"Add Card\""
+        },
+        {
+          "label": "Manage",
+          "role": "button",
+          "selector": "label=\"Manage\""
+        },
+        {
+          "label": "Card Details",
+          "role": "button",
+          "selector": "label=\"Card Details\""
+        },
+        {
+          "label": "Freeze Card",
+          "role": "button",
+          "selector": "label=\"Freeze Card\""
+        },
+        {
+          "label": "Add to Google Wallet",
+          "role": "button",
+          "selector": "label=\"Add to Google Wallet\""
+        }
+      ]
+    },
+    {
+      "id": "manage-card",
+      "fingerprint": "sha256:2c6a406976afaf2c2abfe009",
+      "skeletonHash": "sk:305e1493d43db2e13586e9bb",
+      "pHash": "p:cf4307b4fcdc8c03",
+      "role": "modal",
+      "screenshotPath": "assets/f40a429fd2ee.png",
+      "snapshotPath": null,
+      "texts": [
+        "Manage Card",
+        "Edit Limit",
+        "Delete Card"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Edit Limit",
+          "role": "button",
+          "selector": "label=\"Edit Limit\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Delete Card",
+          "role": "button",
+          "selector": "label=\"Delete Card\""
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "spending-limits",
+      "fingerprint": "sha256:d981d289bd305f18999e30b0",
+      "skeletonHash": "sk:8e5884713b71d722b25731a7",
+      "pHash": "p:cb0326f8fefc8803",
+      "role": "settings",
+      "screenshotPath": "assets/3314d6b09e17.png",
+      "snapshotPath": null,
+      "texts": [
+        "Edit spending limits",
+        "Card",
+        "Vault",
+        "Daily Limit",
+        "Monthly Limit",
+        "Remaining"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Edit card daily limit",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Edit vault daily limit",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Edit vault monthly limit",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "freeze-card-confirmation",
+      "fingerprint": "sha256:c8d72610c2cd997d85ee8b99",
+      "skeletonHash": "sk:6f4007b141df67b363a9256c",
+      "pHash": "p:8b4287bcfcfd0603",
+      "role": "modal",
+      "screenshotPath": "assets/2eb173982146.png",
+      "snapshotPath": null,
+      "texts": [
+        "Confirm card freeze",
+        "Temporarily prevent new transactions",
+        "Pre-authorized transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Confirm",
+          "role": "button",
+          "selector": "label=\"Confirm\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        }
+      ]
+    },
+    {
+      "id": "report-decline",
+      "fingerprint": "sha256:24e66431e2d11fdad0d79fa1",
+      "skeletonHash": "sk:08957898001c4927dcb65b50",
+      "pHash": "p:0303e6fcfcfc0703",
+      "role": "form",
+      "screenshotPath": "assets/3e91b01b5542.png",
+      "snapshotPath": null,
+      "texts": [
+        "Card declined unexpectedly?",
+        "Attach receipt or screenshot",
+        "Tell us what happened"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Drop here, or click to attach",
+          "role": "button",
+          "selector": "label=\"Drop here, or click to attach\""
+        },
+        {
+          "label": "Tell us what happened",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Send for Review",
+          "role": "button",
+          "selector": "label=\"Send for Review\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "vault-funded",
+      "to": "convert-entry",
+      "action": "Tap Convert",
+      "selector": "label=\"Convert\"",
+      "kind": "nav",
+      "observedAtStep": 1
+    },
+    {
+      "from": "convert-entry",
+      "to": "convert-source-picker",
+      "action": "Open source asset picker",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 2
+    },
+    {
+      "from": "convert-source-picker",
+      "to": "convert-usdc-selected",
+      "action": "Select USDC",
+      "selector": "label=\"USDC\"",
+      "kind": "nav",
+      "observedAtStep": 3
+    },
+    {
+      "from": "convert-usdc-selected",
+      "to": "convert-amount-entered",
+      "action": "Enter conversion amount",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 4
+    },
+    {
+      "from": "convert-amount-entered",
+      "to": "convert-destination-picker",
+      "action": "Open destination asset picker",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 5
+    },
+    {
+      "from": "convert-destination-picker",
+      "to": "convert-quote",
+      "action": "Select EURC",
+      "selector": "label=\"EURC\"",
+      "kind": "nav",
+      "observedAtStep": 6
+    },
+    {
+      "from": "convert-quote",
+      "to": "convert-confirmation",
+      "action": "Review conversion",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 7
+    },
+    {
+      "from": "convert-confirmation",
+      "to": "convert-auth",
+      "action": "Confirm conversion",
+      "selector": "label=\"Confirm\"",
+      "kind": "nav",
+      "observedAtStep": 8
+    },
+    {
+      "from": "convert-auth",
+      "to": "convert-processing",
+      "action": "Submit verification code",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 9
+    },
+    {
+      "from": "convert-processing",
+      "to": "convert-success",
+      "action": "Wait for conversion",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 10
+    },
+    {
+      "from": "convert-success",
+      "to": "convert-reset",
+      "action": "Tap Done",
+      "selector": "label=\"Done\"",
+      "kind": "nav",
+      "observedAtStep": 11
+    },
+    {
+      "from": "convert-reset",
+      "to": "vault-after-swap",
+      "action": "Go back to Vault",
+      "selector": "label=\"Back\"",
+      "kind": "back",
+      "observedAtStep": 12
+    },
+    {
+      "from": "vault-after-swap",
+      "to": "send-method",
+      "action": "Tap Send",
+      "selector": "label=\"Send\"",
+      "kind": "nav",
+      "observedAtStep": 13
+    },
+    {
+      "from": "send-method",
+      "to": "transfer-loading",
+      "action": "Choose crypto transfer",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 14
+    },
+    {
+      "from": "transfer-loading",
+      "to": "transfer-form",
+      "action": "Wait for transfer form",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 15
+    },
+    {
+      "from": "transfer-form",
+      "to": "transfer-network-picker",
+      "action": "Open network picker",
+      "selector": "label=\"Network\"",
+      "kind": "nav",
+      "observedAtStep": 16
+    },
+    {
+      "from": "transfer-network-picker",
+      "to": "transfer-base-selected",
+      "action": "Select Base",
+      "selector": "label=\"Base\"",
+      "kind": "nav",
+      "observedAtStep": 17
+    },
+    {
+      "from": "transfer-base-selected",
+      "to": "transfer-amount-entered",
+      "action": "Enter transfer amount",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 18
+    },
+    {
+      "from": "transfer-amount-entered",
+      "to": "transfer-recipient-entered",
+      "action": "Enter recipient",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 19
+    },
+    {
+      "from": "transfer-recipient-entered",
+      "to": "contract-recipient-warning",
+      "action": "Review transfer",
+      "selector": "label=\"Review\"",
+      "kind": "overlay",
+      "observedAtStep": 20
+    },
+    {
+      "from": "contract-recipient-warning",
+      "to": "transfer-review",
+      "action": "Acknowledge contract warning",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 21
+    },
+    {
+      "from": "transfer-review",
+      "to": "transfer-auth",
+      "action": "Tap Send",
+      "selector": "label=\"Send\"",
+      "kind": "nav",
+      "observedAtStep": 22
+    },
+    {
+      "from": "transfer-auth",
+      "to": "transfer-processing",
+      "action": "Submit verification code",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 23
+    },
+    {
+      "from": "transfer-processing",
+      "to": "send-method-after-transfer",
+      "action": "Tap Done",
+      "selector": "label=\"Done\"",
+      "kind": "nav",
+      "observedAtStep": 24
+    },
+    {
+      "from": "send-method-after-transfer",
+      "to": "vault-after-transfer",
+      "action": "Go back to Vault",
+      "selector": "label=\"Back\"",
+      "kind": "back",
+      "observedAtStep": 25
+    },
+    {
+      "from": "vault-after-transfer",
+      "to": "add-funds-options",
+      "action": "Tap Add Funds",
+      "selector": "label=\"Add Funds\"",
+      "kind": "overlay",
+      "observedAtStep": 26
+    },
+    {
+      "from": "add-funds-options",
+      "to": "vault-after-transfer",
+      "action": "Close add funds options",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 27
+    },
+    {
+      "from": "vault-after-transfer",
+      "to": "earn-overview",
+      "action": "Open Earn",
+      "selector": "label=\"Earn\"",
+      "kind": "nav",
+      "observedAtStep": 28
+    },
+    {
+      "from": "earn-overview",
+      "to": "yield-deposit-form",
+      "action": "Open USD Yield",
+      "selector": "label=\"USD Yield\"",
+      "kind": "nav",
+      "observedAtStep": 29
+    },
+    {
+      "from": "yield-deposit-form",
+      "to": "yield-deposit-amount",
+      "action": "Enter deposit amount",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 30
+    },
+    {
+      "from": "yield-deposit-amount",
+      "to": "yield-deposit-auth",
+      "action": "Submit deposit",
+      "selector": "label=\"Deposit\"",
+      "kind": "nav",
+      "observedAtStep": 31
+    },
+    {
+      "from": "yield-deposit-auth",
+      "to": "yield-deposit-complete",
+      "action": "Submit verification code",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 32
+    },
+    {
+      "from": "yield-deposit-complete",
+      "to": "yield-position-after-deposit",
+      "action": "Tap Done",
+      "selector": "label=\"Done\"",
+      "kind": "nav",
+      "observedAtStep": 33
+    },
+    {
+      "from": "yield-position-after-deposit",
+      "to": "earn-after-deposit",
+      "action": "Go back to Earn",
+      "selector": "label=\"Back\"",
+      "kind": "back",
+      "observedAtStep": 34
+    },
+    {
+      "from": "earn-after-deposit",
+      "to": "transaction-history-deposit",
+      "action": "Open Transactions",
+      "selector": "label=\"Transactions\"",
+      "kind": "in-place",
+      "observedAtStep": 35
+    },
+    {
+      "from": "transaction-history-deposit",
+      "to": "deposit-transaction-detail",
+      "action": "Open deposit transaction",
+      "selector": "label=\"Deposit\"",
+      "kind": "nav",
+      "observedAtStep": 36
+    },
+    {
+      "from": "deposit-transaction-detail",
+      "to": "transaction-history-deposit",
+      "action": "Go back to transaction history",
+      "selector": "label=\"Back\"",
+      "kind": "back",
+      "observedAtStep": 37
+    },
+    {
+      "from": "transaction-history-deposit",
+      "to": "earn-after-deposit",
+      "action": "Open Earn",
+      "selector": "label=\"Earn\"",
+      "kind": "back",
+      "observedAtStep": 38
+    },
+    {
+      "from": "earn-after-deposit",
+      "to": "yield-deposit-post-balance",
+      "action": "Open USD Yield",
+      "selector": "label=\"USD Yield\"",
+      "kind": "nav",
+      "observedAtStep": 39
+    },
+    {
+      "from": "yield-deposit-post-balance",
+      "to": "yield-withdraw-form",
+      "action": "Open Withdraw",
+      "selector": "label=\"Withdraw\"",
+      "kind": "nav",
+      "observedAtStep": 40
+    },
+    {
+      "from": "yield-withdraw-form",
+      "to": "yield-withdraw-max",
+      "action": "Tap Max",
+      "selector": "label=\"Max\"",
+      "kind": "nav",
+      "observedAtStep": 41
+    },
+    {
+      "from": "yield-withdraw-max",
+      "to": "yield-withdraw-auth",
+      "action": "Request withdrawal",
+      "selector": "label=\"Withdraw\"",
+      "kind": "nav",
+      "observedAtStep": 42
+    },
+    {
+      "from": "yield-withdraw-auth",
+      "to": "yield-withdrawal-requested",
+      "action": "Submit verification code",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 43
+    },
+    {
+      "from": "yield-withdrawal-requested",
+      "to": "earn-after-withdrawal",
+      "action": "Tap Done",
+      "selector": "label=\"Done\"",
+      "kind": "nav",
+      "observedAtStep": 44
+    },
+    {
+      "from": "earn-after-withdrawal",
+      "to": "transaction-history-pending",
+      "action": "Open Transactions",
+      "selector": "label=\"Transactions\"",
+      "kind": "nav",
+      "observedAtStep": 45
+    },
+    {
+      "from": "transaction-history-pending",
+      "to": "earn-post-history",
+      "action": "Open Earn",
+      "selector": "label=\"Earn\"",
+      "kind": "back",
+      "observedAtStep": 46
+    },
+    {
+      "from": "earn-post-history",
+      "to": "cards-verify-account",
+      "action": "Open Cards",
+      "selector": "label=\"Cards\"",
+      "kind": "nav",
+      "observedAtStep": 47
+    },
+    {
+      "from": "cards-verify-account",
+      "to": "kyc-country-picker",
+      "action": "Start account verification",
+      "selector": "label=\"Verify Your Account\"",
+      "kind": "nav",
+      "observedAtStep": 48
+    },
+    {
+      "from": "kyc-country-picker",
+      "to": "kyc-residence-confirmation",
+      "action": "Select country of residence",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 49
+    },
+    {
+      "from": "kyc-residence-confirmation",
+      "to": "kyc-address-form",
+      "action": "Confirm residence",
+      "selector": "label=\"Yes\"",
+      "kind": "nav",
+      "observedAtStep": 50
+    },
+    {
+      "from": "kyc-address-form",
+      "to": "kyc-application-overview",
+      "action": "Submit residential address",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 51
+    },
+    {
+      "from": "kyc-application-overview",
+      "to": "kyc-loading",
+      "action": "Continue identity verification",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 52
+    },
+    {
+      "from": "kyc-loading",
+      "to": "kyc-residency-classification",
+      "action": "Wait for verification provider",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 53
+    },
+    {
+      "from": "kyc-residency-classification",
+      "to": "kyc-identity-overview",
+      "action": "Select residency classification",
+      "selector": "label=\"All countries except USA\"",
+      "kind": "nav",
+      "observedAtStep": 54
+    },
+    {
+      "from": "kyc-identity-overview",
+      "to": "kyc-document-type",
+      "action": "Continue to identity document",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 55
+    },
+    {
+      "from": "kyc-document-type",
+      "to": "cards-add-funds",
+      "action": "Complete identity verification",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 56
+    },
+    {
+      "from": "cards-add-funds",
+      "to": "cards-get-card",
+      "action": "Verification status updates",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 57
+    },
+    {
+      "from": "cards-get-card",
+      "to": "card-terms",
+      "action": "Tap Get Your Card",
+      "selector": "label=\"Get Your Card\"",
+      "kind": "nav",
+      "observedAtStep": 58
+    },
+    {
+      "from": "card-terms",
+      "to": "card-terms-accepted",
+      "action": "Accept card terms",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 59
+    },
+    {
+      "from": "card-terms-accepted",
+      "to": "add-card-virtual",
+      "action": "Agree to Terms",
+      "selector": "label=\"Agree to Terms\"",
+      "kind": "nav",
+      "observedAtStep": 60
+    },
+    {
+      "from": "add-card-virtual",
+      "to": "add-card-physical",
+      "action": "Open Physical card option",
+      "selector": "label=\"Physical\"",
+      "kind": "in-place",
+      "observedAtStep": 61
+    },
+    {
+      "from": "add-card-physical",
+      "to": "add-card-virtual",
+      "action": "Return to Virtual card option",
+      "selector": "label=\"Virtual\"",
+      "kind": "back",
+      "observedAtStep": 62
+    },
+    {
+      "from": "add-card-virtual",
+      "to": "confirm-legal-name",
+      "action": "Select Virtual Card",
+      "selector": "label=\"Select Virtual Card\"",
+      "kind": "overlay",
+      "observedAtStep": 63
+    },
+    {
+      "from": "confirm-legal-name",
+      "to": "add-card-virtual-after-name",
+      "action": "Confirm legal name",
+      "selector": "label=\"Confirm\"",
+      "kind": "nav",
+      "observedAtStep": 64
+    },
+    {
+      "from": "add-card-virtual-after-name",
+      "to": "card-optional-details",
+      "action": "Select Virtual Card",
+      "selector": "label=\"Select Virtual Card\"",
+      "kind": "nav",
+      "observedAtStep": 65
+    },
+    {
+      "from": "card-optional-details",
+      "to": "card-issued",
+      "action": "Skip optional card details",
+      "selector": "label=\"Skip\"",
+      "kind": "nav",
+      "observedAtStep": 66
+    },
+    {
+      "from": "card-issued",
+      "to": "cards-overview",
+      "action": "View Your Card",
+      "selector": "label=\"View Your Card\"",
+      "kind": "nav",
+      "observedAtStep": 67
+    },
+    {
+      "from": "cards-overview",
+      "to": "manage-card",
+      "action": "Open Manage Card",
+      "selector": "label=\"Manage\"",
+      "kind": "overlay",
+      "observedAtStep": 68
+    },
+    {
+      "from": "manage-card",
+      "to": "spending-limits",
+      "action": "Open Edit Limit",
+      "selector": "label=\"Edit Limit\"",
+      "kind": "overlay",
+      "observedAtStep": 69
+    },
+    {
+      "from": "spending-limits",
+      "to": "cards-overview",
+      "action": "Close spending limits",
+      "selector": "label=\"Close sheet\"",
+      "kind": "back",
+      "observedAtStep": 70
+    },
+    {
+      "from": "cards-overview",
+      "to": "freeze-card-confirmation",
+      "action": "Tap Freeze Card",
+      "selector": "label=\"Freeze Card\"",
+      "kind": "overlay",
+      "observedAtStep": 71
+    },
+    {
+      "from": "freeze-card-confirmation",
+      "to": "cards-overview",
+      "action": "Cancel card freeze",
+      "selector": "label=\"Cancel\"",
+      "kind": "back",
+      "observedAtStep": 72
+    },
+    {
+      "from": "cards-overview",
+      "to": "report-decline",
+      "action": "Open Report a Decline",
+      "selector": "label=\"Report a Decline\"",
+      "kind": "overlay",
+      "observedAtStep": 73
+    },
+    {
+      "from": "report-decline",
+      "to": "cards-overview",
+      "action": "Cancel decline report",
+      "selector": "label=\"Cancel\"",
+      "kind": "back",
+      "observedAtStep": 74
+    }
+  ],
+  "decisionPoints": [
+    {
+      "nodeId": "vault-funded",
+      "options": [
+        {
+          "label": "Convert",
+          "explored": true,
+          "toNode": "convert-entry"
+        },
+        {
+          "label": "Send",
+          "explored": true,
+          "toNode": "send-method"
+        },
+        {
+          "label": "Add Funds",
+          "explored": true,
+          "toNode": "add-funds-options"
+        },
+        {
+          "label": "Earn More",
+          "explored": true,
+          "toNode": "earn-overview"
+        }
+      ]
+    },
+    {
+      "nodeId": "add-funds-options",
+      "options": [
+        {
+          "label": "Send from crypto wallet",
+          "explored": false
+        },
+        {
+          "label": "Send from Exchange",
+          "explored": false
+        },
+        {
+          "label": "Share deposit address",
+          "explored": false
+        },
+        {
+          "label": "Bank transfer",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "add-card-virtual",
+      "options": [
+        {
+          "label": "Virtual",
+          "explored": true,
+          "toNode": "confirm-legal-name"
+        },
+        {
+          "label": "Physical",
+          "explored": true,
+          "toNode": "add-card-physical"
+        }
+      ]
+    },
+    {
+      "nodeId": "cards-overview",
+      "options": [
+        {
+          "label": "Manage",
+          "explored": true,
+          "toNode": "manage-card"
+        },
+        {
+          "label": "Card Details",
+          "explored": false,
+          "note": "Not opened to avoid exposing card credentials"
+        },
+        {
+          "label": "Freeze Card",
+          "explored": true,
+          "toNode": "freeze-card-confirmation"
+        },
+        {
+          "label": "Report a Decline",
+          "explored": true,
+          "toNode": "report-decline"
+        },
+        {
+          "label": "Add Card",
+          "explored": false,
+          "note": "Control did not navigate after repeated verified taps"
+        },
+        {
+          "label": "Add to Google Wallet",
+          "explored": false
+        }
+      ]
+    }
+  ],
+  "overrides": {
+    "screens": {
+      "add-card-physical": {
+        "stateGroup": "add-card-physical",
+        "state": "Physical"
+      },
+      "add-card-virtual": {
+        "stateGroup": "add-card-virtual",
+        "state": "Virtual"
+      },
+      "earn-after-deposit": {
+        "stateGroup": "earn-after-deposit",
+        "state": "Position"
+      },
+      "transaction-history-pending": {
+        "stateGroup": "transaction-history-pending",
+        "state": "Pending withdrawal"
+      }
+    }
+  }
+}

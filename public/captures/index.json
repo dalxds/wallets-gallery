@@ -18,13 +18,14 @@
       "name": "ether.fi",
       "platform": "android",
       "captures": [
-        "2026-07-14"
+        "2026-07-14",
+        "2026-07-15"
       ],
-      "latest": "2026-07-14",
-      "cover": "assets/7e0b3488441d.png",
-      "screens": 50,
+      "latest": "2026-07-15",
+      "cover": "assets/bdd3ab33a6e7.png",
+      "screens": 64,
       "flows": 12,
-      "logo": null
+      "logo": "logo.png?v=abf180586212"
     },
     {
       "slug": "redotpay",
