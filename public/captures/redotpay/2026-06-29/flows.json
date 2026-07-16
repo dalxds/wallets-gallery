@@ -55,16 +55,16 @@
     { "id": "learning-about-credit", "name": "Learning about Credit", "parentId": "managing-credit-settings", "order": 2, "steps": ["credit-learn"] },
     { "id": "taking-a-loan", "name": "Taking a loan", "parentId": "using-credit", "order": 7, "steps": ["loan-intro", "loan-borrow-form"], "entryPoints": [{ "flowId": "exploring-more-services", "fromScreenId": "more-hub", "toScreenId": "loan-intro" }] },
     { "id": "cards", "name": "Cards", "parentId": null, "order": 2, "steps": ["card"] },
-    { "id": "registering-a-card", "name": "Registering a card", "parentId": "cards", "order": 0, "steps": ["card-choose", "card-confirm", "card-pro-membership", "card-activated"], "entryPoints": [{ "flowId": "managing-cards", "fromScreenId": "my-cards", "toScreenId": "card-choose" }] },
-    { "id": "setting-card-limits", "name": "Setting card limits", "parentId": "cards", "order": 1, "steps": ["card-limits"] },
-    { "id": "reviewing-a-card-statement", "name": "Reviewing a card statement", "parentId": "cards", "order": 2, "steps": ["card-transaction-statement"] },
-    { "id": "browsing-card-statements", "name": "Browsing card statements", "parentId": "cards", "order": 3, "steps": ["card-statement-list"] },
-    { "id": "managing-cards", "name": "Managing cards", "parentId": "cards", "order": 4, "steps": ["my-cards"] },
+    { "id": "verifying-identity", "name": "Verifying identity", "parentId": "cards", "order": 0, "steps": ["verify-identity-gate", "kyc-add-phone", "kyc-country-picker", "kyc-issuing-country", "kyc-id-scan-intro", "kyc-id-selfie-intro", "kyc-document-type", "kyc-checklist", "kyc-q-employment", "kyc-q-source-of-funds", "kyc-q-income-volume", "kyc-q-account-purpose", "kyc-approved", "card-choose", "card-confirm", "card-activated", "card-active"], "entryPoints": [{ "flowId": "assets", "fromScreenId": "assets", "toScreenId": "verify-identity-gate" }] },
+    { "id": "registering-a-card", "name": "Registering a card", "parentId": "cards", "order": 1, "steps": ["card-choose", "card-confirm", "card-pro-membership", "card-activated"], "entryPoints": [{ "flowId": "managing-cards", "fromScreenId": "my-cards", "toScreenId": "card-choose" }] },
+    { "id": "setting-card-limits", "name": "Setting card limits", "parentId": "cards", "order": 2, "steps": ["card-limits"] },
+    { "id": "reviewing-a-card-statement", "name": "Reviewing a card statement", "parentId": "cards", "order": 3, "steps": ["card-transaction-statement"] },
+    { "id": "browsing-card-statements", "name": "Browsing card statements", "parentId": "cards", "order": 4, "steps": ["card-statement-list"] },
+    { "id": "managing-cards", "name": "Managing cards", "parentId": "cards", "order": 5, "steps": ["my-cards"] },
     { "id": "send", "name": "Send", "parentId": null, "order": 3, "steps": ["send", "send-from-currency", "send-to-currency", "send-global-details"] },
     { "id": "assets", "name": "Assets", "parentId": null, "order": 4, "steps": ["assets"] },
     { "id": "viewing-a-token", "name": "Viewing a token", "parentId": "assets", "order": 0, "steps": ["token-detail"] },
-    { "id": "exploring-earn", "name": "Exploring Earn", "parentId": "assets", "order": 1, "steps": ["earn"] },
-    { "id": "verifying-identity", "name": "Verifying identity", "parentId": "assets", "order": 2, "steps": ["verify-identity-gate", "kyc-add-phone", "kyc-issuing-country", "kyc-country-picker", "kyc-id-selfie-intro", "kyc-checklist", "kyc-q-employment", "kyc-q-source-of-funds", "kyc-q-income-volume", "kyc-q-account-purpose", "kyc-approved"] }
+    { "id": "exploring-earn", "name": "Exploring Earn", "parentId": "assets", "order": 1, "steps": ["earn"] }
   ],
   "uncovered": {},
   "flowTODO": []
