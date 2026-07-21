@@ -163,8 +163,7 @@
   ],
   "uncovered": {
     "card-label-edit": "Card label editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
-    "card-limit-edit": "Card spend-limit editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
-    "earn-amount-empty": "Pre-funding ($0.00) state of the Add to Earn amount screen, kept as a screen only; the funded state (earn-amount) carries the deposit step in the Earn flow."
+    "card-limit-edit": "Card spend-limit editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow."
   },
   "flowTODO": []
 }
