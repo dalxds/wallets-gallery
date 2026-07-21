@@ -125,7 +125,7 @@
       "summary": "Move cash into a yield-earning balance at 5.71% APY.",
       "parentId": null,
       "order": 2,
-      "steps": ["earn", "earn-amount", "earn-funded", "earn-info"]
+      "steps": ["earn", "earn-amount", "earn-funded"]
     },
 
     {
@@ -163,7 +163,8 @@
   ],
   "uncovered": {
     "card-label-edit": "Card label editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
-    "card-limit-edit": "Card spend-limit editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow."
+    "card-limit-edit": "Card spend-limit editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
+    "earn-info": "Educational Earn info carousel kept as a screen only; the Earn flow covers the deposit sequence (earn → earn-amount → earn-funded)."
   },
   "flowTODO": []
 }
