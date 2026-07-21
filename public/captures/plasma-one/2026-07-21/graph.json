@@ -468,36 +468,6 @@
       ]
     },
     {
-      "id": "phone-otp-entry",
-      "fingerprint": "sha256:7e4f1d9a28d299b324ad2d7c",
-      "skeletonHash": "sk:3f7a3469680ec72b01a03113",
-      "pHash": null,
-      "role": "auth",
-      "screenshotPath": "",
-      "snapshotPath": "assets/6111cf405a66.snap.json",
-      "texts": [
-        "Enter code",
-        "We sent a verification code to your phone number",
-        "Enter 6 digit code",
-        "Resend in 57s"
-      ],
-      "interactiveElements": [
-        {
-          "type": "input",
-          "label": "6 digit code",
-          "emphasis": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Resend code"
-        },
-        {
-          "type": "button",
-          "label": "Go back"
-        }
-      ]
-    },
-    {
       "id": "username-entry",
       "fingerprint": "sha256:c07bfff1fd75cacf42c0a1cc",
       "skeletonHash": "sk:ea3c437757956d9ac61f1c09",
@@ -521,53 +491,6 @@
         {
           "type": "button",
           "label": "Claim",
-          "emphasis": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Log out"
-        }
-      ]
-    },
-    {
-      "id": "profile-color",
-      "fingerprint": "sha256:5c09a20d048635137d6145e8",
-      "skeletonHash": "sk:3e16c00340b354be90bf9e4d",
-      "pHash": null,
-      "role": "picker",
-      "screenshotPath": "",
-      "snapshotPath": "assets/326f6915e55d.snap.json",
-      "texts": [
-        "Choose a profile color",
-        "You can change it anytime.",
-        "Page 4 of 4",
-        "Continue",
-        "Log out"
-      ],
-      "interactiveElements": [
-        {
-          "type": "button",
-          "label": "Green avatar color"
-        },
-        {
-          "type": "button",
-          "label": "Blue avatar color"
-        },
-        {
-          "type": "button",
-          "label": "Light avatar color"
-        },
-        {
-          "type": "button",
-          "label": "Orange avatar color"
-        },
-        {
-          "type": "button",
-          "label": "Purple avatar color"
-        },
-        {
-          "type": "button",
-          "label": "Continue",
           "emphasis": "primary"
         },
         {
@@ -1056,61 +979,6 @@
       ]
     },
     {
-      "id": "account-details",
-      "fingerprint": "sha256:6898ef70319fd9d9bdd1a239",
-      "skeletonHash": "sk:e4425d986d944dc9d95a9b6c",
-      "pHash": null,
-      "role": "settings",
-      "screenshotPath": "",
-      "snapshotPath": "assets/1f4364c1ae26.snap.json",
-      "texts": [
-        "Username",
-        "Email",
-        "Phone number"
-      ],
-      "interactiveElements": [
-        {
-          "type": "button",
-          "label": "Go back"
-        }
-      ]
-    },
-    {
-      "id": "security",
-      "fingerprint": "sha256:7eac57a4c2ceb5e90213bf63",
-      "skeletonHash": "sk:65e4dc590b8c26ac6e55eef8",
-      "pHash": null,
-      "role": "settings",
-      "screenshotPath": "",
-      "snapshotPath": "assets/8b4cf1140d35.snap.json",
-      "texts": [
-        "Essential security",
-        "Biometric unlock",
-        "Sign-in methods",
-        "Google",
-        "Apple",
-        "Email"
-      ],
-      "interactiveElements": [
-        {
-          "type": "toggle",
-          "label": "Biometric unlock"
-        },
-        {
-          "type": "button",
-          "label": "Add Apple sign-in"
-        },
-        {
-          "type": "button",
-          "label": "Add Email sign-in"
-        },
-        {
-          "type": "button",
-          "label": "Go back"
-        }
-      ]
-    },
-    {
       "id": "notifications-settings",
       "fingerprint": "sha256:5707ea45b9f2b5bad60fbd9f",
       "skeletonHash": "sk:2f5ba0fea14ce811ff064aff",
@@ -1402,31 +1270,6 @@
           "type": "input",
           "label": "Email address",
           "emphasis": "primary"
-        }
-      ]
-    },
-    {
-      "id": "kyc-email-otp",
-      "fingerprint": "sha256:373ef248410c3b8607c9ed4a",
-      "skeletonHash": "sk:3368dfc7bda1d8eaaa122dae",
-      "pHash": null,
-      "role": "auth",
-      "screenshotPath": "",
-      "snapshotPath": "assets/9c5d48474e7d.snap.json",
-      "texts": [
-        "Enter code to verify your email",
-        "We’ve sent the code to your email. Check your email.",
-        "Resend code"
-      ],
-      "interactiveElements": [
-        {
-          "type": "input",
-          "label": "Verification code",
-          "emphasis": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Resend code"
         }
       ]
     },
@@ -1890,110 +1733,6 @@
       ]
     },
     {
-      "id": "card-detail",
-      "fingerprint": "sha256:48cabd90bb1c7e176fae83d9",
-      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
-      "pHash": null,
-      "role": "other",
-      "screenshotPath": "",
-      "snapshotPath": "assets/62f2160a5622.snap.json",
-      "texts": [
-        "Cardholder name",
-        "Virtual card ending in 0411",
-        "Reveal",
-        "Freeze",
-        "Settings",
-        "Spendable $0.00",
-        "Daily limit $5,000.00",
-        "Add to Google Wallet",
-        "Add card"
-      ],
-      "interactiveElements": [
-        {
-          "type": "button",
-          "label": "Reveal",
-          "emphasis": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Freeze"
-        },
-        {
-          "type": "button",
-          "label": "Settings"
-        },
-        {
-          "type": "button",
-          "label": "Add to Google Wallet"
-        },
-        {
-          "type": "button",
-          "label": "Add card"
-        },
-        {
-          "type": "button",
-          "label": "Go back"
-        }
-      ]
-    },
-    {
-      "id": "card-settings",
-      "fingerprint": "sha256:fed598e84b28a50f599cd4f7",
-      "skeletonHash": "sk:4e9ef952914c1f5693630b29",
-      "pHash": null,
-      "role": "settings",
-      "screenshotPath": "",
-      "snapshotPath": "assets/1e394e27aef8.snap.json",
-      "texts": [
-        "Card label",
-        "Set as default",
-        "Security",
-        "Daily limit",
-        "Online transactions",
-        "ATM withdrawals",
-        "Coming soon",
-        "PIN",
-        "View PIN",
-        "Cardholder information",
-        "Cardholder name",
-        "Billing address"
-      ],
-      "interactiveElements": [
-        {
-          "type": "button",
-          "label": "Card label"
-        },
-        {
-          "type": "toggle",
-          "label": "Set as default"
-        },
-        {
-          "type": "button",
-          "label": "Daily limit"
-        },
-        {
-          "type": "toggle",
-          "label": "Online transactions"
-        },
-        {
-          "type": "button",
-          "label": "View PIN"
-        },
-        {
-          "type": "button",
-          "label": "Cardholder name"
-        },
-        {
-          "type": "button",
-          "label": "Billing address"
-        },
-        {
-          "type": "button",
-          "label": "Go back"
-        }
-      ]
-    },
-    {
       "id": "home-funded",
       "fingerprint": "sha256:f8c17d6e9b526711c89df2c5",
       "skeletonHash": "sk:cea338567b8196613985f45f",
@@ -2248,54 +1987,6 @@
         {
           "type": "button",
           "label": "Manage (XPL)"
-        }
-      ]
-    },
-    {
-      "id": "card-detail-frozen",
-      "fingerprint": "sha256:3d749a6fc5c8aa8001a027a9",
-      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
-      "pHash": null,
-      "role": "other",
-      "screenshotPath": "",
-      "snapshotPath": "assets/cee1a27ee94d.snap.json",
-      "texts": [
-        "Cardholder name",
-        "Frozen",
-        "Virtual card ending in 0411",
-        "Reveal",
-        "Unfreeze",
-        "Settings",
-        "Spendable $1.50",
-        "Daily limit $5,000.00",
-        "Add to Google Wallet",
-        "Add card"
-      ],
-      "interactiveElements": [
-        {
-          "type": "button",
-          "label": "Reveal"
-        },
-        {
-          "type": "button",
-          "label": "Unfreeze",
-          "emphasis": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Settings"
-        },
-        {
-          "type": "button",
-          "label": "Add to Google Wallet"
-        },
-        {
-          "type": "button",
-          "label": "Add card"
-        },
-        {
-          "type": "button",
-          "label": "Go back"
         }
       ]
     },
@@ -2562,44 +2253,12 @@
       "observedAtStep": 16
     },
     {
-      "from": "phone-entry",
-      "to": "phone-otp-entry",
-      "action": "Enter phone number and tap \"Send code\"",
-      "selector": "role=\"button\" label=\"Send code\"",
-      "kind": "nav",
-      "observedAtStep": 17
-    },
-    {
-      "from": "phone-otp-entry",
-      "to": "username-entry",
-      "action": "Enter 6-digit SMS code (auto-submits)",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 18
-    },
-    {
-      "from": "username-entry",
-      "to": "profile-color",
-      "action": "Enter username and tap \"Claim\"",
-      "selector": "role=\"button\" label=\"Claim\"",
-      "kind": "nav",
-      "observedAtStep": 19
-    },
-    {
-      "from": "profile-color",
-      "to": "verify-intro",
-      "action": "Select avatar color and tap \"Continue\"",
-      "selector": "role=\"button\" label=\"Continue\"",
-      "kind": "nav",
-      "observedAtStep": 20
-    },
-    {
       "from": "verify-intro",
       "to": "home",
       "action": "Tap \"Close\" (then authenticate with device credential)",
       "selector": "role=\"button\" label=\"Close\"",
       "kind": "nav",
-      "observedAtStep": 21
+      "observedAtStep": 17
     },
     {
       "from": "home",
@@ -2607,7 +2266,7 @@
       "action": "Tap \"Earn\" tab",
       "selector": "label=\"Earn\"",
       "kind": "nav",
-      "observedAtStep": 22
+      "observedAtStep": 18
     },
     {
       "from": "earn",
@@ -2615,7 +2274,7 @@
       "action": "Tap \"Tier\" tab",
       "selector": "label=\"Tier\"",
       "kind": "in-place",
-      "observedAtStep": 23
+      "observedAtStep": 19
     },
     {
       "from": "tier",
@@ -2623,7 +2282,7 @@
       "action": "Tap \"Home\" tab",
       "selector": "label=\"Home\"",
       "kind": "nav",
-      "observedAtStep": 24
+      "observedAtStep": 20
     },
     {
       "from": "home",
@@ -2631,7 +2290,7 @@
       "action": "Tap \"Add funds\"",
       "selector": "role=\"button\" label=\"Add funds\"",
       "kind": "overlay",
-      "observedAtStep": 25
+      "observedAtStep": 21
     },
     {
       "from": "add-funds",
@@ -2639,7 +2298,7 @@
       "action": "Tap \"USDT\"",
       "selector": "role=\"button\" label=\"USDT\"",
       "kind": "nav",
-      "observedAtStep": 26
+      "observedAtStep": 22
     },
     {
       "from": "usdt-chain-picker",
@@ -2647,7 +2306,7 @@
       "action": "Tap \"BNB Smart Chain\"",
       "selector": "role=\"button\" label=\"BNB Smart Chain\"",
       "kind": "nav",
-      "observedAtStep": 27
+      "observedAtStep": 23
     },
     {
       "from": "home",
@@ -2655,23 +2314,7 @@
       "action": "Tap \"Profile\"",
       "selector": "role=\"button\" label=\"Profile\"",
       "kind": "nav",
-      "observedAtStep": 28
-    },
-    {
-      "from": "profile",
-      "to": "account-details",
-      "action": "Tap \"Account\"",
-      "selector": "role=\"button\" label=\"Account\"",
-      "kind": "nav",
-      "observedAtStep": 29
-    },
-    {
-      "from": "profile",
-      "to": "security",
-      "action": "Tap \"Security\"",
-      "selector": "role=\"button\" label=\"Security\"",
-      "kind": "nav",
-      "observedAtStep": 30
+      "observedAtStep": 24
     },
     {
       "from": "profile",
@@ -2679,7 +2322,7 @@
       "action": "Tap \"Notifications\"",
       "selector": "role=\"button\" label=\"Notifications\"",
       "kind": "nav",
-      "observedAtStep": 31
+      "observedAtStep": 25
     },
     {
       "from": "profile",
@@ -2687,7 +2330,7 @@
       "action": "Tap \"Legal\"",
       "selector": "role=\"button\" label=\"Legal\"",
       "kind": "nav",
-      "observedAtStep": 32
+      "observedAtStep": 26
     },
     {
       "from": "earn",
@@ -2695,7 +2338,7 @@
       "action": "Tap \"Start earning\"",
       "selector": "role=\"button\" label=\"Start earning\"",
       "kind": "nav",
-      "observedAtStep": 33
+      "observedAtStep": 27
     },
     {
       "from": "earn",
@@ -2703,7 +2346,7 @@
       "action": "Tap \"Earn info\"",
       "selector": "role=\"button\" label=\"Earn info\"",
       "kind": "overlay",
-      "observedAtStep": 34
+      "observedAtStep": 28
     },
     {
       "from": "tier",
@@ -2711,7 +2354,7 @@
       "action": "Tap \"Invite friends\"",
       "selector": "role=\"button\" label=\"Invite friends\"",
       "kind": "overlay",
-      "observedAtStep": 35
+      "observedAtStep": 29
     },
     {
       "from": "tier",
@@ -2719,7 +2362,7 @@
       "action": "Tap \"Manage XPL\"",
       "selector": "role=\"button\" label=\"Manage XPL\"",
       "kind": "nav",
-      "observedAtStep": 36
+      "observedAtStep": 30
     },
     {
       "from": "tier",
@@ -2727,7 +2370,7 @@
       "action": "Tap \"Rewards info\"",
       "selector": "role=\"button\" label=\"Rewards info\"",
       "kind": "overlay",
-      "observedAtStep": 37
+      "observedAtStep": 31
     },
     {
       "from": "tier",
@@ -2735,7 +2378,7 @@
       "action": "Tap \"Get verified\"",
       "selector": "role=\"button\" label=\"Get verified\"",
       "kind": "nav",
-      "observedAtStep": 38
+      "observedAtStep": 32
     },
     {
       "from": "home",
@@ -2743,7 +2386,7 @@
       "action": "Tap \"Get the card - Verify now\"",
       "selector": "role=\"button\" label=\"Verify now\"",
       "kind": "nav",
-      "observedAtStep": 39
+      "observedAtStep": 33
     },
     {
       "from": "verify-intro",
@@ -2751,7 +2394,7 @@
       "action": "Tap \"Verify now\"",
       "selector": "role=\"button\" label=\"Verify now\"",
       "kind": "nav",
-      "observedAtStep": 40
+      "observedAtStep": 34
     },
     {
       "from": "kyc-start",
@@ -2759,7 +2402,7 @@
       "action": "Tap \"Continue\" (launches Sumsub SDK)",
       "selector": "role=\"button\" label=\"Continue\"",
       "kind": "nav",
-      "observedAtStep": 41
+      "observedAtStep": 35
     },
     {
       "from": "kyc-consent",
@@ -2767,23 +2410,7 @@
       "action": "Tap \"Agree and continue\"",
       "selector": "role=\"button\" label=\"Agree and continue\"",
       "kind": "nav",
-      "observedAtStep": 42
-    },
-    {
-      "from": "kyc-email-verify",
-      "to": "kyc-email-otp",
-      "action": "Enter email and tap \"Continue\"",
-      "selector": "role=\"button\" label=\"Continue\"",
-      "kind": "nav",
-      "observedAtStep": 43
-    },
-    {
-      "from": "kyc-email-otp",
-      "to": "kyc-country",
-      "action": "Enter 6-digit email code (auto-submits)",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 44
+      "observedAtStep": 36
     },
     {
       "from": "kyc-country",
@@ -2791,7 +2418,7 @@
       "action": "Confirm country of residence and tap \"Continue\"",
       "selector": "role=\"button\" label=\"Continue\"",
       "kind": "nav",
-      "observedAtStep": 45
+      "observedAtStep": 37
     },
     {
       "from": "kyc-address",
@@ -2799,7 +2426,7 @@
       "action": "Enter address and tap \"Continue\"",
       "selector": "role=\"button\" label=\"Continue\"",
       "kind": "nav",
-      "observedAtStep": 46
+      "observedAtStep": 38
     },
     {
       "from": "kyc-doc-type",
@@ -2807,7 +2434,7 @@
       "action": "Tap close (back to Sumsub step checklist)",
       "selector": null,
       "kind": "back",
-      "observedAtStep": 47
+      "observedAtStep": 39
     },
     {
       "from": "home",
@@ -2815,7 +2442,7 @@
       "action": "Tap \"Get the card\"",
       "selector": "role=\"button\" label=\"Get the card\"",
       "kind": "nav",
-      "observedAtStep": 48
+      "observedAtStep": 40
     },
     {
       "from": "card-upgrade-gate",
@@ -2823,7 +2450,7 @@
       "action": "Tap \"Upgrade to Core\"",
       "selector": "role=\"button\" label=\"Upgrade to Core\"",
       "kind": "overlay",
-      "observedAtStep": 49
+      "observedAtStep": 41
     },
     {
       "from": "card-upgrade-method",
@@ -2831,7 +2458,7 @@
       "action": "Select \"Buy with cash\" and tap \"Continue\"",
       "selector": "role=\"button\" label=\"Continue\"",
       "kind": "nav",
-      "observedAtStep": 50
+      "observedAtStep": 42
     },
     {
       "from": "card-upgrade-gate",
@@ -2839,7 +2466,7 @@
       "action": "Tap \"Lite\" tab",
       "selector": "label=\"Lite\"",
       "kind": "in-place",
-      "observedAtStep": 51
+      "observedAtStep": 43
     },
     {
       "from": "card-gate-lite",
@@ -2847,7 +2474,7 @@
       "action": "Tap \"Activate card\"",
       "selector": "role=\"button\" label=\"Activate card\"",
       "kind": "nav",
-      "observedAtStep": 52
+      "observedAtStep": 44
     },
     {
       "from": "card-terms",
@@ -2855,7 +2482,7 @@
       "action": "Accept all consents and tap \"Continue\"",
       "selector": "role=\"button\" label=\"Continue\"",
       "kind": "nav",
-      "observedAtStep": 53
+      "observedAtStep": 45
     },
     {
       "from": "card-new-virtual",
@@ -2863,7 +2490,7 @@
       "action": "Tap \"Activate card\" (card provisions)",
       "selector": "role=\"button\" label=\"Activate card\"",
       "kind": "overlay",
-      "observedAtStep": 54
+      "observedAtStep": 46
     },
     {
       "from": "card-google-wallet-promo",
@@ -2871,23 +2498,7 @@
       "action": "Tap \"Close\" (returns to home, now showing the active card)",
       "selector": "label=\"Close Google Wallet promo\"",
       "kind": "back",
-      "observedAtStep": 55
-    },
-    {
-      "from": "home",
-      "to": "card-detail",
-      "action": "Tap the virtual card widget",
-      "selector": "role=\"button\" label~=\"virtual card ending\"",
-      "kind": "nav",
-      "observedAtStep": 56
-    },
-    {
-      "from": "card-detail",
-      "to": "card-settings",
-      "action": "Tap \"Settings\"",
-      "selector": null,
-      "kind": "nav",
-      "observedAtStep": 57
+      "observedAtStep": 47
     },
     {
       "from": "home",
@@ -2895,7 +2506,7 @@
       "action": "Wallet funded ($2.50 deposit) — balance and Send/transactions appear",
       "selector": null,
       "kind": "nav",
-      "observedAtStep": 58
+      "observedAtStep": 48
     },
     {
       "from": "home-funded",
@@ -2903,7 +2514,7 @@
       "action": "Tap \"$2.50\" / \"View total balance breakdown\"",
       "selector": "role=\"button\" label=\"View total balance breakdown\"",
       "kind": "overlay",
-      "observedAtStep": 59
+      "observedAtStep": 49
     },
     {
       "from": "earn",
@@ -2911,7 +2522,7 @@
       "action": "Tap \"Start earning\" (funded)",
       "selector": "role=\"button\" label=\"Start earning\"",
       "kind": "nav",
-      "observedAtStep": 60
+      "observedAtStep": 50
     },
     {
       "from": "earn-amount-funded",
@@ -2919,7 +2530,7 @@
       "action": "Enter $1, tap \"Add to earn\" (device-auth, then deposit completes)",
       "selector": "role=\"button\" label=\"Add to earn\"",
       "kind": "nav",
-      "observedAtStep": 61
+      "observedAtStep": 51
     },
     {
       "from": "home-funded",
@@ -2927,31 +2538,7 @@
       "action": "Tap \"View total balance breakdown\" (with earning balance)",
       "selector": "role=\"button\" label=\"View total balance breakdown\"",
       "kind": "overlay",
-      "observedAtStep": 62
-    },
-    {
-      "from": "card-detail",
-      "to": "card-detail-frozen",
-      "action": "Tap \"Freeze\" (device-auth), card becomes frozen",
-      "selector": null,
-      "kind": "in-place",
-      "observedAtStep": 63
-    },
-    {
-      "from": "card-settings",
-      "to": "card-label-edit",
-      "action": "Tap \"Card label\"",
-      "selector": "role=\"button\" label~=\"Card label\"",
-      "kind": "nav",
-      "observedAtStep": 64
-    },
-    {
-      "from": "card-settings",
-      "to": "card-limit-edit",
-      "action": "Tap \"Daily limit\"",
-      "selector": "role=\"button\" label~=\"Daily limit\"",
-      "kind": "overlay",
-      "observedAtStep": 65
+      "observedAtStep": 52
     },
     {
       "from": "tier",
@@ -2959,7 +2546,7 @@
       "action": "Tap \"Cashback\" (Daily benefits section)",
       "selector": "role=\"button\" label=\"Cashback\"",
       "kind": "overlay",
-      "observedAtStep": 66
+      "observedAtStep": 53
     },
     {
       "from": "tier",
@@ -2967,7 +2554,31 @@
       "action": "Tap \"Referrals\" (Daily benefits section)",
       "selector": "role=\"button\" label=\"Referrals\"",
       "kind": "overlay",
-      "observedAtStep": 67
+      "observedAtStep": 54
+    },
+    {
+      "from": "phone-entry",
+      "to": "username-entry",
+      "action": "Verify phone number (SMS-code screen omitted as PII-redacted)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 55
+    },
+    {
+      "from": "username-entry",
+      "to": "verify-intro",
+      "action": "Claim username and pick profile color (profile-color screen omitted)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 56
+    },
+    {
+      "from": "kyc-email-verify",
+      "to": "kyc-country",
+      "action": "Verify email (KYC email-code screen omitted as PII-redacted)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 57
     }
   ],
   "decisionPoints": [
@@ -3053,14 +2664,6 @@
       "card-upgrade-gate": {
         "state": "Core",
         "stateGroup": "card-gate"
-      },
-      "card-detail": {
-        "state": "Active",
-        "stateGroup": "card-status"
-      },
-      "card-detail-frozen": {
-        "state": "Frozen",
-        "stateGroup": "card-status"
       }
     }
   }

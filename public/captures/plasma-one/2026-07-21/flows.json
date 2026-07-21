@@ -36,10 +36,10 @@
     {
       "id": "setting-up-your-profile",
       "name": "Setting up your profile",
-      "summary": "Verify a phone number, claim a username, and pick a profile color.",
+      "summary": "Verify a phone number and claim a username to finish setup.",
       "parentId": "getting-started",
       "order": 1,
-      "steps": ["phone-entry", "country-code-picker", "phone-otp-entry", "username-entry", "profile-color"]
+      "steps": ["phone-entry", "country-code-picker", "username-entry"]
     },
 
     {
@@ -83,43 +83,19 @@
       "steps": ["card-upgrade-method", "card-upgrade-cash"]
     },
     {
-      "id": "managing-your-card",
-      "name": "Managing your card",
-      "summary": "View the card, freeze it, and edit its label and spend limits.",
-      "parentId": "home",
-      "order": 2,
-      "steps": ["card-detail", "card-settings", "card-label-edit", "card-limit-edit"]
-    },
-    {
       "id": "managing-your-account",
       "name": "Account",
-      "summary": "Profile hub for account, security, notification, and legal settings.",
+      "summary": "Profile hub for notification and legal settings.",
       "parentId": "home",
-      "order": 3,
+      "order": 2,
       "steps": ["profile"]
-    },
-    {
-      "id": "account-details",
-      "name": "Account details",
-      "summary": "Username, email, and phone number on file.",
-      "parentId": "managing-your-account",
-      "order": 0,
-      "steps": ["account-details"]
-    },
-    {
-      "id": "security",
-      "name": "Security",
-      "summary": "Biometric unlock and connected sign-in methods.",
-      "parentId": "managing-your-account",
-      "order": 1,
-      "steps": ["security"]
     },
     {
       "id": "notification-settings",
       "name": "Notifications",
       "summary": "Control which push notifications you receive.",
       "parentId": "managing-your-account",
-      "order": 2,
+      "order": 0,
       "steps": ["notifications-settings"]
     },
     {
@@ -127,7 +103,7 @@
       "name": "Legal",
       "summary": "Terms, privacy policy, card agreement, and rewards addendum.",
       "parentId": "managing-your-account",
-      "order": 3,
+      "order": 1,
       "steps": ["legal"]
     },
     {
@@ -135,10 +111,10 @@
       "name": "Verifying your identity",
       "summary": "Complete KYC through the Sumsub flow to unlock the card.",
       "parentId": "home",
-      "order": 4,
-      "steps": ["verify-intro", "kyc-start", "kyc-consent", "kyc-email-verify", "kyc-email-otp", "kyc-country", "kyc-address", "kyc-doc-type", "kyc-checklist"],
+      "order": 3,
+      "steps": ["verify-intro", "kyc-start", "kyc-consent", "kyc-email-verify", "kyc-country", "kyc-address", "kyc-doc-type", "kyc-checklist"],
       "entryPoints": [
-        { "flowId": "setting-up-your-profile", "fromScreenId": "profile-color", "toScreenId": "verify-intro" },
+        { "flowId": "setting-up-your-profile", "fromScreenId": "username-entry", "toScreenId": "verify-intro" },
         { "flowId": "tier", "fromScreenId": "tier", "toScreenId": "verify-intro" }
       ]
     },
@@ -185,6 +161,9 @@
       "steps": ["invite-friends"]
     }
   ],
-  "uncovered": {},
+  "uncovered": {
+    "card-label-edit": "Card label editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
+    "card-limit-edit": "Card spend-limit editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow."
+  },
   "flowTODO": []
 }

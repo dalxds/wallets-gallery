@@ -35,9 +35,9 @@
       ],
       "latest": "2026-07-21",
       "cover": "assets/b6cd6eb913ab.png",
-      "screens": 58,
-      "flows": 22,
-      "logo": null
+      "screens": 50,
+      "flows": 19,
+      "logo": "logo.png?v=34edfafdf749"
     },
     {
       "slug": "redotpay",
