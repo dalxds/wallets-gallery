@@ -1048,12 +1048,12 @@
       "id": "earn-amount",
       "fingerprint": "sha256:8d62411e5347d5ba4f233469",
       "skeletonHash": "sk:5d6617911e85a51562fb7edb",
-      "pHash": "p:06ec0bbc5336a957",
+      "pHash": "p:46ec03bc5336a957",
       "role": "form",
-      "screenshotPath": "assets/08dd928edfc5.png",
-      "snapshotPath": "assets/f78e4400b0b4.snap.json",
+      "screenshotPath": "assets/cc83748d692a.png",
+      "snapshotPath": "assets/2f5965e46c74.snap.json",
       "texts": [
-        "Cash · $0.00",
+        "Cash · $1.50",
         "Use maximum amount",
         "25%",
         "50%",
@@ -1837,50 +1837,6 @@
       ]
     },
     {
-      "id": "earn-amount-funded",
-      "fingerprint": "sha256:8d62411e5347d5ba4f233469",
-      "skeletonHash": "sk:5d6617911e85a51562fb7edb",
-      "pHash": "p:46ec03bc5336a957",
-      "role": "form",
-      "screenshotPath": "assets/cc83748d692a.png",
-      "snapshotPath": "assets/2f5965e46c74.snap.json",
-      "texts": [
-        "Cash · $1.50",
-        "Use maximum amount",
-        "25%",
-        "50%",
-        "75%",
-        "Add to earn"
-      ],
-      "interactiveElements": [
-        {
-          "type": "button",
-          "label": "Use maximum amount"
-        },
-        {
-          "type": "button",
-          "label": "25%"
-        },
-        {
-          "type": "button",
-          "label": "50%"
-        },
-        {
-          "type": "button",
-          "label": "75%"
-        },
-        {
-          "type": "button",
-          "label": "Add to earn",
-          "emphasis": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Go back"
-        }
-      ]
-    },
-    {
       "id": "earn-funded",
       "fingerprint": "sha256:ac0b809c6661a17e672be468",
       "skeletonHash": "sk:6b0ed97639a2b002a2a545a2",
@@ -2517,28 +2473,12 @@
       "observedAtStep": 49
     },
     {
-      "from": "earn",
-      "to": "earn-amount-funded",
-      "action": "Tap \"Start earning\" (funded)",
-      "selector": "role=\"button\" label=\"Start earning\"",
-      "kind": "nav",
-      "observedAtStep": 50
-    },
-    {
-      "from": "earn-amount-funded",
-      "to": "earn-funded",
-      "action": "Enter $1, tap \"Add to earn\" (device-auth, then deposit completes)",
-      "selector": "role=\"button\" label=\"Add to earn\"",
-      "kind": "nav",
-      "observedAtStep": 51
-    },
-    {
       "from": "home-funded",
       "to": "balance-breakdown-earning",
       "action": "Tap \"View total balance breakdown\" (with earning balance)",
       "selector": "role=\"button\" label=\"View total balance breakdown\"",
       "kind": "overlay",
-      "observedAtStep": 52
+      "observedAtStep": 50
     },
     {
       "from": "tier",
@@ -2546,7 +2486,7 @@
       "action": "Tap \"Cashback\" (Daily benefits section)",
       "selector": "role=\"button\" label=\"Cashback\"",
       "kind": "overlay",
-      "observedAtStep": 53
+      "observedAtStep": 51
     },
     {
       "from": "tier",
@@ -2554,7 +2494,7 @@
       "action": "Tap \"Referrals\" (Daily benefits section)",
       "selector": "role=\"button\" label=\"Referrals\"",
       "kind": "overlay",
-      "observedAtStep": 54
+      "observedAtStep": 52
     },
     {
       "from": "phone-entry",
@@ -2562,7 +2502,7 @@
       "action": "Verify phone number (SMS-code screen omitted as PII-redacted)",
       "selector": null,
       "kind": "nav",
-      "observedAtStep": 55
+      "observedAtStep": 53
     },
     {
       "from": "username-entry",
@@ -2570,7 +2510,7 @@
       "action": "Claim username and pick profile color (profile-color screen omitted)",
       "selector": null,
       "kind": "nav",
-      "observedAtStep": 56
+      "observedAtStep": 54
     },
     {
       "from": "kyc-email-verify",
@@ -2578,7 +2518,15 @@
       "action": "Verify email (KYC email-code screen omitted as PII-redacted)",
       "selector": null,
       "kind": "nav",
-      "observedAtStep": 57
+      "observedAtStep": 55
+    },
+    {
+      "from": "earn-amount",
+      "to": "earn-funded",
+      "action": "Enter $1, tap \"Add to earn\" (device-auth, then deposit completes)",
+      "selector": "role=\"button\" label=\"Add to earn\"",
+      "kind": "nav",
+      "observedAtStep": 56
     }
   ],
   "decisionPoints": [
@@ -2664,6 +2612,9 @@
       "card-upgrade-gate": {
         "state": "Core",
         "stateGroup": "card-gate"
+      },
+      "earn-amount": {
+        "title": "Add to Earn"
       }
     }
   }
