@@ -27,6 +27,19 @@
       "logo": "logo.png?v=abf180586212"
     },
     {
+      "slug": "plasma-one",
+      "name": "Plasma One",
+      "platform": "android",
+      "captures": [
+        "2026-07-21"
+      ],
+      "latest": "2026-07-21",
+      "cover": "assets/b6cd6eb913ab.png",
+      "screens": 58,
+      "flows": 22,
+      "logo": null
+    },
+    {
       "slug": "redotpay",
       "name": "RedotPay",
       "platform": "android",

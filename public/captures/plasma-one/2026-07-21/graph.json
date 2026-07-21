@@ -1,0 +1,3067 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "app": {
+      "name": "Plasma One",
+      "slug": "plasma-one",
+      "bundleId": "to.plasma.one.application",
+      "platform": "android"
+    },
+    "captureDate": "2026-07-21",
+    "scope": "initial",
+    "mode": "free-roam",
+    "previousCapture": null
+  },
+  "root": "welcome",
+  "mainNav": [
+    "home",
+    "earn",
+    "tier"
+  ],
+  "nodes": [
+    {
+      "id": "welcome",
+      "fingerprint": "sha256:642da341cd61c428064c60c4",
+      "skeletonHash": "sk:5ff5dc4da0a45f7067d2a9d2",
+      "pHash": "p:992d6163128ff9a9",
+      "role": "other",
+      "screenshotPath": "assets/76181aef62df.png",
+      "snapshotPath": "assets/0f675073aa23.snap.json",
+      "texts": [
+        "Get started"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Get started",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "auth-method",
+      "fingerprint": "sha256:8f179570c7fd309e3f7c770f",
+      "skeletonHash": "sk:8c2140b4c346689dff777e01",
+      "pHash": "p:89dd9c123333cccd",
+      "role": "auth",
+      "screenshotPath": "assets/35852d66d048.png",
+      "snapshotPath": "assets/c0f99dbc0eab.snap.json",
+      "texts": [
+        "Get started",
+        "Choose how you'd like to continue.",
+        "Continue with Apple",
+        "Continue with Google",
+        "Continue with email",
+        "By continuing, you agree to the Terms of Service and Privacy Policy."
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Continue with Apple"
+        },
+        {
+          "type": "button",
+          "label": "Continue with Google"
+        },
+        {
+          "type": "button",
+          "label": "Continue with email",
+          "emphasis": "primary"
+        },
+        {
+          "type": "link",
+          "label": "Terms of Service"
+        },
+        {
+          "type": "link",
+          "label": "Privacy Policy"
+        }
+      ]
+    },
+    {
+      "id": "email-entry",
+      "fingerprint": "sha256:1ec27023763426c15cef414a",
+      "skeletonHash": "sk:3368dfc7bda1d8eaaa122dae",
+      "pHash": "p:5c962bf85023877d",
+      "role": "auth",
+      "screenshotPath": "assets/c071b1445498.png",
+      "snapshotPath": "assets/a0ce26519b07.snap.json",
+      "texts": [
+        "Enter your email",
+        "Enter your email address. We'll send you a confirmation code there.",
+        "hello@email.com",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Email address"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "otp-entry",
+      "fingerprint": "sha256:7e4f1d9a28d299b324ad2d7c",
+      "skeletonHash": "sk:3f7a3469680ec72b01a03113",
+      "pHash": "p:4ea41bb1b34ba44f",
+      "role": "auth",
+      "screenshotPath": "assets/8f91a52d0a80.png",
+      "snapshotPath": "assets/a56111d5b532.snap.json",
+      "texts": [
+        "Enter code",
+        "We sent a verification code to wallet.inspo@gmail.com",
+        "Enter 6 digit code",
+        "Resend in 58s"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "6 digit code",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Resend code"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "notifications-prompt",
+      "fingerprint": "sha256:762861a72c66ebcaacd64d08",
+      "skeletonHash": "sk:bad4b6bb48fffd07db9b0239",
+      "pHash": "p:568c8d72a9738c57",
+      "role": "other",
+      "screenshotPath": "assets/7f755b94a15e.png",
+      "snapshotPath": "assets/dbef9448c556.snap.json",
+      "texts": [
+        "Get notified when you’re in",
+        "Turn on notifications so you don’t miss your invite to Plasma One.",
+        "Maybe later",
+        "Enable"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Enable",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Maybe later",
+          "emphasis": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "waitlist",
+      "fingerprint": "sha256:3b8720de078ea66fb2b70d94",
+      "skeletonHash": "sk:1a64f4c75f5abec4320ecaa4",
+      "pHash": "p:d68ddc21217287dd",
+      "role": "home",
+      "screenshotPath": "assets/b6cd6eb913ab.png",
+      "snapshotPath": "assets/e9e1641b082d.snap.json",
+      "texts": [
+        "40 minutes left",
+        "Explore tiers",
+        "You’re on the waitlist",
+        "1,020 people ahead of you now",
+        "Get notified when you’re in",
+        "Got a code?",
+        "Request a code on X",
+        "Log out"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Explore tiers",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Get notified when you’re in"
+        },
+        {
+          "type": "button",
+          "label": "Got a code?"
+        },
+        {
+          "type": "button",
+          "label": "Request a code on X"
+        },
+        {
+          "type": "button",
+          "label": "Log out"
+        }
+      ]
+    },
+    {
+      "id": "tiers-core",
+      "fingerprint": "sha256:5d250d7233211a8e8c026284",
+      "skeletonHash": "sk:a071e67a5da5f68d231b528a",
+      "pHash": "p:9e9c09b958e2a657",
+      "role": "other",
+      "screenshotPath": "assets/7ebcee7dc4f0.png",
+      "snapshotPath": "assets/d5fb3701a507.snap.json",
+      "texts": [
+        "Built for everyday spending",
+        "$199/year or 20,000 XPL lock",
+        "6 months free",
+        "$0 effective annual cost",
+        "Your existing AI stack pays for the tier",
+        "ChatGPT Go included",
+        "$100 annual subscription covered",
+        "50%+ lower fees",
+        "On FX and bank transfers",
+        "Cashback",
+        "Earn more",
+        "AI subscriptions: ChatGPT Go, $100 annual credits",
+        "Fees: Half the fees",
+        "Card FX: 0.5% added fees",
+        "Bank deposit: Free",
+        "Bank withdrawal: 0.25-0.35%",
+        "Cards: Virtual cards up to 2, Physical cards up to 1",
+        "Travel & Lifestyle: Global eSIM 1GB, Car rental insurance, Visa concierge 24/7, Travel insurance not included",
+        "Lite",
+        "Core",
+        "Platinum"
+      ],
+      "interactiveElements": [
+        {
+          "type": "tab",
+          "label": "Lite"
+        },
+        {
+          "type": "tab",
+          "label": "Core"
+        },
+        {
+          "type": "tab",
+          "label": "Platinum"
+        },
+        {
+          "type": "button",
+          "label": "Open Cashback help"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "tiers-lite",
+      "fingerprint": "sha256:0862342defeabd9f43a11750",
+      "skeletonHash": "sk:7d81624be788b65f5bfae416",
+      "pHash": "p:189c4ce77272a65d",
+      "role": "other",
+      "screenshotPath": "assets/f925564f05ef.png",
+      "snapshotPath": "assets/22f9a42f3185.snap.json",
+      "texts": [
+        "Start spending with Plasma",
+        "Free",
+        "Free virtual card",
+        "Get your free virtual card instantly",
+        "Get setup in minutes",
+        "Takes < 5 mins to get setup",
+        "Spend globally",
+        "Card accepted in 180+ countries",
+        "Cashback",
+        "Basic",
+        "Lite",
+        "Core",
+        "Platinum"
+      ],
+      "interactiveElements": [
+        {
+          "type": "tab",
+          "label": "Lite"
+        },
+        {
+          "type": "tab",
+          "label": "Core"
+        },
+        {
+          "type": "tab",
+          "label": "Platinum"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "tiers-platinum",
+      "fingerprint": "sha256:0862342defeabd9f43a11750",
+      "skeletonHash": "sk:7d81624be788b65f5bfae416",
+      "pHash": "p:a2e2d7971c586a69",
+      "role": "other",
+      "screenshotPath": "assets/7b289d9297c0.png",
+      "snapshotPath": "assets/977614b040bd.snap.json",
+      "texts": [
+        "For those who never settle",
+        "Lock 100,000 XPL 150,000 XPL",
+        "Offer",
+        "24 days left",
+        "$10,000+ annual value",
+        "On AI, travel, and everyday spend",
+        "2 × AI subscriptions included",
+        "$500 for Claude Pro & ChatGPT Plus",
+        "Zero added fees",
+        "On FX and bank transfers",
+        "0%",
+        "Cashback",
+        "Maximum cashback",
+        "Lite",
+        "Core",
+        "Platinum"
+      ],
+      "interactiveElements": [
+        {
+          "type": "tab",
+          "label": "Lite"
+        },
+        {
+          "type": "tab",
+          "label": "Core"
+        },
+        {
+          "type": "tab",
+          "label": "Platinum"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "access-code",
+      "fingerprint": "sha256:6b89780b47bec0b1e94d2bc5",
+      "skeletonHash": "sk:203dabd03f72bf80b90aeec0",
+      "pHash": "p:c6852979717896c7",
+      "role": "form",
+      "screenshotPath": "assets/d09674d16156.png",
+      "snapshotPath": "assets/3ca8f6ea7a4a.snap.json",
+      "texts": [
+        "Got a code?",
+        "Enter a code for instant access.",
+        "Enter 6 character access code",
+        "Paste code"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "6 character access code",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Paste code from clipboard"
+        }
+      ]
+    },
+    {
+      "id": "access-unlocked",
+      "fingerprint": "sha256:642da341cd61c428064c60c4",
+      "skeletonHash": "sk:40e96270961e8e5877c47aa4",
+      "pHash": "p:337829d6815c0ddf",
+      "role": "confirmation",
+      "screenshotPath": "assets/464e2036e185.png",
+      "snapshotPath": "assets/faf1010df594.snap.json",
+      "texts": [
+        "Access unlocked",
+        "Get started"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Get started",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "phone-entry",
+      "fingerprint": "sha256:af3db93a6e1e29fd1fd950dc",
+      "skeletonHash": "sk:bf264bdc877b79e21f78ebfc",
+      "pHash": "p:5ef40bb4120ba55f",
+      "role": "auth",
+      "screenshotPath": "assets/9dc283cd80ac.png",
+      "snapshotPath": "assets/1d902d2477c9.snap.json",
+      "texts": [
+        "Add your phone number",
+        "We'll send a code to verify it. Required to finish setup.",
+        "+1",
+        "123 456 6890",
+        "Send code",
+        "Log out"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Select country code"
+        },
+        {
+          "type": "input",
+          "label": "Phone number"
+        },
+        {
+          "type": "button",
+          "label": "Send code",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Log out"
+        }
+      ]
+    },
+    {
+      "id": "country-code-picker",
+      "fingerprint": "sha256:868f29d2d49e3fefbb012d34",
+      "skeletonHash": "sk:c38bc28abe50aee4a554b333",
+      "pHash": "p:1d23c8260ff906fd",
+      "role": "picker",
+      "screenshotPath": "assets/213c667e0aeb.png",
+      "snapshotPath": "assets/07f0f976e4de.snap.json",
+      "texts": [
+        "Search",
+        "Andorra +376",
+        "United Arab Emirates +971",
+        "Afghanistan +93",
+        "Antigua & Barbuda +1268",
+        "Anguilla +1264",
+        "Albania +355"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Search",
+          "emphasis": "primary"
+        },
+        {
+          "type": "radio",
+          "label": "Andorra, +376"
+        },
+        {
+          "type": "radio",
+          "label": "United Arab Emirates, +971"
+        },
+        {
+          "type": "radio",
+          "label": "Afghanistan, +93"
+        },
+        {
+          "type": "radio",
+          "label": "Albania, +355"
+        }
+      ]
+    },
+    {
+      "id": "phone-otp-entry",
+      "fingerprint": "sha256:7e4f1d9a28d299b324ad2d7c",
+      "skeletonHash": "sk:3f7a3469680ec72b01a03113",
+      "pHash": null,
+      "role": "auth",
+      "screenshotPath": "",
+      "snapshotPath": "assets/6111cf405a66.snap.json",
+      "texts": [
+        "Enter code",
+        "We sent a verification code to your phone number",
+        "Enter 6 digit code",
+        "Resend in 57s"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "6 digit code",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Resend code"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "username-entry",
+      "fingerprint": "sha256:c07bfff1fd75cacf42c0a1cc",
+      "skeletonHash": "sk:ea3c437757956d9ac61f1c09",
+      "pHash": "p:5e942bd8d20b2775",
+      "role": "form",
+      "screenshotPath": "assets/2b3cff31d6dd.png",
+      "snapshotPath": "assets/f3ceb16bbad0.snap.json",
+      "texts": [
+        "Claim a username",
+        "Your username is public and lets others send you funds. It can't be changed later.",
+        "4-14 characters",
+        "Claim",
+        "Log out"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Username",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Claim",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Log out"
+        }
+      ]
+    },
+    {
+      "id": "profile-color",
+      "fingerprint": "sha256:5c09a20d048635137d6145e8",
+      "skeletonHash": "sk:3e16c00340b354be90bf9e4d",
+      "pHash": null,
+      "role": "picker",
+      "screenshotPath": "",
+      "snapshotPath": "assets/326f6915e55d.snap.json",
+      "texts": [
+        "Choose a profile color",
+        "You can change it anytime.",
+        "Page 4 of 4",
+        "Continue",
+        "Log out"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Green avatar color"
+        },
+        {
+          "type": "button",
+          "label": "Blue avatar color"
+        },
+        {
+          "type": "button",
+          "label": "Light avatar color"
+        },
+        {
+          "type": "button",
+          "label": "Orange avatar color"
+        },
+        {
+          "type": "button",
+          "label": "Purple avatar color"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Log out"
+        }
+      ]
+    },
+    {
+      "id": "verify-intro",
+      "fingerprint": "sha256:e3f89fd295d987c365f3840f",
+      "skeletonHash": "sk:7d81624be788b65f5bfae416",
+      "pHash": "p:a1f4af1b0e0b5e0b",
+      "role": "other",
+      "screenshotPath": "assets/478fb8d23481.png",
+      "snapshotPath": "assets/3a9851ea79bd.snap.json",
+      "texts": [
+        "Verify now",
+        "*Subject to Plasma One Card Terms and Plasma One Cashback Terms."
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Verify now",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        },
+        {
+          "type": "link",
+          "label": "Plasma One Card Terms"
+        },
+        {
+          "type": "link",
+          "label": "Plasma One Cashback Terms"
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "fingerprint": "sha256:2f4760567726745ea5c9c714",
+      "skeletonHash": "sk:917cc74a3f612f398b9e8ba4",
+      "pHash": "p:5e03b4395bb4a15d",
+      "role": "home",
+      "screenshotPath": "assets/6f221f6b8de8.png",
+      "snapshotPath": "assets/925eb98b1690.snap.json",
+      "texts": [
+        "Spendable",
+        "$0.00",
+        "Hide balance",
+        "View total balance breakdown",
+        "Add funds",
+        "Earn $10",
+        "Spend $100 to earn bonus",
+        "14d left",
+        "Explore tiers",
+        "Upgrade to Core plan to get more out of your spending.",
+        "Get the card",
+        "This should only take a few minutes",
+        "Verify now",
+        "Nothing here yet",
+        "Your transactions will appear here",
+        "Plasma One Card and Earn are separate products with their own terms.",
+        "Home",
+        "Earn",
+        "Tier"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Add funds",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Hide balance"
+        },
+        {
+          "type": "button",
+          "label": "View total balance breakdown"
+        },
+        {
+          "type": "button",
+          "label": "Explore tiers"
+        },
+        {
+          "type": "button",
+          "label": "Get the card - Verify now"
+        },
+        {
+          "type": "button",
+          "label": "Profile"
+        },
+        {
+          "type": "tab",
+          "label": "Home",
+          "emphasis": "primary"
+        },
+        {
+          "type": "tab",
+          "label": "Earn"
+        },
+        {
+          "type": "tab",
+          "label": "Tier"
+        }
+      ]
+    },
+    {
+      "id": "earn",
+      "fingerprint": "sha256:a1338ce580cd2e5dfd0958df",
+      "skeletonHash": "sk:772a01b946bc15c183627304",
+      "pHash": "p:295656b983a1ecd5",
+      "role": "home",
+      "screenshotPath": "assets/e61707069e9d.png",
+      "snapshotPath": "assets/9005592733ef.snap.json",
+      "texts": [
+        "Earn balance",
+        "$0.00",
+        "Hide balance",
+        "5.71% APY",
+        "Start earning",
+        "No lockup, move to cash anytime",
+        "Day",
+        "Week",
+        "Month",
+        "Year",
+        "Home",
+        "Earn",
+        "Tier"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Start earning",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Hide balance"
+        },
+        {
+          "type": "button",
+          "label": "Earn info"
+        },
+        {
+          "type": "button",
+          "label": "Profile"
+        },
+        {
+          "type": "tab",
+          "label": "Day"
+        },
+        {
+          "type": "tab",
+          "label": "Week"
+        },
+        {
+          "type": "tab",
+          "label": "Month"
+        },
+        {
+          "type": "tab",
+          "label": "Year"
+        },
+        {
+          "type": "tab",
+          "label": "Home"
+        },
+        {
+          "type": "tab",
+          "label": "Earn",
+          "emphasis": "primary"
+        },
+        {
+          "type": "tab",
+          "label": "Tier"
+        }
+      ]
+    },
+    {
+      "id": "tier",
+      "fingerprint": "sha256:eda629492ef5dd46c686f76a",
+      "skeletonHash": "sk:772a01b946bc15c183627304",
+      "pHash": "p:079c98f13343ccdd",
+      "role": "home",
+      "screenshotPath": "assets/dad65b8a2dc3.png",
+      "snapshotPath": "assets/5f4bd4afa33a.snap.json",
+      "texts": [
+        "Lite",
+        "0.00 XPL",
+        "Hide balance",
+        "Get verified",
+        "Invite friends",
+        "Manage XPL",
+        "Earn $10",
+        "Spend $100 to earn bonus",
+        "14d left",
+        "Nothing here yet",
+        "Your XPL activity will appear here",
+        "Daily benefits",
+        "Home",
+        "Earn",
+        "Tier"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Get verified",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Invite friends"
+        },
+        {
+          "type": "button",
+          "label": "Manage XPL"
+        },
+        {
+          "type": "button",
+          "label": "Hide balance"
+        },
+        {
+          "type": "button",
+          "label": "Rewards info"
+        },
+        {
+          "type": "button",
+          "label": "Cashback (Daily benefits)"
+        },
+        {
+          "type": "button",
+          "label": "Referrals (Daily benefits)"
+        },
+        {
+          "type": "button",
+          "label": "Profile"
+        },
+        {
+          "type": "tab",
+          "label": "Home"
+        },
+        {
+          "type": "tab",
+          "label": "Earn"
+        },
+        {
+          "type": "tab",
+          "label": "Tier",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "add-funds",
+      "fingerprint": "sha256:061528e07f42a75f83ee0c59",
+      "skeletonHash": "sk:5863e8a9b65b8efa2d02bcca",
+      "pHash": "p:3be40fc603c60ef9",
+      "role": "picker",
+      "screenshotPath": "assets/8d1082000a31.png",
+      "snapshotPath": "assets/7b444450d2cb.snap.json",
+      "texts": [
+        "Stablecoins",
+        "USDT — Plasma, Ethereum, Solana +6 — Free",
+        "USDC — Ethereum, Solana, Base +4",
+        "Cash deposit",
+        "USD — ACH, Wire",
+        "EUR — SEPA",
+        "GBP — FPS",
+        "BRL — PIX",
+        "MXN — SPEI",
+        "Tokens",
+        "XPL — Plasma — Free"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "USDT",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "USDC"
+        },
+        {
+          "type": "button",
+          "label": "USD (ACH, Wire)"
+        },
+        {
+          "type": "button",
+          "label": "EUR (SEPA)"
+        },
+        {
+          "type": "button",
+          "label": "GBP (FPS)"
+        },
+        {
+          "type": "button",
+          "label": "BRL (PIX)"
+        },
+        {
+          "type": "button",
+          "label": "MXN (SPEI)"
+        },
+        {
+          "type": "button",
+          "label": "XPL"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "usdt-chain-picker",
+      "fingerprint": "sha256:a5fc208755dbb7183483705d",
+      "skeletonHash": "sk:92a74ce4d90b26a13c0f26bf",
+      "pHash": "p:394e1f07c64646f9",
+      "role": "picker",
+      "screenshotPath": "assets/854f4e1ac36b.png",
+      "snapshotPath": "assets/a9535a20a07e.snap.json",
+      "texts": [
+        "Plasma — Recommended — Instant",
+        "Ethereum — ~5 min",
+        "Solana — ~30s",
+        "Tron — ~3 min",
+        "Optimism — ~1 min",
+        "Polygon — ~3 min",
+        "BNB Smart Chain — ~1 min",
+        "Arbitrum — ~3 min",
+        "HyperEVM — ~1 min",
+        "Free"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Plasma",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Ethereum"
+        },
+        {
+          "type": "button",
+          "label": "Solana"
+        },
+        {
+          "type": "button",
+          "label": "Tron"
+        },
+        {
+          "type": "button",
+          "label": "Optimism"
+        },
+        {
+          "type": "button",
+          "label": "Polygon"
+        },
+        {
+          "type": "button",
+          "label": "BNB Smart Chain"
+        },
+        {
+          "type": "button",
+          "label": "Arbitrum"
+        },
+        {
+          "type": "button",
+          "label": "HyperEVM"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "usdt-bnb-deposit",
+      "fingerprint": "sha256:2df47f5840c32e05df4c0051",
+      "skeletonHash": "sk:7d81624be788b65f5bfae416",
+      "pHash": "p:b9168c36c9538d37",
+      "role": "other",
+      "screenshotPath": "assets/d7b76b71b252.png",
+      "snapshotPath": "assets/c99519cec8ad.snap.json",
+      "texts": [
+        "Scanning for deposits",
+        "QR Code",
+        "Token: USDT",
+        "Exchange rate 1 USDT = $1.00",
+        "Fees: Zero fees",
+        "Select BNB Smart Chain network",
+        "BNB Smart Chain ~1 min"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Select BNB Smart Chain network"
+        },
+        {
+          "type": "button",
+          "label": "Share",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Copy address",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "fingerprint": "sha256:22433b7908f199ffe5231425",
+      "skeletonHash": "sk:3e1251c7b0e7bbff585ef036",
+      "pHash": "p:ce3313393946c66d",
+      "role": "settings",
+      "screenshotPath": "assets/be53fa046ebb.png",
+      "snapshotPath": "assets/f301e165c753.snap.json",
+      "texts": [
+        "Lite member",
+        "Since July 2026",
+        "Account",
+        "Your account details",
+        "Security",
+        "Additional security for your account",
+        "Notifications",
+        "Control how you receive updates",
+        "Get help",
+        "Get your questions answered",
+        "Search privacy",
+        "Hide username from public search",
+        "Analytics",
+        "Share anonymous analytics",
+        "Legal"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Edit profile picture"
+        },
+        {
+          "type": "button",
+          "label": "Lite member"
+        },
+        {
+          "type": "button",
+          "label": "Account"
+        },
+        {
+          "type": "button",
+          "label": "Security"
+        },
+        {
+          "type": "button",
+          "label": "Notifications"
+        },
+        {
+          "type": "button",
+          "label": "Get help"
+        },
+        {
+          "type": "toggle",
+          "label": "Search privacy"
+        },
+        {
+          "type": "toggle",
+          "label": "Analytics"
+        },
+        {
+          "type": "button",
+          "label": "Legal"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "account-details",
+      "fingerprint": "sha256:6898ef70319fd9d9bdd1a239",
+      "skeletonHash": "sk:e4425d986d944dc9d95a9b6c",
+      "pHash": null,
+      "role": "settings",
+      "screenshotPath": "",
+      "snapshotPath": "assets/1f4364c1ae26.snap.json",
+      "texts": [
+        "Username",
+        "Email",
+        "Phone number"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "fingerprint": "sha256:7eac57a4c2ceb5e90213bf63",
+      "skeletonHash": "sk:65e4dc590b8c26ac6e55eef8",
+      "pHash": null,
+      "role": "settings",
+      "screenshotPath": "",
+      "snapshotPath": "assets/8b4cf1140d35.snap.json",
+      "texts": [
+        "Essential security",
+        "Biometric unlock",
+        "Sign-in methods",
+        "Google",
+        "Apple",
+        "Email"
+      ],
+      "interactiveElements": [
+        {
+          "type": "toggle",
+          "label": "Biometric unlock"
+        },
+        {
+          "type": "button",
+          "label": "Add Apple sign-in"
+        },
+        {
+          "type": "button",
+          "label": "Add Email sign-in"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "notifications-settings",
+      "fingerprint": "sha256:5707ea45b9f2b5bad60fbd9f",
+      "skeletonHash": "sk:2f5ba0fea14ce811ff064aff",
+      "pHash": "p:b3e383c6a4ec494d",
+      "role": "settings",
+      "screenshotPath": "assets/bbe79972b17d.png",
+      "snapshotPath": "assets/b4b3106a7338.snap.json",
+      "texts": [
+        "Notifications",
+        "Receive push notifications",
+        "Rewards & earnings",
+        "Cashback, referrals, savings",
+        "Insights",
+        "Spending & usage summaries",
+        "Product updates",
+        "New features and improvements"
+      ],
+      "interactiveElements": [
+        {
+          "type": "toggle",
+          "label": "Notifications"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "legal",
+      "fingerprint": "sha256:d41e91943556479932159327",
+      "skeletonHash": "sk:0c36ea0ca565851f4ca9d7c0",
+      "pHash": "p:990c7a6662669dcd",
+      "role": "settings",
+      "screenshotPath": "assets/94ab15f427c2.png",
+      "snapshotPath": "assets/2fadf0cebb4f.snap.json",
+      "texts": [
+        "Terms of service",
+        "Privacy policy",
+        "Card agreement",
+        "Rewards addendum"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Terms of service"
+        },
+        {
+          "type": "button",
+          "label": "Privacy policy"
+        },
+        {
+          "type": "button",
+          "label": "Card agreement"
+        },
+        {
+          "type": "button",
+          "label": "Rewards addendum"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "earn-amount",
+      "fingerprint": "sha256:8d62411e5347d5ba4f233469",
+      "skeletonHash": "sk:5d6617911e85a51562fb7edb",
+      "pHash": "p:06ec0bbc5336a957",
+      "role": "form",
+      "screenshotPath": "assets/08dd928edfc5.png",
+      "snapshotPath": "assets/f78e4400b0b4.snap.json",
+      "texts": [
+        "Cash · $0.00",
+        "Use maximum amount",
+        "25%",
+        "50%",
+        "75%",
+        "Add to earn"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Use maximum amount"
+        },
+        {
+          "type": "button",
+          "label": "25%"
+        },
+        {
+          "type": "button",
+          "label": "50%"
+        },
+        {
+          "type": "button",
+          "label": "75%"
+        },
+        {
+          "type": "button",
+          "label": "Add to earn",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "earn-info",
+      "fingerprint": "sha256:fe8b46f6e269697846a11310",
+      "skeletonHash": "sk:380fe913ee76115f01f95236",
+      "pHash": "p:78291b92a37c09df",
+      "role": "modal",
+      "screenshotPath": "assets/5c2f1a0dc5b1.png",
+      "snapshotPath": "assets/63bcee93bf19.snap.json",
+      "texts": [
+        "Earn info (multi-page educational carousel)",
+        "Next",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Next",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "invite-friends",
+      "fingerprint": "sha256:345883591d206bb586bb27c4",
+      "skeletonHash": "sk:5ff5dc4da0a45f7067d2a9d2",
+      "pHash": "p:478cf8990373cccd",
+      "role": "other",
+      "screenshotPath": "assets/8a1c53b0b283.png",
+      "snapshotPath": "assets/cbb4dae5ec22.snap.json",
+      "texts": [
+        "Invite friends & earn together",
+        "Spend more to unlock more invite codes"
+      ],
+      "interactiveElements": [
+        {
+          "type": "list",
+          "label": "Invite code cards (locked)"
+        }
+      ]
+    },
+    {
+      "id": "manage-xpl",
+      "fingerprint": "sha256:8152bf9ad8f1677e159531fe",
+      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
+      "pHash": "p:66e64c939939c64d",
+      "role": "other",
+      "screenshotPath": "assets/ce472fe5e1bf.png",
+      "snapshotPath": "assets/65e197e33761.snap.json",
+      "texts": [
+        "0.00 XPL",
+        "About locked XPL",
+        "Convert",
+        "Buy or sell XPL",
+        "Deposit",
+        "Transfer from external wallets",
+        "Send",
+        "Send to wallets and Plasma users"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Convert",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Deposit"
+        },
+        {
+          "type": "button",
+          "label": "Send"
+        },
+        {
+          "type": "button",
+          "label": "About locked XPL"
+        },
+        {
+          "type": "button",
+          "label": "Hide balance"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "rewards-info",
+      "fingerprint": "sha256:fe8b46f6e269697846a11310",
+      "skeletonHash": "sk:380fe913ee76115f01f95236",
+      "pHash": "p:0b1c163636a7cbcb",
+      "role": "modal",
+      "screenshotPath": "assets/b54d933ddb5a.png",
+      "snapshotPath": "assets/8e75a08b3576.snap.json",
+      "texts": [
+        "Rewards info (multi-page educational carousel)",
+        "Next",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Next",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "kyc-start",
+      "fingerprint": "sha256:7932879cbdb87b77f6eb9920",
+      "skeletonHash": "sk:bad4b6bb48fffd07db9b0239",
+      "pHash": "p:de0b322203f4a9fd",
+      "role": "other",
+      "screenshotPath": "assets/1e7a8bee2675.png",
+      "snapshotPath": "assets/3016c73cb1bd.snap.json",
+      "texts": [
+        "Email verification",
+        "We will send you a code to verify your email",
+        "Profile details",
+        "Verify and complete your personal information.",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "kyc-consent",
+      "fingerprint": "sha256:248e42b46f772525b5f85203",
+      "skeletonHash": "sk:5ff5dc4da0a45f7067d2a9d2",
+      "pHash": "p:5f835203a3d688fd",
+      "role": "other",
+      "screenshotPath": "assets/c6e36a6ba4c2.png",
+      "snapshotPath": "assets/2f7806526b49.snap.json",
+      "texts": [
+        "Before you continue, you must consent to the processing of your personal data, as described in the Notification to Processing of Personal Data",
+        "I confirm that I have read the Privacy Notice and the Notification to Processing of Personal Data",
+        "Applicable to US residents only: consent to the processing of my personal data, including biometrics",
+        "Agree and continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Agree and continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-email-verify",
+      "fingerprint": "sha256:a68cce73b1151cf0c851ad46",
+      "skeletonHash": "sk:84ff40adf6cd660fd831591d",
+      "pHash": "p:5b43034387f8b5e9",
+      "role": "auth",
+      "screenshotPath": "assets/b07c9750ff89.png",
+      "snapshotPath": "assets/6538f580880f.snap.json",
+      "texts": [
+        "Verify your email address",
+        "Enter your email address to receive a verification code",
+        "Your email"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Email address",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-email-otp",
+      "fingerprint": "sha256:373ef248410c3b8607c9ed4a",
+      "skeletonHash": "sk:3368dfc7bda1d8eaaa122dae",
+      "pHash": null,
+      "role": "auth",
+      "screenshotPath": "",
+      "snapshotPath": "assets/9c5d48474e7d.snap.json",
+      "texts": [
+        "Enter code to verify your email",
+        "We’ve sent the code to your email. Check your email.",
+        "Resend code"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Verification code",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Resend code"
+        }
+      ]
+    },
+    {
+      "id": "kyc-country",
+      "fingerprint": "sha256:2e68a00bdd99bd21e4088d4c",
+      "skeletonHash": "sk:203dabd03f72bf80b90aeec0",
+      "pHash": "p:d6035347035ca9fd",
+      "role": "form",
+      "screenshotPath": "assets/26bbdefbdce5.png",
+      "snapshotPath": "assets/6d0481ed11e8.snap.json",
+      "texts": [
+        "Profile details",
+        "Verify and complete your personal information.",
+        "Country of residence *",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Country of residence"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-address",
+      "fingerprint": "sha256:81d1f034d47584ee55e8f1c9",
+      "skeletonHash": "sk:5d6617911e85a51562fb7edb",
+      "pHash": "p:f6a31246835e29f5",
+      "role": "form",
+      "screenshotPath": "assets/9a0a0ed800b1.png",
+      "snapshotPath": "assets/a0698e4efd42.snap.json",
+      "texts": [
+        "Profile details",
+        "Verify and complete your personal information.",
+        "Address line 1 *",
+        "Address line 2",
+        "City *",
+        "Country *",
+        "Post code (Enter 000000 if not available) *",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Address line 1",
+          "emphasis": "primary"
+        },
+        {
+          "type": "input",
+          "label": "Address line 2"
+        },
+        {
+          "type": "input",
+          "label": "City"
+        },
+        {
+          "type": "input",
+          "label": "Country (locked)"
+        },
+        {
+          "type": "input",
+          "label": "Post code"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-doc-type",
+      "fingerprint": "sha256:f1fbb69a42a5585836fa1a0e",
+      "skeletonHash": "sk:e857f57dea36d074c47857fc",
+      "pHash": "p:7a03134e83c6a9fd",
+      "role": "picker",
+      "screenshotPath": "assets/b00ebab5891f.png",
+      "snapshotPath": "assets/89ebb730b7a3.snap.json",
+      "texts": [
+        "Select document type and issuing country",
+        "Issuing country",
+        "Document type",
+        "Passport",
+        "Driver license",
+        "ID card",
+        "Residence permit",
+        "Powered by Sumsub"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Issuing country"
+        },
+        {
+          "type": "radio",
+          "label": "Passport"
+        },
+        {
+          "type": "radio",
+          "label": "Driver license"
+        },
+        {
+          "type": "radio",
+          "label": "ID card"
+        },
+        {
+          "type": "radio",
+          "label": "Residence permit"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "kyc-checklist",
+      "fingerprint": "sha256:754ffa968de82364c7562b5f",
+      "skeletonHash": "sk:7d81624be788b65f5bfae416",
+      "pHash": "p:5c0b5a720356a9fd",
+      "role": "other",
+      "screenshotPath": "assets/ff3a8ab5999f.png",
+      "snapshotPath": "assets/d268a6aee80e.snap.json",
+      "texts": [
+        "Email verification",
+        "Profile details",
+        "Identity document",
+        "Take a photo of your ID",
+        "Selfie",
+        "Take a selfie",
+        "Questionnaire",
+        "We will ask you few questions",
+        "To complete the verification process, you need to submit all the documents. If you experience any issues, contact support.",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Identity document"
+        },
+        {
+          "type": "button",
+          "label": "Selfie"
+        },
+        {
+          "type": "button",
+          "label": "Questionnaire"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-upgrade-gate",
+      "fingerprint": "sha256:d16b0e51bf08018dafcc81fb",
+      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
+      "pHash": "p:9e9c59ad5826b247",
+      "role": "other",
+      "screenshotPath": "assets/59c026064a6f.png",
+      "snapshotPath": "assets/5ee583d57940.snap.json",
+      "texts": [
+        "Built for everyday spending",
+        "$199/year or 20,000 XPL lock",
+        "$0 effective annual cost",
+        "Your existing AI stack pays for the tier",
+        "ChatGPT Go included",
+        "$100 annual subscription covered",
+        "50%+ lower fees",
+        "Cashback",
+        "Earn more",
+        "Lite",
+        "Core",
+        "Platinum",
+        "Upgrade to Core"
+      ],
+      "interactiveElements": [
+        {
+          "type": "tab",
+          "label": "Lite"
+        },
+        {
+          "type": "tab",
+          "label": "Core"
+        },
+        {
+          "type": "tab",
+          "label": "Platinum"
+        },
+        {
+          "type": "button",
+          "label": "Upgrade to Core",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Open Cashback help"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "card-upgrade-method",
+      "fingerprint": "sha256:d4a40e11c4f92b5d7a95676d",
+      "skeletonHash": "sk:efb226ee8775cc4b13f9ba10",
+      "pHash": "p:9e1c185c29f682f7",
+      "role": "picker",
+      "screenshotPath": "assets/791eff88903c.png",
+      "snapshotPath": "assets/85010d195392.snap.json",
+      "texts": [
+        "Upgrade to Core",
+        "Lock XPL · 1 Year",
+        "20,000 XPL",
+        "Unlocks after 12 months",
+        "Buy with cash",
+        "$199/year",
+        "Paid annually",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "radio",
+          "label": "Lock XPL · 1 Year (20,000 XPL, unlocks after 12 months)"
+        },
+        {
+          "type": "radio",
+          "label": "Buy with cash ($199/year, paid annually)"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "card-upgrade-cash",
+      "fingerprint": "sha256:3fc5aab252da8346a8e009b1",
+      "skeletonHash": "sk:72f7c44996a2a64a990a8df3",
+      "pHash": "p:de9c18590972a2f7",
+      "role": "confirmation",
+      "screenshotPath": "assets/57e7a15ba60c.png",
+      "snapshotPath": "assets/5febebc90f7f.snap.json",
+      "texts": [
+        "Upgrade to Core",
+        "Buy with cash",
+        "$199/year",
+        "You need $199 more",
+        "Renews annually. You can cancel or switch options before the next renewal.",
+        "Deposit funds"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Deposit funds",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Back"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "card-gate-lite",
+      "fingerprint": "sha256:7b6bacd84a5a0e3e4c53308b",
+      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
+      "pHash": "p:198c59e67366b24d",
+      "role": "other",
+      "screenshotPath": "assets/feacb9946894.png",
+      "snapshotPath": "assets/a3a34896e232.snap.json",
+      "texts": [
+        "Start spending with Plasma",
+        "Your current tier",
+        "Free virtual card",
+        "Get your free virtual card instantly",
+        "Get setup in minutes",
+        "Takes < 5 mins to get setup",
+        "Spend globally",
+        "Card accepted in 180+ countries",
+        "Cashback",
+        "Basic",
+        "Lite",
+        "Core",
+        "Platinum",
+        "Activate card"
+      ],
+      "interactiveElements": [
+        {
+          "type": "tab",
+          "label": "Lite"
+        },
+        {
+          "type": "tab",
+          "label": "Core"
+        },
+        {
+          "type": "tab",
+          "label": "Platinum"
+        },
+        {
+          "type": "button",
+          "label": "Activate card",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Open Cashback help"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "card-terms",
+      "fingerprint": "sha256:3de2e56b5760d955d0e814c7",
+      "skeletonHash": "sk:66ddb044b6254043897a62ef",
+      "pHash": "p:351d5746ec5202fd",
+      "role": "form",
+      "screenshotPath": "assets/67d456237a99.png",
+      "snapshotPath": "assets/bd3a15ed803b.snap.json",
+      "texts": [
+        "Terms & Conditions",
+        "Review and accept the terms and conditions to activate your Plasma One card.",
+        "I accept the E-Sign Consent",
+        "I accept the Plasma One Card Terms, Plasma One Cashback Terms and the Issuer Privacy Policy",
+        "I certify that the information I have provided is accurate and that I will abide by all the rules and requirements",
+        "I acknowledge that applying for the Plasma One card...",
+        "Continue"
+      ],
+      "interactiveElements": [
+        {
+          "type": "toggle",
+          "label": "I accept the E-Sign Consent"
+        },
+        {
+          "type": "toggle",
+          "label": "I accept the Plasma One Card Terms, Cashback Terms and Issuer Privacy Policy"
+        },
+        {
+          "type": "toggle",
+          "label": "I certify the information provided is accurate"
+        },
+        {
+          "type": "toggle",
+          "label": "I acknowledge applying for the Plasma One card"
+        },
+        {
+          "type": "button",
+          "label": "E-Sign Consent"
+        },
+        {
+          "type": "button",
+          "label": "Plasma One Card Terms"
+        },
+        {
+          "type": "button",
+          "label": "Plasma One Cashback Terms"
+        },
+        {
+          "type": "button",
+          "label": "Issuer Privacy Policy"
+        },
+        {
+          "type": "button",
+          "label": "Continue",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-new-virtual",
+      "fingerprint": "sha256:c76d0f3f41c304dc6d81f998",
+      "skeletonHash": "sk:619bc9c5ef06e5466980a5e7",
+      "pHash": "p:0bfc0bf42956a25d",
+      "role": "form",
+      "screenshotPath": "assets/e66d9bf029ab.png",
+      "snapshotPath": "assets/d96ff1d0eb6e.snap.json",
+      "texts": [
+        "New virtual card",
+        "Plasma Lite",
+        "Virtual",
+        "Card label (Optional)",
+        "Daily limit",
+        "$5,000",
+        "Set as default card",
+        "Activate card"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Card label"
+        },
+        {
+          "type": "button",
+          "label": "Daily limit ($5,000)"
+        },
+        {
+          "type": "toggle",
+          "label": "Set as default card"
+        },
+        {
+          "type": "button",
+          "label": "Activate card",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "card-google-wallet-promo",
+      "fingerprint": "sha256:5f8d582ad160963964528863",
+      "skeletonHash": "sk:db45b3b8597d41aee1c412d4",
+      "pHash": "p:7e0fd4c06894a1fd",
+      "role": "modal",
+      "screenshotPath": "assets/26913572ce40.png",
+      "snapshotPath": "assets/39a64a166c5f.snap.json",
+      "texts": [
+        "Add to Google Wallet",
+        "More on Google Pay regional availability"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Add to Google Wallet",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Google Pay regional availability"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "card-detail",
+      "fingerprint": "sha256:48cabd90bb1c7e176fae83d9",
+      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
+      "pHash": null,
+      "role": "other",
+      "screenshotPath": "",
+      "snapshotPath": "assets/62f2160a5622.snap.json",
+      "texts": [
+        "Cardholder name",
+        "Virtual card ending in 0411",
+        "Reveal",
+        "Freeze",
+        "Settings",
+        "Spendable $0.00",
+        "Daily limit $5,000.00",
+        "Add to Google Wallet",
+        "Add card"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Reveal",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Freeze"
+        },
+        {
+          "type": "button",
+          "label": "Settings"
+        },
+        {
+          "type": "button",
+          "label": "Add to Google Wallet"
+        },
+        {
+          "type": "button",
+          "label": "Add card"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "card-settings",
+      "fingerprint": "sha256:fed598e84b28a50f599cd4f7",
+      "skeletonHash": "sk:4e9ef952914c1f5693630b29",
+      "pHash": null,
+      "role": "settings",
+      "screenshotPath": "",
+      "snapshotPath": "assets/1e394e27aef8.snap.json",
+      "texts": [
+        "Card label",
+        "Set as default",
+        "Security",
+        "Daily limit",
+        "Online transactions",
+        "ATM withdrawals",
+        "Coming soon",
+        "PIN",
+        "View PIN",
+        "Cardholder information",
+        "Cardholder name",
+        "Billing address"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Card label"
+        },
+        {
+          "type": "toggle",
+          "label": "Set as default"
+        },
+        {
+          "type": "button",
+          "label": "Daily limit"
+        },
+        {
+          "type": "toggle",
+          "label": "Online transactions"
+        },
+        {
+          "type": "button",
+          "label": "View PIN"
+        },
+        {
+          "type": "button",
+          "label": "Cardholder name"
+        },
+        {
+          "type": "button",
+          "label": "Billing address"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "home-funded",
+      "fingerprint": "sha256:f8c17d6e9b526711c89df2c5",
+      "skeletonHash": "sk:cea338567b8196613985f45f",
+      "pHash": "p:03dc98b923438dfd",
+      "role": "home",
+      "screenshotPath": "assets/95170bcbb423.png",
+      "snapshotPath": "assets/c791f9461a95.snap.json",
+      "texts": [
+        "Spendable",
+        "$2.50",
+        "Hide balance",
+        "View total balance breakdown",
+        "Add funds",
+        "Send",
+        "Earn $10",
+        "Spend $100 to earn bonus",
+        "14d left",
+        "Lite Virtual, virtual card ending in 0411",
+        "$2.50",
+        "Completed, +$2.50",
+        "4:22 PM",
+        "Home",
+        "Earn",
+        "Tier"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Add funds",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Send",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Hide balance"
+        },
+        {
+          "type": "button",
+          "label": "View total balance breakdown"
+        },
+        {
+          "type": "button",
+          "label": "Lite Virtual card ending 0411"
+        },
+        {
+          "type": "button",
+          "label": "Transaction: deposit +$2.50"
+        },
+        {
+          "type": "button",
+          "label": "Profile"
+        },
+        {
+          "type": "tab",
+          "label": "Home",
+          "emphasis": "primary"
+        },
+        {
+          "type": "tab",
+          "label": "Earn"
+        },
+        {
+          "type": "tab",
+          "label": "Tier"
+        }
+      ]
+    },
+    {
+      "id": "balance-breakdown",
+      "fingerprint": "sha256:8031e1d6bffcc8c58ebbfa32",
+      "skeletonHash": "sk:db45b3b8597d41aee1c412d4",
+      "pHash": "p:0699f99223638cfd",
+      "role": "modal",
+      "screenshotPath": "assets/7ea50a79361c.png",
+      "snapshotPath": "assets/360c638a3651.snap.json",
+      "texts": [
+        "Spendable",
+        "$2.50",
+        "Earning · 5.71% APY",
+        "$0.00",
+        "XPL · 0.0",
+        "$0.00"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Add (Spendable)",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Earn (Earning balance)"
+        },
+        {
+          "type": "button",
+          "label": "Manage (XPL)"
+        }
+      ]
+    },
+    {
+      "id": "earn-amount-funded",
+      "fingerprint": "sha256:8d62411e5347d5ba4f233469",
+      "skeletonHash": "sk:5d6617911e85a51562fb7edb",
+      "pHash": "p:46ec03bc5336a957",
+      "role": "form",
+      "screenshotPath": "assets/cc83748d692a.png",
+      "snapshotPath": "assets/2f5965e46c74.snap.json",
+      "texts": [
+        "Cash · $1.50",
+        "Use maximum amount",
+        "25%",
+        "50%",
+        "75%",
+        "Add to earn"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Use maximum amount"
+        },
+        {
+          "type": "button",
+          "label": "25%"
+        },
+        {
+          "type": "button",
+          "label": "50%"
+        },
+        {
+          "type": "button",
+          "label": "75%"
+        },
+        {
+          "type": "button",
+          "label": "Add to earn",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "earn-funded",
+      "fingerprint": "sha256:ac0b809c6661a17e672be468",
+      "skeletonHash": "sk:6b0ed97639a2b002a2a545a2",
+      "pHash": "p:479cb8f00323ecdd",
+      "role": "home",
+      "screenshotPath": "assets/b320a57a5fa1.png",
+      "snapshotPath": "assets/c3176d123ee4.snap.json",
+      "texts": [
+        "Earn balance",
+        "$1.00",
+        "Hide balance",
+        "5.71% APY",
+        "Earn more",
+        "Move to cash",
+        "No lockup, move to cash anytime",
+        "Day",
+        "Week",
+        "Month",
+        "Year",
+        "Home",
+        "Earn",
+        "Tier"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Earn more",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Move to cash",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Hide balance"
+        },
+        {
+          "type": "button",
+          "label": "Earn info"
+        },
+        {
+          "type": "button",
+          "label": "Profile"
+        },
+        {
+          "type": "tab",
+          "label": "Day"
+        },
+        {
+          "type": "tab",
+          "label": "Week"
+        },
+        {
+          "type": "tab",
+          "label": "Month"
+        },
+        {
+          "type": "tab",
+          "label": "Year"
+        },
+        {
+          "type": "tab",
+          "label": "Home"
+        },
+        {
+          "type": "tab",
+          "label": "Earn",
+          "emphasis": "primary"
+        },
+        {
+          "type": "tab",
+          "label": "Tier"
+        }
+      ]
+    },
+    {
+      "id": "balance-breakdown-earning",
+      "fingerprint": "sha256:8031e1d6bffcc8c58ebbfa32",
+      "skeletonHash": "sk:db45b3b8597d41aee1c412d4",
+      "pHash": "p:0699f99223638cfd",
+      "role": "modal",
+      "screenshotPath": "assets/a75b7a84814f.png",
+      "snapshotPath": "assets/903b87508dc2.snap.json",
+      "texts": [
+        "Spendable",
+        "$1.50",
+        "Earning · 5.71% APY",
+        "$1.00",
+        "XPL · 0.0",
+        "$0.00"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Add (Spendable)",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Earn (Earning balance)"
+        },
+        {
+          "type": "button",
+          "label": "Manage (XPL)"
+        }
+      ]
+    },
+    {
+      "id": "card-detail-frozen",
+      "fingerprint": "sha256:3d749a6fc5c8aa8001a027a9",
+      "skeletonHash": "sk:c89f6de5c9cc304334442b15",
+      "pHash": null,
+      "role": "other",
+      "screenshotPath": "",
+      "snapshotPath": "assets/cee1a27ee94d.snap.json",
+      "texts": [
+        "Cardholder name",
+        "Frozen",
+        "Virtual card ending in 0411",
+        "Reveal",
+        "Unfreeze",
+        "Settings",
+        "Spendable $1.50",
+        "Daily limit $5,000.00",
+        "Add to Google Wallet",
+        "Add card"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Reveal"
+        },
+        {
+          "type": "button",
+          "label": "Unfreeze",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Settings"
+        },
+        {
+          "type": "button",
+          "label": "Add to Google Wallet"
+        },
+        {
+          "type": "button",
+          "label": "Add card"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
+      "id": "card-label-edit",
+      "fingerprint": "sha256:7f7724acec705671b3975a7c",
+      "skeletonHash": "sk:203dabd03f72bf80b90aeec0",
+      "pHash": "p:5a84a1fdf40a1e5d",
+      "role": "form",
+      "screenshotPath": "assets/0c15ddbc6bf9.png",
+      "snapshotPath": "assets/d771a54073de.snap.json",
+      "texts": [
+        "Card label",
+        "Lite Virtual",
+        "Save"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Card label",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Save",
+          "emphasis": "primary"
+        }
+      ]
+    },
+    {
+      "id": "card-limit-edit",
+      "fingerprint": "sha256:6e12fdef1717e8df0a4ebac8",
+      "skeletonHash": "sk:5d6617911e85a51562fb7edb",
+      "pHash": "p:563c06fcc3f42857",
+      "role": "form",
+      "screenshotPath": "assets/d4e3d7d64cb9.png",
+      "snapshotPath": "assets/02d3d01dd8cb.snap.json",
+      "texts": [
+        "Daily limit",
+        "$1,000",
+        "$5,000",
+        "$10,000",
+        "Save"
+      ],
+      "interactiveElements": [
+        {
+          "type": "input",
+          "label": "Daily limit amount",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "$1,000"
+        },
+        {
+          "type": "button",
+          "label": "$5,000"
+        },
+        {
+          "type": "button",
+          "label": "$10,000"
+        },
+        {
+          "type": "button",
+          "label": "Save",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "daily-benefit-cashback",
+      "fingerprint": "sha256:573c3cec3dddabd111e733a5",
+      "skeletonHash": "sk:db45b3b8597d41aee1c412d4",
+      "pHash": "p:5e23762312f4a8dd",
+      "role": "modal",
+      "screenshotPath": "assets/e794f3e2e1bc.png",
+      "snapshotPath": "assets/23562574a945.snap.json",
+      "texts": [
+        "Cashback",
+        "Earn XPL back on eligible card spend, up to your monthly limit.",
+        "2% on first $500",
+        "$0/500 monthly",
+        "0.1% on the rest",
+        "Resets on Aug 1, 2026",
+        "Cashback limits apply. See full details here.",
+        "Get more cashback"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Get more cashback",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "See full details here"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    },
+    {
+      "id": "daily-benefit-referrals",
+      "fingerprint": "sha256:2eb0809309c15fe656ce604d",
+      "skeletonHash": "sk:380fe913ee76115f01f95236",
+      "pHash": "p:332347673688c8fd",
+      "role": "modal",
+      "screenshotPath": "assets/5c9b80319171.png",
+      "snapshotPath": "assets/4141d8c6a6a5.snap.json",
+      "texts": [
+        "Referrals",
+        "0.25% back from your friends' spend.",
+        "1. Tap \"Invite friends\" on the Rewards page",
+        "2. Share your access code",
+        "3. Cashback is applied to your account each time a friend's transaction settles",
+        "Cashback limits apply. See full details here.",
+        "When friends join with your referral link, you'll earn 0.25% in referral rewards every time they spend. Available for a limited time."
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "See full details here"
+        },
+        {
+          "type": "button",
+          "label": "Close"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "welcome",
+      "to": "auth-method",
+      "action": "Tap \"Get started\"",
+      "selector": "role=\"button\" label=\"Get started\"",
+      "kind": "nav",
+      "observedAtStep": 1
+    },
+    {
+      "from": "auth-method",
+      "to": "email-entry",
+      "action": "Tap \"Continue with email\"",
+      "selector": "role=\"button\" label=\"Continue with email\"",
+      "kind": "nav",
+      "observedAtStep": 2
+    },
+    {
+      "from": "email-entry",
+      "to": "otp-entry",
+      "action": "Enter email and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 3
+    },
+    {
+      "from": "otp-entry",
+      "to": "notifications-prompt",
+      "action": "Enter 6-digit verification code (auto-submits)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 4
+    },
+    {
+      "from": "notifications-prompt",
+      "to": "waitlist",
+      "action": "Tap \"Enable\"",
+      "selector": "role=\"button\" label=\"Enable\"",
+      "kind": "nav",
+      "observedAtStep": 5
+    },
+    {
+      "from": "waitlist",
+      "to": "tiers-core",
+      "action": "Tap \"Explore tiers\"",
+      "selector": "role=\"button\" label=\"Explore tiers\"",
+      "kind": "nav",
+      "observedAtStep": 6
+    },
+    {
+      "from": "tiers-core",
+      "to": "tiers-lite",
+      "action": "Tap \"Lite\" tab",
+      "selector": "label=\"Lite\"",
+      "kind": "nav",
+      "observedAtStep": 7
+    },
+    {
+      "from": "tiers-core",
+      "to": "tiers-platinum",
+      "action": "Tap \"Platinum\" tab",
+      "selector": "label=\"Platinum\"",
+      "kind": "nav",
+      "observedAtStep": 8
+    },
+    {
+      "from": "tiers-platinum",
+      "to": "tiers-core",
+      "action": "Tap \"Core\" tab",
+      "selector": "label=\"Core\"",
+      "kind": "nav",
+      "observedAtStep": 9
+    },
+    {
+      "from": "waitlist",
+      "to": "access-code",
+      "action": "Tap \"Got a code?\"",
+      "selector": "role=\"button\" label=\"Got a code?\"",
+      "kind": "nav",
+      "observedAtStep": 10
+    },
+    {
+      "from": "waitlist",
+      "to": "notifications-prompt",
+      "action": "Tap \"Get notified when you’re in\"",
+      "selector": "role=\"button\" label=\"Get notified when you’re in\"",
+      "kind": "overlay",
+      "observedAtStep": 11
+    },
+    {
+      "from": "notifications-prompt",
+      "to": "waitlist",
+      "action": "Tap \"Maybe later\"",
+      "selector": "role=\"button\" label=\"Maybe later\"",
+      "kind": "back",
+      "observedAtStep": 12
+    },
+    {
+      "from": "access-code",
+      "to": "access-unlocked",
+      "action": "Enter 6-character access code (auto-submits)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 13
+    },
+    {
+      "from": "access-unlocked",
+      "to": "phone-entry",
+      "action": "Tap \"Get started\"",
+      "selector": "role=\"button\" label=\"Get started\"",
+      "kind": "nav",
+      "observedAtStep": 14
+    },
+    {
+      "from": "phone-entry",
+      "to": "country-code-picker",
+      "action": "Tap \"Select country code\"",
+      "selector": "label=\"Select country code, current: United States\"",
+      "kind": "overlay",
+      "observedAtStep": 15
+    },
+    {
+      "from": "country-code-picker",
+      "to": "phone-entry",
+      "action": "Search \"Greece\" and select \"Greece, +30\"",
+      "selector": "label=\"Greece, +30\"",
+      "kind": "back",
+      "observedAtStep": 16
+    },
+    {
+      "from": "phone-entry",
+      "to": "phone-otp-entry",
+      "action": "Enter phone number and tap \"Send code\"",
+      "selector": "role=\"button\" label=\"Send code\"",
+      "kind": "nav",
+      "observedAtStep": 17
+    },
+    {
+      "from": "phone-otp-entry",
+      "to": "username-entry",
+      "action": "Enter 6-digit SMS code (auto-submits)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 18
+    },
+    {
+      "from": "username-entry",
+      "to": "profile-color",
+      "action": "Enter username and tap \"Claim\"",
+      "selector": "role=\"button\" label=\"Claim\"",
+      "kind": "nav",
+      "observedAtStep": 19
+    },
+    {
+      "from": "profile-color",
+      "to": "verify-intro",
+      "action": "Select avatar color and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 20
+    },
+    {
+      "from": "verify-intro",
+      "to": "home",
+      "action": "Tap \"Close\" (then authenticate with device credential)",
+      "selector": "role=\"button\" label=\"Close\"",
+      "kind": "nav",
+      "observedAtStep": 21
+    },
+    {
+      "from": "home",
+      "to": "earn",
+      "action": "Tap \"Earn\" tab",
+      "selector": "label=\"Earn\"",
+      "kind": "nav",
+      "observedAtStep": 22
+    },
+    {
+      "from": "earn",
+      "to": "tier",
+      "action": "Tap \"Tier\" tab",
+      "selector": "label=\"Tier\"",
+      "kind": "in-place",
+      "observedAtStep": 23
+    },
+    {
+      "from": "tier",
+      "to": "home",
+      "action": "Tap \"Home\" tab",
+      "selector": "label=\"Home\"",
+      "kind": "nav",
+      "observedAtStep": 24
+    },
+    {
+      "from": "home",
+      "to": "add-funds",
+      "action": "Tap \"Add funds\"",
+      "selector": "role=\"button\" label=\"Add funds\"",
+      "kind": "overlay",
+      "observedAtStep": 25
+    },
+    {
+      "from": "add-funds",
+      "to": "usdt-chain-picker",
+      "action": "Tap \"USDT\"",
+      "selector": "role=\"button\" label=\"USDT\"",
+      "kind": "nav",
+      "observedAtStep": 26
+    },
+    {
+      "from": "usdt-chain-picker",
+      "to": "usdt-bnb-deposit",
+      "action": "Tap \"BNB Smart Chain\"",
+      "selector": "role=\"button\" label=\"BNB Smart Chain\"",
+      "kind": "nav",
+      "observedAtStep": 27
+    },
+    {
+      "from": "home",
+      "to": "profile",
+      "action": "Tap \"Profile\"",
+      "selector": "role=\"button\" label=\"Profile\"",
+      "kind": "nav",
+      "observedAtStep": 28
+    },
+    {
+      "from": "profile",
+      "to": "account-details",
+      "action": "Tap \"Account\"",
+      "selector": "role=\"button\" label=\"Account\"",
+      "kind": "nav",
+      "observedAtStep": 29
+    },
+    {
+      "from": "profile",
+      "to": "security",
+      "action": "Tap \"Security\"",
+      "selector": "role=\"button\" label=\"Security\"",
+      "kind": "nav",
+      "observedAtStep": 30
+    },
+    {
+      "from": "profile",
+      "to": "notifications-settings",
+      "action": "Tap \"Notifications\"",
+      "selector": "role=\"button\" label=\"Notifications\"",
+      "kind": "nav",
+      "observedAtStep": 31
+    },
+    {
+      "from": "profile",
+      "to": "legal",
+      "action": "Tap \"Legal\"",
+      "selector": "role=\"button\" label=\"Legal\"",
+      "kind": "nav",
+      "observedAtStep": 32
+    },
+    {
+      "from": "earn",
+      "to": "earn-amount",
+      "action": "Tap \"Start earning\"",
+      "selector": "role=\"button\" label=\"Start earning\"",
+      "kind": "nav",
+      "observedAtStep": 33
+    },
+    {
+      "from": "earn",
+      "to": "earn-info",
+      "action": "Tap \"Earn info\"",
+      "selector": "role=\"button\" label=\"Earn info\"",
+      "kind": "overlay",
+      "observedAtStep": 34
+    },
+    {
+      "from": "tier",
+      "to": "invite-friends",
+      "action": "Tap \"Invite friends\"",
+      "selector": "role=\"button\" label=\"Invite friends\"",
+      "kind": "overlay",
+      "observedAtStep": 35
+    },
+    {
+      "from": "tier",
+      "to": "manage-xpl",
+      "action": "Tap \"Manage XPL\"",
+      "selector": "role=\"button\" label=\"Manage XPL\"",
+      "kind": "nav",
+      "observedAtStep": 36
+    },
+    {
+      "from": "tier",
+      "to": "rewards-info",
+      "action": "Tap \"Rewards info\"",
+      "selector": "role=\"button\" label=\"Rewards info\"",
+      "kind": "overlay",
+      "observedAtStep": 37
+    },
+    {
+      "from": "tier",
+      "to": "verify-intro",
+      "action": "Tap \"Get verified\"",
+      "selector": "role=\"button\" label=\"Get verified\"",
+      "kind": "nav",
+      "observedAtStep": 38
+    },
+    {
+      "from": "home",
+      "to": "verify-intro",
+      "action": "Tap \"Get the card - Verify now\"",
+      "selector": "role=\"button\" label=\"Verify now\"",
+      "kind": "nav",
+      "observedAtStep": 39
+    },
+    {
+      "from": "verify-intro",
+      "to": "kyc-start",
+      "action": "Tap \"Verify now\"",
+      "selector": "role=\"button\" label=\"Verify now\"",
+      "kind": "nav",
+      "observedAtStep": 40
+    },
+    {
+      "from": "kyc-start",
+      "to": "kyc-consent",
+      "action": "Tap \"Continue\" (launches Sumsub SDK)",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 41
+    },
+    {
+      "from": "kyc-consent",
+      "to": "kyc-email-verify",
+      "action": "Tap \"Agree and continue\"",
+      "selector": "role=\"button\" label=\"Agree and continue\"",
+      "kind": "nav",
+      "observedAtStep": 42
+    },
+    {
+      "from": "kyc-email-verify",
+      "to": "kyc-email-otp",
+      "action": "Enter email and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 43
+    },
+    {
+      "from": "kyc-email-otp",
+      "to": "kyc-country",
+      "action": "Enter 6-digit email code (auto-submits)",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 44
+    },
+    {
+      "from": "kyc-country",
+      "to": "kyc-address",
+      "action": "Confirm country of residence and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 45
+    },
+    {
+      "from": "kyc-address",
+      "to": "kyc-doc-type",
+      "action": "Enter address and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 46
+    },
+    {
+      "from": "kyc-doc-type",
+      "to": "kyc-checklist",
+      "action": "Tap close (back to Sumsub step checklist)",
+      "selector": null,
+      "kind": "back",
+      "observedAtStep": 47
+    },
+    {
+      "from": "home",
+      "to": "card-upgrade-gate",
+      "action": "Tap \"Get the card\"",
+      "selector": "role=\"button\" label=\"Get the card\"",
+      "kind": "nav",
+      "observedAtStep": 48
+    },
+    {
+      "from": "card-upgrade-gate",
+      "to": "card-upgrade-method",
+      "action": "Tap \"Upgrade to Core\"",
+      "selector": "role=\"button\" label=\"Upgrade to Core\"",
+      "kind": "overlay",
+      "observedAtStep": 49
+    },
+    {
+      "from": "card-upgrade-method",
+      "to": "card-upgrade-cash",
+      "action": "Select \"Buy with cash\" and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 50
+    },
+    {
+      "from": "card-upgrade-gate",
+      "to": "card-gate-lite",
+      "action": "Tap \"Lite\" tab",
+      "selector": "label=\"Lite\"",
+      "kind": "in-place",
+      "observedAtStep": 51
+    },
+    {
+      "from": "card-gate-lite",
+      "to": "card-terms",
+      "action": "Tap \"Activate card\"",
+      "selector": "role=\"button\" label=\"Activate card\"",
+      "kind": "nav",
+      "observedAtStep": 52
+    },
+    {
+      "from": "card-terms",
+      "to": "card-new-virtual",
+      "action": "Accept all consents and tap \"Continue\"",
+      "selector": "role=\"button\" label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 53
+    },
+    {
+      "from": "card-new-virtual",
+      "to": "card-google-wallet-promo",
+      "action": "Tap \"Activate card\" (card provisions)",
+      "selector": "role=\"button\" label=\"Activate card\"",
+      "kind": "overlay",
+      "observedAtStep": 54
+    },
+    {
+      "from": "card-google-wallet-promo",
+      "to": "home",
+      "action": "Tap \"Close\" (returns to home, now showing the active card)",
+      "selector": "label=\"Close Google Wallet promo\"",
+      "kind": "back",
+      "observedAtStep": 55
+    },
+    {
+      "from": "home",
+      "to": "card-detail",
+      "action": "Tap the virtual card widget",
+      "selector": "role=\"button\" label~=\"virtual card ending\"",
+      "kind": "nav",
+      "observedAtStep": 56
+    },
+    {
+      "from": "card-detail",
+      "to": "card-settings",
+      "action": "Tap \"Settings\"",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 57
+    },
+    {
+      "from": "home",
+      "to": "home-funded",
+      "action": "Wallet funded ($2.50 deposit) — balance and Send/transactions appear",
+      "selector": null,
+      "kind": "nav",
+      "observedAtStep": 58
+    },
+    {
+      "from": "home-funded",
+      "to": "balance-breakdown",
+      "action": "Tap \"$2.50\" / \"View total balance breakdown\"",
+      "selector": "role=\"button\" label=\"View total balance breakdown\"",
+      "kind": "overlay",
+      "observedAtStep": 59
+    },
+    {
+      "from": "earn",
+      "to": "earn-amount-funded",
+      "action": "Tap \"Start earning\" (funded)",
+      "selector": "role=\"button\" label=\"Start earning\"",
+      "kind": "nav",
+      "observedAtStep": 60
+    },
+    {
+      "from": "earn-amount-funded",
+      "to": "earn-funded",
+      "action": "Enter $1, tap \"Add to earn\" (device-auth, then deposit completes)",
+      "selector": "role=\"button\" label=\"Add to earn\"",
+      "kind": "nav",
+      "observedAtStep": 61
+    },
+    {
+      "from": "home-funded",
+      "to": "balance-breakdown-earning",
+      "action": "Tap \"View total balance breakdown\" (with earning balance)",
+      "selector": "role=\"button\" label=\"View total balance breakdown\"",
+      "kind": "overlay",
+      "observedAtStep": 62
+    },
+    {
+      "from": "card-detail",
+      "to": "card-detail-frozen",
+      "action": "Tap \"Freeze\" (device-auth), card becomes frozen",
+      "selector": null,
+      "kind": "in-place",
+      "observedAtStep": 63
+    },
+    {
+      "from": "card-settings",
+      "to": "card-label-edit",
+      "action": "Tap \"Card label\"",
+      "selector": "role=\"button\" label~=\"Card label\"",
+      "kind": "nav",
+      "observedAtStep": 64
+    },
+    {
+      "from": "card-settings",
+      "to": "card-limit-edit",
+      "action": "Tap \"Daily limit\"",
+      "selector": "role=\"button\" label~=\"Daily limit\"",
+      "kind": "overlay",
+      "observedAtStep": 65
+    },
+    {
+      "from": "tier",
+      "to": "daily-benefit-cashback",
+      "action": "Tap \"Cashback\" (Daily benefits section)",
+      "selector": "role=\"button\" label=\"Cashback\"",
+      "kind": "overlay",
+      "observedAtStep": 66
+    },
+    {
+      "from": "tier",
+      "to": "daily-benefit-referrals",
+      "action": "Tap \"Referrals\" (Daily benefits section)",
+      "selector": "role=\"button\" label=\"Referrals\"",
+      "kind": "overlay",
+      "observedAtStep": 67
+    }
+  ],
+  "decisionPoints": [
+    {
+      "nodeId": "auth-method",
+      "options": [
+        {
+          "label": "Continue with Apple",
+          "explored": false
+        },
+        {
+          "label": "Continue with Google",
+          "explored": false
+        },
+        {
+          "label": "Continue with email",
+          "explored": true,
+          "toNode": "email-entry"
+        },
+        {
+          "label": "Terms of Service",
+          "explored": false
+        },
+        {
+          "label": "Privacy Policy",
+          "explored": false
+        }
+      ]
+    },
+    {
+      "nodeId": "notifications-prompt",
+      "options": [
+        {
+          "label": "Enable",
+          "explored": true,
+          "toNode": "waitlist"
+        },
+        {
+          "label": "Maybe later",
+          "explored": true,
+          "toNode": "waitlist"
+        }
+      ]
+    },
+    {
+      "nodeId": "waitlist",
+      "options": [
+        {
+          "label": "Explore tiers",
+          "explored": true,
+          "toNode": "tiers-core"
+        },
+        {
+          "label": "Get notified when you’re in",
+          "explored": true,
+          "toNode": "notifications-prompt"
+        },
+        {
+          "label": "Got a code?",
+          "explored": true,
+          "toNode": "access-code"
+        },
+        {
+          "label": "Request a code on X",
+          "explored": false
+        },
+        {
+          "label": "Log out",
+          "explored": false
+        }
+      ]
+    }
+  ],
+  "overrides": {
+    "splits": [
+      "tier"
+    ],
+    "screens": {
+      "card-gate-lite": {
+        "state": "Lite",
+        "stateGroup": "card-gate"
+      },
+      "card-upgrade-gate": {
+        "state": "Core",
+        "stateGroup": "card-gate"
+      },
+      "card-detail": {
+        "state": "Active",
+        "stateGroup": "card-status"
+      },
+      "card-detail-frozen": {
+        "state": "Frozen",
+        "stateGroup": "card-status"
+      }
+    }
+  }
+}

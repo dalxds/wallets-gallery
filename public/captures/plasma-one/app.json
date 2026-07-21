@@ -1,0 +1,12 @@
+{
+  "app": {
+    "name": "Plasma One",
+    "slug": "plasma-one",
+    "bundleId": "to.plasma.one.application",
+    "platform": "android"
+  },
+  "captures": [
+    { "date": "2026-07-21", "scope": "initial", "mode": "free-roam" }
+  ],
+  "latestCapture": "2026-07-21"
+}
