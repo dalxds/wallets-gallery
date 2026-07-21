@@ -1089,6 +1089,50 @@
       ]
     },
     {
+      "id": "earn-amount-empty",
+      "fingerprint": "sha256:8d62411e5347d5ba4f233469",
+      "skeletonHash": "sk:5d6617911e85a51562fb7edb",
+      "pHash": "p:06ec0bbc5336a957",
+      "role": "form",
+      "screenshotPath": "assets/08dd928edfc5.png",
+      "snapshotPath": "assets/f78e4400b0b4.snap.json",
+      "texts": [
+        "Cash · $0.00",
+        "Use maximum amount",
+        "25%",
+        "50%",
+        "75%",
+        "Add to earn"
+      ],
+      "interactiveElements": [
+        {
+          "type": "button",
+          "label": "Use maximum amount"
+        },
+        {
+          "type": "button",
+          "label": "25%"
+        },
+        {
+          "type": "button",
+          "label": "50%"
+        },
+        {
+          "type": "button",
+          "label": "75%"
+        },
+        {
+          "type": "button",
+          "label": "Add to earn",
+          "emphasis": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Go back"
+        }
+      ]
+    },
+    {
       "id": "earn-info",
       "fingerprint": "sha256:fe8b46f6e269697846a11310",
       "skeletonHash": "sk:380fe913ee76115f01f95236",
@@ -2602,7 +2646,8 @@
   ],
   "overrides": {
     "splits": [
-      "tier"
+      "tier",
+      "earn-amount-empty"
     ],
     "screens": {
       "card-gate-lite": {
@@ -2615,6 +2660,9 @@
       },
       "earn-amount": {
         "title": "Add to Earn"
+      },
+      "earn-amount-empty": {
+        "title": "Add to Earn (empty balance)"
       }
     }
   }
