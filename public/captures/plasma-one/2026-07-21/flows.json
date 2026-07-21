@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "flows": [
+    {
+      "id": "getting-started",
+      "name": "Getting started",
+      "summary": "Sign up with email, verify a one-time code, and enable notifications.",
+      "parentId": null,
+      "order": 0,
+      "steps": ["welcome", "auth-method", "email-entry", "otp-entry", "notifications-prompt"]
+    },
+    {
+      "id": "joining-the-waitlist",
+      "name": "Joining the waitlist",
+      "summary": "The waitlist gate new accounts land on before they get access.",
+      "parentId": "getting-started",
+      "order": 0,
+      "steps": ["waitlist"]
+    },
+    {
+      "id": "comparing-tiers",
+      "name": "Comparing tiers",
+      "summary": "Explore the Lite, Core, and Platinum membership tiers.",
+      "parentId": "joining-the-waitlist",
+      "order": 0,
+      "steps": ["tiers-core", "tiers-lite", "tiers-platinum"]
+    },
+    {
+      "id": "redeeming-an-access-code",
+      "name": "Redeeming an access code",
+      "summary": "Skip the waitlist by entering an access code for instant access.",
+      "parentId": "joining-the-waitlist",
+      "order": 1,
+      "steps": ["access-code", "access-unlocked"]
+    },
+    {
+      "id": "setting-up-your-profile",
+      "name": "Setting up your profile",
+      "summary": "Verify a phone number and claim a username to finish setup.",
+      "parentId": "getting-started",
+      "order": 1,
+      "steps": ["phone-entry", "country-code-picker", "username-entry"]
+    },
+
+    {
+      "id": "home",
+      "name": "Home",
+      "summary": "The wallet home: spendable balance, card, and recent transactions.",
+      "parentId": null,
+      "order": 1,
+      "steps": ["home", "home-funded", "balance-breakdown"]
+    },
+    {
+      "id": "adding-money",
+      "name": "Adding money",
+      "summary": "Fund the wallet via stablecoins, cash rails, or tokens.",
+      "parentId": "home",
+      "order": 0,
+      "steps": ["add-funds", "usdt-chain-picker", "usdt-bnb-deposit"]
+    },
+    {
+      "id": "getting-the-card",
+      "name": "Getting the card",
+      "summary": "Choose a tier to unlock the Plasma One card.",
+      "parentId": "home",
+      "order": 1,
+      "steps": ["card-gate-lite"]
+    },
+    {
+      "id": "activating-a-free-card",
+      "name": "Activating a free card",
+      "summary": "Accept the terms and issue the free Lite virtual card.",
+      "parentId": "getting-the-card",
+      "order": 0,
+      "steps": ["card-terms", "card-new-virtual", "card-google-wallet-promo"]
+    },
+    {
+      "id": "upgrading-to-a-paid-tier",
+      "name": "Upgrading to a paid tier",
+      "summary": "Upgrade to Core by locking XPL or paying annually.",
+      "parentId": "getting-the-card",
+      "order": 1,
+      "steps": ["card-upgrade-method", "card-upgrade-cash"]
+    },
+    {
+      "id": "managing-your-account",
+      "name": "Account",
+      "summary": "Profile hub for notification and legal settings.",
+      "parentId": "home",
+      "order": 2,
+      "steps": ["profile"]
+    },
+    {
+      "id": "notification-settings",
+      "name": "Notifications",
+      "summary": "Control which push notifications you receive.",
+      "parentId": "managing-your-account",
+      "order": 0,
+      "steps": ["notifications-settings"]
+    },
+    {
+      "id": "legal",
+      "name": "Legal",
+      "summary": "Terms, privacy policy, card agreement, and rewards addendum.",
+      "parentId": "managing-your-account",
+      "order": 1,
+      "steps": ["legal"]
+    },
+    {
+      "id": "verifying-your-identity",
+      "name": "Verifying your identity",
+      "summary": "Complete KYC through the Sumsub flow to unlock the card.",
+      "parentId": "home",
+      "order": 3,
+      "steps": ["verify-intro", "kyc-start", "kyc-consent", "kyc-email-verify", "kyc-country", "kyc-address", "kyc-doc-type", "kyc-checklist"],
+      "entryPoints": [
+        { "flowId": "setting-up-your-profile", "fromScreenId": "username-entry", "toScreenId": "verify-intro" },
+        { "flowId": "tier", "fromScreenId": "tier", "toScreenId": "verify-intro" }
+      ]
+    },
+
+    {
+      "id": "earn",
+      "name": "Earn",
+      "summary": "Move cash into a yield-earning balance at 5.71% APY.",
+      "parentId": null,
+      "order": 2,
+      "steps": ["earn", "earn-amount", "earn-funded"]
+    },
+
+    {
+      "id": "tier",
+      "name": "Tier",
+      "summary": "XPL rewards, membership progress, and daily benefits.",
+      "parentId": null,
+      "order": 3,
+      "steps": ["tier", "rewards-info"]
+    },
+    {
+      "id": "daily-benefits",
+      "name": "Daily benefits",
+      "summary": "Cashback and referral rewards on card spend.",
+      "parentId": "tier",
+      "order": 0,
+      "steps": ["daily-benefit-cashback", "daily-benefit-referrals"]
+    },
+    {
+      "id": "managing-xpl",
+      "name": "Managing XPL",
+      "summary": "Convert, deposit, or send XPL tokens.",
+      "parentId": "tier",
+      "order": 1,
+      "steps": ["manage-xpl"]
+    },
+    {
+      "id": "inviting-friends",
+      "name": "Inviting friends",
+      "summary": "Share invite codes to earn rewards together.",
+      "parentId": "tier",
+      "order": 2,
+      "steps": ["invite-friends"]
+    }
+  ],
+  "uncovered": {
+    "card-label-edit": "Card label editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
+    "card-limit-edit": "Card spend-limit editor kept as a screen only; its parent card detail/settings screens are PII-redacted and omitted, so it is not surfaced in a flow.",
+    "earn-info": "Educational Earn info carousel kept as a screen only; the Earn flow covers the deposit sequence (earn → earn-amount → earn-funded)."
+  },
+  "flowTODO": []
+}
