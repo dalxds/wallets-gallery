@@ -4576,6 +4576,116 @@
           "selector": "label=\"Close sheet\""
         }
       ]
+    },
+    {
+      "id": "vault-borrow-collateral-view",
+      "fingerprint": "sha256:6972637b2f0b025a74347ebb",
+      "skeletonHash": "sk:ff8f4f04e6caffd0d1d76615",
+      "pHash": "p:a5fc83564678f483",
+      "role": "home",
+      "screenshotPath": "assets/8f7466dc71ea.png",
+      "snapshotPath": "assets/23d8adcba7da.snap.json",
+      "texts": [
+        "Personal",
+        "My Account",
+        "Borrow Mode",
+        "Borrowed",
+        "$0.00",
+        "at 4% APY",
+        "Details",
+        "You can spend up to",
+        "$1.69",
+        "Assets",
+        "Collateral View",
+        "In Borrow Mode, use your assets as collateral to borrow USDC for card purchases. Collateral Loan to Value (LTV) will vary between assets.",
+        "Learn More",
+        "liquidUSD",
+        "5.22% APY",
+        "$0.79",
+        "80% LTV",
+        "USDC",
+        "Earn 5.22% APY",
+        "$0.45",
+        "90% LTV",
+        "EURC",
+        "Earn 8.37% APY",
+        "$0.44",
+        "90% LTV",
+        "Add Funds",
+        "Earn More",
+        "Vault",
+        "Earn",
+        "Cards",
+        "Transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Collateral View",
+          "role": "toggle",
+          "selector": "label=\"Collateral View\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Details",
+          "role": "link",
+          "selector": "label=\"Details\""
+        },
+        {
+          "label": "liquidUSD",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "USDC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "EURC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\""
+        },
+        {
+          "label": "Earn More",
+          "role": "button",
+          "selector": "label=\"Earn More\""
+        },
+        {
+          "label": "Borrow Mode",
+          "role": "button",
+          "selector": "label=\"Borrow Mode\""
+        },
+        {
+          "label": "Learn More",
+          "role": "link",
+          "selector": "label=\"Learn More\""
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": "label=\"Vault\""
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": "label=\"Earn\""
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": "label=\"Cards\""
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": "label=\"Transactions\""
+        }
+      ]
     }
   ],
   "edges": [
@@ -5754,6 +5864,14 @@
       "selector": "label=\"Cancel\"",
       "kind": "back",
       "observedAtStep": 147
+    },
+    {
+      "from": "vault-borrow-mode",
+      "to": "vault-borrow-collateral-view",
+      "action": "Toggle \"Collateral View\" on",
+      "selector": "label=\"Collateral View\"",
+      "kind": "nav",
+      "observedAtStep": 148
     }
   ],
   "decisionPoints": [
@@ -6271,7 +6389,9 @@
         "state": "Direct Pay mode"
       },
       "vault-borrow-mode": {
-        "title": "Vault in Borrow mode"
+        "title": "Vault in Borrow mode",
+        "stateGroup": "vault-borrow",
+        "state": "Default"
       },
       "spend-mode-picker": {
         "title": "Select spend mode",
@@ -6298,6 +6418,11 @@
       },
       "spend-priority-picker": {
         "title": "Select spend priority"
+      },
+      "vault-borrow-collateral-view": {
+        "title": "Vault in Borrow mode",
+        "stateGroup": "vault-borrow",
+        "state": "Collateral view"
       }
     },
     "splits": [
@@ -6336,7 +6461,8 @@
       "spend-mode-picker",
       "spend-mode-borrow-selected",
       "borrow-signing-method",
-      "direct-pay-signing-method"
+      "direct-pay-signing-method",
+      "vault-borrow-collateral-view"
     ],
     "merges": []
   }
