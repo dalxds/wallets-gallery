@@ -2802,7 +2802,7 @@
     {
       "id": "contract-recipient-warning",
       "fingerprint": "sha256:5e963a7718f387a2268ecd74",
-      "skeletonHash": "skt:9b3bee42e83e38bbeea27244",
+      "skeletonHash": "sk:201f7c52f639aa81e60e8d7d",
       "pHash": "p:a1f3f6b0dc895603",
       "role": "form",
       "screenshotPath": "assets/f4ed46c42d02.png",
@@ -4108,6 +4108,474 @@
         "3 days"
       ],
       "interactiveElements": []
+    },
+    {
+      "id": "vault-direct-pay",
+      "fingerprint": "sha256:98122c74a97a299ddaef4e69",
+      "skeletonHash": "sk:3bdb73c16ed10cd0ddda3674",
+      "pHash": "p:278c0fdced7c7003",
+      "role": "home",
+      "screenshotPath": "assets/ce5bbb2348b4.png",
+      "snapshotPath": "assets/be0f0b989ba0.snap.json",
+      "texts": [
+        "Personal",
+        "My Account",
+        "Total Balance",
+        "$1.99",
+        "USD",
+        "Add Funds",
+        "Send",
+        "Convert",
+        "Spend with Cash",
+        "Use your vault assets with your Cash credit card",
+        "Direct Pay",
+        "In Direct Pay Mode, you can spend up to",
+        "$1.99",
+        "Assets",
+        "Set Spend Priority",
+        "In Direct Pay Mode, card purchases use your USDC, USDT or LiquidUSD balance.",
+        "Learn More",
+        "USDC",
+        "Earn 5.22% APY",
+        "$1.50",
+        "EURC",
+        "Earn 8.37% APY",
+        "$0.49",
+        "Vault",
+        "Earn",
+        "Cards",
+        "Transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "label=\"Send\""
+        },
+        {
+          "label": "Convert",
+          "role": "button",
+          "selector": "label=\"Convert\""
+        },
+        {
+          "label": "Direct Pay",
+          "role": "button",
+          "selector": "label=\"Direct Pay\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Change Mode icon",
+          "role": "button",
+          "selector": "label=\"Change Mode icon\""
+        },
+        {
+          "label": "Set Spend Priority",
+          "role": "button",
+          "selector": "label=\"Set Spend Priority\"",
+          "emphasis": "secondary"
+        },
+        {
+          "label": "Learn More",
+          "role": "link",
+          "selector": "label=\"Learn More\""
+        },
+        {
+          "label": "Info Icon",
+          "role": "button",
+          "selector": "label=\"Info Icon\""
+        },
+        {
+          "label": "Options Menu",
+          "role": "button",
+          "selector": "label=\"Options Menu\""
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": "label=\"Vault\""
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": "label=\"Earn\""
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": "label=\"Cards\""
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": "label=\"Transactions\""
+        }
+      ]
+    },
+    {
+      "id": "spend-mode-picker",
+      "fingerprint": "sha256:3c09f2f555015658191eab6f",
+      "skeletonHash": "sk:a177d2d8c4149da70d5c7498",
+      "pHash": "p:359007fcc755ec13",
+      "role": "picker",
+      "screenshotPath": "assets/86d89c93ed54.png",
+      "snapshotPath": "assets/36137def956f.snap.json",
+      "texts": [
+        "Select Mode",
+        "Borrow Mode",
+        "Make purchases without selling your crypto. 4% Borrow APY.",
+        "Select",
+        "Direct Pay",
+        "Make purchases using your USDC, USDT or LiquidUSD asset balance.",
+        "Mode Selected",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select Borrow Mode",
+          "role": "button",
+          "selector": null,
+          "emphasis": "primary"
+        },
+        {
+          "label": "Select Direct Pay",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "label=\"Close\""
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "borrow-signing-method",
+      "fingerprint": "sha256:5348d6f08a46c3762c7d6d1e",
+      "skeletonHash": "sk:01f6ddb7a71c2be3f6bc8091",
+      "pHash": "p:06f9c7bcc1936c13",
+      "role": "auth",
+      "screenshotPath": "assets/5243dfb10933.png",
+      "snapshotPath": "assets/66dc70c56ef6.snap.json",
+      "texts": [
+        "Sign Vault Transaction",
+        "Switch to Borrow mode",
+        "Email + OTP",
+        "Cancel"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Email + OTP",
+          "role": "button",
+          "selector": "label=\"Email + OTP\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        }
+      ]
+    },
+    {
+      "id": "spend-mode-auth",
+      "fingerprint": "sha256:96c45505ebba073b5f0a102c",
+      "skeletonHash": "sk:73e0fc8a0d4bca4280b863ce",
+      "pHash": "p:58c1ab3c857de691",
+      "role": "auth",
+      "screenshotPath": "assets/ed16ce49e904.png",
+      "snapshotPath": "assets/83d5eac42992.snap.json",
+      "texts": [
+        "Check your email",
+        "A confirmation code was sent to your email",
+        "Continue",
+        "Cancel",
+        "Didn't receive it?",
+        "Resend Code"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Verification code",
+          "role": "input",
+          "selector": null
+        },
+        {
+          "label": "Continue",
+          "role": "button",
+          "selector": "label=\"Continue\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        },
+        {
+          "label": "Resend Code",
+          "role": "link",
+          "selector": "label=\"Resend Code\""
+        }
+      ]
+    },
+    {
+      "id": "spend-mode-borrow-selected",
+      "fingerprint": "sha256:3c09f2f555015658191eab6f",
+      "skeletonHash": "sk:a177d2d8c4149da70d5c7498",
+      "pHash": "p:301907f8d775ec13",
+      "role": "picker",
+      "screenshotPath": "assets/369f82d9600a.png",
+      "snapshotPath": "assets/7b16cf120251.snap.json",
+      "texts": [
+        "Select Mode",
+        "Borrow Mode",
+        "Make purchases without selling your crypto. 4% Borrow APY.",
+        "Select",
+        "Direct Pay",
+        "Make purchases using your USDC, USDT or LiquidUSD asset balance.",
+        "Mode Selected",
+        "Close"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select Borrow Mode",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select Direct Pay",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Close",
+          "role": "button",
+          "selector": "label=\"Close\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
+    },
+    {
+      "id": "vault-borrow-mode",
+      "fingerprint": "sha256:7d8e3ef3f74cc081be669520",
+      "skeletonHash": "sk:d3c58807c9819ff3d2e82129",
+      "pHash": "p:0b168fccedf45603",
+      "role": "home",
+      "screenshotPath": "assets/e704e3e39748.png",
+      "snapshotPath": "assets/2512963864a5.snap.json",
+      "texts": [
+        "Personal",
+        "My Account",
+        "Total Balance",
+        "$1.99",
+        "USD",
+        "Add Funds",
+        "Send",
+        "Convert",
+        "Spend with Cash",
+        "Use your vault assets with your Cash credit card",
+        "Borrow Mode",
+        "Borrowed",
+        "$0.00",
+        "at 4% APY",
+        "Details",
+        "You can spend up to",
+        "$1.79",
+        "Assets",
+        "Collateral View",
+        "In Borrow Mode, use your assets as collateral to borrow USDC for card purchases. Collateral Loan to Value (LTV) will vary between assets.",
+        "Learn More",
+        "Vault",
+        "Earn",
+        "Cards",
+        "Transactions"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Add Funds",
+          "role": "button",
+          "selector": "label=\"Add Funds\""
+        },
+        {
+          "label": "Send",
+          "role": "button",
+          "selector": "label=\"Send\""
+        },
+        {
+          "label": "Convert",
+          "role": "button",
+          "selector": "label=\"Convert\""
+        },
+        {
+          "label": "Borrow Mode",
+          "role": "button",
+          "selector": "label=\"Borrow Mode\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Change Mode icon",
+          "role": "button",
+          "selector": "label=\"Change Mode icon\""
+        },
+        {
+          "label": "Details",
+          "role": "link",
+          "selector": "label=\"Details\""
+        },
+        {
+          "label": "Collateral View",
+          "role": "toggle",
+          "selector": null
+        },
+        {
+          "label": "Learn More",
+          "role": "link",
+          "selector": "label=\"Learn More\""
+        },
+        {
+          "label": "Info Icon",
+          "role": "button",
+          "selector": "label=\"Info Icon\""
+        },
+        {
+          "label": "Options Menu",
+          "role": "button",
+          "selector": "label=\"Options Menu\""
+        },
+        {
+          "label": "Vault",
+          "role": "tab",
+          "selector": "label=\"Vault\""
+        },
+        {
+          "label": "Earn",
+          "role": "tab",
+          "selector": "label=\"Earn\""
+        },
+        {
+          "label": "Cards",
+          "role": "tab",
+          "selector": "label=\"Cards\""
+        },
+        {
+          "label": "Transactions",
+          "role": "tab",
+          "selector": "label=\"Transactions\""
+        }
+      ]
+    },
+    {
+      "id": "direct-pay-signing-method",
+      "fingerprint": "sha256:5348d6f08a46c3762c7d6d1e",
+      "skeletonHash": "sk:01f6ddb7a71c2be3f6bc8091",
+      "pHash": "p:06f9c7bcc1936c13",
+      "role": "auth",
+      "screenshotPath": "assets/4c121a002802.png",
+      "snapshotPath": "assets/bdef99467fc8.snap.json",
+      "texts": [
+        "Sign Vault Transaction",
+        "Switch to Direct Pay mode",
+        "Email + OTP",
+        "Cancel"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Email + OTP",
+          "role": "button",
+          "selector": "label=\"Email + OTP\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\""
+        }
+      ]
+    },
+    {
+      "id": "spend-priority-picker",
+      "fingerprint": "sha256:a8106605db2c49a3a9a8121a",
+      "skeletonHash": "sk:6892c7093b30ce75fb213f80",
+      "pHash": "p:1ef9e11f06f07807",
+      "role": "picker",
+      "screenshotPath": "assets/2aea15f0a625.png",
+      "snapshotPath": "assets/73e34cb87da6.snap.json",
+      "texts": [
+        "Select Spend Priority",
+        "When you make a purchase with a card in Direct Pay mode, it will use the balance of your selected priority asset first.",
+        "USDC",
+        "1.5004",
+        "$1.50",
+        "Checkmark marking current selection",
+        "EURC",
+        "0.437439",
+        "$0.49",
+        "Select",
+        "USDT",
+        "0.00",
+        "$0.00",
+        "liquidUSD",
+        "liquidReserve",
+        "liquidEUR",
+        "frxUSD",
+        "Cancel"
+      ],
+      "interactiveElements": [
+        {
+          "label": "Select EURC",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select USDT",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select liquidUSD",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select liquidReserve",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select liquidEUR",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Select frxUSD",
+          "role": "button",
+          "selector": null
+        },
+        {
+          "label": "Cancel",
+          "role": "button",
+          "selector": "label=\"Cancel\"",
+          "emphasis": "primary"
+        },
+        {
+          "label": "Close sheet",
+          "role": "button",
+          "selector": "label=\"Close sheet\""
+        }
+      ]
     }
   ],
   "edges": [
@@ -5172,7 +5640,7 @@
       "to": "convert-auth",
       "action": "Choose Email + OTP",
       "selector": "label=\"Email + OTP\"",
-      "kind": "in-place",
+      "kind": "nav",
       "observedAtStep": 67
     },
     {
@@ -5190,6 +5658,102 @@
       "selector": "label=\"Close\"",
       "kind": "back",
       "observedAtStep": 103
+    },
+    {
+      "from": "vault-direct-pay",
+      "to": "spend-mode-picker",
+      "action": "Tap \"Direct Pay\"",
+      "selector": "label=\"Direct Pay\"",
+      "kind": "overlay",
+      "observedAtStep": 136
+    },
+    {
+      "from": "spend-mode-picker",
+      "to": "borrow-signing-method",
+      "action": "Select \"Borrow Mode\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 137
+    },
+    {
+      "from": "borrow-signing-method",
+      "to": "spend-mode-auth",
+      "action": "Choose \"Email + OTP\"",
+      "selector": "label=\"Email + OTP\"",
+      "kind": "nav",
+      "observedAtStep": 138
+    },
+    {
+      "from": "spend-mode-auth",
+      "to": "spend-mode-borrow-selected",
+      "action": "Submit the verification code",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 139
+    },
+    {
+      "from": "spend-mode-borrow-selected",
+      "to": "vault-borrow-mode",
+      "action": "Tap \"Close\"",
+      "selector": "label=\"Close\"",
+      "kind": "back",
+      "observedAtStep": 140
+    },
+    {
+      "from": "vault-borrow-mode",
+      "to": "spend-mode-borrow-selected",
+      "action": "Tap \"Borrow Mode\"",
+      "selector": "label=\"Borrow Mode\"",
+      "kind": "overlay",
+      "observedAtStep": 141
+    },
+    {
+      "from": "spend-mode-borrow-selected",
+      "to": "direct-pay-signing-method",
+      "action": "Select \"Direct Pay\"",
+      "selector": null,
+      "kind": "overlay",
+      "observedAtStep": 142
+    },
+    {
+      "from": "direct-pay-signing-method",
+      "to": "spend-mode-auth",
+      "action": "Choose \"Email + OTP\"",
+      "selector": "label=\"Email + OTP\"",
+      "kind": "nav",
+      "observedAtStep": 143
+    },
+    {
+      "from": "spend-mode-auth",
+      "to": "spend-mode-picker",
+      "action": "Submit the verification code",
+      "selector": "label=\"Continue\"",
+      "kind": "nav",
+      "observedAtStep": 144
+    },
+    {
+      "from": "spend-mode-picker",
+      "to": "vault-direct-pay",
+      "action": "Tap \"Close\"",
+      "selector": "label=\"Close\"",
+      "kind": "back",
+      "observedAtStep": 145
+    },
+    {
+      "from": "vault-direct-pay",
+      "to": "spend-priority-picker",
+      "action": "Tap \"Set Spend Priority\"",
+      "selector": "label=\"Set Spend Priority\"",
+      "kind": "overlay",
+      "observedAtStep": 146
+    },
+    {
+      "from": "spend-priority-picker",
+      "to": "vault-direct-pay",
+      "action": "Tap \"Cancel\"",
+      "selector": "label=\"Cancel\"",
+      "kind": "back",
+      "observedAtStep": 147
     }
   ],
   "decisionPoints": [
@@ -5418,6 +5982,78 @@
           "toNode": "convert-auth"
         }
       ]
+    },
+    {
+      "nodeId": "spend-mode-picker",
+      "options": [
+        {
+          "label": "Select Borrow Mode",
+          "explored": true,
+          "toNode": "borrow-signing-method"
+        },
+        {
+          "label": "Select Direct Pay",
+          "explored": false
+        },
+        {
+          "label": "Close",
+          "explored": true,
+          "toNode": "vault-direct-pay"
+        }
+      ]
+    },
+    {
+      "nodeId": "spend-mode-borrow-selected",
+      "options": [
+        {
+          "label": "Select Direct Pay",
+          "explored": true,
+          "toNode": "direct-pay-signing-method"
+        },
+        {
+          "label": "Select Borrow Mode",
+          "explored": false
+        },
+        {
+          "label": "Close",
+          "explored": true,
+          "toNode": "vault-borrow-mode"
+        }
+      ]
+    },
+    {
+      "nodeId": "spend-priority-picker",
+      "options": [
+        {
+          "label": "Select EURC",
+          "explored": false
+        },
+        {
+          "label": "Select USDT",
+          "explored": false
+        },
+        {
+          "label": "Select liquidUSD",
+          "explored": false
+        },
+        {
+          "label": "Select liquidReserve",
+          "explored": false
+        },
+        {
+          "label": "Select liquidEUR",
+          "explored": false
+        },
+        {
+          "label": "Select frxUSD",
+          "explored": false
+        },
+        {
+          "label": "Cancel",
+          "explored": true,
+          "toNode": "vault-direct-pay"
+        }
+      ]
     }
   ],
   "overrides": {
@@ -5628,6 +6264,40 @@
       },
       "transaction-history-deposit": {
         "title": "Transaction history"
+      },
+      "vault-direct-pay": {
+        "title": "Vault",
+        "stateGroup": "vault",
+        "state": "Direct Pay mode"
+      },
+      "vault-borrow-mode": {
+        "title": "Vault in Borrow mode"
+      },
+      "spend-mode-picker": {
+        "title": "Select spend mode",
+        "stateGroup": "spend-mode-picker",
+        "state": "Direct Pay active"
+      },
+      "spend-mode-borrow-selected": {
+        "title": "Select spend mode",
+        "stateGroup": "spend-mode-picker",
+        "state": "Borrow selected"
+      },
+      "borrow-signing-method": {
+        "title": "Sign vault transaction",
+        "stateGroup": "spend-mode-signing",
+        "state": "Borrow mode"
+      },
+      "direct-pay-signing-method": {
+        "title": "Sign vault transaction",
+        "stateGroup": "spend-mode-signing",
+        "state": "Direct Pay mode"
+      },
+      "spend-mode-auth": {
+        "title": "Spend mode confirmation code"
+      },
+      "spend-priority-picker": {
+        "title": "Select spend priority"
       }
     },
     "splits": [
@@ -5660,7 +6330,13 @@
       "deposit-address-hyperevm",
       "deposit-address-arbitrum",
       "deposit-address-optimism",
-      "cards-get-card"
+      "cards-get-card",
+      "vault-direct-pay",
+      "vault-borrow-mode",
+      "spend-mode-picker",
+      "spend-mode-borrow-selected",
+      "borrow-signing-method",
+      "direct-pay-signing-method"
     ],
     "merges": []
   }

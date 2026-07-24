@@ -124,6 +124,31 @@
       ]
     },
     {
+      "id": "switching-to-borrow-mode",
+      "name": "Switching to Borrow mode",
+      "summary": "Change how card purchases are funded, from spending balances directly to borrowing against them, confirmed with an emailed code.",
+      "parentId": "vault",
+      "order": 5,
+      "steps": [
+        "vault-direct-pay",
+        "spend-mode-picker",
+        "borrow-signing-method",
+        "spend-mode-auth",
+        "vault-borrow-mode"
+      ]
+    },
+    {
+      "id": "changing-spend-priority",
+      "name": "Changing spend priority",
+      "summary": "Choose which asset a card purchase draws from first while in Direct Pay mode.",
+      "parentId": "vault",
+      "order": 6,
+      "steps": [
+        "vault-direct-pay",
+        "spend-priority-picker"
+      ]
+    },
+    {
       "id": "earn",
       "name": "Earn",
       "summary": "Browse staking and liquid yield products and review position states.",
